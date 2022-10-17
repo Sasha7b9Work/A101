@@ -61,11 +61,8 @@ struct HMode
 {
     enum E
     {
-        Analog,
         Output_PP,
-        RisingIT,
-        Input,
-        AF_PP,
+        AF7_USART2,
         Count
     };
 };
@@ -87,7 +84,6 @@ struct HSpeed
     {
         Low,
         High,
-        VeryHigh,
         Count
     };
 };

@@ -24,11 +24,8 @@ const uint16 HPin::_15 = GPIO_PIN_15;
 
 static const uint modes[HMode::Count] =
 {
-    GPIO_MODE_ANALOG,
     GPIO_MODE_OUTPUT_PP,
-    GPIO_MODE_IT_RISING,
-    GPIO_MODE_INPUT,
-    GPIO_MODE_AF_PP
+    GPIO_AF7_USART2
 };
 
 static const uint pulles[HPull::Count] =
@@ -41,8 +38,7 @@ static const uint pulles[HPull::Count] =
 static const uint speedes[HSpeed::Count] =
 {
     GPIO_SPEED_FREQ_LOW,
-    GPIO_SPEED_FREQ_HIGH,
-    GPIO_SPEED_FREQ_VERY_HIGH
+    GPIO_SPEED_FREQ_HIGH
 };
 
 static const uint alternates[HAlternate::Count] =
