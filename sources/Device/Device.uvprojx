@@ -543,6 +543,26 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_TIM3.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL_SPI2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_SPI2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_UART4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_UART4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_USART2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_USART3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART3.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1098,6 +1118,26 @@
               <FileName>HAL_TIM3.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_TIM3.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_SPI2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_SPI2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_UART4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_UART4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_USART2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_USART3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART3.cpp</FilePath>
             </File>
           </Files>
         </Group>

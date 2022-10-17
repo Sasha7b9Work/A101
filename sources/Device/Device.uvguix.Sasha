@@ -6,7 +6,7 @@
   <Header>### uVision Project, (C) Keil Software</Header>
 
   <PrjGuiSettings>
-    <LastAddFilePath>D:\Projects\A101\sources\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc</LastAddFilePath>
+    <LastAddFilePath>D:\Projects\A101\sources\Device\src\Hardware\HAL</LastAddFilePath>
   </PrjGuiSettings>
 
   <ViewPool/>
@@ -15,17 +15,17 @@
     <View>
       <WinId>38003</WinId>
       <ViewName>Registers</ViewName>
-      <TableColWidths>122 128</TableColWidths>
+      <TableColWidths>160 160</TableColWidths>
     </View>
     <View>
       <WinId>346</WinId>
       <ViewName>Code Coverage</ViewName>
-      <TableColWidths>860 810</TableColWidths>
+      <TableColWidths>860 160</TableColWidths>
     </View>
     <View>
       <WinId>204</WinId>
       <ViewName>Performance Analyzer</ViewName>
-      <TableColWidths>1020 153 153 344</TableColWidths>
+      <TableColWidths>1020</TableColWidths>
     </View>
   </SECTreeCtrl>
 
