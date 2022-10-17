@@ -1,16 +1,19 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
+#include "Display/Display.h"
 
 
 int main()
 {
     HAL::Init();
-    
-    int counter = 0;
-  
+
+    float voltageDC = 0.0f;
+
     while (1)
     {
-        counter++;
+        voltageDC += 1.0f;
+
+        Display::SetDC(voltageDC);
     }
 }
