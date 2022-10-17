@@ -21,15 +21,15 @@ add_compile_options(/wd5220)    # a non-static data member with a volatile quali
 
 file(GLOB LIBS_HAL       ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/*.*
                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/*.*)
-
-file(GLOB SRC            src/*.h src/*.cpp)
-file(GLOB HARDWARE       src/Hardware/*.h src/Hardware/*.cpp)
-file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*)
-file(GLOB HARDWARE_HAL   src/Hardware/HAL/*)
+file(GLOB SRC            src/*.*)
+file(GLOB HARDWARE       src/Hardware/*.*)
+file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*.*)
+file(GLOB HARDWARE_HAL   src/Hardware/HAL/*.*)
 
 set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
 
 source_group(src             FILES ${SRC})
+source_group(libs/HAL        FILES ${LIBS_HAL})
 source_group(Hardware        FILES ${HARDWARE})
 source_group(Hardware/CMSIS  FILES ${HARDWARE_CMSIS})
 source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
