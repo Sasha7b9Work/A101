@@ -1,0 +1,3 @@
+Load "D:\\Projects\\G6-49\\sources\\PLoader\\Objects\\PanelDDS.axf" 
+Erase Done.Programming Done.Application running ...
+Flash Load finished at 13:08:33
