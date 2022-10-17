@@ -18,7 +18,7 @@ void Display::Interface::Process(uint8 byte)
             {1, 1, 0, 1, 1, 0, 0}       // 50A
         };
 
-        int range = (int)(0x31 & 0x0F);
+        int range = (int)(byte & 0x0F) - 1;
 
         HAL_PIO::Write(PIN_US1, states[range][0] == 1);
         HAL_PIO::Write(PIN_US2, states[range][1] == 1);
