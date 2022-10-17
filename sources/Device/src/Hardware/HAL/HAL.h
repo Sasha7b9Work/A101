@@ -16,22 +16,6 @@ namespace HAL
 };
 
 
-namespace HAL_I2C1
-{
-    void Init();
-
-    void Transmit(uint8 address, uint8 data[3]);
-};
-
-
-namespace HAL_SPI3
-{
-    void Init();
-    // Запускает счётчик для измерения малых отрезков времени
-    void Transmit(uint8 *buffer, uint16 num);
-};
-
-
 namespace HAL_TIM
 {
     uint TimeMS();
@@ -60,3 +44,31 @@ namespace HAL_TIM3
 
     void StopIT();
 };
+
+
+// АЦП AD7691BRMZ
+namespace HAL_SPI2
+{
+    void Init();
+};
+
+
+// RS232
+namespace HAL_UART4
+{
+    void Init();
+}
+
+
+// Дисплей
+namespace HAL_USART2
+{
+    void Init();
+}
+
+
+// USB FT232RL
+namespace HAL_USART3
+{
+    void Init();
+}
