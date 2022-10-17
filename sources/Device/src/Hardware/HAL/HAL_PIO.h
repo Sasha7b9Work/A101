@@ -61,8 +61,8 @@ struct HMode
 {
     enum E
     {
+        AF_PP,
         Output_PP,
-        AF7_USART2,
         Count
     };
 };
@@ -92,11 +92,7 @@ struct HAlternate
 {
     enum E
     {
-        AF0_MCO,
-        AF5_SPI1,
-        AF7_USART3,
-        AF10_OTG_FS,
-        AF12_OTG_HS_FS,
+        AF7_USART2,
         Count
     };
 };
@@ -106,7 +102,7 @@ namespace HAL_PIO
     // Начальная инициализация управляющих выводов
     void Init();
 
-    void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
+    void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::Count);
     // Установка в "1"
     void Set(HPort::E port, uint16 pin);
     void Set(const StructPIN &pin);
