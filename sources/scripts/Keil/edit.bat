@@ -1,2 +1,2 @@
 @echo on
-start ../../G6-49.uvmpw
+start ../../A101.uvmpw
