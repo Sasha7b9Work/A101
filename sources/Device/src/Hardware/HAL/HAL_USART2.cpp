@@ -35,7 +35,6 @@ void HAL_USART2::Init()
     */
 
     __HAL_RCC_USART2_CLK_ENABLE();
-    __HAL_RCC_GPIOA_CLK_ENABLE();
 
     GPIO_InitTypeDef is;
     is.Pin = GPIO_PIN_2 | GPIO_PIN_3;
