@@ -15,13 +15,10 @@ if (COMMAND cmake_policy)
 endif ()
 
 # Set project name
-project (G6-49)
+project (A101)
 
 set(CMAKE_UNITY_BUILD ON)
 
-set (TARGET_NAME G6-49)
+set (TARGET_NAME A101)
 
 add_subdirectory(Device)
-add_subdirectory(DLoader)
-add_subdirectory(Panel)
-add_subdirectory(PLoader)
