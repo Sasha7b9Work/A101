@@ -579,7 +579,7 @@ static WCHAR LfnBuf[_MAX_LFN + 1];	/* LFN enabled with static working buffer */
 #define	FREE_NAMBUF()	ff_memfree(lfn)
 #else
 #define	DEF_NAMBUF		WCHAR *lfn;
-#define INIT_NAMBUF(fs)	{ lfn = (WCHAR *)ff_memalloc((_MAX_LFN+1)*2); if (!lfn) LEAVE_FF(fs, FR_NOT_ENOUGH_CORE); (fs)->lfnbuf = lfn; }
+#define INIT_NAMBUF(fs)	{ lfn = ff_memalloc((_MAX_LFN+1)*2); if (!lfn) LEAVE_FF(fs, FR_NOT_ENOUGH_CORE); (fs)->lfnbuf = lfn; }
 #define	FREE_NAMBUF()	ff_memfree(lfn)
 #endif
 
@@ -3218,16 +3218,27 @@ FRESULT validate (	/* Returns FR_OK or FR_INVALID_OBJECT */
 	FATFS** fs		/* Pointer to pointer to the owner file system object to return */
 )
 {
-	FRESULT res;
+	FRESULT res = FR_INVALID_OBJECT;
 
-	if (!obj || !obj->fs || !obj->fs->fs_type || obj->fs->id != obj->id || (disk_status(obj->fs->drv) & STA_NOINIT)) {
-		*fs = 0;
-		res = FR_INVALID_OBJECT;	/* The object is invalid */
-	} else {
-		*fs = obj->fs;			/* Owner file sytem object */
-		ENTER_FF(obj->fs);		/* Lock file system */
-		res = FR_OK;			/* Valid object */
+
+	if (obj && obj->fs && obj->fs->fs_type && obj->id == obj->fs->id) {	/* Test if the object is valid */
+#if _FS_REENTRANT
+		if (lock_fs(obj->fs)) {	/* Obtain the filesystem object */
+			if (!(disk_status(obj->fs->drv) & STA_NOINIT)) { /* Test if the phsical drive is kept initialized */
+				res = FR_OK;
+			} else {
+				unlock_fs(obj->fs, FR_OK);
+			}
+		} else {
+			res = FR_TIMEOUT;
+		}
+#else
+		if (!(disk_status(obj->fs->drv) & STA_NOINIT)) { /* Test if the phsical drive is kept initialized */
+			res = FR_OK;
+		}
+#endif
 	}
+	*fs = (res == FR_OK) ? obj->fs : 0;	/* Corresponding filesystem object */
 	return res;
 }
 
