@@ -14,14 +14,14 @@
 extern "C" {
 #endif
 
-    
+
     void SysTick_Handler()
     {
         HAL_IncTick();
         HAL_SYSTICK_IRQHandler();
     }
 
-    
+
     void MemManage_Handler()
     {
         TRACE_HANDLER;
@@ -30,7 +30,7 @@ extern "C" {
         }
     }
 
-    
+
     void UsageFault_Handler()
     {
         TRACE_HANDLER;
@@ -39,7 +39,7 @@ extern "C" {
         }
     }
 
-    
+
     void HardFault_Handler()
     {
         TRACE_HANDLER;
@@ -48,7 +48,7 @@ extern "C" {
         }
     }
 
-    
+
     void BusFault_Handler()
     {
         TRACE_HANDLER;
@@ -57,22 +57,22 @@ extern "C" {
         }
     }
 
-    
+
     void PendSV_Handler()
     {
     }
 
-    
+
     void NMI_Handler()
     {
     }
 
-    
+
     void SVC_Handler()
     {
     }
 
-    
+
     void DebugMon_Handler()
     {
     }
@@ -80,9 +80,9 @@ extern "C" {
 
     void TIM3_IRQHandler()
     {
-        if((TIM3->SR & TIM_SR_UIF) == TIM_SR_UIF)
+        if ((TIM3->SR & TIM_SR_UIF) == TIM_SR_UIF)
         {
-            if((TIM3->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
+            if ((TIM3->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
             {
                 TIM3->SR = ~TIM_DIER_UIE;
                 Timer::ElapsedCallback();
