@@ -1,6 +1,8 @@
 archiv.zip
 *.dbgconf
 
+sources/generated/*
+
 sources/Device/Objects/*
 sources/Device/Objects-Debug/*
 sources/Device/Listings/*
