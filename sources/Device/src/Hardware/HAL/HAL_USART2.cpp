@@ -64,4 +64,6 @@ void HAL_USART2::Send(pchar command)
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *)
 {
     HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART2::handle, (uint8_t *)&HAL_USART2::buffer, 1);
+    
+    HAL_USART2::buffer = HAL_USART2::buffer;
 }
