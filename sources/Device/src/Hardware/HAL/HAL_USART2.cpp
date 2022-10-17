@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include <stm32f4xx_hal.h>
+#include <cstring>
 
 
 namespace HAL_USART2
@@ -54,9 +55,9 @@ void HAL_USART2::Init()
 }
 
 
-void HAL_USART2::Send(pchar *command)
+void HAL_USART2::Send(pchar command)
 {
-
+    HAL_UART_Transmit(&handleUSART2, (uint8 *)command, (uint16)std::strlen(command), 100);
 }
 
 
