@@ -64,6 +64,8 @@ namespace HAL_UART4
 namespace HAL_USART2
 {
     void Init();
+
+    extern void *handle;   // UART_HandleTypeDef
 }
 
 

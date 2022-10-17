@@ -90,6 +90,12 @@ extern "C" {
         }
     }
 
+    // Дисплей
+    void USART2_IRQHandler(void)
+    {
+        HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART2::handle);
+    }
+
 #ifdef __cplusplus
 }
 #endif
