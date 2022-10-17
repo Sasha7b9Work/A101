@@ -16,7 +16,7 @@ typedef const char *       pchar;
 typedef void(*pFuncVV)();
 typedef void(*pFuncVI)(int);
 
-inline void EmptyFuncVV() {};
+//inline void EmptyFuncVV() {};
 
 #define _GET_BIT(value, bit)    (((value) >> (bit)) & 0x01)
 #define _SET_BIT(value, bit)    ((value) |= (1 << (bit)))
