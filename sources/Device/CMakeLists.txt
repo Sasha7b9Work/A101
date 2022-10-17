@@ -2,7 +2,11 @@
 project (Device)
 
 
+
+
+
 include_directories(src
+                    src/Hardware/HAL
                     ../common/_VS_KEIL
                     ../common/_VS_KEIL/CMSIS
                     ../common/_VS_KEIL/std_includes
@@ -21,6 +25,7 @@ add_compile_options(/wd5220)    # a non-static data member with a volatile quali
 
 file(GLOB LIBS_HAL       ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/*.*
                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/*.*)
+file(GLOB LIBS_HAL_VS    ../common/_VS_GUI/HAL/stm32f4xx_hal_rcc_.cpp)
 file(GLOB SRC            src/*.*)
 file(GLOB HARDWARE       src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*.*)
@@ -30,13 +35,15 @@ set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
 
 source_group(src             FILES ${SRC})
 source_group(libs/HAL        FILES ${LIBS_HAL})
+source_group(libs/HAL_VS     FILES ${LIBS_HAL_VS})
 source_group(Hardware        FILES ${HARDWARE})
 source_group(Hardware/CMSIS  FILES ${HARDWARE_CMSIS})
 source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
 
-add_library(${PROJECT_NAME} ${LIBS_HAL}
-                            ${SRC}
-                            ${HARDWARE}
-                            ${HARDWARE_CMSIS}
-                            ${HARDWARE_HAL}
+add_executable(${PROJECT_NAME} ${LIBS_HAL}
+                               ${LIBS_HAL_VS}
+                               ${SRC}
+                               ${HARDWARE}
+                               ${HARDWARE_CMSIS}
+                               ${HARDWARE_HAL}
 )
