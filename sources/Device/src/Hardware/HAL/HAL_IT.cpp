@@ -22,20 +22,6 @@ extern "C" {
     }
 
     
-    void OTG_FS_IRQHandler()
-    {
-        // Флешка
-        HAL_HCD::IRQHandler();
-    }
-
-    
-    void OTG_HS_IRQHandler()
-    {
-        // VCP
-        HAL_PCD::IRQHandler();
-    }
-    
-    
     void MemManage_Handler()
     {
         TRACE_HANDLER;
