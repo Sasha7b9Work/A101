@@ -6,8 +6,11 @@
 int main()
 {
     HAL::Init();
+    
+    int counter = 0;
   
     while (1)
     {
+        counter++;
     }
 }
