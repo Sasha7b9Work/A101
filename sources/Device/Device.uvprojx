@@ -598,6 +598,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Display.h</FilePath>
             </File>
+            <File>
+              <FileName>DInterface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\DInterface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DInterface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\DInterface.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1193,6 +1203,16 @@
               <FileName>Display.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Display.h</FilePath>
+            </File>
+            <File>
+              <FileName>DInterface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\DInterface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DInterface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\DInterface.h</FilePath>
             </File>
           </Files>
         </Group>

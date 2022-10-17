@@ -113,7 +113,4 @@ namespace HAL_PIO
     void Write(HPort::E port, uint16 pin, HState::E state);
     void Write(HPort::E port, uint16 pin, bool state);
     uint8 Read(HPort::E port, uint16 pin);
-
-    // Запись байта в ПЛИС
-    void WriteFPGA(uint8 byte);
 };
