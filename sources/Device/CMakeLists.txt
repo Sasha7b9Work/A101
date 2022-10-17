@@ -2,7 +2,7 @@
 project (Device)
 
 
-
+set(CMAKE_UNITY_BUILD OFF)
 
 
 include_directories(src
@@ -25,7 +25,8 @@ add_compile_options(/wd5220)    # a non-static data member with a volatile quali
 
 file(GLOB LIBS_HAL       ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/*.*
                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/*.*)
-file(GLOB LIBS_HAL_VS    ../common/_VS_GUI/HAL/stm32f4xx_hal_rcc_.cpp)
+file(GLOB LIBS_HAL_VS    ../common/_VS_GUI/HAL/stm32f4xx_hal_rcc.cpp
+                         ../common/_VS_GUI/HAL/stm32f4xx_hal_cortex.cpp)
 file(GLOB SRC            src/*.*)
 file(GLOB HARDWARE       src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*.*)
