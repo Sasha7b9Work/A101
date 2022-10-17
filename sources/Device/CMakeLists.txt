@@ -8,33 +8,16 @@ include_directories(src
                     ../common/_VS_KEIL/std_includes
                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
-
-#                    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
-#                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-#                    ../Device/src/Hardware/USBD
-#                    ../Device/src/Hardware/HAL
-#                    ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src
-#                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc
-#                    ../Device/src/Hardware/USBH
-#                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc
-#                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-#                    ../Device/src/Hardware/FatFS
                     )
 
 add_definitions(-DSTM32F407xx)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-#add_compile_options(/wd4201)
 add_compile_options(/wd4514)
-#add_compile_options(/wd4623)
-#add_compile_options(/wd4626)
 add_compile_options(/wd4820)
-#add_compile_options(/wd5027)
-#add_compile_options(/wd5039)
 add_compile_options(/wd5045)
 add_compile_options(/wd5220)    # a non-static data member with a volatile qualified type no longer implies
-#add_compile_options(/wd5246)
 
 file(GLOB LIBS_HAL       ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/*.*
                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/*.*)
