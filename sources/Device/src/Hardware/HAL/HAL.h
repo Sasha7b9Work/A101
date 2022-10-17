@@ -65,6 +65,8 @@ namespace HAL_USART2
 {
     void Init();
 
+    void Send(pchar *);
+
     extern void *handle;   // UART_HandleTypeDef
 }
 

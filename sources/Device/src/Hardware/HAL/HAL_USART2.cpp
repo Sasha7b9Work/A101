@@ -21,6 +21,8 @@ namespace HAL_USART2
     };
 
     void *handle = (void *)&handleUSART2;
+
+    uint8 buffer = 0;
 }
 
 
@@ -47,10 +49,18 @@ void HAL_USART2::Init()
     HAL_NVIC_EnableIRQ(USART2_IRQn);
 
     HAL_UART_Init(&handleUSART2);
+
+    HAL_UART_Receive_IT(&handleUSART2, (uint8_t *)&buffer, 1);
+}
+
+
+void HAL_USART2::Send(pchar *command)
+{
+
 }
 
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *)
 {
-
+    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART2::handle, (uint8_t *)&HAL_USART2::buffer, 1);
 }
