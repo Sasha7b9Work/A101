@@ -1,6 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Generator/Generator_d.h"
 
 
 struct CalibrationSettings;
@@ -22,19 +21,6 @@ namespace HAL_CRC32
     uint Calculate(const uint8 *address, uint size);
 
     void Init();
-};
-
-
-namespace HAL_EEPROM
-{
-    void Init();
-
-    namespace Signal
-    {
-        void Save(const Chan &, uint16 data[DGenerator::DDS_NUM_POINTS]);
-
-        uint16 *Get(const Chan &);
-    };
 };
 
 

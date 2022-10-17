@@ -1,9 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Interface_d.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Utils/Debug.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -22,14 +20,6 @@ extern "C" {
         HAL_IncTick();
         HAL_SYSTICK_IRQHandler();
     }
-
-    
-    void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *)
-    {
-        TRACE_HANDLER;
-//        Console::AddInt((int)handle->ErrorCode);
-    }
-
 
     
     void OTG_FS_IRQHandler()

@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "HAL_PIO.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include <stm32f4xx_hal.h>
 
 
