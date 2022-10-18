@@ -14,3 +14,13 @@ void Display::SetDC(float value)
 
     HAL_USART2::Send(buffer);
 }
+
+
+void Display::Update()
+{
+    static float voltageDC = 0.0f;
+
+    voltageDC += 1.0f;
+
+    Display::SetDC(voltageDC);
+}

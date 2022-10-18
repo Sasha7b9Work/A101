@@ -6,7 +6,7 @@
   <Header>### uVision Project, (C) Keil Software</Header>
 
   <PrjGuiSettings>
-    <LastAddFilePath>D:\Projects\A101\sources\Device\src</LastAddFilePath>
+    <LastAddFilePath>D:\Projects\A101\sources\Device\src\Measurer</LastAddFilePath>
   </PrjGuiSettings>
 
   <ViewPool/>
@@ -15,7 +15,7 @@
     <View>
       <WinId>38003</WinId>
       <ViewName>Registers</ViewName>
-      <TableColWidths>115 77</TableColWidths>
+      <TableColWidths>118 118</TableColWidths>
     </View>
     <View>
       <WinId>346</WinId>

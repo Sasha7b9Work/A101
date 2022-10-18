@@ -3,19 +3,20 @@
 #include "Device.h"
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
+#include "Measurer/Measurer.h"
 
 
 void Device::Init()
 {
     HAL::Init();
+
+    Measurer::Init();
 }
 
 
 void Device::Update()
 {
-    static float voltageDC = 0.0f;
+    Measurer::Update();
 
-    voltageDC += 1.0f;
-
-    Display::SetDC(voltageDC);
+    Display::Update();
 }

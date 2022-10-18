@@ -5,4 +5,6 @@
 namespace Display
 {
     void SetDC(float);
+
+    void Update();
 }
