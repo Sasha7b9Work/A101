@@ -18,6 +18,13 @@ struct BufferRAW
 
     uint16 data[SIZE];
 
+    bool IsFull()
+    {
+        return (pointer == SIZE);
+    }
+
+    void Clear() { pointer = 0; }
+
 private:
     int pointer;
 };

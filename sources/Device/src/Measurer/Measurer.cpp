@@ -3,6 +3,7 @@
 #include "Measurer/Measurer.h"
 #include "Measurer/BufferRAW.h"
 #include "Hardware/HAL/HAL.h"
+#include "Measurer/ADC.h"
 
 
 namespace Measurer
@@ -14,12 +15,25 @@ namespace Measurer
 void Measurer::Init()
 {
     HAL_TIM4::Init();
+
+    ADC::Init();
 }
 
 
 void Measurer::Update()
 {
+    buffer.Clear();
+
     HAL_TIM4::Start(6);
 
+    while (!buffer.IsFull())
+    {
+        while (!HAL_TIM4::EndCount())
+        {
+        }
 
+        buffer.Push(ADC::ReadValue());
+    }
+
+    HAL_TIM4::Stop();
 }
