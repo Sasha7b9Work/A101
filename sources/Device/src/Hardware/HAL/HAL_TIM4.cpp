@@ -10,13 +10,25 @@ void HAL_TIM4::Init()
 }
 
 
-void HAL_TIM4::StartIT(uint dUS)
+void HAL_TIM4::Start(uint dUS)
 {
 
 }
 
 
-void HAL_TIM4::StopIT()
+bool HAL_TIM4::EndCount()
+{
+    return false;
+}
+
+
+void HAL_TIM4::NextPeriod()
+{
+
+}
+
+
+void HAL_TIM4::Stop()
 {
 
 }

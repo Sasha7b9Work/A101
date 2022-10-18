@@ -54,9 +54,15 @@ namespace HAL_TIM4
     void Init();
 
     // Запустить таймер с периодом срабатывания dUS микросекнуд
-    void StartIT(uint dUS);
+    void Start(uint dUS);
 
-    void StopIT();
+    // True означает, что счёт закончен
+    bool EndCount();
+
+    // Запуск следующего периода
+    void NextPeriod();
+
+    void Stop();
 }
 
 

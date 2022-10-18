@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Measurer/Measurer.h"
 #include "Measurer/BufferRAW.h"
+#include "Hardware/HAL/HAL.h"
 
 
 namespace Measurer
@@ -12,11 +13,13 @@ namespace Measurer
 
 void Measurer::Init()
 {
-
+    HAL_TIM4::Init();
 }
 
 
 void Measurer::Update()
 {
+    HAL_TIM4::Start(6);
+
 
 }

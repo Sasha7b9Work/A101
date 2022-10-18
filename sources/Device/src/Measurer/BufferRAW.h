@@ -7,6 +7,7 @@ struct BufferRAW
     static const int SIZE = 1024;
 
     BufferRAW() : pointer(0) { }
+
     void Push(uint16 word)
     {
         if (pointer < SIZE)
@@ -14,7 +15,9 @@ struct BufferRAW
             data[pointer++] = word;
         }
     }
+
     uint16 data[SIZE];
+
 private:
     int pointer;
 };

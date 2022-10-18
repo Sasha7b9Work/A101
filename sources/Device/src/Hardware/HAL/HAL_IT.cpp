@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Measurer/Measurer.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -90,18 +91,6 @@ extern "C" {
         }
     }
 
-
-    void TIM4_IRQHandler()
-    {
-        if ((TIM3->SR & TIM_SR_UIF) == TIM_SR_UIF)
-        {
-            if ((TIM3->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
-            {
-                TIM3->SR = ~TIM_DIER_UIE;
-                Timer::ElapsedCallback();
-            }
-        }
-    }
 
     // Дисплей
     void USART2_IRQHandler(void)
