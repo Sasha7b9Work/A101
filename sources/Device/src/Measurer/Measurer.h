@@ -5,10 +5,6 @@
 namespace Measurer
 {
     void Init();
-}
 
-
-namespace Measurer
-{
     void Update();
 }
