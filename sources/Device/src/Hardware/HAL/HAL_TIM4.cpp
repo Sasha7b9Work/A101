@@ -16,13 +16,7 @@ void HAL_TIM4::Start(uint dUS)
 }
 
 
-bool HAL_TIM4::EndCount()
-{
-    return false;
-}
-
-
-void HAL_TIM4::NextPeriod()
+void HAL_TIM4::WaitEvent()
 {
 
 }

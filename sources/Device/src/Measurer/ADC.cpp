@@ -3,13 +3,76 @@
 #include "Measurer/ADC.h"
 
 
+namespace ADC
+{
+    struct Waiter
+    {
+        void WaitConversion()
+        {
+
+        }
+
+        void WaitValue()
+        {
+
+        }
+    };
+
+    struct Pin
+    {
+    };
+
+    struct PinIN : public Pin
+    {
+        int Read()
+        {
+            return 0;
+        }
+    };
+
+    struct PinOUT : public Pin
+    {
+        void Set() {}
+        void Reset() {}
+    };
+
+    static PinIN pinIN;
+    static PinOUT pinCS;
+    static PinOUT pinCLK;
+}
+
+
 void ADC::Init()
 {
-
+    pinCS.Reset();
+    pinCLK.Reset();
 }
 
 
 uint16 ADC::ReadValue()
 {
-    return 0;
+    uint16 result = 0;
+
+    pinCS.Set();
+
+    Waiter waiter;
+
+    waiter.WaitConversion();
+
+    pinCS.Reset();
+
+    waiter.WaitValue();
+
+    for (int i = 0; i < 18; i++)
+    {
+        pinCLK.Set();
+
+        result <<= 1;
+
+        pinCLK.Reset();
+
+        result |= pinIN.Read();
+    }
+
+    return result;
 }

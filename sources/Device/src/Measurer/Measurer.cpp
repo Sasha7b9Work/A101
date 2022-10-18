@@ -28,9 +28,7 @@ void Measurer::Update()
 
     while (!buffer.IsFull())
     {
-        while (!HAL_TIM4::EndCount())
-        {
-        }
+        HAL_TIM4::WaitEvent();
 
         buffer.Push(ADC::ReadValue());
     }
