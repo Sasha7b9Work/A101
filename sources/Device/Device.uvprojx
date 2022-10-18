@@ -648,6 +648,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\BufferRAW.h</FilePath>
             </File>
+            <File>
+              <FileName>ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measurer\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measurer\ADC.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1293,6 +1303,16 @@
               <FileName>BufferRAW.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\BufferRAW.h</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measurer\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measurer\ADC.h</FilePath>
             </File>
           </Files>
         </Group>
