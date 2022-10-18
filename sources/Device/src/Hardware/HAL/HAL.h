@@ -24,6 +24,7 @@ namespace HAL_TIM
 };
 
 
+// Для измерения малых интервалов времени - микросекунд и тиков
 namespace HAL_TIM2
 {
     void Init();
@@ -36,6 +37,7 @@ namespace HAL_TIM2
 };
 
 
+// Для событий таймера Timer
 namespace HAL_TIM3
 {
     void Init();
@@ -44,6 +46,18 @@ namespace HAL_TIM3
 
     void StopIT();
 };
+
+
+// Для чтения АЦП (по сигналу этого таймера нужно читать одну точку АЦП)
+namespace HAL_TIM4
+{
+    void Init();
+
+    // Запустить таймер с периодом срабатывания dUS микросекнуд
+    void StartIT(uint dUS);
+
+    void StopIT();
+}
 
 
 // АЦП AD7691BRMZ

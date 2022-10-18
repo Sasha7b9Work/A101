@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
+#include "Hardware/Timer.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -30,6 +31,12 @@ void HAL::Init()
     HAL_USART2::Init();
 
     HAL_USART3::Init();
+
+    HAL_TIM2::Init();
+
+    HAL_TIM3::Init();
+
+    Timer::Init();
 }
 
 
