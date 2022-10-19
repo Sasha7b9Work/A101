@@ -9,7 +9,7 @@ void Primitives::Rectangle::Draw(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
-
+    Display::Interface::SendCommandFormat("draw %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
 }
 
 
