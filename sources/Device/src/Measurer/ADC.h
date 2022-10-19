@@ -6,5 +6,5 @@ namespace ADC
 {
     void Init();
 
-    uint16 ReadValue();
+    uint ReadValue();
 }

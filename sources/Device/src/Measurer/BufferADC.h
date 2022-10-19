@@ -27,6 +27,6 @@ struct BufferADC
 
 private:
     int pointer;            // Указатель используется при чтении данных (массив raw)
-    uint16 raw[SIZE];       // Данные, считанные с АЦП
+    uint   raw[SIZE];       // Данные, считанные с АЦП
     float  volt[SIZE];      // Реальные значения с АЦП
 };

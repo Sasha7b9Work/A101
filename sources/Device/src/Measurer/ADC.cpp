@@ -49,9 +49,9 @@ void ADC::Init()
 }
 
 
-uint16 ADC::ReadValue()
+uint ADC::ReadValue()
 {
-    uint16 result = 0;
+    uint result = 0;
 
     pinCS.Set();
 

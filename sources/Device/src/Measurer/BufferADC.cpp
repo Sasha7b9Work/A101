@@ -7,6 +7,17 @@ void BufferADC::ConvertToVoltage()
 {
     for (int i = 0; i < SIZE; i++)
     {
+        uint value = raw[i];
 
+        value &= 0x1FFFF;
+
+        static const float k = 5.0f / (float)0x3FFFF;
+
+        volt[i] = (float)value * k;
+
+        if (value != raw[i])
+        {
+            volt[i] *= -1.0f;
+        }
     }
 }
