@@ -16,6 +16,16 @@ void Display::SetDC(float value)
 }
 
 
+void Display::SetAC(float value)
+{
+    char buffer[100];
+
+    std::sprintf(buffer, "ac.txt=\"%.4f mA\"\xFF\xFF\xFF", value);
+
+    HAL_USART2::Send(buffer);
+}
+
+
 void Display::Update()
 {
     static float voltageDC = 0.0f;

@@ -4,6 +4,8 @@
 #include "Measurer/BufferRAW.h"
 #include "Hardware/HAL/HAL.h"
 #include "Measurer/ADC.h"
+#include "Measurer/Calculator.h"
+#include "Display/Display.h"
 
 
 namespace Measurer
@@ -34,4 +36,10 @@ void Measurer::Update()
     }
 
     HAL_TIM4::Stop();
+
+    Calculator::AppendData(buffer);
+
+    Display::SetAC(Calculator::GetAC());
+
+    Display::SetDC(Calculator::GetDC());
 }

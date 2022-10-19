@@ -658,6 +658,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\ADC.h</FilePath>
             </File>
+            <File>
+              <FileName>Calculator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measurer\Calculator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calculator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measurer\Calculator.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1313,6 +1323,16 @@
               <FileName>ADC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\ADC.h</FilePath>
+            </File>
+            <File>
+              <FileName>Calculator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measurer\Calculator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calculator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measurer\Calculator.h</FilePath>
             </File>
           </Files>
         </Group>
