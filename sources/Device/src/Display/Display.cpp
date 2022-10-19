@@ -34,3 +34,9 @@ void Display::Update()
 
     Display::SetDC(voltageDC);
 }
+
+
+void Display::DrawData(const BufferADC &data)
+{
+
+}

@@ -44,4 +44,6 @@ void Measurer::Update()
     Display::SetAC(Calculator::GetAC());
 
     Display::SetDC(Calculator::GetDC());
+
+    Display::DrawData(buffer);
 }

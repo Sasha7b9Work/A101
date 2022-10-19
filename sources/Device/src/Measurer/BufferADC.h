@@ -8,7 +8,7 @@ struct BufferADC
 
     BufferADC() : pointer(0) { } //-V730
 
-    void Push(uint16 word)
+    void Push(uint word)
     {
         if (pointer < SIZE)
         {
