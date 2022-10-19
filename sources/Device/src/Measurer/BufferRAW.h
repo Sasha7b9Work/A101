@@ -6,7 +6,7 @@ struct BufferRAW
 {
     static const int SIZE = 1024;
 
-    BufferRAW() : pointer(0) { }
+    BufferRAW() : pointer(0) { } //-V730
 
     void Push(uint16 word)
     {
