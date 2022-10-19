@@ -27,3 +27,15 @@ void Primitives::Line::Draw(int x1, int y1, int x2, int y2, const Color &color)
 
     Display::Interface::SendCommandFormat("line %d,%d,%d,%d,%s", x1, y1, x2, y2, Color::CurrentValue());
 }
+
+
+void Primitives::Line::DrawV(int x, int y1, int y2, const Color &color)
+{
+    Line().Draw(x, y1, x, y2, color);
+}
+
+
+void Primitives::Line::DrawH(int y, int x1, int x2, const Color &color)
+{
+    Line().Draw(x1, y, x2, y, color);
+}

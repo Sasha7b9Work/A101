@@ -18,5 +18,7 @@ namespace Primitives
     struct Line
     {
         void Draw(int x1, int y1, int x2, int y2, const Color & = Color::Count);
+        void DrawV(int x, int y1, int y2, const Color & = Color::Count);
+        void DrawH(int y, int x1, int x2, const Color & = Color::Count);
     };
 }

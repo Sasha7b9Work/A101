@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/DiagramInput.h"
 #include "Display/Painter.h"
+#include <limits>
 
 
 using namespace Primitives;
@@ -13,8 +14,9 @@ namespace DiagramInput
 
     static const int width = 800;
     static const int height = 200;
+    static const int y0 = 100;
 
-    static void Clear();
+    static void CalculateMinMax(float *, float *);
 }
 
 
@@ -26,13 +28,41 @@ void DiagramInput::SetData(const BufferADC &_data)
 
 void DiagramInput::Draw()
 {
-    Clear();
+    float min = 0.0f;
+    float max = 0.0f;
 
-    Rectangle(width, height).Draw(0, 0, Color::White);
+    CalculateMinMax(&min, &max);
+
+    float scale = height / (max - min);
+
+    for (int i = 1; i < width; i++)
+    {
+        int y1 = (data.At(i - 1) - min) * scale + y0;
+        int y2 = (data.At(i) - min) * scale + y0;
+
+
+    }
 }
 
 
-void DiagramInput::Clear()
+void DiagramInput::CalculateMinMax(float *out_min, float *out_max)
 {
-    Rectangle(width, height).Fill(0, 0, Color::Black);
+    float min = std::numeric_limits<float>::max();
+    float max = std::numeric_limits<float>::min();
+
+    for (int i = 0; i < data.Size(); i++)
+    {
+        if (data.At(i) < min)
+        {
+            min = data.At(i);
+        }
+
+        if (data.At(i) > max)
+        {
+            max = data.At(i);
+        }
+    }
+
+    *out_min = min;
+    *out_max = max;
 }

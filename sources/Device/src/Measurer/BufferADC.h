@@ -25,6 +25,13 @@ struct BufferADC
 
     void ConvertToVoltage();
 
+    int Size() const { return SIZE; }
+
+    float At(int pos)
+    {
+        return volt[pos];
+    }
+
 private:
     int pointer;            // Указатель используется при чтении данных (массив raw)
     uint   raw[SIZE];       // Данные, считанные с АЦП
