@@ -3,6 +3,9 @@
 #include "Display/DInterface.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Hardware/HAL/HAL.h"
+#include <cstdarg>
+#include <cstdio>
+#include <cstring>
 
 
 void Display::Interface::CallbackOnReceive(uint8 byte)
@@ -37,4 +40,17 @@ void Display::Interface::SendCommand(pchar command)
     HAL_USART2::Send(command);
 
     HAL_USART2::Send("\xFF\xFF\xFF");
+}
+
+
+void Display::Interface::SendCommandFormat(pchar format, ...)
+{
+    char message[256];
+
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(message, format, args);
+    va_end(args);
+
+    SendCommand(message);
 }

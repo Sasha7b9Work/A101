@@ -17,9 +17,5 @@ void Primitives::Rectangle::Fill(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
-    char buffer[128];
-
-    std::sprintf(buffer, "fill %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
-
-    Display::Interface::SendCommand(buffer);
+    Display::Interface::SendCommandFormat("fill %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
 }
