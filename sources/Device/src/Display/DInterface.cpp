@@ -4,7 +4,7 @@
 #include "Hardware/HAL/HAL_PIO.h"
 
 
-void Display::Interface::Process(uint8 byte)
+void Display::Interface::CallbackOnReceive(uint8 byte)
 {
     if (byte >= 0x31 && byte <= 0x36)
     {

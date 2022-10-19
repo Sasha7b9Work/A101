@@ -6,6 +6,6 @@ namespace Display
 {
     namespace Interface
     {
-        void Process(uint8);
+        void CallbackOnReceive(uint8);
     }
 }
