@@ -3,9 +3,15 @@
 #include "Display/DiagramInput.h"
 
 
-void DiagramInput::SetData(const BufferADC &data)
+namespace DiagramInput
 {
+    static BufferADC data;
+}
 
+
+void DiagramInput::SetData(const BufferADC &_data)
+{
+    data = _data;
 }
 
 
