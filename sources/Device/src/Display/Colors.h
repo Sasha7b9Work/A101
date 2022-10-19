@@ -4,9 +4,9 @@
 
 struct Color
 {
-    static Color None;
     static Color Black;
     static Color White;
+    static Color Count;
 
     Color(uint8 v) : value(v) {}
 

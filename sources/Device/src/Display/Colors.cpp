@@ -4,9 +4,9 @@
 #include <cstdio>
 
 
-Color Color::None(255);
 Color Color::Black(0);
 Color Color::White(1);
+Color Color::Count(255);
 
 Color Color::current(0);
 
@@ -20,7 +20,7 @@ static uint16 colors[255] =
 
 void Color::SetAsCurrent() const
 {
-    if (value != None.value)
+    if (value != Count.value)
     {
         current = value;
     }
