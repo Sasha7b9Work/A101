@@ -1,7 +1,7 @@
 // 2022/10/18 15:54:07 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Measurer/Measurer.h"
-#include "Measurer/BufferRAW.h"
+#include "Measurer/BufferADC.h"
 #include "Hardware/HAL/HAL.h"
 #include "Measurer/ADC.h"
 #include "Measurer/Calculator.h"
@@ -10,7 +10,7 @@
 
 namespace Measurer
 {
-    static BufferRAW buffer;
+    static BufferADC buffer;
 }
 
 
@@ -36,6 +36,8 @@ void Measurer::Update()
     }
 
     HAL_TIM4::Stop();
+
+    buffer.ConvertToVoltage();
 
     Calculator::AppendData(buffer);
 

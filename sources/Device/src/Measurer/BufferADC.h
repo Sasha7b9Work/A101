@@ -2,21 +2,19 @@
 #pragma once
 
 
-struct BufferRAW
+struct BufferADC
 {
     static const int SIZE = 1024;
 
-    BufferRAW() : pointer(0) { } //-V730
+    BufferADC() : pointer(0) { } //-V730
 
     void Push(uint16 word)
     {
         if (pointer < SIZE)
         {
-            data[pointer++] = word;
+            raw[pointer++] = word;
         }
     }
-
-    uint16 data[SIZE];
 
     bool IsFull()
     {
@@ -25,6 +23,10 @@ struct BufferRAW
 
     void Clear() { pointer = 0; }
 
+    void ConvertToVoltage();
+
 private:
-    int pointer;
+    int pointer;            // Указатель используется при чтении данных (массив raw)
+    uint16 raw[SIZE];       // Данные, считанные с АЦП
+    float  volt[SIZE];      // Реальные значения с АЦП
 };

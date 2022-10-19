@@ -639,16 +639,6 @@
               <FilePath>.\src\Measurer\Measurer.h</FilePath>
             </File>
             <File>
-              <FileName>BufferRAW.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\BufferRAW.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BufferRAW.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\BufferRAW.h</FilePath>
-            </File>
-            <File>
               <FileName>ADC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Measurer\ADC.cpp</FilePath>
@@ -667,6 +657,16 @@
               <FileName>Calculator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\Calculator.h</FilePath>
+            </File>
+            <File>
+              <FileName>BufferADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measurer\BufferADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BufferADC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measurer\BufferADC.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1305,16 +1305,6 @@
               <FilePath>.\src\Measurer\Measurer.h</FilePath>
             </File>
             <File>
-              <FileName>BufferRAW.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\BufferRAW.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BufferRAW.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\BufferRAW.h</FilePath>
-            </File>
-            <File>
               <FileName>ADC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Measurer\ADC.cpp</FilePath>
@@ -1333,6 +1323,16 @@
               <FileName>Calculator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\Calculator.h</FilePath>
+            </File>
+            <File>
+              <FileName>BufferADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measurer\BufferADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BufferADC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measurer\BufferADC.h</FilePath>
             </File>
           </Files>
         </Group>
