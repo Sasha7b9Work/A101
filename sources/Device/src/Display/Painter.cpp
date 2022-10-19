@@ -19,3 +19,11 @@ void Primitives::Rectangle::Fill(int x, int y, const Color &color)
 
     Display::Interface::SendCommandFormat("fill %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
 }
+
+
+void Primitives::Line::Draw(int x1, int y1, int x2, int y2, const Color &color)
+{
+    color.SetAsCurrent();
+
+    Display::Interface::SendCommandFormat("line %d,%d,%d,%d,%s", x1, y1, x2, y2, Color::CurrentValue());
+}
