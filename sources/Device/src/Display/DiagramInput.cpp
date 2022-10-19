@@ -34,5 +34,5 @@ void DiagramInput::Draw()
 
 void DiagramInput::Clear()
 {
-
+    Rectangle(width, height).Fill(0, 0, Color::Black);
 }

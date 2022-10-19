@@ -9,6 +9,7 @@ namespace Primitives
     {
         Rectangle(int w, int h) : width(w), height(h) {}
         void Draw(int x, int y, const Color & = Color::None);
+        void Fill(int x, int y, const Color & = Color::None);
     private:
         int width;
         int height;
