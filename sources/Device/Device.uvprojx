@@ -623,6 +623,36 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\DInterface.h</FilePath>
             </File>
+            <File>
+              <FileName>DiagramFFT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\DiagramFFT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DiagramFFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\DiagramFFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>DiagramInput.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\DiagramInput.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DiagramInput.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\DiagramInput.h</FilePath>
+            </File>
+            <File>
+              <FileName>Painter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Painter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Painter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Painter.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -637,16 +667,6 @@
               <FileName>Measurer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\Measurer.h</FilePath>
-            </File>
-            <File>
-              <FileName>ADC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\ADC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\ADC.h</FilePath>
             </File>
             <File>
               <FileName>Calculator.cpp</FileName>
@@ -667,6 +687,16 @@
               <FileName>BufferADC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\BufferADC.h</FilePath>
+            </File>
+            <File>
+              <FileName>AD7691.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measurer\AD7691.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7691.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measurer\AD7691.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1289,6 +1319,36 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\DInterface.h</FilePath>
             </File>
+            <File>
+              <FileName>DiagramFFT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\DiagramFFT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DiagramFFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\DiagramFFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>DiagramInput.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\DiagramInput.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DiagramInput.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\DiagramInput.h</FilePath>
+            </File>
+            <File>
+              <FileName>Painter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Painter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Painter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Painter.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1303,16 +1363,6 @@
               <FileName>Measurer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\Measurer.h</FilePath>
-            </File>
-            <File>
-              <FileName>ADC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\ADC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\ADC.h</FilePath>
             </File>
             <File>
               <FileName>Calculator.cpp</FileName>
@@ -1333,6 +1383,16 @@
               <FileName>BufferADC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\BufferADC.h</FilePath>
+            </File>
+            <File>
+              <FileName>AD7691.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measurer\AD7691.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7691.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measurer\AD7691.h</FilePath>
             </File>
           </Files>
         </Group>

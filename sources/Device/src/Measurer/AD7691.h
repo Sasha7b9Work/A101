@@ -2,7 +2,8 @@
 #pragma once
 
 
-namespace ADC
+// ¿÷œ
+namespace AD7691
 {
     void Init();
 

@@ -3,7 +3,7 @@
 #include "Measurer/Measurer.h"
 #include "Measurer/BufferADC.h"
 #include "Hardware/HAL/HAL.h"
-#include "Measurer/ADC.h"
+#include "Measurer/AD7691.h"
 #include "Measurer/Calculator.h"
 #include "Display/Display.h"
 
@@ -18,7 +18,7 @@ void Measurer::Init()
 {
     HAL_TIM4::Init();
 
-    ADC::Init();
+    AD7691::Init();
 }
 
 
@@ -32,7 +32,7 @@ void Measurer::Update()
     {
         HAL_TIM4::WaitEvent();
 
-        buffer.Push(ADC::ReadValue());
+        buffer.Push(AD7691::ReadValue());
     }
 
     HAL_TIM4::Stop();

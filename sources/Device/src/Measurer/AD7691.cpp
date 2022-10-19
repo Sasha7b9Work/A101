@@ -1,9 +1,9 @@
 // 2022/10/18 16:57:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Measurer/ADC.h"
+#include "Measurer/AD7691.h"
 
 
-namespace ADC
+namespace AD7691
 {
     struct Waiter
     {
@@ -42,14 +42,14 @@ namespace ADC
 }
 
 
-void ADC::Init()
+void AD7691::Init()
 {
     pinCS.Reset();
     pinCLK.Reset();
 }
 
 
-uint ADC::ReadValue()
+uint AD7691::ReadValue()
 {
     uint result = 0;
 
