@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
+#include "Display/DiagramInput.h"
 #include <cstring>
 #include <cstdio>
 
@@ -38,5 +39,7 @@ void Display::Update()
 
 void Display::DrawData(const BufferADC &data)
 {
+    DiagramInput::SetData(data);
 
+    DiagramInput::Draw();
 }
