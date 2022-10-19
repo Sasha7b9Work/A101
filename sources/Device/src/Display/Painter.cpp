@@ -6,4 +6,6 @@
 void Primitives::Rectangle::Draw(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
+
+
 }

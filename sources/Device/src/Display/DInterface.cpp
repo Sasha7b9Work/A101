@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/DInterface.h"
 #include "Hardware/HAL/HAL_PIO.h"
+#include "Hardware/HAL/HAL.h"
 
 
 void Display::Interface::CallbackOnReceive(uint8 byte)
@@ -28,4 +29,12 @@ void Display::Interface::CallbackOnReceive(uint8 byte)
         HAL_PIO::Write(PIN_US7, states[range][5] == 1);
         HAL_PIO::Write(PIN_US8, states[range][6] == 1);
     }
+}
+
+
+void Display::Interface::SendCommand(pchar command)
+{
+    HAL_USART2::Send(command);
+
+    HAL_USART2::Send("\xFF\xFF\xFF");
 }

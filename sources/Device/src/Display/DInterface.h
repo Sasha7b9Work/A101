@@ -6,6 +6,8 @@ namespace Display
 {
     namespace Interface
     {
+        void SendCommand(pchar);
+
         void CallbackOnReceive(uint8);
     }
 }

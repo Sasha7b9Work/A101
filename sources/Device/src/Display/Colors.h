@@ -13,6 +13,7 @@ struct Color
     void SetAsCurrent() const;
 
     static Color Current() { return current; }
+    static pchar CurrentValue();
 
     uint8 value;
 
