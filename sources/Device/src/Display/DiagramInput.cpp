@@ -37,8 +37,8 @@ void DiagramInput::Draw()
 
     for (int i = 1; i < width; i++)
     {
-        int y1 = (data.At(i - 1) - min) * scale + y0;
-        int y2 = (data.At(i) - min) * scale + y0;
+        int y1 = (int)((data.At(i - 1) - min) * scale + y0);
+        int y2 = (int)((data.At(i) - min) * scale + y0);
 
 
     }

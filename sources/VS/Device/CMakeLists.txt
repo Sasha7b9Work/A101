@@ -80,12 +80,19 @@ if(WIN32)
 endif()
 
 file(GLOB SRC                   ../../Device/src/*.*)
+file(GLOB DISPLAY               ../../Device/src/Display/*.*)
+file(GLOB HARDWARE_HAL          Hardware/HAL/*.*
+                                ../../Device/src/Hardware/HAL/HAL.h)
 
 source_group(src                FILES ${SRC})
+source_group(Display            FILES ${DISPLAY})
+source_group(Hardware/HAL       FILES ${HARDWARE_HAL})
 
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
+                ${DISPLAY}
+                ${HARDWARE_HAL}
                 )
 
 target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)
