@@ -4,19 +4,10 @@ project (Device)
 
 set(CMAKE_UNITY_BUILD OFF)
 
-include_directories(.
-                    Device
-                    ../../Device/src
-                    ../../Device/src/Hardware/CDC
+include_directories(../../Device/src
                     ../../Device/src/Hardware/HAL
-                    ../../VS/ThirdParty/wxWidgets/include
-                    ../../generated/ThirdParty/lib/vc_dll/mswud
-                    ../../common/_VS_KEIL/CMSIS
-                    ../../common/_VS_LIBS/STM32F1
-                    ../../common/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-                    ../../common/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-                    ../../common/STM32Cube_F1/Drivers/CMSIS/Device/ST/STM32F1xx/Include
-                    ../../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc)
+                    ../../common/_VS_GUI/HAL
+                    ../../common/_VS_GUI/CMSIS)
 
 link_directories(../../generated/ThirdParty/lib/vc_dll)
 
@@ -82,17 +73,21 @@ endif()
 file(GLOB SRC                   ../../Device/src/*.*)
 file(GLOB DISPLAY               ../../Device/src/Display/*.*)
 file(GLOB HARDWARE_HAL          Hardware/HAL/*.*
-                                ../../Device/src/Hardware/HAL/HAL.h)
+                                ../../Device/src/Hardware/HAL/HAL.h
+                                ../../Device/src/Hardware/HAL/HAL_PIO.h)
+file(GLOB MEASURER              ../../Device/src/Measurer/*.*)
 
 source_group(src                FILES ${SRC})
 source_group(Display            FILES ${DISPLAY})
 source_group(Hardware/HAL       FILES ${HARDWARE_HAL})
+source_group(Measurer           FILES ${MEASURER})
 
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
                 ${DISPLAY}
                 ${HARDWARE_HAL}
+                ${MEASURER}
                 )
 
 target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)
