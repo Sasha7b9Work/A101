@@ -37,16 +37,18 @@ void Display::Update()
 
     Display::SetDC(voltageDC);
 
-    Interface::SendCommand("addt 17,0,400");
+    Interface::SendCommand("waveInput.dis=77");
 
-    HAL_TIM::Delay(20);
+    static int last = 0;
+    static int d = 1;
 
-    Interface::SendCommand("waveInput.dis=50");
-
-    for (int i = 0; i < 400; i++)
+    Interface::SendCommandFormat("add 16,0,%d", last);
+    last += d;
+    if (last == 255 || last == 0)
     {
-        Interface::SendByte((uint8)i);
+        d = -d;
     }
+    Interface::SendCommandFormat("add 16,1,%d", last);
 }
 
 
