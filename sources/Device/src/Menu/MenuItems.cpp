@@ -16,10 +16,3 @@ Button *Button::ForIndex(int index)
 
     return buttons[Menu::IndexPage()][index - 1];
 }
-
-
-void Button::ApplyAction(int action)
-{
-
-}
-
