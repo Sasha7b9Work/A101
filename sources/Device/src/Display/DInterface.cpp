@@ -23,9 +23,41 @@
 */
 
 
-void Display::Interface::CallbackOnReceive(uint8 byte)
+namespace Display
 {
-    if (byte >= 0x31 && byte <= 0x36)
+    namespace Interface
+    {
+        static const int SIZE_BUFFER = 10;
+        static char buffer[SIZE_BUFFER];
+        static int pointer = 0;
+
+        static void DecodeBuffer();
+    }
+}
+
+
+void Display::Interface::CallbackOnReceive(char byte)
+{
+    buffer[pointer++] = byte;
+
+    if (pointer == SIZE_BUFFER)
+    {
+        pointer = 0;
+    }
+
+    if (byte == 'Z')
+    {
+        DecodeBuffer();
+    }
+}
+
+
+void Display::Interface::DecodeBuffer()
+{
+    int button = buffer[pointer - 3] & 0x0F;
+//    int state = buffer[pointer - 2] & 0x0F;
+
+    if (button >= 0x01 && button <= 0x06)
     {
         static int states[6][7] =
         {
@@ -37,7 +69,7 @@ void Display::Interface::CallbackOnReceive(uint8 byte)
             {1, 1, 0, 1, 1, 0, 0}       // 50A
         };
 
-        int range = (int)(byte & 0x0F) - 1;
+        int range = button - 1;
 
         HAL_PIO::Write(PIN_US1, states[range][0] == 1); //-V525
         HAL_PIO::Write(PIN_US2, states[range][1] == 1);
@@ -47,6 +79,8 @@ void Display::Interface::CallbackOnReceive(uint8 byte)
         HAL_PIO::Write(PIN_US7, states[range][5] == 1);
         HAL_PIO::Write(PIN_US8, states[range][6] == 1);
     }
+
+    pointer = 0;
 }
 
 

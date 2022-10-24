@@ -10,6 +10,6 @@ namespace Display
 
         void SendCommandFormat(pchar, ...);
 
-        void CallbackOnReceive(uint8);
+        void CallbackOnReceive(char);
     }
 }
