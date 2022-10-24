@@ -8,6 +8,8 @@ namespace Display
     {
         void SendCommand(pchar);
 
+        void SendByte(uint8);
+
         void SendCommandFormat(pchar, ...);
 
         void CallbackOnReceive(char);

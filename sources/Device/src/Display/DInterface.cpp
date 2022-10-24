@@ -84,6 +84,12 @@ void Display::Interface::SendCommand(pchar command)
 }
 
 
+void Display::Interface::SendByte(uint8 byte)
+{
+    HAL_USART2::SendByte(byte);
+}
+
+
 void Display::Interface::SendCommandFormat(pchar format, ...)
 {
     char message[256];

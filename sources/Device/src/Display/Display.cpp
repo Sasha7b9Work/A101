@@ -3,15 +3,17 @@
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
 #include "Display/DiagramInput.h"
+#include "Display/DInterface.h"
 #include <cstring>
 #include <cstdio>
+#include <cstdlib>
 
 
 void Display::SetDC(float value)
 {
     char buffer[100];
 
-    std::sprintf(buffer, "dc.txt=\"%.4f mA\"\xFF\xFF\xFF", value);
+    std::sprintf(buffer, "textDC.txt=\"%.4f mA\"\xFF\xFF\xFF", value);
 
     HAL_USART2::Send(buffer);
 }
@@ -34,6 +36,17 @@ void Display::Update()
     voltageDC += 1.0f;
 
     Display::SetDC(voltageDC);
+
+    Interface::SendCommand("addt 17,0,400");
+
+    HAL_TIM::Delay(20);
+
+    Interface::SendCommand("waveInput.dis=50");
+
+    for (int i = 0; i < 400; i++)
+    {
+        Interface::SendByte((uint8)i);
+    }
 }
 
 

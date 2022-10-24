@@ -84,6 +84,8 @@ namespace HAL_USART2
 
     void Send(pchar);
 
+    void SendByte(uint8);
+
     extern void *handle;   // UART_HandleTypeDef
 }
 

@@ -51,6 +51,12 @@ void HAL_USART2::Send(pchar command)
 }
 
 
+void HAL_USART2::SendByte(uint8 byte)
+{
+    HAL_UART_Transmit(&handleUSART2, &byte, 1, 100);
+}
+
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *)
 {
     Display::Interface::CallbackOnReceive(HAL_USART2::buffer);
