@@ -3,6 +3,7 @@
 #include "Display/DInterface.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Hardware/HAL/HAL.h"
+#include "Menu/MenuItems.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -54,6 +55,8 @@ void Display::Interface::CallbackOnReceive(char byte)
 
 void Display::Interface::DecodeBuffer()
 {
+
+
     int button = buffer[pointer - 3] & 0x0F;
 //    int state = buffer[pointer - 2] & 0x0F;
 
