@@ -19,6 +19,9 @@ public:
     // Удалить подсветку
     void RemoveBacklight();
 
+    // Подсветить
+    void SetBacklight();
+
 private:
 
     int index;

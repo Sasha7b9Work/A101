@@ -25,3 +25,11 @@ void Button::RemoveBacklight()
 
     Display::Interface::SendCommandFormat("%s.val=0", names[index]);
 }
+
+
+void Button::SetBacklight()
+{
+    static pchar names[7] = { "bt2mA", "bt2mA", "bt20mA", "bt200mA", "bt2A", "bt20A", "bt50A" };
+
+    Display::Interface::SendCommandFormat("%s.val=1", names[index]);
+}

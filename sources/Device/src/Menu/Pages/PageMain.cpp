@@ -17,15 +17,15 @@ namespace PageMain
     {
         if (action == 1)
         {
-            for (int i = 1; i <= 7; i++)
-            {
-                GetButton(i)->RemoveBacklight();
-            }
-
             int index = button->GetIndex();
 
             if (index >= 0x01 && index <= 0x06)
             {
+                for (int i = 1; i <= 6; i++)
+                {
+                    GetButton(i)->RemoveBacklight();
+                }
+
                 static int states[6][7] =
                 {
                     {1, 0, 0, 0, 1, 1, 0},      // 2mA
@@ -45,6 +45,8 @@ namespace PageMain
                 HAL_PIO::Write(PIN_US6, states[range][4] == 1);
                 HAL_PIO::Write(PIN_US7, states[range][5] == 1);
                 HAL_PIO::Write(PIN_US8, states[range][6] == 1);
+
+                GetButton(index)->SetBacklight();
             }
         }
     }
