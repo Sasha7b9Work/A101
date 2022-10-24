@@ -16,6 +16,9 @@ public:
 
     int GetIndex() const { return index; }
 
+    // Удалить подсветку
+    void RemoveBacklight();
+
 private:
 
     int index;

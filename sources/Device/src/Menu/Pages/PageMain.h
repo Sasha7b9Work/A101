@@ -11,4 +11,7 @@ namespace PageMain
     extern Button *btn2A;
     extern Button *btn20A;
     extern Button *btn50A;
+
+    // Возвращает указатель на кнопку
+    Button *GetButton(int index);
 }

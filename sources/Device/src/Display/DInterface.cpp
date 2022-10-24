@@ -39,6 +39,16 @@ namespace Display
 
 void Display::Interface::CallbackOnReceive(char byte)
 {
+    if(byte == 0x1A)
+    {
+        return;
+    }
+    
+    if((uint)byte == 0xFF)
+    {
+        return;
+    }
+    
     buffer[pointer++] = byte;
 
     if (pointer == SIZE_BUFFER)

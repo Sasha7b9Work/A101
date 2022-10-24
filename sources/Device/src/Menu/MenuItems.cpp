@@ -4,6 +4,7 @@
 #include "Menu/Pages/PageMain.h"
 #include "Menu/Pages/PageTwo.h"
 #include "Menu/Menu.h"
+#include "Display/DInterface.h"
 
 
 Button *Button::ForIndex(int index)
@@ -15,4 +16,12 @@ Button *Button::ForIndex(int index)
     };
 
     return buttons[Menu::IndexPage()][index - 1];
+}
+
+
+void Button::RemoveBacklight()
+{
+    static pchar names[7] = { "bt2mA", "bt2mA", "bt20mA", "bt200mA", "bt2A", "bt20A", "bt50A" };
+
+    Display::Interface::SendCommandFormat("%s.val=0", names[index]);
 }

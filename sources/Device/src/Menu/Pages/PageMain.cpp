@@ -6,10 +6,22 @@
 
 namespace PageMain
 {
+    Button *GetButton(int index)
+    {
+        static Button *buttons[7] = { btn2mA, btn2mA, btn20mA, btn200mA, btn2A, btn20A, btn50A };
+
+        return buttons[index];
+    }
+
     static void Function(const Button *button, int action)
     {
         if (action == 1)
         {
+            for (int i = 1; i <= 7; i++)
+            {
+                GetButton(i)->RemoveBacklight();
+            }
+
             int index = button->GetIndex();
 
             if (index >= 0x01 && index <= 0x06)
