@@ -735,6 +735,31 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Menu/Pages</GroupName>
+          <Files>
+            <File>
+              <FileName>PageMain.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMain.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageMain.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageMain.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageTwo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageTwo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageTwo.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageTwo.h</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -1463,6 +1488,31 @@
               <FileName>MenuItems.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\MenuItems.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Menu/Pages</GroupName>
+          <Files>
+            <File>
+              <FileName>PageMain.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMain.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageMain.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageMain.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageTwo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageTwo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageTwo.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageTwo.h</FilePath>
             </File>
           </Files>
         </Group>
