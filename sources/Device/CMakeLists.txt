@@ -35,6 +35,7 @@ file(GLOB HARDWARE       src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*.*)
 file(GLOB HARDWARE_HAL   src/Hardware/HAL/*.*)
 file(GLOB MEASURER       src/Measurer/*.*)
+file(GLOB MENU           src/Menu/*.*)
 
 set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
 
@@ -46,6 +47,7 @@ source_group(Hardware        FILES ${HARDWARE})
 source_group(Hardware/CMSIS  FILES ${HARDWARE_CMSIS})
 source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
 source_group(Measurer        FILES ${MEASURER})
+source_group(Menu            FILES ${MENU})
 
 add_library(${PROJECT_NAME} ${LIBS_HAL}
 #                               ${LIBS_HAL_VS}
@@ -55,4 +57,5 @@ add_library(${PROJECT_NAME} ${LIBS_HAL}
                             ${HARDWARE_CMSIS}
                             ${HARDWARE_HAL}
                             ${MEASURER}
+                            ${MENU}
 )

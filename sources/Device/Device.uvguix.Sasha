@@ -6,7 +6,7 @@
   <Header>### uVision Project, (C) Keil Software</Header>
 
   <PrjGuiSettings>
-    <LastAddFilePath>D:\Projects\A101\sources\Device\src\Display</LastAddFilePath>
+    <LastAddFilePath>D:\Projects\A101\sources\Device\src\Menu</LastAddFilePath>
   </PrjGuiSettings>
 
   <ViewPool/>
@@ -101,10 +101,10 @@
         <yPos>-1</yPos>
       </MaxPosition>
       <NormalPosition>
-        <Top>90</Top>
-        <Left>137</Left>
-        <Right>1432</Right>
-        <Bottom>879</Bottom>
+        <Top>299</Top>
+        <Left>406</Left>
+        <Right>1701</Right>
+        <Bottom>1088</Bottom>
       </NormalPosition>
     </WindowPosition>
     <MDIClientArea>
