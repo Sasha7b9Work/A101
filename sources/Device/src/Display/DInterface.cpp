@@ -55,10 +55,10 @@ void Display::Interface::CallbackOnReceive(char byte)
 
 void Display::Interface::DecodeBuffer()
 {
-
-
     int button = buffer[pointer - 3] & 0x0F;
-//    int state = buffer[pointer - 2] & 0x0F;
+    int state = buffer[pointer - 2] & 0x0F;
+
+    Button::ForIndex(button)->ApplyAction(state);
 
     if (button >= 0x01 && button <= 0x06)
     {
