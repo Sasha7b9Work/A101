@@ -4,6 +4,7 @@
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
 #include "Measurer/Measurer.h"
+#include "Menu/Menu.h"
 
 
 void Device::Init()
@@ -11,6 +12,8 @@ void Device::Init()
     HAL::Init();
 
     Measurer::Init();
+
+    Menu::Init();
 }
 
 
