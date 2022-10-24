@@ -60,28 +60,7 @@ void Display::Interface::DecodeBuffer()
 
     Button::ForIndex(button)->ApplyAction(state);
 
-    if (button >= 0x01 && button <= 0x06)
-    {
-        static int states[6][7] =
-        {
-            {1, 0, 0, 0, 1, 1, 0},      // 2mA
-            {1, 0, 1, 1, 0, 1, 0},      // 20mA
-            {1, 1, 0, 1, 1, 0, 0},      // 200mA
-            {0, 0, 0, 1, 0, 0, 0},      // 2A
-            {1, 0, 1, 1, 0, 1, 0},      // 20A
-            {1, 1, 0, 1, 1, 0, 0}       // 50A
-        };
 
-        int range = button - 1;
-
-        HAL_PIO::Write(PIN_US1, states[range][0] == 1); //-V525
-        HAL_PIO::Write(PIN_US2, states[range][1] == 1);
-        HAL_PIO::Write(PIN_US3, states[range][2] == 1);
-        HAL_PIO::Write(PIN_US4, states[range][3] == 1);
-        HAL_PIO::Write(PIN_US6, states[range][4] == 1);
-        HAL_PIO::Write(PIN_US7, states[range][5] == 1);
-        HAL_PIO::Write(PIN_US8, states[range][6] == 1);
-    }
 
     pointer = 0;
 }

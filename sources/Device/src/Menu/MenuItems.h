@@ -5,7 +5,8 @@
 struct Button
 {
 public:
-    Button(void (*_applyAction)(int)) : applyAction(_applyAction) {};
+
+    Button(int _index, void (*_applyAction)(int)) : index(_index), applyAction(_applyAction) {};
 
     // Возвращает кнопку для данного присланного из дисплея индекса
     static Button *ForIndex(int);
@@ -13,7 +14,11 @@ public:
     // Применить пришедшее с дисплея воздействие
     void ApplyAction(int action) { applyAction(action); }
 
+    int GetIndex() const { return index; }
+
 private:
+
+    int index;
 
     void (*applyAction)(int);
 };

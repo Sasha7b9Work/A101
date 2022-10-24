@@ -10,7 +10,7 @@ namespace PageTwo
 
     }
 
-    static Button buttonInput(ApplyActionButtonInput);
+    static Button buttonInput(1, ApplyActionButtonInput);
 
 
     static void ApplyActionButtonFFT(int)
@@ -18,7 +18,7 @@ namespace PageTwo
 
     }
 
-    static Button buttonFFT(ApplyActionButtonFFT);
+    static Button buttonFFT(2, ApplyActionButtonFFT);
 
 
     static void ApplyActionButtonEmpty1(int)
@@ -26,7 +26,7 @@ namespace PageTwo
 
     }
 
-    static Button buttonEmpty1(ApplyActionButtonEmpty1);
+    static Button buttonEmpty1(3, ApplyActionButtonEmpty1);
 
 
     static void ApplyActionButtonEmpty2(int)
@@ -34,7 +34,7 @@ namespace PageTwo
 
     }
 
-    static Button buttonEmpty2(ApplyActionButtonEmpty2);
+    static Button buttonEmpty2(4, ApplyActionButtonEmpty2);
 
 
     static void ApplyActionButtonEmpty3(int)
@@ -42,7 +42,7 @@ namespace PageTwo
 
     }
 
-    static Button buttonEmpty3(ApplyActionButtonEmpty3);
+    static Button buttonEmpty3(5, ApplyActionButtonEmpty3);
 
 
     static void ApplyActionButtonEmpty4(int)
@@ -50,7 +50,7 @@ namespace PageTwo
 
     }
 
-    static Button buttonEmpty4(ApplyActionButtonEmpty4);
+    static Button buttonEmpty4(6, ApplyActionButtonEmpty4);
 
 
     Button *btnInput = &buttonInput;
