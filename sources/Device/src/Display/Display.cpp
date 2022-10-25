@@ -11,38 +11,40 @@
 
 void Display::SetDC(float value)
 {
-    char buffer[100];
-
-    std::sprintf(buffer, "textDC.txt=\"%.4f mA\"\xFF\xFF\xFF", value);
-
-    HAL_USART2::Send(buffer);
+    Interface::SendCommandFormat("textDC.txt=\"%.4f mA\"", value);
+    Interface::SendCommandFormat("textDCsmall.txt=\"%.4f mA\"", value);
 }
 
 
 void Display::SetAC(float value)
 {
-    char buffer[100];
-
-    std::sprintf(buffer, "textAC.txt=\"%.4f mA\"\xFF\xFF\xFF", value);
-
-    HAL_USART2::Send(buffer);
+    Interface::SendCommandFormat("textAC.txt=\"%.4f mA\"", value);
+    Interface::SendCommandFormat("textACsmall.txt=\"%.4f mA\"", value);
 }
 
 
 void Display::Update()
 {
-    Interface::SendCommand("waveInput.dis=77");
+    static const int num_points = 5;
+
+    Interface::SendCommandFormat("addt 16,0,%d", num_points);
+
+    HAL_TIM::Delay(32);
 
     static int last = 0;
     static int d = 1;
 
-    Interface::SendCommandFormat("add 16,0,%d", last);
-    last += d;
-    if (last == 255 || last == 0)
+    for (int i = 0; i < num_points; i++)
     {
-        d = -d;
+        last += 3;
+        last -= std::rand() % 6;
+        Interface::SendByte(last);
+        last += d;
+        if (last == 255 || last == 0)
+        {
+            d = -d;
+        }
     }
-    Interface::SendCommandFormat("add 16,1,%d", last);
 }
 
 
