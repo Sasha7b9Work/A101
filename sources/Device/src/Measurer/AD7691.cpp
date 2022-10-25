@@ -12,7 +12,7 @@ namespace AD7691
         {
             __IO uint value = 0;
             
-            for(; value < 100000; value++)
+            for(; value < 10000; value++)
             {
             }
         }
@@ -93,7 +93,7 @@ namespace AD7691
 
 void AD7691::Init()
 {
-    pinIN.Init();
+//    pinIN.Init();
     pinCLK.Init();
     pinCNV.Init();
 
