@@ -93,7 +93,7 @@ namespace AD7691
 
 void AD7691::Init()
 {
-//    pinIN.Init();
+    pinIN.Init();
     pinCLK.Init();
     pinCNV.Init();
 
