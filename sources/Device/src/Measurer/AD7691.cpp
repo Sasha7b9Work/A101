@@ -54,7 +54,6 @@ namespace AD7691
         {
             return HAL_GPIO_ReadPin(gpio, pin);
         }
-
     };
 
     struct PinOUT : public Pin
