@@ -13,7 +13,7 @@ namespace DiagramInput
     static BufferADC data;
 
     static const int width = 800;
-    static const int height = 200;
+    static const int height = 256;
     static const int y0 = 100;
 
     static void CalculateMinMax(float *, float *);
