@@ -35,6 +35,8 @@ private:
     int pointer;            // Указатель используется при чтении данных (массив raw)
     uint   raw[SIZE];       // Данные, считанные с АЦП
     float  volt[SIZE];      // Реальные значения с АЦП
+    uint min_raw;
+    uint max_raw;
     float min;
     float max;
 };
