@@ -26,7 +26,7 @@ void Measurer::Update()
 {
     buffer.Clear();
 
-    HAL_TIM4::Start(6);
+    HAL_TIM4::StartPeriodicUS(6);
 
     while (!buffer.IsFull())
     {

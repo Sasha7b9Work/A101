@@ -74,15 +74,15 @@ namespace AD7691
         }
     };
 
-    static PinIN pinIN(GPIOC, GPIO_PIN_2);
-    static PinOUT pinCS(GPIOB, GPIO_PIN_12);
-    static PinOUT pinCLK(GPIOB, GPIO_PIN_12);
+    static PinIN pinIN(GPIOC, GPIO_PIN_2);      // 17
+    static PinOUT pinCLK(GPIOB, GPIO_PIN_10);   // 47
+    static PinOUT pinCNV(GPIOB, GPIO_PIN_12);   // 51
 }
 
 
 void AD7691::Init()
 {
-    pinCS.Reset();
+    pinCNV.Reset();
     pinCLK.Reset();
 }
 
@@ -91,13 +91,13 @@ uint AD7691::ReadValue()
 {
     uint result = 0;
 
-    pinCS.Set();
+    pinCNV.Set();
 
     Waiter waiter;
 
     waiter.WaitConversion();
 
-    pinCS.Reset();
+    pinCNV.Reset();
 
     waiter.WaitValue();
 
