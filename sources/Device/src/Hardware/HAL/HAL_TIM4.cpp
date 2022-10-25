@@ -7,6 +7,7 @@
 namespace HAL_TIM4
 {
     static TIM_HandleTypeDef handleTIM4 = { TIM4 };
+    static uint period = 83;
 }
 
 
@@ -16,24 +17,34 @@ void HAL_TIM4::Init()
 
     handleTIM4.Init.Prescaler = 0;
     handleTIM4.Init.CounterMode = TIM_COUNTERMODE_UP;
-    handleTIM4.Init.Period = (uint)(-1);
-//    handleTIM4
+    handleTIM4.Init.Period = period;                        // „астота APB1 - 84 ћ√ц. —читать будем через 1 ћ√ц
+    handleTIM4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+
+    HAL_TIM_Base_Init(&handleTIM4);
 }
 
 
-void HAL_TIM4::StartPeriodicUS(uint)
+void HAL_TIM4::StartPeriodicUS(uint timeUS)
 {
-
+    period = 84 * timeUS - 1;
+    Stop();
+    TIM4->CNT = 0;
+    TIM4->CR1 |= TIM_CR1_CEN;
 }
 
 
 void HAL_TIM4::WaitEvent()
 {
-
+    while (TIM4->CNT < period)
+    {
+    }
+    Stop();
+    TIM4->CNT = 0;
+    TIM4->CR1 |= TIM_CR1_CEN;
 }
 
 
 void HAL_TIM4::Stop()
 {
-
+    TIM4->CR1 &= (uint)~TIM_CR1_CEN;
 }
