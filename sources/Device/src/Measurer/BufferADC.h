@@ -20,18 +20,21 @@ struct BufferADC
 
     void Clear()      { pointer = 0; }
 
-    void ConvertToVoltage();
-
     int Size() const  { return SIZE; }
 
     float At(int pos) { return volt[pos]; }
 
-    float MinReal() const;
+    void ConvertToVoltage();
 
-    float MaxReal() const;
+    float MinReal() const { return min; };
+
+    float MaxReal() const { return max; };
+
 
 private:
     int pointer;            // Указатель используется при чтении данных (массив raw)
     uint   raw[SIZE];       // Данные, считанные с АЦП
     float  volt[SIZE];      // Реальные значения с АЦП
+    float min;
+    float max;
 };

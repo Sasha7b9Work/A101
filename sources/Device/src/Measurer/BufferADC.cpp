@@ -6,6 +6,9 @@
 
 void BufferADC::ConvertToVoltage()
 {
+    min = std::numeric_limits<float>::max();
+    max = std::numeric_limits<float>::min();
+
     for (int i = 0; i < SIZE; i++)
     {
         uint raw_value = raw[i];
@@ -20,37 +23,16 @@ void BufferADC::ConvertToVoltage()
         const float k = 5.0f / (1 << 17);
 
         volt[i] = (float)value * k;
-    }
-}
 
-
-float BufferADC::MinReal() const
-{
-    float result = std::numeric_limits<float>::max();
-
-    for (int i = 0; i < SIZE; i++)
-    {
-        if (volt[i] < result)
+        if (volt[i] < min)
         {
-            result = volt[i];
+            min = volt[i];
+        }
+
+        if (volt[i] > max)
+        {
+            max = volt[i];
         }
     }
-
-    return result;
 }
 
-
-float BufferADC::MaxReal() const
-{
-    float result = std::numeric_limits<float>::min();
-
-    for (int i = 0; i < SIZE; i++)
-    {
-        if (volt[i] > result)
-        {
-            result = volt[i];
-        }
-    }
-
-    return result;
-}

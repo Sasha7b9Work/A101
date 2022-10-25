@@ -13,8 +13,8 @@ namespace DiagramInput
     static BufferADC data;
 
     static const int width = 390;               // Столько точек графика выводится
-//    static const int height = 256;              // Таков размах по вре
-//    static const int y0 = height / 2;
+    static const float height = 256;              // Таков размах по вре
+    static const float y0 = height / 2;
 
     static void CalculateMinMax(float *, float *);
 }
