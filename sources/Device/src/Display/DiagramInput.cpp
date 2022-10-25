@@ -16,6 +16,7 @@ namespace DiagramInput
 
     static const int num_points = 390;           // Столько точек графика выводится
     static const float height = 256;        // Таков размах по вре
+    static const float y0 = 128;
 }
 
 
@@ -28,7 +29,7 @@ void DiagramInput::SetData(const BufferADC &_data)
 void DiagramInput::Draw()
 {
     float scale = height / (data.MaxReal() - data.MinReal());
-    float y0 = (data.MaxReal() + data.MinReal()) / 2.0f;
+    float ave = (data.MaxReal() + data.MinReal()) / 2.0f;
 
     Display::Interface::SendCommandFormat("addt 16,0,%d", num_points);
 
@@ -36,16 +37,16 @@ void DiagramInput::Draw()
 
     for (int i = 0; i < num_points; i++)
     {
-        float value = y0 + scale * data.At(i);
+        float value = y0 + scale * (data.At(i) - ave);
 
         if (value < 0)
         {
             value = 0;
         }
-//        else if(value > 255)
-//        {
-//            value = 255;
-//        }
+        else if(value > 255)
+        {
+            value = 255;
+        }
 
         Display::Interface::SendByte((uint8)value);
     }
