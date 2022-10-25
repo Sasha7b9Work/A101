@@ -16,21 +16,19 @@ struct BufferADC
         }
     }
 
-    bool IsFull()
-    {
-        return (pointer == SIZE);
-    }
+    bool IsFull()     { return (pointer == SIZE); }
 
-    void Clear() { pointer = 0; }
+    void Clear()      { pointer = 0; }
 
     void ConvertToVoltage();
 
-    int Size() const { return SIZE; }
+    int Size() const  { return SIZE; }
 
-    float At(int pos)
-    {
-        return volt[pos];
-    }
+    float At(int pos) { return volt[pos]; }
+
+    float MinReal() const;
+
+    float MaxReal() const;
 
 private:
     int pointer;            // ”казатель используетс€ при чтении данных (массив raw)

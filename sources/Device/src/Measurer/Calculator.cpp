@@ -1,6 +1,7 @@
 // 2022/10/19 08:16:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Measurer/Calculator.h"
+#include <cmath>
 
 
 namespace Calculator
@@ -17,14 +18,11 @@ void Calculator::AppendData(const BufferADC &_data)
 
 float Calculator::GetAC()
 {
+    return std::fabsf(data.MaxReal() - data.MinReal());
 }
 
 
 float Calculator::GetDC()
 {
-    static float value = 0.0f;
-
-    value += 1.1f;
-
-    return value;
+    return (data.MaxReal() + data.MinReal()) / 2.0f;
 }
