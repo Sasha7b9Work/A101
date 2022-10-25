@@ -26,29 +26,6 @@ void Display::SetAC(float value)
 void Display::Update()
 {
     DiagramInput::Draw();
-
-    /*
-    static const int num_points = 25;
-
-    Interface::SendCommandFormat("addt 16,0,%d", num_points);
-
-    HAL_TIM::Delay(100);
-
-    static int last = 0;
-    static int d = 1;
-
-    for (int i = 0; i < num_points; i++)
-    {
-        last += 3;
-        last -= std::rand() % 6;
-        Interface::SendByte((uint8)last);
-        last += d;
-        if (last == 255 || last == 0)
-        {
-            d = -d;
-        }
-    }
-    */
 }
 
 

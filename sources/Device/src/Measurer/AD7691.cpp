@@ -12,7 +12,7 @@ namespace AD7691
         {
             __IO uint value = 0;
             
-            for(; value < 10000; value++)
+            for(; value < 100; value++)
             {
             }
         }
