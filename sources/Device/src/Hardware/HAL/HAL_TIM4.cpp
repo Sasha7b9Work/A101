@@ -20,7 +20,7 @@ void HAL_TIM4::Init()
     handleTIM4.Init.Period = period;                        // „астота APB1 - 84 ћ√ц. —читать будем через 1 ћ√ц
     handleTIM4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 
-    HAL_TIM_Base_Init(&handleTIM4);
+    HAL_TIM_Base_DeInit(&handleTIM4);
 }
 
 
