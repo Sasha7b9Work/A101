@@ -25,13 +25,11 @@ void Display::SetAC(float value)
 
 void Display::Update()
 {
-    return;
-
-    static const int num_points = 5;
+    static const int num_points = 25;
 
     Interface::SendCommandFormat("addt 16,0,%d", num_points);
 
-    HAL_TIM::Delay(32);
+    HAL_TIM::Delay(100);
 
     static int last = 0;
     static int d = 1;
