@@ -68,7 +68,7 @@ namespace AD7691
             {
                 pin,
                 GPIO_MODE_OUTPUT_PP,
-                GPIO_PULLDOWN,
+                GPIO_PULLUP,
                 GPIO_SPEED_FAST
             };
 

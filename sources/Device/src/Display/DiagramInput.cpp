@@ -38,7 +38,7 @@ void DiagramInput::Draw()
 
     Display::Interface::SendCommandFormat("addt 16,0,%d", num_points);
 
-    HAL_TIM::Delay(100);
+    HAL_TIM::Delay(50);
 
     for (int i = 0; i < num_points; i++)
     {
