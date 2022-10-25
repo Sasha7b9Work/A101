@@ -10,7 +10,11 @@ namespace AD7691
     {
         void WaitConversion()
         {
-
+            __IO uint value = 0;
+            
+            for(; value < 100000; value++)
+            {
+            }
         }
 
         void WaitValue()
@@ -29,13 +33,17 @@ namespace AD7691
 
     struct PinIN : public Pin
     {
-        PinIN(GPIO_TypeDef *gpio, uint16 pin) : Pin(gpio, pin)
+        PinIN(GPIO_TypeDef *_gpio, uint16 _pin) : Pin(_gpio, _pin)
+        {
+            Init();
+        }
+        void Init()
         {
             GPIO_InitTypeDef is =
             {
                 pin,
                 GPIO_MODE_INPUT,
-                GPIO_PULLUP,
+                GPIO_PULLDOWN,
                 GPIO_SPEED_FAST
             };
 
@@ -51,13 +59,17 @@ namespace AD7691
 
     struct PinOUT : public Pin
     {
-        PinOUT(GPIO_TypeDef *gpio, uint16 pin) : Pin(gpio, pin)
+        PinOUT(GPIO_TypeDef *_gpio, uint16 _pin) : Pin(_gpio, _pin)
+        {
+            Init();
+        }
+        void Init()
         {
             GPIO_InitTypeDef is =
             {
                 pin,
                 GPIO_MODE_OUTPUT_PP,
-                GPIO_PULLUP,
+                GPIO_PULLDOWN,
                 GPIO_SPEED_FAST
             };
 
@@ -82,6 +94,10 @@ namespace AD7691
 
 void AD7691::Init()
 {
+    pinIN.Init();
+    pinCLK.Init();
+    pinCNV.Init();
+
     pinCNV.Reset();
     pinCLK.Reset();
 }

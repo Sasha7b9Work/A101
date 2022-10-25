@@ -32,7 +32,9 @@ void Measurer::Update()
     {
         HAL_TIM4::WaitEvent();
 
-        buffer.Push(AD7691::ReadValue());
+        uint value = AD7691::ReadValue();
+
+        buffer.Push(value);
     }
 
     HAL_TIM4::Stop();
