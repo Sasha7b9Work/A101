@@ -25,6 +25,9 @@ void Display::SetAC(float value)
 
 void Display::Update()
 {
+    DiagramInput::Draw();
+
+    /*
     static const int num_points = 25;
 
     Interface::SendCommandFormat("addt 16,0,%d", num_points);
@@ -45,12 +48,11 @@ void Display::Update()
             d = -d;
         }
     }
+    */
 }
 
 
-void Display::DrawData(const BufferADC &data)
+void Display::SetData(const BufferADC &data)
 {
     DiagramInput::SetData(data);
-
-    DiagramInput::Draw();
 }

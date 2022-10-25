@@ -9,7 +9,7 @@ namespace Display
 
     void SetDC(float);
 
-    void DrawData(const BufferADC &);
+    void SetData(const BufferADC &);
 
     void Update();
 }
