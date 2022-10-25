@@ -25,6 +25,8 @@ void Display::SetAC(float value)
 
 void Display::Update()
 {
+    return;
+
     static const int num_points = 5;
 
     Interface::SendCommandFormat("addt 16,0,%d", num_points);
