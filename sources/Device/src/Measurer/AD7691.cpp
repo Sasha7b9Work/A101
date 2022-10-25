@@ -1,6 +1,7 @@
 // 2022/10/18 16:57:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Measurer/AD7691.h"
+#include <stm32f4xx_hal.h>
 
 
 namespace AD7691
@@ -20,25 +21,62 @@ namespace AD7691
 
     struct Pin
     {
+        Pin(GPIO_TypeDef *_gpio, uint16 _pin) : gpio(_gpio), pin(_pin) { }
+    protected:
+        GPIO_TypeDef *gpio;
+        uint16        pin;
     };
 
     struct PinIN : public Pin
     {
+        PinIN(GPIO_TypeDef *gpio, uint16 pin) : Pin(gpio, pin)
+        {
+            GPIO_InitTypeDef is =
+            {
+                pin,
+                GPIO_MODE_INPUT,
+                GPIO_PULLUP,
+                GPIO_SPEED_FAST
+            };
+
+            HAL_GPIO_Init(gpio, &is);
+        }
+
         int Read()
         {
-            return 0;
+            return HAL_GPIO_ReadPin(gpio, pin);
         }
+
     };
 
     struct PinOUT : public Pin
     {
-        void Set() {}
-        void Reset() {}
+        PinOUT(GPIO_TypeDef *gpio, uint16 pin) : Pin(gpio, pin)
+        {
+            GPIO_InitTypeDef is =
+            {
+                pin,
+                GPIO_MODE_OUTPUT_PP,
+                GPIO_PULLUP,
+                GPIO_SPEED_FAST
+            };
+
+            HAL_GPIO_Init(gpio, &is);
+        }
+
+        void Set()
+        {
+            HAL_GPIO_WritePin(gpio, pin, GPIO_PIN_SET);
+        }
+        void Reset()
+        {
+            HAL_GPIO_WritePin(gpio, pin, GPIO_PIN_RESET);
+        }
     };
 
-    static PinIN pinIN;
-    static PinOUT pinCS;
-    static PinOUT pinCLK;
+    static PinIN pinIN(GPIOC, GPIO_PIN_2);
+    static PinOUT pinCS(GPIOB, GPIO_PIN_12);
+    static PinOUT pinCLK(GPIOB, GPIO_PIN_12);
 }
 
 

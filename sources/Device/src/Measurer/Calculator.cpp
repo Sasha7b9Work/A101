@@ -3,7 +3,7 @@
 #include "Measurer/Calculator.h"
 
 
-void Calculator::AppendData(const BufferADC &data)
+void Calculator::AppendData(const BufferADC &)
 {
 
 }

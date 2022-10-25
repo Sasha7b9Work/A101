@@ -38,7 +38,7 @@ void Display::Update()
     {
         last += 3;
         last -= std::rand() % 6;
-        Interface::SendByte(last);
+        Interface::SendByte((uint8)last);
         last += d;
         if (last == 255 || last == 0)
         {

@@ -10,7 +10,7 @@ void HAL_TIM4::Init()
 }
 
 
-void HAL_TIM4::Start(uint dUS)
+void HAL_TIM4::Start(uint)
 {
 
 }

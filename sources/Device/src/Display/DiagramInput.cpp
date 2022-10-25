@@ -12,9 +12,9 @@ namespace DiagramInput
 {
     static BufferADC data;
 
-    static const int width = 800;
-    static const int height = 256;
-    static const int y0 = 100;
+    static const int width = 390;               // Столько точек графика выводится
+//    static const int height = 256;              // Таков размах по вре
+//    static const int y0 = height / 2;
 
     static void CalculateMinMax(float *, float *);
 }
@@ -33,12 +33,12 @@ void DiagramInput::Draw()
 
     CalculateMinMax(&min, &max);
 
-    float scale = height / (max - min);
+//    float scale = height / (max - min);
 
     for (int i = 1; i < width; i++)
     {
-        int y1 = (int)((data.At(i - 1) - min) * scale + y0);
-        int y2 = (int)((data.At(i) - min) * scale + y0);
+//        int y1 = (int)((data.At(i - 1) - min) * scale + y0);
+//        int y2 = (int)((data.At(i) - min) * scale + y0);
 
 
     }
