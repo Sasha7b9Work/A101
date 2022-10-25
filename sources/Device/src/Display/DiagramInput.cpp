@@ -2,6 +2,8 @@
 #include "defines.h"
 #include "Display/DiagramInput.h"
 #include "Display/Painter.h"
+#include "Display/DInterface.h"
+#include "Hardware/HAL/HAL.h"
 #include <limits>
 
 
@@ -12,11 +14,10 @@ namespace DiagramInput
 {
     static BufferADC data;
 
-    static const int width = 390;               // Столько точек графика выводится
-    static const float height = 256;              // Таков размах по вре
-    static const float y0 = height / 2;
-
-    static void CalculateMinMax(float *, float *);
+    static const int num_points = 390;           // Столько точек графика выводится
+    static uint8 pixels[num_points];
+    static const float height = 240;        // Таков размах по вре
+    static const float y0 = 128;
 }
 
 
@@ -28,41 +29,19 @@ void DiagramInput::SetData(const BufferADC &_data)
 
 void DiagramInput::Draw()
 {
-    float min = 0.0f;
-    float max = 0.0f;
+    float scale = height / (data.MaxReal() - data.MinReal());
 
-    CalculateMinMax(&min, &max);
-
-//    float scale = height / (max - min);
-
-    for (int i = 1; i < width; i++)
+    for (int i = 0; i < num_points; i++)
     {
-//        int y1 = (int)((data.At(i - 1) - min) * scale + y0);
-//        int y2 = (int)((data.At(i) - min) * scale + y0);
-
-
-    }
-}
-
-
-void DiagramInput::CalculateMinMax(float *out_min, float *out_max)
-{
-    float min = std::numeric_limits<float>::max();
-    float max = std::numeric_limits<float>::min();
-
-    for (int i = 0; i < data.Size(); i++)
-    {
-        if (data.At(i) < min)
-        {
-            min = data.At(i);
-        }
-
-        if (data.At(i) > max)
-        {
-            max = data.At(i);
-        }
+        pixels[i] = (uint8)(y0 + scale * data.At(i));
     }
 
-    *out_min = min;
-    *out_max = max;
+    Display::Interface::SendCommandFormat("addt 16,0,%d", num_points);
+
+    HAL_TIM::Delay(100);
+
+    for (int i = 0; i < num_points; i++)
+    {
+        Display::Interface::SendByte(pixels[i]);
+    }
 }
