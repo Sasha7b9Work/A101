@@ -11,11 +11,19 @@ void Calculator::AppendData(const BufferADC &data)
 
 float Calculator::GetAC()
 {
-    return 0.0f;
+    static float value = 0.0f;
+
+    value += 1.0f;
+
+    return value;
 }
 
 
 float Calculator::GetDC()
 {
-    return 0.0f;
+    static float value = 0.0f;
+
+    value += 1.1f;
+
+    return value;
 }

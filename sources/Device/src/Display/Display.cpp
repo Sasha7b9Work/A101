@@ -23,7 +23,7 @@ void Display::SetAC(float value)
 {
     char buffer[100];
 
-    std::sprintf(buffer, "ac.txt=\"%.4f mA\"\xFF\xFF\xFF", value);
+    std::sprintf(buffer, "textAC.txt=\"%.4f mA\"\xFF\xFF\xFF", value);
 
     HAL_USART2::Send(buffer);
 }
@@ -31,12 +31,6 @@ void Display::SetAC(float value)
 
 void Display::Update()
 {
-    static float voltageDC = 0.0f;
-
-    voltageDC += 1.0f;
-
-    Display::SetDC(voltageDC);
-
     Interface::SendCommand("waveInput.dis=77");
 
     static int last = 0;
