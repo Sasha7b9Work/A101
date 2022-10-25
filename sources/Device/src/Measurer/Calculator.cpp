@@ -3,19 +3,20 @@
 #include "Measurer/Calculator.h"
 
 
-void Calculator::AppendData(const BufferADC &)
+namespace Calculator
 {
+    static BufferADC data;
+}
 
+
+void Calculator::AppendData(const BufferADC &_data)
+{
+    data = _data;
 }
 
 
 float Calculator::GetAC()
 {
-    static float value = 0.0f;
-
-    value += 1.0f;
-
-    return value;
 }
 
 
