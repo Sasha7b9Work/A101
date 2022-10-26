@@ -225,3 +225,30 @@ uint Timer::LogPointMS(char * /*name*/) //-V524
 
 
 #undef TIME_NEXT
+
+
+TimeMeterMS::TimeMeterMS()
+{
+    Reset();
+}
+
+
+void TimeMeterMS::Reset()
+{
+    time_reset = HAL_TIM::TimeMS();
+}
+
+
+uint TimeMeterMS::ElapsedTime()
+{
+    return HAL_TIM::TimeMS() - time_reset;
+}
+
+
+void TimeMeterMS::Wait(uint dMS)
+{
+    while (ElapsedTime() < dMS)
+    {
+    }
+}
+

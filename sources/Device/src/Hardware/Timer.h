@@ -67,3 +67,15 @@ namespace Timer
     // Вызывается при срабатывании таймера
     void ElapsedCallback();
 };
+
+
+class TimeMeterMS
+{
+public:
+    TimeMeterMS();
+    void Reset();
+    uint ElapsedTime();
+    void Wait(uint dMS);
+private:
+    uint time_reset;
+};

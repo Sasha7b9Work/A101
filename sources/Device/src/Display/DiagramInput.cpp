@@ -4,6 +4,7 @@
 #include "Display/Painter.h"
 #include "Display/DInterface.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
 #include <limits>
 
 
@@ -28,6 +29,8 @@ void DiagramInput::SetData(const BufferADC &_data)
 
 void DiagramInput::Draw()
 {
+    TimeMeterMS meter;
+
     static uint next_time = 0;
 
     if (HAL_TIM::TimeMS() < next_time)
@@ -42,9 +45,11 @@ void DiagramInput::Draw()
 
     Display::Interface::SendCommandFormat("addt 16,0,%d", num_points);
 
-    while (Display::Interface::LastCode() != ReturnCodeDI::TransparentDataReady)
-    {
-    }
+//    while (Display::Interface::LastCode() != ReturnCodeDI::TransparentDataReady)
+//    {
+//    }
+
+    HAL_TIM::Delay(200);
 
     for(int i = 0; i < num_points; i++)
     {
@@ -60,5 +65,9 @@ void DiagramInput::Draw()
         }
 
         Display::Interface::SendByte((uint8)value);
+    }
+
+    while (Display::Interface::LastCode() != ReturnCodeDI::TransparentDataFinished)
+    {
     }
 }

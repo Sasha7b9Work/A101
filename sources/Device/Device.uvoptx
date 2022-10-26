@@ -152,9 +152,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>60</LineNumber>
+          <LineNumber>44</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134236086</Address>
+          <Address>134236360</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,7 +163,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;1&gt;.\src\Display\DInterface.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Display/DInterface.cpp\60</Expression>
+          <Expression>\\A101_D\src/Display/DInterface.cpp\44</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -176,6 +176,11 @@
           <count>1</count>
           <WinNumber>1</WinNumber>
           <ItemText>byte</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>buffer[pointer - 1]</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>

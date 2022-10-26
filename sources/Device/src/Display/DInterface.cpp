@@ -33,7 +33,8 @@ namespace Display
         static int pointer = 0;
         static ReturnCodeDI::E last_code = ReturnCodeDI::InstructionSuccessful;
 
-        static void DecodeBuffer();
+        static void DecodeBufferFF();
+        static void DecodeBufferZ();
     }
 }
 
@@ -46,9 +47,13 @@ ReturnCodeDI::E Display::Interface::LastCode()
 
 void Display::Interface::CallbackOnReceive(uint8 byte)
 {
-    if (byte == 0xFF || byte == 'Z')
+    if (byte == 0xFF)
     {
-        DecodeBuffer();
+        DecodeBufferFF();
+    }
+    else if (byte == 'Z')
+    {
+        DecodeBufferZ();
     }
     else
     {
@@ -62,7 +67,7 @@ void Display::Interface::CallbackOnReceive(uint8 byte)
 }
 
 
-void Display::Interface::DecodeBuffer()
+void Display::Interface::DecodeBufferFF()
 {
     if(pointer == 0)
     {
@@ -80,6 +85,56 @@ void Display::Interface::DecodeBuffer()
     else
     {
         last_code = (ReturnCodeDI::E)byte;
+        
+        if (last_code == ReturnCodeDI::TransparentDataFinished)
+        {
+            last_code = last_code;
+        }
+        else if (last_code == ReturnCodeDI::TransparentDataReady)
+        {
+            last_code = last_code;
+        }
+        else
+        {
+            last_code = last_code;
+        }
+    }
+
+    pointer = 0;
+}
+
+
+void Display::Interface::DecodeBufferZ()
+{
+    if (pointer == 0)
+    {
+        return;
+    }
+
+    uint8 byte = buffer[pointer - 1];
+
+    if (byte >= '1' && byte <= '8')
+    {
+        int button = byte & 0x0F;
+
+        Button::ForIndex(button)->Press();
+    }
+    else
+    {
+        last_code = (ReturnCodeDI::E)byte;
+
+        if (last_code == ReturnCodeDI::TransparentDataFinished)
+        {
+            last_code = last_code;
+        }
+        else if (last_code == ReturnCodeDI::TransparentDataReady)
+        {
+            last_code = last_code;
+        }
+        else
+        {
+            last_code = last_code;
+        }
     }
 
     pointer = 0;
@@ -88,7 +143,7 @@ void Display::Interface::DecodeBuffer()
 
 void Display::Interface::SendCommand(pchar command)
 {
-    last_code = ReturnCodeDI::InstructionSuccessful;
+    last_code = ReturnCodeDI::_None;
 
     HAL_USART2::Send(command);
 
@@ -98,7 +153,7 @@ void Display::Interface::SendCommand(pchar command)
 
 void Display::Interface::SendByte(uint8 byte)
 {
-    last_code = ReturnCodeDI::InstructionSuccessful;
+    last_code = ReturnCodeDI::_None;
 
     HAL_USART2::SendByte(byte);
 }
