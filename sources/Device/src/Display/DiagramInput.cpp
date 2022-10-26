@@ -42,9 +42,11 @@ void DiagramInput::Draw()
 
     Display::Interface::SendCommandFormat("addt 16,0,%d", num_points);
 
-    HAL_TIM::Delay(200);
+    while (Display::Interface::LastCode() != ReturnCodeDI::TransparentDataReady)
+    {
+    }
 
-    for (int i = 0; i < num_points; i++)
+    for(int i = 0; i < num_points; i++)
     {
         float value = y0 + scale * (data.At(i) - ave);
 

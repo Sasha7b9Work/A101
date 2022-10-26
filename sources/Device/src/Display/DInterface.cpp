@@ -31,9 +31,16 @@ namespace Display
         static const int SIZE_BUFFER = 10;
         static uint8 buffer[SIZE_BUFFER];
         static int pointer = 0;
+        static ReturnCodeDI::E last_code = ReturnCodeDI::InstructionSuccessful;
 
         static void DecodeBuffer();
     }
+}
+
+
+ReturnCodeDI::E Display::Interface::LastCode()
+{
+    return last_code;
 }
 
 
@@ -65,6 +72,10 @@ void Display::Interface::DecodeBuffer()
 
         Button::ForIndex(button)->Press();
     }
+    else
+    {
+        last_code = (ReturnCodeDI::E)byte;
+    }
 
     pointer = 0;
 }
@@ -72,6 +83,8 @@ void Display::Interface::DecodeBuffer()
 
 void Display::Interface::SendCommand(pchar command)
 {
+    last_code = ReturnCodeDI::InstructionSuccessful;
+
     HAL_USART2::Send(command);
 
     HAL_USART2::Send("\xFF\xFF\xFF");
@@ -80,6 +93,8 @@ void Display::Interface::SendCommand(pchar command)
 
 void Display::Interface::SendByte(uint8 byte)
 {
+    last_code = ReturnCodeDI::InstructionSuccessful;
+
     HAL_USART2::SendByte(byte);
 }
 
