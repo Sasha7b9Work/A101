@@ -52,6 +52,11 @@ void Display::Interface::CallbackOnReceive(uint8 byte)
 
 void Display::Interface::DecodeBuffer()
 {
+    if(pointer == 0)
+    {
+        return;
+    }
+    
     uint8 byte = buffer[pointer - 1];
     
     if (byte >= '1' && byte <= '8')
