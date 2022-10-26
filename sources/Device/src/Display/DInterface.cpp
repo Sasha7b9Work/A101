@@ -35,7 +35,7 @@ namespace DInterface
             std::memcpy(buffer, bytes, (uint)size);
         }
         virtual ~CommandUART() {}
-        bool IsEmpty() const { return size != 0; }
+        bool IsEmpty() const { return (size == 0); }
         virtual bool Execute()
         {
             return false;
@@ -106,13 +106,13 @@ namespace DInterface
 
             buffer[pointer++] = byte;
         }
-        CommandUART GetCommand()
+        CommandUART *GetCommand()
         {
             for (int i = 0; i < pointer; i++)
             {
                 if (buffer[i] == (uint8)'Z')
                 {
-                    CommandUART_Z result(buffer, i);
+                    CommandUART_Z *result = new CommandUART_Z(buffer, i);
 
                     RemoveFromStart(i + 1);
 
@@ -131,7 +131,7 @@ namespace DInterface
                 }
             }
 
-            return CommandUART();
+            return new CommandUART();
         }
     private:
         uint8 buffer[size];
@@ -158,8 +158,15 @@ namespace DInterface
 
 void DInterface::Update()
 {
-    while (buffer.GetCommand().Execute())
+    bool run = true;
+
+    while (run)
     {
+        CommandUART *command = buffer.GetCommand();
+
+        run = command->Execute();
+
+        delete command;
     }
 }
 

@@ -49,7 +49,7 @@ typedef void(*pFuncVI)(int);
 #ifndef NULL
 #define NULL 0
 #endif
-#define nullptr NULL   //-V1059
+//#define nullptr NULL   //-V1059
 
 #endif
 
