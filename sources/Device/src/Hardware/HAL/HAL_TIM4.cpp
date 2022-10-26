@@ -6,7 +6,20 @@
 
 namespace HAL_TIM4
 {
-    static TIM_HandleTypeDef handleTIM4 = { TIM4 };
+    static TIM_HandleTypeDef handleTIM4 =
+    {
+        TIM4,
+        {
+
+        },
+        HAL_TIM_ACTIVE_CHANNEL_CLEARED,
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        HAL_UNLOCKED,
+        HAL_TIM_STATE_RESET,
+        {HAL_TIM_CHANNEL_STATE_RESET, HAL_TIM_CHANNEL_STATE_RESET, HAL_TIM_CHANNEL_STATE_RESET, HAL_TIM_CHANNEL_STATE_RESET},
+        {HAL_TIM_CHANNEL_STATE_RESET, HAL_TIM_CHANNEL_STATE_RESET, HAL_TIM_CHANNEL_STATE_RESET, HAL_TIM_CHANNEL_STATE_RESET},
+        HAL_DMA_BURST_STATE_RESET
+    };
     static uint period = 83;
 }
 
