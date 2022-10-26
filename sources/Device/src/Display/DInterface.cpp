@@ -7,6 +7,7 @@
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
+#include <cstring>
 
 
 /*
@@ -26,6 +27,22 @@
 
 namespace DInterface
 {
+    struct CommandUART
+    {
+        CommandUART() : size(0) {}
+        CommandUART(uint8 *bytes, int _size) : size(_size)
+        {
+            std::memcpy(buffer, bytes, (uint)size);
+        }
+        bool IsEmpty() const { return size != 0; }
+        bool Execute();
+    private:
+        static const int SIZE = 16;
+        uint8 buffer[SIZE];
+        int size;
+    };
+
+
     template<uint size>
     struct BufferUART
     {
@@ -34,14 +51,51 @@ namespace DInterface
         {
             if (pointer == size)
             {
-                pointer = 0;
+                RemoveFromStart(1);
             }
 
             buffer[pointer++] = byte;
         }
+        CommandUART GetCommand()
+        {
+            for (int i = 0; i < pointer; i++)
+            {
+                if (buffer[i] == (uint8)'Z')
+                {
+                    CommandUART result(buffer, i);
+
+                    RemoveFromStart(i + 1);
+
+                    return result;
+                }
+            }
+
+            if (pointer > 3)
+            {
+                for (int i = 0; i < pointer - 3; i++)
+                {
+                    if (std::memcmp(&buffer[i], "\xFF\xFF\xFF") == 0)
+                    {
+
+                    }
+                }
+            }
+        }
     private:
         uint8 buffer[size];
         int pointer;
+        void RemoveFromStart(int num_bytes)
+        {
+            if (num_bytes == pointer)
+            {
+                pointer = 0;
+            }
+            else
+            {
+                std::memmove(buffer, buffer + num_bytes, (uint)(pointer - num_bytes));
+                pointer -= num_bytes;
+            }
+        }
     };
 
     static BufferUART <32>buffer;
@@ -52,7 +106,9 @@ namespace DInterface
 
 void DInterface::Update()
 {
-
+    while (buffer.GetCommand().Execute())
+    {
+    }
 }
 
 
