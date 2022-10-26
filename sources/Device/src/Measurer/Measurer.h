@@ -7,6 +7,4 @@ namespace Measurer
     void Init();
 
     void Update();
-
-    void ElapsedCallback();
 }

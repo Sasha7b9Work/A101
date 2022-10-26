@@ -6,6 +6,7 @@
 #include "Measurer/AD7691.h"
 #include "Measurer/Calculator.h"
 #include "Display/Display.h"
+#include "Hardware/HAL/HAL.h"
 
 
 namespace Measurer
@@ -24,6 +25,8 @@ void Measurer::Init()
 
 void Measurer::Update()
 {
+    uint start_time = HAL_TIM::TimeMS();
+
     buffer.Clear();
 
     HAL_TIM4::StartPeriodicUS(6);
@@ -38,6 +41,9 @@ void Measurer::Update()
     }
 
     HAL_TIM4::Stop();
+
+    uint time = HAL_TIM::TimeMS() - start_time;
+    time = time;
 
     buffer.ConvertToVoltage();
 

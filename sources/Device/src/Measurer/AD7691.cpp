@@ -126,13 +126,16 @@ uint AD7691::ReadValue()
 
     for (int i = 0; i < 18; i++)
     {
-        pinCLK.Set();
+        GPIOB->BSRR = GPIO_PIN_10;
 
         result <<= 1;
 
-        pinCLK.Reset();
+        GPIOB->BSRR = GPIO_PIN_10 << 16;
 
-        result |= (uint)pinIN.Read();
+        if (GPIOC->IDR & GPIO_PIN_2)
+        {
+            result |= 1U;
+        }
     }
 
     return result;
