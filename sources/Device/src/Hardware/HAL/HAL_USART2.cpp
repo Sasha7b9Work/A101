@@ -20,7 +20,20 @@ namespace HAL_USART2
             UART_MODE_TX_RX,
             UART_HWCONTROL_NONE,
             UART_OVERSAMPLING_16
-        }
+        },
+        nullptr,
+        0,
+        0,
+        nullptr,
+        0,
+        0,
+        0,
+        nullptr,
+        nullptr,
+        HAL_UNLOCKED,
+        HAL_UART_STATE_RESET,
+        HAL_UART_STATE_RESET,
+        0
     };
 
     void *handle = (void *)&handleUSART2;
@@ -47,7 +60,7 @@ void HAL_USART2::Init()
 
 void HAL_USART2::Send(pchar command)
 {
-    HAL_UART_Transmit(&handleUSART2, (uint8 *)command, (uint16)std::strlen(command), 100);
+    HAL_UART_Transmit(&handleUSART2, (const uint8 *)command, (uint16)std::strlen(command), 100);
 }
 
 

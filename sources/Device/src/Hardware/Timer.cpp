@@ -42,7 +42,7 @@ static void TuneTIM(Timer::Type type);
 
 bool Timer::IsRun(Type type)
 {
-    return TIME_NEXT(type) != std::numeric_limits<uint>::max();
+    return TIME_NEXT(type) != (uint)std::numeric_limits<uint>::max();
 }
 
 
@@ -50,7 +50,7 @@ void Timer::Init()
 {
     for(uint i = 0; i < Timer::Type::Count; i++)
     {
-        timers[i].timeNextMS = std::numeric_limits<uint>::max();
+        timers[i].timeNextMS = (uint)std::numeric_limits<uint>::max();
     }
 
     HAL_TIM3::Init();
@@ -84,7 +84,7 @@ void Timer::ElapsedCallback()
             }
             else
             {
-                timer->timeNextMS = std::numeric_limits<uint>::max();
+                timer->timeNextMS = (uint)std::numeric_limits<uint>::max();
             }
         }
     }
@@ -147,14 +147,14 @@ static void TuneTIM(Timer::Type type)
 
 void Timer::Disable(Type type)
 {
-    timers[type].timeNextMS = std::numeric_limits<uint>::max();
+    timers[type].timeNextMS = (uint)std::numeric_limits<uint>::max();
     timers[type].repeat = false;
 }
 
 
 static uint NearestTime()
 {
-    uint time = std::numeric_limits<uint>::max();
+    uint time = (uint)std::numeric_limits<uint>::max();
 
     for(uint type = 0; type < Timer::Type::Count; type++)
     {
@@ -172,7 +172,7 @@ static void StartTIM(uint timeStopMS)
 {
     StopTIM();
 
-    if(timeStopMS == std::numeric_limits<uint>::max())
+    if(timeStopMS == (uint)std::numeric_limits<uint>::max())
     {
         return;
     }

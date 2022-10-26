@@ -95,3 +95,24 @@ namespace HAL_USART3
 {
     void Init();
 }
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+    void SysTick_Handler();
+    void MemManage_Handler();
+    void UsageFault_Handler();
+    void HardFault_Handler();
+    void BusFault_Handler();
+    void PendSV_Handler();
+    void NMI_Handler();
+    void SVC_Handler();
+    void DebugMon_Handler();
+    void TIM3_IRQHandler();
+    void USART2_IRQHandler();
+    
+#ifdef __cplusplus
+}
+#endif
