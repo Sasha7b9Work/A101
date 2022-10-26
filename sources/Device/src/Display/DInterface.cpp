@@ -29,7 +29,7 @@ namespace Display
     namespace Interface
     {
         static const int SIZE_BUFFER = 10;
-        static char buffer[SIZE_BUFFER];
+        static uint8 buffer[SIZE_BUFFER];
         static int pointer = 0;
 
         static void DecodeBuffer();
@@ -37,9 +37,9 @@ namespace Display
 }
 
 
-void Display::Interface::CallbackOnReceive(char byte)
+void Display::Interface::CallbackOnReceive(uint8 byte)
 {
-    if ((uint8)byte == 0xFF || byte == 'Z')
+    if (byte == 0xFF || byte == 'Z')
     {
         DecodeBuffer();
     }
@@ -52,7 +52,7 @@ void Display::Interface::CallbackOnReceive(char byte)
 
 void Display::Interface::DecodeBuffer()
 {
-    char byte = buffer[pointer - 1];
+    uint8 byte = buffer[pointer - 1];
     
     if (byte >= '1' && byte <= '8')
     {

@@ -12,6 +12,6 @@ namespace Display
 
         void SendCommandFormat(pchar, ...);
 
-        void CallbackOnReceive(char);
+        void CallbackOnReceive(uint8);
     }
 }

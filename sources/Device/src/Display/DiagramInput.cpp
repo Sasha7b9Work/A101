@@ -35,14 +35,14 @@ void DiagramInput::Draw()
         return;
     }
 
-    next_time = HAL_TIM::TimeMS() + 500;
+    next_time = HAL_TIM::TimeMS() + 1000;
 
     float scale = height / (data.MaxReal() - data.MinReal());
     float ave = (data.MaxReal() + data.MinReal()) / 2.0f;
 
     Display::Interface::SendCommandFormat("addt 16,0,%d", num_points);
 
-    HAL_TIM::Delay(100);
+    HAL_TIM::Delay(200);
 
     for (int i = 0; i < num_points; i++)
     {
