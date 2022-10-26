@@ -15,7 +15,7 @@ namespace DiagramInput
 {
     static BufferADC data;
 
-    static const int num_points = 100;      // Столько точек графика выводится
+    static const int num_points = 783;      // Столько точек графика выводится
     static const float height = 256;        // Таков размах по вре
     static const float y0 = 128;
 }
