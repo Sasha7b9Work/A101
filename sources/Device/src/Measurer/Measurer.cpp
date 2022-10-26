@@ -31,6 +31,8 @@ void Measurer::Init()
     AD7691::Init();
 }
 
+#pragma O0
+
 
 void Measurer::Update()
 {
@@ -48,6 +50,7 @@ void Measurer::Update()
     }
 
     HAL_TIM4::Stop();
+
 
     uint time = HAL_TIM::TimeMS() - start_time;
     time = time;

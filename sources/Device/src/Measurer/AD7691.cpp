@@ -137,8 +137,6 @@ uint AD7691::ReadValue()
         
         __ASM("nop");
         __ASM("nop");
-        __ASM("nop");
-        __ASM("nop");
         
         if (GPIOC->IDR & GPIO_PIN_2)
         {
