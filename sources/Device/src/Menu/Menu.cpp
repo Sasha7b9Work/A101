@@ -12,10 +12,6 @@ namespace Menu
 
 void Menu::Init()
 {
-    for (int i = 1; i <= 6; i++)
-    {
-        PageMain::GetButton(i)->RemoveBacklight();
-    }
 }
 
 

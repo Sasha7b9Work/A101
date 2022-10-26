@@ -19,14 +19,6 @@ namespace PageMain
 
         if (index >= 0x01 && index <= 0x06)
         {
-            for (int i = 1; i <= 6; i++)
-            {
-                if (i != index)
-                {
-                    GetButton(i)->RemoveBacklight();
-                }
-            }
-
             static int states[6][7] =
             {
                 {1, 0, 0, 0, 1, 1, 0},      // 2mA

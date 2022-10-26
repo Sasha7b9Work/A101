@@ -148,10 +148,6 @@ void Display::Interface::SendCommand(pchar command)
     HAL_USART2::Send(command);
 
     HAL_USART2::Send("\xFF\xFF\xFF");
-
-//    while (last_code == ReturnCodeDI::_None)
-//    {
-//    }
 }
 
 
