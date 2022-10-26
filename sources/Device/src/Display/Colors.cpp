@@ -24,7 +24,7 @@ void Color::SetAsCurrent() const
     {
         current = value;
     }
-};
+}
 
 
 pchar Color::CurrentValue()

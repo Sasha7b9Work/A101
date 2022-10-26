@@ -66,7 +66,7 @@ namespace Timer
 
     // Вызывается при срабатывании таймера
     void ElapsedCallback();
-};
+}
 
 
 class TimeMeterMS

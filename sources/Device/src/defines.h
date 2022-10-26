@@ -7,10 +7,15 @@
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
 #pragma clang diagnostic ignored "-Wpadded"
 #pragma clang diagnostic ignored "-Wold-style-cast"
-#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+#pragma clang diagnostic ignored "-Wc++98-compat"
 #pragma clang diagnostic ignored "-Wformat-nonliteral"
 #endif
 
+
+#ifndef WIN32
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+#endif
 
 typedef unsigned int       uint;
 typedef unsigned short     uint16;
@@ -22,6 +27,10 @@ typedef unsigned char      uint8_t;
 typedef signed char        int8;
 typedef const char * const cstr;
 typedef const char *       pchar;
+
+#ifndef WIN32
+#pragma clang diagnostic pop
+#endif
 
 typedef void(*pFuncVV)();
 typedef void(*pFuncVI)(int);

@@ -3,7 +3,14 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Measurer/Measurer.h"
+#ifndef WIN32
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+#endif
 #include <stm32f4xx_hal.h>
+#ifndef WIN32
+#pragma clang diagnostic pop
+#endif
 
 
 #define TRACE_HANDLER                   

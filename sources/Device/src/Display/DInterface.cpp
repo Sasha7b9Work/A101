@@ -9,8 +9,11 @@
 #include <cstring>
 #include <cstring>
 
+
+#ifndef WIN32
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wweak-vtables"
+#endif
 
 
 /*
@@ -218,4 +221,6 @@ void DInterface::SendCommandFormat(const char * format, ...)
     SendCommand(message);
 }
 
+#ifndef WIN32
 #pragma clang diagnostic pop
+#endif

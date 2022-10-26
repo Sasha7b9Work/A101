@@ -1,7 +1,14 @@
 // 2022/10/18 16:57:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Measurer/AD7691.h"
+#ifndef WIN32
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+#endif
 #include <stm32f4xx_hal.h>
+#ifndef WIN32
+#pragma clang diagnostic pop
+#endif
 
 
 namespace AD7691

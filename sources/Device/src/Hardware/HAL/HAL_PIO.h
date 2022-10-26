@@ -37,7 +37,7 @@ namespace HPin
     extern const uint16 _13;
     extern const uint16 _14;
     extern const uint16 _15;
-};
+}
 
 
 struct StructPIN
@@ -113,4 +113,4 @@ namespace HAL_PIO
     void Write(HPort::E port, uint16 pin, HState::E state);
     void Write(HPort::E port, uint16 pin, bool state);
     uint8 Read(HPort::E port, uint16 pin);
-};
+}

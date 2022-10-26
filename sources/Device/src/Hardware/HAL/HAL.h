@@ -13,7 +13,7 @@ namespace HAL
     void Init();
 
     void ErrorHandler();
-};
+}
 
 
 namespace HAL_TIM
@@ -21,7 +21,7 @@ namespace HAL_TIM
     uint TimeMS();
 
     void Delay(uint timeMS);
-};
+}
 
 
 // Для измерения малых интервалов времени - микросекунд и тиков
@@ -34,7 +34,7 @@ namespace HAL_TIM2
     void StartMultiMeasurement();
 
     uint TimeUS();
-};
+}
 
 
 // Для событий таймера Timer
@@ -45,7 +45,7 @@ namespace HAL_TIM3
     void StartIT(uint period);
 
     void StopIT();
-};
+}
 
 
 // Для чтения АЦП (по сигналу этого таймера нужно читать одну точку АЦП)
@@ -67,7 +67,7 @@ namespace HAL_TIM4
 namespace HAL_SPI2
 {
     void Init();
-};
+}
 
 
 // RS232
