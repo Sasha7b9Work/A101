@@ -44,7 +44,8 @@ namespace AD7691
                 pin,
                 GPIO_MODE_INPUT,
                 GPIO_PULLDOWN,
-                GPIO_SPEED_FAST
+                GPIO_SPEED_FAST,
+                0
             };
 
             HAL_GPIO_Init(gpio, &is);
@@ -69,7 +70,8 @@ namespace AD7691
                 pin,
                 GPIO_MODE_OUTPUT_PP,
                 GPIO_PULLUP,
-                GPIO_SPEED_FAST
+                GPIO_SPEED_FAST,
+                0
             };
 
             HAL_GPIO_Init(gpio, &is);
@@ -124,7 +126,7 @@ uint AD7691::ReadValue()
 
         pinCLK.Reset();
 
-        result |= pinIN.Read();
+        result |= (uint)pinIN.Read();
     }
 
     return result;
