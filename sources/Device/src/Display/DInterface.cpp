@@ -54,6 +54,11 @@ void Display::Interface::CallbackOnReceive(uint8 byte)
     {
         buffer[pointer++] = byte;
     }
+    
+    if(pointer == SIZE_BUFFER)
+    {
+        pointer = pointer;
+    }
 }
 
 
