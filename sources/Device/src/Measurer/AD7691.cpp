@@ -114,15 +114,13 @@ uint AD7691::ReadValue()
 {
     uint result = 0;
 
-    pinCNV.Set();
+    GPIOB->BSRR = GPIO_PIN_12;
 
     Waiter waiter;
 
     waiter.WaitConversion();
 
-    pinCNV.Reset();
-
-    waiter.WaitValue();
+    GPIOB->BSRR = GPIO_PIN_12 << 16;
 
     for (int i = 0; i < 18; i++)
     {
