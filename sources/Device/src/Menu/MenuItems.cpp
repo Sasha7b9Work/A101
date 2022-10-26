@@ -21,15 +21,15 @@ Button *Button::ForIndex(int index)
 
 void Button::RemoveBacklight()
 {
-    static pchar names[7] = { "bt2mA", "bt2mA", "bt20mA", "bt200mA", "bt2A", "bt20A", "bt50A" };
+//    static pchar names[7] = { "bt2mA", "bt2mA", "bt20mA", "bt200mA", "bt2A", "bt20A", "bt50A" };
 
-    Display::Interface::SendCommandFormat("%s.val=0", names[index]);
+//    Display::Interface::SendCommandFormat("%s.val=0", names[index]);
 }
 
 
 void Button::SetBacklight()
 {
-    static pchar names[7] = { "bt2mA", "bt2mA", "bt20mA", "bt200mA", "bt2A", "bt20A", "bt50A" };
+//    static pchar names[7] = { "bt2mA", "bt2mA", "bt20mA", "bt200mA", "bt2A", "bt20A", "bt50A" };
 
-    Display::Interface::SendCommandFormat("%s.val=1", names[index]);
+//    Display::Interface::SendCommandFormat("%s.val=1", names[index]);
 }

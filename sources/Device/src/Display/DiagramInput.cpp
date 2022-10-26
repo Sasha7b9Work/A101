@@ -45,11 +45,13 @@ void DiagramInput::Draw()
 
     Display::Interface::SendCommandFormat("addt 16,0,%d", num_points);
 
-//    while (Display::Interface::LastCode() != ReturnCodeDI::TransparentDataReady)
-//    {
-//    }
-
-    HAL_TIM::Delay(200);
+    while (Display::Interface::LastCode() != ReturnCodeDI::TransparentDataReady)
+    {
+        if (meter.ElapsedTime() > 200)
+        {
+            break;
+        }
+    }
 
     for(int i = 0; i < num_points; i++)
     {
@@ -67,7 +69,13 @@ void DiagramInput::Draw()
         Display::Interface::SendByte((uint8)value);
     }
 
+    meter.Reset();
+    
     while (Display::Interface::LastCode() != ReturnCodeDI::TransparentDataFinished)
     {
+        if(meter.ElapsedTime() > 200)
+        {
+            break;
+        }
     }
 }
