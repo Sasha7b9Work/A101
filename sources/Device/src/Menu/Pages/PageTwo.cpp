@@ -5,49 +5,43 @@
 
 namespace PageTwo
 {
-    static void ApplyActionButtonInput(int)
+    static void ApplyActionButtonInput()
     {
-
     }
 
     static Button buttonInput(1, ApplyActionButtonInput);
 
 
-    static void ApplyActionButtonFFT(int)
+    static void ApplyActionButtonFFT()
     {
-
     }
 
     static Button buttonFFT(2, ApplyActionButtonFFT);
 
 
-    static void ApplyActionButtonEmpty1(int)
+    static void ApplyActionButtonEmpty1()
     {
-
     }
 
     static Button buttonEmpty1(3, ApplyActionButtonEmpty1);
 
 
-    static void ApplyActionButtonEmpty2(int)
+    static void ApplyActionButtonEmpty2()
     {
-
     }
 
     static Button buttonEmpty2(4, ApplyActionButtonEmpty2);
 
 
-    static void ApplyActionButtonEmpty3(int)
+    static void ApplyActionButtonEmpty3()
     {
-
     }
 
     static Button buttonEmpty3(5, ApplyActionButtonEmpty3);
 
 
-    static void ApplyActionButtonEmpty4(int)
+    static void ApplyActionButtonEmpty4()
     {
-
     }
 
     static Button buttonEmpty4(6, ApplyActionButtonEmpty4);

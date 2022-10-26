@@ -39,28 +39,27 @@ namespace Display
 
 void Display::Interface::CallbackOnReceive(char byte)
 {
-    buffer[pointer++] = byte;
-
-    if (pointer == SIZE_BUFFER)
-    {
-        pointer = 0;
-    }
-
-    if (byte == 'Z')
+    if ((uint8)byte == 0xFF || byte == 'Z')
     {
         DecodeBuffer();
+    }
+    else
+    {
+        buffer[pointer++] = byte;
     }
 }
 
 
 void Display::Interface::DecodeBuffer()
 {
-    int button = buffer[pointer - 3] & 0x0F;
-    int state = buffer[pointer - 2] & 0x0F;
+    char byte = buffer[pointer - 1];
+    
+    if (byte >= '1' && byte <= '8')
+    {
+        int button = byte & 0x0F;
 
-    Button::ForIndex(button)->ApplyAction(state);
-
-
+        Button::ForIndex(button)->Press();
+    }
 
     pointer = 0;
 }
