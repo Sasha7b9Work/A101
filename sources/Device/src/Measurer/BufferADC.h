@@ -26,9 +26,9 @@ struct BufferADC
 
     void ConvertToVoltage();
 
-    float MinReal() const { return min; };
+    float MinReal() const { return min; }
 
-    float MaxReal() const { return max; };
+    float MaxReal() const { return max; }
 
 
 private:

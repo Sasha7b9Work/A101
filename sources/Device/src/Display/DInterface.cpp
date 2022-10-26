@@ -42,7 +42,7 @@ namespace DInterface
         virtual bool Execute()
         {
             return false;
-        };
+        }
     protected:
         static const int SIZE = 16;
         uint8 buffer[SIZE];
