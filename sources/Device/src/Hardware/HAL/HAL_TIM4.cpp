@@ -58,9 +58,8 @@ void HAL_TIM4::WaitEvent()
     while (TIM4->CNT < period)
     {
     }
-//    Stop();
+
     TIM4->CNT = 0;
-//    TIM4->CR1 |= TIM_CR1_CEN;
 }
 
 
