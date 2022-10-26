@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Device.h"
 #include "Display/Display.h"
+#include "Display/DInterface.h"
 #include "Hardware/HAL/HAL.h"
 #include "Measurer/Measurer.h"
 #include "Menu/Menu.h"
@@ -22,4 +23,6 @@ void Device::Update()
     Measurer::Update();
 
     Display::Update();
+
+    DInterface::Update();
 }

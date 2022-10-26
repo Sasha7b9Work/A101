@@ -34,18 +34,17 @@ struct ReturnCodeDI
 };
 
 
-namespace Display
+namespace DInterface
 {
-    namespace Interface
-    {
-        void SendCommand(pchar);
+    void Update();
 
-        void SendByte(uint8);
+    void SendCommand(pchar);
 
-        void SendCommandFormat(pchar, ...);
+    void SendByte(uint8);
 
-        void CallbackOnReceive(uint8);
+    void SendCommandFormat(pchar, ...);
 
-        ReturnCodeDI::E LastCode();
-    }
+    void CallbackOnReceive(uint8);
+
+    ReturnCodeDI::E LastCode();
 }

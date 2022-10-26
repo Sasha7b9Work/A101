@@ -30,8 +30,6 @@ void DiagramInput::SetData(const BufferADC &_data)
 
 void DiagramInput::Draw()
 {
-    return;
-
     TimeMeterMS meter;
 
     static uint next_time = 0;
@@ -46,9 +44,9 @@ void DiagramInput::Draw()
     float scale = height / (data.MaxReal() - data.MinReal());
     float ave = (data.MaxReal() + data.MinReal()) / 2.0f;
 
-    Display::Interface::SendCommandFormat("addt 16,0,%d", num_points);
+    DInterface::SendCommandFormat("addt 16,0,%d", num_points);
 
-    while (Display::Interface::LastCode() != ReturnCodeDI::TransparentDataReady)
+    while (DInterface::LastCode() != ReturnCodeDI::TransparentDataReady)
     {
         if (meter.ElapsedTime() > 200)
         {
@@ -69,12 +67,12 @@ void DiagramInput::Draw()
             value = 255;
         }
 
-        Display::Interface::SendByte((uint8)value);
+        DInterface::SendByte((uint8)value);
     }
 
     meter.Reset();
     
-    while (Display::Interface::LastCode() != ReturnCodeDI::TransparentDataFinished)
+    while (DInterface::LastCode() != ReturnCodeDI::TransparentDataFinished)
     {
         if(meter.ElapsedTime() > 200)
         {

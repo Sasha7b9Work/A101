@@ -11,15 +11,15 @@
 
 void Display::SetDC(float value)
 {
-    Interface::SendCommandFormat("textDC.txt=\"%.4f V\"", value);
-    Interface::SendCommandFormat("textDCsmall.txt=\"%.4f V\"", value);
+    DInterface::SendCommandFormat("textDC.txt=\"%.4f V\"", value);
+    DInterface::SendCommandFormat("textDCsmall.txt=\"%.4f V\"", value);
 }
 
 
 void Display::SetAC(float value)
 {
-    Interface::SendCommandFormat("textAC.txt=\"%.4f V\"", value);
-    Interface::SendCommandFormat("textACsmall.txt=\"%.4f V\"", value);
+    DInterface::SendCommandFormat("textAC.txt=\"%.4f V\"", value);
+    DInterface::SendCommandFormat("textACsmall.txt=\"%.4f V\"", value);
 }
 
 

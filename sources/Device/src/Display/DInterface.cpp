@@ -24,124 +24,51 @@
 */
 
 
-namespace Display
+namespace DInterface
 {
-    namespace Interface
+    template<uint size>
+    struct BufferUART
     {
-        static const int SIZE_BUFFER = 10;
-        static uint8 buffer[SIZE_BUFFER];
-        static int pointer = 0;
-        static ReturnCodeDI::E last_code = ReturnCodeDI::InstructionSuccessful;
+        BufferUART() : pointer(0) {}
+        void Push(uint8 byte)
+        {
+            if (pointer == size)
+            {
+                pointer = 0;
+            }
 
-        static void DecodeBufferFF();
-        static void DecodeBufferZ();
-    }
+            buffer[pointer++] = byte;
+        }
+    private:
+        uint8 buffer[size];
+        int pointer;
+    };
+
+    static BufferUART <32>buffer;
+
+    static ReturnCodeDI::E last_code = ReturnCodeDI::InstructionSuccessful;
 }
 
 
-ReturnCodeDI::E Display::Interface::LastCode()
+void DInterface::Update()
+{
+
+}
+
+
+ReturnCodeDI::E DInterface::LastCode()
 {
     return last_code;
 }
 
 
-void Display::Interface::CallbackOnReceive(uint8 byte)
+void DInterface::CallbackOnReceive(uint8 byte)
 {
-    if (byte == 0xFF)
-    {
-        DecodeBufferFF();
-    }
-    else if (byte == 'Z')
-    {
-        DecodeBufferZ();
-    }
-    else
-    {
-        buffer[pointer++] = byte;
-    }
-    
-    if(pointer == SIZE_BUFFER)
-    {
-        pointer = pointer;
-    }
+    buffer.Push(byte);
 }
 
 
-void Display::Interface::DecodeBufferFF()
-{
-    if(pointer == 0)
-    {
-        return;
-    }
-    
-    uint8 byte = buffer[pointer - 1];
-    
-    if (byte >= '1' && byte <= '8')
-    {
-        int button = byte & 0x0F;
-
-        Button::ForIndex(button)->Press();
-    }
-    else
-    {
-        last_code = (ReturnCodeDI::E)byte;
-        
-        if (last_code == ReturnCodeDI::TransparentDataFinished)
-        {
-            last_code = last_code;
-        }
-        else if (last_code == ReturnCodeDI::TransparentDataReady)
-        {
-            last_code = last_code;
-        }
-        else
-        {
-            last_code = last_code;
-        }
-    }
-
-    pointer = 0;
-}
-
-
-void Display::Interface::DecodeBufferZ()
-{
-    if (pointer == 0)
-    {
-        return;
-    }
-
-    uint8 byte = buffer[pointer - 1];
-
-    if (byte >= '1' && byte <= '8')
-    {
-        int button = byte & 0x0F;
-
-        Button::ForIndex(button)->Press();
-    }
-    else
-    {
-        last_code = (ReturnCodeDI::E)byte;
-
-        if (last_code == ReturnCodeDI::TransparentDataFinished)
-        {
-            last_code = last_code;
-        }
-        else if (last_code == ReturnCodeDI::TransparentDataReady)
-        {
-            last_code = last_code;
-        }
-        else
-        {
-            last_code = last_code;
-        }
-    }
-
-    pointer = 0;
-}
-
-
-void Display::Interface::SendCommand(pchar command)
+void DInterface::SendCommand(pchar command)
 {
     last_code = ReturnCodeDI::_None;
 
@@ -151,7 +78,7 @@ void Display::Interface::SendCommand(pchar command)
 }
 
 
-void Display::Interface::SendByte(uint8 byte)
+void DInterface::SendByte(uint8 byte)
 {
     last_code = ReturnCodeDI::_None;
 
@@ -159,7 +86,7 @@ void Display::Interface::SendByte(uint8 byte)
 }
 
 
-void Display::Interface::SendCommandFormat(pchar format, ...)
+void DInterface::SendCommandFormat(pchar format, ...)
 {
     char message[256];
 
