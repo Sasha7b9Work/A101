@@ -13,7 +13,7 @@ namespace PageMain
         return buttons[index];
     }
 
-    static void Function(const Button *button)
+    static void Function(const Button *button, int)
     {
         int index = button->GetIndex();
 
@@ -41,49 +41,49 @@ namespace PageMain
         }
     }
 
-    static void ApplyActionButton2mA()
+    static void ApplyActionButton2mA(int state)
     {
-        Function(btn2mA);
+        Function(btn2mA, state);
     }
 
     static Button button2mA(1, ApplyActionButton2mA);
 
 
-    static void ApplyActionButton20mA()
+    static void ApplyActionButton20mA(int state)
     {
-        Function(btn20mA);
+        Function(btn20mA, state);
     }
 
     static Button button20mA(2, ApplyActionButton20mA);
 
 
-    static void ApplyActionButton200mA()
+    static void ApplyActionButton200mA(int state)
     {
-        Function(btn200mA);
+        Function(btn200mA, state);
     }
 
     static Button button200mA(3, ApplyActionButton200mA);
 
 
-    static void ApplyActionButton2A()
+    static void ApplyActionButton2A(int state)
     {
-        Function(btn2A);
+        Function(btn2A, state);
     }
 
     static Button button2A(4, ApplyActionButton2A);
 
 
-    static void ApplyActionButton20A()
+    static void ApplyActionButton20A(int state)
     {
-        Function(btn20A);
+        Function(btn20A, state);
     }
 
     static Button button20A(5, ApplyActionButton20A);
 
 
-    static void ApplyActionButton50A()
+    static void ApplyActionButton50A(int state)
     {
-        Function(btn50A);
+        Function(btn50A, state);
     }
 
     static Button button50A(6, ApplyActionButton50A);

@@ -34,12 +34,59 @@ namespace DInterface
         {
             std::memcpy(buffer, bytes, (uint)size);
         }
+        virtual ~CommandUART() {}
         bool IsEmpty() const { return size != 0; }
-        bool Execute();
-    private:
+        virtual bool Execute() { return false; };
+    protected:
         static const int SIZE = 16;
         uint8 buffer[SIZE];
         int size;
+    };
+
+    struct CommandUART_Z : public CommandUART
+    {
+        CommandUART_Z(uint8 *bytes, int size) : CommandUART(bytes, size) {}
+
+        virtual bool Execute()
+        {
+            if (IsEmpty())
+            {
+                return false;
+            }
+
+            if (size == 2)
+            {
+                uint8 byte1 = buffer[0];
+
+                if (byte1 >= '1' && byte1 <= '9')
+                {
+                    int button = byte1 & 0x0F;
+
+                    int state = buffer[1] & 0x0F;
+
+                    Button::ForIndex(button)->ToState(state);
+                    
+                    return false;
+                }
+            }
+
+            return false;
+        }
+    };
+
+    struct CommandUART_FF : public CommandUART
+    {
+        CommandUART_FF(uint8 *bytes, int size) : CommandUART(bytes, size) {}
+
+        virtual bool Execute()
+        {
+            if (IsEmpty())
+            {
+                return false;
+            }
+            
+            return false;
+        }
     };
 
 
@@ -62,7 +109,7 @@ namespace DInterface
             {
                 if (buffer[i] == (uint8)'Z')
                 {
-                    CommandUART result(buffer, i);
+                    CommandUART_Z result(buffer, i);
 
                     RemoveFromStart(i + 1);
 
@@ -74,12 +121,14 @@ namespace DInterface
             {
                 for (int i = 0; i < pointer - 3; i++)
                 {
-                    if (std::memcmp(&buffer[i], "\xFF\xFF\xFF") == 0)
+                    if (std::memcmp(&buffer[i], "\xFF\xFF\xFF", 3) == 0)
                     {
 
                     }
                 }
             }
+
+            return CommandUART();
         }
     private:
         uint8 buffer[size];

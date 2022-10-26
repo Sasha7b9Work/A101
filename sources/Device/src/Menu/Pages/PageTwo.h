@@ -7,7 +7,7 @@ namespace PageTwo
 {
     extern Button *btnInput;
     extern Button *btnFFT;
-    extern Button *btnEmpty1;
+    extern Button *btnZero;
     extern Button *btnEmpty2;
     extern Button *btnEmpty3;
     extern Button *btnEmpty4;

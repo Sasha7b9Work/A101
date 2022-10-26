@@ -6,13 +6,13 @@ struct Button
 {
 public:
 
-    Button(int _index, void (*_funcOnPress)()) : index(_index), funcOnPress(_funcOnPress) {};
+    Button(int _index, void (*_funcOnPress)(int)) : index(_index), funcOnPress(_funcOnPress) {};
 
     // Возвращает кнопку для данного присланного из дисплея индекса
     static Button *ForIndex(int);
 
     // Применить пришедшее с дисплея воздействие
-    void Press() { funcOnPress(); }
+    void ToState(int state) { funcOnPress(state); }
 
     int GetIndex() const { return index; }
 
@@ -20,5 +20,5 @@ private:
 
     int index;
 
-    void (*funcOnPress)();
+    void (*funcOnPress)(int);
 };
