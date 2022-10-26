@@ -9,6 +9,9 @@
 #include <cstring>
 #include <cstring>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wweak-vtables"
+
 
 /*
 *  +--------+---------------+
@@ -48,7 +51,8 @@ namespace DInterface
 
     struct CommandUART_Z : public CommandUART
     {
-        CommandUART_Z(uint8 *bytes, int size) : CommandUART(bytes, size) {}
+        CommandUART_Z(uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
+        virtual ~CommandUART_Z() override {}
 
         virtual bool Execute() override
         {
@@ -79,7 +83,8 @@ namespace DInterface
 
     struct CommandUART_FF : public CommandUART
     {
-        CommandUART_FF(uint8 *bytes, int size) : CommandUART(bytes, size) {}
+        CommandUART_FF(uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
+        virtual ~CommandUART_FF() override {}
 
         virtual bool Execute() override
         {
@@ -201,7 +206,7 @@ void DInterface::SendByte(uint8 byte)
 }
 
 
-void DInterface::SendCommandFormat(pchar format, ...)
+void DInterface::SendCommandFormat(const char * format, ...)
 {
     char message[256];
 
@@ -212,3 +217,5 @@ void DInterface::SendCommandFormat(pchar format, ...)
 
     SendCommand(message);
 }
+
+#pragma clang diagnostic pop

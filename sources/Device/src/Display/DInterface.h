@@ -42,7 +42,7 @@ namespace DInterface
 
     void SendByte(uint8);
 
-    void SendCommandFormat(pchar, ...);
+    void SendCommandFormat(const char *, ...);
 
     void CallbackOnReceive(uint8);
 
