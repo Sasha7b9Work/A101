@@ -14,7 +14,7 @@ namespace DiagramInput
 {
     static BufferADC data;
 
-    static const int num_points = 390;           // Столько точек графика выводится
+    static const int num_points = 783;      // Столько точек графика выводится
     static const float height = 256;        // Таков размах по вре
     static const float y0 = 128;
 }
@@ -28,12 +28,21 @@ void DiagramInput::SetData(const BufferADC &_data)
 
 void DiagramInput::Draw()
 {
+    static uint next_time = 0;
+
+    if (HAL_TIM::TimeMS() < next_time)
+    {
+        return;
+    }
+
+    next_time = HAL_TIM::TimeMS() + 500;
+
     float scale = height / (data.MaxReal() - data.MinReal());
     float ave = (data.MaxReal() + data.MinReal()) / 2.0f;
 
     Display::Interface::SendCommandFormat("addt 16,0,%d", num_points);
 
-    HAL_TIM::Delay(50);
+    HAL_TIM::Delay(100);
 
     for (int i = 0; i < num_points; i++)
     {
