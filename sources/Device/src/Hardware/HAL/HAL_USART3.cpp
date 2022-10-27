@@ -12,7 +12,7 @@ namespace HAL_USART3
     {
         USART3,
         {
-            115200,
+            256000,
             UART_WORDLENGTH_8B,
             UART_STOPBITS_1,
             UART_PARITY_NONE,
