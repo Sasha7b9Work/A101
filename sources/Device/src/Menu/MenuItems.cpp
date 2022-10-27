@@ -7,6 +7,9 @@
 #include "Display/DInterface.h"
 
 
+Page *Page::current = PageMain::self;
+
+
 Button *Button::ForIndex(int index)
 {
     static Button *buttons[2][6] =

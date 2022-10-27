@@ -48,9 +48,9 @@ struct Page
 {
     Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5);
 
-    static Page *Current();
+    static Page *Current() { return current; }
 
-    void SetAsCurrent();
+    void SetAsCurrent() { current = this; }
 
     // Возвращает кнопку от 0 до 5
     Button *GetButton(int index);
@@ -58,4 +58,6 @@ struct Page
 private:
 
     Button *buttons[6];
+
+    static Page *current;
 };
