@@ -11,9 +11,14 @@ namespace HAL_USART2
 {
     static UART_HandleTypeDef handleUSART2 =
     {
+        // 256000 - идут ошибки 0xFC
+        // 250000 - ошибки
+        // 230400 - работает, время 50-100 мс
+        // 115200 - время 75-100 мс
+        // 57600 - время 150-200 мс
         USART2,
         {
-            921600,
+            230400,
             UART_WORDLENGTH_8B,
             UART_STOPBITS_1,
             UART_PARITY_NONE,
