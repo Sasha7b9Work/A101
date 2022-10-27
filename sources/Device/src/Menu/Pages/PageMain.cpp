@@ -46,7 +46,7 @@ namespace PageMain
         Function(btn2mA, state);
     }
 
-    static Button button2mA(1, ApplyActionButton2mA);
+    static Button button2mA(1, "button1", "2 mA", ApplyActionButton2mA);
 
 
     static void ApplyActionButton20mA(int state)
@@ -54,7 +54,7 @@ namespace PageMain
         Function(btn20mA, state);
     }
 
-    static Button button20mA(2, ApplyActionButton20mA);
+    static Button button20mA(2, "button2", "20 mA", ApplyActionButton20mA);
 
 
     static void ApplyActionButton200mA(int state)
@@ -62,7 +62,7 @@ namespace PageMain
         Function(btn200mA, state);
     }
 
-    static Button button200mA(3, ApplyActionButton200mA);
+    static Button button200mA(3, "button3", "200 mA", ApplyActionButton200mA);
 
 
     static void ApplyActionButton2A(int state)
@@ -70,7 +70,7 @@ namespace PageMain
         Function(btn2A, state);
     }
 
-    static Button button2A(4, ApplyActionButton2A);
+    static Button button2A(4, "button4", "2 A", ApplyActionButton2A);
 
 
     static void ApplyActionButton20A(int state)
@@ -78,7 +78,7 @@ namespace PageMain
         Function(btn20A, state);
     }
 
-    static Button button20A(5, ApplyActionButton20A);
+    static Button button20A(5, "button5", "20 A", ApplyActionButton20A);
 
 
     static void ApplyActionButton50A(int state)
@@ -86,7 +86,7 @@ namespace PageMain
         Function(btn50A, state);
     }
 
-    static Button button50A(6, ApplyActionButton50A);
+    static Button button50A(6, "button6", "50 A", ApplyActionButton50A);
 
 
     Button *btn2mA = &button2mA;

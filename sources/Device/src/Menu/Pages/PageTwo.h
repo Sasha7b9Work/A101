@@ -11,4 +11,6 @@ namespace PageTwo
     extern Button *btnEmpty2;
     extern Button *btnEmpty3;
     extern Button *btnEmpty4;
+
+    extern void *self;
 }

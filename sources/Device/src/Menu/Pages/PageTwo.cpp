@@ -11,7 +11,7 @@ namespace PageTwo
         DiagramInput::Enable(action == 1);
     }
 
-    static Button buttonInput(7, ApplyActionButtonInput);
+    static Button buttonInput(7, "button1", "Input", ApplyActionButtonInput);
 
 
     static void ApplyActionButtonFFT(int)
@@ -19,7 +19,7 @@ namespace PageTwo
 
     }
 
-    static Button buttonFFT(8, ApplyActionButtonFFT);
+    static Button buttonFFT(8, "button2", "FFT", ApplyActionButtonFFT);
 
 
     static void ApplyActionButtonZero(int)
@@ -27,28 +27,28 @@ namespace PageTwo
 
     }
 
-    static Button buttonZero(9, ApplyActionButtonZero);
+    static Button buttonZero(9, "button3", "Zero", ApplyActionButtonZero);
 
 
     static void ApplyActionButtonEmpty2(int)
     {
     }
 
-    static Button buttonEmpty2(10, ApplyActionButtonEmpty2);
+    static Button buttonEmpty2(10, "button4", "", ApplyActionButtonEmpty2);
 
 
     static void ApplyActionButtonEmpty3(int)
     {
     }
 
-    static Button buttonEmpty3(11, ApplyActionButtonEmpty3);
+    static Button buttonEmpty3(11, "button5", "", ApplyActionButtonEmpty3);
 
 
     static void ApplyActionButtonEmpty4(int)
     {
     }
 
-    static Button buttonEmpty4(12, ApplyActionButtonEmpty4);
+    static Button buttonEmpty4(12, "button6", "", ApplyActionButtonEmpty4);
 
 
     Button *btnInput = &buttonInput;
@@ -57,4 +57,8 @@ namespace PageTwo
     Button *btnEmpty2 = &buttonEmpty2;
     Button *btnEmpty3 = &buttonEmpty3;
     Button *btnEmpty4 = &buttonEmpty4;
+
+    static Button *buttons[6] = { btnInput, btnFFT, btnZero, btnEmpty2, btnEmpty3, btnEmpty4 };
+
+    void *self = (void *)buttons;
 }

@@ -12,6 +12,10 @@ namespace Menu
 
 void Menu::Init()
 {
+    for (int i = 0; i < 7; i++)
+    {
+        Button::ForIndex(i)->SetText();
+    }
 }
 
 

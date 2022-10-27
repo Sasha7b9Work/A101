@@ -7,7 +7,10 @@ struct Button
 {
 public:
 
-    Button(int _index, void (*_funcOnPress)(int)) : index(_index), funcOnPress(_funcOnPress) {}
+    Button(int _index, pchar _name_button, pchar _text, void (*_funcOnPress)(int)) :
+        index(_index), name_button(_name_button), text(_text), funcOnPress(_funcOnPress)
+    {
+    }
 
     // Возвращает кнопку для данного присланного из дисплея индекса
     static Button *ForIndex(int);
@@ -21,9 +24,12 @@ public:
 
     int GetIndex() const { return index; }
 
+    void SetText();
+
 private:
 
     int index;
-
+    pchar name_button;
+    pchar text;
     void (*funcOnPress)(int);
 };

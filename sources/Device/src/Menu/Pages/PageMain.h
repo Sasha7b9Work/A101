@@ -14,4 +14,6 @@ namespace PageMain
 
     // Возвращает указатель на кнопку
     Button *GetButton(int index);
+
+    extern void *sefl;
 }

@@ -17,3 +17,9 @@ Button *Button::ForIndex(int index)
 
     return buttons[Menu::IndexPage()][index - 1];
 }
+
+
+void Button::SetText()
+{
+    DInterface::SendCommandFormat("%s.txt=\"%s\"", name_button, text);
+}
