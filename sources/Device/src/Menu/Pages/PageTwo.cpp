@@ -33,11 +33,8 @@ namespace PageTwo
     Button *btnInput = &buttonInput;
     Button *btnFFT = &buttonFFT;
     Button *btnZero = &buttonZero;
-    Button *btnEmpty2 = &Button::empty;
-    Button *btnEmpty3 = &Button::empty;
-    Button *btnEmpty4 = &Button::empty;
 
-    static Button *buttons[6] = { btnInput, btnFFT, btnZero, btnEmpty2, btnEmpty3, btnEmpty4 };
+    static Page pageTwo(&buttonInput, &buttonFFT, &buttonZero, &Button::empty, &Button::empty, &Button::empty);
 
-    void *self = (void *)buttons;
+    Page *self = &pageTwo;
 }
