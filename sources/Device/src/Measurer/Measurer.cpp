@@ -27,7 +27,9 @@ void Measurer::Update()
 {
     buffer.Clear();
 
-    HAL_TIM4::StartPeriodicUS(10);
+    HAL_TIM4::StartPeriodicUS(5);
+
+    uint time_start = HAL_TIM::TimeMS();
 
     while (!buffer.IsFull())
     {
@@ -37,6 +39,8 @@ void Measurer::Update()
     }
 
     HAL_TIM4::Stop();
+
+    Log::Write("time read %d ms", HAL_TIM::TimeMS() - time_start);
 
     buffer.ConvertToVoltage();
 
