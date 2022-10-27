@@ -6,32 +6,42 @@
 
 namespace PageMain
 {
+    static int GetIndex(const Button *button)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (PageMain::self->GetButton(i) == button)
+            {
+                return i;
+            }
+        }
+
+        LOG_WRITE("Invalid index page");
+
+        return -1;
+    }
+
     static void Function(const Button *button, int)
     {
-        int index = button->GetIndex();
+        int index = GetIndex(button);
 
-        if (index >= 0x01 && index <= 0x06)
+        static int states[6][7] =
         {
-            static int states[6][7] =
-            {
-                {1, 0, 0, 0, 1, 1, 0},      // 2mA
-                {1, 0, 1, 1, 0, 1, 0},      // 20mA
-                {1, 1, 0, 1, 1, 0, 0},      // 200mA
-                {0, 0, 0, 1, 0, 0, 0},      // 2A
-                {1, 1, 0, 1, 1, 0, 0},      // 20A
-                {1, 0, 1, 1, 0, 1, 0}       // 50A
-            };
+            {1, 0, 0, 0, 1, 1, 0},      // 2mA
+            {1, 0, 1, 1, 0, 1, 0},      // 20mA
+            {1, 1, 0, 1, 1, 0, 0},      // 200mA
+            {0, 0, 0, 1, 0, 0, 0},      // 2A
+            {1, 1, 0, 1, 1, 0, 0},      // 20A
+            {1, 0, 1, 1, 0, 1, 0}       // 50A
+        };
 
-            int range = index - 1;
-
-            HAL_PIO::Write(PIN_US1, states[range][0] == 1); //-V525
-            HAL_PIO::Write(PIN_US2, states[range][1] == 1);
-            HAL_PIO::Write(PIN_US3, states[range][2] == 1); 
-            HAL_PIO::Write(PIN_US4, states[range][3] == 1);
-            HAL_PIO::Write(PIN_US6, states[range][4] == 1);
-            HAL_PIO::Write(PIN_US7, states[range][5] == 1);
-            HAL_PIO::Write(PIN_US8, states[range][6] == 1);
-        }
+        HAL_PIO::Write(PIN_US1, states[index][0] == 1); //-V525
+        HAL_PIO::Write(PIN_US2, states[index][1] == 1);
+        HAL_PIO::Write(PIN_US3, states[index][2] == 1);
+        HAL_PIO::Write(PIN_US4, states[index][3] == 1);
+        HAL_PIO::Write(PIN_US6, states[index][4] == 1);
+        HAL_PIO::Write(PIN_US7, states[index][5] == 1);
+        HAL_PIO::Write(PIN_US8, states[index][6] == 1);
     }
 
     static void ApplyActionButton2mA(int state)
@@ -39,7 +49,7 @@ namespace PageMain
         Function(btn2mA, state);
     }
 
-    static Button button2mA(1, "button1", "2 mA", false, ApplyActionButton2mA);
+    static Button button2mA("button0", "2 mA", false, ApplyActionButton2mA);
 
 
     static void ApplyActionButton20mA(int state)
@@ -47,7 +57,7 @@ namespace PageMain
         Function(btn20mA, state);
     }
 
-    static Button button20mA(2, "button2", "20 mA", false, ApplyActionButton20mA);
+    static Button button20mA("button1", "20 mA", false, ApplyActionButton20mA);
 
 
     static void ApplyActionButton200mA(int state)
@@ -55,7 +65,7 @@ namespace PageMain
         Function(btn200mA, state);
     }
 
-    static Button button200mA(3, "button3", "200 mA", false, ApplyActionButton200mA);
+    static Button button200mA("button2", "200 mA", false, ApplyActionButton200mA);
 
 
     static void ApplyActionButton2A(int state)
@@ -63,7 +73,7 @@ namespace PageMain
         Function(btn2A, state);
     }
 
-    static Button button2A(4, "button4", "2 A", true, ApplyActionButton2A);
+    static Button button2A("button3", "2 A", true, ApplyActionButton2A);
 
 
     static void ApplyActionButton20A(int state)
@@ -71,7 +81,7 @@ namespace PageMain
         Function(btn20A, state);
     }
 
-    static Button button20A(5, "button5", "20 A", false, ApplyActionButton20A);
+    static Button button20A("button4", "20 A", false, ApplyActionButton20A);
 
 
     static void ApplyActionButton50A(int state)
@@ -79,7 +89,7 @@ namespace PageMain
         Function(btn50A, state);
     }
 
-    static Button button50A(6, "button6", "50 A", false, ApplyActionButton50A);
+    static Button button50A("button5", "50 A", false, ApplyActionButton50A);
 
 
     Button *btn2mA = &button2mA;

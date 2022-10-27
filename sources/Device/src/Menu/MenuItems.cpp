@@ -15,7 +15,7 @@ static void EmptyFunc(int)
 }
 
 
-Button Button::empty(-1, "null", "", false, EmptyFunc);
+Button Button::empty("null", "", false, EmptyFunc);
 
 
 void Button::SetText()

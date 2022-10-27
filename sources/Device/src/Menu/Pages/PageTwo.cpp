@@ -11,7 +11,7 @@ namespace PageTwo
         DiagramInput::Enable(action == 1);
     }
 
-    static Button buttonInput(7, "button1", "Input", false, ApplyActionButtonInput);
+    static Button buttonInput("button0", "Input", false, ApplyActionButtonInput);
 
 
     static void ApplyActionButtonFFT(int)
@@ -19,7 +19,7 @@ namespace PageTwo
 
     }
 
-    static Button buttonFFT(8, "button2", "FFT", false, ApplyActionButtonFFT);
+    static Button buttonFFT("button1", "FFT", false, ApplyActionButtonFFT);
 
 
     static void ApplyActionButtonZero(int)
@@ -27,7 +27,7 @@ namespace PageTwo
 
     }
 
-    static Button buttonZero(9, "button3", "Zero", false, ApplyActionButtonZero);
+    static Button buttonZero("button2", "Zero", false, ApplyActionButtonZero);
 
 
     Button *btnInput = &buttonInput;
