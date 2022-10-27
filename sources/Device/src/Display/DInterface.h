@@ -29,7 +29,7 @@ struct ReturnCodeDI
         StartMicroSDupgrade = 0x89,
         TransparentDataFinished = 0xFD,
         TransparentDataReady = 0xFE,
-        _None = 0xFF
+        None = 0xFF
     };
 };
 

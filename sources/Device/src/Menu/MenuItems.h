@@ -3,6 +3,14 @@
 #include "Utils/Log.h"
 
 
+struct Page
+{
+    static Page *Current();
+
+    void SetAsCurrent();
+};
+
+
 struct Button
 {
 public:

@@ -146,7 +146,7 @@ void DInterface::CallbackOnReceive(uint8 byte)
 
 void DInterface::SendCommand(pchar command)
 {
-    last_code = ReturnCodeDI::_None;
+    last_code = ReturnCodeDI::None;
 
     HAL_USART2::Send(command);
 
@@ -158,7 +158,7 @@ void DInterface::SendCommand(pchar command)
 
 void DInterface::WaitCode(ReturnCodeDI::E code)
 {
-    while (last_code == ReturnCodeDI::_None)
+    while (last_code == ReturnCodeDI::None)
     {
         Update();
     }
@@ -172,7 +172,7 @@ void DInterface::WaitCode(ReturnCodeDI::E code)
 
 void DInterface::SendByte(uint8 byte)
 {
-    last_code = ReturnCodeDI::_None;
+    last_code = ReturnCodeDI::None;
 
     HAL_USART2::SendByte(byte);
 }
