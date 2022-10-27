@@ -37,11 +37,8 @@ namespace DInterface
         CommandUART() : size(0) {}
         CommandUART(uint8 *bytes, int _size);
         virtual ~CommandUART() {}
-        bool IsEmpty() const { return (size == 0); }
-        virtual bool Execute()
-        {
-            return false;
-        }
+        bool IsEmpty() const   { return (size == 0); }
+        virtual bool Execute() { return false; }
     protected:
         static const int SIZE = 16;
         uint8 buffer[SIZE];
@@ -53,31 +50,7 @@ namespace DInterface
         CommandUART_Z(uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
         virtual ~CommandUART_Z() override {}
 
-        virtual bool Execute() override
-        {
-            if (IsEmpty())
-            {
-                return false;
-            }
-
-            if (size == 2)
-            {
-                uint8 byte1 = buffer[0];
-
-                if (byte1 >= '1' && byte1 <= '9')
-                {
-                    int button = byte1 & 0x0F;
-
-                    int state = buffer[1] & 0x0F;
-
-                    Button::ForIndex(button)->ToState(state);
-                    
-                    return false;
-                }
-            }
-
-            return false;
-        }
+        virtual bool Execute() override;
     };
 
     struct CommandUART_FF : public CommandUART
@@ -240,4 +213,31 @@ void DInterface::SendCommandFormat(const char *format, ...)
 DInterface::CommandUART::CommandUART(uint8 *bytes, int _size) : size(_size)
 {
     std::memcpy(buffer, bytes, (uint)size);
+}
+
+
+bool DInterface::CommandUART_Z::Execute()
+{
+    if (IsEmpty())
+    {
+        return false;
+    }
+
+    if (size == 2)
+    {
+        uint8 byte1 = buffer[0];
+
+        if (byte1 >= '1' && byte1 <= '9')
+        {
+            int button = byte1 & 0x0F;
+
+            int state = buffer[1] & 0x0F;
+
+            Button::ForIndex(button)->ToState(state);
+
+            return false;
+        }
+    }
+
+    return false;
 }
