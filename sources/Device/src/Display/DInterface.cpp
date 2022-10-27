@@ -62,13 +62,14 @@ namespace DInterface
         CommandUART(uint8 *bytes, int _size);
         virtual ~CommandUART() {}
 
-        bool IsEmpty() const   { return (size == 0); }
+        bool IsEmpty() const { return (size == 0); }
         virtual bool Execute() { return false; }
     protected:
-        static const int SIZE = 16;
-        uint8 buffer[SIZE];
+        static const int MAX_LEN = 16;
+        uint8 buffer[MAX_LEN];
         int size;
     };
+
 
     struct CommandUART_Z : public CommandUART
     {
@@ -77,6 +78,7 @@ namespace DInterface
 
         virtual bool Execute() override;
     };
+
 
     struct CommandUART_FF : public CommandUART
     {
@@ -94,14 +96,18 @@ namespace DInterface
 
         void Push(uint8 byte);
         CommandUART *ExtractCommand();
-        int NumBytes() const        { return pointer;   }
-        uint8 operator[](int i)     { return buffer[i]; }
+        int NumBytes() const { return pointer; }
+        uint8 operator[](int i) { return buffer[i]; }
     private:
         uint8 buffer[size];
         int pointer;
         void RemoveFromStart(int num_bytes);
     };
+}
 
+
+namespace DInterface
+{
     static BufferUART <32>buffer;
 
     static ReturnCodeDI::E last_code = ReturnCodeDI::InstructionSuccessful;
