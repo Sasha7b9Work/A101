@@ -30,8 +30,6 @@ void DiagramInput::SetData(const BufferADC &_data)
 
 void DiagramInput::Draw()
 {
-    return;
-
     TimeMeterMS meter;
 
     static uint next_time = 0;
