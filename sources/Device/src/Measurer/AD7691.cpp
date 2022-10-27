@@ -12,7 +12,7 @@ namespace AD7691
         {
             __IO uint value = 0;
 
-            for (; value < 35; value++)
+            for (; value < 100; value++)
             {
             }
         }
@@ -129,6 +129,7 @@ uint AD7691::ReadValue()
         GPIOB->BSRR = GPIO_PIN_10 << 16;
 
 #ifndef WIN32
+        __ASM("nop");
         __ASM("nop");
         __ASM("nop");
 #endif
