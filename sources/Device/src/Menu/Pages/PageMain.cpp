@@ -6,13 +6,6 @@
 
 namespace PageMain
 {
-    Button *GetButton(int index)
-    {
-        static Button *buttons[7] = { btn2mA, btn2mA, btn20mA, btn200mA, btn2A, btn20A, btn50A };
-
-        return buttons[index];
-    }
-
     static void Function(const Button *button, int)
     {
         int index = button->GetIndex();
