@@ -175,7 +175,7 @@ void DInterface::WaitResponse(ResponseCode::E code)
 
         if (meter.ElapsedTime() > 500)
         {
-            Log::Write("No response received");
+            LOG_WRITE("No response received");
 
             break;
         }
@@ -183,7 +183,7 @@ void DInterface::WaitResponse(ResponseCode::E code)
 
     if (last_code != code)
     {
-        Log::Write("Received %02Xh but expected %02Xh", last_code, code);
+        LOG_WRITE("Received %02Xh but expected %02Xh", last_code, code);
     }
 }
 
@@ -256,7 +256,7 @@ bool DInterface::AnswerFF::Execute()
 
     if(size > 1)
     {
-        Log::Write("Size return code %d", size);
+        LOG_WRITE("Size return code %d", size);
     }
 
     return true;

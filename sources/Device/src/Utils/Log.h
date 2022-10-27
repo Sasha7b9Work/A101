@@ -2,6 +2,9 @@
 #pragma once
 
 
+#define LOG_WRITE(...)  Log::Write(__VA_ARGS__)
+
+
 namespace Log
 {
     void Write(const char *format, ...);

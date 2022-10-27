@@ -35,7 +35,7 @@ void Button::Highlight(bool _highlight)
 
 void Button::ToState(int state)
 {
-    Log::Write("Button %d to state %d", index, state);
+    LOG_WRITE("Button %d to state %d", index, state);
 
     funcOnPress(state);
 
