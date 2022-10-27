@@ -32,14 +32,9 @@ void Button::Highlight()
 
 void Button::ToState(int state)
 {
-    LOG_WRITE("Button %d to state %d", index, state);
+    LOG_WRITE("Button %s to state %d", text, state);
 
     funcOnPress(state);
-
-    if (index < 6)
-    {
-
-    }
 }
 
 
