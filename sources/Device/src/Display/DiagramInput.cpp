@@ -39,7 +39,7 @@ void DiagramInput::Draw()
         return;
     }
 
-    next_time = HAL_TIM::TimeMS() + 250;
+    next_time = HAL_TIM::TimeMS() + 100;
 
     float scale = height / (data.MaxReal() - data.MinReal());
     float ave = (data.MaxReal() + data.MinReal()) / 2.0f;
@@ -48,6 +48,8 @@ void DiagramInput::Draw()
 
     while (DInterface::LastCode() != ReturnCodeDI::TransparentDataReady)
     {
+        DInterface::Update();
+
         if (meter.ElapsedTime() > 200)
         {
             break;
@@ -74,7 +76,9 @@ void DiagramInput::Draw()
     
     while (DInterface::LastCode() != ReturnCodeDI::TransparentDataFinished)
     {
-        if(meter.ElapsedTime() > 200)
+        DInterface::Update();
+
+        if (meter.ElapsedTime() > 200)
         {
             break;
         }
