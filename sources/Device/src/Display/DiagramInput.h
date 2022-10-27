@@ -5,6 +5,10 @@
 
 namespace DiagramInput
 {
+    void Enable(bool);
+
+    bool IsEnabled();
+
     void SetData(const BufferADC &);
 
     void Draw();

@@ -22,6 +22,7 @@ namespace DiagramInput
     static const int num_points = 783;      // Столько точек графика выводится
     static const float height = 256;        // Таков размах по вре
     static const float y0 = 128;
+    static bool enabled = false;
 }
 
 
@@ -48,7 +49,7 @@ bool DiagramInput::NeedDraw()
 
 void DiagramInput::Draw()
 {
-    if (!NeedDraw())
+    if (!IsEnabled() || !NeedDraw())
     {
         return;
     }
@@ -93,4 +94,16 @@ void DiagramInput::WaitCode(ReturnCodeDI::E code)
             break;
         }
     }
+}
+
+
+void DiagramInput::Enable(bool _enable)
+{
+    enabled = _enable;
+}
+
+
+bool DiagramInput::IsEnabled()
+{
+    return enabled;
 }
