@@ -16,5 +16,11 @@ void Log::Write(const char *format, ...)
     std::vsprintf(message, format, args);
     va_end(args);
 
-    HAL_USART3::Send(message);
+    char line[256];
+
+    static int counter = 1;
+
+    std::sprintf(line, "%d : %s", counter++, message);
+
+    HAL_USART3::Send(line);
 }
