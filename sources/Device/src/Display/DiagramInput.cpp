@@ -13,6 +13,8 @@ using namespace Primitives;
 
 namespace DiagramInput
 {
+    void WaitCode(ReturnCodeDI::E);
+
     static BufferADC data;
 
     static const int num_points = 783;      // Столько точек графика выводится
@@ -46,15 +48,7 @@ void DiagramInput::Draw()
 
     DInterface::SendCommandFormat("addt 16,0,%d", num_points);
 
-    while (DInterface::LastCode() != ReturnCodeDI::TransparentDataReady)
-    {
-        DInterface::Update();
-
-        if (meter.ElapsedTime() > 200)
-        {
-            break;
-        }
-    }
+    WaitCode(ReturnCodeDI::TransparentDataReady);
 
     for(int i = 0; i < num_points; i++)
     {
@@ -72,7 +66,15 @@ void DiagramInput::Draw()
         DInterface::SendByte((uint8)value);
     }
 
-    while (DInterface::LastCode() != ReturnCodeDI::TransparentDataFinished)
+    WaitCode(ReturnCodeDI::TransparentDataFinished);
+}
+
+
+void DiagramInput::WaitCode(ReturnCodeDI::E code)
+{
+    TimeMeterMS meter;
+
+    while (DInterface::LastCode() != code)
     {
         DInterface::Update();
 
@@ -81,6 +83,4 @@ void DiagramInput::Draw()
             break;
         }
     }
-
-    Log::Write("time draw %d ms", meter.ElapsedTime());
 }
