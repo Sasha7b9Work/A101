@@ -39,7 +39,7 @@ void DiagramInput::Draw()
         return;
     }
 
-    next_time = HAL_TIM::TimeMS() + 100;
+    next_time = HAL_TIM::TimeMS() + 1000;
 
     float scale = height / (data.MaxReal() - data.MinReal());
     float ave = (data.MaxReal() + data.MinReal()) / 2.0f;
