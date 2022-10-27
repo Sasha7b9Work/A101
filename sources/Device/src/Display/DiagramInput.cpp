@@ -41,7 +41,7 @@ bool DiagramInput::NeedDraw()
         return false;
     }
 
-    next_time = HAL_TIM::TimeMS() + 1000;
+    next_time = HAL_TIM::TimeMS() + 500;
 
     return true;
 }
