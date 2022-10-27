@@ -65,7 +65,7 @@ namespace DInterface
         bool IsEmpty() const { return (size == 0); }
         virtual bool Execute() { return false; }
     protected:
-        static const int MAX_LEN = 16;
+        static const int MAX_LEN = 32;
         uint8 buffer[MAX_LEN];
         int size;
     };
