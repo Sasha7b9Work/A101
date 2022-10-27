@@ -1,14 +1,26 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Device.h"
+#include "Display/Display.h"
+#include "Display/DInterface.h"
+#include "Hardware/HAL/HAL.h"
+#include "Measurer/Measurer.h"
+#include "Menu/Menu.h"
 
 
 int main()
 {
-    Device::Init();
+    HAL::Init();
+
+    Measurer::Init();
+
+    Menu::Init();
 
     while (1)
     {
-        Device::Update();
+        Measurer::Update();
+
+        Display::Update();
+
+        DInterface::Update();
     }
 }

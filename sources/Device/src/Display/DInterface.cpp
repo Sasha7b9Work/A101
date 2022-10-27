@@ -7,7 +7,6 @@
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
-#include <cstring>
 
 
 #ifndef WIN32
@@ -209,7 +208,7 @@ void DInterface::SendByte(uint8 byte)
 }
 
 
-void DInterface::SendCommandFormat(const char * format, ...)
+void DInterface::SendCommandFormat(const char *format, ...)
 {
     char message[256];
 
