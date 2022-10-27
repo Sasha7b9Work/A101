@@ -35,10 +35,7 @@ namespace DInterface
     struct CommandUART
     {
         CommandUART() : size(0) {}
-        CommandUART(uint8 *bytes, int _size) : size(_size)
-        {
-            std::memcpy(buffer, bytes, (uint)size);
-        }
+        CommandUART(uint8 *bytes, int _size);
         virtual ~CommandUART() {}
         bool IsEmpty() const { return (size == 0); }
         virtual bool Execute()
@@ -238,3 +235,9 @@ void DInterface::SendCommandFormat(const char *format, ...)
 #ifndef WIN32
 #pragma clang diagnostic pop
 #endif
+
+
+DInterface::CommandUART::CommandUART(uint8 *bytes, int _size) : size(_size)
+{
+    std::memcpy(buffer, bytes, (uint)size);
+}
