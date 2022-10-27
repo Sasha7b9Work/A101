@@ -18,18 +18,6 @@ static void EmptyFunc(int)
 Button Button::empty(-1, "null", "", false, EmptyFunc);
 
 
-Button *Button::ForIndex(int index)
-{
-    static Button *buttons[2][6] =
-    {
-        {PageMain::btn2mA, PageMain::btn20mA, PageMain::btn200mA, PageMain::btn2A, PageMain::btn20A, PageMain::btn50A},
-        {PageTwo::btnInput, PageTwo::btnFFT, PageTwo::btnZero, PageTwo::btnEmpty2, PageTwo::btnEmpty3, PageTwo::btnEmpty4}
-    };
-
-    return buttons[Menu::IndexPage()][index];
-}
-
-
 void Button::SetText()
 {
     DInterface::SendCommandFormat("%s.txt=\"%s\"", name_button, text);
