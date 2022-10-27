@@ -39,7 +39,7 @@ namespace DInterface
 {
     void Update();
 
-    void SendCommand(pchar);
+    void SendCommandRAW(pchar);
 
     void SendByte(uint8);
 

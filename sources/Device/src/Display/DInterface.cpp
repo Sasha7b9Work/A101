@@ -4,6 +4,7 @@
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/MenuItems.h"
+#include "Hardware/Timer.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -152,7 +153,7 @@ void DInterface::CallbackOnReceive(uint8 byte)
 }
 
 
-void DInterface::SendCommand(pchar command)
+void DInterface::SendCommandRAW(pchar command)
 {
     last_code = ResponseCode::None;
 
@@ -166,9 +167,18 @@ void DInterface::SendCommand(pchar command)
 
 void DInterface::WaitResponse(ResponseCode::E code)
 {
+    TimeMeterMS meter;
+
     while (last_code == ResponseCode::None)
     {
         Update();
+
+        if (meter.ElapsedTime() > 500)
+        {
+            Log::Write("No response received");
+
+            break;
+        }
     }
 
     if (last_code != code)
@@ -195,7 +205,7 @@ void DInterface::SendCommandFormat(const char *format, ...)
     std::vsprintf(message, format, args);
     va_end(args);
 
-    SendCommand(message);
+    SendCommandRAW(message);
 }
 
 #ifndef WIN32
