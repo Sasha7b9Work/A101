@@ -37,6 +37,7 @@ namespace DInterface
         CommandUART() : size(0) {}
         CommandUART(uint8 *bytes, int _size);
         virtual ~CommandUART() {}
+
         bool IsEmpty() const   { return (size == 0); }
         virtual bool Execute() { return false; }
     protected:
@@ -58,15 +59,7 @@ namespace DInterface
         CommandUART_FF(uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
         virtual ~CommandUART_FF() override {}
 
-        virtual bool Execute() override
-        {
-            if (IsEmpty())
-            {
-                return false;
-            }
-            
-            return false;
-        }
+        virtual bool Execute() override;
     };
 
 
@@ -237,6 +230,17 @@ bool DInterface::CommandUART_Z::Execute()
 
             return false;
         }
+    }
+
+    return false;
+}
+
+
+bool DInterface::CommandUART_FF::Execute()
+{
+    if (IsEmpty())
+    {
+        return false;
     }
 
     return false;
