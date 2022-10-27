@@ -13,6 +13,8 @@ using namespace Primitives;
 
 namespace DiagramInput
 {
+    bool NeedDraw();
+
     void WaitCode(ReturnCodeDI::E);
 
     static BufferADC data;
@@ -29,19 +31,27 @@ void DiagramInput::SetData(const BufferADC &_data)
 }
 
 
-
-void DiagramInput::Draw()
+bool DiagramInput::NeedDraw()
 {
-    TimeMeterMS meter;
-
     static uint next_time = 0;
 
     if (HAL_TIM::TimeMS() < next_time)
     {
-        return;
+        return false;
     }
 
     next_time = HAL_TIM::TimeMS() + 1000;
+
+    return true;
+}
+
+
+void DiagramInput::Draw()
+{
+    if (!NeedDraw())
+    {
+        return;
+    }
 
     float scale = height / (data.MaxReal() - data.MinReal());
     float ave = (data.MaxReal() + data.MinReal()) / 2.0f;
