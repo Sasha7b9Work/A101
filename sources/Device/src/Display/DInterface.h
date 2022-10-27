@@ -46,5 +46,8 @@ namespace DInterface
 
     void CallbackOnReceive(uint8);
 
+    // Функция заверашется при получении кода
+    void WaitCode(ReturnCodeDI::E);
+
     ReturnCodeDI::E LastCode();
 }

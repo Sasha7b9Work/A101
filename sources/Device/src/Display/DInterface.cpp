@@ -151,6 +151,22 @@ void DInterface::SendCommand(pchar command)
     HAL_USART2::Send(command);
 
     HAL_USART2::Send("\xFF\xFF\xFF");
+
+    WaitCode(ReturnCodeDI::InstructionSuccessful);
+}
+
+
+void DInterface::WaitCode(ReturnCodeDI::E code)
+{
+    while (last_code == ReturnCodeDI::_None)
+    {
+        Update();
+    }
+
+    if (last_code != code)
+    {
+        Log::Write("Returned %02Xh but %02Xh", last_code, code);
+    }
 }
 
 
@@ -217,15 +233,10 @@ bool DInterface::CommandUART_FF::Execute()
     {
         return false;
     }
-    else if (size == 1)
-    {
-        last_code = (ReturnCodeDI::E)buffer[0];
-        if (last_code != ReturnCodeDI::TransparentDataFinished && last_code != ReturnCodeDI::TransparentDataReady)
-        {
-            Log::Write("Return code %2X", (int)last_code);
-        }
-    }
-    else
+
+    last_code = (ReturnCodeDI::E)buffer[0];
+
+    if(size > 1)
     {
         Log::Write("Size return code %d", size);
     }
