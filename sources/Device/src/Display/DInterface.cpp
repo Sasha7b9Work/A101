@@ -191,6 +191,15 @@ bool DInterface::CommandUART_FF::Execute()
     {
         return false;
     }
+    else if (size == 1)
+    {
+        last_code = (ReturnCodeDI::E)buffer[0];
+        Log::Write("Return code %2X", (int)last_code);
+    }
+    else
+    {
+        Log::Write("Size return code %d", size);
+    }
 
     return true;
 }
@@ -225,7 +234,7 @@ DInterface::CommandUART *DInterface::BufferUART<size>::ExtractCommand()
 
     if (pointer > 3)
     {
-        for (int i = 0; i < pointer - 3; i++)
+        for (int i = 0; i < pointer - 2; i++)
         {
             if (std::memcmp(&buffer[i], "\xFF\xFF\xFF", 3) == 0)
             {
