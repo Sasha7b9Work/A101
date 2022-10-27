@@ -10,6 +10,14 @@
 Page *Page::current = PageMain::self;
 
 
+static void EmptyFunc(int)
+{
+}
+
+
+Button Button::empty(-1, "null", "", EmptyFunc);
+
+
 Button *Button::ForIndex(int index)
 {
     static Button *buttons[2][6] =
@@ -49,7 +57,8 @@ void Button::ToState(int state)
 }
 
 
-Page::Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5)
+Page::Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5, void (*_funcInit)()) :
+    funcInit(_funcInit)
 {
     buttons[0] = btn0;
     buttons[1] = btn1;
@@ -69,5 +78,16 @@ Button *Page::GetButton(int index)
     else
     {
         return &Button::empty;
+    }
+}
+
+
+void Page::SetAsCurrent()
+{
+    current = this;
+
+    for (int i = 0; i < 6; i++)
+    {
+        GetButton(i)->SetText();
     }
 }

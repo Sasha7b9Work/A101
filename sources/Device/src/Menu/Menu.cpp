@@ -12,12 +12,9 @@ namespace Menu
 
 void Menu::Init()
 {
-    for (int i = 0; i < 6; i++)
-    {
-        Button::ForIndex(i)->SetText();
+    PageMain::self->SetAsCurrent();
 
-        Button::ForIndex(i)->Highlight(i == 3);
-    }
+    Page::Current()->Init();
 }
 
 

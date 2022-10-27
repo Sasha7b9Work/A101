@@ -95,5 +95,19 @@ namespace PageMain
     Button *btn2A = &button2A;
     Button *btn20A = &button20A;
     Button *btn50A = &button50A;
+
+    static void FuncInit()
+    {
+        button2mA.Highlight(false);
+        button20mA.Highlight(false);
+        button200mA.Highlight(false);
+        button2A.Highlight(true);
+        button20A.Highlight(false);
+        button50A.Highlight(false);
+    }
+
+    static Page pageMain(&button2mA, &button20mA, &button200mA, &button2A, &button20A, &button50A, FuncInit);
+
+    Page *self = &pageMain;
 }
 

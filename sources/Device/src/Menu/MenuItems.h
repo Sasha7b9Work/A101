@@ -46,18 +46,23 @@ private:
 
 struct Page
 {
-    Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5);
+    Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5, void (*_funcInit)());
 
     static Page *Current() { return current; }
 
-    void SetAsCurrent() { current = this; }
+    void SetAsCurrent();
 
     // Возвращает кнопку от 0 до 5
     Button *GetButton(int index);
+
+    void Init() { funcInit(); }
 
 private:
 
     Button *buttons[6];
 
     static Page *current;
+
+    // Вызывается перед при первичной инициализации
+    void (*funcInit)();
 };
