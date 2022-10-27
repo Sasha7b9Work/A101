@@ -90,7 +90,7 @@ void DInterface::Update()
 {
     for (int i = 0; i < buffer.NumBytes(); i++)
     {
-        Log::Write("byte %d : %2X", bytes_received - buffer.NumBytes() + i, buffer[i]);
+//        Log::Write("byte %d : %2X", bytes_received - buffer.NumBytes() + i, buffer[i]);
     }
 
     bool run = true;

@@ -72,15 +72,15 @@ void DiagramInput::Draw()
         DInterface::SendByte((uint8)value);
     }
 
-    meter.Reset();
-    
     while (DInterface::LastCode() != ReturnCodeDI::TransparentDataFinished)
     {
         DInterface::Update();
 
-        if (meter.ElapsedTime() > 200)
+        if (meter.ElapsedTime() > 400)
         {
             break;
         }
     }
+
+    Log::Write("time draw %d ms", meter.ElapsedTime());
 }

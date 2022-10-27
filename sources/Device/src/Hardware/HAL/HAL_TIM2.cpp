@@ -42,5 +42,5 @@ void HAL_TIM2::StartMultiMeasurement()
 
 uint HAL_TIM2::TimeUS()
 {
-    return (TIM2->CNT / 90);
+    return (TIM2->CNT / 84);
 }

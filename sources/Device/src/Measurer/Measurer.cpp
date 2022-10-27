@@ -27,9 +27,12 @@ void Measurer::Update()
 {
     buffer.Clear();
 
-    HAL_TIM4::StartPeriodicUS(5);
+    HAL_TIM4::StartPeriodicUS(10);
 
-    uint time_start = HAL_TIM::TimeMS();
+    for (int i = 0; i < 100; i++)
+    {
+        AD7691::ReadValue();
+    }
 
     while (!buffer.IsFull())
     {
@@ -39,8 +42,6 @@ void Measurer::Update()
     }
 
     HAL_TIM4::Stop();
-
-    Log::Write("time read %d ms", HAL_TIM::TimeMS() - time_start);
 
     buffer.ConvertToVoltage();
 
