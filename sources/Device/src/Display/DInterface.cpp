@@ -157,9 +157,9 @@ void DInterface::SendCommandRAW(pchar command)
 {
     last_code = ResponseCode::None;
 
-    HAL_USART2::Send(command);
+    HAL_USART2::SendNZ(command);
 
-    HAL_USART2::Send("\xFF\xFF\xFF");
+    HAL_USART2::SendNZ("\xFF\xFF\xFF");
 
     WaitResponse(ResponseCode::InstructionSuccessful);
 }

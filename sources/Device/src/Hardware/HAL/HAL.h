@@ -82,7 +82,8 @@ namespace HAL_USART2
 {
     void Init();
 
-    void Send(pchar);
+    // Посылает без завершаюшего нуля
+    void SendNZ(pchar);
 
     void SendByte(uint8);
 
