@@ -33,7 +33,7 @@ namespace PageMain
 
             HAL_PIO::Write(PIN_US1, states[range][0] == 1); //-V525
             HAL_PIO::Write(PIN_US2, states[range][1] == 1);
-            HAL_PIO::Write(PIN_US3, states[range][2] == 1);
+            HAL_PIO::Write(PIN_US3, states[range][2] == 1); 
             HAL_PIO::Write(PIN_US4, states[range][3] == 1);
             HAL_PIO::Write(PIN_US6, states[range][4] == 1);
             HAL_PIO::Write(PIN_US7, states[range][5] == 1);
