@@ -7,8 +7,9 @@ struct Button
 {
 public:
 
-    Button(int _index, pchar _name_button, pchar _text, void (*_funcOnPress)(int)) :
-        index(_index), name_button(_name_button), text(_text), highlight(false), funcOnPress(_funcOnPress)
+    // _highlight - в этом состоянии кнопка находится при первом появлении на экране
+    Button(int _index, pchar _name_button, pchar _text, bool _highlight, void (*_funcOnPress)(int)) :
+        index(_index), name_button(_name_button), text(_text), highlight(_highlight), funcOnPress(_funcOnPress)
     {
     }
 
@@ -22,9 +23,7 @@ public:
 
     void SetText();
 
-    void Highlight(bool);
-
-    bool IsHightlighted() const { return highlight; }
+    void Highlight();
 
     static Button empty;
 
@@ -46,7 +45,7 @@ private:
 
 struct Page
 {
-    Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5, void (*_funcInit)());
+    Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5);
 
     static Page *Current() { return current; }
 
@@ -55,14 +54,11 @@ struct Page
     // Возвращает кнопку от 0 до 5
     Button *GetButton(int index);
 
-    void Init() { funcInit(); }
+    void Init();
 
 private:
 
     Button *buttons[6];
 
     static Page *current;
-
-    // Вызывается перед при первичной инициализации
-    void (*funcInit)();
 };

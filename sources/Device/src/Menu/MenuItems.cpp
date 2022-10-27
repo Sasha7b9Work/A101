@@ -15,7 +15,7 @@ static void EmptyFunc(int)
 }
 
 
-Button Button::empty(-1, "null", "", EmptyFunc);
+Button Button::empty(-1, "null", "", false, EmptyFunc);
 
 
 Button *Button::ForIndex(int index)
@@ -36,10 +36,8 @@ void Button::SetText()
 }
 
 
-void Button::Highlight(bool _highlight)
+void Button::Highlight()
 {
-    highlight = _highlight;
-
     DInterface::SendCommandFormat("%s.val=%d", name_button, highlight ? 1 : 0);
 }
 
@@ -57,8 +55,7 @@ void Button::ToState(int state)
 }
 
 
-Page::Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5, void (*_funcInit)()) :
-    funcInit(_funcInit)
+Page::Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5)
 {
     buttons[0] = btn0;
     buttons[1] = btn1;
@@ -89,5 +86,14 @@ void Page::SetAsCurrent()
     for (int i = 0; i < 6; i++)
     {
         GetButton(i)->SetText();
+    }
+}
+
+
+void Page::Init()
+{
+    for (int i = 0; i < 6; i++)
+    {
+        GetButton(i)->Highlight();
     }
 }

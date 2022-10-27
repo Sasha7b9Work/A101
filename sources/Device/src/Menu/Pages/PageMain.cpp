@@ -46,7 +46,7 @@ namespace PageMain
         Function(btn2mA, state);
     }
 
-    static Button button2mA(1, "button1", "2 mA", ApplyActionButton2mA);
+    static Button button2mA(1, "button1", "2 mA", false, ApplyActionButton2mA);
 
 
     static void ApplyActionButton20mA(int state)
@@ -54,7 +54,7 @@ namespace PageMain
         Function(btn20mA, state);
     }
 
-    static Button button20mA(2, "button2", "20 mA", ApplyActionButton20mA);
+    static Button button20mA(2, "button2", "20 mA", false, ApplyActionButton20mA);
 
 
     static void ApplyActionButton200mA(int state)
@@ -62,7 +62,7 @@ namespace PageMain
         Function(btn200mA, state);
     }
 
-    static Button button200mA(3, "button3", "200 mA", ApplyActionButton200mA);
+    static Button button200mA(3, "button3", "200 mA", false, ApplyActionButton200mA);
 
 
     static void ApplyActionButton2A(int state)
@@ -70,7 +70,7 @@ namespace PageMain
         Function(btn2A, state);
     }
 
-    static Button button2A(4, "button4", "2 A", ApplyActionButton2A);
+    static Button button2A(4, "button4", "2 A", true, ApplyActionButton2A);
 
 
     static void ApplyActionButton20A(int state)
@@ -78,7 +78,7 @@ namespace PageMain
         Function(btn20A, state);
     }
 
-    static Button button20A(5, "button5", "20 A", ApplyActionButton20A);
+    static Button button20A(5, "button5", "20 A", false, ApplyActionButton20A);
 
 
     static void ApplyActionButton50A(int state)
@@ -86,7 +86,7 @@ namespace PageMain
         Function(btn50A, state);
     }
 
-    static Button button50A(6, "button6", "50 A", ApplyActionButton50A);
+    static Button button50A(6, "button6", "50 A", false, ApplyActionButton50A);
 
 
     Button *btn2mA = &button2mA;
@@ -96,17 +96,7 @@ namespace PageMain
     Button *btn20A = &button20A;
     Button *btn50A = &button50A;
 
-    static void FuncInit()
-    {
-        button2mA.Highlight(false);
-        button20mA.Highlight(false);
-        button200mA.Highlight(false);
-        button2A.Highlight(true);
-        button20A.Highlight(false);
-        button50A.Highlight(false);
-    }
-
-    static Page pageMain(&button2mA, &button20mA, &button200mA, &button2A, &button20A, &button50A, FuncInit);
+    static Page pageMain(&button2mA, &button20mA, &button200mA, &button2A, &button20A, &button50A);
 
     Page *self = &pageMain;
 }
