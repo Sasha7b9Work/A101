@@ -67,50 +67,11 @@ namespace DInterface
     struct BufferUART
     {
         BufferUART() : pointer(0) {}
-        void Push(uint8 byte)
-        {
-            if (pointer == size)
-            {
-                RemoveFromStart(1);
-            }
 
-            buffer[pointer++] = byte;
-        }
-        CommandUART *GetCommand()
-        {
-            for (int i = 0; i < pointer; i++)
-            {
-                if (buffer[i] == (uint8)'Z')
-                {
-                    CommandUART_Z *result = new CommandUART_Z(buffer, i);
-
-                    RemoveFromStart(i + 1);
-
-                    return result;
-                }
-            }
-
-            if (pointer > 3)
-            {
-                for (int i = 0; i < pointer - 3; i++)
-                {
-                    if (std::memcmp(&buffer[i], "\xFF\xFF\xFF", 3) == 0)
-                    {
-
-                    }
-                }
-            }
-
-            return new CommandUART();
-        }
-        int NumBytes() const
-        {
-            return pointer;
-        }
-        uint8 operator[](int i)
-        {
-            return buffer[i];
-        }
+        void Push(uint8 byte);
+        CommandUART *GetCommand();
+        int NumBytes() const        { return pointer;   }
+        uint8 operator[](int i)     { return buffer[i]; }
     private:
         uint8 buffer[size];
         int pointer;
@@ -244,4 +205,46 @@ bool DInterface::CommandUART_FF::Execute()
     }
 
     return false;
+}
+
+
+template<uint size>
+void DInterface::BufferUART<size>::Push(uint8 byte)
+{
+    if (pointer == size)
+    {
+        RemoveFromStart(1);
+    }
+
+    buffer[pointer++] = byte;
+}
+
+
+template<uint size>
+DInterface::CommandUART *DInterface::BufferUART<size>::GetCommand()
+{
+    for (int i = 0; i < pointer; i++)
+    {
+        if (buffer[i] == (uint8)'Z')
+        {
+            CommandUART_Z *result = new CommandUART_Z(buffer, i);
+
+            RemoveFromStart(i + 1);
+
+            return result;
+        }
+    }
+
+    if (pointer > 3)
+    {
+        for (int i = 0; i < pointer - 3; i++)
+        {
+            if (std::memcmp(&buffer[i], "\xFF\xFF\xFF", 3) == 0)
+            {
+
+            }
+        }
+    }
+
+    return new CommandUART();
 }
