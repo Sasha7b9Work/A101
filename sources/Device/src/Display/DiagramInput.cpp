@@ -15,7 +15,7 @@ namespace DiagramInput
 {
     bool NeedDraw();
 
-    void WaitCode(ReturnCodeDI::E);
+    void WaitResponse(ResponseCode::E);
 
     static BufferADC data;
 
@@ -59,7 +59,7 @@ void DiagramInput::Draw()
 
     DInterface::SendCommandFormat("addt 16,0,%d", num_points);
 
-    WaitCode(ReturnCodeDI::TransparentDataReady);
+    WaitResponse(ResponseCode::TransparentDataReady);
 
     for(int i = 0; i < num_points; i++)
     {
@@ -77,11 +77,11 @@ void DiagramInput::Draw()
         DInterface::SendByte((uint8)value);
     }
 
-    WaitCode(ReturnCodeDI::TransparentDataFinished);
+    WaitResponse(ResponseCode::TransparentDataFinished);
 }
 
 
-void DiagramInput::WaitCode(ReturnCodeDI::E code)
+void DiagramInput::WaitResponse(ResponseCode::E code)
 {
     TimeMeterMS meter;
 

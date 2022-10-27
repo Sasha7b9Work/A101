@@ -2,7 +2,8 @@
 #pragma once
 
 
-struct ReturnCodeDI
+// Код ответа дисплея
+struct ResponseCode
 {
     enum E
     {
@@ -47,7 +48,7 @@ namespace DInterface
     void CallbackOnReceive(uint8);
 
     // Функция заверашется при получении кода
-    void WaitCode(ReturnCodeDI::E);
+    void WaitResponse(ResponseCode::E);
 
-    ReturnCodeDI::E LastCode();
+    ResponseCode::E LastCode();
 }

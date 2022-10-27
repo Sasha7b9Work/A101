@@ -71,19 +71,21 @@ namespace DInterface
     };
 
 
-    struct CommandUART_Z : public CommandUART
+    // Команда дисплея
+    struct CommandZ : public CommandUART
     {
-        CommandUART_Z(uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
-        virtual ~CommandUART_Z() override {}
+        CommandZ(uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
+        virtual ~CommandZ() override {}
 
         virtual bool Execute() override;
     };
 
 
-    struct CommandUART_FF : public CommandUART
+    // Служебный ответ дисплея
+    struct AnswerFF : public CommandUART
     {
-        CommandUART_FF(uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
-        virtual ~CommandUART_FF() override {}
+        AnswerFF(uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
+        virtual ~AnswerFF() override {}
 
         virtual bool Execute() override;
     };
@@ -110,7 +112,7 @@ namespace DInterface
 {
     static BufferUART <32>buffer;
 
-    static ReturnCodeDI::E last_code = ReturnCodeDI::InstructionSuccessful;
+    static ResponseCode::E last_code = ResponseCode::InstructionSuccessful;
 
     static int bytes_received = 0;          // Всего принято байт
 }
@@ -136,7 +138,7 @@ void DInterface::Update()
 }
 
 
-ReturnCodeDI::E DInterface::LastCode()
+ResponseCode::E DInterface::LastCode()
 {
     return last_code;
 }
@@ -152,33 +154,33 @@ void DInterface::CallbackOnReceive(uint8 byte)
 
 void DInterface::SendCommand(pchar command)
 {
-    last_code = ReturnCodeDI::None;
+    last_code = ResponseCode::None;
 
     HAL_USART2::Send(command);
 
     HAL_USART2::Send("\xFF\xFF\xFF");
 
-    WaitCode(ReturnCodeDI::InstructionSuccessful);
+    WaitResponse(ResponseCode::InstructionSuccessful);
 }
 
 
-void DInterface::WaitCode(ReturnCodeDI::E code)
+void DInterface::WaitResponse(ResponseCode::E code)
 {
-    while (last_code == ReturnCodeDI::None)
+    while (last_code == ResponseCode::None)
     {
         Update();
     }
 
     if (last_code != code)
     {
-        Log::Write("Returned %02Xh but %02Xh", last_code, code);
+        Log::Write("Received %02Xh but expected %02Xh", last_code, code);
     }
 }
 
 
 void DInterface::SendByte(uint8 byte)
 {
-    last_code = ReturnCodeDI::None;
+    last_code = ResponseCode::None;
 
     HAL_USART2::SendByte(byte);
 }
@@ -207,7 +209,7 @@ DInterface::CommandUART::CommandUART(uint8 *bytes, int _size) : size(_size)
 }
 
 
-bool DInterface::CommandUART_Z::Execute()
+bool DInterface::CommandZ::Execute()
 {
     if (IsEmpty())
     {
@@ -233,14 +235,14 @@ bool DInterface::CommandUART_Z::Execute()
 }
 
 
-bool DInterface::CommandUART_FF::Execute()
+bool DInterface::AnswerFF::Execute()
 {
     if (IsEmpty())
     {
         return false;
     }
 
-    last_code = (ReturnCodeDI::E)buffer[0];
+    last_code = (ResponseCode::E)buffer[0];
 
     if(size > 1)
     {
@@ -270,7 +272,7 @@ DInterface::CommandUART *DInterface::BufferUART<size>::ExtractCommand()
     {
         if (buffer[i] == (uint8)'Z')
         {
-            CommandUART_Z *result = new CommandUART_Z(buffer, i);
+            CommandZ *result = new CommandZ(buffer, i);
 
             RemoveFromStart(i + 1);
 
@@ -284,7 +286,7 @@ DInterface::CommandUART *DInterface::BufferUART<size>::ExtractCommand()
         {
             if (std::memcmp(&buffer[i], "\xFF\xFF\xFF", 3) == 0)
             {
-                CommandUART_FF *result = new CommandUART_FF(buffer, i);
+                AnswerFF *result = new AnswerFF(buffer, i);
 
                 RemoveFromStart(i + 3);
 
