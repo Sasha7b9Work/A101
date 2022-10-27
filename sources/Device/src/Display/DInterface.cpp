@@ -186,6 +186,10 @@ ReturnCodeDI::E DInterface::LastCode()
 
 void DInterface::CallbackOnReceive(uint8 byte)
 {
+    static int counter = 0;
+
+    Log::Write("%d : %2X", counter++, byte);
+
     buffer.Push(byte);
 }
 

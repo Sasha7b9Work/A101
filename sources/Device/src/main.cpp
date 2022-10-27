@@ -22,9 +22,5 @@ int main()
         Display::Update();
 
         DInterface::Update();
-
-        static int counter = 1;
-
-        Log::Write("Test message %d", counter++);
     }
 }

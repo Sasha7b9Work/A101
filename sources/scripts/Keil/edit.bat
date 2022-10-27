@@ -1,2 +1,1 @@
-@echo on
-start ../../A101.uvmpw
+start ../../Network.uvmpw
