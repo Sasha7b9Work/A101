@@ -69,7 +69,7 @@ namespace DInterface
         BufferUART() : pointer(0) {}
 
         void Push(uint8 byte);
-        CommandUART *GetCommand();
+        CommandUART *ExtractCommand();
         int NumBytes() const        { return pointer;   }
         uint8 operator[](int i)     { return buffer[i]; }
     private:
@@ -97,7 +97,7 @@ void DInterface::Update()
 
     while (run)
     {
-        CommandUART *command = buffer.GetCommand();
+        CommandUART *command = buffer.ExtractCommand();
 
         run = command->Execute();
 
@@ -210,7 +210,7 @@ void DInterface::BufferUART<size>::Push(uint8 byte)
 
 
 template<uint size>
-DInterface::CommandUART *DInterface::BufferUART<size>::GetCommand()
+DInterface::CommandUART *DInterface::BufferUART<size>::ExtractCommand()
 {
     for (int i = 0; i < pointer; i++)
     {
