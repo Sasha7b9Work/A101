@@ -75,18 +75,7 @@ namespace DInterface
     private:
         uint8 buffer[size];
         int pointer;
-        void RemoveFromStart(int num_bytes)
-        {
-            if (num_bytes == pointer)
-            {
-                pointer = 0;
-            }
-            else
-            {
-                std::memmove(buffer, buffer + num_bytes, (uint)(pointer - num_bytes));
-                pointer -= num_bytes;
-            }
-        }
+        void RemoveFromStart(int num_bytes);
     };
 
     static BufferUART <32>buffer;
@@ -247,4 +236,19 @@ DInterface::CommandUART *DInterface::BufferUART<size>::GetCommand()
     }
 
     return new CommandUART();
+}
+
+
+template<uint size>
+void DInterface::BufferUART<size>::RemoveFromStart(int num_bytes)
+{
+    if (num_bytes == pointer)
+    {
+        pointer = 0;
+    }
+    else
+    {
+        std::memmove(buffer, buffer + num_bytes, (uint)(pointer - num_bytes));
+        pointer -= num_bytes;
+    }
 }
