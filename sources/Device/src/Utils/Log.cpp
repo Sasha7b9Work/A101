@@ -16,7 +16,7 @@ void Log::Write(const char *format, ...)
     std::vsprintf(message, format, args);
     va_end(args);
 
-    char line[256];
+    char line[300];
 
     static int counter = 1;
 
