@@ -3,13 +3,9 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Measurer/Measurer.h"
+#include "Display/DInterface.h"
 #include "stm_includes.h"
 
-
-#define TRACE_HANDLER                   
-/*
-    Console::AddString(__FUNCTION__);
-*/
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,7 +21,6 @@ extern "C" {
 
     void MemManage_Handler()
     {
-        TRACE_HANDLER;
         while (1)
         {
         }
@@ -34,7 +29,6 @@ extern "C" {
 
     void UsageFault_Handler()
     {
-        TRACE_HANDLER;
         while (1)
         {
         }
@@ -43,7 +37,6 @@ extern "C" {
 
     void HardFault_Handler()
     {
-        TRACE_HANDLER;
         while (1)
         {
         }
@@ -52,7 +45,6 @@ extern "C" {
 
     void BusFault_Handler()
     {
-        TRACE_HANDLER;
         while (1)
         {
         }
@@ -96,6 +88,24 @@ extern "C" {
     void USART2_IRQHandler()
     {
         HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART2::handle);
+    }
+
+    // USB
+    void USART3_IRQHandler()
+    {
+        HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART3::handle);
+    }
+
+    void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
+    {
+        if (handle == HAL_USART2::handle)
+        {
+            HAL_USART2::CallbackOnReceive();
+        }
+        else if (handle == HAL_USART3::handle)
+        {
+            HAL_USART3::CallbackOnReceive();
+        }
     }
 
 #ifdef __cplusplus

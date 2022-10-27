@@ -87,6 +87,8 @@ namespace HAL_USART2
     void SendByte(uint8);
 
     extern void *handle;   // UART_HandleTypeDef
+
+    void CallbackOnReceive();
 }
 
 
@@ -94,6 +96,12 @@ namespace HAL_USART2
 namespace HAL_USART3
 {
     void Init();
+
+    void Send(pchar);
+
+    extern void *handle;    // UART_HandleTypeDef
+
+    void CallbackOnReceive();
 }
 
 
@@ -112,6 +120,7 @@ extern "C" {
     void DebugMon_Handler();
     void TIM3_IRQHandler();
     void USART2_IRQHandler();
+    void USART3_IRQHandler();
     
 #ifdef __cplusplus
 }

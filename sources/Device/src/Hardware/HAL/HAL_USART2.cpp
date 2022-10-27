@@ -70,7 +70,7 @@ void HAL_USART2::SendByte(uint8 byte)
 }
 
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *)
+void HAL_USART2::CallbackOnReceive()
 {
     DInterface::CallbackOnReceive(HAL_USART2::buffer);
 

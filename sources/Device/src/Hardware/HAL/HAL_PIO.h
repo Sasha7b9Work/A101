@@ -93,6 +93,7 @@ struct HAlternate
     enum E
     {
         AF7_USART2,
+        AF7_USART3,
         Count
     };
 };
