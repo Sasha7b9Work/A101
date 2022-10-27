@@ -81,6 +81,8 @@ namespace DInterface
     static BufferUART <32>buffer;
 
     static ReturnCodeDI::E last_code = ReturnCodeDI::InstructionSuccessful;
+
+    static int bytes_received = 0;          // Всего принято байт
 }
 
 
@@ -88,9 +90,7 @@ void DInterface::Update()
 {
     for (int i = 0; i < buffer.NumBytes(); i++)
     {
-        static int counter = 0;
-
-        Log::Write("%3d : %2X", counter++, buffer[i]);
+        Log::Write("byte %d : %2X", bytes_received - buffer.NumBytes() + i, buffer[i]);
     }
 
     bool run = true;
@@ -114,6 +114,8 @@ ReturnCodeDI::E DInterface::LastCode()
 
 void DInterface::CallbackOnReceive(uint8 byte)
 {
+    bytes_received++;
+
     buffer.Push(byte);
 }
 
