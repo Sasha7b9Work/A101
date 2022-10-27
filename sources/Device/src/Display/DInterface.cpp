@@ -235,7 +235,9 @@ bool DInterface::CommandZ::Execute()
 
             int state = buffer[1] & 0x0F;
 
-            Button::ForIndex(button)->ToState(state);
+            Page::Current()->GetButton(button)->ToState(state);
+
+//            Button::ForIndex(button)->ToState(state);
 
             return true;
         }

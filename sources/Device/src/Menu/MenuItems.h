@@ -3,14 +3,6 @@
 #include "Utils/Log.h"
 
 
-struct Page
-{
-    static Page *Current();
-
-    void SetAsCurrent();
-};
-
-
 struct Button
 {
 public:
@@ -34,6 +26,8 @@ public:
 
     bool IsHightlighted() const { return highlight; }
 
+    static Button empty;
+
 private:
 
     int index;
@@ -41,4 +35,27 @@ private:
     pchar text;
     bool highlight;
     void (*funcOnPress)(int);
+};
+
+
+/*
+*   У каждой страницы есть шесть кнопок, которые являются разными для каждой страницы.
+*   Кнопка "Меню" и остальные элементы являются общими
+*/
+
+
+struct Page
+{
+    Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5);
+
+    static Page *Current();
+
+    void SetAsCurrent();
+
+    // Возвращает кнопку от 0 до 5
+    Button *GetButton(int index);
+
+private:
+
+    Button *buttons[6];
 };
