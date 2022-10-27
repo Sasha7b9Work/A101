@@ -7,7 +7,7 @@
 #include <cstring>
 
 
-void Log::Write(char *format, ...)
+void Log::Write(const char *format, ...)
 {
     char message[256];
 

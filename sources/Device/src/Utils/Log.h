@@ -4,5 +4,5 @@
 
 namespace Log
 {
-    void Write(char *format, ...);
+    void Write(const char *format, ...);
 }
