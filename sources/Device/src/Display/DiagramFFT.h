@@ -4,5 +4,7 @@
 
 namespace DiagramFFT
 {
+    void Enable(bool);
 
+    bool IsEnabled();
 }
