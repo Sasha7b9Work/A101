@@ -3,14 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Display/DInterface.h"
-#ifndef WIN32
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
-#endif
-#include <stm32f4xx_hal.h>
-#ifndef WIN32
-#pragma clang diagnostic pop
-#endif
+#include "stm_includes.h"
 #include <cstring>
 
 

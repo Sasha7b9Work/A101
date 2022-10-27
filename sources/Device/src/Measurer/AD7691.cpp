@@ -1,14 +1,7 @@
 // 2022/10/18 16:57:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Measurer/AD7691.h"
-#ifndef WIN32
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
-#endif
-#include <stm32f4xx_hal.h>
-#ifndef WIN32
-#pragma clang diagnostic pop
-#endif
+#include "stm_includes.h"
 
 
 namespace AD7691
@@ -18,8 +11,8 @@ namespace AD7691
         void WaitConversion()
         {
             __IO uint value = 0;
-            
-            for(; value < 35; value++)
+
+            for (; value < 35; value++)
             {
             }
         }
@@ -27,8 +20,8 @@ namespace AD7691
         void WaitValue()
         {
             __IO uint value = 0;
-            
-            for(; value < 1; value++)
+
+            for (; value < 1; value++)
             {
             }
         }
@@ -132,12 +125,14 @@ uint AD7691::ReadValue()
         GPIOB->BSRR = GPIO_PIN_10;
 
         result <<= 1;
-        
+
         GPIOB->BSRR = GPIO_PIN_10 << 16;
-        
+
+#ifndef WIN32
         __ASM("nop");
         __ASM("nop");
-        
+#endif
+
         if (GPIOC->IDR & GPIO_PIN_2)
         {
             result |= 1U;
