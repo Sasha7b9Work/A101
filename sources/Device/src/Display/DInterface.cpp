@@ -165,8 +165,7 @@ bool DInterface::CommandUART_Z::Execute()
     {
         return false;
     }
-
-    if (size == 2)
+    else if (size == 2)
     {
         uint8 byte1 = buffer[0];
 
@@ -178,11 +177,11 @@ bool DInterface::CommandUART_Z::Execute()
 
             Button::ForIndex(button)->ToState(state);
 
-            return false;
+            return true;
         }
     }
 
-    return false;
+    return true;
 }
 
 
@@ -193,7 +192,7 @@ bool DInterface::CommandUART_FF::Execute()
         return false;
     }
 
-    return false;
+    return true;
 }
 
 
@@ -230,7 +229,11 @@ DInterface::CommandUART *DInterface::BufferUART<size>::ExtractCommand()
         {
             if (std::memcmp(&buffer[i], "\xFF\xFF\xFF", 3) == 0)
             {
+                CommandUART_FF *result = new CommandUART_FF(buffer, i);
 
+                RemoveFromStart(i + 3);
+
+                return result;
             }
         }
     }
