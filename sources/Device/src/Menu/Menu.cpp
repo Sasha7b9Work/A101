@@ -12,9 +12,11 @@ namespace Menu
 
 void Menu::Init()
 {
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < 6; i++)
     {
         Button::ForIndex(i)->SetText();
+
+        Button::ForIndex(i)->Highlight(i == 3);
     }
 }
 

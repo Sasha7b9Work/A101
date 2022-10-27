@@ -213,7 +213,7 @@ bool DInterface::CommandUART_Z::Execute()
 
         if (byte1 >= '1' && byte1 <= '9')
         {
-            int button = byte1 & 0x0F;
+            int button = (byte1 & 0x0F) - 1;
 
             int state = buffer[1] & 0x0F;
 

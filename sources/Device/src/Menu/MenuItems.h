@@ -8,7 +8,7 @@ struct Button
 public:
 
     Button(int _index, pchar _name_button, pchar _text, void (*_funcOnPress)(int)) :
-        index(_index), name_button(_name_button), text(_text), funcOnPress(_funcOnPress)
+        index(_index), name_button(_name_button), text(_text), highlight(false), funcOnPress(_funcOnPress)
     {
     }
 
@@ -16,20 +16,21 @@ public:
     static Button *ForIndex(int);
 
     // Применить пришедшее с дисплея воздействие
-    void ToState(int state)
-    {
-        Log::Write("Button %d to state %d", index, state);
-        funcOnPress(state);
-    }
+    void ToState(int state);
 
     int GetIndex() const { return index; }
 
     void SetText();
+
+    void Highlight(bool);
+
+    bool IsHightlighted() const { return highlight; }
 
 private:
 
     int index;
     pchar name_button;
     pchar text;
+    bool highlight;
     void (*funcOnPress)(int);
 };

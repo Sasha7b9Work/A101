@@ -15,11 +15,32 @@ Button *Button::ForIndex(int index)
         {PageTwo::btnInput, PageTwo::btnFFT, PageTwo::btnZero, PageTwo::btnEmpty2, PageTwo::btnEmpty3, PageTwo::btnEmpty4}
     };
 
-    return buttons[Menu::IndexPage()][index - 1];
+    return buttons[Menu::IndexPage()][index];
 }
 
 
 void Button::SetText()
 {
     DInterface::SendCommandFormat("%s.txt=\"%s\"", name_button, text);
+}
+
+
+void Button::Highlight(bool _highlight)
+{
+    highlight = _highlight;
+
+    DInterface::SendCommandFormat("%s.val=%d", name_button, highlight ? 1 : 0);
+}
+
+
+void Button::ToState(int state)
+{
+    Log::Write("Button %d to state %d", index, state);
+
+    funcOnPress(state);
+
+    if (index < 6)
+    {
+
+    }
 }
