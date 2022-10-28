@@ -22,11 +22,13 @@ struct Label
 
     void SetText(pchar);
 
+    void SetValue(float);
+
 private:
 
     Size::E size;
 
-    pchar text;
+    char text[32];
 
     pchar name_big;
     pchar name_small;

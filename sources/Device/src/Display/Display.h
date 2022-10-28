@@ -5,10 +5,6 @@
 
 namespace Display
 {
-    void SetAC(float);
-
-    void SetDC(float);
-
     void SetData(const BufferADC &);
 
     void Update();

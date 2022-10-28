@@ -9,20 +9,6 @@
 #include <cstdlib>
 
 
-void Display::SetDC(float value)
-{
-    DInterface::SendCommandFormat("textDC.txt=\"%.4f V\"", (double)value);
-    DInterface::SendCommandFormat("textDCsmall.txt=\"%.4f V\"", (double)value);
-}
-
-
-void Display::SetAC(float value)
-{
-    DInterface::SendCommandFormat("textAC.txt=\"%.4f V\"", (double)value);
-    DInterface::SendCommandFormat("textACsmall.txt=\"%.4f V\"", (double)value);
-}
-
-
 void Display::Update()
 {
     DiagramInput::Draw();

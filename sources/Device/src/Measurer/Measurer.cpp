@@ -7,6 +7,7 @@
 #include "Measurer/Calculator.h"
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
+#include "Menu/MenuItems.h"
 
 
 namespace Measurer
@@ -47,9 +48,9 @@ void Measurer::Update()
 
     Calculator::AppendData(buffer);
 
-    Display::SetAC(Calculator::GetAC());
+    Page::textDC.SetValue(Calculator::GetAC());
 
-    Display::SetDC(Calculator::GetDC());
+    Page::textAC.SetValue(Calculator::GetDC());
 
     Display::SetData(buffer);
 }
