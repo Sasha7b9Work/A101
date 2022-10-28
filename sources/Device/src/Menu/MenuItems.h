@@ -20,6 +20,8 @@ public:
 
     void Highlight();
 
+    void SetHighlight(bool);
+
     static Button empty;
 
 private:

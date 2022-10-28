@@ -32,6 +32,19 @@ void Button::Highlight()
 }
 
 
+void Button::SetHighlight(bool _higthligth)
+{
+    if (highlight == _higthligth)
+    {
+        return;
+    }
+
+    highlight = _higthligth;
+
+    Highlight();
+}
+
+
 void Button::ToState(int state)
 {
     LOG_WRITE("Button %s to state %d", text, state);
