@@ -2,17 +2,22 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "stm_includes.h"
+#include <ctime>
 
 
 uint HAL_GetTick()
 {
-    return 0;
+    return clock();
 }
 
 
-void HAL_Delay(uint)
+void HAL_Delay(uint dT)
 {
+    uint end = HAL_GetTick() + dT;
 
+    while (HAL_GetTick() < end)
+    {
+    }
 }
 
 
