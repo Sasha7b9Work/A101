@@ -15,6 +15,8 @@ int main()
 
     Menu::Init();
 
+    Display::Init();
+
     while (1)
     {
         Measurer::Update();

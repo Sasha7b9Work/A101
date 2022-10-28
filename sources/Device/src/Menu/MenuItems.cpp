@@ -20,12 +20,6 @@ static void EmptyFunc(int)
 Button Button::empty("null", "", false, EmptyFunc);
 
 
-Label Page::labelDC("labelDC", "labelDCsmall", "DC:");
-Label Page::textDC("textDC", "textDCsmall", "");
-Label Page::labelAC("labelAC", "labelACsmall", "AC:");
-Label Page::textAC("textAC", "textACsmall", "");
-
-
 void Button::SetText()
 {
     DInterface::SendCommandFormat("%s.txt=\"%s\"", name_button, text);
@@ -87,57 +81,4 @@ void Page::Init()
     {
         GetButton(i)->Highlight();
     }
-}
-
-
-void Label::SetSize(Size::E _size)
-{
-    if (_size == size)
-    {
-        return;
-    }
-
-    size = _size;
-
-    if (size == Size::Big)
-    {
-        Enable(name_small, false);
-        Enable(name_big, true);
-    }
-    else
-    {
-        Enable(name_big, false);
-        Enable(name_small, true);
-    }
-}
-
-
-void Label::Enable(pchar name, bool enable)
-{
-    DInterface::SendCommandFormat("%s.txt=\"%s\"", name, enable ? text : "");
-}
-
-
-void Label::SetText(pchar _text)
-{
-    std::strcpy(text, _text);
-
-    DInterface::SendCommandFormat("%s.txt=\"%s\"", (size == Size::Big) ? name_big : name_small, text);
-}
-
-
-void Label::SetValue(float value)
-{
-    char buffer[32];
-
-    std::sprintf(buffer, "%.4f V", (double)value);
-
-    SetText(buffer);
-}
-
-
-Label::Label(pchar _name_big, pchar _name_small, pchar _text) :
-    size(Size::Count), name_big(_name_big), name_small(_name_small)
-{
-    std::strcpy(text, _text);
 }

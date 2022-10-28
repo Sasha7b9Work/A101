@@ -881,6 +881,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Colors.h</FilePath>
             </File>
+            <File>
+              <FileName>Indicator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Indicator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Indicator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Indicator.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1902,6 +1912,16 @@
               <FileName>Colors.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Colors.h</FilePath>
+            </File>
+            <File>
+              <FileName>Indicator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Indicator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Indicator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Indicator.h</FilePath>
             </File>
           </Files>
         </Group>

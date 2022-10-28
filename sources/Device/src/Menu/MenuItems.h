@@ -3,41 +3,6 @@
 #include "Utils/Log.h"
 
 
-struct Label
-{
-    struct Size
-    {
-        enum E
-        {
-            Big,
-            Small,
-            Count
-        };
-    };
-
-    // Нараметры - имена соответсвующих контролов в прошивке дисплея
-    Label(pchar name_big, pchar name_small, pchar text);
-
-    void SetSize(Size::E);
-
-    void SetText(pchar);
-
-    void SetValue(float);
-
-private:
-
-    Size::E size;
-
-    char text[32];
-
-    pchar name_big;
-    pchar name_small;
-
-    // Включить/выключить контрол с именем name
-    void Enable(pchar name, bool);
-};
-
-
 struct Button
 {
 public:
@@ -66,12 +31,6 @@ private:
 };
 
 
-/*
-*   У каждой страницы есть шесть кнопок, которые являются разными для каждой страницы.
-*   Кнопка "Меню" и остальные элементы являются общими
-*/
-
-
 struct Page
 {
     Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5);
@@ -84,12 +43,6 @@ struct Page
     Button *GetButton(int index);
 
     void Init();
-
-    static Label labelDC;           // Надпись "DC"
-    static Label textDC;            // Числовое значение DC
-
-    static Label labelAC;           // Надпись "AC"
-    static Label textAC;            // Числовое значение AC
 
 private:
 

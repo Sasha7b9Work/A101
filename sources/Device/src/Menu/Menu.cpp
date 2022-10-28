@@ -9,12 +9,4 @@ void Menu::Init()
     PageMain::self->SetAsCurrent();
 
     Page::Current()->Init();
-
-    Page::textDC.SetSize(Label::Size::Big);
-
-    Page::labelDC.SetSize(Label::Size::Big);
-
-    Page::textAC.SetSize(Label::Size::Big);
-
-    Page::labelAC.SetSize(Label::Size::Big);
 }

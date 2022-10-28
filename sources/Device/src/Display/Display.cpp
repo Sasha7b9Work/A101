@@ -4,9 +4,16 @@
 #include "Hardware/HAL/HAL.h"
 #include "Display/DiagramInput.h"
 #include "Display/DInterface.h"
+#include "Display/Indicator.h"
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
+
+
+void Display::Init()
+{
+    Indicator::SetBig();
+}
 
 
 void Display::Update()
