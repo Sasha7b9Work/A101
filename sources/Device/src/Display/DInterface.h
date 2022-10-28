@@ -44,6 +44,7 @@ namespace DInterface
     void SendByte(uint8);
 
     void SendCommandFormat(const char *, ...);
+    void SendCommandFormatLog(const char *, ...);
 
     void CallbackOnReceive(uint8);
 

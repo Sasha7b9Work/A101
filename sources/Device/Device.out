@@ -1,3 +1,3 @@
-Load "D:\\Projects\\A101\\sources\\Device\\Objects\\A101.axf" 
+Load "D:\\Projects\\A101\\sources\\Device\\Objects-Debug\\A101-D.axf" 
 Erase Done.Programming Done.Application running ...
-Flash Load finished at 16:11:38
+Flash Load finished at 17:01:29

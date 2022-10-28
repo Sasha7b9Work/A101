@@ -28,17 +28,12 @@ void Button::SetText()
 
 void Button::Highlight()
 {
-    DInterface::SendCommandFormat("%s.val=%d", name_button, highlight ? 1 : 0);
+    DInterface::SendCommandFormatLog("%s.val=%d", name_button, highlight ? 1 : 0);
 }
 
 
 void Button::SetHighlight(bool _higthligth)
 {
-    if (highlight == _higthligth)
-    {
-        return;
-    }
-
     highlight = _higthligth;
 
     Highlight();

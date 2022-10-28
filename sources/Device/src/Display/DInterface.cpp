@@ -116,21 +116,22 @@ namespace DInterface
     static ResponseCode::E last_code = ResponseCode::InstructionSuccessful;
 
     static int bytes_received = 0;          // ¬сего прин€то байт
+
+    static bool in_update_state = false;    // true означает, что находимс€ в обработке полученных данных - нельз€ ложить ничего в приЄмный буфер
 }
 
 
 void DInterface::Update()
 {
-    for (int i = 0; i < buffer.NumBytes(); i++)
-    {
-//        Log::Write("byte %d : %2X", bytes_received - buffer.NumBytes() + i, buffer[i]);
-    }
-
     bool run = true;
 
     while (run)
     {
+        in_update_state = true;
+
         CommandUART *command = buffer.ExtractCommand();
+
+        in_update_state = false;
 
         run = command->Execute();
 
@@ -147,9 +148,16 @@ ResponseCode::E DInterface::LastCode()
 
 void DInterface::CallbackOnReceive(uint8 byte)
 {
-    bytes_received++;
+    if (in_update_state)
+    {
+        LOG_WRITE("!!!!! Cant receive byte - update data");
+    }
+    else
+    {
+        bytes_received++;
 
-    buffer.Push(byte);
+        buffer.Push(byte);
+    }
 }
 
 
@@ -209,9 +217,19 @@ void DInterface::SendCommandFormat(const char *format, ...)
 }
 
 
-#ifndef WIN32
-#pragma clang diagnostic pop
-#endif
+void DInterface::SendCommandFormatLog(const char *format, ...)
+{
+    char message[256];
+
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(message, format, args);
+    va_end(args);
+
+    LOG_WRITE(message);
+
+    SendCommandRAW(message);
+}
 
 
 DInterface::CommandUART::CommandUART(uint8 *bytes, int _size) : size(_size)
@@ -323,3 +341,8 @@ void DInterface::BufferUART<size>::RemoveFromStart(int num_bytes)
         pointer -= num_bytes;
     }
 }
+
+
+#ifndef WIN32
+#pragma clang diagnostic pop
+#endif
