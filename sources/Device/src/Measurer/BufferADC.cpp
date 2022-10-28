@@ -48,6 +48,10 @@ void BufferADC::ConvertToVoltage()
         }
     }
 
+    LOG_TRACE();
+
     DInterface::SendCommandFormat("textDELTA.txt=\"%d\"", max_raw - min_raw);
+
+    LOG_TRACE();
 }
 

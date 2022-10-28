@@ -37,8 +37,15 @@ extern "C" {
 
     void HardFault_Handler()
     {
+        volatile int line = Debug::line[0];
+        volatile pchar file = Debug::file[0];
+
         while (1)
         {
+            line = line;
+            file = file;
+
+            line = line;
         }
     }
 

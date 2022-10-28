@@ -45,7 +45,11 @@ void Measurer::Update()
 
     HAL_TIM4::Stop();
 
+    LOG_TRACE();
+
     buffer.ConvertToVoltage();
+
+    LOG_TRACE();
 
     Calculator::AppendData(buffer);
 

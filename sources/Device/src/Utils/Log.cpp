@@ -7,6 +7,12 @@
 #include <cstring>
 
 
+namespace Log
+{
+    static int counter = 1;
+}
+
+
 void Log::Write(const char *format, ...)
 {
     char message[256];
@@ -18,9 +24,24 @@ void Log::Write(const char *format, ...)
 
     char line[300];
 
-    static int counter = 1;
-
     std::sprintf(line, "%d : %s", counter++, message);
 
     HAL_USART3::Send(line);
+}
+
+
+void Log::Write(const char *file, int line, const char *format, ...)
+{
+    char message[256];
+
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(message, format, args);
+    va_end(args);
+
+    char buffer[300];
+
+    std::sprintf(buffer, "%d : %s          %s:%d", counter++, message, file, line);
+
+    HAL_USART3::Send(buffer);
 }

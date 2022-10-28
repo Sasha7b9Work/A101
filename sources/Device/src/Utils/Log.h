@@ -7,6 +7,8 @@
 #endif
 
 #define LOG_WRITE(...)  Log::Write(__VA_ARGS__)
+#define LOG_TRACE()     Log::Write(__FILE__, __LINE__, "")
+#define LOG_WRITE_TRACE(...) Log::Write(__FILE__, __LINE__, __VA_ARGS__)
 
 #ifndef WIN32
 #pragma clang diagnostic pop
@@ -15,5 +17,6 @@
 
 namespace Log
 {
+    void Write(const char *file, int line, const char *format, ...);
     void Write(const char *format, ...);
 }
