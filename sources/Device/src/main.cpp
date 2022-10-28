@@ -19,18 +19,10 @@ int main()
 
     while (1)
     {
-        DEBUG_POINT_0;
-
         Measurer::Update();
-
-        DEBUG_POINT_0;
 
         Display::Update();
 
-        DEBUG_POINT_0;
-
         DInterface::Update();
-
-        DEBUG_POINT_0;
     }
 }
