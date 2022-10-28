@@ -2,3 +2,18 @@
 #pragma once
 #define WIN32_LEAN_AND_MEAN
 #include "wx/wx.h"
+
+
+class Application : public wxApp
+{
+public:
+    virtual bool OnInit() wxOVERRIDE;
+
+    static Application *self;
+
+    void Update();
+
+private:
+
+    void Init();
+};
