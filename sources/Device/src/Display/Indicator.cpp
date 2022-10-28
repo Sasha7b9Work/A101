@@ -3,6 +3,7 @@
 #include "Display/Indicator.h"
 #include "Display/DInterface.h"
 #include "Display/Colors.h"
+#include "Display/Painter.h"
 #include <cstdio>
 #include <cstring>
 
@@ -129,13 +130,13 @@ Indicator::Label::Label(int _x, int _y, int _w, int _h, int _font, pchar _text) 
 
 void Indicator::Label::Enable()
 {
-    DInterface::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), text);
+    Primitives::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), text);
 }
 
 
 void Indicator::Label::Disable()
 {
-    DInterface::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), text);
+    Primitives::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), text);
 }
 
 

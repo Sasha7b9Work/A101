@@ -5,6 +5,8 @@
 
 namespace Primitives
 {
+    void DrawString(int x, int y, int width, int height, int font, uint16 color, uint16 back_color, pchar);
+
     struct Rectangle
     {
         Rectangle(int w, int h) : width(w), height(h) {}
