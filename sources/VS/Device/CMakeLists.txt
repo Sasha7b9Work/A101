@@ -72,7 +72,8 @@ if(WIN32)
     add_compile_options(/wd26812)
 endif()
 
-file(GLOB SRC                   ./*.cpp
+file(GLOB SRC                   ./*.h
+                                ./*.cpp
                                 ../../Device/src/defines.h
                                 ../../Device/src/stm_includes.h)
 file(GLOB DISPLAY               ../../Device/src/Display/*.*)

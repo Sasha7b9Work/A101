@@ -18,7 +18,7 @@ namespace PageMain
 
         LOG_WRITE("Invalid index page");
 
-        return -1;
+        return 0;
     }
 
     static void Function(const Button *button, int)

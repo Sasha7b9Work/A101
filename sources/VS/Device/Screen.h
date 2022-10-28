@@ -1,0 +1,22 @@
+// 2022/10/28 23:17:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#pragma once
+#define WIN32_LEAN_AND_MEAN
+#include  "wx/wx.h"
+
+
+class Screen : public wxPanel
+{
+public:
+
+    static const int WIDTH = 800;
+    static const int HEIGHT = 480;
+
+    Screen(wxWindow *parent);
+
+    static Screen *self;
+
+    void OnPaint(wxPaintEvent &);
+
+private:
+    static wxBitmap bitmap;
+};

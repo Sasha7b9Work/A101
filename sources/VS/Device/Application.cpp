@@ -16,8 +16,8 @@ bool Application::OnInit()
         return false;
 
     // create and show the main application window
-    Frame *frame = new Frame(_("A101 GUI version"));
-    frame->Show();
+    new Frame(_("A101 GUI version"));
+    Frame::self->Show();
 
     Init();
 

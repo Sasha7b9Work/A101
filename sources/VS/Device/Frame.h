@@ -11,7 +11,7 @@ public:
 
     static Frame *self;
 
-
-
 private:
+
+    void SetSizeAndPosition();
 };
