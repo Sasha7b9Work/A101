@@ -122,7 +122,7 @@ void Label::SetText(pchar _text)
 {
     std::strcpy(text, _text);
 
-    DInterface::SendCommandFormat("%s.txt=\"%s\"", (size == Size::Big) ? name_big : text);
+    DInterface::SendCommandFormat("%s.txt=\"%s\"", (size == Size::Big) ? name_big : name_small, text);
 }
 
 
