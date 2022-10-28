@@ -209,7 +209,7 @@ void DInterface::SendCommandFormat(const char *format, ...)
 }
 
 
-void DInterface::DrawString(int x, int y, int width, int height, int font, int color, int back_color, pchar text)
+void DInterface::DrawString(int x, int y, int width, int height, int font, uint16 color, uint16 back_color, pchar text)
 {
     SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,0,0,1,\"%s\"", x, y, width, height, font, color, back_color, text);
 }

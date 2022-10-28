@@ -6,6 +6,7 @@ struct Color
 {
     static Color Black;
     static Color White;
+    static Color Background;
     static Color Count;
 
     Color(uint8 v) : value(v) {}
@@ -17,6 +18,8 @@ struct Color
     static pchar CurrentValue();
 
     uint8 value;
+
+    uint16 ToRaw() const;
 
 private:
 

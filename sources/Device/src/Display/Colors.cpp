@@ -6,6 +6,7 @@
 
 Color Color::Black(0);
 Color Color::White(1);
+Color Color::Background(2);
 Color Color::Count(255);
 
 Color Color::current(0);
@@ -14,7 +15,8 @@ Color Color::current(0);
 static uint16 colors[255] =
 {
     Color::MakeColor(0.0f, 0.0f, 0.0f),
-    Color::MakeColor(1.0f, 1.0f, 1.0f)
+    Color::MakeColor(1.0f, 1.0f, 1.0f),
+    15319
 };
 
 
@@ -44,4 +46,10 @@ uint16 Color::MakeColor(float r, float g, float b)
     int blue = (int)(b * 0x3F);
 
     return (uint16)((red << 11) | (green << 6) | (blue));
+}
+
+
+uint16 Color::ToRaw() const
+{
+    return colors[value];
 }

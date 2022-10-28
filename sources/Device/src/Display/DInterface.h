@@ -45,7 +45,7 @@ namespace DInterface
 
     void SendCommandFormat(const char *, ...);
 
-    void DrawString(int x, int y, int width, int height, int font, int color, int back_color, pchar);
+    void DrawString(int x, int y, int width, int height, int font, uint16 color, uint16 back_color, pchar);
 
     void CallbackOnReceive(uint8);
 

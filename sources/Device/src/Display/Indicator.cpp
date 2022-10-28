@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/Indicator.h"
 #include "Display/DInterface.h"
+#include "Display/Colors.h"
 #include <cstdio>
 #include <cstring>
 
@@ -13,24 +14,47 @@ namespace Indicator
     // Неизменяемый текст
     struct Label
     {
-        Label(pchar _name_control, pchar _text);
+        Label(int _x, int _y, int _w, int _h, int _font, pchar _text);
         void Disable();
         void Enable();
         void SetText(char [MAX_LEN]);
     private:
-        pchar name_control;
         char text[MAX_LEN];
+        int x;
+        int y;
+        int width;
+        int height;
+        int font;
     };
 
-    static Label labelDC("labelDC", "DC:");
-    static Label labelDCsmall("labelDCsmall", "DC:");
-    static Label labelAC("labelAC", "AC:");
-    static Label labelACsmall("lableACsmall", "AC:");
+    static const int big_x_label = 38;
+    static const int big_y_0 = 74;
+    static const int big_y_1 = 236;
+    static const int big_width_label = 173;
+    static const int big_height = 111;
 
-    static Label textDC("textDC", "");
-    static Label textDCsmall("textDCsmall", "");
-    static Label textAC("textAC", "");
-    static Label textACsmall("textACsmall", "");
+    static const int big_x_text = 261;
+    static const int big_width_text = 530;
+
+    static const int small_x_label = 146;
+    static const int small_y_0 = 220;
+    static const int small_y_1 = 294;
+    static const int small_width_label = 150;
+    static const int small_height = 57;
+
+    static const int small_x_text = 361;
+    static const int small_width_text = 300;
+
+
+    static Label labelDC(big_x_label, big_y_0, big_width_label, big_height, 7, "DC:");
+    static Label labelDCsmall(small_x_label, small_y_0, small_width_label, small_height, 0, "DC:");
+    static Label labelAC(big_x_label, big_y_1, big_width_label, big_height, 7, "AC:");
+    static Label labelACsmall(small_x_label, small_y_1, small_width_label, small_height, 0, "AC:");
+
+    static Label textDC(big_x_text, big_y_0, big_width_text, big_height, 7, "");
+    static Label textDCsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "");
+    static Label textAC(big_x_text, big_y_1, big_width_text, big_height, 7, "");
+    static Label textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "");
 
     static bool is_big = true;
 
@@ -97,8 +121,7 @@ void Indicator::SetMeasures(float dc, float ac)
 }
 
 
-Indicator::Label::Label(pchar _name_control, pchar _text) :
-    name_control(_name_control)
+Indicator::Label::Label(int _x, int _y, int _w, int _h, int _font, pchar _text) : x(_x), y(_y), width(_w), height(_h), font(_font)
 {
     std::strcpy(text, _text);
 }
@@ -106,13 +129,13 @@ Indicator::Label::Label(pchar _name_control, pchar _text) :
 
 void Indicator::Label::Enable()
 {
-    DInterface::SendCommandFormat("%s.txt=\"%s\"", name_control, text);
+    DInterface::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), text);
 }
 
 
 void Indicator::Label::Disable()
 {
-    DInterface::SendCommandFormat("%s.txt=\"\"", name_control);
+    DInterface::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), text);
 }
 
 
