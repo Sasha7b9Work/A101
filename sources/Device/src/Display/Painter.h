@@ -23,5 +23,7 @@ struct Line
 
 namespace Painter
 {
+    void DrawWave(uint8 *points, int num_points);
+
     void DrawString(int x, int y, int width, int height, int font, uint16 color, uint16 back_color, pchar);
 }

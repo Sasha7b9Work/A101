@@ -2,7 +2,14 @@
 #include "defines.h"
 #include "Display/Painter.h"
 #include "Display/DInterface.h"
+#include "Hardware/Timer.h"
 #include <cstdio>
+
+
+namespace Painter
+{
+    static void WaitResponse(ResponseCode::E);
+}
 
 
 void Rectangle::Draw(int x, int y, const Color &color)
@@ -44,4 +51,35 @@ void Line::DrawH(int y, int x1, int x2, const Color &color)
 void Painter::DrawString(int x, int y, int width, int height, int font, uint16 color, uint16 back_color, pchar text)
 {
     DInterface::SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,0,0,1,\"%s\"", x, y, width, height, font, color, back_color, text);
+}
+
+
+void Painter::DrawWave(uint8 *points, int num_points)
+{
+    DInterface::SendCommandFormat("addt 16,0,%d", num_points);
+
+    WaitResponse(ResponseCode::TransparentDataReady);
+
+    for (int i = 0; i < num_points; i++)
+    {
+        DInterface::SendByte(*points++);
+    }
+
+    WaitResponse(ResponseCode::TransparentDataFinished);
+}
+
+
+void Painter::WaitResponse(ResponseCode::E code)
+{
+    TimeMeterMS meter;
+
+    while (DInterface::LastCode() != code)
+    {
+        DInterface::Update();
+
+        if (meter.ElapsedTime() > 400)
+        {
+            break;
+        }
+    }
 }

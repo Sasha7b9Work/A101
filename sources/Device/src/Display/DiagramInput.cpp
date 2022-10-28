@@ -54,11 +54,9 @@ void DiagramInput::Draw()
     float scale = height / (data.MaxReal() - data.MinReal());
     float ave = (data.MaxReal() + data.MinReal()) / 2.0f;
 
-    DInterface::SendCommandFormat("addt 16,0,%d", num_points);
+    uint8 points[num_points];
 
-    WaitResponse(ResponseCode::TransparentDataReady);
-
-    for(int i = 0; i < num_points; i++)
+    for (int i = 0; i < num_points; i++)
     {
         float value = y0 + scale * (data.At(i) - ave);
 
@@ -66,15 +64,15 @@ void DiagramInput::Draw()
         {
             value = 0;
         }
-        else if(value > 255)
+        else if (value > 255)
         {
             value = 255;
         }
 
-        DInterface::SendByte((uint8)value);
+        points[i] = (uint8)value;
     }
 
-    WaitResponse(ResponseCode::TransparentDataFinished);
+    Painter::DrawWave(points, num_points);
 }
 
 
