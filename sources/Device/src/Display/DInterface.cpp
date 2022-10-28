@@ -208,6 +208,13 @@ void DInterface::SendCommandFormat(const char *format, ...)
     SendCommandRAW(message);
 }
 
+
+void DInterface::DrawString(int x, int y, int width, int height, int font, int color, int back_color, pchar text)
+{
+    SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,0,0,1,\"%s\"", x, y, width, height, font, color, back_color, text);
+}
+
+
 #ifndef WIN32
 #pragma clang diagnostic pop
 #endif

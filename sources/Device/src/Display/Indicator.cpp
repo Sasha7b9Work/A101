@@ -84,10 +84,6 @@ void Indicator::SetMeasures(float dc, float ac)
     std::sprintf(measureDC, "%.4f V", (double)dc);
     std::sprintf(measureAC, "%.4f V", (double)ac);
 
-    DInterface::SendCommandFormat(
-        "xstr 261,236,530,111,7,65535,15319,0,0,1,\"%s\"", measureAC
-    );
-
     if (is_big)
     {
         textDC.SetText(measureDC);

@@ -45,6 +45,8 @@ namespace DInterface
 
     void SendCommandFormat(const char *, ...);
 
+    void DrawString(int x, int y, int width, int height, int font, int color, int back_color, pchar);
+
     void CallbackOnReceive(uint8);
 
     // Функция заверашется при получении кода
