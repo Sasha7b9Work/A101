@@ -6,6 +6,8 @@ set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(../../Device/src
                     ../../Device/src/Hardware/HAL
+                    ../../VS/ThirdParty/wxWidgets/include
+                    ../../generated/ThirdParty/lib/vc_dll/mswud
                     ../../common/_VS_GUI/HAL
                     ../../common/_VS_GUI/CMSIS)
 
@@ -70,10 +72,12 @@ if(WIN32)
     add_compile_options(/wd26812)
 endif()
 
-file(GLOB SRC                   ../../Device/src/*.*)
+file(GLOB SRC                   ./*.cpp
+                                ../../Device/src/defines.h
+                                ../../Device/src/stm_includes.h)
 file(GLOB DISPLAY               ../../Device/src/Display/*.*)
 file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
-file(GLOB HARDWARE_HAL          Hardware/HAL/*.*
+file(GLOB HARDWARE_HAL          ./Hardware/HAL/*.*
                                 ../../Device/src/Hardware/HAL/HAL.h
                                 ../../Device/src/Hardware/HAL/HAL_PIO.h
                                 ../../Device/src/Hardware/HAL/HAL_TIM.cpp)
