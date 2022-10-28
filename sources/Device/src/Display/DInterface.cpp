@@ -161,11 +161,11 @@ void DInterface::SendCommandRAW(pchar command)
 
     HAL_USART2::SendNZ("\xFF\xFF\xFF");
 
-    WaitResponse(ResponseCode::InstructionSuccessful);
+    WaitResponse(command, ResponseCode::InstructionSuccessful);
 }
 
 
-void DInterface::WaitResponse(ResponseCode::E code)
+void DInterface::WaitResponse(pchar command, ResponseCode::E code)
 {
     TimeMeterMS meter;
 
@@ -183,7 +183,7 @@ void DInterface::WaitResponse(ResponseCode::E code)
 
     if (last_code != code)
     {
-        LOG_WRITE("Received %02Xh but expected %02Xh", last_code, code);
+        LOG_WRITE("Error in %s : Received %02Xh but expected %02Xh", command, last_code, code);
     }
 }
 
