@@ -4,21 +4,17 @@
 #include "Menu/Pages/PageMain.h"
 
 
-namespace Menu
-{
-    static int index_page = 0;
-}
-
-
 void Menu::Init()
 {
     PageMain::self->SetAsCurrent();
 
     Page::Current()->Init();
-}
 
+    Page::textDC.SetSize(Label::Size::Big);
 
-int Menu::IndexPage()
-{
-    return index_page;
+    Page::labelDC.SetSize(Label::Size::Big);
+
+    Page::textAC.SetSize(Label::Size::Big);
+
+    Page::labelAC.SetSize(Label::Size::Big);
 }

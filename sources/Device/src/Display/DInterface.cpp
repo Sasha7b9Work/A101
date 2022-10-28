@@ -229,7 +229,7 @@ bool DInterface::CommandZ::Execute()
     {
         uint8 byte1 = buffer[0];
 
-        if (byte1 >= '1' && byte1 <= '9')
+        if (byte1 >= '0' && byte1 <= '9')
         {
             int button = (byte1 & 0x0F);
 

@@ -18,6 +18,12 @@ static void EmptyFunc(int)
 Button Button::empty("null", "", false, EmptyFunc);
 
 
+Label Page::labelDC("labelDC", "labelDCsmall", "DC:");
+Label Page::textDC("textDC", "textDCsmall", "");
+Label Page::labelAC("labelAC", "labelACsmall", "AC:");
+Label Page::textAC("textAC", "textACsmall", "");
+
+
 void Button::SetText()
 {
     DInterface::SendCommandFormat("%s.txt=\"%s\"", name_button, text);
@@ -79,4 +85,31 @@ void Page::Init()
     {
         GetButton(i)->Highlight();
     }
+}
+
+
+void Label::SetSize(Size::E _size)
+{
+    if (_size == size)
+    {
+        return;
+    }
+
+    size = _size;
+
+    Enable(name_big, size == Size::Big);
+    Enable(name_small, size == Size::Small);
+}
+
+
+void Label::Enable(pchar name, bool enable)
+{
+    DInterface::SendCommandFormat("%s.txt=%s", name, enable ? text : "");
+}
+
+
+Label::Label(pchar _name_big, pchar _name_small, pchar _text) :
+    size(Size::Count), text(_text), name_big(_name_big), name_small(_name_small)
+{
+
 }

@@ -5,9 +5,4 @@
 namespace Menu
 {
     void Init();
-
-    // ¬озвращает индекс текущей страницы
-    // 0 - Main
-    // 1 - Two
-    int IndexPage();
 }
