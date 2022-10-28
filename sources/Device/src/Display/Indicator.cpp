@@ -31,8 +31,8 @@ namespace Indicator
     static const int big_x_label = 38;
     static const int big_y_0 = 74;
     static const int big_y_1 = 236;
-    static const int big_width_label = 173;
-    static const int big_height = 111;
+    static const int big_width_label = 170;
+    static const int big_height = 95;
 
     static const int big_x_text = 261;
     static const int big_width_text = 530;
@@ -53,7 +53,7 @@ namespace Indicator
     static Label labelACsmall(small_x_label, small_y_1, small_width_label, small_height, 0, "AC:");
 
     static Label textDC(big_x_text, big_y_0, big_width_text, big_height, 7, "");
-    static Label textDCsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "");
+    static Label textDCsmall(small_x_text, small_y_0, small_width_text, small_height, 0, "");
     static Label textAC(big_x_text, big_y_1, big_width_text, big_height, 7, "");
     static Label textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "");
 
@@ -136,7 +136,7 @@ void Indicator::Label::Enable()
 
 void Indicator::Label::Disable()
 {
-    Painter::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), text);
+    Painter::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), "");
 }
 
 

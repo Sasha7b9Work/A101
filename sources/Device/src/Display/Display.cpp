@@ -5,6 +5,7 @@
 #include "Display/DiagramInput.h"
 #include "Display/DInterface.h"
 #include "Display/Indicator.h"
+#include "Display/Painter.h"
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
@@ -12,6 +13,8 @@
 
 void Display::Init()
 {
+    Rectangle(700, 400).Fill(0, 0, Color::Black);
+
     Indicator::SetBig();
 }
 
