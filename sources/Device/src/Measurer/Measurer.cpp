@@ -48,9 +48,9 @@ void Measurer::Update()
 
     Calculator::AppendData(buffer);
 
-    Page::textDC.SetValue(Calculator::GetAC());
+    Page::textAC.SetValue(Calculator::GetAC());
 
-    Page::textAC.SetValue(Calculator::GetDC());
+    Page::textDC.SetValue(Calculator::GetDC());
 
     Display::SetData(buffer);
 }
