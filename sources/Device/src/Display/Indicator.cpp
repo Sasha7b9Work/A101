@@ -130,13 +130,13 @@ Indicator::Label::Label(int _x, int _y, int _w, int _h, int _font, pchar _text) 
 
 void Indicator::Label::Enable()
 {
-    Primitives::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), text);
+    Painter::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), text);
 }
 
 
 void Indicator::Label::Disable()
 {
-    Primitives::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), text);
+    Painter::DrawString(x, y, width, height, font, Color::White.ToRaw(), Color::Background.ToRaw(), text);
 }
 
 

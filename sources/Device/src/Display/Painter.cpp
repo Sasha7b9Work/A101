@@ -5,7 +5,7 @@
 #include <cstdio>
 
 
-void Primitives::Rectangle::Draw(int x, int y, const Color &color)
+void Rectangle::Draw(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
@@ -13,7 +13,7 @@ void Primitives::Rectangle::Draw(int x, int y, const Color &color)
 }
 
 
-void Primitives::Rectangle::Fill(int x, int y, const Color &color)
+void Rectangle::Fill(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
@@ -21,7 +21,7 @@ void Primitives::Rectangle::Fill(int x, int y, const Color &color)
 }
 
 
-void Primitives::Line::Draw(int x1, int y1, int x2, int y2, const Color &color)
+void Line::Draw(int x1, int y1, int x2, int y2, const Color &color)
 {
     color.SetAsCurrent();
 
@@ -29,19 +29,19 @@ void Primitives::Line::Draw(int x1, int y1, int x2, int y2, const Color &color)
 }
 
 
-void Primitives::Line::DrawV(int x, int y1, int y2, const Color &color)
+void Line::DrawV(int x, int y1, int y2, const Color &color)
 {
     Line().Draw(x, y1, x, y2, color);
 }
 
 
-void Primitives::Line::DrawH(int y, int x1, int x2, const Color &color)
+void Line::DrawH(int y, int x1, int x2, const Color &color)
 {
     Line().Draw(x1, y, x2, y, color);
 }
 
 
-void Primitives::DrawString(int x, int y, int width, int height, int font, uint16 color, uint16 back_color, pchar text)
+void Painter::DrawString(int x, int y, int width, int height, int font, uint16 color, uint16 back_color, pchar text)
 {
     DInterface::SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,0,0,1,\"%s\"", x, y, width, height, font, color, back_color, text);
 }

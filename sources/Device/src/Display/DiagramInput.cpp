@@ -8,9 +8,6 @@
 #include <limits>
 
 
-using namespace Primitives;
-
-
 namespace DiagramInput
 {
     bool NeedDraw();
