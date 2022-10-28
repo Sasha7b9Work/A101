@@ -104,7 +104,7 @@ void Label::SetSize(Size::E _size)
 
 void Label::Enable(pchar name, bool enable)
 {
-    DInterface::SendCommandFormat("%s.txt=%s", name, enable ? text : "");
+    DInterface::SendCommandFormat("%s.txt=\"%s\"", name, enable ? text : "");
 }
 
 
