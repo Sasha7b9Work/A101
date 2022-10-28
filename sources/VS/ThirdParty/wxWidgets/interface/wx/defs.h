@@ -251,16 +251,8 @@ enum wxBorder
 /*  Windows, it won't normally get the dialog navigation key events) */
 #define wxWANTS_CHARS           0x00040000
 
-/*  Make window retained (Motif only, see src/generic/scrolwing.cpp)
- *  This is non-zero only under wxMotif, to avoid a clash with wxPOPUP_WINDOW
- *  on other platforms
- */
-
-#ifdef __WXMOTIF__
-#define wxRETAINED              0x00020000
-#else
+/*  Deprecated, does nothing and shouldn't be used in the new code. */
 #define wxRETAINED              0x00000000
-#endif
 #define wxBACKINGSTORE          wxRETAINED
 
 /*  set this flag to create a special popup window: it will be always shown on */
@@ -599,11 +591,12 @@ enum wxStandardID
     /**
         Start of the range reserved for wxWidgets-defined IDs.
 
-        Don't define custom IDs in the range from wxID_LOWEST to wxID_HIGHEST.
+        Don't define custom IDs in the range from wxID_LOWEST to wxID_HIGHEST
+        (exclusive).
      */
-    wxID_LOWEST = 4999,
+    wxID_LOWEST = 5000,
 
-    wxID_OPEN,
+    wxID_OPEN = wxID_LOWEST,
     wxID_CLOSE,
     wxID_NEW,
     wxID_SAVE,
@@ -751,13 +744,14 @@ enum wxStandardID
     /**
         End of the range reserved for wxWidgets-defined IDs.
 
-        Don't define custom IDs in the range from wxID_LOWEST to wxID_HIGHEST.
+        Don't define custom IDs in the range from wxID_LOWEST to wxID_HIGHEST
+        (exclusive).
 
         When using an enum to define a number of custom IDs, assigning the
-        value of @c wxID_HIGHEST+1 to the first element ensures that none of
+        value of @c wxID_HIGHEST to the first element ensures that none of
         the enum elements will conflict with any standard IDs.
      */
-    wxID_HIGHEST = 5999
+    wxID_HIGHEST = 6000
 };
 
 /**
@@ -1697,11 +1691,6 @@ template <typename T> void wxDELETEA(T*& array);
     wxString wxGetSomething();
     @endcode
 
-    For compilers other than clang, g++ 4.5 or later and MSVC 8 (MSVS 2005) or
-    later, the message is ignored and a generic deprecation warning is given if
-    possible, i.e. if the compiler is g++ (any supported version) or MSVC 7
-    (MSVS 2003) or later.
-
     @since 3.0
 
     @header{wx/defs.h}
@@ -1714,9 +1703,6 @@ template <typename T> void wxDELETEA(T*& array);
     be removed in the future) when it is used.
 
     Notice that this macro itself is deprecated in favour of wxDEPRECATED_MSG()!
-
-    Only Visual C++ 7 and higher and g++ compilers currently support this
-    functionality.
 
     Example of use:
 
@@ -1804,31 +1790,16 @@ template <typename T> void wxDELETEA(T*& array);
 #define wxDEPRECATED_BUT_USED_INTERNALLY_INLINE(func, body)
 
 /**
-    @c wxOVERRIDE expands to the C++11 @c override keyword if it's supported by
-    the compiler or nothing otherwise.
+    Expands to "override" keyword.
 
-    This macro is useful for writing code which may be compiled by both C++11
-    and non-C++11 compilers and still allow the use of @c override for the
-    former.
-
-    Example of using this macro:
-    @code
-        class MyApp : public wxApp {
-        public:
-            virtual bool OnInit() wxOVERRIDE;
-
-            // This would result in an error from a C++11 compiler as the
-            // method doesn't actually override the base class OnExit() due to
-            // a typo in its name.
-            //virtual int OnEzit() wxOVERRIDE;
-        };
-    @endcode
+    This macro is deprecated and exists only for compatibility, just use @c
+    override directly in the new code.
 
     @header{wx/defs.h}
 
     @since 3.1.0
  */
-#define wxOVERRIDE
+#define wxOVERRIDE override
 
 /**
     GNU C++ compiler gives a warning for any class whose destructor is private

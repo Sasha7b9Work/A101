@@ -110,25 +110,9 @@ public:
     // check if we have any icons at all
     bool IsEmpty() const { return GetIconCount() == 0; }
 
-#if WXWIN_COMPATIBILITY_2_8
-#if wxUSE_STREAMS && wxUSE_IMAGE && (wxUSE_FFILE || wxUSE_FILE)
-    wxDEPRECATED( void AddIcon(const wxString& file, long type)
-        {
-            AddIcon(file, (wxBitmapType)type);
-        }
-    )
-
-    wxDEPRECATED_CONSTRUCTOR( wxIconBundle (const wxString& file, long type)
-        {
-            AddIcon(file, (wxBitmapType)type);
-        }
-    )
-#endif // wxUSE_STREAMS && wxUSE_IMAGE && (wxUSE_FFILE || wxUSE_FILE)
-#endif // WXWIN_COMPATIBILITY_2_8
-
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const wxOVERRIDE;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const wxOVERRIDE;
+    virtual wxGDIRefData *CreateGDIRefData() const override;
+    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 
 private:
     // delete all icons

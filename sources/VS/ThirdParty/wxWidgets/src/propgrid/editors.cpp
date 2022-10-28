@@ -176,8 +176,8 @@ void wxPGEditor::SetControlAppearance( wxPropertyGrid* pg,
                                        bool unspecified ) const
 {
     // Get old editor appearance
-    wxTextCtrl* tc = NULL;
-    wxComboCtrl* cb = NULL;
+    wxTextCtrl* tc = nullptr;
+    wxComboCtrl* cb = nullptr;
     if ( wxDynamicCast(ctrl, wxTextCtrl) )
     {
         tc = (wxTextCtrl*) ctrl;
@@ -294,7 +294,7 @@ wxPGWindowList wxPGTextCtrlEditor::CreateControls( wxPropertyGrid* propGrid,
     // If has children, and limited editing is specified, then don't create.
     if ( property->HasFlag(wxPG_PROP_NOEDITOR) &&
          property->GetChildCount() )
-        return NULL;
+        return nullptr;
 
     int argFlags = 0;
     if ( !property->HasFlag(wxPG_PROP_READONLY) &&
@@ -307,7 +307,7 @@ wxPGWindowList wxPGTextCtrlEditor::CreateControls( wxPropertyGrid* propGrid,
          wxDynamicCast(property, wxStringProperty) )
         flags |= wxTE_PASSWORD;
 
-    wxWindow* wnd = propGrid->GenerateEditorTextCtrl(pos,sz,text,NULL,flags,
+    wxWindow* wnd = propGrid->GenerateEditorTextCtrl(pos,sz,text,nullptr,flags,
                                                      property->GetMaxLength());
 
     return wnd;
@@ -471,7 +471,7 @@ wxPGTextCtrlEditor::~wxPGTextCtrlEditor()
 {
     // Reset the global pointer. Useful when wxPropertyGrid is accessed
     // from an external main loop.
-    wxPG_EDITOR(TextCtrl) = NULL;
+    wxPG_EDITOR(TextCtrl) = nullptr;
 }
 
 
@@ -575,7 +575,7 @@ public:
 
     wxPGComboBox()
         : wxOwnerDrawnComboBox()
-        , m_dclickProcessor(NULL)
+        , m_dclickProcessor(nullptr)
     {
     }
 
@@ -626,7 +626,7 @@ public:
     virtual void OnDrawItem( wxDC& dc,
                              const wxRect& rect,
                              int item,
-                             int flags ) const wxOVERRIDE
+                             int flags ) const override
     {
         wxPropertyGrid* pg = GetGrid();
 
@@ -643,13 +643,13 @@ public:
         }
     }
 
-    virtual wxCoord OnMeasureItem( size_t item ) const wxOVERRIDE
+    virtual wxCoord OnMeasureItem( size_t item ) const override
     {
         wxPropertyGrid* pg = GetGrid();
         wxRect rect;
         rect.x = -1;
         rect.width = 0;
-        pg->OnComboItemPaint( this, item, NULL, rect, 0 );
+        pg->OnComboItemPaint( this, item, nullptr, rect, 0 );
         return rect.height;
     }
 
@@ -661,13 +661,13 @@ public:
         return pg;
     }
 
-    virtual wxCoord OnMeasureItemWidth( size_t item ) const wxOVERRIDE
+    virtual wxCoord OnMeasureItemWidth( size_t item ) const override
     {
         wxPropertyGrid* pg = GetGrid();
         wxRect rect;
         rect.x = -1;
         rect.width = -1;
-        pg->OnComboItemPaint( this, item, NULL, rect, 0 );
+        pg->OnComboItemPaint( this, item, nullptr, rect, 0 );
         return rect.width;
     }
 
@@ -686,7 +686,7 @@ public:
 #endif
 
     virtual void PositionTextCtrl( int textCtrlXAdjust,
-                                   int WXUNUSED(textCtrlYAdjust) ) wxOVERRIDE
+                                   int WXUNUSED(textCtrlYAdjust) ) override
     {
     #ifdef wxPG_TEXTCTRLXADJUST
         textCtrlXAdjust = wxPG_TEXTCTRLXADJUST -
@@ -792,8 +792,8 @@ void wxPropertyGrid::OnComboItemPaint( const wxPGComboBox* pCb,
 
     //
     // DrawItem call
-    wxPGCellRenderer* renderer = NULL;
-    const wxPGChoiceEntry* cell = NULL;
+    wxPGCellRenderer* renderer = nullptr;
+    const wxPGChoiceEntry* cell = nullptr;
 
     wxPoint pt(rect.x + wxPG_CONTROL_MARGIN - wxPG_CHOICEXADJUST - 1,
                 rect.y + 1);
@@ -954,7 +954,7 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
     // the same sense that wxTextCtrl is read-only, simply do not create
     // the control in this case.
     if ( property->HasFlag(wxPG_PROP_READONLY) )
-        return NULL;
+        return nullptr;
 
     const wxPGChoices& choices = property->GetChoices();
     wxString defString;
@@ -1007,7 +1007,7 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
 #endif
     cb->Create(ctrlParent,
                wxID_ANY,
-               wxEmptyString,
+               wxString(),
                po,
                si,
                labels,
@@ -1054,9 +1054,9 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
 
 void wxPGChoiceEditor::UpdateControl( wxPGProperty* property, wxWindow* ctrl ) const
 {
-    wxASSERT( ctrl );
-    wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
-    wxASSERT( wxDynamicCast(cb, wxOwnerDrawnComboBox));
+    wxOwnerDrawnComboBox* cb = wxDynamicCast(ctrl, wxOwnerDrawnComboBox);
+    wxCHECK_RET(cb, "Only wxOwnerDrawnComboBox editor can be updated");
+
     int ind = property->GetChoiceSelection();
     cb->SetSelection(ind);
 }
@@ -1070,9 +1070,8 @@ wxPGWindowList wxPGChoiceEditor::CreateControls( wxPropertyGrid* propGrid, wxPGP
 
 int wxPGChoiceEditor::InsertItem( wxWindow* ctrl, const wxString& label, int index ) const
 {
-    wxASSERT( ctrl );
-    wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
-    wxASSERT( wxDynamicCast(cb, wxOwnerDrawnComboBox));
+    wxOwnerDrawnComboBox* cb = wxDynamicCast(ctrl, wxOwnerDrawnComboBox);
+    wxCHECK_MSG(cb, wxNOT_FOUND, "Only wxOwnerDrawnComboBox editor can be updated");
 
     if (index < 0)
         index = cb->GetCount();
@@ -1083,18 +1082,16 @@ int wxPGChoiceEditor::InsertItem( wxWindow* ctrl, const wxString& label, int ind
 
 void wxPGChoiceEditor::DeleteItem( wxWindow* ctrl, int index ) const
 {
-    wxASSERT( ctrl );
-    wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
-    wxASSERT( wxDynamicCast(cb, wxOwnerDrawnComboBox));
+    wxOwnerDrawnComboBox* cb = wxDynamicCast(ctrl, wxOwnerDrawnComboBox);
+    wxCHECK_RET(cb, "Only wxOwnerDrawnComboBox editor can be updated");
 
     cb->Delete(index);
 }
 
 void wxPGChoiceEditor::SetItems(wxWindow* ctrl, const wxArrayString& labels) const
 {
-    wxASSERT( ctrl );
     wxOwnerDrawnComboBox* cb = wxDynamicCast(ctrl, wxOwnerDrawnComboBox);
-    wxASSERT( cb );
+    wxCHECK_RET(cb, "Only wxOwnerDrawnComboBox editor can be updated");
 
     cb->Set(labels);
 }
@@ -1160,8 +1157,9 @@ void wxPGChoiceEditor::SetControlStringValue( wxPGProperty* property,
                                               wxWindow* ctrl,
                                               const wxString& txt ) const
 {
-    wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
-    wxASSERT( cb );
+    wxOwnerDrawnComboBox* cb = wxDynamicCast(ctrl, wxOwnerDrawnComboBox);
+    wxCHECK_RET(cb, "Only wxOwnerDrawnComboBox editor can be updated");
+
     property->GetGrid()->SetupTextCtrlValue(txt);
     cb->SetValue(txt);
 }
@@ -1169,8 +1167,9 @@ void wxPGChoiceEditor::SetControlStringValue( wxPGProperty* property,
 
 void wxPGChoiceEditor::SetControlIntValue( wxPGProperty* WXUNUSED(property), wxWindow* ctrl, int value ) const
 {
-    wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
-    wxASSERT( cb );
+    wxOwnerDrawnComboBox* cb = wxDynamicCast(ctrl, wxOwnerDrawnComboBox);
+    wxCHECK_RET(cb, "Only wxOwnerDrawnComboBox editor can be updated");
+
     cb->SetSelection(value);
 }
 
@@ -1178,7 +1177,8 @@ void wxPGChoiceEditor::SetControlIntValue( wxPGProperty* WXUNUSED(property), wxW
 void wxPGChoiceEditor::SetValueToUnspecified( wxPGProperty* WXUNUSED(property),
                                               wxWindow* ctrl ) const
 {
-    wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
+    wxOwnerDrawnComboBox* cb = wxDynamicCast(ctrl, wxOwnerDrawnComboBox);
+    wxCHECK_RET(cb, "Only wxOwnerDrawnComboBox editor can be updated");
 
     if ( cb->HasFlag(wxCB_READONLY) )
         cb->SetSelection(-1);
@@ -1193,7 +1193,7 @@ bool wxPGChoiceEditor::CanContainCustomImage() const
 
 wxPGChoiceEditor::~wxPGChoiceEditor()
 {
-    wxPG_EDITOR(Choice) = NULL;
+    wxPG_EDITOR(Choice) = nullptr;
 }
 
 
@@ -1232,8 +1232,8 @@ bool wxPGComboBoxEditor::OnEvent( wxPropertyGrid* propGrid,
                                   wxWindow* ctrl,
                                   wxEvent& event ) const
 {
-    wxOwnerDrawnComboBox* cb = NULL;
-    wxWindow* textCtrl = NULL;
+    wxOwnerDrawnComboBox* cb = nullptr;
+    wxWindow* textCtrl = nullptr;
 
     if ( ctrl )
     {
@@ -1280,7 +1280,7 @@ void wxPGComboBoxEditor::OnFocus( wxPGProperty* property,
 
 wxPGComboBoxEditor::~wxPGComboBoxEditor()
 {
-    wxPG_EDITOR(ComboBox) = NULL;
+    wxPG_EDITOR(ComboBox) = nullptr;
 }
 
 
@@ -1336,7 +1336,7 @@ wxPGWindowList wxPGChoiceAndButtonEditor::CreateControls( wxPropertyGrid* propGr
 
 wxPGChoiceAndButtonEditor::~wxPGChoiceAndButtonEditor()
 {
-    wxPG_EDITOR(ChoiceAndButton) = NULL;
+    wxPG_EDITOR(ChoiceAndButton) = nullptr;
 }
 
 // -----------------------------------------------------------------------
@@ -1363,7 +1363,7 @@ wxPGWindowList wxPGTextCtrlAndButtonEditor::CreateControls( wxPropertyGrid* prop
 
 wxPGTextCtrlAndButtonEditor::~wxPGTextCtrlAndButtonEditor()
 {
-    wxPG_EDITOR(TextCtrlAndButton) = NULL;
+    wxPG_EDITOR(TextCtrlAndButton) = nullptr;
 }
 
 // -----------------------------------------------------------------------
@@ -1615,7 +1615,7 @@ wxPGWindowList wxPGCheckBoxEditor::CreateControls( wxPropertyGrid* propGrid,
                                                    const wxSize& size ) const
 {
     if ( property->HasFlag(wxPG_PROP_READONLY) )
-        return NULL;
+        return nullptr;
 
     wxPoint pt = pos;
     pt.x -= wxPG_XBEFOREWIDGET;
@@ -1673,8 +1673,8 @@ void wxPGCheckBoxEditor::DrawValue( wxDC& dc, const wxRect& rect,
 void wxPGCheckBoxEditor::UpdateControl( wxPGProperty* property,
                                         wxWindow* ctrl ) const
 {
-    wxSimpleCheckBox* cb = (wxSimpleCheckBox*) ctrl;
-    wxASSERT( cb );
+    wxSimpleCheckBox* cb = wxDynamicCast(ctrl, wxSimpleCheckBox);
+    wxCHECK_RET(cb, "Only wxSimpleCheckBox editor can be updated");
 
     if ( !property->IsValueUnspecified() )
         cb->m_state = property->GetChoiceSelection();
@@ -1733,7 +1733,7 @@ void wxPGCheckBoxEditor::SetValueToUnspecified( wxPGProperty* WXUNUSED(property)
 
 wxPGCheckBoxEditor::~wxPGCheckBoxEditor()
 {
-    wxPG_EDITOR(CheckBox) = NULL;
+    wxPG_EDITOR(CheckBox) = nullptr;
 }
 
 #endif // wxPG_INCLUDE_CHECKBOX
@@ -1753,7 +1753,7 @@ void wxPropertyGrid::CorrectEditorWidgetSizeX()
 
     // Use fixed selColumn 1 for main editor widgets
     int newSplitterx;
-    CalcScrolledPosition(m_pState->DoGetSplitterPosition(0), 0, &newSplitterx, NULL);
+    CalcScrolledPosition(m_pState->DoGetSplitterPosition(0), 0, &newSplitterx, nullptr);
     int newWidth = newSplitterx + m_pState->GetColumnWidth(1);
 
     if ( m_wndEditor2 )
@@ -2029,7 +2029,7 @@ wxWindow* wxPropertyGrid::GenerateEditorTextCtrlAndButton( const wxPoint& pos,
         // There is button Show in GenerateEditorTextCtrl as well
         but->Show();
     #endif
-        return NULL;
+        return nullptr;
     }
 
     wxString text;
@@ -2069,7 +2069,7 @@ wxTextCtrl* wxPropertyGrid::GetEditorTextCtrl() const
     wxWindow* wnd = GetEditorControl();
 
     if ( !wnd )
-        return NULL;
+        return nullptr;
 
     wxTextCtrl* tc = wxDynamicCast(wnd, wxTextCtrl);
     if ( tc )
@@ -2081,7 +2081,7 @@ wxTextCtrl* wxPropertyGrid::GetEditorTextCtrl() const
         return cb->GetTextCtrl();
     }
 
-    return NULL;
+    return nullptr;
 }
 
 // -----------------------------------------------------------------------
@@ -2092,7 +2092,7 @@ wxPGEditor* wxPropertyGridInterface::GetEditorByName( const wxString& editorName
 
     it = wxPGGlobalVars->m_mapEditorClasses.find(editorName);
     if ( it == wxPGGlobalVars->m_mapEditorClasses.end() )
-        return NULL;
+        return nullptr;
     return (wxPGEditor*) it->second;
 }
 
@@ -2145,11 +2145,7 @@ int wxPGMultiButton::GenId( int itemid ) const
 
 #if defined(__WXGTK__)
 // Dedicated wxBitmapButton with reduced internal borders
-#if defined( __WXGTK127__ )
-#include "wx/gtk1/private.h"
-#else
 #include "wx/gtk/private.h"
-#endif
 
 class wxPGEditorBitmapButton : public wxBitmapButton
 {

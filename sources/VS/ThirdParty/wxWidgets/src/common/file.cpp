@@ -244,7 +244,7 @@ bool wxFile::Close()
 
 bool wxFile::ReadAll(wxString *str, const wxMBConv& conv)
 {
-    wxCHECK_MSG( str, false, wxS("Output string must be non-NULL") );
+    wxCHECK_MSG( str, false, wxS("Output string must be non-null") );
 
     static const ssize_t READSIZE = 4096;
 
@@ -324,7 +324,7 @@ ssize_t wxFile::Read(void *pBuf, size_t nCount)
     if ( !nCount )
         return 0;
 
-    wxCHECK( (pBuf != NULL) && IsOpened(), 0 );
+    wxCHECK( (pBuf != nullptr) && IsOpened(), 0 );
 
     ssize_t iRc = wxRead(m_fd, pBuf, nCount);
 
@@ -343,7 +343,7 @@ size_t wxFile::Write(const void *pBuf, size_t nCount)
     if ( !nCount )
         return 0;
 
-    wxCHECK( (pBuf != NULL) && IsOpened(), 0 );
+    wxCHECK( (pBuf != nullptr) && IsOpened(), 0 );
 
     ssize_t iRc = wxWrite(m_fd, pBuf, nCount);
 
@@ -556,7 +556,7 @@ bool wxTempFile::Open(const wxString& strName)
     mode_t mode;
 
     wxStructStat st;
-    if ( stat( (const char*) m_strName.fn_str(), &st) == 0 )
+    if ( wxStat(m_strName, &st) == 0 )
     {
         mode = st.st_mode;
     }

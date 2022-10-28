@@ -212,7 +212,7 @@ struct wxCmdLineEntryDesc
     }
     @endcode
 
-    With C++11, the for loop could be written:
+    The for loop could be written:
     @code
     for (const auto &arg : parser.GetArguments()) {
         // working on arg as with *itarg above
@@ -717,7 +717,7 @@ public:
             { wxCMD_LINE_OPTION, "s", "size",    "output block size", wxCMD_LINE_VAL_NUMBER },
             { wxCMD_LINE_OPTION, "d", "date",    "output file date", wxCMD_LINE_VAL_DATE },
 
-            { wxCMD_LINE_PARAM,  NULL, NULL, "input file", wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_MULTIPLE },
+            { wxCMD_LINE_PARAM,  nullptr, nullptr, "input file", wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_MULTIPLE },
 
             { wxCMD_LINE_NONE }
         };

@@ -852,7 +852,7 @@ public:
 
     /**
         This function does the same as the standard ANSI C @c strftime(3)
-        function (http://www.cplusplus.com/reference/clibrary/ctime/strftime.html).
+        function (https://cplusplus.com/reference/ctime/strftime/).
         Please see its description for the meaning of @a format parameter.
 
         Notice that POSIX @c "%g", @c "%G", @c "%V" and @c "%z" format
@@ -977,7 +977,7 @@ public:
             Will be filled with the iterator pointing to the location where the
             parsing stopped if the function returns @true. If the entire string
             was consumed, it is set to @c date.end(). Notice that this argument
-            must be non-@NULL.
+            must be non-null.
         @return
             @true if at least part of the string was parsed successfully,
             @false otherwise.
