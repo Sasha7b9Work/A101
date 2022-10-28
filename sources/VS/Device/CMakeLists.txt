@@ -72,22 +72,34 @@ endif()
 
 file(GLOB SRC                   ../../Device/src/*.*)
 file(GLOB DISPLAY               ../../Device/src/Display/*.*)
+file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
 file(GLOB HARDWARE_HAL          Hardware/HAL/*.*
                                 ../../Device/src/Hardware/HAL/HAL.h
-                                ../../Device/src/Hardware/HAL/HAL_PIO.h)
+                                ../../Device/src/Hardware/HAL/HAL_PIO.h
+                                ../../Device/src/Hardware/HAL/HAL_TIM.cpp)
 file(GLOB MEASURER              ../../Device/src/Measurer/*.*)
+file(GLOB MENU                  ../../Device/src/Menu/*.*)
+file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
+file(GLOB UTILS                 ../../Device/src/Utils/*.*)
 
 source_group(src                FILES ${SRC})
 source_group(Display            FILES ${DISPLAY})
+source_group(Hardware           FILES ${HARDWARE})
 source_group(Hardware/HAL       FILES ${HARDWARE_HAL})
 source_group(Measurer           FILES ${MEASURER})
-
+source_group(Menu               FILES ${MENU})
+source_group(Menu/Pages         FILES ${MENU_PAGES})
+source_group(Utils              FILES ${UTILS})
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
                 ${DISPLAY}
+                ${HARDWARE}
                 ${HARDWARE_HAL}
                 ${MEASURER}
+                ${MENU}
+                ${MENU_PAGES}
+                ${UTILS}
                 )
 
 target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)

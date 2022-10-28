@@ -3,6 +3,8 @@
 archiv.zip
 *.dbgconf
 
+.vs/*
+
 sources/generated/*
 
 sources/Device/Objects/*
