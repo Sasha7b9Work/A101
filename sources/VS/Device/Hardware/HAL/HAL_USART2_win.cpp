@@ -3,7 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 
 
-void HAL_USART2::Send(pchar)
+void HAL_USART2::SendNZ(pchar)
 {
 
 }

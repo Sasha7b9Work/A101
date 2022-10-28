@@ -9,7 +9,7 @@ void HAL_TIM4::Init()
 }
 
 
-void HAL_TIM4::Start(uint)
+void HAL_TIM4::StartPeriodicUS(uint)
 {
 
 }
