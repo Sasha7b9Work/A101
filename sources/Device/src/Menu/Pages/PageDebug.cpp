@@ -5,52 +5,22 @@
 
 namespace PageDebug
 {
-    static void FuncPress_0(Button *)
-    {
-
-    }
-
-    static Button button0("button0", "", false, FuncPress_0);
+    static Button button0("button0", "", false, [](Button *) {});
 
 
-    static void FuncPress_1(Button *)
-    {
-
-    }
-
-    static Button button1("button1", "", false, FuncPress_1);
+    static Button button1("button1", "", false, [](Button *) {});
 
 
-    static void FuncPress_2(Button *)
-    {
-
-    }
-
-    static Button button2("button2", "", false, FuncPress_2);
+    static Button button2("button2", "", false, [](Button *) {});
 
 
-    static void FuncPress_3(Button *)
-    {
-
-    }
-
-    static Button button3("button3", "", false, FuncPress_3);
+    static Button button3("button3", "", false, [](Button *) {});
 
 
-    static void FuncPress_4(Button *)
-    {
-
-    }
-
-    static Button button4("button4", "", false, FuncPress_4);
+    static Button button4("button4", "", false, [](Button *) {});
 
 
-    static void FuncPress_5(Button *)
-    {
-
-    }
-
-    static Button button5("button5", "", false, FuncPress_5);
+    static Button button5("button5", "", false, [](Button *) {});
 
 
     static Page pageDebug(&button0, &button1, &button2, &button3, &button4, &button5);
