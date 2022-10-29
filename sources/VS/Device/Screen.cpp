@@ -158,13 +158,13 @@ void Screen::DrawString(int x, int y, int num_font, const wxColor &color, pchar 
 }
 
 
-void Screen::SetTextButton(pchar name_button, pchar text)
+void Screen::Button::SetText(pchar name_button, pchar text)
 {
     buttons[name_button]->SetText(text);
 }
 
 
-void Screen::HighlightButton(pchar name_button, bool hightlight)
+void Screen::Button::Highlight(pchar name_button, bool hightlight)
 {
     buttons[name_button]->pressed = hightlight;
     buttons[name_button]->Draw();

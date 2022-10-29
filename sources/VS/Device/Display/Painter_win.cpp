@@ -63,16 +63,15 @@ void Painter::DrawString(int x, int y, int width, int height, int font, const Co
 }
 
 
-
 void Painter::Button::SetText(pchar name_button, pchar text)
 {
-    Screen::self->SetTextButton(name_button, text);
+    Screen::self->Button::SetText(name_button, text);
 }
 
 
 void Painter::Button::Highligth(pchar name_button, bool highlight)
 {
-    Screen::self->HighlightButton(name_button, highlight);
+    Screen::self->Button::Highlight(name_button, highlight);
 }
 
 

@@ -22,9 +22,12 @@ public:
 
     void DrawString(int x, int y, int font, const wxColor &, pchar text);
 
-    void SetTextButton(pchar name_button, pchar text);
+    struct Button
+    {
+        static void SetText(pchar name_button, pchar text);
 
-    void HighlightButton(pchar name_button, bool);
+        static void Highlight(pchar name_button, bool);
+    };
 
 private:
     static wxBitmap bitmap;
