@@ -7,6 +7,7 @@
 #include "Menu/Menu.h"
 #include "Display/Display.h"
 #include "Display/DInterface.h"
+#include "Screen.h"
 
 
 void Application::Init()
@@ -16,6 +17,8 @@ void Application::Init()
     Measurer::Init();
 
     Menu::Init();
+
+    Screen::self->Init();
 
     Display::Init();
 }

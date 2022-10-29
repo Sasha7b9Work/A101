@@ -16,6 +16,8 @@ public:
 
     void OnPaint(wxPaintEvent &);
 
+    void Init();
+
     void DrawRectangle(int x, int y, int width, int height, const wxColor &);
 
 private:
