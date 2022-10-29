@@ -1,6 +1,7 @@
 // 2022/10/19 09:03:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/DiagramInput.h"
+#include "Display/DiagramFFT.h"
 #include "Display/Painter.h"
 #include "Display/DInterface.h"
 #include "Hardware/HAL/HAL.h"
@@ -76,7 +77,29 @@ void DiagramInput::Draw()
 
 void DiagramInput::Enable(bool _enable)
 {
+    if (enabled == _enable)
+    {
+        return;
+    }
+
     enabled = _enable;
+
+    if (enabled)
+    {
+        Painter::WaveFFT::Disable(0);
+        Painter::WaveFFT::Disable(1);
+        Painter::WaveInput::Disable(0);
+
+        if (DiagramFFT::IsEnabled())
+        {
+            Painter::WaveFFT::Enable(0);
+            Painter::WaveInput::Enable(0);
+        }
+        else
+        {
+            Painter::WaveInput::Enable(1);
+        }
+    }
 }
 
 

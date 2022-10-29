@@ -253,6 +253,30 @@ void Screen::Button::Disable(pchar name_button)
 }
 
 
+void Screen::WaveInput::Enable(int size)
+{
+
+}
+
+
+void Screen::WaveInput::Disable(int size)
+{
+
+}
+
+
+void Screen::WaveFFT::Enable(int size)
+{
+
+}
+
+
+void Screen::WaveFFT::Disable(int size)
+{
+
+}
+
+
 wxFont Font::Get(int num_font)
 {
     static const int sizes[10] = { 30, 30, 30, 20, 30, 30, 30, 60, 30, 30 };

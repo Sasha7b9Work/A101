@@ -85,3 +85,27 @@ void Painter::Button::Disable(pchar name_button)
 {
     Screen::Button::Disable(name_button);
 }
+
+
+void Painter::WaveInput::Enable(int size)
+{
+    Screen::WaveInput::Enable(size);
+}
+
+
+void Painter::WaveInput::Disable(int size)
+{
+    Screen::WaveInput::Disable(size);
+}
+
+
+void Painter::WaveFFT::Enable(int size)
+{
+    Screen::WaveFFT::Enable(size);
+}
+
+
+void Painter::WaveFFT::Disable(int size)
+{
+    Screen::WaveFFT::Disable(size);
+}

@@ -33,6 +33,20 @@ public:
         static void Disable(pchar name_button);
     };
 
+    struct WaveInput
+    {
+        static void Enable(int size);
+
+        static void Disable(int size);
+    };
+
+    struct WaveFFT
+    {
+        static void Enable(int size);
+
+        static void Disable(int size);
+    };
+
 private:
     static wxBitmap bitmap;
 

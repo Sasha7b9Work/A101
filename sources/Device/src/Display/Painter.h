@@ -30,10 +30,10 @@ namespace Painter
         void Draw(uint8 *points, int num_points);
 
         // 0 - маленький, 1 - большой
-        void Enable(int);
+        void Enable(int size);
 
         // 0 - маленький, 1 - большой
-        void Disable(int);
+        void Disable(int size);
     }
 
     namespace WaveFFT
@@ -41,10 +41,10 @@ namespace Painter
         void Draw();
 
         // 0 - маленький, 1 - большой
-        void Enable(int);
+        void Enable(int size);
 
         // 0 - маленький, 1 - большой
-        void Disable(int);
+        void Disable(int size);
     }
 
     namespace Button
