@@ -84,12 +84,12 @@ void DiagramInput::Enable(bool _enable)
 
     enabled = _enable;
 
+    Painter::WaveFFT::Disable(0);
+    Painter::WaveFFT::Disable(1);
+    Painter::WaveInput::Disable(0);
+
     if (enabled)
     {
-        Painter::WaveFFT::Disable(0);
-        Painter::WaveFFT::Disable(1);
-        Painter::WaveInput::Disable(0);
-
         if (DiagramFFT::IsEnabled())
         {
             Painter::WaveFFT::Enable(0);

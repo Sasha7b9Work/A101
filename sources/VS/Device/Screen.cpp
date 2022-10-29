@@ -16,6 +16,10 @@ Screen *Screen::self = nullptr;
 static const int width_button = 130;
 static const int height_button = 72;
 static const int y_button = 405;
+static const int x_wave = 9;
+static const int y_wave = 10;
+static const int width_wave = 390;
+static const int height_wave = 196;
 
 
 struct ButtonGUI
@@ -51,6 +55,27 @@ private:
 };
 
 
+struct Wave
+{
+    Wave(int _x, int _y, int _w, int _h) : x(_x), y(_y), width(_w), height(_h), enabled(false) {};
+
+    void Draw();
+
+    void Enable();
+
+    void Disable();
+
+    bool IsEnabled() const { return enabled; }
+
+private:
+    int x;
+    int y;
+    int width;
+    int height;
+    bool enabled;
+};
+
+
 struct Font
 {
     static wxFont Get(int num_font);
@@ -76,6 +101,11 @@ static std::map<std::string, ButtonGUI *> buttons
     {"button5", &btn5},
     {"btMenu", &btMenu}
 };
+
+
+static Wave waveLeft(x_wave, y_wave, width_wave, height_wave);
+static Wave waveRight(401, y_wave, width_wave, height_wave);
+static Wave waveBig(x_wave, y_wave, 783, height_wave);
 
 
 Screen::Screen(wxWindow *parent) : wxPanel(parent)
@@ -255,25 +285,75 @@ void Screen::Button::Disable(pchar name_button)
 
 void Screen::WaveInput::Enable(int size)
 {
-
+    if (size == 0)
+    {
+        waveLeft.Enable();
+    }
+    else
+    {
+        waveBig.Enable();
+    }
 }
 
 
 void Screen::WaveInput::Disable(int size)
 {
-
+    if (size == 0)
+    {
+        waveLeft.Disable();
+    }
+    else
+    {
+        waveBig.Disable();
+    }
 }
 
 
 void Screen::WaveFFT::Enable(int size)
 {
-
+    if (size == 0)
+    {
+        waveRight.Enable();
+    }
+    else
+    {
+        waveBig.Enable();
+    }
 }
 
 
 void Screen::WaveFFT::Disable(int size)
 {
+    if (size == 0)
+    {
+        waveRight.Disable();
+    }
+    else
+    {
+        waveBig.Disable();
+    }
+}
 
+
+void Wave::Enable()
+{
+    enabled = true;
+    Draw();
+}
+
+
+void Wave::Disable()
+{
+    enabled = false;
+    Draw();
+}
+
+
+void Wave::Draw()
+{
+    Color color = enabled ? Color::ButtonPress : Color::Background;
+
+    Screen::self->FillRectangle(x, y, width, height, wxColor(color.ToRaw()));
 }
 
 
