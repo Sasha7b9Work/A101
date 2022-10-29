@@ -93,6 +93,30 @@ void Painter::WaveInput::Draw(uint8 *points, int num_points)
 }
 
 
+void Painter::WaveInput::Enable(int size)
+{
+
+}
+
+
+void Painter::WaveInput::Disable(int size)
+{
+
+}
+
+
+void Painter::WaveFFT::Enable(int size)
+{
+
+}
+
+
+void Painter::WaveFFT::Disable(int size)
+{
+
+}
+
+
 void Painter::WaitResponse(ResponseCode::E code)
 {
     TimeMeterMS meter;
