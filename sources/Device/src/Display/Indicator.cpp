@@ -4,6 +4,7 @@
 #include "Display/DInterface.h"
 #include "Display/Colors.h"
 #include "Display/Painter.h"
+#include "Menu/Pages/PageTwo.h"
 #include <cstdio>
 #include <cstring>
 
@@ -63,6 +64,23 @@ namespace Indicator
 
     static char measureDC[MAX_LEN] = { '\0' };
     static char measureAC[MAX_LEN] = { '\0' };
+
+    void SetBig();
+
+    void SetSmall();
+}
+
+
+void Indicator::AutoSize()
+{
+    if (PageTwo::btnInput->IsHightlight() || PageTwo::btnFFT->IsHightlight())
+    {
+        SetSmall();
+    }
+    else
+    {
+        SetBig();
+    }
 }
 
 

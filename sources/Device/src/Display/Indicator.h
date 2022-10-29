@@ -9,9 +9,8 @@
 
 namespace Indicator
 {
-    void SetBig();
-
-    void SetSmall();
+    // Вызов этой функции устанавливает размер автоматически в зависимости от установленных режимов
+    void AutoSize();
 
     void SetMeasures(float dc, float ac);
 

@@ -5,6 +5,7 @@
 #include "Display/DiagramFFT.h"
 #include "Menu/Pages/PageDebug.h"
 #include "Menu/Pages/PageCalibration.h"
+#include "Display/Indicator.h"
 
 
 namespace PageTwo
@@ -14,6 +15,8 @@ namespace PageTwo
             button->ToggleHighlight();
 
             DiagramInput::Enable(button->IsHightlight());
+
+            Indicator::AutoSize();
         });
 
 
@@ -22,6 +25,8 @@ namespace PageTwo
             button->ToggleHighlight();
 
             DiagramFFT::Enable(button->IsHightlight());
+
+            Indicator::AutoSize();
         });
 
 
@@ -44,6 +49,9 @@ namespace PageTwo
 
 
     static Page pageTwo(&buttonInput, &buttonFFT, &button2, &button3, &buttonDebug, &buttonCalibration);
+
+    Button *btnInput = &buttonInput;
+    Button *btnFFT = &buttonFFT;
 
     Page *self = &pageTwo;
 }

@@ -13,7 +13,7 @@
 
 void Display::Init()
 {
-    Indicator::SetBig();
+    Indicator::AutoSize();
 }
 
 
