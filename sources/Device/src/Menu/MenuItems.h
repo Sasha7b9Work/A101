@@ -8,7 +8,7 @@ struct Button
 public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
-    Button(pchar _name_button, pchar _text, bool _highlight, void (*_funcOnPress)(int)) :
+    Button(pchar _name_button, pchar _text, bool _highlight, void (*_funcOnPress)(Button *, int)) :
         name_button(_name_button), text(_text), highlight(_highlight), funcOnPress(_funcOnPress)
     {
     }
@@ -33,7 +33,7 @@ private:
     pchar name_button;
     pchar text;
     bool highlight;
-    void (*funcOnPress)(int);
+    void (*funcOnPress)(Button *, int);
 };
 
 
@@ -50,11 +50,11 @@ struct Page
 
     void Init();
 
-    static Button btnMenu;
-
 private:
 
     Button *buttons[6];
 
     static Page *current;
+
+    static Button btnMenu;
 };

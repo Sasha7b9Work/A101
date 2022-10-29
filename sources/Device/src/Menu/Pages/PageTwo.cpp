@@ -6,7 +6,7 @@
 
 namespace PageTwo
 {
-    static void ApplyActionButtonInput(int action)
+    static void ApplyActionButtonInput(Button *, int action)
     {
         DiagramInput::Enable(action == 1);
     }
@@ -14,7 +14,7 @@ namespace PageTwo
     static Button buttonInput("button0", "Input", false, ApplyActionButtonInput);
 
 
-    static void ApplyActionButtonFFT(int)
+    static void ApplyActionButtonFFT(Button *, int)
     {
 
     }
@@ -22,7 +22,7 @@ namespace PageTwo
     static Button buttonFFT("button1", "FFT", false, ApplyActionButtonFFT);
 
 
-    static void ApplyActionButtonZero(int)
+    static void ApplyActionButtonZero(Button *, int)
     {
 
     }

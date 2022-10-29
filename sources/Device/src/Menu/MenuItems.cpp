@@ -13,7 +13,7 @@
 Page *Page::current = PageMain::self;
 
 
-static void EmptyFunc(int)
+static void EmptyFunc(Button *, int)
 {
 }
 
@@ -21,17 +21,17 @@ static void EmptyFunc(int)
 Button Button::empty("null", "", false, EmptyFunc);
 
 
-static void FuncPressButtonMenu(int state)
+static void FuncPressButtonMenu(Button *btn, int state)
 {
     if (state == 1)
     {
-        if (strcmp(Page::btnMenu.GetText(), ">>") == 0)
+        if (strcmp(btn->GetText(), ">>") == 0)
         {
-            Page::btnMenu.SetText("<<");
+            btn->SetText("<<");
         }
         else
         {
-            Page::btnMenu.SetText(">>");
+            btn->SetText(">>");
         }
     }
 }
@@ -71,7 +71,7 @@ void Button::ToState(int state)
 {
     LOG_WRITE("Button %s to state %d", text, state);
 
-    funcOnPress(state);
+    funcOnPress(this, state);
 }
 
 
