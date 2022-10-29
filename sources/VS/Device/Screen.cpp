@@ -31,9 +31,6 @@ struct ButtonGUI
     // "Нажать" кнопку
     void Press();
 
-    // "Отпустить" кнопку
-    void Release();
-
     void SetText(pchar);
 
     bool pressed;
@@ -210,25 +207,21 @@ void ButtonGUI::Press()
     }
 
     DInterface::CallbackOnReceive((uint8)(0x30 + index));
-    DInterface::CallbackOnReceive(0x31);
     DInterface::CallbackOnReceive('Z');
 
     Draw();
 }
 
 
-void ButtonGUI::Release()
+void Screen::Button::Enable(pchar name_button)
 {
-    Draw();
 
-    if (pressed)
-    {
-        DInterface::CallbackOnReceive((uint8)(0x30 + index));
-        DInterface::CallbackOnReceive(0x30);
-        DInterface::CallbackOnReceive('Z');
-    }
+}
 
-    pressed = false;
+
+void Screen::Button::Disable(pchar name_button)
+{
+
 }
 
 

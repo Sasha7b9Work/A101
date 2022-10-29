@@ -27,6 +27,10 @@ public:
         static void SetText(pchar name_button, pchar text);
 
         static void Highlight(pchar name_button, bool);
+
+        static void Enable(pchar name_button);
+
+        static void Disable(pchar name_button);
     };
 
 private:

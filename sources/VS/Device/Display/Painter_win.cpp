@@ -77,11 +77,11 @@ void Painter::Button::Highligth(pchar name_button, bool highlight)
 
 void Painter::Button::Eanble(pchar name_button)
 {
-
+    Screen::Button::Enable(name_button);
 }
 
 
 void Painter::Button::Disable(pchar name_button)
 {
-
+    Screen::Button::Disable(name_button);
 }
