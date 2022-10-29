@@ -108,8 +108,16 @@ void Page::SetAsCurrent()
     {
         Button *button = GetButton(i);
 
-        button->SetText();
-        button->Highlight();
+        if (button->IsExist())
+        {
+            button->Enable();
+            button->SetText();
+            button->Highlight();
+        }
+        else
+        {
+            button->Disable();
+        }
     }
 
     btnMenu.SetText();

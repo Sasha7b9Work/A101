@@ -22,6 +22,10 @@ public:
 
     void SetHighlight(bool);
 
+    void Enable();
+
+    void Disable();
+
     // Установка пустой строки выключает кнопку
     void SetText(pchar text);
 

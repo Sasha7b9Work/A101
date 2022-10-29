@@ -6,8 +6,10 @@
 
 namespace PageTwo
 {
-    static void ApplyActionButtonInput(Button *, int action)
+    static void ApplyActionButtonInput(Button *button, int action)
     {
+        button->SetHighlight(action == 1);
+
         DiagramInput::Enable(action == 1);
     }
 
