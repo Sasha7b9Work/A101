@@ -16,8 +16,8 @@ Color Color::current(0);
     static uint colors[255] =
     {
         0x00000000,
-        0xFFFFFF00,
-        0xF2335200
+        0x00FFFFFF,
+        0x00F23352
     };
 #else
     static uint16 colors[255] =

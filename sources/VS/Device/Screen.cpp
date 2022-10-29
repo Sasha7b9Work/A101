@@ -32,4 +32,8 @@ void Screen::DrawRectangle(int x, int y, int width, int height, const wxColor &c
     wxMemoryDC memDC;
     memDC.SelectObject(bitmap);
     wxBrush brush(color, wxTRANSPARENT);
+    memDC.SetBrush(brush);
+    memDC.DrawRectangle({ x, y, width, height });
+    memDC.SelectObject(wxNullBitmap);
+    Refresh();
 }
