@@ -55,9 +55,9 @@ uint Color::ToRaw() const
 {
     uint16 val16 = colors[value];
 
-    float red = ((val16 >> 11) & 0x1F) / 31.0f;
-    float green = ((val16 >> 5) & 0x3F) / 63.0f;
-    float blue = ((val16 >> 0) & 0x1F) / 31.0f;
+    float red = (float)((val16 >> 11) & 0x1F) / 31.0f;
+    float green = (float)((val16 >> 5) & 0x3F) / 63.0f;
+    float blue = (float)((val16 >> 0) & 0x1F) / 31.0f;
 
     uint u_r = (uint)(red * 255.0f);
     uint u_g = (uint)(green * 255.0f);
@@ -65,7 +65,7 @@ uint Color::ToRaw() const
 
     uint result = (u_b << 16) | (u_g << 8) | u_r;
 
-    return result;
+    return result;  
 }
 
 #else

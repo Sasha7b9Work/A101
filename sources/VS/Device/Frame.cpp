@@ -31,18 +31,18 @@ Frame::Frame(const wxString &title)
 
 void Frame::SetSizeAndPosition()
 {
-    SetClientSize(Screen::WIDTH, Screen::HEIGHT);
+    wxWindowBase::SetClientSize(Screen::WIDTH, Screen::HEIGHT);
 
-    wxTopLevelWindowBase::SetMinSize(GetSize());
-    wxTopLevelWindowBase::SetMaxSize(GetSize());
+    wxTopLevelWindowBase::SetMinSize(wxWindowBase::GetSize());
+    wxTopLevelWindowBase::SetMaxSize(wxWindowBase::GetSize());
 
     const int maxWidth = wxSystemSettings::GetMetric(wxSYS_SCREEN_X);
     const int maxHeight = wxSystemSettings::GetMetric(wxSYS_SCREEN_Y);
 
-    int x = (maxWidth - GetSize().x) / 2;
-    int y = (maxHeight - GetSize().y) / 2;
+    int x = (maxWidth - wxWindowBase::GetSize().x) / 2;
+    int y = (maxHeight - wxWindowBase::GetSize().y) / 2;
 
-    SetPosition({ x, y });
+    wxWindowBase::SetPosition({ x, y });
 
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
 
