@@ -20,15 +20,26 @@ static const int y_button = 405;
 struct Button
 {
     Button(int _x, int _y, int _width, int _height)
-        : text(""), x(_x), y(_y), width(_width), height(_height) {}
+        : text(""), x(_x), y(_y), width(_width), height(_height), pressed(false) {}
 
     void Draw();
 
+    // Возвращает true, если пикслеь внутри кнопки
+    bool PixelInside(int x, int y);
+
+    // "Нажать" кнопку
+    void Press();
+
+    // "Отпустить" кнопку
+    void Release();
+
+private:
     std::string text;
     int x;
     int y;
     int width;
     int height;
+    bool pressed;
 };
 
 static Button btn0(3,   y_button, width_button, height_button);
@@ -72,15 +83,29 @@ void Screen::OnPaint(wxPaintEvent &)
 }
 
 
-void Screen::OnMouseDown(wxMouseEvent &)
+void Screen::OnMouseDown(wxMouseEvent &event)
 {
+    int x = event.GetX();
+    int y = event.GetY();
 
+    for (auto &elem : buttons)
+    {
+        Button *button = elem.second;
+
+        if (button->PixelInside(x, y))
+        {
+            button->Press();
+        }
+    }
 }
 
 
 void Screen::OnMouseUp(wxMouseEvent &)
 {
-
+    for (auto &elem : buttons)
+    {
+        elem.second->Release();
+    }
 }
 
 
@@ -122,4 +147,27 @@ void Button::Draw()
 {
     Rect(width, height).Draw(x, y, Color::White);
     Rect(width - 2, height - 2).Draw(x + 1, y + 1, Color::Background);
+}
+
+
+bool Button::PixelInside(int pixel_x, int pixel_y)
+{
+    if (pixel_x < x)          { return false; }
+    if (pixel_x > x + width)  { return false; }
+    if (pixel_y < y)          { return false; }
+    if (pixel_y > y + height) { return false; }
+
+    return true;
+}
+
+
+void Button::Press()
+{
+    pressed = true;
+}
+
+
+void Button::Release()
+{
+    pressed = false;
 }
