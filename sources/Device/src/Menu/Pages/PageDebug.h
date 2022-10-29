@@ -5,6 +5,5 @@
 
 namespace PageDebug
 {
-
     extern Page *self;
 }

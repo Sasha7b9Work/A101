@@ -5,7 +5,5 @@
 
 namespace PageCalibration
 {
-    extern Button *btnZero;
-
     extern Page *self;
 }

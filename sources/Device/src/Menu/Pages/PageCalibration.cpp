@@ -64,7 +64,5 @@ namespace PageCalibration
 
     static Page pageCalibration(&buttonZero, &button1, &button2, &button3, &button4, &button5);
 
-    Button *btnZero = &buttonZero;
-
     Page *self = &pageCalibration;
 }

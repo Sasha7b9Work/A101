@@ -58,10 +58,6 @@ namespace PageTwo
 
     static Button buttonCalibration("button5", "Calibr", false, FuncPress_Calibration);
 
-
-    Button *btnInput = &buttonInput;
-    Button *btnFFT = &buttonFFT;
-
     static Page pageTwo(&buttonInput, &buttonFFT, &button2, &button3, &buttonDebug, &buttonCalibration);
 
     Page *self = &pageTwo;

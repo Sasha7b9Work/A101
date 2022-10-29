@@ -5,12 +5,5 @@
 
 namespace PageMain
 {
-    extern Button *btn2mA;
-    extern Button *btn20mA;
-    extern Button *btn200mA;
-    extern Button *btn2A;
-    extern Button *btn20A;
-    extern Button *btn50A;
-
     extern Page *self;
 }

@@ -97,13 +97,6 @@ namespace PageMain
     static Button button50A("button5", "50 A", false, FuncPress_50A);
 
 
-    Button *btn2mA = &button2mA;
-    Button *btn20mA = &button20mA;
-    Button *btn200mA = &button200mA;
-    Button *btn2A = &button2A;
-    Button *btn20A = &button20A;
-    Button *btn50A = &button50A;
-
     static Page pageMain(&button2mA, &button20mA, &button200mA, &button2A, &button20A, &button50A);
 
     Page *self = &pageMain;
