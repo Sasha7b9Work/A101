@@ -48,8 +48,6 @@ struct Page
     // Возвращает кнопку от 0 до 5
     Button *GetButton(int index);
 
-    void Init();
-
 private:
 
     Button *buttons[6];

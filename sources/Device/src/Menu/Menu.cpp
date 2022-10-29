@@ -8,6 +8,4 @@
 void Menu::Init()
 {
     PageMain::self->SetAsCurrent();
-
-    Page::Current()->Init();
 }

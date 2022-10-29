@@ -110,16 +110,8 @@ void Page::SetAsCurrent()
     for (int i = 0; i < 6; i++)
     {
         GetButton(i)->SetText();
+        GetButton(i)->Highlight();
     }
 
     btnMenu.SetText();
-}
-
-
-void Page::Init()
-{
-    for (int i = 0; i < 6; i++)
-    {
-        GetButton(i)->Highlight();
-    }
 }
