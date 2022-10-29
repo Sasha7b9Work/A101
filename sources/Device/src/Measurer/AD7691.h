@@ -7,5 +7,5 @@ namespace AD7691
 {
     void Init();
 
-    uint ReadValue();
+    int ReadValue();
 }

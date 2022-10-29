@@ -108,9 +108,9 @@ void AD7691::Init()
 }
 
 
-uint AD7691::ReadValue()
+int AD7691::ReadValue()
 {
-    uint result = 0;
+    int result = 0;
 
     GPIOB->BSRR = GPIO_PIN_12;
 
@@ -138,6 +138,11 @@ uint AD7691::ReadValue()
         {
             result |= 1U;
         }
+    }
+
+    if (result > (1 << 17))
+    {
+        result -= (1 << 18);
     }
 
     return result;

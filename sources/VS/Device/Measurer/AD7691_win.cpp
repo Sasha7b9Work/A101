@@ -9,7 +9,7 @@ void AD7691::Init()
 }
 
 
-uint AD7691::ReadValue()
+int AD7691::ReadValue()
 {
     return 0;
 }

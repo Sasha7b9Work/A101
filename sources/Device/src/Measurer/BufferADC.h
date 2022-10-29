@@ -8,7 +8,7 @@ struct BufferADC
 
     BufferADC() : pointer(0) { } //-V730
 
-    void Push(uint word)
+    void Push(int word)
     {
         if (pointer < SIZE)
         {
@@ -32,11 +32,11 @@ struct BufferADC
 
 
 private:
-    int pointer;            // Указатель используется при чтении данных (массив raw)
-    uint   raw[SIZE];       // Данные, считанные с АЦП
+    int    pointer;         // Указатель используется при чтении данных (массив raw)
+    int    raw[SIZE];       // Данные, считанные с АЦП
     float  volt[SIZE];      // Реальные значения с АЦП
-    uint min_raw;
-    uint max_raw;
-    float min;
-    float max;
+    int    min_raw;
+    int    max_raw;
+    float  min;
+    float  max;
 };

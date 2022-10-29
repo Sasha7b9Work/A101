@@ -31,11 +31,6 @@ void Measurer::Update()
 
     HAL_TIM4::StartPeriodicUS(10);
 
-    for (int i = 0; i < 100; i++)
-    {
-        AD7691::ReadValue();
-    }
-
     while (!buffer.IsFull())
     {
         HAL_TIM4::WaitEvent();
