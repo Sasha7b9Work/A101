@@ -1,11 +1,9 @@
 // 2022/10/24 12:16:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Menu/Pages/PageTwo.h"
 #include "Display/DiagramInput.h"
 #include "Display/DiagramFFT.h"
-#include "Menu/Pages/PageDebug.h"
-#include "Menu/Pages/PageCalibration.h"
 #include "Display/Indicator.h"
+#include "Menu/Pages/Pages.h"
 
 
 namespace PageTwo

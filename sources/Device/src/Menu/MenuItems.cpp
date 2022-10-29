@@ -1,13 +1,10 @@
 // 2022/10/24 11:25:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Menu/MenuItems.h"
-#include "Menu/Pages/PageMain.h"
-#include "Menu/Pages/PageTwo.h"
-#include "Menu/Pages/PageDebug.h"
-#include "Menu/Pages/PageCalibration.h"
 #include "Menu/Menu.h"
 #include "Display/DInterface.h"
 #include "Display/Painter.h"
+#include "Menu/Pages/Pages.h"
 #include <cstring>
 #include <cstdio>
 
@@ -18,34 +15,32 @@ using namespace std;
 Page *Page::current = PageMain::self;
 
 
-static void FuncPressButtonMenu(Button *btn)
-{
-    if (strcmp(btn->GetText(), ">>") == 0)
+Button Page::btnMenu("btMenu", ">>", false, [](Button *btn)
     {
-        btn->SetText("<<");
+        if (strcmp(btn->GetText(), ">>") == 0)
+        {
+            btn->SetText("<<");
 
-        PageTwo::self->SetAsCurrent();
-    }
-    else
-    {
-        if (Page::Current() == PageDebug::self)
-        {
-            PageTwo::self->SetAsCurrent();
-        }
-        else if (Page::Current() == PageCalibration::self)
-        {
             PageTwo::self->SetAsCurrent();
         }
         else
         {
-            btn->SetText(">>");
+            if (Page::Current() == PageDebug::self)
+            {
+                PageTwo::self->SetAsCurrent();
+            }
+            else if (Page::Current() == PageCalibration::self)
+            {
+                PageTwo::self->SetAsCurrent();
+            }
+            else
+            {
+                btn->SetText(">>");
 
-            PageMain::self->SetAsCurrent();
+                PageMain::self->SetAsCurrent();
+            }
         }
-    }
-}
-
-Button Page::btnMenu("btMenu", ">>", false, FuncPressButtonMenu);
+    });
 
 
 void Button::SetText()

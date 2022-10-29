@@ -4,7 +4,6 @@
 #include "Display/DInterface.h"
 #include "Display/Colors.h"
 #include "Display/Painter.h"
-#include "Menu/Pages/PageTwo.h"
 #include "Display/DiagramInput.h"
 #include "Display/DiagramFFT.h"
 #include <cstdio>

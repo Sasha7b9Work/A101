@@ -972,19 +972,9 @@
               <FilePath>.\src\Menu\Pages\PageMain.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageMain.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageMain.h</FilePath>
-            </File>
-            <File>
               <FileName>PageTwo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageTwo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageTwo.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageTwo.h</FilePath>
             </File>
             <File>
               <FileName>PageCalibration.cpp</FileName>
@@ -992,19 +982,9 @@
               <FilePath>.\src\Menu\Pages\PageCalibration.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageCalibration.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageCalibration.h</FilePath>
-            </File>
-            <File>
               <FileName>PageDebug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageDebug.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2034,19 +2014,9 @@
               <FilePath>.\src\Menu\Pages\PageMain.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageMain.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageMain.h</FilePath>
-            </File>
-            <File>
               <FileName>PageTwo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageTwo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageTwo.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageTwo.h</FilePath>
             </File>
             <File>
               <FileName>PageCalibration.cpp</FileName>
@@ -2054,19 +2024,9 @@
               <FilePath>.\src\Menu\Pages\PageCalibration.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageCalibration.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageCalibration.h</FilePath>
-            </File>
-            <File>
               <FileName>PageDebug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageDebug.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug.h</FilePath>
             </File>
           </Files>
         </Group>
