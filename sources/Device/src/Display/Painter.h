@@ -25,7 +25,7 @@ namespace Painter
 {
     void DrawWave(uint8 *points, int num_points);
 
-    void DrawString(int x, int y, int width, int height, int font, uint16 color, uint16 back_color, pchar);
+    void DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar);
 
     void SetTextButton(pchar name_button, pchar text);
 

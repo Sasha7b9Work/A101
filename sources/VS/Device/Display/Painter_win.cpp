@@ -9,7 +9,7 @@ void Painter::DrawWave(uint8 *, int)
 }
 
 
-void Painter::DrawString(int x, int y, int width, int height, int font, uint16 color, uint16 back_color, pchar)
+void Painter::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar)
 {
 
 }
