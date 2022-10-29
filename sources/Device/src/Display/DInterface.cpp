@@ -244,7 +244,7 @@ bool DInterface::CommandZ::Execute()
     {
         return false;
     }
-    else if (size == 2)
+    else if (size == 1)
     {
         uint8 byte1 = buffer[0];
 
