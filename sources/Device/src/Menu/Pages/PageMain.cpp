@@ -49,52 +49,17 @@ namespace PageMain
         }
     }
 
-    static void FuncPress_2mA(Button *btn)
-    {
-        Function(btn);
-    }
+    static Button button2mA("button0", "2 mA", false, [](Button *btn) {Function(btn); });
 
-    static Button button2mA("button0", "2 mA", false, FuncPress_2mA);
+    static Button button20mA("button1", "20 mA", false, [](Button *btn) {Function(btn); });
 
+    static Button button200mA("button2", "200 mA", false, [](Button *btn) {Function(btn); });
 
-    static void FuncPress_20mA(Button *btn)
-    {
-        Function(btn);
-    }
+    static Button button2A("button3", "2 A", true, [](Button *btn) {Function(btn); });
 
-    static Button button20mA("button1", "20 mA", false, FuncPress_20mA);
+    static Button button20A("button4", "20 A", false, [](Button *btn) {Function(btn); });
 
-
-    static void FuncPress_200mA(Button *btn)
-    {
-        Function(btn);
-    }
-
-    static Button button200mA("button2", "200 mA", false, FuncPress_200mA);
-
-
-    static void FuncPress_2A(Button *btn)
-    {
-        Function(btn);
-    }
-
-    static Button button2A("button3", "2 A", true, FuncPress_2A);
-
-
-    static void FuncPress_20A(Button *btn)
-    {
-        Function(btn);
-    }
-
-    static Button button20A("button4", "20 A", false, FuncPress_20A);
-
-
-    static void FuncPress_50A(Button *btn)
-    {
-        Function(btn);
-    }
-
-    static Button button50A("button5", "50 A", false, FuncPress_50A);
+    static Button button50A("button5", "50 A", false, [](Button *btn) {Function(btn); });
 
 
     static Page pageMain(&button2mA, &button20mA, &button200mA, &button2A, &button20A, &button50A);

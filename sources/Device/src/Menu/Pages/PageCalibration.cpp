@@ -22,18 +22,13 @@ namespace PageCalibration
 
     static Button button0A("button1", "0 A", false, [](Button *) {});
 
-
     static Button button2A("button2", "2 A", false, [](Button *) {});
-
 
     static Button button3("button3", "", false, [](Button *) {});
 
-
     static Button button4("button4", "", false, [](Button *) {});
 
-
     static Button button5("button5", "", false, [](Button *) {});
-
 
     static Page pageCalibration(&buttonZero, &button0A, &button2A, &button3, &button4, &button5);
 
