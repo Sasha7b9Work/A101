@@ -14,8 +14,6 @@ public:
 
     static Screen *self;
 
-    void OnPaint(wxPaintEvent &);
-
     void Init();
 
     void FillRectangle(int x, int y, int width, int height, const wxColor &);
@@ -24,4 +22,11 @@ public:
 
 private:
     static wxBitmap bitmap;
+
+    void OnPaint(wxPaintEvent &);
+
+    void OnMouseDown(wxMouseEvent &);
+
+    void OnMouseUp(wxMouseEvent &);
+
 };

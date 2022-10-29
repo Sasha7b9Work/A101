@@ -59,6 +59,8 @@ Screen::Screen(wxWindow *parent) : wxPanel(parent)
     SetMinSize({ Screen::WIDTH, Screen::HEIGHT });
     SetDoubleBuffered(true);
     Bind(wxEVT_PAINT, &Screen::OnPaint, this);
+    Bind(wxEVT_LEFT_DOWN, &Screen::OnMouseDown, this);
+    Bind(wxEVT_LEFT_UP, &Screen::OnMouseUp, this);
 }
 
 
@@ -67,6 +69,18 @@ void Screen::OnPaint(wxPaintEvent &)
     wxPaintDC dc(this);
 
     dc.DrawBitmap(bitmap, 0, 0);
+}
+
+
+void Screen::OnMouseDown(wxMouseEvent &)
+{
+
+}
+
+
+void Screen::OnMouseUp(wxMouseEvent &)
+{
+
 }
 
 
