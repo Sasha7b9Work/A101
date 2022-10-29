@@ -55,7 +55,7 @@ namespace PageTwo
 
     static void FuncPress_Calibration(Button *)
     {
-        PageDebug::self->SetAsCurrent();
+        PageCalibration::self->SetAsCurrent();
     }
 
     static Button buttonCalibration("button5", "Calibr", false, FuncPress_Calibration);

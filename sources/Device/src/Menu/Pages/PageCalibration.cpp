@@ -22,20 +22,20 @@ namespace PageCalibration
     static Button buttonZero("button0", "Zero", false, FuncPress_Zero);
 
 
-    static void FuncPress_1(Button *)
+    static void FuncPress_0A(Button *)
     {
 
     }
 
-    static Button button1("button1", "", false, FuncPress_1);
+    static Button button0A("button1", "0 A", false, FuncPress_0A);
 
 
-    static void FuncPress_2(Button *)
+    static void FuncPress_2A(Button *)
     {
 
     }
 
-    static Button button2("button2", "", false, FuncPress_2);
+    static Button button2A("button2", "2 A", false, FuncPress_2A);
 
 
     static void FuncPress_3(Button *)
@@ -62,7 +62,7 @@ namespace PageCalibration
     static Button button5("button5", "", false, FuncPress_5);
 
 
-    static Page pageCalibration(&buttonZero, &button1, &button2, &button3, &button4, &button5);
+    static Page pageCalibration(&buttonZero, &button0A, &button2A, &button3, &button4, &button5);
 
     Page *self = &pageCalibration;
 }
