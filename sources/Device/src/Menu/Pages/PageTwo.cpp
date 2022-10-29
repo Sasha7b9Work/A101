@@ -30,11 +30,35 @@ namespace PageTwo
     static Button buttonZero("button2", "Zero", false, ApplyActionButtonZero);
 
 
+    static void ApplyActionButtonDebug(Button *, int)
+    {
+
+    }
+
+    static Button buttonDebug("button3", "Debug", false, ApplyActionButtonDebug);
+
+
+    static void ApplyActionButton4(Button *, int)
+    {
+
+    }
+
+    static Button button4("button4", "", false, ApplyActionButton4);
+
+
+    static void ApplyActionButton5(Button *, int)
+    {
+
+    }
+
+    static Button button5("button5", "", false, ApplyActionButton5);
+
+
     Button *btnInput = &buttonInput;
     Button *btnFFT = &buttonFFT;
     Button *btnZero = &buttonZero;
 
-    static Page pageTwo(&buttonInput, &buttonFFT, &buttonZero, &Button::empty, &Button::empty, &Button::empty);
+    static Page pageTwo(&buttonInput, &buttonFFT, &buttonZero, &buttonDebug, &button4, &button5);
 
     Page *self = &pageTwo;
 }

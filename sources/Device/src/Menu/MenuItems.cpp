@@ -16,14 +16,6 @@ using namespace std;
 Page *Page::current = PageMain::self;
 
 
-static void EmptyFunc(Button *, int)
-{
-}
-
-
-Button Button::empty("null", "", false, EmptyFunc);
-
-
 static void FuncPressButtonMenu(Button *btn, int state)
 {
     if (state == 1)
@@ -31,10 +23,14 @@ static void FuncPressButtonMenu(Button *btn, int state)
         if (strcmp(btn->GetText(), ">>") == 0)
         {
             btn->SetText("<<");
+
+            PageTwo::self->SetAsCurrent();
         }
         else
         {
             btn->SetText(">>");
+
+            PageMain::self->SetAsCurrent();
         }
     }
 }
@@ -99,10 +95,8 @@ Button *Page::GetButton(int index)
     {
         return &btnMenu;
     }
-    else
-    {
-        return &Button::empty;
-    }
+
+    return nullptr;
 }
 
 
@@ -112,8 +106,10 @@ void Page::SetAsCurrent()
 
     for (int i = 0; i < 6; i++)
     {
-        GetButton(i)->SetText();
-        GetButton(i)->Highlight();
+        Button *button = GetButton(i);
+
+        button->SetText();
+        button->Highlight();
     }
 
     btnMenu.SetText();

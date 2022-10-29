@@ -22,16 +22,17 @@ public:
 
     void SetHighlight(bool);
 
+    // Установка пустой строки выключает кнопку
     void SetText(pchar text);
 
     pchar GetText() const { return text; }
 
-    static Button empty;
+    bool IsExist() const { return text[0] != '\0'; }
 
 private:
 
     pchar name_button;
-    pchar text;
+    pchar text;                         // Если равно нулю, то кнопки не существует
     bool highlight;
     void (*funcOnPress)(Button *, int);
 };
