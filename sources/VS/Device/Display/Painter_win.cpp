@@ -16,10 +16,10 @@ void Rect::Draw(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
-    Line().Draw(x, y, x + width, y);
-    Line().Draw(x + width - 1, y, x + width - 1, y + height);
-    Line().Draw(x, y + height - 1, x + width, y + height - 1);
-    Line().Draw(x, y, x, y + height);
+    Line().DrawH(y, x, x + width);
+    Line().DrawV(x + width - 1, y, y + height);
+    Line().DrawH(y + height - 1, x, x + width);
+    Line().DrawV(x, y, y + height);
 }
 
 
@@ -28,6 +28,22 @@ void Line::Draw(int x1, int y1, int x2, int y2, const Color &color)
     color.SetAsCurrent();
 
     Screen::self->DrawLine(x1, y1, x2, y2, wxColor(Color::Current().ToRaw()));
+}
+
+
+void Line::DrawV(int x, int y1, int y2, const Color &color)
+{
+    color.SetAsCurrent();
+
+    Draw(x, y1, x, y2);
+}
+
+
+void Line::DrawH(int y, int x1, int x2, const Color &color)
+{
+    color.SetAsCurrent();
+
+    Draw(x1, y, x2, y);
 }
 
 
