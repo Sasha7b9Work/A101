@@ -27,21 +27,12 @@ namespace PageTwo
     static Button buttonFFT("button1", "FFT", false, FuncPress_FFT);
 
 
-    static void FuncPress_Zero(Button *button)
+    static void FuncPress_2(Button *)
     {
-        button->ToggleHighlight();
 
-        if (button->IsHightlight())
-        {
-
-        }
-        else
-        {
-
-        }
     }
 
-    static Button buttonZero("button2", "Zero", false, FuncPress_Zero);
+    static Button button2("button2", "", false, FuncPress_2);
 
 
     static void FuncPress_3(Button *)
@@ -52,27 +43,26 @@ namespace PageTwo
     static Button button3("button3", "", false, FuncPress_3);
 
 
-    static void FuncPress_4(Button *)
-    {
-
-    }
-
-    static Button button4("button4", "", false, FuncPress_4);
-
-
     static void FuncPress_Debug(Button *)
     {
 
     }
 
-    static Button buttonDebug("button5", "Debug", false, FuncPress_Debug);
+    static Button buttonDebug("button4", "Debug", false, FuncPress_Debug);
+
+
+    static void FuncPress_Calibration(Button *)
+    {
+
+    }
+
+    static Button buttonCalibration("button5", "Calibr", false, FuncPress_Calibration);
 
 
     Button *btnInput = &buttonInput;
     Button *btnFFT = &buttonFFT;
-    Button *btnZero = &buttonZero;
 
-    static Page pageTwo(&buttonInput, &buttonFFT, &buttonZero, &button3, &button4, &buttonDebug);
+    static Page pageTwo(&buttonInput, &buttonFFT, &button2, &button3, &buttonDebug, &buttonCalibration);
 
     Page *self = &pageTwo;
 }
