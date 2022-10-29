@@ -62,6 +62,7 @@ if(WIN32)
     add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
     add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
     add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specifie
+    add_compile_options(/wd5219)    # implicit conversion from 'int' to 'float'
 endif()
 
 file(GLOB SRC                   ./*.h

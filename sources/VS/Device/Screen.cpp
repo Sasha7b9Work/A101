@@ -377,7 +377,7 @@ void Wave::DrawData(uint8 *data, int num_points)
 
     for (int i = 0; i < num_points; i++)
     {
-        Line().DrawV(x + i, y + scale * data[i], y + scale * data[i] + 1, Color::White);
+        Line().DrawV(x + i, (int)(y + scale * data[i]), (int)(y + scale * data[i] + 1), Color::White);
     }
 }
 

@@ -12,4 +12,7 @@ namespace DiagramInput
     void SetData(const BufferADC &);
 
     void Draw();
+
+    // ”казывает немедленно перерисовать картикну
+    void Repaint();
 }

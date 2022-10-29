@@ -19,6 +19,7 @@ namespace DiagramInput
     static const float height = 256;        // Таков размах по вре
     static const float y0 = 128;
     static bool enabled = false;
+    static uint time_next_draw = 0;         // Время следующей отрисовки картинки
 }
 
 
@@ -30,14 +31,12 @@ void DiagramInput::SetData(const BufferADC &_data)
 
 bool DiagramInput::NeedDraw()
 {
-    static uint next_time = 0;
-
-    if (HAL_TIM::TimeMS() < next_time)
+    if (HAL_TIM::TimeMS() < time_next_draw)
     {
         return false;
     }
 
-    next_time = HAL_TIM::TimeMS() + 500;
+    time_next_draw = HAL_TIM::TimeMS() + 500;
 
     return true;
 }
@@ -82,6 +81,8 @@ void DiagramInput::Enable(bool _enable)
         return;
     }
 
+    time_next_draw = 0;
+
     enabled = _enable;
 
     Painter::WaveFFT::Disable(0);
@@ -100,10 +101,23 @@ void DiagramInput::Enable(bool _enable)
             Painter::WaveInput::Enable(1);
         }
     }
+    else
+    {
+        if (DiagramFFT::IsEnabled())
+        {
+            Painter::WaveFFT::Enable(1);
+        }
+    }
 }
 
 
 bool DiagramInput::IsEnabled()
 {
     return enabled;
+}
+
+
+void DiagramInput::Repaint()
+{
+    time_next_draw = 0;
 }

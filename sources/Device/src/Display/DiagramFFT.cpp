@@ -36,6 +36,15 @@ void DiagramFFT::Enable(bool _enable)
             Painter::WaveFFT::Enable(1);
         }
     }
+    else
+    {
+        if (DiagramInput::IsEnabled())
+        {
+            Painter::WaveInput::Enable(1);
+        }
+    }
+
+    DiagramInput::Repaint();
 }
 
 
