@@ -5,21 +5,19 @@
 
 namespace PageCalibration
 {
-    static void FuncPress_Zero(Button *button)
-    {
-        button->ToggleHighlight();
-
-        if (button->IsHightlight())
+    static Button buttonZero("button0", "Zero", false, [](Button *button)
         {
+            button->ToggleHighlight();
 
-        }
-        else
-        {
+            if (button->IsHightlight())
+            {
 
-        }
-    }
+            }
+            else
+            {
 
-    static Button buttonZero("button0", "Zero", false, FuncPress_Zero);
+            }
+        });
 
 
     static Button button0A("button1", "0 A", false, [](Button *) {});
