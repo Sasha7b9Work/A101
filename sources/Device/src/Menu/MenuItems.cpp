@@ -37,7 +37,7 @@ Button Page::btnMenu("btMenu", ">>", false, FuncPressButtonMenu);
 
 void Button::SetText()
 {
-    Painter::SetTextButton(name_button, text);
+    Painter::Button::SetText(name_button, text);
 }
 
 
@@ -49,9 +49,21 @@ void Button::SetText(pchar _text)
 }
 
 
+void Button::Enable()
+{
+    Painter::Button::Eanble(name_button);
+}
+
+
+void Button::Disable()
+{
+    Painter::Button::Disable(name_button);
+}
+
+
 void Button::Highlight()
 {
-    Painter::SetValButton(name_button, highlight ? 1 : 0);
+    Painter::Button::Highligth(name_button, highlight);
 }
 
 
@@ -60,6 +72,12 @@ void Button::SetHighlight(bool _higthligth)
     highlight = _higthligth;
 
     Highlight();
+}
+
+
+void Button::ToggleHighlight()
+{
+    SetHighlight(!highlight);
 }
 
 

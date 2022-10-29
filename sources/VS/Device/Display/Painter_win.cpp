@@ -64,13 +64,25 @@ void Painter::DrawString(int x, int y, int width, int height, int font, const Co
 
 
 
-void Painter::SetTextButton(pchar name_button, pchar text)
+void Painter::Button::SetText(pchar name_button, pchar text)
 {
     Screen::self->SetTextButton(name_button, text);
 }
 
 
-void Painter::SetValButton(pchar name_button, int val)
+void Painter::Button::Highligth(pchar name_button, bool highlight)
 {
-    Screen::self->SetValButton(name_button, val);
+    Screen::self->HighlightButton(name_button, highlight);
+}
+
+
+void Painter::Button::Eanble(pchar name_button)
+{
+
+}
+
+
+void Painter::Button::Disable(pchar name_button)
+{
+
 }

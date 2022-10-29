@@ -54,15 +54,27 @@ void Painter::DrawString(int x, int y, int width, int height, int font, const Co
 }
 
 
-void Painter::SetTextButton(pchar name_button, pchar text)
+void Painter::Button::SetText(pchar name_button, pchar text)
 {
     DInterface::SendCommandFormat("%s.txt=\"%s\"", name_button, text);
 }
 
 
-void Painter::SetValButton(pchar name_button, int val)
+void Painter::Button::Highligth(pchar name_button, bool val)
 {
-    DInterface::SendCommandFormatLog("%s.val=%d", name_button, val);
+    //DInterface::SendCommandFormatLog("%s.val=%d", name_button, val);
+}
+
+
+void Painter::Button::Eanble(pchar name_button)
+{
+    DInterface::SendCommandFormat("vis %s,1", name_button);
+}
+
+
+void Painter::Button::Disable(pchar name_button)
+{
+    DInterface::SendCommandFormat("vis %s,0", name_button);
 }
 
 

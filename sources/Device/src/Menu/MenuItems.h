@@ -23,7 +23,7 @@ public:
 
     void ToggleHighlight();
 
-    bool IsHightlight();
+    bool IsHightlight() const { return highlight; }
 
     void Enable();
 

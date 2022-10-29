@@ -27,8 +27,14 @@ namespace Painter
 
     void DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar);
 
-    void SetTextButton(pchar name_button, pchar text);
+    namespace Button
+    {
+        void SetText(pchar name_button, pchar text);
 
-    // 0 - отжата, 1 - нажата
-    void SetValButton(pchar name_button, int val);
+        void Highligth(pchar name_button, bool);
+
+        void Eanble(pchar name_button);
+
+        void Disable(pchar name_button);
+    }
 }

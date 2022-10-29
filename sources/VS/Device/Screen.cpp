@@ -174,9 +174,9 @@ void Screen::SetTextButton(pchar name_button, pchar text)
 }
 
 
-void Screen::SetValButton(pchar name_button, int val)
+void Screen::HighlightButton(pchar name_button, bool hightlight)
 {
-    buttons[name_button]->pressed = val > 0;
+    buttons[name_button]->pressed = hightlight;
     buttons[name_button]->Draw();
 }
 
