@@ -84,7 +84,6 @@ Screen::Screen(wxWindow *parent) : wxPanel(parent)
     SetDoubleBuffered(true);
     Bind(wxEVT_PAINT, &Screen::OnPaint, this);
     Bind(wxEVT_LEFT_DOWN, &Screen::OnMouseDown, this);
-    Bind(wxEVT_LEFT_UP, &Screen::OnMouseUp, this);
 }
 
 
@@ -109,15 +108,6 @@ void Screen::OnMouseDown(wxMouseEvent &event)
         {
             button->Press();
         }
-    }
-}
-
-
-void Screen::OnMouseUp(wxMouseEvent &)
-{
-    for (auto &elem : buttons)
-    {
-        elem.second->Release();
     }
 }
 

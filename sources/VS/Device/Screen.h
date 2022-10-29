@@ -32,7 +32,4 @@ private:
     void OnPaint(wxPaintEvent &);
 
     void OnMouseDown(wxMouseEvent &);
-
-    void OnMouseUp(wxMouseEvent &);
-
 };
