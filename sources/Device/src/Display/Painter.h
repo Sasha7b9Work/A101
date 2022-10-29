@@ -29,5 +29,6 @@ namespace Painter
 
     void SetTextButton(pchar name_button, pchar text);
 
+    // 0 - отжата, 1 - нажата
     void SetValButton(pchar name_button, int val);
 }

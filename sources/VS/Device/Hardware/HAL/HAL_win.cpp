@@ -7,7 +7,7 @@
 
 uint HAL_GetTick()
 {
-    return clock();
+    return (uint)clock();
 }
 
 

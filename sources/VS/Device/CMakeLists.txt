@@ -50,26 +50,17 @@ if(WIN32)
         endforeach()
     endif()
 
-    add_compile_options(/wd4005)
-    add_compile_options(/wd4100)
-    add_compile_options(/wd4255)
-    add_compile_options(/wd4365)
-    add_compile_options(/wd4464)
-    add_compile_options(/wd4548)
-    add_compile_options(/wd4514)
-    add_compile_options(/wd4623)
-    add_compile_options(/wd4625)
-    add_compile_options(/wd4626)
-    add_compile_options(/wd4774)
-    add_compile_options(/wd4820)
-    add_compile_options(/wd4996)
-    add_compile_options(/wd5026)
-    add_compile_options(/wd5027)
-    add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
-                                    # function under -EHc.
-    add_compile_options(/wd5045)
-    add_compile_options(/wd5220)
-    add_compile_options(/wd26812)
+    add_compile_options(/wd4100)    # 'identifier' : unreferenced formal parameter
+    add_compile_options(/wd4514)    # unreferenced inline function has been removed
+    add_compile_options(/wd4625)    # copy constructor was implicitly defined as deleted
+    add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
+    add_compile_options(/wd4774)    # 'string' : format string expected in argument number is not a string literal
+    add_compile_options(/wd4820)    # 'bytes' bytes padding added after construct 'member_name'
+    add_compile_options(/wd4996)    # This function or variable may be unsafe
+    add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
+    add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
+    add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
+    add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specifie
 endif()
 
 file(GLOB SRC                   ./*.h
