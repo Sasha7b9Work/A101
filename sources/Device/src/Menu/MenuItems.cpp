@@ -10,6 +10,9 @@
 #include <cstdio>
 
 
+using namespace std;
+
+
 Page *Page::current = PageMain::self;
 
 
