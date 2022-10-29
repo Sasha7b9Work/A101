@@ -12,8 +12,6 @@ namespace DiagramInput
 {
     bool NeedDraw();
 
-    void WaitResponse(ResponseCode::E);
-
     static BufferADC data;
 
     static const int num_points = 783;      // Столько точек графика выводится
@@ -73,22 +71,6 @@ void DiagramInput::Draw()
     }
 
     Painter::DrawWave(points, num_points);
-}
-
-
-void DiagramInput::WaitResponse(ResponseCode::E code)
-{
-    TimeMeterMS meter;
-
-    while (DInterface::LastCode() != code)
-    {
-        DInterface::Update();
-
-        if (meter.ElapsedTime() > 400)
-        {
-            break;
-        }
-    }
 }
 
 

@@ -2,7 +2,7 @@
 
 project (Device)
 
-set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(../../Device/src
                     ../../Device/src/Hardware/HAL
@@ -76,7 +76,13 @@ file(GLOB SRC                   ./*.h
                                 ./*.cpp
                                 ../../Device/src/defines.h
                                 ../../Device/src/stm_includes.h)
-file(GLOB DISPLAY               ../../Device/src/Display/*.*)
+file(GLOB DISPLAY               ./Display/*.*
+                                ../../Device/src/Display/*.h
+                                ../../Device/src/Display/Colors.cpp
+                                ../../Device/src/Display/DiagramFFT.cpp
+                                ../../Device/src/Display/DiagramInput.cpp
+                                ../../Device/src/Display/Display.cpp
+                                ../../Device/src/Display/Indicator.cpp)
 file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
 file(GLOB HARDWARE_HAL          ./Hardware/HAL/*.*
                                 ../../Device/src/Hardware/HAL/HAL.h

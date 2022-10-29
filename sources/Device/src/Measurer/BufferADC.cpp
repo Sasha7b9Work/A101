@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Measurer/BufferADC.h"
 #include "Display/DInterface.h"
+#include "Display/Indicator.h"
 #include <limits>
 
 
@@ -48,6 +49,6 @@ void BufferADC::ConvertToVoltage()
         }
     }
 
-    DInterface::SendCommandFormat("textDELTA.txt=\"%d\"", max_raw - min_raw);
+    Indicator::SetDeltaADC(max_raw - min_raw);
 }
 

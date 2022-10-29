@@ -5,6 +5,7 @@
 #include "Menu/Pages/PageTwo.h"
 #include "Menu/Menu.h"
 #include "Display/DInterface.h"
+#include "Display/Painter.h"
 #include <cstring>
 #include <cstdio>
 
@@ -22,13 +23,13 @@ Button Button::empty("null", "", false, EmptyFunc);
 
 void Button::SetText()
 {
-    DInterface::SendCommandFormat("%s.txt=\"%s\"", name_button, text);
+    Painter::SetTextButton(name_button, text);
 }
 
 
 void Button::Highlight()
 {
-    DInterface::SendCommandFormatLog("%s.val=%d", name_button, highlight ? 1 : 0);
+    Painter::SetValButton(name_button, highlight ? 1 : 0);
 }
 
 

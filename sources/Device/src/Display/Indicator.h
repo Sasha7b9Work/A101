@@ -14,4 +14,6 @@ namespace Indicator
     void SetSmall();
 
     void SetMeasures(float dc, float ac);
+
+    void SetDeltaADC(int);
 }

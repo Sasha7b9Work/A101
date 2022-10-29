@@ -57,6 +57,8 @@ namespace Indicator
     static Label textAC(big_x_text, big_y_1, big_width_text, big_height, 7, "");
     static Label textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "");
 
+    static Label textDeltaADC(7, 207, 70, 40, 3, "");
+
     static bool is_big = true;
 
     static char measureDC[MAX_LEN] = { '\0' };
@@ -119,6 +121,14 @@ void Indicator::SetMeasures(float dc, float ac)
         textDCsmall.SetText(measureDC);
         textACsmall.SetText(measureAC);
     }
+}
+
+
+void Indicator::SetDeltaADC(int delta)
+{
+    char buffer[32];
+    std::sprintf(buffer, "%d", delta);
+    textDeltaADC.SetText(buffer);
 }
 
 

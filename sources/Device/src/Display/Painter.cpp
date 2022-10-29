@@ -54,6 +54,18 @@ void Painter::DrawString(int x, int y, int width, int height, int font, uint16 c
 }
 
 
+void Painter::SetTextButton(pchar name_button, pchar text)
+{
+    DInterface::SendCommandFormat("%s.txt=\"%s\"", name_button, text);
+}
+
+
+void Painter::SetValButton(pchar name_button, int val)
+{
+    DInterface::SendCommandFormatLog("%s.val=%d", name_button, val);
+}
+
+
 void Painter::DrawWave(uint8 *points, int num_points)
 {
     DInterface::SendCommandFormat("addt 16,0,%d", num_points);
