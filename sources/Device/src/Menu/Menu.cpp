@@ -5,32 +5,9 @@
 #include <cstring>
 
 
-namespace Menu
-{
-    static void FuncPressButtonMenu(int state)
-    {
-        if (state == 1)
-        {
-            if (strcmp(btnMenu.GetText(), ">>") == 0)
-            {
-                btnMenu.SetText("<<");
-            }
-            else
-            {
-                btnMenu.SetText(">>");
-            }
-        }
-    }
-
-    Button btnMenu("btMenu", ">>", false, FuncPressButtonMenu);
-}
-
-
 void Menu::Init()
 {
     PageMain::self->SetAsCurrent();
 
     Page::Current()->Init();
-
-    btnMenu.SetText();
 }

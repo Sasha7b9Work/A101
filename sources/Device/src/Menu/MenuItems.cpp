@@ -21,6 +21,24 @@ static void EmptyFunc(int)
 Button Button::empty("null", "", false, EmptyFunc);
 
 
+static void FuncPressButtonMenu(int state)
+{
+    if (state == 1)
+    {
+        if (strcmp(Page::btnMenu.GetText(), ">>") == 0)
+        {
+            Page::btnMenu.SetText("<<");
+        }
+        else
+        {
+            Page::btnMenu.SetText(">>");
+        }
+    }
+}
+
+Button Page::btnMenu("btMenu", ">>", false, FuncPressButtonMenu);
+
+
 void Button::SetText()
 {
     Painter::SetTextButton(name_button, text);
@@ -76,7 +94,7 @@ Button *Page::GetButton(int index)
     }
     else if (index == 6)
     {
-        return &Menu::btnMenu;
+        return &btnMenu;
     }
     else
     {
@@ -93,6 +111,8 @@ void Page::SetAsCurrent()
     {
         GetButton(i)->SetText();
     }
+
+    btnMenu.SetText();
 }
 
 

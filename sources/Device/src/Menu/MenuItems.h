@@ -50,6 +50,8 @@ struct Page
 
     void Init();
 
+    static Button btnMenu;
+
 private:
 
     Button *buttons[6];

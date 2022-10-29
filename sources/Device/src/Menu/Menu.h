@@ -6,6 +6,4 @@
 namespace Menu
 {
     void Init();
-
-    extern Button btnMenu;
 }
