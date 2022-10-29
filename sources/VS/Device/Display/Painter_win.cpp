@@ -12,6 +12,25 @@ void Rect::Fill(int x, int y, const Color &color)
 }
 
 
+void Rect::Draw(int x, int y, const Color &color)
+{
+    color.SetAsCurrent();
+
+    Line().Draw(x, y, x + width, y);
+    Line().Draw(x + width - 1, y, x + width - 1, y + height);
+    Line().Draw(x, y + height - 1, x + width, y + height - 1);
+    Line().Draw(x, y, x, y + height);
+}
+
+
+void Line::Draw(int x1, int y1, int x2, int y2, const Color &color)
+{
+    color.SetAsCurrent();
+
+    Screen::self->DrawLine(x1, y1, x2, y2, wxColor(Color::Current().ToRaw()));
+}
+
+
 void Painter::DrawWave(uint8 *, int)
 {
 

@@ -20,6 +20,8 @@ public:
 
     void FillRectangle(int x, int y, int width, int height, const wxColor &);
 
+    void DrawLine(int x1, int y1, int x2, int y2, const wxColor &);
+
 private:
     static wxBitmap bitmap;
 };
