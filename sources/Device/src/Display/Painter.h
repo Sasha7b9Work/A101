@@ -3,9 +3,9 @@
 #include "Display/Colors.h"
 
 
-struct Rectangle
+struct Rect
 {
-    Rectangle(int w, int h) : width(w), height(h) {}
+    Rect(int w, int h) : width(w), height(h) {}
     void Draw(int x, int y, const Color & = Color::Count);
     void Fill(int x, int y, const Color & = Color::Count);
 private:

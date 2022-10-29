@@ -4,9 +4,11 @@
 #include "Screen.h"
 
 
-void Rectangle::Fill(int x, int y, const Color &color)
+void Rect::Fill(int x, int y, const Color &color)
 {
-    Screen::self->DrawRectangle(x, y, width, height, wxColor(color.ToRaw()));
+    color.SetAsCurrent();
+
+    Screen::self->DrawRectangle(x, y, width, height, wxColor(Color::Current().ToRaw()));
 }
 
 

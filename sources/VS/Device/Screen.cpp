@@ -23,13 +23,13 @@ void Screen::OnPaint(wxPaintEvent &)
 {
     wxPaintDC dc(this);
 
-    wxImage image = bitmap.ConvertToImage().Rescale(Screen::WIDTH, Screen::HEIGHT);
-
-    dc.DrawBitmap(wxBitmap(image), 0, 0);
+    dc.DrawBitmap(bitmap, 0, 0);
 }
 
 
 void Screen::DrawRectangle(int x, int y, int width, int height, const wxColor &color)
 {
-
+    wxMemoryDC memDC;
+    memDC.SelectObject(bitmap);
+    wxBrush brush(color, wxTRANSPARENT);
 }

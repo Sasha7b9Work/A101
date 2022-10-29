@@ -12,7 +12,7 @@ namespace Painter
 }
 
 
-void Rectangle::Draw(int x, int y, const Color &color)
+void Rect::Draw(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
@@ -20,7 +20,7 @@ void Rectangle::Draw(int x, int y, const Color &color)
 }
 
 
-void Rectangle::Fill(int x, int y, const Color &color)
+void Rect::Fill(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
