@@ -5,6 +5,8 @@
 #include "Display/Colors.h"
 #include "Display/Painter.h"
 #include "Menu/Pages/PageTwo.h"
+#include "Display/DiagramInput.h"
+#include "Display/DiagramFFT.h"
 #include <cstdio>
 #include <cstring>
 
@@ -73,7 +75,7 @@ namespace Indicator
 
 void Indicator::AutoSize()
 {
-    if (PageTwo::btnInput->IsHightlight() || PageTwo::btnFFT->IsHightlight())
+    if (DiagramInput::IsEnabled() || DiagramFFT::IsEnabled())
     {
         SetSmall();
     }

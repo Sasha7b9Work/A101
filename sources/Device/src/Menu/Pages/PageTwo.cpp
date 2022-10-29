@@ -50,8 +50,5 @@ namespace PageTwo
 
     static Page pageTwo(&buttonInput, &buttonFFT, &button2, &button3, &buttonDebug, &buttonCalibration);
 
-    Button *btnInput = &buttonInput;
-    Button *btnFFT = &buttonFFT;
-
     Page *self = &pageTwo;
 }
