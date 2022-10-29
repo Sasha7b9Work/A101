@@ -7,4 +7,6 @@ namespace DiagramFFT
     void Enable(bool);
 
     bool IsEnabled();
+
+    void Draw();
 }

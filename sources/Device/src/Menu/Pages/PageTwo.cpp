@@ -15,6 +15,10 @@ namespace PageTwo
             DiagramInput::Enable(button->IsHightlight());
 
             Indicator::AutoSize();
+
+            DiagramInput::Draw();
+
+            DiagramFFT::Draw();
         });
 
 
@@ -25,6 +29,10 @@ namespace PageTwo
             DiagramFFT::Enable(button->IsHightlight());
 
             Indicator::AutoSize();
+
+            DiagramInput::Draw();
+
+            DiagramFFT::Draw();
         });
 
 

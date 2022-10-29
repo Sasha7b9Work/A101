@@ -43,3 +43,9 @@ bool DiagramFFT::IsEnabled()
 {
     return enabled;
 }
+
+
+void DiagramFFT::Draw()
+{
+
+}
