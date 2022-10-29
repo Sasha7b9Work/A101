@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Screen.h"
 #include "Display/Painter.h"
+#include "Display/DInterface.h"
 #include <string>
 #include <map>
 #include <algorithm>
@@ -19,8 +20,8 @@ static const int y_button = 405;
 
 struct Button
 {
-    Button(int _x, int _y, int _width, int _height)
-        : text(""), x(_x), y(_y), width(_width), height(_height), pressed(false) {}
+    Button(int _index, int _x, int _y, int _width, int _height)
+        : index(_index), text(""), x(_x), y(_y), width(_width), height(_height), pressed(false) {}
 
     void Draw();
 
@@ -36,6 +37,7 @@ struct Button
     void SetText(pchar);
 
 private:
+    int index;
     std::string text;
     int x;
     int y;
@@ -51,13 +53,13 @@ struct Font
 };
 
 
-static Button btn0(3,   y_button, width_button, height_button);
-static Button btn1(136, y_button, width_button, height_button);
-static Button btn2(269, y_button, width_button, height_button);
-static Button btn3(402, y_button, width_button, height_button);
-static Button btn4(535, y_button, width_button, height_button);
-static Button btn5(668, y_button, width_button, height_button);
-static Button btMenu(725, 7, 69, 69);
+static Button btn0(0, 3,   y_button, width_button, height_button);
+static Button btn1(1, 136, y_button, width_button, height_button);
+static Button btn2(2, 269, y_button, width_button, height_button);
+static Button btn3(3, 402, y_button, width_button, height_button);
+static Button btn4(4, 535, y_button, width_button, height_button);
+static Button btn5(5, 668, y_button, width_button, height_button);
+static Button btMenu(6, 725, 7, 69, 69);
 
 
 static std::map<std::string, Button *> buttons
@@ -173,7 +175,7 @@ void Screen::SetTextButton(pchar name_button, pchar text)
 void Button::Draw()
 {
     Rect(width, height).Draw(x, y, Color::White);
-    Rect(width - 2, height - 2).Draw(x + 1, y + 1, Color::Background);
+    Rect(width - 2, height - 2).Fill(x + 1, y + 1, Color::Background);
 
     int d = 20;
     Painter::DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, Color::Background, text.c_str());
@@ -201,11 +203,22 @@ bool Button::PixelInside(int pixel_x, int pixel_y)
 void Button::Press()
 {
     pressed = true;
+
+    DInterface::CallbackOnReceive((uint8)(0x30 + index));
+    DInterface::CallbackOnReceive(0x31);
+    DInterface::CallbackOnReceive('Z');
 }
 
 
 void Button::Release()
 {
+    if (pressed)
+    {
+        DInterface::CallbackOnReceive((uint8)(0x30 + index));
+        DInterface::CallbackOnReceive(0x30);
+        DInterface::CallbackOnReceive('Z');
+    }
+
     pressed = false;
 }
 

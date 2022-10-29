@@ -2,7 +2,7 @@
 
 project (Device)
 
-set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(.
                     ../../Device/src
@@ -73,6 +73,7 @@ file(GLOB DISPLAY               ./Display/*.*
                                 ../../Device/src/Display/Colors.cpp
                                 ../../Device/src/Display/DiagramFFT.cpp
                                 ../../Device/src/Display/DiagramInput.cpp
+                                ../../Device/src/Display/DInterface.cpp
                                 ../../Device/src/Display/Display.cpp
                                 ../../Device/src/Display/Indicator.cpp)
 file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
