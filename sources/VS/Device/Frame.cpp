@@ -2,9 +2,16 @@
 #include "defines.h"
 #include "Frame.h"
 #include "Screen.h"
+#include "Application.h"
 
 
 Frame *Frame::self = nullptr;
+
+
+enum
+{
+    TIMER_ID = 11111
+};
 
 
 Frame::Frame(const wxString &title)
@@ -36,4 +43,20 @@ void Frame::SetSizeAndPosition()
     int y = (maxHeight - GetSize().y) / 2;
 
     SetPosition({ x, y });
+
+    Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
+
+    timer.SetOwner(this, TIMER_ID);
+
+    timer.StartOnce(25);
+}
+
+
+void Frame::OnTimer(wxTimerEvent &)
+{
+    timer.Stop();
+
+    Application::self->Update();
+
+    timer.Start(25);
 }

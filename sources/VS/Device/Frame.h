@@ -12,5 +12,9 @@ public:
 
 private:
 
+    void OnTimer(wxTimerEvent &);
+
     void SetSizeAndPosition();
+
+    wxTimer timer;
 };
