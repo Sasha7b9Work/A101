@@ -19,7 +19,7 @@ namespace PageCalibration
         }
     }
 
-    static Button buttonZero("button2", "Zero", false, FuncPress_Zero);
+    static Button buttonZero("button0", "Zero", false, FuncPress_Zero);
 
 
     static void FuncPress_1(Button *)

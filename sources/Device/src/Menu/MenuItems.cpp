@@ -3,6 +3,8 @@
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/PageMain.h"
 #include "Menu/Pages/PageTwo.h"
+#include "Menu/Pages/PageDebug.h"
+#include "Menu/Pages/PageCalibration.h"
 #include "Menu/Menu.h"
 #include "Display/DInterface.h"
 #include "Display/Painter.h"
@@ -26,9 +28,20 @@ static void FuncPressButtonMenu(Button *btn)
     }
     else
     {
-        btn->SetText(">>");
+        if (Page::Current() == PageDebug::self)
+        {
+            PageTwo::self->SetAsCurrent();
+        }
+        else if (Page::Current() == PageCalibration::self)
+        {
+            PageTwo::self->SetAsCurrent();
+        }
+        else
+        {
+            btn->SetText(">>");
 
-        PageMain::self->SetAsCurrent();
+            PageMain::self->SetAsCurrent();
+        }
     }
 }
 

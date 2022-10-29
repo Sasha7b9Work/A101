@@ -3,6 +3,8 @@
 #include "Menu/Pages/PageTwo.h"
 #include "Display/DiagramInput.h"
 #include "Display/DiagramFFT.h"
+#include "Menu/Pages/PageDebug.h"
+#include "Menu/Pages/PageCalibration.h"
 
 
 namespace PageTwo
@@ -45,7 +47,7 @@ namespace PageTwo
 
     static void FuncPress_Debug(Button *)
     {
-
+        PageDebug::self->SetAsCurrent();
     }
 
     static Button buttonDebug("button4", "Debug", false, FuncPress_Debug);
@@ -53,7 +55,7 @@ namespace PageTwo
 
     static void FuncPress_Calibration(Button *)
     {
-
+        PageDebug::self->SetAsCurrent();
     }
 
     static Button buttonCalibration("button5", "Calibr", false, FuncPress_Calibration);
