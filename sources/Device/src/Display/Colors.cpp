@@ -12,12 +12,21 @@ Color Color::Count(255);
 Color Color::current(0);
 
 
-static uint16 colors[255] =
-{
-    Color::MakeColor(0.0f, 0.0f, 0.0f),
-    Color::MakeColor(1.0f, 1.0f, 1.0f),
-    15319
-};
+#ifdef WIN32
+    static uint colors[255] =
+    {
+        0x00000000,
+        0xFFFFFF00,
+        0xF2335200
+    };
+#else
+    static uint16 colors[255] =
+    {
+        Color::MakeColor(0.0f, 0.0f, 0.0f),
+        Color::MakeColor(1.0f, 1.0f, 1.0f),
+        15319
+    };
+#endif
 
 
 void Color::SetAsCurrent() const
@@ -49,7 +58,11 @@ uint16 Color::MakeColor(float r, float g, float b)
 }
 
 
-uint16 Color::ToRaw() const
+#ifdef WIN32
+    uint Color::ToRaw() const
+#else
+    uint16 Color::ToRaw() const
+#endif
 {
     return colors[value];
 }

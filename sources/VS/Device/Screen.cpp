@@ -27,3 +27,9 @@ void Screen::OnPaint(wxPaintEvent &)
 
     dc.DrawBitmap(wxBitmap(image), 0, 0);
 }
+
+
+void Screen::DrawRectangle(int x, int y, int width, int height, const wxColor &color)
+{
+
+}

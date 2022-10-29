@@ -1,6 +1,13 @@
 // 2022/10/29 09:37:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Painter.h"
+#include "Screen.h"
+
+
+void Rectangle::Fill(int x, int y, const Color &color)
+{
+    Screen::self->DrawRectangle(x, y, width, height, wxColor(color.ToRaw()));
+}
 
 
 void Painter::DrawWave(uint8 *, int)

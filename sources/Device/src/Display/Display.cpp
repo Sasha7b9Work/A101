@@ -13,6 +13,8 @@
 
 void Display::Init()
 {
+    Rectangle(100, 100).Fill(100, 100, Color::White);
+
     Indicator::SetBig();
 }
 

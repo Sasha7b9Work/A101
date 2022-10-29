@@ -19,7 +19,11 @@ struct Color
 
     uint8 value;
 
+#ifdef WIN32
+    uint ToRaw() const;
+#else
     uint16 ToRaw() const;
+#endif
 
 private:
 
