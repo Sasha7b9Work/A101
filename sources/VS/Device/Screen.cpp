@@ -143,6 +143,12 @@ void Screen::DrawLine(int x1, int y1, int x2, int y2, const wxColor &color)
 }
 
 
+void Screen::DrawString(int x, int y, int font, const wxColor &color, pchar text)
+{
+
+}
+
+
 void Button::Draw()
 {
     Rect(width, height).Draw(x, y, Color::White);
@@ -157,7 +163,7 @@ bool Button::PixelInside(int pixel_x, int pixel_y)
     if (pixel_y < y)          { return false; }
     if (pixel_y > y + height) { return false; }
 
-    return true;
+        return true;
 }
 
 

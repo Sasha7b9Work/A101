@@ -37,9 +37,13 @@ void Painter::DrawWave(uint8 *, int)
 }
 
 
-void Painter::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar)
+void Painter::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text)
 {
+    Rect(width, height).Fill(x, y, back_color);
 
+    color.SetAsCurrent();
+
+    Screen::self->DrawString(x, y, font, wxColor(Color::Current().ToRaw()), text);
 }
 
 

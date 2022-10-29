@@ -20,6 +20,8 @@ public:
 
     void DrawLine(int x1, int y1, int x2, int y2, const wxColor &);
 
+    void DrawString(int x, int y, int font, const wxColor &, pchar text);
+
 private:
     static wxBitmap bitmap;
 
