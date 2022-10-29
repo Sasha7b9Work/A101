@@ -24,6 +24,8 @@ public:
 
     void SetTextButton(pchar name_button, pchar text);
 
+    void SetValButton(pchar name_button, int val);
+
 private:
     static wxBitmap bitmap;
 

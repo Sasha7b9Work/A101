@@ -7,6 +7,7 @@
 Color Color::Black(0);
 Color Color::White(1);
 Color Color::Background(2);
+Color Color::ButtonPress(3);
 Color Color::Count(255);
 
 Color Color::current(0);
@@ -16,7 +17,8 @@ static uint16 colors[255] =
 {
     Color::MakeColor(0.0f, 0.0f, 0.0f),
     Color::MakeColor(1.0f, 1.0f, 1.0f),
-    15319
+    15319,
+    6700
 };
 
 

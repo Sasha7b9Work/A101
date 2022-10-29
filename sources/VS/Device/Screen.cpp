@@ -21,7 +21,7 @@ static const int y_button = 405;
 struct Button
 {
     Button(int _index, int _x, int _y, int _width, int _height)
-        : index(_index), text(""), x(_x), y(_y), width(_width), height(_height), pressed(false) {}
+        : pressed(false), index(_index), text(""), x(_x), y(_y), width(_width), height(_height) {}
 
     void Draw();
 
@@ -36,6 +36,8 @@ struct Button
 
     void SetText(pchar);
 
+    bool pressed;
+
 private:
     int index;
     std::string text;
@@ -43,7 +45,6 @@ private:
     int y;
     int width;
     int height;
-    bool pressed;
 };
 
 
@@ -172,13 +173,23 @@ void Screen::SetTextButton(pchar name_button, pchar text)
 }
 
 
+void Screen::SetValButton(pchar name_button, int val)
+{
+    buttons[name_button]->pressed = val > 0;
+    buttons[name_button]->Draw();
+}
+
+
 void Button::Draw()
 {
     Rect(width, height).Draw(x, y, Color::White);
-    Rect(width - 2, height - 2).Fill(x + 1, y + 1, Color::Background);
+
+    Color color_fill = pressed ? Color::ButtonPress : Color::Background;
+
+    Rect(width - 2, height - 2).Fill(x + 1, y + 1, color_fill);
 
     int d = 20;
-    Painter::DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, Color::Background, text.c_str());
+    Painter::DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, color_fill, text.c_str());
 }
 
 
@@ -207,11 +218,15 @@ void Button::Press()
     DInterface::CallbackOnReceive((uint8)(0x30 + index));
     DInterface::CallbackOnReceive(0x31);
     DInterface::CallbackOnReceive('Z');
+
+    Draw();
 }
 
 
 void Button::Release()
 {
+    Draw();
+
     if (pressed)
     {
         DInterface::CallbackOnReceive((uint8)(0x30 + index));

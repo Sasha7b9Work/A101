@@ -56,5 +56,5 @@ void Painter::SetTextButton(pchar name_button, pchar text)
 
 void Painter::SetValButton(pchar name_button, int val)
 {
-
+    Screen::self->SetValButton(name_button, val);
 }
