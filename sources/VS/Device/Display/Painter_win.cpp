@@ -47,9 +47,9 @@ void Line::DrawH(int y, int x1, int x2, const Color &color)
 }
 
 
-void Painter::WaveInput::Draw(uint8 *, int)
+void Painter::WaveInput::Draw(uint8 *data, int num_points)
 {
-
+    Screen::WaveInput::Draw(data, num_points);
 }
 
 

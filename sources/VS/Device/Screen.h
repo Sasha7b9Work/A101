@@ -35,6 +35,8 @@ public:
 
     struct WaveInput
     {
+        static void Draw(uint8 *, int);
+
         static void Enable(int size);
 
         static void Disable(int size);

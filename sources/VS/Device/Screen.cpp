@@ -61,6 +61,8 @@ struct Wave
 
     void Draw();
 
+    void DrawData(uint8 *, int);
+
     void Enable();
 
     void Disable();
@@ -346,6 +348,37 @@ void Wave::Disable()
 {
     enabled = false;
     Draw();
+}
+
+
+void Screen::WaveInput::Draw(uint8 *points, int num_points)
+{
+    if (waveLeft.IsEnabled())
+    {
+        waveLeft.DrawData(points, num_points);
+    }
+    if(waveBig.IsEnabled())
+    {
+        waveBig.DrawData(points, num_points);
+    }
+}
+
+
+void Wave::DrawData(uint8 *data, int num_points)
+{
+    Draw();
+
+    if (num_points > width)
+    {
+        num_points = width;
+    }
+
+    float scale = (float)height / 255.0f * 3.0f;
+
+    for (int i = 0; i < num_points; i++)
+    {
+        Line().DrawV(x + i, y + scale * data[i], y + scale * data[i] + 1, Color::White);
+    }
 }
 
 
