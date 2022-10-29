@@ -22,13 +22,13 @@ const uint16 HPin::_14 = GPIO_PIN_14;
 const uint16 HPin::_15 = GPIO_PIN_15;
 
 
-void HAL_PIO::Write(HPort::E port, uint16 pin, HState::E state)
+void HAL_PIO::Write(HPort::E, uint16, HState::E)
 {
 
 }
 
 
-void HAL_PIO::Write(HPort::E port, uint16 pin, bool state)
+void HAL_PIO::Write(HPort::E, uint16, bool)
 {
 
 }

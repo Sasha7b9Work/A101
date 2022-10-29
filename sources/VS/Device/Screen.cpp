@@ -20,8 +20,8 @@ static const int y_button = 405;
 
 struct ButtonGUI
 {
-    ButtonGUI(int _index, int _x, int _y, int _width, int _height, bool _with_fixation = true)
-        : pressed(false), index(_index), text(""), x(_x), y(_y), width(_width), height(_height), with_fixation(_with_fixation) {}
+    ButtonGUI(int _index, int _x, int _y, int _width, int _height)
+        : index(_index), text(""), x(_x), y(_y), width(_width), height(_height), enabled(true), highlight(false) {}
 
     void Draw();
 
@@ -33,7 +33,11 @@ struct ButtonGUI
 
     void SetText(pchar);
 
-    bool pressed;
+    void Enable();
+
+    void Disable();
+
+    void SetHightlight(bool);
 
 private:
     int index;
@@ -42,7 +46,8 @@ private:
     int y;
     int width;
     int height;
-    bool with_fixation;
+    bool enabled;
+    bool highlight;
 };
 
 
@@ -58,7 +63,7 @@ static ButtonGUI btn2(2, 269, y_button, width_button, height_button);
 static ButtonGUI btn3(3, 402, y_button, width_button, height_button);
 static ButtonGUI btn4(4, 535, y_button, width_button, height_button);
 static ButtonGUI btn5(5, 668, y_button, width_button, height_button);
-static ButtonGUI btMenu(6, 725, 7, 67, 67, false);
+static ButtonGUI btMenu(6, 725, 7, 67, 67);
 
 
 static std::map<std::string, ButtonGUI *> buttons
@@ -163,21 +168,27 @@ void Screen::Button::SetText(pchar name_button, pchar text)
 
 void Screen::Button::Highlight(pchar name_button, bool hightlight)
 {
-    buttons[name_button]->pressed = hightlight;
-    buttons[name_button]->Draw();
+    buttons[name_button]->SetHightlight(hightlight);
 }
 
 
 void ButtonGUI::Draw()
 {
-    Rect(width, height).Draw(x, y, Color::White);
+    if (!enabled)
+    {
+        Rect(width, height).Fill(x, y, Color::Background);
+    }
+    else
+    {
+        Rect(width, height).Draw(x, y, Color::White);
 
-    Color color_fill = pressed ? Color::ButtonPress : Color::Background;
+        Color color_fill = highlight ? Color::ButtonPress : Color::Background;
 
-    Rect(width - 2, height - 2).Fill(x + 1, y + 1, color_fill);
+        Rect(width - 2, height - 2).Fill(x + 1, y + 1, color_fill);
 
-    int d = 20;
-    Painter::DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, color_fill, text.c_str());
+        int d = 20;
+        Painter::DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, color_fill, text.c_str());
+    }
 }
 
 
@@ -201,13 +212,30 @@ bool ButtonGUI::PixelInside(int pixel_x, int pixel_y)
 
 void ButtonGUI::Press()
 {
-    if (with_fixation)
-    {
-        pressed = true;
-    }
-
     DInterface::CallbackOnReceive((uint8)(0x30 + index));
     DInterface::CallbackOnReceive('Z');
+}
+
+
+void ButtonGUI::Enable()
+{
+    enabled = true;
+
+    Draw();
+}
+
+
+void ButtonGUI::Disable()
+{
+    enabled = false;
+
+    Draw();
+}
+
+
+void ButtonGUI::SetHightlight(bool _highlight)
+{
+    highlight = _highlight;
 
     Draw();
 }
@@ -215,13 +243,13 @@ void ButtonGUI::Press()
 
 void Screen::Button::Enable(pchar name_button)
 {
-
+    buttons[name_button]->Enable();
 }
 
 
 void Screen::Button::Disable(pchar name_button)
 {
-
+    buttons[name_button]->Disable();
 }
 
 
