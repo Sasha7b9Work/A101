@@ -50,7 +50,7 @@ void Painter::DrawString(int x, int y, int width, int height, int font, const Co
 
 void Painter::SetTextButton(pchar name_button, pchar text)
 {
-
+    Screen::self->SetTextButton(name_button, text);
 }
 
 

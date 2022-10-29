@@ -22,6 +22,8 @@ public:
 
     void DrawString(int x, int y, int font, const wxColor &, pchar text);
 
+    void SetTextButton(pchar name_button, pchar text);
+
 private:
     static wxBitmap bitmap;
 

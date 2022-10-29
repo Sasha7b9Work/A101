@@ -33,6 +33,8 @@ struct Button
     // "Отпустить" кнопку
     void Release();
 
+    void SetText(pchar);
+
 private:
     std::string text;
     int x;
@@ -41,6 +43,13 @@ private:
     int height;
     bool pressed;
 };
+
+
+struct Font
+{
+    static wxFont Get(int num_font);
+};
+
 
 static Button btn0(3,   y_button, width_button, height_button);
 static Button btn1(136, y_button, width_button, height_button);
@@ -143,9 +152,21 @@ void Screen::DrawLine(int x1, int y1, int x2, int y2, const wxColor &color)
 }
 
 
-void Screen::DrawString(int x, int y, int font, const wxColor &color, pchar text)
+void Screen::DrawString(int x, int y, int num_font, const wxColor &color, pchar text)
 {
+    wxMemoryDC dc;
+    dc.SelectObject(bitmap);
+    dc.SetTextForeground(color);
+    dc.SetFont(Font::Get(num_font));
+    dc.DrawText(text, x, y);
+    dc.SelectObject(wxNullBitmap);
+    Refresh();
+}
 
+
+void Screen::SetTextButton(pchar name_button, pchar text)
+{
+    buttons[name_button]->SetText(text);
 }
 
 
@@ -153,6 +174,16 @@ void Button::Draw()
 {
     Rect(width, height).Draw(x, y, Color::White);
     Rect(width - 2, height - 2).Draw(x + 1, y + 1, Color::Background);
+
+    int d = 20;
+    Painter::DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, Color::Background, text.c_str());
+}
+
+
+void Button::SetText(pchar _text)
+{
+    text = _text;
+    Draw();
 }
 
 
@@ -163,7 +194,7 @@ bool Button::PixelInside(int pixel_x, int pixel_y)
     if (pixel_y < y)          { return false; }
     if (pixel_y > y + height) { return false; }
 
-        return true;
+    return true;
 }
 
 
@@ -176,4 +207,12 @@ void Button::Press()
 void Button::Release()
 {
     pressed = false;
+}
+
+
+wxFont Font::Get(int num_font)
+{
+    static const int sizes[10] = { 30, 30, 30, 20, 30, 30, 30, 60, 30, 30 };
+
+    return wxFont(sizes[num_font], wxFONTFAMILY_ROMAN, wxNORMAL, wxNORMAL);
 }
