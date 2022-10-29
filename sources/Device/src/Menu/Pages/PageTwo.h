@@ -7,7 +7,9 @@ namespace PageTwo
 {
     extern Button *btnInput;
     extern Button *btnFFT;
-    extern Button *btnZero;
+
+    extern Button *btnDebug;
+    extern Button *btnCalibration;
 
     extern Page *self;
 }

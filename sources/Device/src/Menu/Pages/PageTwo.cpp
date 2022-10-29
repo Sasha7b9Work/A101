@@ -7,27 +7,27 @@
 
 namespace PageTwo
 {
-    static void ApplyActionButtonInput(Button *button)
+    static void FuncPress_Input(Button *button)
     {
         button->ToggleHighlight();
 
         DiagramInput::Enable(button->IsHightlight());
     }
 
-    static Button buttonInput("button0", "Input", false, ApplyActionButtonInput);
+    static Button buttonInput("button0", "Input", false, FuncPress_Input);
 
 
-    static void ApplyActionButtonFFT(Button *button)
+    static void FuncPress_FFT(Button *button)
     {
         button->ToggleHighlight();
 
         DiagramFFT::Enable(button->IsHightlight());
     }
 
-    static Button buttonFFT("button1", "FFT", false, ApplyActionButtonFFT);
+    static Button buttonFFT("button1", "FFT", false, FuncPress_FFT);
 
 
-    static void ApplyActionButtonZero(Button *button)
+    static void FuncPress_Zero(Button *button)
     {
         button->ToggleHighlight();
 
@@ -41,31 +41,31 @@ namespace PageTwo
         }
     }
 
-    static Button buttonZero("button2", "Zero", false, ApplyActionButtonZero);
+    static Button buttonZero("button2", "Zero", false, FuncPress_Zero);
 
 
-    static void ApplyActionButton3(Button *)
+    static void FuncPress_3(Button *)
     {
 
     }
 
-    static Button button3("button3", "", false, ApplyActionButton3);
+    static Button button3("button3", "", false, FuncPress_3);
 
 
-    static void ApplyActionButton4(Button *)
+    static void FuncPress_4(Button *)
     {
 
     }
 
-    static Button button4("button4", "", false, ApplyActionButton4);
+    static Button button4("button4", "", false, FuncPress_4);
 
 
-    static void ApplyActionButtonDebug(Button *)
+    static void FuncPress_Debug(Button *)
     {
 
     }
 
-    static Button buttonDebug("button5", "Debug", false, ApplyActionButtonDebug);
+    static Button buttonDebug("button5", "Debug", false, FuncPress_Debug);
 
 
     Button *btnInput = &buttonInput;
