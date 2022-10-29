@@ -24,6 +24,8 @@ public:
 
     void SetText(pchar text);
 
+    pchar GetText() const { return text; };
+
     static Button empty;
 
 private:

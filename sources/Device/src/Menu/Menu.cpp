@@ -2,12 +2,24 @@
 #include "defines.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/PageMain.h"
+#include <cstring>
 
 
 namespace Menu
 {
     static void FuncPressButtonMenu(int state)
     {
+        if (state == 1)
+        {
+            if (strcmp(btnMenu.GetText(), ">>") == 0)
+            {
+                btnMenu.SetText("<<");
+            }
+            else
+            {
+                btnMenu.SetText(">>");
+            }
+        }
     }
 
     Button btnMenu("btMenu", ">>", false, FuncPressButtonMenu);

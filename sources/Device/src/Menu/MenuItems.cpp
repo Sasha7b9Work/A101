@@ -74,6 +74,10 @@ Button *Page::GetButton(int index)
     {
         return buttons[index];
     }
+    else if (index == 6)
+    {
+        return &Menu::btnMenu;
+    }
     else
     {
         return &Button::empty;
