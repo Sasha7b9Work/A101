@@ -8,7 +8,7 @@ void Rect::Fill(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
-    Screen::self->DrawRectangle(x, y, width, height, wxColor(Color::Current().ToRaw()));
+    Screen::self->FillRectangle(x, y, width, height, wxColor(Color::Current().ToRaw()));
 }
 
 

@@ -18,7 +18,7 @@ public:
 
     void Init();
 
-    void DrawRectangle(int x, int y, int width, int height, const wxColor &);
+    void FillRectangle(int x, int y, int width, int height, const wxColor &);
 
 private:
     static wxBitmap bitmap;
