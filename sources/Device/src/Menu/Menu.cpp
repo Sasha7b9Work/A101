@@ -4,9 +4,21 @@
 #include "Menu/Pages/PageMain.h"
 
 
+namespace Menu
+{
+    static void FuncPressButtonMenu(int state)
+    {
+    }
+
+    Button btnMenu("btMenu", ">>", false, FuncPressButtonMenu);
+}
+
+
 void Menu::Init()
 {
     PageMain::self->SetAsCurrent();
 
     Page::Current()->Init();
+
+    btnMenu.SetText();
 }

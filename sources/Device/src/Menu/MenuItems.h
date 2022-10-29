@@ -22,6 +22,8 @@ public:
 
     void SetHighlight(bool);
 
+    void SetText(pchar text);
+
     static Button empty;
 
 private:

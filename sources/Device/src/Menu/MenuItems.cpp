@@ -27,6 +27,14 @@ void Button::SetText()
 }
 
 
+void Button::SetText(pchar _text)
+{
+    text = _text;
+
+    SetText();
+}
+
+
 void Button::Highlight()
 {
     Painter::SetValButton(name_button, highlight ? 1 : 0);

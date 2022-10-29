@@ -20,8 +20,8 @@ static const int y_button = 405;
 
 struct ButtonGUI
 {
-    ButtonGUI(int _index, int _x, int _y, int _width, int _height)
-        : pressed(false), index(_index), text(""), x(_x), y(_y), width(_width), height(_height) {}
+    ButtonGUI(int _index, int _x, int _y, int _width, int _height, bool _with_fixation = true)
+        : pressed(false), index(_index), text(""), x(_x), y(_y), width(_width), height(_height), with_fixation(_with_fixation) {}
 
     void Draw();
 
@@ -45,6 +45,7 @@ private:
     int y;
     int width;
     int height;
+    bool with_fixation;
 };
 
 
@@ -60,7 +61,7 @@ static ButtonGUI btn2(2, 269, y_button, width_button, height_button);
 static ButtonGUI btn3(3, 402, y_button, width_button, height_button);
 static ButtonGUI btn4(4, 535, y_button, width_button, height_button);
 static ButtonGUI btn5(5, 668, y_button, width_button, height_button);
-static ButtonGUI btMenu(6, 725, 7, 69, 69);
+static ButtonGUI btMenu(6, 725, 7, 67, 67, false);
 
 
 static std::map<std::string, ButtonGUI *> buttons
@@ -213,7 +214,10 @@ bool ButtonGUI::PixelInside(int pixel_x, int pixel_y)
 
 void ButtonGUI::Press()
 {
-    pressed = true;
+    if (with_fixation)
+    {
+        pressed = true;
+    }
 
     DInterface::CallbackOnReceive((uint8)(0x30 + index));
     DInterface::CallbackOnReceive(0x31);
