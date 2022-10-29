@@ -9,56 +9,39 @@
 
 namespace PageTwo
 {
-    static void FuncPress_Input(Button *button)
-    {
-        button->ToggleHighlight();
+    static Button buttonInput("button0", "Input", false, [](Button *button)
+        {
+            button->ToggleHighlight();
 
-        DiagramInput::Enable(button->IsHightlight());
-    }
-
-    static Button buttonInput("button0", "Input", false, FuncPress_Input);
+            DiagramInput::Enable(button->IsHightlight());
+        });
 
 
-    static void FuncPress_FFT(Button *button)
-    {
-        button->ToggleHighlight();
+    static Button buttonFFT("button1", "FFT", false, [](Button *button)
+        {
+            button->ToggleHighlight();
 
-        DiagramFFT::Enable(button->IsHightlight());
-    }
-
-    static Button buttonFFT("button1", "FFT", false, FuncPress_FFT);
+            DiagramFFT::Enable(button->IsHightlight());
+        });
 
 
-    static void FuncPress_2(Button *)
-    {
-
-    }
-
-    static Button button2("button2", "", false, FuncPress_2);
+    static Button button2("button2", "", false, [](Button *) {});
 
 
-    static void FuncPress_3(Button *)
-    {
-
-    }
-
-    static Button button3("button3", "", false, FuncPress_3);
+    static Button button3("button3", "", false, [](Button *) {});
 
 
-    static void FuncPress_Debug(Button *)
-    {
-        PageDebug::self->SetAsCurrent();
-    }
-
-    static Button buttonDebug("button4", "Debug", false, FuncPress_Debug);
+    static Button buttonDebug("button4", "Debug", false, [](Button *)
+        {
+            PageDebug::self->SetAsCurrent();
+        });
 
 
-    static void FuncPress_Calibration(Button *)
-    {
-        PageCalibration::self->SetAsCurrent();
-    }
+    static Button buttonCalibration("button5", "Calibr", false, [](Button *)
+        {
+            PageCalibration::self->SetAsCurrent();
+        });
 
-    static Button buttonCalibration("button5", "Calibr", false, FuncPress_Calibration);
 
     static Page pageTwo(&buttonInput, &buttonFFT, &button2, &button3, &buttonDebug, &buttonCalibration);
 
