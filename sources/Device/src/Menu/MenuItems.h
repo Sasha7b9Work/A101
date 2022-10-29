@@ -8,19 +8,22 @@ struct Button
 public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
-    Button(pchar _name_button, pchar _text, bool _highlight, void (*_funcOnPress)(Button *, int)) :
+    Button(pchar _name_button, pchar _text, bool _highlight, void (*_funcOnPress)(Button *)) :
         name_button(_name_button), text(_text), highlight(_highlight), funcOnPress(_funcOnPress)
     {
     }
 
-    // Применить пришедшее с дисплея воздействие
-    void ToState(int state);
+    void Press();
 
     void SetText();
 
     void Highlight();
 
     void SetHighlight(bool);
+
+    void ToggleHighlight();
+
+    bool IsHightlight();
 
     void Enable();
 
@@ -38,7 +41,7 @@ private:
     pchar name_button;
     pchar text;                         // Если равно нулю, то кнопки не существует
     bool highlight;
-    void (*funcOnPress)(Button *, int);
+    void (*funcOnPress)(Button *);
 };
 
 

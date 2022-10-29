@@ -16,22 +16,19 @@ using namespace std;
 Page *Page::current = PageMain::self;
 
 
-static void FuncPressButtonMenu(Button *btn, int state)
+static void FuncPressButtonMenu(Button *btn)
 {
-    if (state == 1)
+    if (strcmp(btn->GetText(), ">>") == 0)
     {
-        if (strcmp(btn->GetText(), ">>") == 0)
-        {
-            btn->SetText("<<");
+        btn->SetText("<<");
 
-            PageTwo::self->SetAsCurrent();
-        }
-        else
-        {
-            btn->SetText(">>");
+        PageTwo::self->SetAsCurrent();
+    }
+    else
+    {
+        btn->SetText(">>");
 
-            PageMain::self->SetAsCurrent();
-        }
+        PageMain::self->SetAsCurrent();
     }
 }
 
@@ -66,11 +63,11 @@ void Button::SetHighlight(bool _higthligth)
 }
 
 
-void Button::ToState(int state)
+void Button::Press()
 {
-    LOG_WRITE("Button %s to state %d", text, state);
+    LOG_WRITE("Press button %s", text);
 
-    funcOnPress(this, state);
+    funcOnPress(this);
 }
 
 

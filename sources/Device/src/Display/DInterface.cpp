@@ -252,9 +252,7 @@ bool DInterface::CommandZ::Execute()
         {
             int button = (byte1 & 0x0F);
 
-            int state = buffer[1] & 0x0F;
-
-            Page::Current()->GetButton(button)->ToState(state);
+            Page::Current()->GetButton(button)->Press();
 
             return true;
         }

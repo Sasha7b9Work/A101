@@ -6,17 +6,17 @@
 
 namespace PageTwo
 {
-    static void ApplyActionButtonInput(Button *button, int action)
+    static void ApplyActionButtonInput(Button *button)
     {
-        button->SetHighlight(action == 1);
+        button->ToggleHighlight();
 
-        DiagramInput::Enable(action == 1);
+        DiagramInput::Enable(button->IsHightlight());
     }
 
     static Button buttonInput("button0", "Input", false, ApplyActionButtonInput);
 
 
-    static void ApplyActionButtonFFT(Button *, int)
+    static void ApplyActionButtonFFT(Button *)
     {
 
     }
@@ -24,7 +24,7 @@ namespace PageTwo
     static Button buttonFFT("button1", "FFT", false, ApplyActionButtonFFT);
 
 
-    static void ApplyActionButtonZero(Button *, int)
+    static void ApplyActionButtonZero(Button *)
     {
 
     }
@@ -32,7 +32,7 @@ namespace PageTwo
     static Button buttonZero("button2", "Zero", false, ApplyActionButtonZero);
 
 
-    static void ApplyActionButtonDebug(Button *, int)
+    static void ApplyActionButtonDebug(Button *)
     {
 
     }
@@ -40,7 +40,7 @@ namespace PageTwo
     static Button buttonDebug("button3", "Debug", false, ApplyActionButtonDebug);
 
 
-    static void ApplyActionButton4(Button *, int)
+    static void ApplyActionButton4(Button *)
     {
 
     }
@@ -48,7 +48,7 @@ namespace PageTwo
     static Button button4("button4", "", false, ApplyActionButton4);
 
 
-    static void ApplyActionButton5(Button *, int)
+    static void ApplyActionButton5(Button *)
     {
 
     }
