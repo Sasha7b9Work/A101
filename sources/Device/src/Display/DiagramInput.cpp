@@ -70,7 +70,7 @@ void DiagramInput::Draw()
         points[i] = (uint8)value;
     }
 
-    Painter::DrawWave(points, num_points);
+    Painter::WaveInput::Draw(points, num_points);
 }
 
 

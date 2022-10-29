@@ -5,7 +5,6 @@
 
 namespace PageMain
 {
-
     extern Page *self;
 }
 

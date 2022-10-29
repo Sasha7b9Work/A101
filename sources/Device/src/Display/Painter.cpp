@@ -78,7 +78,7 @@ void Painter::Button::Disable(pchar name_button)
 }
 
 
-void Painter::DrawWave(uint8 *points, int num_points)
+void Painter::WaveInput::Draw(uint8 *points, int num_points)
 {
     DInterface::SendCommandFormat("addt 16,0,%d", num_points);
 
