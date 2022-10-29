@@ -18,9 +18,9 @@ static const int height_button = 72;
 static const int y_button = 405;
 
 
-struct Button
+struct ButtonGUI
 {
-    Button(int _index, int _x, int _y, int _width, int _height)
+    ButtonGUI(int _index, int _x, int _y, int _width, int _height)
         : pressed(false), index(_index), text(""), x(_x), y(_y), width(_width), height(_height) {}
 
     void Draw();
@@ -54,16 +54,16 @@ struct Font
 };
 
 
-static Button btn0(0, 3,   y_button, width_button, height_button);
-static Button btn1(1, 136, y_button, width_button, height_button);
-static Button btn2(2, 269, y_button, width_button, height_button);
-static Button btn3(3, 402, y_button, width_button, height_button);
-static Button btn4(4, 535, y_button, width_button, height_button);
-static Button btn5(5, 668, y_button, width_button, height_button);
-static Button btMenu(6, 725, 7, 69, 69);
+static ButtonGUI btn0(0, 3,   y_button, width_button, height_button);
+static ButtonGUI btn1(1, 136, y_button, width_button, height_button);
+static ButtonGUI btn2(2, 269, y_button, width_button, height_button);
+static ButtonGUI btn3(3, 402, y_button, width_button, height_button);
+static ButtonGUI btn4(4, 535, y_button, width_button, height_button);
+static ButtonGUI btn5(5, 668, y_button, width_button, height_button);
+static ButtonGUI btMenu(6, 725, 7, 69, 69);
 
 
-static std::map<std::string, Button *> buttons
+static std::map<std::string, ButtonGUI *> buttons
 {
     {"button0", &btn0},
     {"button1", &btn1},
@@ -102,7 +102,7 @@ void Screen::OnMouseDown(wxMouseEvent &event)
 
     for (auto &elem : buttons)
     {
-        Button *button = elem.second;
+        ButtonGUI *button = elem.second;
 
         if (button->PixelInside(x, y))
         {
@@ -180,7 +180,7 @@ void Screen::SetValButton(pchar name_button, int val)
 }
 
 
-void Button::Draw()
+void ButtonGUI::Draw()
 {
     Rect(width, height).Draw(x, y, Color::White);
 
@@ -193,14 +193,14 @@ void Button::Draw()
 }
 
 
-void Button::SetText(pchar _text)
+void ButtonGUI::SetText(pchar _text)
 {
     text = _text;
     Draw();
 }
 
 
-bool Button::PixelInside(int pixel_x, int pixel_y)
+bool ButtonGUI::PixelInside(int pixel_x, int pixel_y)
 {
     if (pixel_x < x)          { return false; }
     if (pixel_x > x + width)  { return false; }
@@ -211,7 +211,7 @@ bool Button::PixelInside(int pixel_x, int pixel_y)
 }
 
 
-void Button::Press()
+void ButtonGUI::Press()
 {
     pressed = true;
 
@@ -223,7 +223,7 @@ void Button::Press()
 }
 
 
-void Button::Release()
+void ButtonGUI::Release()
 {
     Draw();
 
