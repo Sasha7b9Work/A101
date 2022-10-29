@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/Pages/PageTwo.h"
 #include "Display/DiagramInput.h"
+#include "Display/DiagramFFT.h"
 
 
 namespace PageTwo
@@ -16,28 +17,39 @@ namespace PageTwo
     static Button buttonInput("button0", "Input", false, ApplyActionButtonInput);
 
 
-    static void ApplyActionButtonFFT(Button *)
+    static void ApplyActionButtonFFT(Button *button)
     {
+        button->ToggleHighlight();
 
+        DiagramFFT::Enable(button->IsHightlight());
     }
 
     static Button buttonFFT("button1", "FFT", false, ApplyActionButtonFFT);
 
 
-    static void ApplyActionButtonZero(Button *)
+    static void ApplyActionButtonZero(Button *button)
     {
+        button->ToggleHighlight();
 
+        if (button->IsHightlight())
+        {
+
+        }
+        else
+        {
+
+        }
     }
 
     static Button buttonZero("button2", "Zero", false, ApplyActionButtonZero);
 
 
-    static void ApplyActionButtonDebug(Button *)
+    static void ApplyActionButton3(Button *)
     {
 
     }
 
-    static Button buttonDebug("button3", "Debug", false, ApplyActionButtonDebug);
+    static Button button3("button3", "", false, ApplyActionButton3);
 
 
     static void ApplyActionButton4(Button *)
@@ -48,19 +60,19 @@ namespace PageTwo
     static Button button4("button4", "", false, ApplyActionButton4);
 
 
-    static void ApplyActionButton5(Button *)
+    static void ApplyActionButtonDebug(Button *)
     {
 
     }
 
-    static Button button5("button5", "", false, ApplyActionButton5);
+    static Button buttonDebug("button5", "Debug", false, ApplyActionButtonDebug);
 
 
     Button *btnInput = &buttonInput;
     Button *btnFFT = &buttonFFT;
     Button *btnZero = &buttonZero;
 
-    static Page pageTwo(&buttonInput, &buttonFFT, &buttonZero, &buttonDebug, &button4, &button5);
+    static Page pageTwo(&buttonInput, &buttonFFT, &buttonZero, &button3, &button4, &buttonDebug);
 
     Page *self = &pageTwo;
 }

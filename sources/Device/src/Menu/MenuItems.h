@@ -23,6 +23,7 @@ public:
 
     void ToggleHighlight();
 
+    // Возвращает true, если кнопка находится в выделенном состоянии
     bool IsHightlight() const { return highlight; }
 
     void Enable();
