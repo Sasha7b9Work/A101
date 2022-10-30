@@ -9,7 +9,7 @@
 
 namespace AD7691
 {
-    static const double max = (double)(1 << 17);
+    static const double max = (double)(0x1FFFF);
 }
 
 
@@ -33,7 +33,9 @@ int AD7691::ReadValue()
 
     if (result < 0)
     {
-        result += (1 << 18);
+        result = -result;
+
+        _SET_BIT(result, 17);
     }
 
     return result;

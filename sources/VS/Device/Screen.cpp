@@ -373,7 +373,7 @@ void Wave::DrawData(uint8 *data, int num_points)
         num_points = width;
     }
 
-    float scale = (float)height / 255.0f * 3.0f;
+    float scale = (float)height / 256.0f;
 
     for (int i = 0; i < num_points; i++)
     {
