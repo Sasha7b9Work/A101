@@ -21,6 +21,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 add_compile_options(/wd4514)    # unreferenced inline function
 add_compile_options(/wd4820)    # 'x' bytes padding added after
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation
+add_compile_options(/wd5219)
 add_compile_options(/wd5220)    # a non-static data member with a volatile qualified type no longer implies
 
 file(GLOB LIBS_HAL       ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/*.*

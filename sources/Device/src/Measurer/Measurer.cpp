@@ -29,7 +29,7 @@ void Measurer::Update()
 {
     uint time_points_us = 10;
 
-    buffer.Clear(1.0f / (time_points_us * 1e-6f));
+    buffer.Clear(1.0f / ((float)time_points_us * 1e-6f));
 
     HAL_TIM4::StartPeriodicUS(time_points_us);
 
