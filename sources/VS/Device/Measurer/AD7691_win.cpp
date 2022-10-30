@@ -2,6 +2,15 @@
 #include "defines.h"
 #include "Measurer/AD7691.h"
 #include <cstdlib>
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <cmath>
+
+
+namespace AD7691
+{
+    static const double max = (double)(1 << 17);
+}
 
 
 void AD7691::Init()
@@ -12,5 +21,20 @@ void AD7691::Init()
 
 int AD7691::ReadValue()
 {
-    return std::rand() - 100000;
+    const double step = 2.0 * M_PI / 1024.0;
+
+    static double angle = 0.0;
+
+    double value = std::cos(angle / (2.0f * M_PI)) * max;
+
+    angle += step;
+
+    int result = (int)value;
+
+    if (result < 0)
+    {
+        result += (1 << 18);
+    }
+
+    return result;
 }

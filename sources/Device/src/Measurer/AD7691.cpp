@@ -140,9 +140,10 @@ int AD7691::ReadValue()
         }
     }
 
-    if (result > (1 << 17))
+    if (_GET_BIT(result, 17))
     {
-        result -= (1 << 18);
+        result &= 0x1FFFF;
+        result = -result;
     }
 
     return result;
