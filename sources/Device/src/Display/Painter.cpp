@@ -62,8 +62,7 @@ void Painter::Button::SetText(pchar name_button, pchar text)
 
 void Painter::Button::Highligth(pchar name_button, bool val)
 {
-    DInterface::SendCommandFormat("%s.")
-    //DInterface::SendCommandFormatLog("%s.val=%d", name_button, val);
+    DInterface::SendCommandFormat("%s.bc0=%d", name_button, val ? Color::ButtonPress.ToRaw() : Color::Background.ToRaw());
 }
 
 
@@ -96,25 +95,25 @@ void Painter::WaveInput::Draw(uint8 *points, int num_points)
 
 void Painter::WaveInput::Enable(int size)
 {
-
+    DInterface::SendCommandFormat("vis %s,1", size ? "waveBig" : "waveLeft");
 }
 
 
 void Painter::WaveInput::Disable(int size)
 {
-
+    DInterface::SendCommandFormat("vis %s,0", size ? "waveBig" : "waveLeft");
 }
 
 
 void Painter::WaveFFT::Enable(int size)
 {
-
+    DInterface::SendCommandFormat("vis %s,1", size ? "waveBig" : "waveRight");
 }
 
 
 void Painter::WaveFFT::Disable(int size)
 {
-
+    DInterface::SendCommandFormat("vis %s,0", size ? "waveBig" : "waveRight");
 }
 
 
