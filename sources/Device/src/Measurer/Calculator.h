@@ -7,7 +7,9 @@ namespace Calculator
 {
     void AppendData(const BufferADC &);
 
-    float GetAC();
+    void SetAverages(int num_ave);
 
-    float GetDC();
+    double GetAC();
+
+    double GetDC();
 }

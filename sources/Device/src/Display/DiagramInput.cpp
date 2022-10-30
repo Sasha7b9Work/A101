@@ -49,14 +49,14 @@ void DiagramInput::Draw()
         return;
     }
 
-    float scale = height / (data.MaxReal() - data.MinReal());
-    float ave = (data.MaxReal() + data.MinReal()) / 2.0f;
+    double scale = height / (data.MaxReal() - data.MinReal());
+    double ave = (data.MaxReal() + data.MinReal()) / 2.0;
 
     uint8 points[num_points];
 
     for (int i = 0; i < num_points; i++)
     {
-        float value = y0 + scale * (data.At(i) - ave);
+        double value = y0 + scale * (data.At(i) - ave);
 
         if (value < 0)
         {

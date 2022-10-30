@@ -125,10 +125,10 @@ void Indicator::SetSmall()
 }
 
 
-void Indicator::SetMeasures(float dc, float ac)
+void Indicator::SetMeasures(double dc, double ac)
 {
-    std::sprintf(measureDC, "%.4f V", (double)dc);
-    std::sprintf(measureAC, "%.4f V", (double)ac);
+    std::sprintf(measureDC, "%.4f V", dc);
+    std::sprintf(measureAC, "%.4f V", ac);
 
     if (is_big)
     {

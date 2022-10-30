@@ -21,22 +21,13 @@ void AD7691::Init()
 
 int AD7691::ReadValue()
 {
-    const double step = 2.0 * M_PI / 1024.0;
+    const double step = 2.0 * M_PI / 111.0;
 
     static double angle = 0.0;
 
-    double value = std::cos(angle / (2.0f * M_PI)) * max;
+    double value = std::cos(angle) * max;
 
     angle += step;
 
-    int result = (int)value;
-
-    if (result < 0)
-    {
-        result = -result;
-
-        _SET_BIT(result, 17);
-    }
-
-    return result;
+    return (int)value;
 }

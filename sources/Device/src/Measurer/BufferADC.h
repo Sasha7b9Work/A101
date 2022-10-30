@@ -18,25 +18,26 @@ struct BufferADC
 
     bool IsFull()     { return (pointer == SIZE); }
 
-    void Clear()      { pointer = 0; }
+    void Clear(double sample_rate) { pointer = 0; sample_rate_HZ = sample_rate; }
 
     int Size() const  { return SIZE; }
 
-    float At(int pos) { return volt[pos]; }
+    double At(int pos) { return volt[pos]; }
 
     void ConvertToVoltage();
 
-    float MinReal() const { return min; }
+    double MinReal() const { return min; }
 
-    float MaxReal() const { return max; }
+    double MaxReal() const { return max; }
 
+    double sample_rate_HZ;
 
 private:
     int    pointer;         // Указатель используется при чтении данных (массив raw)
     int    raw[SIZE];       // Данные, считанные с АЦП
-    float  volt[SIZE];      // Реальные значения с АЦП
+    double volt[SIZE];      // Реальные значения с АЦП
     int    min_raw;
     int    max_raw;
-    float  min;
-    float  max;
+    double min;
+    double max;
 };

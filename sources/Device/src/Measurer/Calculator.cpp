@@ -7,6 +7,10 @@
 namespace Calculator
 {
     static BufferADC data;
+    static int num_averages = 0;
+
+    // Расчёт частоты сигнала. sample_rate - частота дискретизации
+    float CalculateFrequency(const BufferADC &, float sample_rate);
 }
 
 
@@ -16,13 +20,19 @@ void Calculator::AppendData(const BufferADC &_data)
 }
 
 
-float Calculator::GetAC()
+double Calculator::GetAC()
 {
-    return std::fabsf(data.MaxReal() - data.MinReal());
+    return std::fabs(data.MaxReal() - data.MinReal());
 }
 
 
-float Calculator::GetDC()
+double Calculator::GetDC()
 {
-    return (data.MaxReal() + data.MinReal()) / 2.0f;
+    return (data.MaxReal() + data.MinReal()) / 2.0;
+}
+
+
+void Calculator::SetAverages(int num_ave)
+{
+    num_averages = num_ave;
 }
