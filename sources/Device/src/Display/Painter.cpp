@@ -62,6 +62,7 @@ void Painter::Button::SetText(pchar name_button, pchar text)
 
 void Painter::Button::Highligth(pchar name_button, bool val)
 {
+    DInterface::SendCommandFormat("%s.")
     //DInterface::SendCommandFormatLog("%s.val=%d", name_button, val);
 }
 
