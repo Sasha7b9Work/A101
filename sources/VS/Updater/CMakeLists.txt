@@ -14,7 +14,7 @@ if(WIN32)
     macro(wx_string_append var str)
         set(${var} ${${var}}${str})
     endmacro()
-    
+
     if(BUILD_USE_STATIC_RUNTIME)
         set(MSVC_LIB_USE "/MT")
         set(MSVC_LIB_REPLACE "/MD")
@@ -51,10 +51,10 @@ if(WIN32)
 #    add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
 #    add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
 #                                    # function under -EHc.
-#    add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+    add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 endif()
 
-file(GLOB SRC                    *.h *.cpp *.me)
+file(GLOB SRC                    *.h *.c *.cpp *.me)
 
 source_group(src                 FILES ${SRC})
 
