@@ -16,8 +16,8 @@ namespace DiagramInput
     static BufferADC data;
 
     static const int num_points = 783;      // Столько точек графика выводится
-    static const float height = 256;        // Таков размах по вре
-    static const float y0 = 128;
+    static const double height = 256;        // Таков размах по вре
+    static const double y0 = 128;
     static bool enabled = false;
     static uint time_next_draw = 0;         // Время следующей отрисовки картинки
 }

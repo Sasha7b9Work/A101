@@ -8,8 +8,8 @@
 
 void BufferADC::ConvertToVoltage()
 {
-    min = std::numeric_limits<float>::max();
-    max = std::numeric_limits<float>::min();
+    min = std::numeric_limits<double>::max();
+    max = std::numeric_limits<double>::min();
 
     min_raw = 1 << 20;
     max_raw = - min_raw;
@@ -27,11 +27,11 @@ void BufferADC::ConvertToVoltage()
             max_raw = raw_value;
         }
 
-        float value = (float)raw_value;
+        double value = raw_value;
 
-        const float k = 5.0f / (1 << 17);
+        const double k = 5.0 / (1 << 17);
 
-        volt[i] = (float)value * k;
+        volt[i] = value * k;
 
         if (volt[i] < min)
         {
