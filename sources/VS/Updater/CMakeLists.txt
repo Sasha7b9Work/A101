@@ -46,12 +46,13 @@ if(WIN32)
 #    add_compile_options(/wd4625)    # 'derived class' : copy constructor was implicitly defined as deleted because a base class copy constructor is inaccessible or deleted
 #    add_compile_options(/wd4626)    # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
 #    add_compile_options(/wd4820)    # 'bytes' bytes padding added after construct 'member_name'
-#    add_compile_options(/wd4996)    # Your code uses a function, class member, variable, or typedef that's marked deprecated
+    add_compile_options(/wd4996)    # Your code uses a function, class member, variable, or typedef that's marked deprecated
 #    add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
 #    add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
-#    add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
-#                                    # function under -EHc.
+    add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
+                                    # function under -EHc.
     add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+
 endif()
 
 file(GLOB SRC                    *.h *.c *.cpp *.me)
@@ -61,3 +62,6 @@ source_group(src                 FILES ${SRC})
 add_executable( ${PROJECT_NAME}
                 ${SRC}
                 )
+
+    set_target_properties(Updater PROPERTIES
+        VS_DEBUGGER_COMMAND_ARGUMENTS "com1 a101.bin")
