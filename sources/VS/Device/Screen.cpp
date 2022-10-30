@@ -25,7 +25,7 @@ static const int height_wave = 196;
 struct ButtonGUI
 {
     ButtonGUI(int _index, int _x, int _y, int _width, int _height)
-        : index(_index), text(""), x(_x), y(_y), width(_width), height(_height), enabled(true), highlight(false) {}
+        : index(_index), text(), x(_x), y(_y), width(_width), height(_height), enabled(true), highlight(false) {}
 
     void Draw();
 

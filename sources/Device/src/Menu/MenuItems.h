@@ -9,7 +9,7 @@ public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
     Button(pchar _name_button, pchar _text, bool _highlight, void (*_funcOnPress)(Button *)) :
-        name_button(_name_button), text(_text), highlight(_highlight), funcOnPress(_funcOnPress)
+        name(_name_button), text(_text), highlight(_highlight), funcOnPress(_funcOnPress)
     {
     }
 
@@ -39,7 +39,7 @@ public:
 
 private:
 
-    pchar name_button;
+    pchar name;
     pchar text;                         // Если равно нулю, то кнопки не существует
     bool highlight;
     void (*funcOnPress)(Button *);

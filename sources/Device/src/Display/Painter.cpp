@@ -54,9 +54,9 @@ void Painter::DrawString(int x, int y, int width, int height, int font, const Co
 }
 
 
-void Painter::Button::SetText(pchar name_button, pchar text)
+void Painter::Button::SetText(pchar name_button, pchar _text)
 {
-    DInterface::SendCommandFormat("%s.txt=\"%s\"", name_button, text);
+    DInterface::SendCommandFormat("%s.txt=\"%s\"", name_button, _text);
 }
 
 

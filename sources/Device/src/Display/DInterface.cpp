@@ -59,7 +59,7 @@ namespace DInterface
 {
     struct CommandUART
     {
-        CommandUART() : size(0) {}
+        CommandUART() : size(0) {} //-V730
         CommandUART(uint8 *bytes, int _size);
         virtual ~CommandUART() {}
 
@@ -95,7 +95,7 @@ namespace DInterface
     template<uint size>
     struct BufferUART
     {
-        BufferUART() : pointer(0) {}
+        BufferUART() : pointer(0) {} //-V730
 
         void Push(uint8 byte);
         CommandUART *ExtractCommand();

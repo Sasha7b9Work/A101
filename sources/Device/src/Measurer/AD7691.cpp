@@ -19,11 +19,6 @@ namespace AD7691
 
         void WaitValue()
         {
-            __IO uint value = 0;
-
-            for (; value < 1; value++)
-            {
-            }
         }
     };
 

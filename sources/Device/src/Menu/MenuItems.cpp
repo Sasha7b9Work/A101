@@ -45,7 +45,7 @@ Button Page::btnMenu("btMenu", ">>", false, [](Button *btn)
 
 void Button::SetText()
 {
-    Painter::Button::SetText(name_button, text);
+    Painter::Button::SetText(name, text);
 }
 
 
@@ -59,19 +59,19 @@ void Button::SetText(pchar _text)
 
 void Button::Enable()
 {
-    Painter::Button::Eanble(name_button);
+    Painter::Button::Eanble(name);
 }
 
 
 void Button::Disable()
 {
-    Painter::Button::Disable(name_button);
+    Painter::Button::Disable(name);
 }
 
 
 void Button::Highlight()
 {
-    Painter::Button::Highligth(name_button, highlight);
+    Painter::Button::Highligth(name, highlight);
 }
 
 
@@ -119,7 +119,7 @@ Button *Page::GetButton(int index)
         return &btnMenu;
     }
 
-    return nullptr;
+    return buttons[0];
 }
 
 
