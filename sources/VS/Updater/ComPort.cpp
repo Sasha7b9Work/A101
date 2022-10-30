@@ -19,6 +19,12 @@ void ComPort::Open(char *name_port)
 }
 
 
+bool ComPort::ConnectToDeivce()
+{
+
+}
+
+
 int ComPort::ExtractNumberPort(char *name_port)
 {
     string name(name_port);

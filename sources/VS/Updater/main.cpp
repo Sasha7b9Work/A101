@@ -45,6 +45,11 @@ int main(int argc, char *argv[])
 
     port.Open(argv[1]);
 
+    if (port.ConnectToDeivce())
+    {
+
+    }
+
     getch();
 
     return 0;

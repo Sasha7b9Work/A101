@@ -6,6 +6,7 @@ class ComPort
 {
 public:
     void Open(char *name_port);
+    bool ConnectToDeivce();
 private:
     int port = -1;
     int ExtractNumberPort(char *name_port);
