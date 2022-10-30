@@ -11,15 +11,16 @@
 
 namespace DiagramInput
 {
-    bool NeedDraw();
-
     static BufferADC data;
 
-    static const int num_points = 783;      // Столько точек графика выводится
     static const float height = 256;        // Таков размах по вре
     static const float y0 = 128;
     static bool enabled = false;
     static uint time_next_draw = 0;         // Время следующей отрисовки картинки
+
+    static bool NeedDraw();
+
+    static int NumPoints();
 }
 
 
@@ -52,9 +53,9 @@ void DiagramInput::Draw()
     float scale = height / (data.MaxReal() - data.MinReal());
     float ave = (data.MaxReal() + data.MinReal()) / 2.0f;
 
-    uint8 points[num_points];
+    uint8 points[1024];
 
-    for (int i = 0; i < num_points; i++)
+    for (int i = 0; i < NumPoints(); i++)
     {
         float value = y0 + scale * (data.At(i) - ave);
 
@@ -70,7 +71,7 @@ void DiagramInput::Draw()
         points[i] = (uint8)value;
     }
 
-    Painter::WaveInput::Draw(points, num_points);
+    Painter::WaveInput::Draw(points, NumPoints());
 }
 
 
@@ -120,4 +121,10 @@ bool DiagramInput::IsEnabled()
 void DiagramInput::Repaint()
 {
     time_next_draw = 0;
+}
+
+
+int DiagramInput::NumPoints()
+{
+    return (DiagramFFT::IsEnabled() && DiagramInput::IsEnabled()) ? 783 : 390;
 }
