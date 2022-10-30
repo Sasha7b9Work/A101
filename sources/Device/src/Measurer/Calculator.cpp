@@ -20,15 +20,15 @@ void Calculator::AppendData(const BufferADC &_data)
 }
 
 
-double Calculator::GetAC()
+float Calculator::GetAC()
 {
     return std::fabs(data.MaxReal() - data.MinReal());
 }
 
 
-double Calculator::GetDC()
+float Calculator::GetDC()
 {
-    return (data.MaxReal() + data.MinReal()) / 2.0;
+    return (data.MaxReal() + data.MinReal()) / 2.0f;
 }
 
 

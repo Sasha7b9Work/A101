@@ -16,8 +16,8 @@ namespace DiagramInput
     static BufferADC data;
 
     static const int num_points = 783;      // Столько точек графика выводится
-    static const double height = 256;        // Таков размах по вре
-    static const double y0 = 128;
+    static const float height = 256;        // Таков размах по вре
+    static const float y0 = 128;
     static bool enabled = false;
     static uint time_next_draw = 0;         // Время следующей отрисовки картинки
 }
@@ -49,7 +49,7 @@ void DiagramInput::Draw()
         return;
     }
 
-    double scale = height / (data.MaxReal() - data.MinReal());
+    float scale = height / (data.MaxReal() - data.MinReal());
     double ave = (data.MaxReal() + data.MinReal()) / 2.0;
 
     uint8 points[num_points];
