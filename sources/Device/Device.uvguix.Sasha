@@ -6,7 +6,7 @@
   <Header>### uVision Project, (C) Keil Software</Header>
 
   <PrjGuiSettings>
-    <LastAddFilePath>C:\My\GitHub\_work\A101\sources\Device\src\Menu\Pages</LastAddFilePath>
+    <LastAddFilePath>D:\Projects\A101\sources\Device\src\Measurer</LastAddFilePath>
   </PrjGuiSettings>
 
   <ViewPool/>
@@ -15,17 +15,17 @@
     <View>
       <WinId>38003</WinId>
       <ViewName>Registers</ViewName>
-      <TableColWidths>121 129</TableColWidths>
+      <TableColWidths>121 122</TableColWidths>
     </View>
     <View>
       <WinId>346</WinId>
       <ViewName>Code Coverage</ViewName>
-      <TableColWidths>560 1110</TableColWidths>
+      <TableColWidths>560 160</TableColWidths>
     </View>
     <View>
       <WinId>204</WinId>
       <ViewName>Performance Analyzer</ViewName>
-      <TableColWidths>720 108 108 950</TableColWidths>
+      <TableColWidths>720</TableColWidths>
     </View>
   </SECTreeCtrl>
 
@@ -93,8 +93,8 @@
       <flags>2</flags>
       <showCmd>3</showCmd>
       <MinPosition>
-        <xPos>-32000</xPos>
-        <yPos>-32000</yPos>
+        <xPos>-1</xPos>
+        <yPos>-1</yPos>
       </MinPosition>
       <MaxPosition>
         <xPos>-1</xPos>

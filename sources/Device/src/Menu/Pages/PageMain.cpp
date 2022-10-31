@@ -1,7 +1,7 @@
 // 2022/10/24 12:17:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Hardware/HAL/HAL_PIO.h"
 #include "Menu/Pages/Pages.h"
+#include "Measurer/InputRelays.h"
 
 
 namespace PageMain
@@ -25,23 +25,7 @@ namespace PageMain
     {
         int index = GetIndex(button);
 
-        static int states[6][7] =
-        {
-            {1, 0, 0, 0, 1, 1, 0},      // 2mA
-            {1, 0, 1, 1, 0, 1, 0},      // 20mA
-            {1, 1, 0, 1, 1, 0, 0},      // 200mA
-            {0, 0, 0, 1, 0, 0, 0},      // 2A
-            {1, 0, 1, 1, 0, 1, 0},      // 20A
-            {1, 1, 0, 1, 1, 0, 0},      // 50A
-        };
-
-        HAL_PIO::Write(PIN_US1, states[index][0] == 1); //-V525
-        HAL_PIO::Write(PIN_US2, states[index][1] == 1);
-        HAL_PIO::Write(PIN_US3, states[index][2] == 1);
-        HAL_PIO::Write(PIN_US4, states[index][3] == 1);
-        HAL_PIO::Write(PIN_US6, states[index][4] == 1);
-        HAL_PIO::Write(PIN_US7, states[index][5] == 1);
-        HAL_PIO::Write(PIN_US8, states[index][6] == 1);
+        InputRelays::EnableRange(index);
 
         for (int i = 5; i >= 0; i--)
         {

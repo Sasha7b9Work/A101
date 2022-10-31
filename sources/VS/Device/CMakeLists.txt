@@ -86,7 +86,8 @@ file(GLOB MEASURER              ./Measurer/*.*
                                 ../../Device/src/Measurer/*.h
                                 ../../Device/src/Measurer/BufferADC.cpp
                                 ../../Device/src/Measurer/Calculator.cpp
-                                ../../Device/src/Measurer/Measurer.cpp)
+                                ../../Device/src/Measurer/Measurer.cpp
+                                ../../Device/src/Measurer/InputRelays.cpp)
 file(GLOB MENU                  ../../Device/src/Menu/*.*)
 file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
 file(GLOB UTILS                 ../../Device/src/Utils/*.*)

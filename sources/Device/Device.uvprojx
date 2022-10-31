@@ -936,6 +936,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\AD7691.h</FilePath>
             </File>
+            <File>
+              <FileName>InputRelays.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measurer\InputRelays.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputRelays.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measurer\InputRelays.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1977,6 +1987,16 @@
               <FileName>AD7691.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Measurer\AD7691.h</FilePath>
+            </File>
+            <File>
+              <FileName>InputRelays.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measurer\InputRelays.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputRelays.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measurer\InputRelays.h</FilePath>
             </File>
           </Files>
         </Group>
