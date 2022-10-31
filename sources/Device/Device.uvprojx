@@ -891,6 +891,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Nextion.h</FilePath>
             </File>
+            <File>
+              <FileName>Nextion_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Nextion_stm.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1952,6 +1957,11 @@
               <FileName>Nextion.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Nextion.h</FilePath>
+            </File>
+            <File>
+              <FileName>Nextion_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Nextion_stm.cpp</FilePath>
             </File>
           </Files>
         </Group>

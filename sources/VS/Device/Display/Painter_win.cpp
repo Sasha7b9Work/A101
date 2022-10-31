@@ -12,17 +12,6 @@ void Rect::Fill(int x, int y, const Color &color)
 }
 
 
-void Rect::Draw(int x, int y, const Color &color)
-{
-    color.SetAsCurrent();
-
-    Line().DrawH(y, x, x + width);
-    Line().DrawV(x + width - 1, y, y + height);
-    Line().DrawH(y + height - 1, x, x + width);
-    Line().DrawV(x, y, y + height);
-}
-
-
 void Line::Draw(int x1, int y1, int x2, int y2, const Color &color)
 {
     color.SetAsCurrent();

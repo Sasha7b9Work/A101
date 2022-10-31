@@ -14,14 +14,6 @@ namespace Painter
 }
 
 
-void Rect::Draw(int x, int y, const Color &color)
-{
-    color.SetAsCurrent();
-
-    Nextion::SendCommandFormat("draw %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
-}
-
-
 void Rect::Fill(int x, int y, const Color &color)
 {
     color.SetAsCurrent();

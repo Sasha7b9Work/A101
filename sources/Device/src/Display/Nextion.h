@@ -1,5 +1,6 @@
 // 2022/10/17 15:30:21 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Display/Colors.h"
 
 
 // Код ответа дисплея
@@ -37,6 +38,8 @@ struct ResponseCode
 
 namespace Nextion
 {
+    void DrawRect(int x, int y, int width, int height, const Color & = Color::Count);
+
     // Функция вызывается в главном цикле
     void Update();
 

@@ -212,7 +212,7 @@ void ButtonGUI::Draw()
     }
     else
     {
-        Rect(width, height).Draw(x, y, Color::White);
+        Nextion::DrawRect(x, y, width, height, Color::White);
 
         Color color_fill = highlight ? Color::ButtonPress : Color::Background;
 
