@@ -14,12 +14,6 @@ namespace Painter
 }
 
 
-void Painter::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text)
-{
-    Nextion::SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,0,0,1,\"%s\"", x, y, width, height, font, color.ToRaw(), back_color.ToRaw(), text);
-}
-
-
 void Painter::Button::SetText(pchar name_button, pchar _text)
 {
     Nextion::SendCommandFormat("%s.txt=\"%s\"", name_button, _text);

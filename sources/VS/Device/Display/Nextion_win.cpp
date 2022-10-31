@@ -30,3 +30,14 @@ void Nextion::DrawLine(int x1, int y1, int x2, int y2, const Color &color)
 
     Screen::self->DrawLine(x1, y1, x2, y2, wxColor(Color::Current().ToRaw()));
 }
+
+
+void Nextion::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text)
+{
+    FillRect(x, y, width, height, back_color);
+
+    color.SetAsCurrent();
+
+    Screen::self->DrawString(x, y, font, wxColor(Color::Current().ToRaw()), text);
+}
+

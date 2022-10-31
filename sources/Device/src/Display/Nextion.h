@@ -48,6 +48,8 @@ namespace Nextion
 
     void DrawLineV(int x, int y1, int y2, const Color & = Color::Count);
 
+    void DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar);
+
     // Функция вызывается в главном цикле
     void Update();
 

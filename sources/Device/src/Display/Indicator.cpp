@@ -159,13 +159,13 @@ Indicator::Label::Label(int _x, int _y, int _w, int _h, int _font, pchar _text) 
 
 void Indicator::Label::Enable()
 {
-    Painter::DrawString(x, y, width, height, font, Color::White, Color::Background, text);
+    Nextion::DrawString(x, y, width, height, font, Color::White, Color::Background, text);
 }
 
 
 void Indicator::Label::Disable()
 {
-    Painter::DrawString(x, y, width, height, font, Color::White, Color::Background, "");
+    Nextion::DrawString(x, y, width, height, font, Color::White, Color::Background, "");
 }
 
 

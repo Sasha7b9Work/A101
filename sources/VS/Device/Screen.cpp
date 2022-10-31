@@ -219,7 +219,7 @@ void ButtonGUI::Draw()
         Nextion::FillRect(x + 1, y + 1, width - 2, height - 2, color_fill);
 
         int d = 20;
-        Painter::DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, color_fill, text.c_str());
+        Nextion::DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, color_fill, text.c_str());
     }
 }
 

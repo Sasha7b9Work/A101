@@ -10,16 +10,6 @@ void Painter::WaveInput::Draw(uint8 *data, int num_points)
 }
 
 
-void Painter::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text)
-{
-    Nextion::FillRect(x, y, width, height, back_color);
-
-    color.SetAsCurrent();
-
-    Screen::self->DrawString(x, y, font, wxColor(Color::Current().ToRaw()), text);
-}
-
-
 void Painter::Button::SetText(pchar name_button, pchar text)
 {
     Screen::self->Button::SetText(name_button, text);
