@@ -28,12 +28,6 @@ void Line::DrawV(int x, int y1, int y2, const Color &color)
 }
 
 
-void Line::DrawH(int y, int x1, int x2, const Color &color)
-{
-    Line().Draw(x1, y, x2, y, color);
-}
-
-
 void Painter::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text)
 {
     Nextion::SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,0,0,1,\"%s\"", x, y, width, height, font, color.ToRaw(), back_color.ToRaw(), text);

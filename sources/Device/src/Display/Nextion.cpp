@@ -6,6 +6,7 @@
 #include "Menu/MenuItems.h"
 #include "Hardware/Timer.h"
 #include "Utils/Profiler.h"
+#include "Display/Painter.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -381,6 +382,12 @@ bool Nextion::BufferUART::Pop(uint8 *byte)
     *byte = buffer[out_p++];
 
     return true;
+}
+
+
+void Nextion::DrawLineH(int y, int x1, int x2, const Color &color)
+{
+    Line().Draw(x1, y, x2, y, color);
 }
 
 

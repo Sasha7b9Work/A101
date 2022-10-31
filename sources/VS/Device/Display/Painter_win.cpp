@@ -20,14 +20,6 @@ void Line::DrawV(int x, int y1, int y2, const Color &color)
 }
 
 
-void Line::DrawH(int y, int x1, int x2, const Color &color)
-{
-    color.SetAsCurrent();
-
-    Draw(x1, y, x2, y);
-}
-
-
 void Painter::WaveInput::Draw(uint8 *data, int num_points)
 {
     Screen::WaveInput::Draw(data, num_points);
