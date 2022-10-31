@@ -25,10 +25,6 @@ namespace Nextion
 
     // Функция заверашется при получении кода
     static void WaitResponse(pchar, ResponseCode::E);
-
-    static ResponseCode::E LastCode();
-
-    static ResponseCode::E last_code;
 }
 
 
@@ -95,7 +91,7 @@ void Nextion::WaitResponse(ResponseCode::E code)
 {
     TimeMeterMS meter;
 
-    while (LastCode() != code)
+    while (LastCode::Get() != code)
     {
         if (meter.ElapsedTime() > 200)
         {
@@ -157,7 +153,7 @@ void Nextion::Button::Disable(pchar name_button)
 
 void Nextion::SendByte(uint8 byte)
 {
-    last_code = ResponseCode::None;
+    LastCode::Set(ResponseCode::None);
 
     HAL_USART2::SendByte(byte);
 }
@@ -191,7 +187,7 @@ void Nextion::SendCommandFormatWithoutWaiting(const char *format, ...)
 
 void Nextion::SendCommandRAW(pchar command, bool wait)
 {
-    last_code = ResponseCode::None;
+    LastCode::Set(ResponseCode::None);
 
     HAL_USART2::SendNZ(command);
 
@@ -210,7 +206,7 @@ void Nextion::WaitResponse(pchar command, ResponseCode::E code)
 {
     TimeMeterMS meter;
 
-    while (last_code == ResponseCode::None)
+    while (LastCode::Get() == ResponseCode::None)
     {
         Update();
 
@@ -222,14 +218,9 @@ void Nextion::WaitResponse(pchar command, ResponseCode::E code)
         }
     }
 
-    if (last_code != code)
+    if (LastCode::Get() != code)
     {
-        LOG_WRITE("Error in %s : Received %02Xh but expected %02Xh", command, last_code, code);
+        LOG_WRITE("Error in %s : Received %02Xh but expected %02Xh", command, LastCode::Get(), code);
     }
 }
 
-
-ResponseCode::E Nextion::LastCode()
-{
-    return last_code;
-}

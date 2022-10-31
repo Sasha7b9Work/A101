@@ -44,6 +44,12 @@ namespace Nextion
     // Эта функция вызвается по приходу байта с дисплея
     void CallbackOnReceive(uint8);
 
+    namespace LastCode
+    {
+        void Set(ResponseCode::E);
+        ResponseCode::E Get();
+    }
+
     void DrawRect(int x, int y, int width, int height, const Color & = Color::Count);
 
     void FillRect(int x, int y, int width, int height, const Color & = Color::Count);

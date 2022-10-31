@@ -128,7 +128,10 @@ namespace Nextion
 
     static BufferData data;                         // А здесь принятые данные
 
-    ResponseCode::E last_code = ResponseCode::InstructionSuccessful;
+    namespace LastCode
+    {
+        static ResponseCode::E code = ResponseCode::InstructionSuccessful;
+    }
 }
 
 
@@ -202,7 +205,7 @@ bool Nextion::AnswerFF::Execute()
         return false;
     }
 
-    last_code = (ResponseCode::E)buffer[0];
+    LastCode::Set((ResponseCode::E)buffer[0]);
 
     if(size > 1)
     {
@@ -313,6 +316,18 @@ void Nextion::DrawLineH(int y, int x1, int x2, const Color &color)
 void Nextion::DrawLineV(int x, int y1, int y2, const Color &color)
 {
     DrawLine(x, y1, x, y2, color);
+}
+
+
+ResponseCode::E Nextion::LastCode::Get()
+{
+    return code;
+}
+
+
+void Nextion::LastCode::Set(ResponseCode::E _code)
+{
+    code = _code;
 }
 
 
