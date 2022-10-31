@@ -5,12 +5,6 @@
 
 namespace Painter
 {
-    namespace WaveInput
-    {
-        // 0 - маленький, 1 - большой
-        void Disable(int size);
-    }
-
     namespace WaveFFT
     {
         void Draw();

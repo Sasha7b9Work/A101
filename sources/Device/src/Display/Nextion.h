@@ -56,6 +56,9 @@ namespace Nextion
 
         // 0 - маленький, 1 - большой
         void Enable(int size);
+
+        // 0 - маленький, 1 - большой
+        void Disable(int size);
     }
 
     // Функция вызывается в главном цикле

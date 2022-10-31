@@ -84,3 +84,8 @@ void Nextion::WaveInput::Enable(int size)
 {
     SendCommandFormat("vis %s,1", size ? "waveBig" : "waveLeft");
 }
+
+void Nextion::WaveInput::Disable(int size)
+{
+    SendCommandFormat("vis %s,0", size ? "waveBig" : "waveLeft");
+}

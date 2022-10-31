@@ -88,7 +88,7 @@ void DiagramInput::Enable(bool _enable)
 
     Painter::WaveFFT::Disable(0);
     Painter::WaveFFT::Disable(1);
-    Painter::WaveInput::Disable(0);
+    Nextion::WaveInput::Disable(0);
 
     if (enabled)
     {

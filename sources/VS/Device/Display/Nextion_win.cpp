@@ -53,3 +53,8 @@ void Nextion::WaveInput::Enable(int size)
     Screen::WaveInput::Enable(size);
 }
 
+
+void Nextion::WaveInput::Disable(int size)
+{
+    Screen::WaveInput::Disable(size);
+}

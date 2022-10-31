@@ -13,8 +13,8 @@
 
 void Display::Init()
 {
-    Painter::WaveInput::Disable(0);
-    Painter::WaveInput::Disable(1);
+    Nextion::WaveInput::Disable(0);
+    Nextion::WaveInput::Disable(1);
     Painter::WaveFFT::Disable(0);
 
     Indicator::AutoSize();
