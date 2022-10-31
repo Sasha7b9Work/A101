@@ -46,3 +46,10 @@ void Nextion::WaveInput::Draw(uint8 *points, int num_points)
 {
     Screen::WaveInput::Draw(points, num_points);
 }
+
+
+void Nextion::WaveInput::Enable(int size)
+{
+    Screen::WaveInput::Enable(size);
+}
+

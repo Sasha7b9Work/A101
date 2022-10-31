@@ -34,12 +34,6 @@ void Painter::Button::Disable(pchar name_button)
 }
 
 
-void Painter::WaveInput::Enable(int size)
-{
-    Nextion::SendCommandFormat("vis %s,1", size ? "waveBig" : "waveLeft");
-}
-
-
 void Painter::WaveInput::Disable(int size)
 {
     Nextion::SendCommandFormat("vis %s,0", size ? "waveBig" : "waveLeft");

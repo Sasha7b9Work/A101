@@ -3,6 +3,7 @@
 #include "Display/DiagramFFT.h"
 #include "Display/DiagramInput.h"
 #include "Display/Painter.h"
+#include "Display/Nextion.h"
 
 
 namespace DiagramFFT
@@ -29,7 +30,7 @@ void DiagramFFT::Enable(bool _enable)
         if (DiagramInput::IsEnabled())
         {
             Painter::WaveFFT::Enable(0);
-            Painter::WaveInput::Enable(0);
+            Nextion::WaveInput::Enable(0);
         }
         else
         {
@@ -40,7 +41,7 @@ void DiagramFFT::Enable(bool _enable)
     {
         if (DiagramInput::IsEnabled())
         {
-            Painter::WaveInput::Enable(1);
+            Nextion::WaveInput::Enable(1);
         }
     }
 

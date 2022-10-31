@@ -95,11 +95,11 @@ void DiagramInput::Enable(bool _enable)
         if (DiagramFFT::IsEnabled())
         {
             Painter::WaveFFT::Enable(0);
-            Painter::WaveInput::Enable(0);
+            Nextion::WaveInput::Enable(0);
         }
         else
         {
-            Painter::WaveInput::Enable(1);
+            Nextion::WaveInput::Enable(1);
         }
     }
     else

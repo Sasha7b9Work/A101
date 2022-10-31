@@ -52,13 +52,13 @@ void Nextion::WaveInput::Draw(uint8 *points, int num_points)
 
     int id = (DiagramFFT::IsEnabled() && DiagramInput::IsEnabled()) ? 9 : 7;
 
-    Nextion::SendCommandFormatWithoutWaiting("addt %d,0,%d", id, num_points);
+    SendCommandFormatWithoutWaiting("addt %d,0,%d", id, num_points);
 
     WaitResponse(ResponseCode::TransparentDataReady);
 
     for (int i = 0; i < num_points; i++)
     {
-        Nextion::SendByte(*points++);
+        SendByte(*points++);
     }
 
     WaitResponse(ResponseCode::TransparentDataFinished);
@@ -69,7 +69,7 @@ void Nextion::WaitResponse(ResponseCode::E code)
 {
     TimeMeterMS meter;
 
-    while (Nextion::LastCode() != code)
+    while (LastCode() != code)
     {
         if (meter.ElapsedTime() > 200)
         {
@@ -77,4 +77,10 @@ void Nextion::WaitResponse(ResponseCode::E code)
             break;
         }
     }
+}
+
+
+void Nextion::WaveInput::Enable(int size)
+{
+    SendCommandFormat("vis %s,1", size ? "waveBig" : "waveLeft");
 }
