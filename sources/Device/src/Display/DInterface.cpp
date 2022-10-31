@@ -62,9 +62,10 @@ namespace DInterface
         void Push(uint8);
         bool Pop(uint8 *);
     private:
-        uint8 buffer[128];
-        int int_p = 0;              // Сюда будет записываться байт из UART (Push)
-        int out_p = -1;             // Это последний забранный байт (Pop)
+        static const int SIZE = 128;
+        uint8 buffer[SIZE];
+        int in_p = 0;               // Сюда будет записываться байт из UART (Push)
+        int out_p = 0;              // Этот байт нужно забирать
         bool mutex_uart = false;    // Если true, то буфер занят прерыванием
     };
 
@@ -343,6 +344,44 @@ void DInterface::BufferData::RemoveFromStart(int num_bytes)
         std::memmove(buffer, buffer + num_bytes, (uint)(pointer - num_bytes));
         pointer -= num_bytes;
     }
+}
+
+
+void DInterface::BufferUART::Push(uint8 byte)
+{
+    mutex_uart = true;
+
+    if (out_p > 1)
+    {
+        int num_bytes = out_p + 1;
+
+        std::memmove(buffer, buffer + num_bytes, (size_t)num_bytes);
+
+        out_p = 0;
+        in_p -= num_bytes;
+    }
+
+    buffer[in_p++] = byte;
+
+    mutex_uart = false;
+}
+
+
+bool DInterface::BufferUART::Pop(uint8 *byte)
+{
+    if (mutex_uart)
+    {
+        return false;
+    }
+
+    if (in_p != out_p)
+    {
+        *byte = buffer[out_p++];
+
+        return true;
+    }
+
+    return false;
 }
 
 
