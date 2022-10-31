@@ -391,6 +391,12 @@ void Nextion::DrawLineH(int y, int x1, int x2, const Color &color)
 }
 
 
+void Nextion::DrawLineV(int x, int y1, int y2, const Color &color)
+{
+    Line().Draw(x, y1, x, y2, color);
+}
+
+
 #ifndef WIN32
 #pragma clang diagnostic pop
 #endif

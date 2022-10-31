@@ -44,6 +44,8 @@ namespace Nextion
 
     void DrawLineH(int y, int x1, int x2, const Color & = Color::Count);
 
+    void DrawLineV(int x, int y1, int y2, const Color & = Color::Count);
+
     // Функция вызывается в главном цикле
     void Update();
 

@@ -10,9 +10,9 @@ void Nextion::DrawRect(int x, int y, int width, int height, const Color &color)
     color.SetAsCurrent();
 
     DrawLineH(y, x, x + width);
-    Line().DrawV(x + width - 1, y, y + height);
+    DrawLineV(x + width - 1, y, y + height);
     DrawLineH(y + height - 1, x, x + width);
-    Line().DrawV(x, y, y + height);
+    DrawLineV(x, y, y + height);
 }
 
 
