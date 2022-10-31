@@ -128,7 +128,7 @@ namespace Nextion
 
     static BufferData data;                         // А здесь принятые данные
 
-    static ResponseCode::E last_code = ResponseCode::InstructionSuccessful;
+    ResponseCode::E last_code = ResponseCode::InstructionSuccessful;
 
     // Если wait == true, то ждать ответа
     static void SendCommandRAW(pchar, bool wait);
@@ -211,14 +211,6 @@ void Nextion::WaitResponse(pchar command, ResponseCode::E code)
     {
         LOG_WRITE("Error in %s : Received %02Xh but expected %02Xh", command, last_code, code);
     }
-}
-
-
-void Nextion::SendByte(uint8 byte)
-{
-    last_code = ResponseCode::None;
-
-    HAL_USART2::SendByte(byte);
 }
 
 

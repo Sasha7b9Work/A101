@@ -4,6 +4,15 @@
 #include "Display/DiagramFFT.h"
 #include "Display/DiagramInput.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
+
+
+namespace Nextion
+{
+    static void SendByte(uint8);
+
+    extern ResponseCode::E last_code;
+}
 
 
 namespace Nextion
@@ -126,4 +135,12 @@ void Nextion::Button::Eanble(pchar name_button)
 void Nextion::Button::Disable(pchar name_button)
 {
     Nextion::SendCommandFormat("vis %s,0", name_button);
+}
+
+
+void Nextion::SendByte(uint8 byte)
+{
+    last_code = ResponseCode::None;
+
+    HAL_USART2::SendByte(byte);
 }

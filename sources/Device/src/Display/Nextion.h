@@ -86,8 +86,6 @@ namespace Nextion
     // Функция вызывается в главном цикле
     void Update();
 
-    void SendByte(uint8);
-
     void SendCommandFormat(const char *, ...);
     // Без ожидания ответа
 
