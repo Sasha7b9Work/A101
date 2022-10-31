@@ -8,29 +8,3 @@
 #include <cstdio>
 
 
-void Painter::Button::SetText(pchar name_button, pchar _text)
-{
-    Nextion::SendCommandFormat("%s.txt=\"%s\"", name_button, _text);
-}
-
-
-void Painter::Button::Highligth(pchar name_button, bool val)
-{
-    uint color_val = val ? Color::ButtonPress.ToRaw() : Color::Background.ToRaw();
-
-    Nextion::SendCommandFormat("%s.bco=%d", name_button, color_val);
-}
-
-
-void Painter::Button::Eanble(pchar name_button)
-{
-    Nextion::SendCommandFormat("vis %s,1", name_button);
-}
-
-
-void Painter::Button::Disable(pchar name_button)
-{
-    Nextion::SendCommandFormat("vis %s,0", name_button);
-}
-
-

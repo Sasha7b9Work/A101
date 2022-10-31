@@ -72,6 +72,17 @@ namespace Nextion
         void Disable(int size);
     }
 
+    namespace Button
+    {
+        void SetText(pchar name_button, pchar text);
+
+        void Highligth(pchar name_button, bool);
+
+        void Eanble(pchar name_button);
+
+        void Disable(pchar name_button);
+    }
+
     // Функция вызывается в главном цикле
     void Update();
 

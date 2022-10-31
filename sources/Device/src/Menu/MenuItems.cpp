@@ -45,7 +45,7 @@ Button Page::btnMenu("btMenu", ">>", false, [](Button *btn)
 
 void Button::SetText()
 {
-    Painter::Button::SetText(name, text);
+    Nextion::Button::SetText(name, text);
 }
 
 
@@ -59,19 +59,19 @@ void Button::SetText(pchar _text)
 
 void Button::Enable()
 {
-    Painter::Button::Eanble(name);
+    Nextion::Button::Eanble(name);
 }
 
 
 void Button::Disable()
 {
-    Painter::Button::Disable(name);
+    Nextion::Button::Disable(name);
 }
 
 
 void Button::Highlight()
 {
-    Painter::Button::Highligth(name, highlight);
+    Nextion::Button::Highligth(name, highlight);
 }
 
 
