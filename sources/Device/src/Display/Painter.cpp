@@ -133,9 +133,7 @@ void Painter::WaitResponse(ResponseCode::E code)
 
     while (DInterface::LastCode() != code)
     {
-        DInterface::Update();
-
-        if (meter.ElapsedTime() > 1000)
+        if (meter.ElapsedTime() > 200)
         {
             LOG_WRITE("Not response");
             break;

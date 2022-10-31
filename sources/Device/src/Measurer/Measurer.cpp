@@ -45,11 +45,6 @@ void Measurer::Update()
 
     buffer.ConvertToVoltage();
 
-    if (InputRelays::IsEnabledZero())
-    {
-        buffer.LogUART();
-    }
-
     Calculator::AppendData(buffer);
 
     Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC());

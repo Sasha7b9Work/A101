@@ -47,7 +47,7 @@ void BufferADC::ConvertToVoltage()
 
     Indicator::SetDeltaADC((int)(max_raw - min_raw));
 
-    LOG_WRITE("min %d, max %d, delta %d", min_raw, max_raw, (int)(max_raw - min_raw));
+//    LOG_WRITE("min %d, max %d, delta %d", min_raw, max_raw, (int)(max_raw - min_raw));
 }
 
 
