@@ -170,7 +170,7 @@ void DInterface::CallbackOnReceive(uint8 byte)
 }
 
 
-void DInterface::SendCommandRAW(pchar command)
+void DInterface::SendCommandRAW(pchar command, bool wait)
 {
     last_code = ResponseCode::None;
 
@@ -178,7 +178,10 @@ void DInterface::SendCommandRAW(pchar command)
 
     HAL_USART2::SendNZ("\xFF\xFF\xFF");
 
-    WaitResponse(command, ResponseCode::InstructionSuccessful);
+    if (wait)
+    {
+        WaitResponse(command, ResponseCode::InstructionSuccessful);
+    }
 }
 
 
@@ -190,7 +193,7 @@ void DInterface::WaitResponse(pchar command, ResponseCode::E code)
     {
         Update();
 
-        if (meter.ElapsedTime() > 500)
+        if (meter.ElapsedTime() > 50)
         {
             LOG_WRITE("No response received");
 
@@ -222,7 +225,20 @@ void DInterface::SendCommandFormat(const char *format, ...)
     std::vsprintf(message, format, args);
     va_end(args);
 
-    SendCommandRAW(message);
+    SendCommandRAW(message, true);
+}
+
+
+void DInterface::SendCommandFormatWithoutWaiting(const char *format, ...)
+{
+    char message[256];
+
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(message, format, args);
+    va_end(args);
+
+    SendCommandRAW(message, false);
 }
 
 
@@ -237,7 +253,7 @@ void DInterface::SendCommandFormatLog(const char *format, ...)
 
     LOG_WRITE(message);
 
-    SendCommandRAW(message);
+    SendCommandRAW(message, true);
 }
 
 

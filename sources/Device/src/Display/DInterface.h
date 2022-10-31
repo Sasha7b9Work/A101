@@ -39,11 +39,16 @@ namespace DInterface
 {
     void Update();
 
-    void SendCommandRAW(pchar);
+    // Если wait == true, то ждать ответа
+    void SendCommandRAW(pchar, bool wait);
 
     void SendByte(uint8);
 
     void SendCommandFormat(const char *, ...);
+    // Без ожидания ответа
+
+    void SendCommandFormatWithoutWaiting(const char *, ...);
+
     void SendCommandFormatLog(const char *, ...);
 
     void CallbackOnReceive(uint8);

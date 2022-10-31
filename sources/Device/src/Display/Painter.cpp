@@ -3,6 +3,8 @@
 #include "Display/Painter.h"
 #include "Display/DInterface.h"
 #include "Hardware/Timer.h"
+#include "Display/DiagramInput.h"
+#include "Display/DiagramFFT.h"
 #include <cstdio>
 
 
@@ -82,9 +84,15 @@ void Painter::Button::Disable(pchar name_button)
 
 void Painter::WaveInput::Draw(uint8 *points, int num_points)
 {
-    DInterface::SendCommandFormat("addt 16,0,%d", num_points);
+    /*
+    * Маленький - в форму 9
+    * Большой - в форму 7
+    */
 
-    WaitResponse(ResponseCode::TransparentDataReady);
+
+    int id = (DiagramFFT::IsEnabled() && DiagramInput::IsEnabled()) ? 9 : 7;
+
+    DInterface::SendCommandFormatWithoutWaiting("addt %d,0,%d", id, num_points);
 
     for (int i = 0; i < num_points; i++)
     {
@@ -127,8 +135,9 @@ void Painter::WaitResponse(ResponseCode::E code)
     {
         DInterface::Update();
 
-        if (meter.ElapsedTime() > 400)
+        if (meter.ElapsedTime() > 1000)
         {
+            LOG_WRITE("Not response");
             break;
         }
     }

@@ -37,7 +37,7 @@ bool DiagramInput::NeedDraw()
         return false;
     }
 
-    time_next_draw = HAL_TIM::TimeMS() + 500;
+    time_next_draw = HAL_TIM::TimeMS() + 1000;
 
     return true;
 }
