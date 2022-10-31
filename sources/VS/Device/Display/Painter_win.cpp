@@ -4,12 +4,6 @@
 #include "Screen.h"
 
 
-void Painter::WaveInput::Draw(uint8 *data, int num_points)
-{
-    Screen::WaveInput::Draw(data, num_points);
-}
-
-
 void Painter::Button::SetText(pchar name_button, pchar text)
 {
     Screen::self->Button::SetText(name_button, text);

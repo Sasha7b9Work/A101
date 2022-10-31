@@ -50,6 +50,11 @@ namespace Nextion
 
     void DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar);
 
+    namespace WaveInput
+    {
+        void Draw(uint8 *points, int num_points);
+    }
+
     // Функция вызывается в главном цикле
     void Update();
 

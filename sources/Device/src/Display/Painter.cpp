@@ -8,12 +8,6 @@
 #include <cstdio>
 
 
-namespace Painter
-{
-    static void WaitResponse(ResponseCode::E);
-}
-
-
 void Painter::Button::SetText(pchar name_button, pchar _text)
 {
     Nextion::SendCommandFormat("%s.txt=\"%s\"", name_button, _text);
@@ -40,29 +34,6 @@ void Painter::Button::Disable(pchar name_button)
 }
 
 
-void Painter::WaveInput::Draw(uint8 *points, int num_points)
-{
-    /*
-    * Маленький - в форму 9
-    * Большой - в форму 7
-    */
-
-
-    int id = (DiagramFFT::IsEnabled() && DiagramInput::IsEnabled()) ? 9 : 7;
-
-    Nextion::SendCommandFormatWithoutWaiting("addt %d,0,%d", id, num_points);
-
-    WaitResponse(ResponseCode::TransparentDataReady);
-
-    for (int i = 0; i < num_points; i++)
-    {
-        Nextion::SendByte(*points++);
-    }
-
-    WaitResponse(ResponseCode::TransparentDataFinished);
-}
-
-
 void Painter::WaveInput::Enable(int size)
 {
     Nextion::SendCommandFormat("vis %s,1", size ? "waveBig" : "waveLeft");
@@ -86,17 +57,3 @@ void Painter::WaveFFT::Disable(int size)
     Nextion::SendCommandFormat("vis %s,0", size ? "waveBig" : "waveRight");
 }
 
-
-void Painter::WaitResponse(ResponseCode::E code)
-{
-    TimeMeterMS meter;
-
-    while (Nextion::LastCode() != code)
-    {
-        if (meter.ElapsedTime() > 200)
-        {
-            LOG_WRITE("Not response");
-            break;
-        }
-    }
-}

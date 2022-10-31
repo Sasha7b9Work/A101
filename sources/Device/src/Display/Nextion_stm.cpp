@@ -1,6 +1,15 @@
 // 2022/10/31 19:37:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Nextion.h"
+#include "Display/DiagramFFT.h"
+#include "Display/DiagramInput.h"
+#include "Hardware/Timer.h"
+
+
+namespace Nextion
+{
+    static void WaitResponse(ResponseCode::E);
+}
 
 
 void Nextion::DrawRect(int x, int y, int width, int height, const Color &color)
@@ -33,5 +42,39 @@ void Nextion::DrawString(int x, int y, int width, int height, int font, const Co
 }
 
 
+void Nextion::WaveInput::Draw(uint8 *points, int num_points)
+{
+    /*
+    * Маленький - в форму 9
+    * Большой - в форму 7
+    */
 
 
+    int id = (DiagramFFT::IsEnabled() && DiagramInput::IsEnabled()) ? 9 : 7;
+
+    Nextion::SendCommandFormatWithoutWaiting("addt %d,0,%d", id, num_points);
+
+    WaitResponse(ResponseCode::TransparentDataReady);
+
+    for (int i = 0; i < num_points; i++)
+    {
+        Nextion::SendByte(*points++);
+    }
+
+    WaitResponse(ResponseCode::TransparentDataFinished);
+}
+
+
+void Nextion::WaitResponse(ResponseCode::E code)
+{
+    TimeMeterMS meter;
+
+    while (Nextion::LastCode() != code)
+    {
+        if (meter.ElapsedTime() > 200)
+        {
+            LOG_WRITE("Not response");
+            break;
+        }
+    }
+}

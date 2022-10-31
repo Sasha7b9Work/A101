@@ -41,3 +41,8 @@ void Nextion::DrawString(int x, int y, int width, int height, int font, const Co
     Screen::self->DrawString(x, y, font, wxColor(Color::Current().ToRaw()), text);
 }
 
+
+void Nextion::WaveInput::Draw(uint8 *points, int num_points)
+{
+    Screen::WaveInput::Draw(points, num_points);
+}

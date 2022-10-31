@@ -7,8 +7,6 @@ namespace Painter
 {
     namespace WaveInput
     {
-        void Draw(uint8 *points, int num_points);
-
         // 0 - маленький, 1 - большой
         void Enable(int size);
 

@@ -71,7 +71,7 @@ void DiagramInput::Draw()
         points[i] = (uint8)value;
     }
 
-    Painter::WaveInput::Draw(points, NumPoints());
+    Nextion::WaveInput::Draw(points, NumPoints());
 }
 
 
