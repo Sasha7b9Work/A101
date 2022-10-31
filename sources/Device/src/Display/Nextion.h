@@ -40,9 +40,6 @@ namespace Nextion
     // Функция вызывается в главном цикле
     void Update();
 
-   
-    void ExtractCodes();
-
     // Если wait == true, то ждать ответа
     void SendCommandRAW(pchar, bool wait);
 
@@ -52,8 +49,6 @@ namespace Nextion
     // Без ожидания ответа
 
     void SendCommandFormatWithoutWaiting(const char *, ...);
-
-    void SendCommandFormatLog(const char *, ...);
 
     void CallbackOnReceive(uint8);
 

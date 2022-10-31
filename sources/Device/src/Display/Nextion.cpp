@@ -245,21 +245,6 @@ void Nextion::SendCommandFormatWithoutWaiting(const char *format, ...)
 }
 
 
-void Nextion::SendCommandFormatLog(const char *format, ...)
-{
-    char message[256];
-
-    std::va_list args;
-    va_start(args, format);
-    std::vsprintf(message, format, args);
-    va_end(args);
-
-    LOG_WRITE(message);
-
-    SendCommandRAW(message, true);
-}
-
-
 Nextion::Command::Command(const uint8 *bytes, int _size) : size(_size)
 {
     std::memcpy(buffer, bytes, (uint)size);
