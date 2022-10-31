@@ -86,11 +86,6 @@ namespace Nextion
     // Функция вызывается в главном цикле
     void Update();
 
-    void SendCommandFormat(const char *, ...);
-    // Без ожидания ответа
-
-    void SendCommandFormatWithoutWaiting(const char *, ...);
-
     void CallbackOnReceive(uint8);
 
     // Функция заверашется при получении кода

@@ -5,11 +5,23 @@
 #include "Display/DiagramInput.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Utils/Profiler.h"
+#include <cstdarg>
+#include <cstdio>
+#include <cstring>
 
 
 namespace Nextion
 {
     static void SendByte(uint8);
+
+    static void SendCommandFormat(const char *, ...);
+
+    // Без ожидания ответа
+    static void SendCommandFormatWithoutWaiting(const char *, ...);
+
+    // Если wait == true, то ждать ответа
+    static void SendCommandRAW(pchar, bool wait);
 
     extern ResponseCode::E last_code;
 }
@@ -143,4 +155,47 @@ void Nextion::SendByte(uint8 byte)
     last_code = ResponseCode::None;
 
     HAL_USART2::SendByte(byte);
+}
+
+
+void Nextion::SendCommandFormat(const char *format, ...)
+{
+    char message[256];
+
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(message, format, args);
+    va_end(args);
+
+    SendCommandRAW(message, true);
+}
+
+
+void Nextion::SendCommandFormatWithoutWaiting(const char *format, ...)
+{
+    char message[256];
+
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(message, format, args);
+    va_end(args);
+
+    SendCommandRAW(message, false);
+}
+
+
+void Nextion::SendCommandRAW(pchar command, bool wait)
+{
+    last_code = ResponseCode::None;
+
+    HAL_USART2::SendNZ(command);
+
+    HAL_USART2::SendNZ("\xFF\xFF\xFF");
+
+    Profiler::AddCommand();
+
+    if (wait)
+    {
+        WaitResponse(command, ResponseCode::InstructionSuccessful);
+    }
 }

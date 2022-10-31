@@ -129,9 +129,6 @@ namespace Nextion
     static BufferData data;                         // А здесь принятые данные
 
     ResponseCode::E last_code = ResponseCode::InstructionSuccessful;
-
-    // Если wait == true, то ждать ответа
-    static void SendCommandRAW(pchar, bool wait);
 }
 
 
@@ -174,23 +171,6 @@ void Nextion::CallbackOnReceive(uint8 byte)
 }
 
 
-void Nextion::SendCommandRAW(pchar command, bool wait)
-{
-    last_code = ResponseCode::None;
-
-    HAL_USART2::SendNZ(command);
-
-    HAL_USART2::SendNZ("\xFF\xFF\xFF");
-
-    Profiler::AddCommand();
-
-    if (wait)
-    {
-        WaitResponse(command, ResponseCode::InstructionSuccessful);
-    }
-}
-
-
 void Nextion::WaitResponse(pchar command, ResponseCode::E code)
 {
     TimeMeterMS meter;
@@ -211,32 +191,6 @@ void Nextion::WaitResponse(pchar command, ResponseCode::E code)
     {
         LOG_WRITE("Error in %s : Received %02Xh but expected %02Xh", command, last_code, code);
     }
-}
-
-
-void Nextion::SendCommandFormat(const char *format, ...)
-{
-    char message[256];
-
-    std::va_list args;
-    va_start(args, format);
-    std::vsprintf(message, format, args);
-    va_end(args);
-
-    SendCommandRAW(message, true);
-}
-
-
-void Nextion::SendCommandFormatWithoutWaiting(const char *format, ...)
-{
-    char message[256];
-
-    std::va_list args;
-    va_start(args, format);
-    std::vsprintf(message, format, args);
-    va_end(args);
-
-    SendCommandRAW(message, false);
 }
 
 
