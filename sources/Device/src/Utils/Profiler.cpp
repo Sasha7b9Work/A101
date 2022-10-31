@@ -32,9 +32,9 @@ void Profiler::AddBytes(int num)
 
 void Profiler::Update()
 {
-    if (meter.ElapsedTime() >= 1000)
-    {
-        LOG_WRITE("Send : %d commands, %d bytes", num_commands, num_bytes);
-        meter.Reset();
-    }
+//    if (meter.ElapsedTime() >= 1000)
+//    {
+//        LOG_WRITE("Send : %d commands, %d bytes", num_commands, num_bytes);
+//        meter.Reset();
+//    }
 }
