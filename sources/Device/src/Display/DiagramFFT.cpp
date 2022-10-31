@@ -21,20 +21,20 @@ void DiagramFFT::Enable(bool _enable)
 
     enabled = _enable;
 
-    Painter::WaveFFT::Disable(0);
-    Painter::WaveFFT::Disable(1);
+    Nextion::WaveFFT::Disable(0);
+    Nextion::WaveFFT::Disable(1);
     Nextion::WaveInput::Disable(0);
 
     if (enabled)
     {
         if (DiagramInput::IsEnabled())
         {
-            Painter::WaveFFT::Enable(0);
+            Nextion::WaveFFT::Enable(0);
             Nextion::WaveInput::Enable(0);
         }
         else
         {
-            Painter::WaveFFT::Enable(1);
+            Nextion::WaveFFT::Enable(1);
         }
     }
     else

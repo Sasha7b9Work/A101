@@ -34,14 +34,3 @@ void Painter::Button::Disable(pchar name_button)
 }
 
 
-void Painter::WaveFFT::Enable(int size)
-{
-    Nextion::SendCommandFormat("vis %s,1", size ? "waveBig" : "waveRight");
-}
-
-
-void Painter::WaveFFT::Disable(int size)
-{
-    Nextion::SendCommandFormat("vis %s,0", size ? "waveBig" : "waveRight");
-}
-

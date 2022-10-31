@@ -5,17 +5,6 @@
 
 namespace Painter
 {
-    namespace WaveFFT
-    {
-        void Draw();
-
-        // 0 - маленький, 1 - большой
-        void Enable(int size);
-
-        // 0 - маленький, 1 - большой
-        void Disable(int size);
-    }
-
     namespace Button
     {
         void SetText(pchar name_button, pchar text);

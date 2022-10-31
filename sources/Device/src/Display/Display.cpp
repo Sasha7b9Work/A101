@@ -15,7 +15,7 @@ void Display::Init()
 {
     Nextion::WaveInput::Disable(0);
     Nextion::WaveInput::Disable(1);
-    Painter::WaveFFT::Disable(0);
+    Nextion::WaveFFT::Disable(0);
 
     Indicator::AutoSize();
 }

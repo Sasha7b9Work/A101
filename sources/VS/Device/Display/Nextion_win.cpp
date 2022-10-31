@@ -58,3 +58,15 @@ void Nextion::WaveInput::Disable(int size)
 {
     Screen::WaveInput::Disable(size);
 }
+
+
+void Nextion::WaveFFT::Enable(int size)
+{
+    Screen::WaveFFT::Enable(size);
+}
+
+
+void Nextion::WaveFFT::Disable(int size)
+{
+    Screen::WaveFFT::Disable(size);
+}
