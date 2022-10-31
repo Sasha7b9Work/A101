@@ -57,3 +57,9 @@ void InputRelays::EnableZero()
     enabled_zero = true;
     SetRange(range);
 }
+
+
+bool InputRelays::IsEnabledZero()
+{
+    return enabled_zero;
+}

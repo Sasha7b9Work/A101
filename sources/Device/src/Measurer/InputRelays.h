@@ -11,4 +11,6 @@ namespace InputRelays
 
     // Выключить режим "нуль" (измерения невозможны)
     void DisableZero();
+
+    bool IsEnabledZero();
 }
