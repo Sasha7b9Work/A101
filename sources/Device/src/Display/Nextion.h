@@ -64,6 +64,12 @@ namespace Nextion
 
     namespace WaveInput
     {
+        // Перед отрисовкой данных нужно вызвать эту функцию
+        void PrepareForDraw();
+
+        // Когда дисплей готов принять данные для отрисовки, эта функция возвратит true
+        bool ReadForDraw();
+
         void Draw(uint8 *points, int num_points);
 
         // 0 - маленький, 1 - большой
