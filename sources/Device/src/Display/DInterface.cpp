@@ -58,7 +58,7 @@
 
 namespace DInterface
 {
-    struct BufferUART
+    struct BufferUART //-V730
     {
         void Push(uint8);
         bool Pop(uint8 *);
