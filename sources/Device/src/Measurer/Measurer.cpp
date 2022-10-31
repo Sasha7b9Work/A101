@@ -9,6 +9,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Menu/MenuItems.h"
 #include "Display/Indicator.h"
+#include "Measurer/InputRelays.h"
 
 
 namespace Measurer
@@ -43,6 +44,11 @@ void Measurer::Update()
     HAL_TIM4::Stop();
 
     buffer.ConvertToVoltage();
+
+    if (InputRelays::IsEnabledZero())
+    {
+        buffer.LogUART();
+    }
 
     Calculator::AppendData(buffer);
 

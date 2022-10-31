@@ -30,6 +30,8 @@ struct BufferADC
 
     float MaxReal() const { return max; }
 
+    void LogUART() const;
+
     float sample_rate_HZ;
 
 private:

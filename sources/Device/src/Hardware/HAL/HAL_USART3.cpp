@@ -57,9 +57,15 @@ void HAL_USART3::Init()
 }
 
 
-void HAL_USART3::Send(pchar message)
+void HAL_USART3::SendZ(pchar message)
 {
     HAL_UART_Transmit(&handleUSART3, (const uint8 *)message, (uint16)(std::strlen(message) + 1), 100);
+}
+
+
+void HAL_USART3::Send(pchar message)
+{
+    HAL_UART_Transmit(&handleUSART3, (const uint8 *)message, (uint16)(std::strlen(message)), 100);
 }
 
 

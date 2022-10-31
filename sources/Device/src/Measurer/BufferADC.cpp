@@ -3,6 +3,7 @@
 #include "Measurer/BufferADC.h"
 #include "Display/DInterface.h"
 #include "Display/Indicator.h"
+#include "Hardware/HAL/HAL.h"
 #include <limits>
 
 
@@ -47,3 +48,11 @@ void BufferADC::ConvertToVoltage()
     Indicator::SetDeltaADC((int)(max_raw - min_raw));
 }
 
+
+void BufferADC::LogUART() const
+{
+    for (int i = 0; i < Size(); i++)
+    {
+        LOG_WRITE("%d", raw[i]);
+    }
+}
