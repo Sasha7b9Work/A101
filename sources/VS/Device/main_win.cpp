@@ -30,5 +30,5 @@ void Application::Update()
 
     Display::Update();
 
-    DInterface::Update();
+    Nextion::Update();
 }

@@ -56,7 +56,7 @@
 */
 
 
-namespace DInterface
+namespace Nextion
 {
     struct BufferUART //-V730
     {
@@ -122,7 +122,7 @@ namespace DInterface
 }
 
 
-namespace DInterface
+namespace Nextion
 {
     static BufferUART bufferUART;                   // —юда складываем даныне из UART
 
@@ -132,7 +132,7 @@ namespace DInterface
 }
 
 
-void DInterface::Update()
+void Nextion::Update()
 {
     uint8 byte = 0;
 
@@ -159,19 +159,19 @@ void DInterface::Update()
 }
 
 
-ResponseCode::E DInterface::LastCode()
+ResponseCode::E Nextion::LastCode()
 {
     return last_code;
 }
 
 
-void DInterface::CallbackOnReceive(uint8 byte)
+void Nextion::CallbackOnReceive(uint8 byte)
 {
     bufferUART.Push(byte);
 }
 
 
-void DInterface::SendCommandRAW(pchar command, bool wait)
+void Nextion::SendCommandRAW(pchar command, bool wait)
 {
     last_code = ResponseCode::None;
 
@@ -188,7 +188,7 @@ void DInterface::SendCommandRAW(pchar command, bool wait)
 }
 
 
-void DInterface::WaitResponse(pchar command, ResponseCode::E code)
+void Nextion::WaitResponse(pchar command, ResponseCode::E code)
 {
     TimeMeterMS meter;
 
@@ -211,7 +211,7 @@ void DInterface::WaitResponse(pchar command, ResponseCode::E code)
 }
 
 
-void DInterface::SendByte(uint8 byte)
+void Nextion::SendByte(uint8 byte)
 {
     last_code = ResponseCode::None;
 
@@ -219,7 +219,7 @@ void DInterface::SendByte(uint8 byte)
 }
 
 
-void DInterface::SendCommandFormat(const char *format, ...)
+void Nextion::SendCommandFormat(const char *format, ...)
 {
     char message[256];
 
@@ -232,7 +232,7 @@ void DInterface::SendCommandFormat(const char *format, ...)
 }
 
 
-void DInterface::SendCommandFormatWithoutWaiting(const char *format, ...)
+void Nextion::SendCommandFormatWithoutWaiting(const char *format, ...)
 {
     char message[256];
 
@@ -245,7 +245,7 @@ void DInterface::SendCommandFormatWithoutWaiting(const char *format, ...)
 }
 
 
-void DInterface::SendCommandFormatLog(const char *format, ...)
+void Nextion::SendCommandFormatLog(const char *format, ...)
 {
     char message[256];
 
@@ -260,13 +260,13 @@ void DInterface::SendCommandFormatLog(const char *format, ...)
 }
 
 
-DInterface::Command::Command(const uint8 *bytes, int _size) : size(_size)
+Nextion::Command::Command(const uint8 *bytes, int _size) : size(_size)
 {
     std::memcpy(buffer, bytes, (uint)size);
 }
 
 
-bool DInterface::CommandZ::Execute()
+bool Nextion::CommandZ::Execute()
 {
     if (IsEmpty())
     {
@@ -290,7 +290,7 @@ bool DInterface::CommandZ::Execute()
 }
 
 
-bool DInterface::AnswerFF::Execute()
+bool Nextion::AnswerFF::Execute()
 {
     if (IsEmpty())
     {
@@ -308,7 +308,7 @@ bool DInterface::AnswerFF::Execute()
 }
 
 
-void DInterface::BufferData::Push(uint8 byte)
+void Nextion::BufferData::Push(uint8 byte)
 {
     if (pointer == SIZE)
     {
@@ -319,7 +319,7 @@ void DInterface::BufferData::Push(uint8 byte)
 }
 
 
-DInterface::Command *DInterface::BufferData::ExtractCommand()
+Nextion::Command *Nextion::BufferData::ExtractCommand()
 {
     for (int i = 0; i < pointer; i++)
     {
@@ -352,7 +352,7 @@ DInterface::Command *DInterface::BufferData::ExtractCommand()
 }
 
 
-void DInterface::BufferData::RemoveFromStart(int num_bytes)
+void Nextion::BufferData::RemoveFromStart(int num_bytes)
 {
     if (num_bytes == pointer)
     {
@@ -366,7 +366,7 @@ void DInterface::BufferData::RemoveFromStart(int num_bytes)
 }
 
 
-void DInterface::BufferUART::Push(uint8 byte)
+void Nextion::BufferUART::Push(uint8 byte)
 {
     mutex_uart = true;
 
@@ -386,7 +386,7 @@ void DInterface::BufferUART::Push(uint8 byte)
 }
 
 
-bool DInterface::BufferUART::Pop(uint8 *byte)
+bool Nextion::BufferUART::Pop(uint8 *byte)
 {
     if (mutex_uart || in_p == out_p)
     {

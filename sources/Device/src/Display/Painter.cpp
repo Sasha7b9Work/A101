@@ -18,7 +18,7 @@ void Rect::Draw(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
-    DInterface::SendCommandFormat("draw %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
+    Nextion::SendCommandFormat("draw %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
 }
 
 
@@ -26,7 +26,7 @@ void Rect::Fill(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
-    DInterface::SendCommandFormat("fill %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
+    Nextion::SendCommandFormat("fill %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
 }
 
 
@@ -34,7 +34,7 @@ void Line::Draw(int x1, int y1, int x2, int y2, const Color &color)
 {
     color.SetAsCurrent();
 
-    DInterface::SendCommandFormat("line %d,%d,%d,%d,%s", x1, y1, x2, y2, Color::CurrentValue());
+    Nextion::SendCommandFormat("line %d,%d,%d,%d,%s", x1, y1, x2, y2, Color::CurrentValue());
 }
 
 
@@ -52,13 +52,13 @@ void Line::DrawH(int y, int x1, int x2, const Color &color)
 
 void Painter::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text)
 {
-    DInterface::SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,0,0,1,\"%s\"", x, y, width, height, font, color.ToRaw(), back_color.ToRaw(), text);
+    Nextion::SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,0,0,1,\"%s\"", x, y, width, height, font, color.ToRaw(), back_color.ToRaw(), text);
 }
 
 
 void Painter::Button::SetText(pchar name_button, pchar _text)
 {
-    DInterface::SendCommandFormat("%s.txt=\"%s\"", name_button, _text);
+    Nextion::SendCommandFormat("%s.txt=\"%s\"", name_button, _text);
 }
 
 
@@ -66,19 +66,19 @@ void Painter::Button::Highligth(pchar name_button, bool val)
 {
     uint color_val = val ? Color::ButtonPress.ToRaw() : Color::Background.ToRaw();
 
-    DInterface::SendCommandFormat("%s.bco=%d", name_button, color_val);
+    Nextion::SendCommandFormat("%s.bco=%d", name_button, color_val);
 }
 
 
 void Painter::Button::Eanble(pchar name_button)
 {
-    DInterface::SendCommandFormat("vis %s,1", name_button);
+    Nextion::SendCommandFormat("vis %s,1", name_button);
 }
 
 
 void Painter::Button::Disable(pchar name_button)
 {
-    DInterface::SendCommandFormat("vis %s,0", name_button);
+    Nextion::SendCommandFormat("vis %s,0", name_button);
 }
 
 
@@ -92,13 +92,13 @@ void Painter::WaveInput::Draw(uint8 *points, int num_points)
 
     int id = (DiagramFFT::IsEnabled() && DiagramInput::IsEnabled()) ? 9 : 7;
 
-    DInterface::SendCommandFormatWithoutWaiting("addt %d,0,%d", id, num_points);
+    Nextion::SendCommandFormatWithoutWaiting("addt %d,0,%d", id, num_points);
 
     WaitResponse(ResponseCode::TransparentDataReady);
 
     for (int i = 0; i < num_points; i++)
     {
-        DInterface::SendByte(*points++);
+        Nextion::SendByte(*points++);
     }
 
     WaitResponse(ResponseCode::TransparentDataFinished);
@@ -107,25 +107,25 @@ void Painter::WaveInput::Draw(uint8 *points, int num_points)
 
 void Painter::WaveInput::Enable(int size)
 {
-    DInterface::SendCommandFormat("vis %s,1", size ? "waveBig" : "waveLeft");
+    Nextion::SendCommandFormat("vis %s,1", size ? "waveBig" : "waveLeft");
 }
 
 
 void Painter::WaveInput::Disable(int size)
 {
-    DInterface::SendCommandFormat("vis %s,0", size ? "waveBig" : "waveLeft");
+    Nextion::SendCommandFormat("vis %s,0", size ? "waveBig" : "waveLeft");
 }
 
 
 void Painter::WaveFFT::Enable(int size)
 {
-    DInterface::SendCommandFormat("vis %s,1", size ? "waveBig" : "waveRight");
+    Nextion::SendCommandFormat("vis %s,1", size ? "waveBig" : "waveRight");
 }
 
 
 void Painter::WaveFFT::Disable(int size)
 {
-    DInterface::SendCommandFormat("vis %s,0", size ? "waveBig" : "waveRight");
+    Nextion::SendCommandFormat("vis %s,0", size ? "waveBig" : "waveRight");
 }
 
 
@@ -133,7 +133,7 @@ void Painter::WaitResponse(ResponseCode::E code)
 {
     TimeMeterMS meter;
 
-    while (DInterface::LastCode() != code)
+    while (Nextion::LastCode() != code)
     {
         if (meter.ElapsedTime() > 200)
         {

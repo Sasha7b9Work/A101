@@ -24,7 +24,7 @@ int main()
 
         Display::Update();
 
-        DInterface::Update();
+        Nextion::Update();
 
         Profiler::Update();
     }

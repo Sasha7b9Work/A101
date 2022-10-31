@@ -35,7 +35,7 @@ struct ResponseCode
 };
 
 
-namespace DInterface
+namespace Nextion
 {
     // Функция вызывается в главном цикле
     void Update();
