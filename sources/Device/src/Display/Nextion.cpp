@@ -129,6 +129,9 @@ namespace Nextion
     static BufferData data;                         // А здесь принятые данные
 
     static ResponseCode::E last_code = ResponseCode::InstructionSuccessful;
+
+    // Если wait == true, то ждать ответа
+    static void SendCommandRAW(pchar, bool wait);
 }
 
 

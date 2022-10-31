@@ -86,9 +86,6 @@ namespace Nextion
     // Функция вызывается в главном цикле
     void Update();
 
-    // Если wait == true, то ждать ответа
-    void SendCommandRAW(pchar, bool wait);
-
     void SendByte(uint8);
 
     void SendCommandFormat(const char *, ...);
