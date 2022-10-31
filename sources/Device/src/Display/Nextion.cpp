@@ -6,7 +6,6 @@
 #include "Menu/MenuItems.h"
 #include "Hardware/Timer.h"
 #include "Utils/Profiler.h"
-#include "Display/Painter.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>

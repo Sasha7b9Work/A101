@@ -3,7 +3,6 @@
 #include "Display/Indicator.h"
 #include "Display/Nextion.h"
 #include "Display/Colors.h"
-#include "Display/Painter.h"
 #include "Display/DiagramInput.h"
 #include "Display/DiagramFFT.h"
 #include <cstdio>

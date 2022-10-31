@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Display/DiagramInput.h"
 #include "Display/DiagramFFT.h"
-#include "Display/Painter.h"
 #include "Display/Nextion.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"

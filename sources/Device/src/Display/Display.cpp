@@ -5,7 +5,6 @@
 #include "Display/DiagramInput.h"
 #include "Display/Nextion.h"
 #include "Display/Indicator.h"
-#include "Display/Painter.h"
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>

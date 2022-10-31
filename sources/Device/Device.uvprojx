@@ -852,16 +852,6 @@
               <FilePath>.\src\Display\DiagramInput.h</FilePath>
             </File>
             <File>
-              <FileName>Painter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Painter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Painter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Painter.h</FilePath>
-            </File>
-            <File>
               <FileName>Colors.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Colors.cpp</FilePath>
@@ -1917,16 +1907,6 @@
               <FileName>DiagramInput.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\DiagramInput.h</FilePath>
-            </File>
-            <File>
-              <FileName>Painter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Painter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Painter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Painter.h</FilePath>
             </File>
             <File>
               <FileName>Colors.cpp</FileName>

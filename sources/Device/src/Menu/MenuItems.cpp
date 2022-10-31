@@ -3,7 +3,6 @@
 #include "Menu/MenuItems.h"
 #include "Menu/Menu.h"
 #include "Display/Nextion.h"
-#include "Display/Painter.h"
 #include "Menu/Pages/Pages.h"
 #include <cstring>
 #include <cstdio>
