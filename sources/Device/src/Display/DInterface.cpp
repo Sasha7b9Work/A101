@@ -353,7 +353,7 @@ void DInterface::BufferUART::Push(uint8 byte)
 
     if (out_p > 1)
     {
-        int num_bytes = out_p + 1;
+        int num_bytes = out_p;
 
         std::memmove(buffer, buffer + num_bytes, (size_t)num_bytes);
 
@@ -369,19 +369,14 @@ void DInterface::BufferUART::Push(uint8 byte)
 
 bool DInterface::BufferUART::Pop(uint8 *byte)
 {
-    if (mutex_uart)
+    if (mutex_uart || in_p == out_p)
     {
         return false;
     }
 
-    if (in_p != out_p)
-    {
-        *byte = buffer[out_p++];
+    *byte = buffer[out_p++];
 
-        return true;
-    }
-
-    return false;
+    return true;
 }
 
 
