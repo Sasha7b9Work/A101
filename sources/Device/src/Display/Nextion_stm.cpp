@@ -17,3 +17,13 @@ void Nextion::FillRect(int x, int y, int width, int height, const Color & color)
 
     SendCommandFormat("fill %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
 }
+
+
+void Nextion::DrawLine(int x1, int y1, int x2, int y2, const Color &color)
+{
+    color.SetAsCurrent();
+
+    SendCommandFormat("line %d,%d,%d,%d,%s", x1, y1, x2, y2, Color::CurrentValue());
+}
+
+

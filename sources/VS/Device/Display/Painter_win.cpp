@@ -4,14 +4,6 @@
 #include "Screen.h"
 
 
-void Line::Draw(int x1, int y1, int x2, int y2, const Color &color)
-{
-    color.SetAsCurrent();
-
-    Screen::self->DrawLine(x1, y1, x2, y2, wxColor(Color::Current().ToRaw()));
-}
-
-
 void Painter::WaveInput::Draw(uint8 *data, int num_points)
 {
     Screen::WaveInput::Draw(data, num_points);

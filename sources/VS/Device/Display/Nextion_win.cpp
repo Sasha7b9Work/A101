@@ -22,3 +22,11 @@ void Nextion::FillRect(int x, int y, int width, int height, const Color &color)
 
     Screen::self->FillRectangle(x, y, width, height, wxColor(Color::Current().ToRaw()));
 }
+
+
+void Nextion::DrawLine(int x1, int y1, int x2, int y2, const Color &color)
+{
+    color.SetAsCurrent();
+
+    Screen::self->DrawLine(x1, y1, x2, y2, wxColor(Color::Current().ToRaw()));
+}

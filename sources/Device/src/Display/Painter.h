@@ -3,12 +3,6 @@
 #include "Display/Colors.h"
 
 
-struct Line
-{
-    void Draw(int x1, int y1, int x2, int y2, const Color & = Color::Count);
-};
-
-
 namespace Painter
 {
     void DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar);
