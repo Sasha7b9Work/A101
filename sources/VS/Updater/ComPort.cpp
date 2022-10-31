@@ -21,7 +21,7 @@ void ComPort::Open(char *name_port)
 
 bool ComPort::ConnectToDeivce()
 {
-
+    return false;
 }
 
 
