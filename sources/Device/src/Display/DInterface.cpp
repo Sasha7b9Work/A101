@@ -116,8 +116,6 @@ namespace DInterface
     static ResponseCode::E last_code = ResponseCode::InstructionSuccessful;
 
     static int bytes_received = 0;          // ¬сего прин€то байт
-
-    static bool in_update_state = false;    // true означает, что находимс€ в обработке полученных данных - нельз€ ложить ничего в приЄмный буфер
 }
 
 
@@ -127,11 +125,7 @@ void DInterface::Update()
 
     while (run)
     {
-        in_update_state = true;
-
         CommandUART *command = buffer.ExtractCommand();
-
-        in_update_state = false;
 
         run = command->Execute();
 
@@ -148,16 +142,9 @@ ResponseCode::E DInterface::LastCode()
 
 void DInterface::CallbackOnReceive(uint8 byte)
 {
-    if (in_update_state)
-    {
-        LOG_WRITE("!!!!! Cant receive byte - update data");
-    }
-    else
-    {
-        bytes_received++;
+    bytes_received++;
 
-        buffer.Push(byte);
-    }
+    buffer.Push(byte);
 }
 
 
