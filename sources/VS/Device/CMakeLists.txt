@@ -74,7 +74,7 @@ file(GLOB DISPLAY               ./Display/*.*
                                 ../../Device/src/Display/Colors.cpp
                                 ../../Device/src/Display/DiagramFFT.cpp
                                 ../../Device/src/Display/DiagramInput.cpp
-                                ../../Device/src/Display/DInterface.cpp
+                                ../../Device/src/Display/Nextion.cpp
                                 ../../Device/src/Display/Display.cpp
                                 ../../Device/src/Display/Indicator.cpp)
 file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)

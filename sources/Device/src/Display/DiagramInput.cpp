@@ -3,7 +3,7 @@
 #include "Display/DiagramInput.h"
 #include "Display/DiagramFFT.h"
 #include "Display/Painter.h"
-#include "Display/DInterface.h"
+#include "Display/Nextion.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include <limits>

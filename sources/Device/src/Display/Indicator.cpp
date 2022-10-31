@@ -1,7 +1,7 @@
 // 2022/10/28 11:17:42 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Indicator.h"
-#include "Display/DInterface.h"
+#include "Display/Nextion.h"
 #include "Display/Colors.h"
 #include "Display/Painter.h"
 #include "Display/DiagramInput.h"

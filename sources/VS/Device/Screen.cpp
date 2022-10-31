@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Screen.h"
 #include "Display/Painter.h"
-#include "Display/DInterface.h"
+#include "Display/Nextion.h"
 #include <string>
 #include <map>
 #include <algorithm>

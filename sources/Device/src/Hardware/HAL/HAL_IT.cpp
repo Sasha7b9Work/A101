@@ -3,7 +3,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Measurer/Measurer.h"
-#include "Display/DInterface.h"
+#include "Display/Nextion.h"
 #include "stm_includes.h"
 
 

@@ -832,16 +832,6 @@
               <FilePath>.\src\Display\Display.h</FilePath>
             </File>
             <File>
-              <FileName>DInterface.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\DInterface.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DInterface.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\DInterface.h</FilePath>
-            </File>
-            <File>
               <FileName>DiagramFFT.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\DiagramFFT.cpp</FilePath>
@@ -890,6 +880,16 @@
               <FileName>Indicator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Indicator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Nextion.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Nextion.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Nextion.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Nextion.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1894,16 +1894,6 @@
               <FilePath>.\src\Display\Display.h</FilePath>
             </File>
             <File>
-              <FileName>DInterface.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\DInterface.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DInterface.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\DInterface.h</FilePath>
-            </File>
-            <File>
               <FileName>DiagramFFT.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\DiagramFFT.cpp</FilePath>
@@ -1952,6 +1942,16 @@
               <FileName>Indicator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Indicator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Nextion.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Nextion.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Nextion.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Nextion.h</FilePath>
             </File>
           </Files>
         </Group>
