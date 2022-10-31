@@ -7,3 +7,9 @@ void HAL_USART3::Send(pchar)
 {
 
 }
+
+
+void HAL_USART3::SendZ(pchar)
+{
+
+}

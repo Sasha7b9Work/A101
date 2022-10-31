@@ -5,6 +5,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/Timer.h"
+#include "Utils/Profiler.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -177,6 +178,8 @@ void DInterface::SendCommandRAW(pchar command, bool wait)
     HAL_USART2::SendNZ(command);
 
     HAL_USART2::SendNZ("\xFF\xFF\xFF");
+
+    Profiler::AddCommand();
 
     if (wait)
     {
