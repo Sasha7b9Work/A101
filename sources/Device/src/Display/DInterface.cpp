@@ -60,8 +60,7 @@ namespace DInterface
     struct BufferUART
     {
         void Push(uint8);
-        uint8 Pop();
-        bool ExistData() const;
+        bool Pop(uint8 *);
     private:
         uint8 buffer[128];
         int int_p = 0;              // —юда будет записыватьс€ байт из UART (Push)
@@ -133,6 +132,13 @@ namespace DInterface
 
 void DInterface::Update()
 {
+    uint8 byte = 0;
+
+    while (bufferUART.Pop(&byte))
+    {
+        data.Push(byte);
+    }
+
     bool run = true;
 
     while (run)
@@ -159,7 +165,7 @@ ResponseCode::E DInterface::LastCode()
 
 void DInterface::CallbackOnReceive(uint8 byte)
 {
-    data.Push(byte);
+    bufferUART.Push(byte);
 }
 
 
