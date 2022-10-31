@@ -65,8 +65,6 @@ void Painter::Button::Highligth(pchar name_button, bool val)
     uint color_val = val ? Color::ButtonPress.ToRaw() : Color::Background.ToRaw();
 
     DInterface::SendCommandFormat("%s.bc0=%d", name_button, color_val);
-
-    color_val = color_val;
 }
 
 

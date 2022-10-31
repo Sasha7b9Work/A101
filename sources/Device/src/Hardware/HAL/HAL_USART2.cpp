@@ -18,7 +18,7 @@ namespace HAL_USART2
         // 57600 - время 150-200 мс
         USART2,
         {
-            230400,
+            115200,
             UART_WORDLENGTH_8B,
             UART_STOPBITS_1,
             UART_PARITY_NONE,
