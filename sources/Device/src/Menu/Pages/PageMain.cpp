@@ -43,7 +43,7 @@ namespace PageMain
         HAL_PIO::Write(PIN_US7, states[index][5] == 1);
         HAL_PIO::Write(PIN_US8, states[index][6] == 1);
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 5; i >= 0; i--)
         {
             PageMain::self->GetButton(i)->SetHighlight(index == i);
         }

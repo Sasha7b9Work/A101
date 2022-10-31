@@ -60,7 +60,7 @@ namespace DInterface
     struct CommandUART
     {
         CommandUART() : size(0) {} //-V730
-        CommandUART(uint8 *bytes, int _size);
+        CommandUART(const uint8 *bytes, int _size);
         virtual ~CommandUART() {}
 
         bool IsEmpty() const { return (size == 0); }
@@ -75,7 +75,7 @@ namespace DInterface
     // Команда дисплея
     struct CommandZ : public CommandUART
     {
-        CommandZ(uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
+        CommandZ(const uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
         virtual ~CommandZ() override {}
 
         virtual bool Execute() override;
@@ -85,7 +85,7 @@ namespace DInterface
     // Служебный ответ дисплея
     struct AnswerFF : public CommandUART
     {
-        AnswerFF(uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
+        AnswerFF(const uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
         virtual ~AnswerFF() override {}
 
         virtual bool Execute() override;
@@ -130,6 +130,11 @@ void DInterface::Update()
         run = command->Execute();
 
         delete command;
+    }
+
+    if (buffer.NumBytes())
+    {
+        LOG_WRITE("After %s in buffer %d received bytes : %2Xh", __FUNCTION__, buffer.NumBytes(), buffer[0]);
     }
 }
 
@@ -219,7 +224,7 @@ void DInterface::SendCommandFormatLog(const char *format, ...)
 }
 
 
-DInterface::CommandUART::CommandUART(uint8 *bytes, int _size) : size(_size)
+DInterface::CommandUART::CommandUART(const uint8 *bytes, int _size) : size(_size)
 {
     std::memcpy(buffer, bytes, (uint)size);
 }
