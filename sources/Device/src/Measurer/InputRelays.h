@@ -4,7 +4,7 @@
 
 namespace InputRelays
 {
-    void EnableRange(int);
+    void SetRange(int);
 
     // ¬ключить режим "нуль" (измерени€ невозможны)
     void EnableZero();

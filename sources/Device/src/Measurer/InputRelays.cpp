@@ -7,11 +7,14 @@
 namespace InputRelays
 {
     static bool enabled_zero = false;
+    static int range = 3;
 }
 
 
-void InputRelays::EnableRange(int range)
+void InputRelays::SetRange(int _range)
 {
+    range = _range;
+
     static int states[6][7] =
     {
         {1, 0, 0, 0, 1, 1, 0},      // 2mA
@@ -26,19 +29,31 @@ void InputRelays::EnableRange(int range)
     HAL_PIO::Write(PIN_US2, states[range][1] == 1);
     HAL_PIO::Write(PIN_US3, states[range][2] == 1);
     HAL_PIO::Write(PIN_US4, states[range][3] == 1);
-    HAL_PIO::Write(PIN_US6, states[range][4] == 1);
-    HAL_PIO::Write(PIN_US7, states[range][5] == 1);
-    HAL_PIO::Write(PIN_US8, states[range][6] == 1);
+
+    if (enabled_zero)
+    {
+        HAL_PIO::Write(PIN_US6, false);
+        HAL_PIO::Write(PIN_US7, false);
+        HAL_PIO::Write(PIN_US8, true);
+    }
+    else
+    {
+        HAL_PIO::Write(PIN_US6, states[range][4] == 1);
+        HAL_PIO::Write(PIN_US7, states[range][5] == 1);
+        HAL_PIO::Write(PIN_US8, states[range][6] == 1);
+    }
 }
 
 
 void InputRelays::DisableZero()
 {
-
+    enabled_zero = false;
+    SetRange(range);
 }
 
 
 void InputRelays::EnableZero()
 {
-
+    enabled_zero = true;
+    SetRange(range);
 }

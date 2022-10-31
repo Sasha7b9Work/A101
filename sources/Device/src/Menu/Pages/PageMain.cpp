@@ -25,7 +25,7 @@ namespace PageMain
     {
         int index = GetIndex(button);
 
-        InputRelays::EnableRange(index);
+        InputRelays::SetRange(index);
 
         for (int i = 5; i >= 0; i--)
         {
