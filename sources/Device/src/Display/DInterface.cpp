@@ -193,7 +193,7 @@ void DInterface::WaitResponse(pchar command, ResponseCode::E code)
     {
         Update();
 
-        if (meter.ElapsedTime() > 50)
+        if (meter.ElapsedTime() > 200)
         {
             LOG_WRITE("No response received");
 
