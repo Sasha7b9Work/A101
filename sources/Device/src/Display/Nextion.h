@@ -68,7 +68,7 @@ namespace Nextion
         void PrepareForDraw();
 
         // Когда дисплей готов принять данные для отрисовки, эта функция возвратит true
-        bool ReadForDraw();
+        bool ReadyForDraw();
 
         void Draw(uint8 *points, int num_points);
 
