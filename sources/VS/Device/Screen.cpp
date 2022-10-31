@@ -148,7 +148,7 @@ void Screen::OnMouseDown(wxMouseEvent &event)
 
 void Screen::Init()
 {
-    Rect(WIDTH, HEIGHT).Fill(0, 0, Color::Background);
+    Nextion::FillRect(0, 0, WIDTH, HEIGHT, Color::Background);
 
     for (auto &elem : buttons)
     {
@@ -208,7 +208,7 @@ void ButtonGUI::Draw()
 {
     if (!enabled)
     {
-        Rect(width, height).Fill(x, y, Color::Background);
+        Nextion::FillRect(x, y, width, height, Color::Background);
     }
     else
     {
@@ -216,7 +216,7 @@ void ButtonGUI::Draw()
 
         Color color_fill = highlight ? Color::ButtonPress : Color::Background;
 
-        Rect(width - 2, height - 2).Fill(x + 1, y + 1, color_fill);
+        Nextion::FillRect(x + 1, y + 1, width - 2, height - 2, color_fill);
 
         int d = 20;
         Painter::DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, color_fill, text.c_str());

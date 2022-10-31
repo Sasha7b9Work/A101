@@ -40,6 +40,8 @@ namespace Nextion
 {
     void DrawRect(int x, int y, int width, int height, const Color & = Color::Count);
 
+    void FillRect(int x, int y, int width, int height, const Color & = Color::Count);
+
     // Функция вызывается в главном цикле
     void Update();
 

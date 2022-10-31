@@ -3,16 +3,6 @@
 #include "Display/Colors.h"
 
 
-struct Rect
-{
-    Rect(int w, int h) : width(w), height(h) {}
-
-    void Fill(int x, int y, const Color & = Color::Count);
-private:
-    int width;
-    int height;
-};
-
 struct Line
 {
     void Draw(int x1, int y1, int x2, int y2, const Color & = Color::Count);

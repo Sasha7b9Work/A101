@@ -4,14 +4,6 @@
 #include "Screen.h"
 
 
-void Rect::Fill(int x, int y, const Color &color)
-{
-    color.SetAsCurrent();
-
-    Screen::self->FillRectangle(x, y, width, height, wxColor(Color::Current().ToRaw()));
-}
-
-
 void Line::Draw(int x1, int y1, int x2, int y2, const Color &color)
 {
     color.SetAsCurrent();
@@ -44,7 +36,7 @@ void Painter::WaveInput::Draw(uint8 *data, int num_points)
 
 void Painter::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text)
 {
-    Rect(width, height).Fill(x, y, back_color);
+    Nextion::FillRect(x, y, width, height, back_color);
 
     color.SetAsCurrent();
 

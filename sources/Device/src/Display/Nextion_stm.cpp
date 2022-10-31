@@ -7,5 +7,13 @@ void Nextion::DrawRect(int x, int y, int width, int height, const Color &color)
 {
     color.SetAsCurrent();
 
-    Nextion::SendCommandFormat("draw %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
+    SendCommandFormat("draw %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
+}
+
+
+void Nextion::FillRect(int x, int y, int width, int height, const Color & color)
+{
+    color.SetAsCurrent();
+
+    SendCommandFormat("fill %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
 }
