@@ -38,6 +38,12 @@ struct ResponseCode
 
 namespace Nextion
 {
+    // Функция вызывается в главном цикле
+    void Update();
+
+    // Эта функция вызвается по приходу байта с дисплея
+    void CallbackOnReceive(uint8);
+
     void DrawRect(int x, int y, int width, int height, const Color & = Color::Count);
 
     void FillRect(int x, int y, int width, int height, const Color & = Color::Count);
@@ -82,14 +88,4 @@ namespace Nextion
 
         void Disable(pchar name_button);
     }
-
-    // Функция вызывается в главном цикле
-    void Update();
-
-    void CallbackOnReceive(uint8);
-
-    // Функция заверашется при получении кода
-    void WaitResponse(pchar, ResponseCode::E);
-
-    ResponseCode::E LastCode();
 }

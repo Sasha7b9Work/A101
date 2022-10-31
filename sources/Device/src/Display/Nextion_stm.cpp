@@ -23,7 +23,12 @@ namespace Nextion
     // Если wait == true, то ждать ответа
     static void SendCommandRAW(pchar, bool wait);
 
-    extern ResponseCode::E last_code;
+    // Функция заверашется при получении кода
+    static void WaitResponse(pchar, ResponseCode::E);
+
+    static ResponseCode::E LastCode();
+
+    static ResponseCode::E last_code;
 }
 
 
@@ -198,4 +203,33 @@ void Nextion::SendCommandRAW(pchar command, bool wait)
     {
         WaitResponse(command, ResponseCode::InstructionSuccessful);
     }
+}
+
+
+void Nextion::WaitResponse(pchar command, ResponseCode::E code)
+{
+    TimeMeterMS meter;
+
+    while (last_code == ResponseCode::None)
+    {
+        Update();
+
+        if (meter.ElapsedTime() > 200)
+        {
+            LOG_WRITE("No response received");
+
+            break;
+        }
+    }
+
+    if (last_code != code)
+    {
+        LOG_WRITE("Error in %s : Received %02Xh but expected %02Xh", command, last_code, code);
+    }
+}
+
+
+ResponseCode::E Nextion::LastCode()
+{
+    return last_code;
 }

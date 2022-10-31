@@ -159,38 +159,9 @@ void Nextion::Update()
 }
 
 
-ResponseCode::E Nextion::LastCode()
-{
-    return last_code;
-}
-
-
 void Nextion::CallbackOnReceive(uint8 byte)
 {
     bufferUART.Push(byte);
-}
-
-
-void Nextion::WaitResponse(pchar command, ResponseCode::E code)
-{
-    TimeMeterMS meter;
-
-    while (last_code == ResponseCode::None)
-    {
-        Update();
-
-        if (meter.ElapsedTime() > 200)
-        {
-            LOG_WRITE("No response received");
-
-            break;
-        }
-    }
-
-    if (last_code != code)
-    {
-        LOG_WRITE("Error in %s : Received %02Xh but expected %02Xh", command, last_code, code);
-    }
 }
 
 
