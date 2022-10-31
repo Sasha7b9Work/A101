@@ -57,11 +57,23 @@
 
 namespace DInterface
 {
-    struct CommandUART
+    struct BufferUART
     {
-        CommandUART() : size(0) {} //-V730
-        CommandUART(const uint8 *bytes, int _size);
-        virtual ~CommandUART() {}
+        void Push(uint8);
+        uint8 Pop();
+        bool ExistData() const;
+    private:
+        uint8 buffer[128];
+        int int_p = 0;              // Сюда будет записываться байт из UART (Push)
+        int out_p = -1;             // Это последний забранный байт (Pop)
+        bool mutex_uart = false;    // Если true, то буфер занят прерыванием
+    };
+
+    struct Command
+    {
+        Command() : size(0) {} //-V730
+        Command(const uint8 *bytes, int _size);
+        virtual ~Command() {}
 
         bool IsEmpty() const { return (size == 0); }
         virtual bool Execute() { return false; }
@@ -73,9 +85,9 @@ namespace DInterface
 
 
     // Команда дисплея
-    struct CommandZ : public CommandUART
+    struct CommandZ : public Command
     {
-        CommandZ(const uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
+        CommandZ(const uint8 *_bytes, int _size) : Command(_bytes, _size) {}
         virtual ~CommandZ() override {}
 
         virtual bool Execute() override;
@@ -83,26 +95,26 @@ namespace DInterface
 
 
     // Служебный ответ дисплея
-    struct AnswerFF : public CommandUART
+    struct AnswerFF : public Command
     {
-        AnswerFF(const uint8 *_bytes, int _size) : CommandUART(_bytes, _size) {}
+        AnswerFF(const uint8 *_bytes, int _size) : Command(_bytes, _size) {}
         virtual ~AnswerFF() override {}
 
         virtual bool Execute() override;
     };
 
 
-    template<uint size>
-    struct BufferUART
+    struct BufferData
     {
-        BufferUART() : pointer(0) {} //-V730
+        BufferData() : pointer(0) {} //-V730
 
         void Push(uint8 byte);
-        CommandUART *ExtractCommand();
+        Command *ExtractCommand();
         int NumBytes() const { return pointer; }
         uint8 operator[](int i) { return buffer[i]; }
     private:
-        uint8 buffer[size];
+        static const int SIZE = 128;
+        uint8 buffer[SIZE];
         int pointer;
         void RemoveFromStart(int num_bytes);
     };
@@ -111,11 +123,11 @@ namespace DInterface
 
 namespace DInterface
 {
-    static BufferUART <32>buffer;
+    static BufferUART bufferUART;                   // Сюда складываем даныне из UART
+
+    static BufferData data;                         // А здесь принятые данные
 
     static ResponseCode::E last_code = ResponseCode::InstructionSuccessful;
-
-    static int bytes_received = 0;          // Всего принято байт
 }
 
 
@@ -125,16 +137,16 @@ void DInterface::Update()
 
     while (run)
     {
-        CommandUART *command = buffer.ExtractCommand();
+        Command *command = data.ExtractCommand();
 
         run = command->Execute();
 
         delete command;
     }
 
-    if (buffer.NumBytes())
+    if (data.NumBytes())
     {
-        LOG_WRITE("After %s in buffer %d received bytes : %2Xh", __FUNCTION__, buffer.NumBytes(), buffer[0]);
+//        LOG_WRITE("After %s in buffer %d received bytes : %2Xh", __FUNCTION__, data.NumBytes(), data[0]);
     }
 }
 
@@ -147,9 +159,7 @@ ResponseCode::E DInterface::LastCode()
 
 void DInterface::CallbackOnReceive(uint8 byte)
 {
-    bytes_received++;
-
-    buffer.Push(byte);
+    data.Push(byte);
 }
 
 
@@ -224,7 +234,7 @@ void DInterface::SendCommandFormatLog(const char *format, ...)
 }
 
 
-DInterface::CommandUART::CommandUART(const uint8 *bytes, int _size) : size(_size)
+DInterface::Command::Command(const uint8 *bytes, int _size) : size(_size)
 {
     std::memcpy(buffer, bytes, (uint)size);
 }
@@ -272,10 +282,9 @@ bool DInterface::AnswerFF::Execute()
 }
 
 
-template<uint size>
-void DInterface::BufferUART<size>::Push(uint8 byte)
+void DInterface::BufferData::Push(uint8 byte)
 {
-    if (pointer == size)
+    if (pointer == SIZE)
     {
         RemoveFromStart(1);
     }
@@ -284,8 +293,7 @@ void DInterface::BufferUART<size>::Push(uint8 byte)
 }
 
 
-template<uint size>
-DInterface::CommandUART *DInterface::BufferUART<size>::ExtractCommand()
+DInterface::Command *DInterface::BufferData::ExtractCommand()
 {
     for (int i = 0; i < pointer; i++)
     {
@@ -314,12 +322,11 @@ DInterface::CommandUART *DInterface::BufferUART<size>::ExtractCommand()
         }
     }
 
-    return new CommandUART();
+    return new Command();
 }
 
 
-template<uint size>
-void DInterface::BufferUART<size>::RemoveFromStart(int num_bytes)
+void DInterface::BufferData::RemoveFromStart(int num_bytes)
 {
     if (num_bytes == pointer)
     {
