@@ -37,7 +37,11 @@ struct ResponseCode
 
 namespace DInterface
 {
+    // Функция вызывается в главном цикле
     void Update();
+
+   
+    void ExtractCodes();
 
     // Если wait == true, то ждать ответа
     void SendCommandRAW(pchar, bool wait);

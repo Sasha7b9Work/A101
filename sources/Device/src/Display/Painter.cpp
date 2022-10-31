@@ -94,6 +94,8 @@ void Painter::WaveInput::Draw(uint8 *points, int num_points)
 
     DInterface::SendCommandFormatWithoutWaiting("addt %d,0,%d", id, num_points);
 
+    WaitResponse(ResponseCode::TransparentDataReady);
+
     for (int i = 0; i < num_points; i++)
     {
         DInterface::SendByte(*points++);
