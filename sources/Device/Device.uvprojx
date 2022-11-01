@@ -871,6 +871,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\InputRelays.h</FilePath>
             </File>
+            <File>
+              <FileName>Calibrator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calibrator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calibrator.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1947,6 +1957,16 @@
               <FileName>InputRelays.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\InputRelays.h</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calibrator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calibrator.h</FilePath>
             </File>
           </Files>
         </Group>

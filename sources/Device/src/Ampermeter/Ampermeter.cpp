@@ -10,6 +10,7 @@
 #include "Menu/MenuItems.h"
 #include "Display/Indicator.h"
 #include "Ampermeter/InputRelays.h"
+#include "Ampermeter/Calibrator.h"
 
 
 namespace Ampermeter
@@ -21,6 +22,8 @@ namespace Ampermeter
 void Ampermeter::Init()
 {
     HAL_TIM4::Init();
+
+    Calibrator::Init();
 
     AD7691::Init();
 }
