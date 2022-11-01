@@ -28,20 +28,14 @@ void BufferADC::ConvertToVoltage()
             max_raw = raw_value;
         }
 
-        float value = (float)raw_value;
-
-        const float k = 5.0 / (1 << 17);
-
-        volt[i] = value * k;
-
-        if (volt[i] < min)
+        if (raw[i].Real() < min)
         {
-            min = volt[i];
+            min = raw[i].Real();
         }
 
-        if (volt[i] > max)
+        if (raw[i].Real() > max)
         {
-            max = volt[i];
+            max = raw[i].Real();
         }
     }
 

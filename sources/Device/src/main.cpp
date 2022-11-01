@@ -21,7 +21,7 @@ int main()
 
     Display::Init();
 
-    Generator::Enable();
+    Generator::Disable();
 
     while (1)
     {

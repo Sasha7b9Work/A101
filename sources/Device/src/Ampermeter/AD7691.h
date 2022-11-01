@@ -15,7 +15,7 @@ private:
 struct ValueADC
 {
     explicit ValueADC(int _reading = 0);
-    float Real() const;
+    float Real() const { return 5.0f / (1 << 17) * (float)value; }
     int Raw()    const { return value; }
 private:
     int value;        // ѕрочитанное значение, уже преобразованное

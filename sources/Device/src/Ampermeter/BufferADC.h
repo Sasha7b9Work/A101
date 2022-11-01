@@ -23,7 +23,7 @@ struct BufferADC
 
     int Size() const  { return SIZE; }
 
-    float At(int pos) { return volt[pos]; }
+    float At(int pos) { return raw[pos].Real(); }
 
     void ConvertToVoltage();
 
@@ -36,7 +36,6 @@ struct BufferADC
 private:
     int        pointer;         // Указатель используется при чтении данных (массив raw)
     ValueADC   raw[SIZE];       // Данные, считанные с АЦП
-    float      volt[SIZE];      // Реальные значения с АЦП
     int        min_raw;
     int        max_raw;
     float      min;

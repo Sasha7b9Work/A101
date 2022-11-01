@@ -145,14 +145,6 @@ ValueADC::ValueADC(int reading)
 }
 
 
-float ValueADC::Real() const
-{
-    static const float k = 5.0f / (1 << 17);
-
-    return k * (float)value;
-}
-
-
 void AD7691::GeneratorChangedEvent()
 {
     funcRead = Generator::IsEanbled() ? Generator::ReadValue : ReadReal;
