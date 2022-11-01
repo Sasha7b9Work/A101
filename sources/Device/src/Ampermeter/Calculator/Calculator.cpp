@@ -1,6 +1,7 @@
 // 2022/10/19 08:16:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Ampermeter/Calculator/Calculator.h"
+#include "Ampermeter/Calculator/FFT.h"
 #include <cmath>
 
 
@@ -16,6 +17,8 @@ SampleRate Calculator::AppendData(const BufferADC &data)
     ac = std::fabs(data.MaxReal() - data.MinReal());
 
     dc = (data.MaxReal() + data.MinReal()) / 2.0f;
+
+    FFT fft(data);
 
     return SampleRate(10);
 }

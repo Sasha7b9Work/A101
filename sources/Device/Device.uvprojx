@@ -871,6 +871,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calibrator.h</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Ampermeter/Calculator</GroupName>
+          <Files>
             <File>
               <FileName>Calculator.cpp</FileName>
               <FileType>8</FileType>
@@ -881,10 +886,17 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\Calculator.h</FilePath>
             </File>
+            <File>
+              <FileName>FFT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FFT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FFT.h</FilePath>
+            </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Ampermeter/Calculator</GroupName>
         </Group>
         <Group>
           <GroupName>Display</GroupName>
@@ -1971,6 +1983,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calibrator.h</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Ampermeter/Calculator</GroupName>
+          <Files>
             <File>
               <FileName>Calculator.cpp</FileName>
               <FileType>8</FileType>
@@ -1981,10 +1998,17 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\Calculator.h</FilePath>
             </File>
+            <File>
+              <FileName>FFT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FFT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FFT.h</FilePath>
+            </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Ampermeter/Calculator</GroupName>
         </Group>
         <Group>
           <GroupName>Display</GroupName>
