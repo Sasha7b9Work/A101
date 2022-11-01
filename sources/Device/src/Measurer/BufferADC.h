@@ -1,5 +1,6 @@
 // 2022/10/18 16:18:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Measurer/Measurer.h"
 
 
 struct BufferADC
@@ -18,7 +19,7 @@ struct BufferADC
 
     bool IsFull()     { return (pointer == SIZE); }
 
-    void Clear(float sample_rate) { pointer = 0; sample_rate_HZ = sample_rate; }
+    void Clear(SampleRate _rate) { sampleRate = _rate; }
 
     int Size() const  { return SIZE; }
 
@@ -32,14 +33,13 @@ struct BufferADC
 
     void LogUART() const;
 
-    float sample_rate_HZ;
-
 private:
-    int    pointer;         // Указатель используется при чтении данных (массив raw)
-    int    raw[SIZE];       // Данные, считанные с АЦП
-    float  volt[SIZE];      // Реальные значения с АЦП
-    int    min_raw;
-    int    max_raw;
-    float  min;
-    float  max;
+    int        pointer;         // Указатель используется при чтении данных (массив raw)
+    int        raw[SIZE];       // Данные, считанные с АЦП
+    float      volt[SIZE];      // Реальные значения с АЦП
+    int        min_raw;
+    int        max_raw;
+    float      min;
+    float      max;
+    SampleRate sampleRate;
 };
