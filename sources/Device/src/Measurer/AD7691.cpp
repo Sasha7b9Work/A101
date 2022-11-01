@@ -1,6 +1,7 @@
 // 2022/10/18 16:57:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Measurer/AD7691.h"
+#include "Generator/Generator.h"
 #include "stm_includes.h"
 
 
@@ -140,5 +141,5 @@ int AD7691::ReadReal()
 
 void AD7691::GeneratorChangedEvent()
 {
-
+    funcRead = Generator::IsEanbled() ? Generator::ReadValue : ReadReal;
 }

@@ -8,9 +8,13 @@ namespace Generator
 
     void Disable();
 
+    bool IsEanbled();
+
     void SetFrequency(float);
 
     void SetDC(float);
 
     void SetAC(float);
+
+    int ReadValue();
 }

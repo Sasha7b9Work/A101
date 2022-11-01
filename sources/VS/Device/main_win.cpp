@@ -7,6 +7,7 @@
 #include "Menu/Menu.h"
 #include "Display/Display.h"
 #include "Nextion/Nextion.h"
+#include "Generator/Generator.h"
 #include "Screen.h"
 
 
@@ -21,6 +22,8 @@ void Application::Init()
     Screen::self->Init();
 
     Display::Init();
+
+    Generator::Enable();
 }
 
 
