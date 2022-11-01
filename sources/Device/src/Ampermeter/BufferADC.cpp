@@ -7,7 +7,7 @@
 #include <limits>
 
 
-void BufferADC::ConvertToVoltage()
+void BufferADC::CalculateLimits()
 {
     min = std::numeric_limits<float>::max();
     max = std::numeric_limits<float>::min();

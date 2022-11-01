@@ -44,7 +44,7 @@ void Ampermeter::Update()
 
     HAL_TIM4::Stop();
 
-    buffer.ConvertToVoltage();
+    buffer.CalculateLimits();
 
     Calculator::AppendData(buffer);
 

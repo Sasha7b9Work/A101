@@ -25,7 +25,7 @@ struct BufferADC
 
     float At(int pos) { return raw[pos].Real(); }
 
-    void ConvertToVoltage();
+    void CalculateLimits();
 
     float MinReal() const { return min; }
 
@@ -36,9 +36,10 @@ struct BufferADC
 private:
     int        pointer;         // Указатель используется при чтении данных (массив raw)
     ValueADC   raw[SIZE];       // Данные, считанные с АЦП
+    SampleRate sampleRate;
+
     int        min_raw;
     int        max_raw;
     float      min;
     float      max;
-    SampleRate sampleRate;
 };
