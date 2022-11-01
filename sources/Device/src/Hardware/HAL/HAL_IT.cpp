@@ -103,7 +103,7 @@ extern "C" {
         HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART3::handle);
     }
 
-    void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
+    void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle) //-V2009
     {
         if (handle == HAL_USART2::handle)
         {

@@ -60,7 +60,7 @@ struct Wave
 
     void Draw();
 
-    void DrawData(uint8 *, int);
+    void DrawData(const uint8 *, int);
 
     void Enable();
 
@@ -128,7 +128,7 @@ void Screen::OnPaint(wxPaintEvent &)
 }
 
 
-void Screen::OnMouseDown(wxMouseEvent &event)
+void Screen::OnMouseDown(wxMouseEvent &event) //-V2009
 {
     int x = event.GetX();
     int y = event.GetY();
@@ -363,7 +363,7 @@ void Screen::WaveInput::Draw(uint8 *points, int num_points)
 }
 
 
-void Wave::DrawData(uint8 *data, int num_points)
+void Wave::DrawData(const uint8 *data, int num_points)
 {
     Draw();
 

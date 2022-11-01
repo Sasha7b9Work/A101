@@ -715,7 +715,7 @@ int RS232_SendByte(int comport_number, unsigned char byte)
 }
 
 
-int RS232_SendBuf(int comport_number, unsigned char *buf, int size)
+int RS232_SendBuf(int comport_number, const unsigned char *buf, int size)
 {
   int n;
 
