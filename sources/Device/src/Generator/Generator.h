@@ -15,7 +15,7 @@ namespace Generator
 
     void SetDC(float);
 
-    void SetAC(float);
+    void SetPicAC(float);
 
     ValueADC ReadValue();
 }

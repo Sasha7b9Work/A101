@@ -21,6 +21,10 @@ int main()
 
     Display::Init();
 
+    Generator::SetPicAC(1);
+
+    Generator::SetFrequency(1e3f);
+
     Generator::Disable();
 
     while (1)

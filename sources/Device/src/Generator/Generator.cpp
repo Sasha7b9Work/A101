@@ -32,7 +32,7 @@ void Generator::SetFrequency(float)
 }
 
 
-void Generator::SetAC(float)
+void Generator::SetPicAC(float)
 {
 
 }
