@@ -12,6 +12,15 @@ private:
 };
 
 
+struct ValueADC
+{
+    ValueADC(int _reading);
+    float Real();
+private:
+    int value;        // Прочитанное значение, уже преобразованное
+};
+
+
 // АЦП
 namespace AD7691
 {

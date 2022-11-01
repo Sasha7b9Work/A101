@@ -141,6 +141,25 @@ int AD7691::ReadReal()
 }
 
 
+ValueADC::ValueADC(int reading)
+{
+    value = reading;
+
+    if (_GET_BIT(value, 17))
+    {
+        value -= 1 << 18;
+    }
+}
+
+
+float ValueADC::Real()
+{
+    static const float k = 5.0f / (1 << 17);
+
+    return k * (float)value;
+}
+
+
 void AD7691::GeneratorChangedEvent()
 {
     funcRead = Generator::IsEanbled() ? Generator::ReadValue : ReadReal;
