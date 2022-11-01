@@ -19,7 +19,7 @@ namespace Indicator
         Label(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &);
         void Disable();
         void Enable();
-        void SetText(char [MAX_LEN]);
+        void SetText(const char [MAX_LEN]);
     private:
         char  text[MAX_LEN];
         int   x;
@@ -170,7 +170,7 @@ void Indicator::Label::Disable()
 }
 
 
-void Indicator::Label::SetText(char _text[MAX_LEN])
+void Indicator::Label::SetText(const char _text[MAX_LEN])
 {
     std::strcpy(text, _text);
 
