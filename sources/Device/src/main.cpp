@@ -7,6 +7,7 @@
 #include "Menu/Menu.h"
 #include "Utils/Profiler.h"
 #include "Generator/Generator.h"
+#include "Hardware/Timer.h"
 
 
 int main()
@@ -27,6 +28,8 @@ int main()
 
     Generator::Enable();
 
+    static TimeMeterMS meter;
+
     while (1)
     {
         Ampermeter::Update();
@@ -36,5 +39,8 @@ int main()
         Nextion::Update();
 
         Profiler::Update();
+
+        LOG_WRITE("time cycle %d", meter.ElapsedTime());
+        meter.Reset();
     }
 }

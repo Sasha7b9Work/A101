@@ -11,6 +11,7 @@
 #include "Display/Indicator.h"
 #include "Ampermeter/InputRelays.h"
 #include "Ampermeter/Calibrator.h"
+#include "Hardware/Timer.h"
 
 
 namespace Ampermeter

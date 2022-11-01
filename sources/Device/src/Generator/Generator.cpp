@@ -56,7 +56,9 @@ ValueADC Generator::ReadValue()
 {
     time += (float)(AD7691::CurrentSampleRate().Time() * 1e-6);
 
-    float result = amplitudeAC * std::sinf(2.0f * 3.1415926f * frequency);
+    float result = amplitudeAC * std::sinf(2.0f * 3.1415926f * frequency * time);
+
+//    LOG_WRITE("%f", result);
 
     return ConvertToValueADC(result);
 }

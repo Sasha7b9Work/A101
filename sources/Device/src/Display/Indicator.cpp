@@ -59,7 +59,7 @@ namespace Indicator
     static Label textAC(big_x_text, big_y_1, big_width_text, big_height, 7, "", Color::MeasureAC);
     static Label textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "", Color::MeasureAC);
 
-    static Label textDeltaADC(7, 207, 70, 40, 3, "", Color::White);
+    static Label textDeltaADC(7, 207, 150, 40, 3, "", Color::White);
 
     static bool is_big = true;
 
