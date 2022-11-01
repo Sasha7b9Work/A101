@@ -5,7 +5,8 @@
 
 namespace Calculator
 {
-    void AppendData(const BufferADC &);
+    // Функция возвращает частоту дискретизации для следующего сбора данных
+    SampleRate AppendData(const BufferADC &);
 
     void SetAverages(int num_ave);
 
