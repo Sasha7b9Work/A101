@@ -7,7 +7,5 @@ namespace Display
 {
     void Init();
 
-    void SetData(const BufferADC &);
-
     void Update();
 }

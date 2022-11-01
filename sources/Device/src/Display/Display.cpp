@@ -24,9 +24,3 @@ void Display::Update()
 {
     DiagramInput::Draw();
 }
-
-
-void Display::SetData(const BufferADC &data)
-{
-    DiagramInput::SetData(data);
-}

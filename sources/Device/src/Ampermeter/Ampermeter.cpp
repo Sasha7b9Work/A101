@@ -12,6 +12,7 @@
 #include "Ampermeter/InputRelays.h"
 #include "Ampermeter/Calibrator.h"
 #include "Hardware/Timer.h"
+#include "Display/DiagramInput.h"
 
 
 namespace Ampermeter
@@ -51,5 +52,5 @@ void Ampermeter::Update()
 
     Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC());
 
-    Display::SetData(buffer);
+    DiagramInput::SetData(buffer);
 }
