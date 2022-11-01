@@ -13,4 +13,7 @@ private:
 
     void CalculateFFT(float dataR[1024], float result[2024]);
     void Normalize(float *data, int);
+
+    // Находит индекс массива частоты
+    int FindFreq();
 };

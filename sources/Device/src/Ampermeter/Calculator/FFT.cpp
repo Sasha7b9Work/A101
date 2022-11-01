@@ -21,6 +21,22 @@ FFT::FFT(const BufferADC &_data)
     {
         data[i] = (uint8)(255.0f * in[i]);
     }
+
+    LOG_WRITE("index freq - %d", FindFreq());
+}
+
+
+int FFT::FindFreq()
+{
+    for (int i = 0; i < 512; i++)
+    {
+        if (data[i] == 255)
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 
