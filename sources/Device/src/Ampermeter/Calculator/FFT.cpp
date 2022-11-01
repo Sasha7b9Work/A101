@@ -19,10 +19,14 @@ FFT::FFT(const BufferADC &_data)
 
     for (int i = 0; i < SIZE; i++)
     {
-        data[i] = (uint8)(255.0f * in[i]);
+        data[i] = (uint8)(255.0f * out[i]);
     }
 
-    LOG_WRITE("index freq - %d", FindFreq());
+    int index_freq = FindFreq();
+
+    float freq = (float)index_freq * _data.GetSampleRate().Freq();
+
+    LOG_WRITE("spectrum : index %d, frequency %f", index_freq, (double)freq);
 }
 
 

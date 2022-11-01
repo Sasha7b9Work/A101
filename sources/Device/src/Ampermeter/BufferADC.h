@@ -31,6 +31,8 @@ struct BufferADC
 
     void LogUART() const;
 
+    SampleRate GetSampleRate() const { return sampleRate; }
+
     ValueADC operator[](int i) const { return raw[i]; }
 
 private:
