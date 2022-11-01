@@ -8,4 +8,7 @@ namespace AD7691
     void Init();
 
     int ReadValue();
+
+    // При вкл/откл генератора нужно вызывать эту функцию
+    void GeneratorChangedEvent();
 }

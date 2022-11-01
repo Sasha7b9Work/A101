@@ -6,22 +6,6 @@
 
 namespace AD7691
 {
-    struct Waiter
-    {
-        void WaitConversion()
-        {
-            __IO uint value = 0;
-
-            for (; value < 100; value++)
-            {
-            }
-        }
-
-        void WaitValue()
-        {
-        }
-    };
-
     struct Pin
     {
         Pin(GPIO_TypeDef *_gpio, uint16 _pin) : gpio(_gpio), pin(_pin) { }
@@ -109,9 +93,7 @@ int AD7691::ReadValue()
 
     GPIOB->BSRR = GPIO_PIN_12;
 
-    Waiter waiter;
-
-    waiter.WaitConversion();
+    __IO uint wait = 0;   for (; wait < 100; wait++)  { }
 
     GPIOB->BSRR = GPIO_PIN_12 << 16;
 
@@ -143,4 +125,10 @@ int AD7691::ReadValue()
     result -= 6510;
 
     return result;
+}
+
+
+void AD7691::GeneratorChangedEvent()
+{
+
 }
