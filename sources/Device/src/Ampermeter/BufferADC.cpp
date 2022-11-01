@@ -19,24 +19,13 @@ void BufferADC::CalculateLimits()
     {
         int raw_value = raw[i].Raw();
 
-        if (raw_value < min_raw)
-        {
-            min_raw = raw_value;
-        }
-        if (raw_value > max_raw)
-        {
-            max_raw = raw_value;
-        }
+        if (raw_value < min_raw) { min_raw = raw_value; }
+        if (raw_value > max_raw) { max_raw = raw_value; }
 
-        if (raw[i].Real() < min)
-        {
-            min = raw[i].Real();
-        }
+        float value = raw[i].Real();
 
-        if (raw[i].Real() > max)
-        {
-            max = raw[i].Real();
-        }
+        if (value < min) { min = value; }
+        if (value > max) { max = value; }
     }
 
     Indicator::SetDeltaADC((int)(max_raw - min_raw));
