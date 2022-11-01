@@ -874,6 +874,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Generator</GroupName>
+          <Files>
+            <File>
+              <FileName>Generator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Generator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Generator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Generator.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Measurer</GroupName>
           <Files>
             <File>
@@ -1932,6 +1947,21 @@
               <FileName>Indicator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Indicator.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Generator</GroupName>
+          <Files>
+            <File>
+              <FileName>Generator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Generator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Generator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Generator.cpp</FilePath>
             </File>
           </Files>
         </Group>

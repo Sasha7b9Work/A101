@@ -6,6 +6,7 @@
 #include "Measurer/Measurer.h"
 #include "Menu/Menu.h"
 #include "Utils/Profiler.h"
+#include "Generator/Generator.h"
 
 
 int main()
@@ -19,6 +20,8 @@ int main()
     Menu::Init();
 
     Display::Init();
+
+    Generator::Disable();
 
     while (1)
     {

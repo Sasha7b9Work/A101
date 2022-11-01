@@ -76,6 +76,7 @@ file(GLOB DISPLAY               ./Display/*.*
                                 ../../Device/src/Display/DiagramInput.cpp
                                 ../../Device/src/Display/Display.cpp
                                 ../../Device/src/Display/Indicator.cpp)
+file(GLOB GENERATOR             ../../Device/src/Generator/*.*)
 file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
 file(GLOB HARDWARE_HAL          ./Hardware/HAL/*.*
                                 ../../Device/src/Hardware/HAL/HAL.h
@@ -96,6 +97,7 @@ file(GLOB UTILS                 ../../Device/src/Utils/*.*)
 
 source_group(src                FILES ${SRC})
 source_group(Display            FILES ${DISPLAY})
+source_group(Generator          FILES ${GENERATOR})
 source_group(Hardware           FILES ${HARDWARE})
 source_group(Hardware/HAL       FILES ${HARDWARE_HAL})
 source_group(Measurer           FILES ${MEASURER})
@@ -107,6 +109,7 @@ source_group(Utils              FILES ${UTILS})
 add_executable( ${PROJECT_NAME}
                 ${SRC}
                 ${DISPLAY}
+                ${GENERATOR}
                 ${HARDWARE}
                 ${HARDWARE_HAL}
                 ${MEASURER}

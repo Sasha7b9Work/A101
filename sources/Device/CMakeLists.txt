@@ -28,6 +28,7 @@ file(GLOB LIBS_HAL       ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Drive
                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/*.*)
 file(GLOB SRC            src/*.*)
 file(GLOB DISPLAY        src/Display/*.*)
+file(GLOB GENERATOR      src/Generator/*.*)
 file(GLOB HARDWARE       src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*.*)
 file(GLOB HARDWARE_HAL   src/Hardware/HAL/*.*)
@@ -41,6 +42,7 @@ set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
 
 source_group(src             FILES ${SRC})
 source_group(Display         FILES ${DISPLAY})
+source_group(Generator       FILES ${GENERATOR})
 source_group(libs/HAL        FILES ${LIBS_HAL})
 source_group(Hardware        FILES ${HARDWARE})
 source_group(Hardware/CMSIS  FILES ${HARDWARE_CMSIS})
@@ -54,6 +56,7 @@ source_group(Utils           FILES ${UTILS})
 add_library(${PROJECT_NAME} ${LIBS_HAL}
                             ${SRC}
                             ${DISPLAY}
+                            ${GENERATOR}
                             ${HARDWARE}
                             ${HARDWARE_CMSIS}
                             ${HARDWARE_HAL}
