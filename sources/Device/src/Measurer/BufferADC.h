@@ -19,7 +19,7 @@ struct BufferADC
 
     bool IsFull()     { return (pointer == SIZE); }
 
-    void Clear(SampleRate _rate) { sampleRate = _rate; }
+    void Clear(SampleRate _rate) { pointer = 0; sampleRate = _rate; }
 
     int Size() const  { return SIZE; }
 
