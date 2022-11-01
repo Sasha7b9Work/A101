@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Display/DiagramInput.h"
 #include "Display/DiagramFFT.h"
-#include "Display/Nextion.h"
+#include "Nextion/Nextion.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include <limits>

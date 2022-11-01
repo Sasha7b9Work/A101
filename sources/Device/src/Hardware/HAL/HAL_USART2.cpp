@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
-#include "Display/Nextion.h"
+#include "Nextion/Nextion.h"
 #include "stm_includes.h"
 #include "Utils/Profiler.h"
 #include <cstring>

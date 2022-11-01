@@ -871,21 +871,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Indicator.h</FilePath>
             </File>
-            <File>
-              <FileName>Nextion.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Nextion.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Nextion.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Nextion.h</FilePath>
-            </File>
-            <File>
-              <FileName>Nextion_stm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Nextion_stm.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -990,6 +975,26 @@
               <FileName>PageDebug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Nextioin</GroupName>
+          <Files>
+            <File>
+              <FileName>Nextion.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Nextion\Nextion.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Nextion.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Nextion\Nextion.h</FilePath>
+            </File>
+            <File>
+              <FileName>Nextion_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Nextion\Nextion_stm.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1928,21 +1933,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Indicator.h</FilePath>
             </File>
-            <File>
-              <FileName>Nextion.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Nextion.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Nextion.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Nextion.h</FilePath>
-            </File>
-            <File>
-              <FileName>Nextion_stm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Nextion_stm.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2047,6 +2037,26 @@
               <FileName>PageDebug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Nextioin</GroupName>
+          <Files>
+            <File>
+              <FileName>Nextion.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Nextion\Nextion.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Nextion.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Nextion\Nextion.h</FilePath>
+            </File>
+            <File>
+              <FileName>Nextion_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Nextion\Nextion_stm.cpp</FilePath>
             </File>
           </Files>
         </Group>

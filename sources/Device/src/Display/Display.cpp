@@ -3,7 +3,7 @@
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
 #include "Display/DiagramInput.h"
-#include "Display/Nextion.h"
+#include "Nextion/Nextion.h"
 #include "Display/Indicator.h"
 #include <cstring>
 #include <cstdio>

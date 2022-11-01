@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Display/DiagramFFT.h"
 #include "Display/DiagramInput.h"
-#include "Display/Nextion.h"
+#include "Nextion/Nextion.h"
 
 
 namespace DiagramFFT

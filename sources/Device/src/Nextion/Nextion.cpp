@@ -1,6 +1,6 @@
 // 2022/10/17 15:30:27 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Display/Nextion.h"
+#include "Nextion/Nextion.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/MenuItems.h"

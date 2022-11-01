@@ -74,7 +74,6 @@ file(GLOB DISPLAY               ./Display/*.*
                                 ../../Device/src/Display/Colors.cpp
                                 ../../Device/src/Display/DiagramFFT.cpp
                                 ../../Device/src/Display/DiagramInput.cpp
-                                ../../Device/src/Display/Nextion.cpp
                                 ../../Device/src/Display/Display.cpp
                                 ../../Device/src/Display/Indicator.cpp)
 file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
@@ -90,6 +89,9 @@ file(GLOB MEASURER              ./Measurer/*.*
                                 ../../Device/src/Measurer/InputRelays.cpp)
 file(GLOB MENU                  ../../Device/src/Menu/*.*)
 file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
+file(GLOB NEXTION               ./Nextion/*.*
+                                ../../Device/src/Nextion/*.h
+                                ../../Device/src/Nextion/Nextion.cpp)
 file(GLOB UTILS                 ../../Device/src/Utils/*.*)
 
 source_group(src                FILES ${SRC})
@@ -99,6 +101,7 @@ source_group(Hardware/HAL       FILES ${HARDWARE_HAL})
 source_group(Measurer           FILES ${MEASURER})
 source_group(Menu               FILES ${MENU})
 source_group(Menu/Pages         FILES ${MENU_PAGES})
+source_group(Nextion            FILES ${NEXTION})
 source_group(Utils              FILES ${UTILS})
 
 add_executable( ${PROJECT_NAME}
@@ -109,6 +112,7 @@ add_executable( ${PROJECT_NAME}
                 ${MEASURER}
                 ${MENU}
                 ${MENU_PAGES}
+                ${NEXTION}
                 ${UTILS}
                 )
 

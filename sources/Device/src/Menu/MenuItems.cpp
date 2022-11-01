@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Menu.h"
-#include "Display/Nextion.h"
+#include "Nextion/Nextion.h"
 #include "Menu/Pages/Pages.h"
 #include <cstring>
 #include <cstdio>

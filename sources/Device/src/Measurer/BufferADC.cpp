@@ -1,7 +1,7 @@
 // 2022/10/18 16:18:26 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Measurer/BufferADC.h"
-#include "Display/Nextion.h"
+#include "Nextion/Nextion.h"
 #include "Display/Indicator.h"
 #include "Hardware/HAL/HAL.h"
 #include <limits>

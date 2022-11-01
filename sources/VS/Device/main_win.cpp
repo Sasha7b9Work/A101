@@ -6,7 +6,7 @@
 #include "Measurer/Measurer.h"
 #include "Menu/Menu.h"
 #include "Display/Display.h"
-#include "Display/Nextion.h"
+#include "Nextion/Nextion.h"
 #include "Screen.h"
 
 

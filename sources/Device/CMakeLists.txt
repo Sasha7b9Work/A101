@@ -34,6 +34,7 @@ file(GLOB HARDWARE_HAL   src/Hardware/HAL/*.*)
 file(GLOB MEASURER       src/Measurer/*.*)
 file(GLOB MENU           src/Menu/*.*)
 file(GLOB MENU_PAGES     src/Menu/Pages/*.*)
+file(GLOB NEXTION        src/Nextion/*.*)
 file(GLOB UTILS          src/Utils/*)
 
 set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
@@ -47,6 +48,7 @@ source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
 source_group(Measurer        FILES ${MEASURER})
 source_group(Menu            FILES ${MENU})
 source_group(Menu/Pages      FILES ${MENU_PAGES})
+source_group(Nextion         FILES ${NEXTION})
 source_group(Utils           FILES ${UTILS})
 
 add_library(${PROJECT_NAME} ${LIBS_HAL}
@@ -58,5 +60,6 @@ add_library(${PROJECT_NAME} ${LIBS_HAL}
                             ${MEASURER}
                             ${MENU}
                             ${MENU_PAGES}
+                            ${NEXTION}
                             ${UTILS}
 )
