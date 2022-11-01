@@ -23,8 +23,6 @@ struct BufferADC
 
     int Size() const  { return SIZE; }
 
-    float At(int pos) { return raw[pos].Real(); }
-
     void CalculateLimits();
 
     float MinReal() const { return min.Real(); }
@@ -32,6 +30,8 @@ struct BufferADC
     float MaxReal() const { return max.Real(); }
 
     void LogUART() const;
+
+    ValueADC operator[](int i) const { return raw[i]; }
 
 private:
     int        pointer;         // ”казатель используетс€ при чтении данных (массив raw)

@@ -56,7 +56,7 @@ void DiagramInput::Draw()
 
     for (int i = 0; i < NumPoints(); i++)
     {
-        float value = y0 + scale * (data.At(i) - ave);
+        float value = y0 + scale * (data[i].Real() - ave);
 
         if (value < 0)
         {

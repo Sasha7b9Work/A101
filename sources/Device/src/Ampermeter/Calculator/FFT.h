@@ -10,4 +10,7 @@ public:
 private:
     static const int SIZE = 512;
     uint8 data[SIZE];
+
+    void CalculateFFT(float dataR[1024], float result[2024]);
+    void Normalize(float *data, int);
 };
