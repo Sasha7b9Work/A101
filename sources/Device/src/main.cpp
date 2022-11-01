@@ -25,7 +25,7 @@ int main()
 
     Generator::SetFrequency(1e3f);
 
-    Generator::Disable();
+    Generator::Enable();
 
     while (1)
     {
