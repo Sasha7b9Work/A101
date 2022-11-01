@@ -12,6 +12,8 @@ int main()
 {
     HAL::Init();
 
+    HAL_TIM::Delay(500);
+
     Measurer::Init();
 
     Menu::Init();

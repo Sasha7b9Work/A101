@@ -8,6 +8,8 @@ struct Color
     static Color White;
     static Color Background;
     static Color ButtonPress;
+    static Color MeasureDC;
+    static Color MeasureAC;
     static Color Count;
 
     Color(uint8 v) : value(v) {}

@@ -8,6 +8,8 @@ Color Color::Black(0);
 Color Color::White(1);
 Color Color::Background(2);
 Color Color::ButtonPress(3);
+Color Color::MeasureDC(4);
+Color Color::MeasureAC(5);
 Color Color::Count(255);
 
 Color Color::current(0);
@@ -15,10 +17,12 @@ Color Color::current(0);
 
 static uint16 colors[255] =
 {
-    Color::MakeColor(0.0f, 0.0f, 0.0f),
-    Color::MakeColor(1.0f, 1.0f, 1.0f),
-    15319,
-    6700
+    Color::MakeColor(0.0f, 0.0f, 0.0f),     // Black
+    Color::MakeColor(1.0f, 1.0f, 1.0f),     // White
+    15319,                                  // Background
+    6700,                                   // ButtonPress
+    Color::MakeColor(0.5f,  1.0f, 0.1f),    // MeasureDC
+    Color::MakeColor(0.25f, 0.75f, 0.05f)   // MeasureAC
 };
 
 
