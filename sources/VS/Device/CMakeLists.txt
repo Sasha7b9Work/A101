@@ -82,7 +82,7 @@ file(GLOB HARDWARE_HAL          ./Hardware/HAL/*.*
                                 ../../Device/src/Hardware/HAL/HAL.h
                                 ../../Device/src/Hardware/HAL/HAL_PIO.h
                                 ../../Device/src/Hardware/HAL/HAL_TIM.cpp)
-file(GLOB MEASURER              ../../Device/src/Measurer/*.*)
+file(GLOB AMPERMETER            ../../Device/src/Ampermeter/*.*)
 file(GLOB MENU                  ../../Device/src/Menu/*.*)
 file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
 file(GLOB NEXTION               ./Nextion/*.*
@@ -95,7 +95,7 @@ source_group(Display            FILES ${DISPLAY})
 source_group(Generator          FILES ${GENERATOR})
 source_group(Hardware           FILES ${HARDWARE})
 source_group(Hardware/HAL       FILES ${HARDWARE_HAL})
-source_group(Measurer           FILES ${MEASURER})
+source_group(Ampermeter         FILES ${AMPERMETER})
 source_group(Menu               FILES ${MENU})
 source_group(Menu/Pages         FILES ${MENU_PAGES})
 source_group(Nextion            FILES ${NEXTION})
@@ -107,7 +107,7 @@ add_executable( ${PROJECT_NAME}
                 ${GENERATOR}
                 ${HARDWARE}
                 ${HARDWARE_HAL}
-                ${MEASURER}
+                ${AMPERMETER}
                 ${MENU}
                 ${MENU_PAGES}
                 ${NEXTION}

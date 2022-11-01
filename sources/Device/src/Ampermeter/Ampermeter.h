@@ -17,7 +17,4 @@ namespace Measurer
     void Init();
 
     void Update();
-
-    // Возвращает частоту дискретизации
-    SampleRate GetSampleRate();
 }

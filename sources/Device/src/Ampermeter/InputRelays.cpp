@@ -1,6 +1,6 @@
 // 2022/10/31 12:42:59 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Measurer/InputRelays.h"
+#include "Ampermeter/InputRelays.h"
 #include "Hardware/HAL/HAL_PIO.h"
 
 

@@ -32,7 +32,7 @@ file(GLOB GENERATOR      src/Generator/*.*)
 file(GLOB HARDWARE       src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*.*)
 file(GLOB HARDWARE_HAL   src/Hardware/HAL/*.*)
-file(GLOB MEASURER       src/Measurer/*.*)
+file(GLOB AMPERMETER     src/Ampermeter/*.*)
 file(GLOB MENU           src/Menu/*.*)
 file(GLOB MENU_PAGES     src/Menu/Pages/*.*)
 file(GLOB NEXTION        src/Nextion/*.*)
@@ -47,7 +47,7 @@ source_group(libs/HAL        FILES ${LIBS_HAL})
 source_group(Hardware        FILES ${HARDWARE})
 source_group(Hardware/CMSIS  FILES ${HARDWARE_CMSIS})
 source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
-source_group(Measurer        FILES ${MEASURER})
+source_group(Ampermeter      FILES ${AMPERMETER})
 source_group(Menu            FILES ${MENU})
 source_group(Menu/Pages      FILES ${MENU_PAGES})
 source_group(Nextion         FILES ${NEXTION})
@@ -60,7 +60,7 @@ add_library(${PROJECT_NAME} ${LIBS_HAL}
                             ${HARDWARE}
                             ${HARDWARE_CMSIS}
                             ${HARDWARE_HAL}
-                            ${MEASURER}
+                            ${AMPERMETER}
                             ${MENU}
                             ${MENU_PAGES}
                             ${NEXTION}

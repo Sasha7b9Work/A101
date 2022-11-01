@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Measurer/Measurer.h"
+#include "Ampermeter/Ampermeter.h"
 #include "Nextion/Nextion.h"
 #include "stm_includes.h"
 

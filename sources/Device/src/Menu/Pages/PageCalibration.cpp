@@ -1,7 +1,7 @@
 // 2022/10/29 21:41:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
-#include "Measurer/InputRelays.h"
+#include "Ampermeter/InputRelays.h"
 
 
 namespace PageCalibration

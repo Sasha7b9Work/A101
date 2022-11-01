@@ -1,15 +1,15 @@
 // 2022/10/18 15:54:07 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Measurer/Measurer.h"
-#include "Measurer/BufferADC.h"
+#include "Ampermeter/Ampermeter.h"
+#include "Ampermeter/BufferADC.h"
 #include "Hardware/HAL/HAL.h"
-#include "Measurer/AD7691.h"
-#include "Measurer/Calculator.h"
+#include "Ampermeter/AD7691.h"
+#include "Ampermeter/Calculator.h"
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/MenuItems.h"
 #include "Display/Indicator.h"
-#include "Measurer/InputRelays.h"
+#include "Ampermeter/InputRelays.h"
 
 
 namespace Measurer

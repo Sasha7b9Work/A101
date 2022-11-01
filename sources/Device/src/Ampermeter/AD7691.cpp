@@ -1,6 +1,6 @@
 // 2022/10/18 16:57:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Measurer/AD7691.h"
+#include "Ampermeter/AD7691.h"
 #include "Generator/Generator.h"
 #include "stm_includes.h"
 

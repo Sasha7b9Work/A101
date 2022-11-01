@@ -3,7 +3,7 @@
 #include "Display/Display.h"
 #include "Nextion/Nextion.h"
 #include "Hardware/HAL/HAL.h"
-#include "Measurer/Measurer.h"
+#include "Ampermeter/Ampermeter.h"
 #include "Menu/Menu.h"
 #include "Utils/Profiler.h"
 #include "Generator/Generator.h"
@@ -21,7 +21,7 @@ int main()
 
     Display::Init();
 
-    Generator::Disable();
+    Generator::Enable();
 
     while (1)
     {

@@ -819,6 +819,61 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Ampermeter</GroupName>
+          <Files>
+            <File>
+              <FileName>AD7691.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\AD7691.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7691.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\AD7691.h</FilePath>
+            </File>
+            <File>
+              <FileName>Ampermeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Ampermeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Ampermeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Ampermeter.h</FilePath>
+            </File>
+            <File>
+              <FileName>BufferADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\BufferADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BufferADC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\BufferADC.h</FilePath>
+            </File>
+            <File>
+              <FileName>Calculator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calculator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator.h</FilePath>
+            </File>
+            <File>
+              <FileName>InputRelays.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\InputRelays.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputRelays.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\InputRelays.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Display</GroupName>
           <Files>
             <File>
@@ -885,61 +940,6 @@
               <FileName>Generator.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Generator.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Measurer</GroupName>
-          <Files>
-            <File>
-              <FileName>Measurer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\Measurer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measurer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\Measurer.h</FilePath>
-            </File>
-            <File>
-              <FileName>Calculator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\Calculator.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Calculator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\Calculator.h</FilePath>
-            </File>
-            <File>
-              <FileName>BufferADC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\BufferADC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BufferADC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\BufferADC.h</FilePath>
-            </File>
-            <File>
-              <FileName>AD7691.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\AD7691.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7691.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\AD7691.h</FilePath>
-            </File>
-            <File>
-              <FileName>InputRelays.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\InputRelays.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputRelays.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\InputRelays.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1896,6 +1896,61 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Ampermeter</GroupName>
+          <Files>
+            <File>
+              <FileName>AD7691.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\AD7691.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7691.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\AD7691.h</FilePath>
+            </File>
+            <File>
+              <FileName>Ampermeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Ampermeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Ampermeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Ampermeter.h</FilePath>
+            </File>
+            <File>
+              <FileName>BufferADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\BufferADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BufferADC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\BufferADC.h</FilePath>
+            </File>
+            <File>
+              <FileName>Calculator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calculator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator.h</FilePath>
+            </File>
+            <File>
+              <FileName>InputRelays.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\InputRelays.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputRelays.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\InputRelays.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Display</GroupName>
           <Files>
             <File>
@@ -1962,61 +2017,6 @@
               <FileName>Generator.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Generator.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Measurer</GroupName>
-          <Files>
-            <File>
-              <FileName>Measurer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\Measurer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measurer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\Measurer.h</FilePath>
-            </File>
-            <File>
-              <FileName>Calculator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\Calculator.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Calculator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\Calculator.h</FilePath>
-            </File>
-            <File>
-              <FileName>BufferADC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\BufferADC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BufferADC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\BufferADC.h</FilePath>
-            </File>
-            <File>
-              <FileName>AD7691.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\AD7691.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7691.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\AD7691.h</FilePath>
-            </File>
-            <File>
-              <FileName>InputRelays.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measurer\InputRelays.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputRelays.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measurer\InputRelays.h</FilePath>
             </File>
           </Files>
         </Group>

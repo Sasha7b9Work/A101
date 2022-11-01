@@ -1,6 +1,6 @@
 // 2022/10/18 16:18:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Measurer/Measurer.h"
+#include "Ampermeter/Ampermeter.h"
 
 
 struct BufferADC

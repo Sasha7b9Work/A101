@@ -1,6 +1,6 @@
 // 2022/10/17 13:48:30 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Measurer/BufferADC.h"
+#include "Ampermeter/BufferADC.h"
 
 
 namespace Display
