@@ -75,6 +75,8 @@ namespace AD7691
     static PinOUT pinCLK(GPIOB, GPIO_PIN_10);   // 47
     static PinOUT pinCNV(GPIOB, GPIO_PIN_12);   // 51
 
+    static SampleRate sampleRate(10);
+
     static int ReadReal();
 
     static int (*funcRead)() = ReadReal;
@@ -142,4 +144,10 @@ int AD7691::ReadReal()
 void AD7691::GeneratorChangedEvent()
 {
     funcRead = Generator::IsEanbled() ? Generator::ReadValue : ReadReal;
+}
+
+
+SampleRate AD7691::CurrentSampleRate()
+{
+    return sampleRate;
 }

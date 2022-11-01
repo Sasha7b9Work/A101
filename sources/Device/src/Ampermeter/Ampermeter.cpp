@@ -15,8 +15,6 @@
 namespace Measurer
 {
     static BufferADC buffer;
-
-    static SampleRate sampleRate(10);
 }
 
 
@@ -30,9 +28,9 @@ void Measurer::Init()
 
 void Measurer::Update()
 {
-    buffer.Clear(sampleRate);
+    buffer.Clear(AD7691::CurrentSampleRate());
 
-    HAL_TIM4::StartPeriodicUS(sampleRate.Time());
+    HAL_TIM4::StartPeriodicUS(AD7691::CurrentSampleRate().Time());
 
     while (!buffer.IsFull())
     {

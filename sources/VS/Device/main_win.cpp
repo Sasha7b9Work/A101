@@ -7,6 +7,7 @@
 #include "Display/Display.h"
 #include "Nextion/Nextion.h"
 #include "Generator/Generator.h"
+#include "Ampermeter/Ampermeter.h"
 #include "Screen.h"
 
 
