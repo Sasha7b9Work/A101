@@ -4,7 +4,7 @@
 #include "Ampermeter/BufferADC.h"
 #include "Hardware/HAL/HAL.h"
 #include "Ampermeter/AD7691.h"
-#include "Ampermeter/Calculator.h"
+#include "Ampermeter/Calculator/Calculator.h"
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/MenuItems.h"

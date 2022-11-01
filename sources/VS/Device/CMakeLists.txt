@@ -83,6 +83,7 @@ file(GLOB HARDWARE_HAL          ./Hardware/HAL/*.*
                                 ../../Device/src/Hardware/HAL/HAL_PIO.h
                                 ../../Device/src/Hardware/HAL/HAL_TIM.cpp)
 file(GLOB AMPERMETER            ../../Device/src/Ampermeter/*.*)
+file(GLOB AMPERMETER_CALC       ../../Device/src/Ampermeter/Calculator/*.*)
 file(GLOB MENU                  ../../Device/src/Menu/*.*)
 file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
 file(GLOB NEXTION               ./Nextion/*.*
@@ -90,16 +91,17 @@ file(GLOB NEXTION               ./Nextion/*.*
                                 ../../Device/src/Nextion/Nextion.cpp)
 file(GLOB UTILS                 ../../Device/src/Utils/*.*)
 
-source_group(src                FILES ${SRC})
-source_group(Display            FILES ${DISPLAY})
-source_group(Generator          FILES ${GENERATOR})
-source_group(Hardware           FILES ${HARDWARE})
-source_group(Hardware/HAL       FILES ${HARDWARE_HAL})
-source_group(Ampermeter         FILES ${AMPERMETER})
-source_group(Menu               FILES ${MENU})
-source_group(Menu/Pages         FILES ${MENU_PAGES})
-source_group(Nextion            FILES ${NEXTION})
-source_group(Utils              FILES ${UTILS})
+source_group(src                   FILES ${SRC})
+source_group(Display               FILES ${DISPLAY})
+source_group(Generator             FILES ${GENERATOR})
+source_group(Hardware              FILES ${HARDWARE})
+source_group(Hardware/HAL          FILES ${HARDWARE_HAL})
+source_group(Ampermeter            FILES ${AMPERMETER})
+source_group(Ampermeter/Calculator FILES ${AMPERMETER_CALC})
+source_group(Menu                  FILES ${MENU})
+source_group(Menu/Pages            FILES ${MENU_PAGES})
+source_group(Nextion               FILES ${NEXTION})
+source_group(Utils                 FILES ${UTILS})
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
@@ -108,6 +110,7 @@ add_executable( ${PROJECT_NAME}
                 ${HARDWARE}
                 ${HARDWARE_HAL}
                 ${AMPERMETER}
+                ${AMPERMETER_CALC}
                 ${MENU}
                 ${MENU_PAGES}
                 ${NEXTION}

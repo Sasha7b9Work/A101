@@ -852,16 +852,6 @@
               <FilePath>.\src\Ampermeter\BufferADC.h</FilePath>
             </File>
             <File>
-              <FileName>Calculator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Calculator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator.h</FilePath>
-            </File>
-            <File>
               <FileName>InputRelays.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\InputRelays.cpp</FilePath>
@@ -881,7 +871,20 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calibrator.h</FilePath>
             </File>
+            <File>
+              <FileName>Calculator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\Calculator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calculator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\Calculator.h</FilePath>
+            </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Ampermeter/Calculator</GroupName>
         </Group>
         <Group>
           <GroupName>Display</GroupName>
@@ -1949,16 +1952,6 @@
               <FilePath>.\src\Ampermeter\BufferADC.h</FilePath>
             </File>
             <File>
-              <FileName>Calculator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Calculator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator.h</FilePath>
-            </File>
-            <File>
               <FileName>InputRelays.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\InputRelays.cpp</FilePath>
@@ -1978,7 +1971,20 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calibrator.h</FilePath>
             </File>
+            <File>
+              <FileName>Calculator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\Calculator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calculator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\Calculator.h</FilePath>
+            </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Ampermeter/Calculator</GroupName>
         </Group>
         <Group>
           <GroupName>Display</GroupName>
