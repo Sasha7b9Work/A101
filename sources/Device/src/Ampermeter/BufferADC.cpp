@@ -16,13 +16,11 @@ void BufferADC::CalculateLimits()
     {
         ValueADC value = raw[i];
 
-        if (value < ValueADC::MIN) { min = value; }
-        if (value > ValueADC::MAX) { max = value; }
+        if (value < min) { min = value; }
+        if (value > max) { max = value; }
     }
 
     Indicator::SetDeltaADC((int)(max.Raw() - min.Raw()));
-
-//    LOG_WRITE("min %d, max %d, delta %d", min_raw, max_raw, (int)(max_raw - min_raw));
 }
 
 

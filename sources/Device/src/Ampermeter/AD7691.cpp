@@ -5,8 +5,8 @@
 #include "stm_includes.h"
 
 
-const ValueADC ValueADC::MAX = ValueADC((1 << 18) - 1);
-const ValueADC ValueADC::MIN = ValueADC(-(1 << 18));
+const ValueADC ValueADC::MAX = ValueADC((1 << 17) - 1);
+const ValueADC ValueADC::MIN = ValueADC((1 << 17));
 
 
 namespace AD7691
