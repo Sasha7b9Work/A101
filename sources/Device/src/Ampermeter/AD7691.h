@@ -14,7 +14,7 @@ private:
 
 struct ValueADC
 {
-    ValueADC(int _reading = 0);
+    explicit ValueADC(int _reading = 0);
     float Real() const;
     int Raw()    const { return value; }
 private:

@@ -130,14 +130,7 @@ ValueADC AD7691::ReadReal()
         }
     }
 
-    if (_GET_BIT(result, 17))
-    {
-        result -= 1 << 18;
-    }
-
-    result -= 6510;
-
-    return result;
+    return ValueADC(result);
 }
 
 
