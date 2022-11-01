@@ -17,6 +17,10 @@ struct ValueADC
     explicit ValueADC(int _reading = 0);
     float Real() const { return 5.0f / (1 << 17) * (float)value; }
     int Raw()    const { return value; }
+    static const ValueADC MIN;
+    static const ValueADC MAX;
+    bool operator <(const ValueADC &rhs) const { return value < rhs.value; }
+    bool operator >(const ValueADC &rhs) const { return value > rhs.value; }
 private:
     int value;        // ѕрочитанное значение, уже преобразованное
 };

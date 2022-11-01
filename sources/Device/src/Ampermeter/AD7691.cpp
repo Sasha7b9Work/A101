@@ -5,6 +5,10 @@
 #include "stm_includes.h"
 
 
+const ValueADC ValueADC::MAX = ValueADC((1 << 18) - 1);
+const ValueADC ValueADC::MIN = ValueADC(-(1 << 18));
+
+
 namespace AD7691
 {
     struct Pin

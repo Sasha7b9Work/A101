@@ -9,26 +9,18 @@
 
 void BufferADC::CalculateLimits()
 {
-    min = std::numeric_limits<float>::max();
-    max = std::numeric_limits<float>::min();
-
-    min_raw = 1 << 20;
-    max_raw = - min_raw;
+    min = ValueADC::MAX;
+    max = ValueADC::MIN;
 
     for (int i = 0; i < SIZE; i++)
     {
-        int raw_value = raw[i].Raw();
+        ValueADC value = raw[i];
 
-        if (raw_value < min_raw) { min_raw = raw_value; }
-        if (raw_value > max_raw) { max_raw = raw_value; }
-
-        float value = raw[i].Real();
-
-        if (value < min) { min = value; }
-        if (value > max) { max = value; }
+        if (value < ValueADC::MIN) { min = value; }
+        if (value > ValueADC::MAX) { max = value; }
     }
 
-    Indicator::SetDeltaADC((int)(max_raw - min_raw));
+    Indicator::SetDeltaADC((int)(max.Raw() - min.Raw()));
 
 //    LOG_WRITE("min %d, max %d, delta %d", min_raw, max_raw, (int)(max_raw - min_raw));
 }

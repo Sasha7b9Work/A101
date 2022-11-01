@@ -27,9 +27,9 @@ struct BufferADC
 
     void CalculateLimits();
 
-    float MinReal() const { return min; }
+    float MinReal() const { return min.Real(); }
 
-    float MaxReal() const { return max; }
+    float MaxReal() const { return max.Real(); }
 
     void LogUART() const;
 
@@ -38,8 +38,6 @@ private:
     ValueADC   raw[SIZE];       // Данные, считанные с АЦП
     SampleRate sampleRate;
 
-    int        min_raw;
-    int        max_raw;
-    float      min;
-    float      max;
+    ValueADC   min;
+    ValueADC   max;
 };
