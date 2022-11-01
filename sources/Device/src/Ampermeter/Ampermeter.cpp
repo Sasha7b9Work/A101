@@ -32,9 +32,9 @@ void Ampermeter::Init()
 
 void Ampermeter::Update()
 {
-    buffer.Clear(AD7691::CurrentSampleRate());
+    buffer.Clear(SampleRate::Current::Get());
 
-    HAL_TIM4::StartPeriodicUS(AD7691::CurrentSampleRate().Time());
+    HAL_TIM4::StartPeriodicUS(SampleRate::Current::Get().Time());
 
     while (!buffer.IsFull())
     {
@@ -47,7 +47,7 @@ void Ampermeter::Update()
 
     buffer.CalculateLimits();
 
-    Calculator::AppendData(buffer);
+    SampleRate::Current::Set(Calculator::AppendData(buffer));
 
     Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC());
 

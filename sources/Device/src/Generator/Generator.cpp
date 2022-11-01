@@ -54,7 +54,7 @@ void Generator::SetDC(float dc)
 
 ValueADC Generator::ReadValue()
 {
-    time += (float)(AD7691::CurrentSampleRate().Time() * 1e-6);
+    time += (float)(SampleRate::Current::Get().Time() * 1e-6);
 
     float result = amplitudeAC * std::sinf(2.0f * 3.1415926f * frequency * time);
 
