@@ -15,7 +15,7 @@ void Application::Init()
 {
     HAL::Init();
 
-    Measurer::Init();
+    Ampermeter::Init();
 
     Menu::Init();
 
@@ -29,7 +29,7 @@ void Application::Init()
 
 void Application::Update()
 {
-    Measurer::Update();
+    Ampermeter::Update();
 
     Display::Update();
 

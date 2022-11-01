@@ -15,7 +15,7 @@ int main()
 
     HAL_TIM::Delay(500);
 
-    Measurer::Init();
+    Ampermeter::Init();
 
     Menu::Init();
 
@@ -25,7 +25,7 @@ int main()
 
     while (1)
     {
-        Measurer::Update();
+        Ampermeter::Update();
 
         Display::Update();
 

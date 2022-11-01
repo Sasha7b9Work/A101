@@ -2,7 +2,7 @@
 #pragma once
 
 
-namespace Measurer
+namespace Ampermeter
 {
     void Init();
 

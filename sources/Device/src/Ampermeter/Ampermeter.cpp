@@ -12,13 +12,13 @@
 #include "Ampermeter/InputRelays.h"
 
 
-namespace Measurer
+namespace Ampermeter
 {
     static BufferADC buffer;
 }
 
 
-void Measurer::Init()
+void Ampermeter::Init()
 {
     HAL_TIM4::Init();
 
@@ -26,7 +26,7 @@ void Measurer::Init()
 }
 
 
-void Measurer::Update()
+void Ampermeter::Update()
 {
     buffer.Clear(AD7691::CurrentSampleRate());
 
