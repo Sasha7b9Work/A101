@@ -896,6 +896,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\FFT.h</FilePath>
             </File>
+            <File>
+              <FileName>arm_fft_bin_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\arm_fft_bin_data.c</FilePath>
+            </File>
+            <File>
+              <FileName>arm_fft_bin_example_f32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\arm_fft_bin_example_f32.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2007,6 +2017,16 @@
               <FileName>FFT.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\FFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>arm_fft_bin_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\arm_fft_bin_data.c</FilePath>
+            </File>
+            <File>
+              <FileName>arm_fft_bin_example_f32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\arm_fft_bin_example_f32.c</FilePath>
             </File>
           </Files>
         </Group>
