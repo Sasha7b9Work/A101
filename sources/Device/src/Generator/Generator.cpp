@@ -44,7 +44,7 @@ void Generator::SetDC(float)
 }
 
 
-int Generator::ReadValue()
+ValueADC Generator::ReadValue()
 {
     return 0;
 }

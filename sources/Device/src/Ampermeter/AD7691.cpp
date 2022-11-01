@@ -77,9 +77,9 @@ namespace AD7691
 
     static SampleRate sampleRate(10);
 
-    static int ReadReal();
+    static ValueADC ReadReal();
 
-    static int (*funcRead)() = ReadReal;
+    static ValueADC (*funcRead)() = ReadReal;
 }
 
 
@@ -94,13 +94,13 @@ void AD7691::Init()
 }
 
 
-int AD7691::ReadValue()
+ValueADC AD7691::ReadValue()
 {
     return funcRead();
 }
 
 
-int AD7691::ReadReal()
+ValueADC AD7691::ReadReal()
 {
     int result = 0;
 
@@ -152,7 +152,7 @@ ValueADC::ValueADC(int reading)
 }
 
 
-float ValueADC::Real()
+float ValueADC::Real() const
 {
     static const float k = 5.0f / (1 << 17);
 

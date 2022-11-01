@@ -17,7 +17,7 @@ void BufferADC::ConvertToVoltage()
 
     for (int i = 0; i < SIZE; i++)
     {
-        int raw_value = raw[i];
+        int raw_value = raw[i].Raw();
 
         if (raw_value < min_raw)
         {
@@ -55,6 +55,6 @@ void BufferADC::LogUART() const
 {
     for (int i = 0; i < Size(); i++)
     {
-        LOG_WRITE("%d", raw[i]);
+        LOG_WRITE("%d", raw[i].Raw());
     }
 }

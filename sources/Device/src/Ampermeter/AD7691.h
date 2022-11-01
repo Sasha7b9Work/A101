@@ -14,8 +14,9 @@ private:
 
 struct ValueADC
 {
-    ValueADC(int _reading);
-    float Real();
+    ValueADC(int _reading = 0);
+    float Real() const;
+    int Raw()    const { return value; }
 private:
     int value;        // Прочитанное значение, уже преобразованное
 };
@@ -26,7 +27,7 @@ namespace AD7691
 {
     void Init();
 
-    int ReadValue();
+    ValueADC ReadValue();
 
     // При вкл/откл генератора нужно вызывать эту функцию
     void GeneratorChangedEvent();
