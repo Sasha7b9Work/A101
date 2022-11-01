@@ -24,7 +24,7 @@ FFT::FFT(const BufferADC &_data)
 
     int index_freq = FindFreq();
 
-    float freq = (float)index_freq * _data.GetSampleRate().Freq();
+    float freq = (float)index_freq * _data.GetSampleRate().Freq() / 1024.0f;
 
     LOG_WRITE("spectrum : index %d, frequency %f", index_freq, (double)freq);
 }

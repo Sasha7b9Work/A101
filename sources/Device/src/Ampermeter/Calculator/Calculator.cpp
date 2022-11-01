@@ -20,7 +20,7 @@ SampleRate Calculator::AppendData(const BufferADC &data)
 
     FFT fft(data);
 
-    return SampleRate(10);
+    return SampleRate::Current::Get();
 }
 
 
