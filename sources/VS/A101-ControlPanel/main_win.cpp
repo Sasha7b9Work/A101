@@ -15,22 +15,16 @@ void Application::Init()
 {
     HAL::Init();
 
-    Ampermeter::Init();
-
     Menu::Init();
 
     Screen::self->Init();
 
     Display::Init();
-
-    Generator::Enable();
 }
 
 
 void Application::Update()
 {
-    Ampermeter::Update();
-
     Display::Update();
 
     Nextion::Update();
