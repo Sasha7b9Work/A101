@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "SCPI/SCPI.h"
 #include "SCPI/ComPort.h"
+#include "SCPI/Parser/Parser.h"
 #include <vector>
 #include <queue>
 
@@ -122,7 +123,7 @@ bool SCPI::Command::Execute()
         return true;
     }
 
-
+    Parser::ParseCommand(buffer);
 
     return false;
 }
