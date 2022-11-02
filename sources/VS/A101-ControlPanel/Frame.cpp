@@ -49,7 +49,7 @@ void Frame::CreateMenu()
     bar->Append(menu_file, wxT("Файл"));
     bar->Append(menu_settings, wxT("Настройки"));
 
-    SetMenuBar(bar);
+    wxFrameBase::SetMenuBar(bar);
 
     Bind(wxEVT_MENU, &Frame::OnQuitEvent, this, MENU_FILE_QUIT);
     Bind(wxEVT_MENU, &Frame::OnNumberPortEvent, this, MENU_SETTINS_NUMPORT);

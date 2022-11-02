@@ -14,7 +14,7 @@ DialogNumberComPort::DialogNumberComPort() : Dialog("Номер ком-порта")
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
     sizer->Add(txtNumberComPort, wxALIGN_CENTER_HORIZONTAL);
 
-    SetBoxSizer(sizer, { 200, 50 });
+    Dialog::SetBoxSizer(sizer, { 200, 50 });
 }
 
 
