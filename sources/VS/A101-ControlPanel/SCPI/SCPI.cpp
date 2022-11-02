@@ -16,6 +16,12 @@ void SCPI::Init()
 }
 
 
+void SCPI::DeInit()
+{
+    port.Close();
+}
+
+
 void SCPI::Update()
 {
     if (port.IsOpened())

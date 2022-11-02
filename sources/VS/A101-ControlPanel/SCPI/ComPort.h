@@ -11,9 +11,15 @@ public:
 
     bool Open();
 
+    void Close();
+
     bool IsOpened() const;
 
     void Send(uint8);
+
+    int NumPort() const { return number; }
+
+    void CallbackOnReceive(uint8 byte) { received.push_back(byte); };
 
 private:
 

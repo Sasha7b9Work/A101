@@ -9,7 +9,7 @@
 
 ComPort::~ComPort()
 {
-    RS232_CloseComport(number);
+    Close();
 }
 
 
@@ -31,6 +31,12 @@ bool ComPort::Open()
 }
 
 
+void ComPort::Close()
+{
+    RS232_CloseComport(number);
+}
+
+
 bool ComPort::IsOpened() const
 {
     return (number >= 0);
@@ -47,6 +53,11 @@ void ComPort::FuncReceive(ComPort *com_port)
 {
     while (com_port->IsOpened())
     {
-        com_port = com_port;
+        uint8 byte = 0;
+
+        if (RS232_PollComport(com_port->number, &byte, 1) != 1)
+        {
+            com_port->CallbackOnReceive(byte);
+        }
     }
 }

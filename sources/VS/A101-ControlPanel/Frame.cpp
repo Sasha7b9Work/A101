@@ -4,6 +4,7 @@
 #include "Screen.h"
 #include "Application.h"
 #include "Dialogs/DialogNumberComPort.h"
+#include "SCPI/SCPI.h"
 
 
 Frame *Frame::self = nullptr;
@@ -90,6 +91,8 @@ void Frame::OnTimerEvent(wxTimerEvent &)
 
 void Frame::OnQuitEvent(wxCommandEvent &)
 {
+    SCPI::DeInit();
+
     Close(true);
 }
 
