@@ -50,6 +50,7 @@ void Frame::CreateMenu()
     SetMenuBar(bar);
 
     Bind(wxEVT_MENU, &Frame::OnQuitEvent, this, MENU_FILE_QUIT);
+    Bind(wxEVT_MENU, &Frame::OnNumberPortEvent, this, MENU_SETTINS_NUMPORT);
 }
 
 
@@ -89,4 +90,12 @@ void Frame::OnTimerEvent(wxTimerEvent &)
 void Frame::OnQuitEvent(wxCommandEvent &)
 {
     Close(true);
+}
+
+
+void Frame::OnNumberPortEvent(wxCommandEvent &)
+{
+    TuneGeneratorDialog dialog;
+
+    dialog.ShowModal();
 }

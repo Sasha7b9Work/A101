@@ -20,4 +20,5 @@ private:
 
     void OnTimerEvent(wxTimerEvent &);
     void OnQuitEvent(wxCommandEvent &);
+    void OnNumberPortEvent(wxCommandEvent &);
 };
