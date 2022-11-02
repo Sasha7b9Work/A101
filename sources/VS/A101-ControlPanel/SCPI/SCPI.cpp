@@ -2,6 +2,10 @@
 #include "defines.h"
 #include "SCPI/SCPI.h"
 #include "SCPI/ComPort.h"
+#include <vector>
+
+
+using namespace std;
 
 
 namespace SCPI
@@ -26,7 +30,12 @@ void SCPI::Update()
 {
     if (port.IsOpened())
     {
+        vector<uint8> data = port.PopAll();
 
+        if (data.size())
+        {
+            data = data;
+        }
     }
     else
     {

@@ -17,14 +17,14 @@ bool ComPort::Open()
 {
     number = DialogNumberComPort::NumComPort();
 
-    if (!RS232_OpenComport(number, 115200, "8n1", 0))
-    {
-        number = -1;
-    }
-    else
+    if (RS232_OpenComport(number, 115200, "8n1", 0))
     {
         std::thread thread(ComPort::FuncReceive, this);
         thread.detach();
+    }
+    else
+    {
+        number = -1;
     }
 
     return (number >= 0);
@@ -64,7 +64,7 @@ void ComPort::ReadByte()
 {
     uint8 byte = 0;
 
-    if (RS232_PollComport(number, &byte, 1) == 1)
+    if (RS232_PollComport(number, &byte, 1))
     {
         received.Push(byte);
     }

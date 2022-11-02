@@ -25,6 +25,8 @@ public:
 
     void ReadByte();
 
+    vector<uint8> PopAll() { return received.PopAll(); }
+
 private:
 
     int number = -1;                    // Если -1 - порт не открыт
@@ -33,7 +35,7 @@ private:
     {
         void Push(uint8);
         // Возвращает всё, что есть в буфере и очищает данный буфер
-        std::vector<uint8> PopAll();
+        vector<uint8> PopAll();
     private:
         mutex mutex_buffer;
         vector<uint8> buffer;        // Здесь принятые байты
