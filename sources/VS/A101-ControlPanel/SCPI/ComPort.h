@@ -19,7 +19,7 @@ public:
 
     int NumPort() const { return number; }
 
-    void CallbackOnReceive(uint8 byte) { received.push_back(byte); };
+    void ReadByte();
 
 private:
 

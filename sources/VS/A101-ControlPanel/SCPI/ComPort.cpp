@@ -55,11 +55,17 @@ void ComPort::FuncReceive(ComPort *com_port)
 {
     while (com_port->IsOpened())
     {
-        uint8 byte = 0;
+        com_port->ReadByte();
+    }
+}
 
-        if (RS232_PollComport(com_port->number, &byte, 1) != 1)
-        {
-            com_port->CallbackOnReceive(byte);
-        }
+
+void ComPort::ReadByte()
+{
+    uint8 byte = 0;
+
+    if (RS232_PollComport(number, &byte, 1) == 1)
+    {
+        received.push_back(byte);
     }
 }
