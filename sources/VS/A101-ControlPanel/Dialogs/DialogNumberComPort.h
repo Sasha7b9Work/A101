@@ -9,8 +9,14 @@ public:
 
     DialogNumberComPort();
 
+    static int NumComPort() { return num_port; };
+
 private:
 
     virtual void ApplyParameters();
     virtual void CancelParameters();
+
+    wxTextCtrl *txtNumberComPort = nullptr;
+
+    static int num_port;
 };
