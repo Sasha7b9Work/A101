@@ -3,7 +3,7 @@
 #include "SCPI/ComPort.h"
 #include "SCPI/rs232.h"
 #include "Dialogs/DialogNumberComPort.h"
-
+#include <thread>
 
 
 
@@ -14,6 +14,11 @@ bool ComPort::Open()
     if (!RS232_OpenComport(number, 115200, "8n1", 0))
     {
         number = -1;
+    }
+    else
+    {
+        std::thread thread(ComPort::FuncReceive, this);
+        thread.detach();
     }
 
     return (number >= 0);
@@ -29,4 +34,13 @@ bool ComPort::IsOpened() const
 void ComPort::Send(uint8 byte)
 {
     RS232_SendByte(number, byte);
+}
+
+
+void ComPort::FuncReceive(ComPort *com_port)
+{
+    while (com_port->IsOpened())
+    {
+
+    }
 }

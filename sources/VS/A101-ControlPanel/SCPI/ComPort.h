@@ -1,5 +1,6 @@
 // 2022/11/02 08:51:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include <vector>
 
 
 class ComPort
@@ -14,5 +15,9 @@ public:
 
 private:
 
-    int number = -1;    // Если -1 - порт не открыт
+    int number = -1;                    // Если -1 - порт не открыт
+
+    std::vector<uint8> received;        // Здесь принятые байты
+
+    static void FuncReceive(ComPort *);
 };
