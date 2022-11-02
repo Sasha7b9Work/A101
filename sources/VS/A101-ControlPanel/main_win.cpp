@@ -2,28 +2,15 @@
 #define WIN32_LEAN_AND_MEAN
 #include "defines.h"
 #include "Application.h"
-#include "Hardware/HAL/HAL.h"
-#include "Menu/Menu.h"
-#include "Display/Display.h"
-#include "Nextion/Nextion.h"
-#include "Generator/Generator.h"
-#include "Ampermeter/Ampermeter.h"
 #include "Screen.h"
 
 
 void Application::Init()
 {
-    HAL::Init();
-
     Screen::self->Init();
-
-    Display::Init();
 }
 
 
 void Application::Update()
 {
-    Display::Update();
-
-    Nextion::Update();
 }

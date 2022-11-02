@@ -2,10 +2,10 @@
 
 project (A101-ControlPanel)
 
-set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD ON)
 
 include_directories(.
-                    ../../Device/src
+#                    ../../Device/src
                     ../../VS/ThirdParty/wxWidgets/include
                     ../../generated/ThirdParty/lib/vc_dll/mswud)
 
@@ -49,6 +49,7 @@ if(WIN32)
     endif()
 
 #    add_compile_options(/wd4244)    # initializing': conversion from 'double' to 'int', possible loss of data
+    add_compile_options(/wd4464)    # relative include path contains '..'
     add_compile_options(/wd4514)    # unreferenced inline function has been removed
     add_compile_options(/wd4625)    # copy constructor was implicitly defined as deleted
     add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
@@ -62,15 +63,18 @@ if(WIN32)
     add_compile_options(/wd5219)    # implicit conversion from 'int' to 'float'
 endif()
 
-file(GLOB SRC                   ./*.h  ./*.cpp)
-file(GLOB DISPLAY               ../../Device/src/Display/Colors.*)
+file(GLOB SRC               *.h  *.cpp)
+file(GLOB DISPLAY           ../../Device/src/Display/Colors.*)
+file(GLOB SCPI              SCPI/*)
 
-source_group(src                   FILES ${SRC})
-source_group(Display               FILES ${DISPLAY})
+source_group(src            FILES ${SRC})
+source_group(Display        FILES ${DISPLAY})
+source_group(SCPI           FILES ${SCPI})
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
                 ${DISPLAY}
+                ${SCPI}
                 )
 
 target_link_libraries(${PROJECT_NAME} wxbase33ud wxmsw33ud_core Ws2_32)

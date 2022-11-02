@@ -1,6 +1,10 @@
 // 2022/10/19 10:00:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
+#ifdef WIN32
+#include "../../Device/src/Display/Colors.h"
+#else
 #include "Display/Colors.h"
+#endif
 #include <cstdio>
 
 

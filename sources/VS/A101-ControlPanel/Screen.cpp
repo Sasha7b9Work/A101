@@ -1,7 +1,7 @@
 // 2022/10/28 23:17:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Screen.h"
-#include "Nextion/Nextion.h"
+#include "SCPI/SCPI.h"
 #include <string>
 #include <map>
 #include <algorithm>
@@ -147,7 +147,7 @@ void Screen::OnMouseDown(wxMouseEvent &event) //-V2009
 
 void Screen::Init()
 {
-    Nextion::FillRect(0, 0, WIDTH, HEIGHT, Color::Background);
+    FillRectangle(0, 0, WIDTH, HEIGHT, Color::Background);
 
     for (auto &elem : buttons)
     {
@@ -156,8 +156,12 @@ void Screen::Init()
 }
 
 
-void Screen::FillRectangle(int x, int y, int width, int height, const wxColor &color)
+void Screen::FillRectangle(int x, int y, int width, int height, const Color &_color)
 {
+    _color.SetAsCurrent();
+
+    wxColor color(Color::Current().ToRaw());
+
     wxMemoryDC dc;
     dc.SelectObject(bitmap);
     dc.SetBrush(color);
@@ -168,8 +172,23 @@ void Screen::FillRectangle(int x, int y, int width, int height, const wxColor &c
 }
 
 
-void Screen::DrawLine(int x1, int y1, int x2, int y2, const wxColor &color)
+void Screen::DrawRectangle(int x, int y, int width, int height, const Color &_color)
 {
+    _color.SetAsCurrent();
+
+    DrawLineH(y, x, x + width);
+    DrawLineV(x + width - 1, y, y + height);
+    DrawLineH(y + height - 1, x, x + width);
+    DrawLineV(x, y, y + height);
+}
+
+
+void Screen::DrawLine(int x1, int y1, int x2, int y2, const Color &_color)
+{
+    _color.SetAsCurrent();
+
+    wxColor color(Color::Current().ToRaw());
+
     wxMemoryDC dc;
     dc.SelectObject(bitmap);
     dc.SetPen(color);
@@ -179,8 +198,24 @@ void Screen::DrawLine(int x1, int y1, int x2, int y2, const wxColor &color)
 }
 
 
-void Screen::DrawString(int x, int y, int num_font, const wxColor &color, pchar text)
+void Screen::DrawLineH(int y, int x1, int x2, const Color &color)
 {
+    DrawLine(x1, y, x2, y, color);
+}
+
+
+void Screen::DrawLineV(int x, int y1, int y2, const Color &color)
+{
+    DrawLine(x, y1, x, y2, color);
+}
+
+
+void Screen::DrawString(int x, int y, int num_font, const Color &_color, pchar text)
+{
+    _color.SetAsCurrent();
+
+    wxColor color(Color::Current().ToRaw());
+
     wxMemoryDC dc;
     dc.SelectObject(bitmap);
     dc.SetTextForeground(color);
@@ -188,6 +223,14 @@ void Screen::DrawString(int x, int y, int num_font, const wxColor &color, pchar 
     dc.DrawText(text, x, y);
     dc.SelectObject(wxNullBitmap);
     Refresh();
+}
+
+
+void Screen::DrawString(int x, int y, int width, int height, int font, const Color &color_draw, const Color &color_back, pchar text)
+{
+    FillRectangle(x, y, width, height, color_back);
+
+    DrawString(x, y, font, color_draw, text);
 }
 
 
@@ -207,18 +250,18 @@ void ButtonGUI::Draw()
 {
     if (!enabled)
     {
-        Nextion::FillRect(x, y, width, height, Color::Background);
+        Screen::self->FillRectangle(x, y, width, height, Color::Background);
     }
     else
     {
-        Nextion::DrawRect(x, y, width, height, Color::White);
+        Screen::self->DrawRectangle(x, y, width, height, Color::White);
 
         Color color_fill = highlight ? Color::ButtonPress : Color::Background;
 
-        Nextion::FillRect(x + 1, y + 1, width - 2, height - 2, color_fill);
+        Screen::self->FillRectangle(x + 1, y + 1, width - 2, height - 2, color_fill);
 
         int d = 20;
-        Nextion::DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, color_fill, text.c_str());
+        Screen::self->DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, color_fill, text.c_str());
     }
 }
 
@@ -243,8 +286,8 @@ bool ButtonGUI::PixelInside(int pixel_x, int pixel_y)
 
 void ButtonGUI::Press()
 {
-    Nextion::CallbackOnReceive((uint8)(0x30 + index));
-    Nextion::CallbackOnReceive('Z');
+    SCPI::Send((uint8)(0x30 + index));
+    SCPI::Send('Z');
 }
 
 
@@ -376,7 +419,7 @@ void Wave::DrawData(const uint8 *data, int num_points)
 
     for (int i = 0; i < num_points; i++)
     {
-        Nextion::DrawLineV(x + i, (int)(y + scale * data[i]), (int)(y + scale * data[i] + 1), Color::White);
+        Screen::self->DrawLineV(x + i, (int)(y + scale * data[i]), (int)(y + scale * data[i] + 1), Color::White);
     }
 }
 
@@ -385,7 +428,7 @@ void Wave::Draw()
 {
     Color color = enabled ? Color::ButtonPress : Color::Background;
 
-    Screen::self->FillRectangle(x, y, width, height, wxColor(color.ToRaw()));
+    Screen::self->FillRectangle(x, y, width, height, color);
 }
 
 

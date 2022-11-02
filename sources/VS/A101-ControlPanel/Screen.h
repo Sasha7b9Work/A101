@@ -1,5 +1,6 @@
 // 2022/10/28 23:17:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "../../Device/src/Display/Colors.h"
 #include "wx_includes.h"
 
 
@@ -16,11 +17,29 @@ public:
 
     void Init();
 
-    void FillRectangle(int x, int y, int width, int height, const wxColor &);
+private:
 
-    void DrawLine(int x1, int y1, int x2, int y2, const wxColor &);
+    static wxBitmap bitmap;
 
-    void DrawString(int x, int y, int font, const wxColor &, pchar text);
+    void OnPaint(wxPaintEvent &);
+
+    void OnMouseDown(wxMouseEvent &);
+
+public:
+
+    void FillRectangle(int x, int y, int width, int height, const Color & = Color::Count);
+
+    void DrawRectangle(int x, int y, int width, int height, const Color & = Color::Count);
+
+    void DrawLine(int x1, int y1, int x2, int y2, const Color & = Color::Count);
+
+    void DrawLineV(int x, int y1, int y2, const Color & = Color::Count);
+
+    void DrawLineH(int y, int x1, int x2, const Color & = Color::Count);
+
+    void DrawString(int x, int y, int font, const Color &, pchar);
+
+    void DrawString(int x, int y, int width, int height, int font, const Color &color_draw, const Color &color_back, pchar);
 
     struct Button
     {
@@ -48,11 +67,4 @@ public:
 
         static void Disable(int size);
     };
-
-private:
-    static wxBitmap bitmap;
-
-    void OnPaint(wxPaintEvent &);
-
-    void OnMouseDown(wxMouseEvent &);
 };
