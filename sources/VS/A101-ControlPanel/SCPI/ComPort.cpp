@@ -2,15 +2,31 @@
 #include "defines.h"
 #include "SCPI/ComPort.h"
 #include "SCPI/rs232.h"
+#include "Dialogs/DialogNumberComPort.h"
 
 
-void ComPort::Open()
+
+
+bool ComPort::Open()
 {
+    number = DialogNumberComPort::NumComPort();
 
+    if (!RS232_OpenComport(number, 115200, "8n1", 0))
+    {
+        number = -1;
+    }
+
+    return (number >= 0);
 }
 
 
 bool ComPort::IsOpened() const
 {
-    return false;
+    return (number >= 0);
+}
+
+
+void ComPort::Send(uint8 byte)
+{
+    RS232_SendByte(number, byte);
 }

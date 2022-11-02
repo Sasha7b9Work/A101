@@ -6,5 +6,7 @@ namespace SCPI
 {
     void Init();
 
+    void Update();
+
     void Send(uint8);
 }

@@ -16,4 +16,5 @@ void Application::Init()
 
 void Application::Update()
 {
+    SCPI::Update();
 }

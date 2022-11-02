@@ -6,7 +6,13 @@ class ComPort
 {
 public:
 
-    void Open();
+    bool Open();
 
     bool IsOpened() const;
+
+    void Send(uint8);
+
+private:
+
+    int number = -1;    // Если -1 - порт не открыт
 };

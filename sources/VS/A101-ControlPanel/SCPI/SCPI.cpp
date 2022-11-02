@@ -16,11 +16,24 @@ void SCPI::Init()
 }
 
 
-void SCPI::Send(uint8)
+void SCPI::Update()
 {
     if (port.IsOpened())
     {
 
+    }
+    else
+    {
+        port.Open();
+    }
+}
+
+
+void SCPI::Send(uint8 byte)
+{
+    if (port.IsOpened())
+    {
+        port.Send(byte);
     }
     else
     {
