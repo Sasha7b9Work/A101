@@ -13,11 +13,15 @@ namespace SCPI
 
 void SCPI::Update()
 {
-    Parser::Update();
+    if (data_in.Size())
+    {
+        int i = data_in.Size();
+        i = i;
+    }
 }
 
 
 void SCPI::CallbackOnReceive(uint8 byte)
 {
-    data_in.Append(&byte, 1);
+    data_in.Append(byte);
 }

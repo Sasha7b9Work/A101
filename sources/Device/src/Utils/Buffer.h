@@ -2,23 +2,12 @@
 #include <cstring>
 
 
-template<class T, int size_buffer>
+template<class T, int MAX_SIZE>
 class Buffer
 {
 public:
 
-    Buffer() : size(size_buffer) {} //-V730
-
-    Buffer(int _size) : size(size_buffer) //-V730
-    {
-        Realloc(_size);
-    }
-
-    Buffer(int _size, T value) : size(size_buffer)
-    {
-        Realloc(_size);
-        Fill(value);
-    }
+    Buffer() : size(0) {} //-V730
 
     void Fill(T value)
     {
@@ -37,59 +26,6 @@ public:
         return buffer + Size();
     }
 
-    void Realloc(int _size)
-    {
-        size = _size;
-
-        if (size > size_buffer)
-        {
-            LOG_ERROR("%s:%d : Very small buffer %d, need %d", __FILE__, __LINE__, size_buffer, size);
-            size = size_buffer;
-        }
-    }
-
-    void ReallocAndFill(int _size, T value)
-    {
-        Realloc(_size);
-
-        for (int i = 0; i < size; i++)
-        {
-            buffer[i] = value;
-        }
-    }
-
-    // Перевыделить память и заполнить её из buffer
-    void ReallocFromBuffer(const T *in, int _size)
-    {
-        size = _size;
-
-        if (size > size_buffer)
-        {
-            LOG_ERROR("%s:%d : Very small buffer %d, need %d", __FILE__, __LINE__, size_buffer, size);
-            size = size_buffer;
-        }
-
-        for (int i = 0; i < size; i++)
-        {
-            buffer[i] = in[i];
-        }
-    }
-
-    // Записать в буфер size байт из buffer. Если памяти выделено меньше, заполнить только выделенную память
-    void FillFromBuffer(const T *in, int _size)
-    {
-        if (_size > Size())
-        {
-            LOG_ERROR("%s:%d : Very small buffer %d, need %d", __FILE__, __LINE__, size_buffer, _size);
-            _size = Size();
-        }
-
-        for (int i = 0; i < _size; i++)
-        {
-            buffer[i] = in[i];
-        }
-    }
-
     // Возвращает количество элементов в буфере
     int Size() const
     {
@@ -98,10 +34,10 @@ public:
 
     int Capacity() const
     {
-        return size_buffer;
+        return MAX_SIZE;
     }
 
-    void Append(const void *data, int _size)
+    void Append(const T *data, int _size)
     {
         if (Size() + _size > Capacity())
         {
@@ -109,8 +45,20 @@ public:
         }
         else
         {
-            std::memcpy(&buffer[size], data, (uint)_size);
+            std::memcpy(&buffer[size], data, (uint)_size * sizeof(T));
             size += _size;
+        }
+    }
+
+    void Append(T value)
+    {
+        if (Size() + 1 > Capacity())
+        {
+            LOG_ERROR("Buffer is full");
+        }
+        else
+        {
+            buffer[size++] = value;
         }
     }
 
@@ -142,7 +90,7 @@ protected:
 
     int size;
 
-    T buffer[size_buffer];
+    T buffer[MAX_SIZE];
 };
 
 
