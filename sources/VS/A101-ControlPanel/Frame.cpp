@@ -12,7 +12,9 @@ enum
 {
     TIMER_ID = 11111,
 
-    MENU_FILE_QUIT
+    MENU_FILE_QUIT,
+
+    MENU_SETTINS_NUMPORT
 };
 
 
@@ -35,15 +37,17 @@ Frame::Frame(const wxString &title)
 
 void Frame::CreateMenu()
 {
-    wxMenu *file_menu = new wxMenu();
+    wxMenu *menu_file = new wxMenu();
+    menu_file->Append(MENU_FILE_QUIT, wxT("Выход\tAlt+X"), wxT("Закрыть редактор"));
 
-    file_menu->Append(MENU_FILE_QUIT, wxT("Выход\tAlt+X"), wxT("Закрыть редактор"));
+    wxMenu *menu_settings = new wxMenu();
+    menu_settings->Append(MENU_SETTINS_NUMPORT, wxT("Номер порта"), wxT("Устновка номера ком-порта"));
 
-    wxMenuBar *menu_bar = new wxMenuBar();
+    wxMenuBar *bar = new wxMenuBar();
+    bar->Append(menu_file, wxT("Файл"));
+    bar->Append(menu_settings, wxT("Настройки"));
 
-    menu_bar->Append(file_menu, wxT("Файл"));
-
-    SetMenuBar(menu_bar);
+    SetMenuBar(bar);
 
     Bind(wxEVT_MENU, &Frame::OnQuitEvent, this, MENU_FILE_QUIT);
 }
