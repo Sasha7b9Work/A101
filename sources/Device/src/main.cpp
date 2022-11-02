@@ -8,6 +8,7 @@
 #include "Utils/Profiler.h"
 #include "Generator/Generator.h"
 #include "Hardware/Timer.h"
+#include "SCPI/SCPI.h"
 
 
 int main()
@@ -37,5 +38,7 @@ int main()
         Nextion::Update();
 
         Profiler::Update();
+
+        SCPI::Update();
     }
 }

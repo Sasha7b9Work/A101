@@ -9,6 +9,7 @@
 #include "Generator/Generator.h"
 #include "Ampermeter/Ampermeter.h"
 #include "Screen.h"
+#include "SCPI/SCPI.h"
 
 
 void Application::Init()
@@ -34,4 +35,6 @@ void Application::Update()
     Display::Update();
 
     Nextion::Update();
+
+    SCPI::Update();
 }

@@ -90,6 +90,8 @@ file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
 file(GLOB NEXTION               ./Nextion/*.*
                                 ../../Device/src/Nextion/*.h
                                 ../../Device/src/Nextion/Nextion.cpp)
+file(GLOB SCPI                  ../../Device/src/SCPI/*.*)
+file(GLOB SCPI_PARSER           ../../Device/src/SCPI/Parser/*.*)
 file(GLOB UTILS                 ../../Device/src/Utils/*.*)
 
 source_group(src                   FILES ${SRC})
@@ -102,6 +104,8 @@ source_group(Ampermeter/Calculator FILES ${AMPERMETER_CALC})
 source_group(Menu                  FILES ${MENU})
 source_group(Menu/Pages            FILES ${MENU_PAGES})
 source_group(Nextion               FILES ${NEXTION})
+source_group(SCPI                  FILES ${SCPI})
+source_group(SCPI/Parser           FILES ${SCPI_PARSER})
 source_group(Utils                 FILES ${UTILS})
 
 add_executable( ${PROJECT_NAME}
@@ -115,6 +119,8 @@ add_executable( ${PROJECT_NAME}
                 ${MENU}
                 ${MENU_PAGES}
                 ${NEXTION}
+                ${SCPI}
+                ${SCPI_PARSER}
                 ${UTILS}
                 )
 
