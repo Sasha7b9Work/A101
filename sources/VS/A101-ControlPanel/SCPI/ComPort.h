@@ -1,6 +1,10 @@
 // 2022/11/02 08:51:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include <vector>
+#include <mutex>
+
+
+using namespace std;
 
 
 class ComPort
@@ -25,7 +29,17 @@ private:
 
     int number = -1;                    // Если -1 - порт не открыт
 
-    std::vector<uint8> received;        // Здесь принятые байты
+    struct Buffer
+    {
+        void Push(uint8);
+        // Возвращает всё, что есть в буфере и очищает данный буфер
+        std::vector<uint8> PopAll();
+    private:
+        mutex mutex_buffer;
+        vector<uint8> buffer;        // Здесь принятые байты
+    };
+
+    Buffer received;
 
     static void FuncReceive(ComPort *);
 };

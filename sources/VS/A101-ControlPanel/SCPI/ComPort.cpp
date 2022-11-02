@@ -66,6 +66,30 @@ void ComPort::ReadByte()
 
     if (RS232_PollComport(number, &byte, 1) == 1)
     {
-        received.push_back(byte);
+        received.Push(byte);
     }
+}
+
+
+void ComPort::Buffer::Push(uint8 byte)
+{
+    mutex_buffer.lock();
+
+    buffer.push_back(byte);
+
+    mutex_buffer.unlock();
+}
+
+
+std::vector<uint8> ComPort::Buffer::PopAll()
+{
+    mutex_buffer.lock();
+
+    std::vector<uint8> result = buffer;
+
+    buffer.clear();
+
+    mutex_buffer.unlock();
+
+    return result;
 }
