@@ -34,6 +34,8 @@ bool ComPort::Open()
 void ComPort::Close()
 {
     RS232_CloseComport(number);
+
+    number = -1;
 }
 
 
