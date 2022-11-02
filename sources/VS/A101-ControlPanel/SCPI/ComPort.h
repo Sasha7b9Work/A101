@@ -14,7 +14,7 @@ public:
 
     bool IsOpened() const;
 
-    void Send(uint8 *data, int size);
+    void Send(const uint8 *data, int size);
 
     int NumPort() const { return number; }
 

@@ -43,7 +43,7 @@ bool ComPort::IsOpened() const
 }
 
 
-void ComPort::Send(uint8 *data, int size)
+void ComPort::Send(const uint8 *data, int size)
 {
     RS232_SendBuf(number, data, size);
 }

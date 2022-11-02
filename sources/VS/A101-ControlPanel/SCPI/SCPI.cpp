@@ -37,7 +37,7 @@ bool SCPI::OpenPort()
 {
     if (port.Open())
     {
-
+        SCPI::Send(":connect");
     }
 
     return port.IsOpened();
@@ -46,6 +46,8 @@ bool SCPI::OpenPort()
 
 void SCPI::ClosePort()
 {
+    SCPI::Send(":disconnect");
+
     port.Close();
 }
 
@@ -99,7 +101,7 @@ void SCPI::Send(pchar format, ...)
 
         port.Send((uint8 *)message, (int)strlen(message));
 
-        port.Send((uint8 *)"\x0a\0x0d", 2);
+        port.Send((uint8 *)"\x0a\x0d", 2);
     }
 }
 
