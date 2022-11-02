@@ -3,10 +3,13 @@
 #include "defines.h"
 #include "Application.h"
 #include "Screen.h"
+#include "SCPI/SCPI.h"
 
 
 void Application::Init()
 {
+    SCPI::Init();
+
     Screen::self->Init();
 }
 

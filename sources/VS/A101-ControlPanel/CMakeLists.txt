@@ -5,7 +5,6 @@ project (A101-ControlPanel)
 set(CMAKE_UNITY_BUILD ON)
 
 include_directories(.
-#                    ../../Device/src
                     ../../VS/ThirdParty/wxWidgets/include
                     ../../generated/ThirdParty/lib/vc_dll/mswud)
 
@@ -63,7 +62,7 @@ if(WIN32)
     add_compile_options(/wd5219)    # implicit conversion from 'int' to 'float'
 endif()
 
-file(GLOB SRC               *.h  *.cpp)
+file(GLOB SRC               *.h  *.cpp *.c)
 file(GLOB DISPLAY           ../../Device/src/Display/Colors.*)
 file(GLOB SCPI              SCPI/*)
 
