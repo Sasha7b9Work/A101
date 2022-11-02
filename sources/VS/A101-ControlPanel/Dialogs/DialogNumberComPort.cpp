@@ -3,7 +3,7 @@
 #include "Dialogs/DialogNumberComPort.h"
 
 
-int DialogNumberComPort::num_port = 5;
+int DialogNumberComPort::num_port = 4;
 
 
 DialogNumberComPort::DialogNumberComPort() : Dialog("Номер ком-порта")

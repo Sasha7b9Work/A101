@@ -17,7 +17,7 @@ bool ComPort::Open()
 {
     number = DialogNumberComPort::NumComPort();
 
-    if (RS232_OpenComport(number, 115200, "8n1", 0))
+    if (RS232_OpenComport(number, 115200, "8n1", 0) == 0)
     {
         std::thread thread(ComPort::FuncReceive, this);
         thread.detach();
