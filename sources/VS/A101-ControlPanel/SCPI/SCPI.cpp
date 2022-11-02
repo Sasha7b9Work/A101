@@ -63,6 +63,13 @@ void SCPI::Update()
 }
 
 
+void SCPI::Event::ChangePort()
+{
+    port.Close();
+    port.Open();
+}
+
+
 void SCPI::Send(uint8 byte)
 {
     if (port.IsOpened())
@@ -105,11 +112,14 @@ SCPI::Command SCPI::Buffer::Extract()
         }
     }
 
-    data.erase(data.begin(), data.begin() + (int)bytes.size());
-
-    while (data.size() && (data[0] == 0x0d || data[0] == 0x0a))
+    if (data.size())
     {
-        data.erase(data.begin());
+        data.erase(data.begin(), data.begin() + (int)bytes.size());
+
+        while (data.size() && (data[0] == 0x0d || data[0] == 0x0a))
+        {
+            data.erase(data.begin());
+        }
     }
 
     return Command(bytes.data(), bytes.size());

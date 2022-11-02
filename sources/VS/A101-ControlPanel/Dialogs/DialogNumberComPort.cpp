@@ -1,6 +1,7 @@
 // 2022/11/02 09:17:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Dialogs/DialogNumberComPort.h"
+#include "SCPI/SCPI.h"
 
 
 int DialogNumberComPort::num_port = 4;
@@ -23,7 +24,12 @@ void DialogNumberComPort::ApplyParameters()
 
     if (txtNumberComPort->GetValue().ToInt(&value))
     {
-        num_port = value;
+        if (num_port != value)
+        {
+            num_port = value;
+
+            SCPI::Event::ChangePort();
+        }
     }
 }
 

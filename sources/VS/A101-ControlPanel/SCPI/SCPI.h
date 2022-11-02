@@ -11,4 +11,9 @@ namespace SCPI
     void Update();
 
     void Send(uint8);
+
+    namespace Event
+    {
+        void ChangePort();
+    }
 }
