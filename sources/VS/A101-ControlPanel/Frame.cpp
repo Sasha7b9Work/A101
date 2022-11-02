@@ -3,6 +3,7 @@
 #include "Frame.h"
 #include "Screen.h"
 #include "Application.h"
+#include "Dialogs/DialogNumberComPort.h"
 
 
 Frame *Frame::self = nullptr;
@@ -95,7 +96,7 @@ void Frame::OnQuitEvent(wxCommandEvent &)
 
 void Frame::OnNumberPortEvent(wxCommandEvent &)
 {
-    TuneGeneratorDialog dialog;
+    DialogNumberComPort dialog;
 
     dialog.ShowModal();
 }

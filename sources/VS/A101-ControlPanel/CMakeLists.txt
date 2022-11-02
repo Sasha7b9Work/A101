@@ -63,15 +63,18 @@ if(WIN32)
 endif()
 
 file(GLOB SRC               *.h  *.cpp *.c)
+file(GLOB DIALOGS           Dialogs/*)
 file(GLOB DISPLAY           ../../Device/src/Display/Colors.*)
 file(GLOB SCPI              SCPI/*)
 
 source_group(src            FILES ${SRC})
+source_group(Dialogs        FILES ${DIALOGS})
 source_group(Display        FILES ${DISPLAY})
 source_group(SCPI           FILES ${SCPI})
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
+                ${DIALOGS}
                 ${DISPLAY}
                 ${SCPI}
                 )
