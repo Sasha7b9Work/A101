@@ -11,5 +11,6 @@ if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
     add_definitions(-DDEBUG)
 endif()
 
-add_subdirectory(Device)
+add_subdirectory(A101-Emu)
+add_subdirectory(A101-ControlPanel)
 add_subdirectory(Updater)

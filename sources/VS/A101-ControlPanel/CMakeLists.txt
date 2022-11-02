@@ -1,6 +1,6 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 
-project (Device)
+project (A101-ControlPanel)
 
 set(CMAKE_UNITY_BUILD ON)
 
