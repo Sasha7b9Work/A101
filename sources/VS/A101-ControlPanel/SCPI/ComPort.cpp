@@ -7,6 +7,12 @@
 
 
 
+ComPort::~ComPort()
+{
+    RS232_CloseComport(number);
+}
+
+
 bool ComPort::Open()
 {
     number = DialogNumberComPort::NumComPort();
@@ -41,6 +47,6 @@ void ComPort::FuncReceive(ComPort *com_port)
 {
     while (com_port->IsOpened())
     {
-
+        com_port = com_port;
     }
 }

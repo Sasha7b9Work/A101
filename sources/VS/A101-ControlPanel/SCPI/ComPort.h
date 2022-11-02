@@ -7,6 +7,8 @@ class ComPort
 {
 public:
 
+    ~ComPort();
+
     bool Open();
 
     bool IsOpened() const;
