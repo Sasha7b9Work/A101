@@ -4,5 +4,7 @@
 
 namespace SCPI
 {
+    void CallbackOnReceive(uint8);
+
     void Update();
 }

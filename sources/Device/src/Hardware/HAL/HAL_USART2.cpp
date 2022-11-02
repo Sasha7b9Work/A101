@@ -85,7 +85,7 @@ void HAL_USART2::SendByte(uint8 byte)
 
 void HAL_USART2::CallbackOnReceive()
 {
-    Nextion::CallbackOnReceive(HAL_USART2::buffer);
+    Nextion::CallbackOnReceive(buffer);
 
-    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART2::handle, (uint8_t *)&HAL_USART2::buffer, 1);
+    HAL_UART_Receive_IT(&handleUSART2, (uint8_t *)&buffer, 1);
 }
