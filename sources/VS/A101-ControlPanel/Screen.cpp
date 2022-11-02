@@ -2,9 +2,6 @@
 #include "defines.h"
 #include "Screen.h"
 #include "SCPI/SCPI.h"
-#include <string>
-#include <map>
-#include <algorithm>
 
 
 wxBitmap Screen::bitmap(Screen::WIDTH, Screen::HEIGHT);
@@ -286,8 +283,7 @@ bool ButtonGUI::PixelInside(int pixel_x, int pixel_y)
 
 void ButtonGUI::Press()
 {
-    SCPI::Send((uint8)(0x30 + index));
-    SCPI::Send('Z');
+    SCPI::Send(":button%d press", index + 1);
 }
 
 

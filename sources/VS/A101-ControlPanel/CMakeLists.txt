@@ -63,10 +63,10 @@ if(WIN32)
 endif()
 
 file(GLOB SRC               *.h  *.cpp *.c)
-file(GLOB DIALOGS           Dialogs/*)
+file(GLOB DIALOGS           Dialogs/*.*)
 file(GLOB DISPLAY           ../../Device/src/Display/Colors.*)
-file(GLOB SCPI              SCPI/*)
-file(GLOB SCPI_PARSER       SCPI/Parser/*)
+file(GLOB SCPI              SCPI/*.*)
+file(GLOB SCPI_PARSER       SCPI/Parser/*.*)
 
 source_group(src            FILES ${SRC})
 source_group(Dialogs        FILES ${DIALOGS})

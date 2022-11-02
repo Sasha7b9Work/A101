@@ -1,10 +1,5 @@
 // 2022/11/02 08:51:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include <vector>
-#include <mutex>
-
-
-using namespace std;
 
 
 class ComPort
@@ -19,7 +14,7 @@ public:
 
     bool IsOpened() const;
 
-    void Send(uint8);
+    void Send(uint8 *data, int size);
 
     int NumPort() const { return number; }
 

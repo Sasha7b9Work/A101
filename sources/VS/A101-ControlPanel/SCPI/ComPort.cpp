@@ -3,8 +3,6 @@
 #include "SCPI/ComPort.h"
 #include "SCPI/rs232.h"
 #include "Dialogs/DialogNumberComPort.h"
-#include <thread>
-
 
 
 ComPort::~ComPort()
@@ -45,9 +43,9 @@ bool ComPort::IsOpened() const
 }
 
 
-void ComPort::Send(uint8 byte)
+void ComPort::Send(uint8 *data, int size)
 {
-    RS232_SendByte(number, byte);
+    RS232_SendBuf(number, data, size);
 }
 
 

@@ -10,7 +10,8 @@ namespace SCPI
 
     void Update();
 
-    void Send(uint8);
+    // «авершающий ноль замен€етс€ последовательностью \r\n
+    void Send(pchar, ...);
 
     namespace Event
     {

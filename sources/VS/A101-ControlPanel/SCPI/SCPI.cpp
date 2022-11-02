@@ -3,11 +3,6 @@
 #include "SCPI/SCPI.h"
 #include "SCPI/ComPort.h"
 #include "SCPI/Parser/Parser.h"
-#include <vector>
-#include <queue>
-
-
-using namespace std;
 
 
 namespace SCPI
@@ -31,18 +26,39 @@ namespace SCPI
     private:
         vector<uint8> data;
     } buffer;
+
+
+    static bool OpenPort();
+    static void ClosePort();
+}
+
+
+bool SCPI::OpenPort()
+{
+    if (port.Open())
+    {
+
+    }
+
+    return port.IsOpened();
+}
+
+
+void SCPI::ClosePort()
+{
+    port.Close();
 }
 
 
 void SCPI::Init()
 {
-    port.Open();
+    OpenPort();
 }
 
 
 void SCPI::DeInit()
 {
-    port.Close();
+    ClosePort();
 }
 
 
@@ -58,27 +74,32 @@ void SCPI::Update()
     }
     else
     {
-        port.Open();
+        OpenPort();
     }
 }
 
 
 void SCPI::Event::ChangePort()
 {
-    port.Close();
-    port.Open();
+    ClosePort();
+    OpenPort();
 }
 
 
-void SCPI::Send(uint8 byte)
+void SCPI::Send(pchar format, ...)
 {
     if (port.IsOpened())
     {
-        port.Send(byte);
-    }
-    else
-    {
-        port.Open();
+        char message[1024];
+
+        va_list args;
+        va_start(args, message);
+        vsprintf(message, format, args);
+        va_end(args);
+
+        port.Send((uint8 *)message, (int)strlen(message));
+
+        port.Send((uint8 *)"\x0a\0x0d", 2);
     }
 }
 

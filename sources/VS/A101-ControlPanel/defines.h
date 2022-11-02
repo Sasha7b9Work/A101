@@ -2,6 +2,25 @@
 #pragma once
 #define WIN32_LEAN_AND_MEAN
 
+#include <vector>
+#include <queue>
+#include <cstdarg>
+#include <cstdio>
+#include <cstring>
+#include <thread>
+#include <mutex>
+#include <map>
+
+
+#include "wx_includes.h"
+
+
+#pragma warning(push, 0)
+#include <wx/wx.h>
+#pragma warning(pop)
+
+using namespace std;
+
 
 typedef unsigned char uint8;
 typedef unsigned short uint16;
