@@ -12,9 +12,12 @@ public:
 
 private:
 
-    void OnTimer(wxTimerEvent &);
+    wxTimer timer;
 
     void SetSizeAndPosition();
 
-    wxTimer timer;
+    void CreateMenu();
+
+    void OnTimerEvent(wxTimerEvent &);
+    void OnQuitEvent(wxCommandEvent &);
 };

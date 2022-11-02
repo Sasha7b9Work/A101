@@ -10,7 +10,9 @@ Frame *Frame::self = nullptr;
 
 enum
 {
-    TIMER_ID = 11111
+    TIMER_ID = 11111,
+
+    MENU_FILE_QUIT
 };
 
 
@@ -21,11 +23,29 @@ Frame::Frame(const wxString &title)
 
     new Screen(this);
 
+    CreateMenu();
+
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
     sizer->Add(Screen::self);
     SetSizer(sizer);
 
     SetSizeAndPosition();
+}
+
+
+void Frame::CreateMenu()
+{
+    wxMenu *file_menu = new wxMenu();
+
+    file_menu->Append(MENU_FILE_QUIT, wxT("Выход\tAlt+X"), wxT("Закрыть редактор"));
+
+    wxMenuBar *menu_bar = new wxMenuBar();
+
+    menu_bar->Append(file_menu, wxT("Файл"));
+
+    SetMenuBar(menu_bar);
+
+    Bind(wxEVT_MENU, &Frame::OnQuitEvent, this, MENU_FILE_QUIT);
 }
 
 
@@ -44,7 +64,7 @@ void Frame::SetSizeAndPosition()
 
     wxWindowBase::SetPosition({ x, y });
 
-    Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
+    Bind(wxEVT_TIMER, &Frame::OnTimerEvent, this, TIMER_ID);
 
     timer.SetOwner(this, TIMER_ID);
 
@@ -52,11 +72,17 @@ void Frame::SetSizeAndPosition()
 }
 
 
-void Frame::OnTimer(wxTimerEvent &)
+void Frame::OnTimerEvent(wxTimerEvent &)
 {
     timer.Stop();
 
     Application::self->Update();
 
     timer.Start(25);
+}
+
+
+void Frame::OnQuitEvent(wxCommandEvent &)
+{
+    Close(true);
 }
