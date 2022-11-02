@@ -6,11 +6,8 @@ set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(.
                     ../../Device/src
-                    ../../Device/src/Hardware/HAL
                     ../../VS/ThirdParty/wxWidgets/include
-                    ../../generated/ThirdParty/lib/vc_dll/mswud
-                    ../../common/_VS_GUI/HAL
-                    ../../common/_VS_GUI/CMSIS)
+                    ../../generated/ThirdParty/lib/vc_dll/mswud)
 
 link_directories(../../generated/ThirdParty/lib/vc_dll)
 
@@ -65,47 +62,15 @@ if(WIN32)
     add_compile_options(/wd5219)    # implicit conversion from 'int' to 'float'
 endif()
 
-file(GLOB SRC                   ./*.h
-                                ./*.cpp
-                                ../../Device/src/defines.h
-                                ../../Device/src/stm_includes.h)
-file(GLOB DISPLAY               ./Display/*.*
-                                ../../Device/src/Display/*.h
-                                ../../Device/src/Display/Colors.cpp
-                                ../../Device/src/Display/DiagramFFT.cpp
-                                ../../Device/src/Display/DiagramInput.cpp
-                                ../../Device/src/Display/Display.cpp
-                                ../../Device/src/Display/Indicator.cpp)
-file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
-file(GLOB HARDWARE_HAL          ./Hardware/HAL/*.*
-                                ../../Device/src/Hardware/HAL/HAL.h
-                                ../../Device/src/Hardware/HAL/HAL_PIO.h
-                                ../../Device/src/Hardware/HAL/HAL_TIM.cpp)
-file(GLOB MENU                  ../../Device/src/Menu/*.*)
-file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
-file(GLOB NEXTION               ./Nextion/*.*
-                                ../../Device/src/Nextion/*.h
-                                ../../Device/src/Nextion/Nextion.cpp)
-file(GLOB UTILS                 ../../Device/src/Utils/*.*)
+file(GLOB SRC                   ./*.h  ./*.cpp)
+file(GLOB DISPLAY               ../../Device/src/Display/Colors.*)
 
 source_group(src                   FILES ${SRC})
 source_group(Display               FILES ${DISPLAY})
-source_group(Hardware              FILES ${HARDWARE})
-source_group(Hardware/HAL          FILES ${HARDWARE_HAL})
-source_group(Menu                  FILES ${MENU})
-source_group(Menu/Pages            FILES ${MENU_PAGES})
-source_group(Nextion               FILES ${NEXTION})
-source_group(Utils                 FILES ${UTILS})
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
                 ${DISPLAY}
-                ${HARDWARE}
-                ${HARDWARE_HAL}
-                ${MENU}
-                ${MENU_PAGES}
-                ${NEXTION}
-                ${UTILS}
                 )
 
 target_link_libraries(${PROJECT_NAME} wxbase33ud wxmsw33ud_core Ws2_32)

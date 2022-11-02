@@ -15,8 +15,6 @@ void Application::Init()
 {
     HAL::Init();
 
-    Menu::Init();
-
     Screen::self->Init();
 
     Display::Init();
