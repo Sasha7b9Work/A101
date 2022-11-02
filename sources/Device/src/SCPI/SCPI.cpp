@@ -27,8 +27,11 @@ namespace SCPI
 
 void SCPI::Update()
 {
+    static int counter = 0;
+
     while (buffer.ExtractCommand().Execute())
     {
+        counter++;
     }
 }
 
