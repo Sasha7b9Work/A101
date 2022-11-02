@@ -7,21 +7,74 @@
 
 namespace SCPI
 {
-    static Buffer2048<uint8> data_in;
+    class Command : public Buffer<uint8, 128>
+    {
+    public:
+        bool Execute();
+    };
+
+
+    class InBuffer : public Buffer2048<uint8>
+    {
+    public:
+        Command ExtractCommand();
+    };
+
+
+    static InBuffer buffer;
 }
 
 
 void SCPI::Update()
 {
-    if (data_in.Size())
+    while (buffer.ExtractCommand().Execute())
     {
-        int i = data_in.Size();
-        i = i;
     }
 }
 
 
 void SCPI::CallbackOnReceive(uint8 byte)
 {
-    data_in.Append(byte);
+    buffer.Append(byte);
+}
+
+
+SCPI::Command SCPI::InBuffer::ExtractCommand()
+{
+    while (Size() && (buffer[0] == 0x0a || buffer[0] == 0x0d))
+    {
+        RemoveFirst(1);
+    }
+
+    Command command;
+
+    for (int i = 0; i < Size(); i++)
+    {
+        if (buffer[0] == 0x0a || buffer[0] == 0x0d)
+        {
+            break;
+        }
+
+        command.Append(buffer[i]);
+    }
+
+    RemoveFirst(command.Size());
+
+    while (Size() && (buffer[0] == 0x0a || buffer[0] == 0x0d))
+    {
+        RemoveFirst(1);
+    }
+
+    return command;
+}
+
+
+bool SCPI::Command::Execute()
+{
+    if (Size() == 0)
+    {
+        return false;
+    }
+
+    return true;
 }

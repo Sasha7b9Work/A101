@@ -37,6 +37,25 @@ public:
         return MAX_SIZE;
     }
 
+    void RemoveFirst(int num_elements)
+    {
+        if (num_elements > size)
+        {
+            LOG_ERROR("Too many elements");
+            num_elements = size;
+        }
+
+        if (num_elements == size)
+        {
+            size = 0;
+        }
+        else
+        {
+            std::memmove(buffer, buffer + num_elements, (uint)num_elements);
+            size -= num_elements;
+        }
+    }
+
     void Append(const T *data, int _size)
     {
         if (Size() + _size > Capacity())
