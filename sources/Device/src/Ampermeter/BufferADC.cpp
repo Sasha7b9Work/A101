@@ -21,6 +21,8 @@ void BufferADC::CalculateLimits()
     }
 
     Indicator::SetDeltaADC((int)(max.Raw() - min.Raw()));
+
+    LOG_WRITE("%d", (min.Raw() + max.Raw()) / 2);
 }
 
 

@@ -98,11 +98,8 @@ namespace HAL_USART3
 {
     void Init();
 
-    // Послать с завешающим нулём
-    void SendZ(pchar);
-
-    // Послать без завершающего нуля
-    void Send(pchar);
+    // Послать с 0d0a в конце
+    void SendODOA(pchar);
 
     extern void *handle;    // UART_HandleTypeDef
 
