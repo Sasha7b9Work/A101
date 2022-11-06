@@ -9,11 +9,11 @@
 namespace Generator
 {
     static bool enabled = false;
-    static double frequency = 1000.0;
+    static double frequency = 100.0;
     static double picAC = 1.0;
-    static double dc = 0.5;
+    static double dc = 0.0;
     static double picNoise = 0.0;
-    static double time = 0.0;
+    static uint64 timeUS = 0;
 
     static ValueADC ConvertToValueADC(double);
 
@@ -57,7 +57,9 @@ void Generator::SetDC(double _dc)
 
 ValueADC Generator::ReadValue()
 {
-    time += SampleRate::Current::Get().Time() * 1e-6;
+    timeUS += SampleRate::Current::Get().Time();
+
+    double time = timeUS * 10e-6;
 
     double result = dc + picAC * std::sin(2.0 * 3.1415926535897932384626433832795 * frequency * time) + CalculateNoise();
 
