@@ -12,8 +12,8 @@ namespace DiagramInput
 {
     static BufferADC data;
 
-    static const float height = 256;        // Таков размах по вре
-    static const float y0 = 128;
+    static const double height = 256;        // Таков размах по вре
+    static const double y0 = 128;
     static bool enabled = false;
     static uint time_next_draw = 0;         // Время следующей отрисовки картинки
 
@@ -49,14 +49,14 @@ void DiagramInput::Draw()
         return;
     }
 
-    float scale = height / (data.MaxReal() - data.MinReal());
-    float ave = (data.MaxReal() + data.MinReal()) / 2.0f;
+    double scale = height / (data.MaxReal() - data.MinReal());
+    double ave = (data.MaxReal() + data.MinReal()) / 2.0;
 
     uint8 points[1024];
 
     for (int i = 0; i < NumPoints(); i++)
     {
-        float value = y0 + scale * (data[i].Real() - ave);
+        double value = y0 + scale * (data[i].Real() - ave);
 
         if (value < 0)
         {

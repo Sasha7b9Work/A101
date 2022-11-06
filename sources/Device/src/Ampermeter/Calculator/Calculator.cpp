@@ -9,8 +9,8 @@
 namespace Calculator
 {
     static int num_averages = 0;
-    static double dc = 0.0f;
-    static double ac = 0.0f;
+    static double dc = 0.0;
+    static double ac = 0.0;
 
     static BufferADC data;
 
@@ -25,7 +25,7 @@ SampleRate Calculator::AppendData(const BufferADC &_data)
 
     ac = CalculateAC(period);
 
-    dc = (data.MaxReal() + data.MinReal()) / 2.0f;
+    dc = (data.MaxReal() + data.MinReal()) / 2.0;
 
     FFT fft(data);
 
@@ -53,7 +53,7 @@ void Calculator::SetAverages(int num_ave)
 
 double Calculator::CalculateAC(int period)
 {
-    double sum = 0.0f;
+    double sum = 0.0;
 
     for (int i = 0; i < period; i++)
     {

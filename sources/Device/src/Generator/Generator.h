@@ -11,13 +11,13 @@ namespace Generator
 
     bool IsEanbled();
 
-    void SetFrequency(float);
+    void SetFrequency(double);
 
-    void SetDC(float);
+    void SetDC(double);
 
-    void SetPicAC(float);
+    void SetPicAC(double);
 
-    void SetNoisePicNose(float);
+    void SetNoisePicNose(double);
 
     ValueADC ReadValue();
 }

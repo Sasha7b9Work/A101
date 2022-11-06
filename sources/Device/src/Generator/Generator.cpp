@@ -37,19 +37,19 @@ void Generator::Disable()
 }
 
 
-void Generator::SetFrequency(float freq)
+void Generator::SetFrequency(double freq)
 {
     frequency = freq;
 }
 
 
-void Generator::SetPicAC(float ac)
+void Generator::SetPicAC(double ac)
 {
     picAC = ac;
 }
 
 
-void Generator::SetDC(float _dc)
+void Generator::SetDC(double _dc)
 {
     dc = _dc;
 }
@@ -57,7 +57,7 @@ void Generator::SetDC(float _dc)
 
 ValueADC Generator::ReadValue()
 {
-    time += (float)(SampleRate::Current::Get().Time() * 1e-6);
+    time += SampleRate::Current::Get().Time() * 1e-6;
 
     double result = picAC * std::sin(2.0 * 3.1415926 * frequency * time) + CalculateNoise();
 

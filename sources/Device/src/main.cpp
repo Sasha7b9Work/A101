@@ -25,7 +25,7 @@ int main()
 
     Generator::SetPicAC(1);
 
-    Generator::SetFrequency(1024.0f);
+    Generator::SetFrequency(1024.0);
 
     Generator::Disable();
 
