@@ -18,7 +18,7 @@ PeriodInt::PeriodInt(const BufferADC &buffer)
 
     int min_delta = std::numeric_limits<int>::max();
 
-    for (int per = BufferADC::SIZE / 11 * 10; per < BufferADC::SIZE - 1; per++)
+    for (int per = BufferADC::SIZE / 2; per < BufferADC::SIZE - 1; per++)
     {
         int delta = FindDelta(per);
 

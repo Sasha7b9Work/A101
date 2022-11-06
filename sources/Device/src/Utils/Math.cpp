@@ -4,11 +4,11 @@
 #include <cstdlib>
 
 
-float Math::Random(float min, float max)
+double Math::Random(double min, double max)
 {
-    float distance = max - min;
+    double distance = max - min;
 
-    float scale = distance / (float)RAND_MAX;
+    double scale = distance / (double)RAND_MAX;
 
-    return min +  (float)std::rand() * scale;
+    return min + (double)std::rand() * scale;
 }

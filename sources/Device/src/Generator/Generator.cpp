@@ -9,15 +9,15 @@
 namespace Generator
 {
     static bool enabled = false;
-    static float frequency = 1000.0f;
-    static float picAC = 1.0f;
-    static float dc = 0.0f;
-    static float picNoise = 0.0f;
-    static float time = 0.0f;
+    static double frequency = 1000.0;
+    static double picAC = 1.0;
+    static double dc = 0.0;
+    static double picNoise = 0.0;
+    static double time = 0.0;
 
-    static ValueADC ConvertToValueADC(float);
+    static ValueADC ConvertToValueADC(double);
 
-    static float CalculateNoise();
+    static double CalculateNoise();
 }
 
 
@@ -59,7 +59,7 @@ ValueADC Generator::ReadValue()
 {
     time += (float)(SampleRate::Current::Get().Time() * 1e-6);
 
-    float result = picAC * std::sinf(2.0f * 3.1415926f * frequency * time) + CalculateNoise();
+    double result = picAC * std::sin(2.0 * 3.1415926 * frequency * time) + CalculateNoise();
 
     return ConvertToValueADC(result);
 }
@@ -71,11 +71,11 @@ bool Generator::IsEanbled()
 }
 
 
-ValueADC Generator::ConvertToValueADC(float value)
+ValueADC Generator::ConvertToValueADC(double value)
 {
-    Math::Limitation(&value, -5.0f, 4.999962f);
+    Math::Limitation(&value, -5.0, 4.999962);
 
-    int direct = (int)(value * (1 << 17) / 5.0f);
+    int direct = (int)(value * (1 << 17) / 5.0);
 
     int convert = (direct >= 0) ? direct : (direct + (1 << 18));
 
@@ -83,13 +83,13 @@ ValueADC Generator::ConvertToValueADC(float value)
 }
 
 
-float Generator::CalculateNoise()
+double Generator::CalculateNoise()
 {
-    static float value = 0.0f;
+    static double value = 0.0;
 
     value += Math::Random(-picNoise, picNoise);
 
-    Math::Limitation<float>(&value, -picNoise, picNoise);
+    Math::Limitation<double>(&value, -picNoise, picNoise);
 
     return value;
 }
