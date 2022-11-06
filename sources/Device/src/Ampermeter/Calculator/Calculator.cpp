@@ -3,18 +3,20 @@
 #include "Ampermeter/Calculator/Calculator.h"
 #include "Ampermeter/Calculator/FFT.h"
 #include "Ampermeter/Calculator/PeriodInt.h"
+#include "Ampermeter/Calculator/Averager.h"
 #include <cmath>
 
 
 namespace Calculator
 {
     static int num_averages = 0;
-    static double dc = 0.0;
-    static double ac = 0.0;
+    static Averager<double, 8> dc;
+    static Averager<double, 8> ac;
 
     static BufferADC data;
 
     static double CalculateAC(int period);
+    static double CalculateDC(int period);
 }
 
 SampleRate Calculator::AppendData(const BufferADC &_data)
@@ -23,9 +25,9 @@ SampleRate Calculator::AppendData(const BufferADC &_data)
 
     int period = PeriodInt(data).ToPoints();
 
-    ac = CalculateAC(period);
+    ac.Push(CalculateAC(period));
 
-    dc = (data.MaxReal() + data.MinReal()) / 2.0;
+    dc.Push(CalculateDC(period));
 
     FFT fft(data);
 
@@ -35,13 +37,13 @@ SampleRate Calculator::AppendData(const BufferADC &_data)
 
 double Calculator::GetAC()
 {
-    return ac;
+    return ac.Get();
 }
 
 
 double Calculator::GetDC()
 {
-    return dc;
+    return dc.Get();
 }
 
 
@@ -61,4 +63,17 @@ double Calculator::CalculateAC(int period)
     }
 
     return std::sqrt(sum / period);
+}
+
+
+double Calculator::CalculateDC(int period)
+{
+    double sum = 0.0f;
+
+    for (int i = 0; i < period; i++)
+    {
+        sum += data[i].Real();
+    }
+
+    return sum / period;
 }
