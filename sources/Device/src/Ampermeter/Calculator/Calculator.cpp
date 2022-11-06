@@ -5,8 +5,6 @@
 #include "Ampermeter/Calculator/PeriodInt.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include <cmath>
-#include <algorithm>
-#include <array>
 
 
 namespace Calculator
@@ -61,18 +59,9 @@ double Calculator::CalculateAC(int period, double dc_val)
 {
     double sum = 0.0;
 
-    std::array<double, BufferADC::SIZE> values;
-
     for (uint i = 0; i < (uint)period; i++)
     {
-        values[i] = data[(int)i].Real() - dc_val;
-    }
-
-//    std::sort(values.begin(), values.begin() + period);
-
-    for (uint i = 0; i < (uint)period; i++)
-    {
-        double value = values[i];
+        double value = data[(int)i].Real() - dc_val;
 
         sum += value * value;
     }
