@@ -75,5 +75,5 @@ double Calculator::CalculateDC(int period)
         sum += data[i].Real();
     }
 
-    return sum / period;
+    return sum / (double)period;
 }
