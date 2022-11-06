@@ -104,6 +104,7 @@ Page::Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4,
     buttons[3] = btn3;
     buttons[4] = btn4;
     buttons[5] = btn5;
+    buttons[6] = &btnMenu;
 }
 
 

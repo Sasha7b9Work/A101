@@ -8,4 +8,6 @@
 void Menu::Init()
 {
     PageMain::self->SetAsCurrent();
+
+    PageMain::self->GetButton(6)->Disable();
 }

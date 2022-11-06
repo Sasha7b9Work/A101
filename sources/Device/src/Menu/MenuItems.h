@@ -59,7 +59,7 @@ struct Page
 
 private:
 
-    Button *buttons[6];
+    Button *buttons[7];
 
     static Page *current;
 
