@@ -3,13 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 
 
-void HAL_USART3::Send(pchar)
-{
-
-}
-
-
-void HAL_USART3::SendZ(pchar)
+void HAL_USART3::SendODOA(pchar)
 {
 
 }
