@@ -53,5 +53,12 @@ void Calculator::SetAverages(int num_ave)
 
 float Calculator::CalculateAC(int period)
 {
-    return 0.0f;
+    float sum = 0.0f;
+
+    for (int i = 0; i < period; i++)
+    {
+        sum += data[i].Real() * data[i].Real();
+    }
+
+    return std::sqrtf(sum / period);
 }

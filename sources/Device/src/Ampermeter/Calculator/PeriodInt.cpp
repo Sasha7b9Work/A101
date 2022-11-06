@@ -7,26 +7,27 @@
 
 PeriodInt::PeriodInt(const BufferADC &buffer)
 {
-    sum[0] = Math::Abs<int>(buffer[0].Raw());
+    sum[0] = buffer[0].Raw();
 
     for (int i = 1; i < BufferADC::SIZE; i++)
     {
-        sum[i] = sum[i - 1] + Math::Abs<int>(buffer[i].Raw());
+        sum[i] = sum[i - 1] + buffer[i].Raw();
     }
 
     period = std::numeric_limits<int>::max();
 
-    for (int per = BufferADC::SIZE / 2; per < BufferADC::SIZE; per++)
+    int min_delta = std::numeric_limits<int>::max();
+
+    for (int per = BufferADC::SIZE / 2; per < BufferADC::SIZE - 1; per++)
     {
         int delta = FindDelta(per);
 
-        if (delta < period)
+        if (delta < min_delta)
         {
+            min_delta = delta;
             period = per;
         }
     }
-
-    period = period;
 }
 
 
@@ -38,9 +39,9 @@ int PeriodInt::FindDelta(int per)
     {
         int integral = sum[start + per - 1] - sum[start];
 
-        if (integral > delta)
+        if (Math::Abs<int>(integral) > delta)
         {
-            delta = integral;
+            delta = Math::Abs<int>(integral);
         }
     }
 
