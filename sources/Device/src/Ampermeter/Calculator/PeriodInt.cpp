@@ -37,7 +37,7 @@ int PeriodInt::FindDelta(int per)
 
     for (int start = 0; start < (BufferADC::SIZE - per - 1); start++)
     {
-        int integral = sum[start + per - 1] - sum[start];
+        int integral = sum[start + per] - sum[start];
 
         if (Math::Abs<int>(integral) > delta)
         {
