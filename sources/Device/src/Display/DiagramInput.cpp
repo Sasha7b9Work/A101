@@ -125,5 +125,5 @@ void DiagramInput::Repaint()
 
 int DiagramInput::NumPoints()
 {
-    return (DiagramFFT::IsEnabled() && DiagramInput::IsEnabled()) ? 783 : 390;
+    return (DiagramFFT::IsEnabled() && DiagramInput::IsEnabled()) ? 390 : 783;
 }
