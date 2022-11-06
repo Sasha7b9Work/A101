@@ -15,7 +15,7 @@ namespace Calculator
 
     static BufferADC data;
 
-    static double CalculateAC(int period, double *values);
+    static double CalculateAC(int period, double dc_val);
     static double CalculateDC(int period);
 }
 
@@ -29,14 +29,7 @@ SampleRate Calculator::AppendData(const BufferADC &_data)
 
     dc.Push(dc_val);
 
-    double values[BufferADC::SIZE];
-
-    for (int i = 0; i < period; i++)
-    {
-        values[i] = data[i].Real() - dc_val;
-    }
-
-    ac.Push(CalculateAC(period, values));
+    ac.Push(CalculateAC(period, dc_val));
 
     FFT fft(data);
 
@@ -62,8 +55,15 @@ void Calculator::SetAverages(int num_ave)
 }
 
 
-double Calculator::CalculateAC(int period, double *values)
+double Calculator::CalculateAC(int period, double dc_val)
 {
+    double values[BufferADC::SIZE];
+
+    for (int i = 0; i < period; i++)
+    {
+        values[i] = data[i].Real() - dc_val;
+    }
+
     double sum = 0.0;
 
     for (int i = 0; i < period; i++)

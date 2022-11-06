@@ -59,7 +59,7 @@ ValueADC Generator::ReadValue()
 {
     time += SampleRate::Current::Get().Time() * 1e-6;
 
-    double result = dc + picAC * std::sin(2.0 * 3.1415926 * frequency * time) + CalculateNoise();
+    double result = dc + picAC * std::sin(2.0 * 3.1415926535897932384626433832795 * frequency * time) + CalculateNoise();
 
     return ConvertToValueADC(result);
 }
