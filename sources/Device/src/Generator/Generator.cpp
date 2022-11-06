@@ -9,9 +9,9 @@
 namespace Generator
 {
     static bool enabled = false;
-    static double frequency = 1000.0;
+    static double frequency = 966.0;
     static double picAC = 1.0;
-    static double dc = -0.2555;
+    static double dc = 0.0;
     static double picNoise = 0.0;
     static double time = 0.0;
 
