@@ -4,7 +4,7 @@
 
 
 template<class T, int size_buffer>
-class Averager
+class Averager //-V730
 {
 public:
     void Push(T value)

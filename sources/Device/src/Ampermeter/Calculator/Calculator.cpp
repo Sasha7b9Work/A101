@@ -57,18 +57,13 @@ void Calculator::SetAverages(int num_ave)
 
 double Calculator::CalculateAC(int period, double dc_val)
 {
-    double values[BufferADC::SIZE];
-
-    for (int i = 0; i < period; i++)
-    {
-        values[i] = data[i].Real() - dc_val;
-    }
-
     double sum = 0.0;
 
     for (int i = 0; i < period; i++)
     {
-        sum += values[i] * values[i];
+        double value = data[i].Real() - dc_val;
+
+        sum += value * value;
     }
 
     return std::sqrt(sum / period);
