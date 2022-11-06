@@ -24,4 +24,6 @@ int PeriodInt::FindDelta(int per)
 {
     int max = std::numeric_limits<int>::min();
     int min = std::numeric_limits<int>::max();
+
+    return 0;
 }
