@@ -10,11 +10,14 @@ namespace Generator
 {
     static bool enabled = false;
     static float frequency = 1e3f;
-    static float amplitudeAC = 1.0f;
-    static float amplitudeDC = 0.0f;
+    static float picAC = 1.0f;
+    static float dc = 0.0f;
+    static float picNoise = 0.05f;
     static float time = 0.0f;
 
     static ValueADC ConvertToValueADC(float);
+
+    static float CalculateNoise();
 }
 
 
@@ -42,13 +45,13 @@ void Generator::SetFrequency(float freq)
 
 void Generator::SetPicAC(float ac)
 {
-    amplitudeAC = ac;
+    picAC = ac;
 }
 
 
-void Generator::SetDC(float dc)
+void Generator::SetDC(float _dc)
 {
-    amplitudeDC = dc;
+    dc = _dc;
 }
 
 
@@ -56,9 +59,7 @@ ValueADC Generator::ReadValue()
 {
     time += (float)(SampleRate::Current::Get().Time() * 1e-6);
 
-    float result = amplitudeAC * std::sinf(2.0f * 3.1415926f * frequency * time);
-
-//    LOG_WRITE("%f", result);
+    float result = picAC * std::sinf(2.0f * 3.1415926f * frequency * time) + CalculateNoise();
 
     return ConvertToValueADC(result);
 }
@@ -79,4 +80,16 @@ ValueADC Generator::ConvertToValueADC(float value)
     int convert = (direct >= 0) ? direct : (direct + (1 << 18));
 
     return ValueADC(convert);
+}
+
+
+float Generator::CalculateNoise()
+{
+    static float value = 0.0f;
+
+    value += Math::Random(-picNoise, picNoise);
+
+    Math::Limitation<float>(&value, -picNoise, picNoise);
+
+    return value;
 }

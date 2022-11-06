@@ -17,5 +17,7 @@ namespace Generator
 
     void SetPicAC(float);
 
+    void SetNoisePicNose(float);
+
     ValueADC ReadValue();
 }

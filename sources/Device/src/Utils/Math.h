@@ -16,4 +16,6 @@ namespace Math
         }
         return *value;
     }
+
+    float Random(float min, float max);
 }
