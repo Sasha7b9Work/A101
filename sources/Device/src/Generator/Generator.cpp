@@ -9,7 +9,7 @@
 namespace Generator
 {
     static bool enabled = false;
-    static float frequency = 1e3f;
+    static float frequency = 1000.0f;
     static float picAC = 1.0f;
     static float dc = 0.0f;
     static float picNoise = 0.0f;

@@ -10,7 +10,7 @@ namespace Calculator
 
     void SetAverages(int num_ave);
 
-    float GetAC();
+    double GetAC();
 
-    float GetDC();
+    double GetDC();
 }

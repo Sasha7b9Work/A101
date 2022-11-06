@@ -11,8 +11,8 @@ private:
     static const int SIZE = BufferADC::SIZE / 2;
     uint8 data[SIZE];
 
-    void CalculateFFT(float dataR[BufferADC::SIZE], float result[BufferADC::SIZE]);
-    void Normalize(float *data, int);
+    void CalculateFFT(double dataR[BufferADC::SIZE], double result[BufferADC::SIZE]);
+    void Normalize(double *data, int);
 
     // Находит индекс массива частоты
     int FindFreq();

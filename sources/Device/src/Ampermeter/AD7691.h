@@ -23,7 +23,7 @@ private:
 struct ValueADC
 {
     explicit ValueADC(int _reading = 0);
-    float Real() const { return 5.0f / (1 << 17) * (float)value; }
+    double Real() const { return 5.0 / (1 << 17) * (double)value; }
     int Raw()    const { return value; }
     static const ValueADC MIN;
     static const ValueADC MAX;

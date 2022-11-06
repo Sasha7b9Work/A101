@@ -9,12 +9,12 @@
 namespace Calculator
 {
     static int num_averages = 0;
-    static float dc = 0.0f;
-    static float ac = 0.0f;
+    static double dc = 0.0f;
+    static double ac = 0.0f;
 
     static BufferADC data;
 
-    static float CalculateAC(int period);
+    static double CalculateAC(int period);
 }
 
 SampleRate Calculator::AppendData(const BufferADC &_data)
@@ -33,13 +33,13 @@ SampleRate Calculator::AppendData(const BufferADC &_data)
 }
 
 
-float Calculator::GetAC()
+double Calculator::GetAC()
 {
     return ac;
 }
 
 
-float Calculator::GetDC()
+double Calculator::GetDC()
 {
     return dc;
 }
@@ -51,14 +51,14 @@ void Calculator::SetAverages(int num_ave)
 }
 
 
-float Calculator::CalculateAC(int period)
+double Calculator::CalculateAC(int period)
 {
-    float sum = 0.0f;
+    double sum = 0.0f;
 
     for (int i = 0; i < period; i++)
     {
         sum += data[i].Real() * data[i].Real();
     }
 
-    return std::sqrtf(sum / period);
+    return std::sqrt(sum / period);
 }

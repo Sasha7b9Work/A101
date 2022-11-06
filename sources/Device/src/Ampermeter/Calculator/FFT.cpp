@@ -7,9 +7,9 @@
 
 FFT::FFT(const BufferADC &_data)
 {
-    float in[1024];
+    double in[1024];
 
-    float out[1024];
+    double out[1024];
 
     for (int i = 0; i < 1024; i++)
     {
@@ -45,7 +45,7 @@ int FFT::FindFreq()
 }
 
 
-void FFT::CalculateFFT(float dataR[1024], float result[1024])
+void FFT::CalculateFFT(double dataR[1024], double result[1024])
 {
     for (int i = 0; i < 1024; i++)
     {
@@ -87,14 +87,14 @@ void FFT::CalculateFFT(float dataR[1024], float result[1024])
             for (int i = j; i < 1024; i += ie)
             {
                 int io = i + in;
-                float dRi = dataR[i]; //-V2563
-                float dRio = dataR[io]; //-V2563
-                float ri = result[i]; //-V2563
-                float rio = result[io]; //-V2563
+                double dRi = dataR[i]; //-V2563
+                double dRio = dataR[io]; //-V2563
+                double ri = result[i]; //-V2563
+                double rio = result[io]; //-V2563
                 dataR[i] = dRi + dRio; //-V2563
                 result[i] = ri + rio; //-V2563
-                float rtq = dRi - dRio;
-                float itq = ri - rio;
+                double rtq = dRi - dRio;
+                double itq = ri - rio;
                 dataR[io] = rtq * ru - itq * iu; //-V2563
                 result[io] = itq * ru + rtq * iu; //-V2563
             }
@@ -111,8 +111,8 @@ void FFT::CalculateFFT(float dataR[1024], float result[1024])
         {
             int io = i - 1;
             int in = j - 1;
-            float rtp = dataR[in]; //-V2563
-            float itp = result[in]; //-V2563
+            double rtp = dataR[in]; //-V2563
+            double itp = result[in]; //-V2563
             dataR[in] = dataR[io]; //-V2563
             result[in] = result[io]; //-V2563
             dataR[io] = rtp; //-V2563
@@ -134,7 +134,7 @@ void FFT::CalculateFFT(float dataR[1024], float result[1024])
 
     for (int i = 0; i < num_points; i++)
     {
-        result[i] = std::sqrtf(dataR[i] * dataR[i] + result[i] * result[i]); //-V2563
+        result[i] = std::sqrt(dataR[i] * dataR[i] + result[i] * result[i]); //-V2563
     }
 
     result[0] = 0.0F;       // \todo нулева€ составл€юща€ мешает посто€нно. надо еЄ убрать //-V2563
@@ -143,9 +143,9 @@ void FFT::CalculateFFT(float dataR[1024], float result[1024])
 }
 
 
-void FFT::Normalize(float *in, int num_points)
+void FFT::Normalize(double *in, int num_points)
 {
-    float max = 0.0;
+    double max = 0.0;
 
     for (int i = 0; i < num_points; i++)
     {
