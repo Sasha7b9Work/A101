@@ -6,6 +6,11 @@ namespace Math
 {
     float Random(float min, float max);
 
+    template<class T> T Abs(T value)
+    {
+        return (value < T(0)) ? -value : value;
+    }
+
     template<class T> T Limitation(T *value, T min, T max)
     {
         if (*value < min)       { *value = min; }
