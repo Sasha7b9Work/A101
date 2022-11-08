@@ -31,7 +31,7 @@ FFT::FFT(const BufferADC &_data)
 }
 
 
-int FFT::FindFreq()
+int FFT::FindIndexFreq() const
 {
     for (int i = 0; i < 512; i++)
     {

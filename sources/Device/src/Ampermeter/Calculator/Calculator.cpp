@@ -37,15 +37,15 @@ SampleRate Calculator::AppendData(const BufferADC &_data)
 {
     data = _data;
 
-    int period = PeriodInt(data).ToPoints();
+    FFT fft(data);
+
+    int period = PeriodInt(data, fft).ToPoints();
 
     double dc_val = FinderDC::Calculate(data, period);
 
     dc.Push(dc_val * k);
 
     ac.Push(CalculateAC(period, dc_val) * k);
-
-    FFT fft(data);
 
     return SampleRate::Current::Get();
 }
