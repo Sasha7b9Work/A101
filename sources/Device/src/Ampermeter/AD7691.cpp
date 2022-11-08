@@ -144,6 +144,8 @@ ValueADC::ValueADC(int reading)
     {
         value -= 1 << 18;
     }
+
+    value -= 3250;
 }
 
 

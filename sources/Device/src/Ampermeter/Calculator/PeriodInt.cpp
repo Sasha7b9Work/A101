@@ -14,9 +14,9 @@ PeriodInt::PeriodInt(const BufferADC &buffer)
         sum[i] = sum[i - 1] + buffer[i].Raw();
     }
 
-    period = std::numeric_limits<int>::max();
+    period = (int)std::numeric_limits<int>::max();
 
-    int min_delta = std::numeric_limits<int>::max();
+    int min_delta = (int)std::numeric_limits<int>::max();
 
     for (int per = BufferADC::SIZE / 2; per < BufferADC::SIZE - 1; per++)
     {
