@@ -9,7 +9,7 @@ const ValueADC ValueADC::MAX = ValueADC((1 << 17) - 1);
 const ValueADC ValueADC::MIN = ValueADC((1 << 17));
 
 
-SampleRate SampleRate::current(23);
+SampleRate SampleRate::current(90);
 
 
 namespace AD7691
@@ -111,7 +111,7 @@ ValueADC AD7691::ReadReal()
 
     GPIOB->BSRR = GPIO_PIN_12;
 
-    __IO uint wait = 0;   for (; wait < 1000; wait++)  { }
+    __IO uint wait = 0;   for (; wait < 50; wait++)  { }
 
     GPIOB->BSRR = GPIO_PIN_12 << 16;
 
