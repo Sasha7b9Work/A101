@@ -29,9 +29,9 @@ void HAL_TIM4::Init()
 {
     __HAL_RCC_TIM4_CLK_ENABLE();
 
-    handleTIM4.Init.Prescaler = 0;
+    handleTIM4.Init.Prescaler = 84;
     handleTIM4.Init.CounterMode = TIM_COUNTERMODE_UP;
-    handleTIM4.Init.Period = 83;                                // „астота APB1 - 84 ћ√ц. —чЄтчик будет тикать через 1мкс
+    handleTIM4.Init.Period = (uint)(-1);                            // „астота APB1 - 84 ћ√ц. —чЄтчик будет тикать через 1мкс
     handleTIM4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 
     HAL_TIM_Base_Init(&handleTIM4);

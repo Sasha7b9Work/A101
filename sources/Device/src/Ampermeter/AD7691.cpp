@@ -9,7 +9,7 @@ const ValueADC ValueADC::MAX = ValueADC((1 << 17) - 1);
 const ValueADC ValueADC::MIN = ValueADC((1 << 17));
 
 
-SampleRate SampleRate::current(90);
+SampleRate SampleRate::current(10);
 
 
 namespace AD7691
