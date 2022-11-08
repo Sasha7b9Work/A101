@@ -28,6 +28,10 @@ void Ampermeter::Init()
     Calibrator::Init();
 
     AD7691::Init();
+
+    Indicator::Reset(InputRelays::GetRange());
+
+    Calculator::Reset(InputRelays::GetRange());
 }
 
 

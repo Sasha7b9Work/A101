@@ -2,6 +2,8 @@
 #include "defines.h"
 #include "Ampermeter/InputRelays.h"
 #include "Hardware/HAL/HAL_PIO.h"
+#include "Display/Indicator.h"
+#include "Ampermeter/Calculator/Calculator.h"
 
 
 namespace InputRelays
@@ -13,6 +15,12 @@ namespace InputRelays
 
 void InputRelays::SetRange(int _range)
 {
+    if (range != _range)
+    {
+        Indicator::Reset(_range);
+        Calculator::Reset(_range);
+    }
+
     range = _range;
 
     static int states[6][7] =

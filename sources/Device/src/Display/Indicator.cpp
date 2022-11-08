@@ -7,6 +7,7 @@
 #include "Display/DiagramFFT.h"
 #include <cstdio>
 #include <cstring>
+#include <cmath>
 
 
 namespace Indicator
@@ -35,8 +36,6 @@ namespace Indicator
     {
         Text(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_color) :
          Label(_x, _y, _w, _h, _font, _text, _color) {}
-    private:
-        bool empty = true;
     };
 
     static const int big_x_label = 38;
@@ -75,9 +74,14 @@ namespace Indicator
     static char measureDC[MAX_LEN] = { '\0' };
     static char measureAC[MAX_LEN] = { '\0' };
 
-    void SetBig();
+    static void SetBig();
 
-    void SetSmall();
+    static void SetSmall();
+
+    // before - количество цифр (без учёта знака) перед запятой, after - количество цифр после запятой
+    static void ConvertDoubleToText(double value, char buffer[MAX_LEN], int after, pchar suffix);
+
+    static void WriteMeasures();
 }
 
 
@@ -136,11 +140,18 @@ void Indicator::SetSmall()
 
 void Indicator::SetMeasures(double dc, double ac, int range)
 {
-    char *format[6] = { "%.4f mA", "%.3f mA", "%06.2f mA", "%.4f A", "%.3f A", "%.3f A" };
+    static const int after[6]    = { 4, 3, 2, 4, 3, 3 };
+    static const pchar suffix[6] = { "mA", "mA", "mA", "mA", "A", "A" };
 
-    std::sprintf(measureDC, format[range], dc);
-    std::sprintf(measureAC, format[range], ac);
+    ConvertDoubleToText(dc, measureDC, after[range], suffix[range]);
+    ConvertDoubleToText(ac, measureAC, after[range], suffix[range]);
 
+    WriteMeasures();
+}
+
+
+void Indicator::WriteMeasures()
+{
     if (is_big)
     {
         textDC.SetText(measureDC);
@@ -151,6 +162,41 @@ void Indicator::SetMeasures(double dc, double ac, int range)
         textDCsmall.SetText(measureDC);
         textACsmall.SetText(measureAC);
     }
+}
+
+
+void Indicator::ConvertDoubleToText(double value, char out[MAX_LEN], int after, pchar suffix)
+{
+    std::strcpy(out, value < 0.0 ? "-" : "+");
+
+    char buffer[MAX_LEN];
+
+    char format[] = { '%', '0', (char)((6 - after) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0'};
+
+    std::sprintf(buffer, format, std::fabs(value), suffix);
+
+    std::strcat(out, buffer);
+}
+
+
+void Indicator::Reset(int range)
+{
+    pchar message = nullptr;
+
+    switch (range)
+    {
+    case 0:        message = "*.***** mA";        break;
+    case 1:        message = "**.**** mA";        break;
+    case 2:        message = "***.*** mA";        break;
+    case 3:        message = "*.***** A";         break;
+    case 4:        message = "**.**** A";         break;
+    case 5:        message = "**.**** A";         break;
+    }
+
+    std::strcpy(measureDC, message);
+    std::strcpy(measureAC, message);
+
+    WriteMeasures();
 }
 
 

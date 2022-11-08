@@ -17,7 +17,21 @@ namespace Calculator
 
     static double CalculateAC(int period, double dc_val);
     static double CalculateDC(int period);
+
+    static double k = 1.0;
 }
+
+
+void Calculator::Reset(int range)
+{
+    dc.Reset();
+    ac.Reset();
+
+    static const double koeff[6] = { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
+
+    k = koeff[range];
+}
+
 
 SampleRate Calculator::AppendData(const BufferADC &_data)
 {
