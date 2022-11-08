@@ -25,9 +25,9 @@ struct BufferADC
 
     void CalculateLimits();
 
-    double MinReal() const { return min.Real(); }
+    ValueADC Min() const { return min; }
 
-    double MaxReal() const { return max.Real(); }
+    ValueADC Max() const { return max; }
 
     void LogUART() const;
 

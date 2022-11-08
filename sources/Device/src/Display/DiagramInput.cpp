@@ -49,8 +49,8 @@ void DiagramInput::Draw()
         return;
     }
 
-    double scale = height / (data.MaxReal() - data.MinReal());
-    double ave = (data.MaxReal() + data.MinReal()) / 2.0;
+    double scale = height / (data.Max().Real() - data.Min().Real());
+    double ave = (data.Max().Real() + data.Min().Real()) / 2.0;
 
     uint8 points[1024];
 

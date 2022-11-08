@@ -3,6 +3,12 @@
 #include "Ampermeter/Calculator/FinderDC.h"
 
 
+namespace FinderDC
+{
+
+}
+
+
 double FinderDC::Calculate(const BufferADC &data, int period)
 {
     double sum = 0.0;
