@@ -63,3 +63,9 @@ bool InputRelays::IsEnabledZero()
 {
     return enabled_zero;
 }
+
+
+int InputRelays::GetRange()
+{
+    return range;
+}

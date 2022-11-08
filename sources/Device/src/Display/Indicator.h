@@ -12,7 +12,9 @@ namespace Indicator
     // Вызов этой функции устанавливает размер автоматически в зависимости от установленных режимов
     void AutoSize();
 
-    void SetMeasures(double dc, double ac);
+    void SetMeasures(double dc, double ac, int range);
+
+    void ResetMeasures(int range);
 
     void SetDeltaADC(int);
 }

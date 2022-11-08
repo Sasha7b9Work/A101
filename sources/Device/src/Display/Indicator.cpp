@@ -134,10 +134,12 @@ void Indicator::SetSmall()
 }
 
 
-void Indicator::SetMeasures(double dc, double ac)
+void Indicator::SetMeasures(double dc, double ac, int range)
 {
-    std::sprintf(measureDC, "%.4f V", dc);
-    std::sprintf(measureAC, "%.4f V", ac);
+    char *format[6] = { "%.4f mA", "%.3f mA", "%06.2f mA", "%.4f A", "%.3f A", "%.3f A" };
+
+    std::sprintf(measureDC, format[range], dc);
+    std::sprintf(measureAC, format[range], ac);
 
     if (is_big)
     {

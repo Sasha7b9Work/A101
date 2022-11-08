@@ -50,7 +50,7 @@ void Ampermeter::Update()
 
     SampleRate::Current::Set(Calculator::AppendData(buffer));
 
-    Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC());
+    Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC(), InputRelays::GetRange());
 
     DiagramInput::SetData(buffer);
 }
