@@ -44,8 +44,8 @@ namespace Indicator
     static const int big_width_label = 175;
     static const int big_height = 95;
 
-    static const int big_x_text = 261;
-    static const int big_width_text = 530;
+    static const int big_x_text = 220;
+    static const int big_width_text = 550;
 
     static const int small_x_label = 146;
     static const int small_y_0 = 220;

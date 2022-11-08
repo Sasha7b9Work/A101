@@ -10,8 +10,8 @@
 namespace Calculator
 {
     static int num_averages = 0;
-    static Averager<double, 8> dc;
-    static Averager<double, 8> ac;
+    static Averager<double, 1> dc;
+    static Averager<double, 1> ac;
 
     static BufferADC data;
 
