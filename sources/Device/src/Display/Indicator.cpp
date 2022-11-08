@@ -141,7 +141,7 @@ void Indicator::SetSmall()
 void Indicator::SetMeasures(double dc, double ac, int range)
 {
     static const int after[6]    = { 4, 3, 2, 4, 3, 3 };
-    static const pchar suffix[6] = { "mA", "mA", "mA", "mA", "A", "A" };
+    static const pchar suffix[6] = { "mA", "mA", "mA", "A", "A", "A" };
 
     ConvertDoubleToText(dc, measureDC, after[range], suffix[range]);
     ConvertDoubleToText(ac, measureAC, after[range], suffix[range]);

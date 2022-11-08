@@ -10,8 +10,8 @@
 namespace Calculator
 {
     static int num_averages = 0;
-    static Averager<double, 8> dc;
-    static Averager<double, 8> ac;
+    static Averager<double, 1> dc;
+    static Averager<double, 1> ac;
 
     static BufferADC data;
 
@@ -27,9 +27,9 @@ void Calculator::Reset(int range)
     dc.Reset();
     ac.Reset();
 
-    static const double koeff[6] = { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
+    static const double koeff[6] = { 1e-2, 1e-1, 1e0, 1e-2, 1e-1, 1e0 };
 
-    k = koeff[range];
+    k = koeff[range] * 61.77;
 }
 
 
@@ -41,9 +41,9 @@ SampleRate Calculator::AppendData(const BufferADC &_data)
 
     double dc_val = CalculateDC(period);
 
-    dc.Push(dc_val);
+    dc.Push(dc_val * k);
 
-    ac.Push(CalculateAC(period, dc_val));
+    ac.Push(CalculateAC(period, dc_val) * k);
 
     FFT fft(data);
 
