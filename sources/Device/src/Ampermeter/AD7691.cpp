@@ -124,12 +124,21 @@ ValueADC AD7691::ReadReal()
             result |= 1;
         }
 
+#ifndef WIN32
+        __ASM("nop");
+#endif
+
         GPIOB->BSRR = GPIO_PIN_10 << 16;
 
         if (i != 17)
         {
             result <<= 1;
         }
+
+#ifndef WIN32
+        __ASM("nop");
+        __ASM("nop");
+#endif
     }
 
     return ValueADC(result);
