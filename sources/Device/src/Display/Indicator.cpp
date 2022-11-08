@@ -181,7 +181,7 @@ void Indicator::ConvertDoubleToText(double value, char out[MAX_LEN], int after, 
         }
         else if (value < 100.0)
         {
-            std::strcat(out, "00");
+            std::strcat(out, "0");
         }
     }
 
