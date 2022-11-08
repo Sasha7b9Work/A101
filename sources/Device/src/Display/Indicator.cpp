@@ -30,6 +30,15 @@ namespace Indicator
         Color color;
     };
 
+    // Изменяемый текст
+    struct Text : public Label
+    {
+        Text(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_color) :
+         Label(_x, _y, _w, _h, _font, _text, _color) {}
+    private:
+        bool empty = true;
+    };
+
     static const int big_x_label = 38;
     static const int big_y_0 = 74;
     static const int big_y_1 = 236;
@@ -54,12 +63,12 @@ namespace Indicator
     static Label labelAC(big_x_label, big_y_1, big_width_label, big_height, 7, "AC:", Color::MeasureAC);
     static Label labelACsmall(small_x_label, small_y_1, small_width_label, small_height, 0, "AC:", Color::MeasureAC);
 
-    static Label textDC(big_x_text, big_y_0, big_width_text, big_height, 7, "", Color::MeasureDC);
-    static Label textDCsmall(small_x_text, small_y_0, small_width_text, small_height, 0, "", Color::MeasureDC);
-    static Label textAC(big_x_text, big_y_1, big_width_text, big_height, 7, "", Color::MeasureAC);
-    static Label textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "", Color::MeasureAC);
+    static Text textDC(big_x_text, big_y_0, big_width_text, big_height, 7, "", Color::MeasureDC);
+    static Text textDCsmall(small_x_text, small_y_0, small_width_text, small_height, 0, "", Color::MeasureDC);
+    static Text textAC(big_x_text, big_y_1, big_width_text, big_height, 7, "", Color::MeasureAC);
+    static Text textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "", Color::MeasureAC);
 
-    static Label textDeltaADC(7, 207, 150, 40, 3, "", Color::White);
+    static Text textDeltaADC(7, 207, 150, 40, 3, "", Color::White);
 
     static bool is_big = true;
 
