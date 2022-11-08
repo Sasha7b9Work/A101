@@ -169,11 +169,32 @@ void Indicator::ConvertDoubleToText(double value, char out[MAX_LEN], int after, 
 {
     std::strcpy(out, value < 0.0 ? "-" : "+");
 
+    value = std::fabs(value);
+
+    int before = 5 - after;
+
+    if (before == 3)
+    {
+        if (value < 10.0)
+        {
+            std::strcat(out, "00");
+        }
+        else if (value < 100.0)
+        {
+            std::strcat(out, "00");
+        }
+    }
+
+    if (before == 2 && value < 10.0)
+    {
+        std::strcat(out, "0");
+    }
+
     char buffer[MAX_LEN];
 
-    char format[] = { '%', '0', (char)((6 - after) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0'};
+    char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0'};
 
-    std::sprintf(buffer, format, std::fabs(value), suffix);
+    std::sprintf(buffer, format, value, suffix);
 
     std::strcat(out, buffer);
 }
