@@ -111,7 +111,7 @@ ValueADC AD7691::ReadReal()
 
     GPIOB->BSRR = GPIO_PIN_12;
 
-    __IO uint wait = 0;   for (; wait < 22; wait++)  { }
+    __IO uint wait = 0;   for (; wait < 30; wait++)  { }
 
     GPIOB->BSRR = GPIO_PIN_12 << 16;
 
@@ -128,6 +128,7 @@ ValueADC AD7691::ReadReal()
         __ASM("nop");
         __ASM("nop");
         __ASM("nop");
+        __ASM("nop");
 #endif
 
         GPIOB->BSRR = GPIO_PIN_10 << 16;
@@ -138,6 +139,7 @@ ValueADC AD7691::ReadReal()
         }
 
 #ifndef WIN32
+        __ASM("nop");
         __ASM("nop");
         __ASM("nop");
         __ASM("nop");
