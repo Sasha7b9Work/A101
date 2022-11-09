@@ -37,8 +37,6 @@ void Ampermeter::Init()
 
 void Ampermeter::Update()
 {
-    TimeMeterMS meter;
-
     buffer.Clear(SampleRate::Current::Get());
 
     HAL_TIM4::StartPeriodicUS(SampleRate::Current::Get().Time());
@@ -52,8 +50,6 @@ void Ampermeter::Update()
 
     HAL_TIM4::Stop();
 
-    uint time = meter.ElapsedTime();
-
     buffer.CalculateLimits();
 
     SampleRate::Current::Set(Calculator::AppendData(buffer));
@@ -61,6 +57,4 @@ void Ampermeter::Update()
     Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC(), InputRelays::GetRange());
 
     DiagramInput::SetData(buffer);
-
-    LOG_WRITE("time %d ms", time);
 }

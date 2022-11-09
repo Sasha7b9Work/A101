@@ -2,16 +2,23 @@
 #include "defines.h"
 #include "Ampermeter/Calculator/PeriodInt.h"
 #include "Utils/Math.h"
+#include "Hardware/Timer.h"
 #include <limits>
 
 
 PeriodInt::PeriodInt(const BufferADC &buffer, const FFT &fft)
 {
+    CalculateSums(buffer);
+    
+    TimeMeterMS meter;
+    
     period = (int)std::numeric_limits<int>::max();
 
     int min_delta = (int)std::numeric_limits<int>::max();
+    
+    int index = fft.FindIndexFreq();
 
-    for (int per = BufferADC::SIZE / 2; per < BufferADC::SIZE - 10; per++)
+    for (int per = BufferADC::SIZE / (index + 2) * index; per < BufferADC::SIZE - 10; per++)
     {
         int delta = FindDelta(buffer, per, min_delta);
 
@@ -27,9 +34,7 @@ PeriodInt::PeriodInt(const BufferADC &buffer, const FFT &fft)
         }
     }
 
-    LOG_WRITE("index %d", fft.FindIndexFreq());
-
-    LOG_WRITE("period %d", period);
+    LOG_WRITE("index %d, period %d, time %d", fft.FindIndexFreq(), period, meter.ElapsedTime());
 }
 
 
@@ -62,6 +67,18 @@ int PeriodInt::FindDelta(const BufferADC &buffer, int per, int delta_out)
 }
 
 
+int PeriodInt::FindDelta2(const BufferADC &buffer, int per, int delta_out)
+{  
+    for(int start = 0; start < BufferADC::SIZE - per; start++)
+    {
+        int min = (int)std::numeric_limits<int>::max();
+        int max = (int)std::numeric_limits<int>::min();
+
+        
+    }
+}
+
+
 int PeriodInt::FindIntegral(const BufferADC &buffer, int line, int index_start)
 {
     int result = 0;
@@ -72,4 +89,15 @@ int PeriodInt::FindIntegral(const BufferADC &buffer, int line, int index_start)
     }
 
     return result;
+}
+
+
+void PeriodInt::CalculateSums(const BufferADC &buffer)
+{
+    sum[0] = buffer[0].Raw();
+    
+    for(int i = 0; i < BufferADC::SIZE; i++)
+    {
+        sum[i] = sum[i - 1] + buffer[i].Raw();
+    }
 }
