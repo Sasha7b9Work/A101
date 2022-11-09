@@ -51,7 +51,7 @@ if(WIN32)
         endforeach()
     endif()
 
-#    add_compile_options(/wd4244)    # initializing': conversion from 'double' to 'int', possible loss of data
+    add_compile_options(/wd4127)    # conditional expression is constant
     add_compile_options(/wd4464)    # relative include path contains '..'
     add_compile_options(/wd4514)    # unreferenced inline function has been removed
     add_compile_options(/wd4625)    # copy constructor was implicitly defined as deleted

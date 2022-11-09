@@ -38,11 +38,7 @@ SampleRate Calculator::AppendData(const BufferADC &_data)
 {
     data = _data;
 
-    TimeMeterMS meter;
-
     FFT fft(data);
-
-    LOG_WRITE("time fft %d ms", meter.ElapsedTime());
 
     int period = PeriodInt(data, fft).ToPoints();
 
