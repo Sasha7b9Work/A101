@@ -35,7 +35,7 @@ void Calculator::Reset(int range)
 
 SampleRate Calculator::AppendData(const BufferADC &data)
 {
-    const Period period = FinderPeriodSamples(data).GetResult();
+    FinderPeriodSamples(data).GetResult();
 
     return SampleRate::Current::Get();
 }

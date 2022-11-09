@@ -3,6 +3,28 @@
 #include "Ampermeter/Calculator/FinderPeriodSamples.h"
 
 
+// Структура для расчёт положительного и отрицательного интегралов
+struct DualIntegral
+{
+    DualIntegral(const BufferADC &, const Period &);
+
+    uint Positive() const { return positive; }
+    uint Negative() const { return negative; }
+
+    void Recalculate(const BufferADC &, const Period &);
+
+    bool IsSymmetric() const { return positive == negative; }
+
+private:
+
+    uint CalculatePositive(const BufferADC &, const Period &);
+    uint CalculateNegative(const BufferADC &, const Period &);
+
+    uint positive = 0xFFFFFFFF;
+    uint negative = 0;
+};
+
+
 FinderPeriodSamples::FinderPeriodSamples(const BufferADC &buffer)
 {
     int sum = 0;
@@ -25,8 +47,18 @@ FinderPeriodSamples::FinderPeriodSamples(const BufferADC &buffer)
         return;
     }
 
-    Period period_around(first_around, last_around, ValueADC::FromRaw(averaging));
+    Period period(first_around, last_around, ValueADC::FromRaw(averaging));
 
+    DualIntegral integral(buffer, period);
+
+    if (integral.IsSymmetric())
+    {
+        CalculateAccuracy(buffer, period.dc);
+    }
+    else
+    {
+
+    }
 }
 
 
@@ -38,9 +70,9 @@ bool FinderPeriodSamples::BadIntersection(const Intersection &first, const Inter
 
 void FinderPeriodSamples::SetFullPeriod(ValueADC _dc)
 {
-    period.dc = _dc;
-    period.first.Set(Intersection::Type::Rise, 0, 1);
-    period.last.Set(Intersection::Type::Fall, BufferADC::SIZE - 2, BufferADC::SIZE - 1);
+    result_period.dc = _dc;
+    result_period.first.Set(Intersection::Type::Rise, 0, 1);
+    result_period.last.Set(Intersection::Type::Fall, BufferADC::SIZE - 2, BufferADC::SIZE - 1);
 }
 
 
@@ -104,4 +136,65 @@ Intersection FinderPeriodSamples::FindLastIntersectionRelativeAverage(const Buff
     }
 
     return result;
+}
+
+
+void FinderPeriodSamples::CalculateAccuracy(const BufferADC &, const ValueADC &)
+{
+
+}
+
+
+DualIntegral::DualIntegral(const BufferADC &buffer, const Period &period)
+{
+    Recalculate(buffer, period);
+}
+
+
+void DualIntegral::Recalculate(const BufferADC &buffer, const Period &period)
+{
+    positive = CalculatePositive(buffer, period);
+    negative = CalculateNegative(buffer, period);
+}
+
+
+uint DualIntegral::CalculatePositive(const BufferADC &buffer, const Period &period)
+{
+    int i_first = period.first.first;
+    int i_last = period.last.second;
+
+    int zero = period.dc;
+
+    uint sum = 0;
+
+    for (int i = i_first; i < i_last; i++)
+    {
+        if (buffer[i] > zero)
+        {
+            sum += (uint)(buffer[i] - zero);
+        }
+    }
+
+    return sum;
+}
+
+
+uint DualIntegral::CalculateNegative(const BufferADC &buffer, const Period &period)
+{
+    int i_first = period.first.first;
+    int i_last = period.last.second;
+
+    int zero = period.dc;
+
+    uint sum = 0;
+
+    for (int i = i_first; i < i_last; i++)
+    {
+        if (buffer[i] < zero)
+        {
+            sum += (uint)(zero - buffer[i]);
+        }
+    }
+
+    return sum;
 }

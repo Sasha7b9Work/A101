@@ -48,9 +48,9 @@ class FinderPeriodSamples
 {
 public:
     FinderPeriodSamples(const BufferADC &);
-    const Period GetResult() const { return period; }
+    const Period GetResult() const { return result_period; }
 private:
-    Period period;
+    Period result_period;
 
     // Ќайти первое пересечение с уровнем zero
     Intersection FindFirstIntersectionRelativeAverage(const BufferADC &, const ValueADC &zero);
@@ -63,10 +63,6 @@ private:
     // ”станавливает результатом весь размер BufferADC
     void SetFullPeriod(ValueADC dc);
 
-    // Ќайти интеграл положительной части сигнала (над нулевой линией Period::dc)
-    int FindPositiveIntegral(const Period &);
-
-    // Ќайти интеграл отрицательной части сигнала (под нулевой линией Period::ac)
-    int FindNegativeIntegral(const Period &);
+    void CalculateAccuracy(const BufferADC &, const ValueADC &zero);
 };
 
