@@ -4,11 +4,12 @@
 #include "Hardware/Timer.h"
 #include "Hardware/Timer.h"
 #include <cmath>
+#include <cstdlib>
 
 
 FFT::FFT(const BufferADC &_data)
 {
-    double in[BufferADC::SIZE];
+    double *in = (double *)std::malloc(sizeof(double) * BufferADC::SIZE);
 
     double out[BufferADC::SIZE];
 
@@ -23,6 +24,8 @@ FFT::FFT(const BufferADC &_data)
     {
         data[i] = (uint8)(255.0 * out[i]);
     }
+
+    std::free(in);
 }
 
 
@@ -48,6 +51,21 @@ int FFT::FindIndexFreq() const
 }
 
 
+int FFT::GetLogN()
+{
+    if (BufferADC::SIZE == 4096)
+    {
+        return 12;
+    }
+    else if (BufferADC::SIZE == 2048)
+    {
+        return 11;
+    }
+
+    return 10;
+}
+
+
 void FFT::CalculateFFT(double dataR[BufferADC::SIZE], double result[BufferADC::SIZE])
 {
     for (int i = 0; i < BufferADC::SIZE; i++)
@@ -55,7 +73,7 @@ void FFT::CalculateFFT(double dataR[BufferADC::SIZE], double result[BufferADC::S
         result[i] = 0.0;
     }
 
-    int logN = 10;
+    int logN = GetLogN();
 
     static const double Rcoef[14] =
     {

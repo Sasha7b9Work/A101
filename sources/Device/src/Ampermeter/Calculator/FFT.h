@@ -15,4 +15,6 @@ private:
 
     void CalculateFFT(double dataR[BufferADC::SIZE], double result[BufferADC::SIZE]);
     void Normalize(double *data, int);
+
+    int GetLogN();
 };
