@@ -7,11 +7,11 @@
 
 FFT::FFT(const BufferADC &_data)
 {
-    double in[1024];
+    double in[BufferADC::SIZE];
 
-    double out[1024];
+    double out[BufferADC::SIZE];
 
-    for (int i = 0; i < 1024; i++)
+    for (int i = 0; i < BufferADC::SIZE; i++)
     {
         in[i] = _data[i].Real();
     }
@@ -22,12 +22,6 @@ FFT::FFT(const BufferADC &_data)
     {
         data[i] = (uint8)(255.0 * out[i]);
     }
-
-//    int index_freq = FindFreq();
-//
-//    float freq = (float)index_freq * _data.GetSampleRate().Freq() / 1024.0f;
-//
-//    LOG_WRITE("spectrum : index %d, frequency %f", index_freq, (double)freq);
 }
 
 
@@ -53,9 +47,9 @@ int FFT::FindIndexFreq() const
 }
 
 
-void FFT::CalculateFFT(double dataR[1024], double result[1024])
+void FFT::CalculateFFT(double dataR[BufferADC::SIZE], double result[BufferADC::SIZE])
 {
-    for (int i = 0; i < 1024; i++)
+    for (int i = 0; i < BufferADC::SIZE; i++)
     {
         result[i] = 0.0;
     }
@@ -80,8 +74,8 @@ void FFT::CalculateFFT(double dataR[1024], double result[1024])
         -0.0007669903187427, -0.0003834951875714
     };
 
-    int nn = 1024 >> 1;
-    int ie = 1024;
+    int nn = BufferADC::SIZE >> 1;
+    int ie = BufferADC::SIZE;
 
     for (int n = 1; n <= logN; n++)
     {
@@ -92,7 +86,7 @@ void FFT::CalculateFFT(double dataR[1024], double result[1024])
         double iu = 0.0;
         for (int j = 0; j < in; j++)
         {
-            for (int i = j; i < 1024; i += ie)
+            for (int i = j; i < BufferADC::SIZE; i += ie)
             {
                 int io = i + in;
                 double dRi = dataR[i]; //-V2563
@@ -113,7 +107,7 @@ void FFT::CalculateFFT(double dataR[1024], double result[1024])
         ie >>= 1;
     }
 
-    for (int j = 1, i = 1; i < 1024; i++)
+    for (int j = 1, i = 1; i < BufferADC::SIZE; i++)
     {
         if (i < j)
         {

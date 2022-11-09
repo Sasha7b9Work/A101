@@ -52,7 +52,7 @@ void DiagramInput::Draw()
     double scale = height / (data.Max().Real() - data.Min().Real());
     double ave = (data.Max().Real() + data.Min().Real()) / 2.0;
 
-    uint8 points[1024];
+    uint8 points[BufferADC::SIZE];
 
     for (int i = 0; i < NumPoints(); i++)
     {
