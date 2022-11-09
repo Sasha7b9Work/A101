@@ -1,5 +1,5 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-project (A101-Explorer)
+project (Explorer)
 
 set(CMAKE_UNITY_BUILD OFF)
 
