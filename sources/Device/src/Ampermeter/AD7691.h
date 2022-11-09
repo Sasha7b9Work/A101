@@ -22,6 +22,7 @@ private:
 
 struct ValueADC
 {
+    // В конструктор подаётся считанное с АЦП значение, которое подвергается корректировке
     explicit ValueADC(int _reading = 0);
     double Real() const { return 5.0 / (1 << 17) * (double)value; }
     int Raw()    const { return value; }
