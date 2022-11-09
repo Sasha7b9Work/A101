@@ -42,7 +42,7 @@ SampleRate Calculator::AppendData(const BufferADC &data)
 
     dc.Push(dc_val * k);
 
-    ac.Push(CalculateAC(data, period) * k);
+    ac.Push(CalculateAC(data, period ) * k);
 
     return SampleRate::Current::Get();
 }
