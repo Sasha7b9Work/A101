@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Ampermeter/Calculator/Calculator.h"
 #include "Ampermeter/Calculator/FFT.h"
-#include "Ampermeter/Calculator/FinderPeriod.h"
+#include "Ampermeter/Calculator/FinderPeriodFFT.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include "Ampermeter/Calculator/FinderDC.h"
 #include "Hardware/Timer.h"
@@ -36,7 +36,7 @@ SampleRate Calculator::AppendData(const BufferADC &data)
 {
     FFT fft(data);
 
-    int period = FinderPeriod(data, fft).ToPoints();
+    int period = FinderPeriodFFT(data, fft).ToPoints();
 
     double dc_val = FinderDC::Calculate(data, period);
 

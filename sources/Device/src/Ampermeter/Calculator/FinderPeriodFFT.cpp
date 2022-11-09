@@ -1,12 +1,12 @@
 // 2022/11/06 17:18:40 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Ampermeter/Calculator/FinderPeriod.h"
+#include "Ampermeter/Calculator/FinderPeriodFFT.h"
 #include "Utils/Math.h"
 #include "Hardware/Timer.h"
 #include <limits>
 
 
-FinderPeriod::FinderPeriod(const BufferADC &buffer, const FFT &fft)
+FinderPeriodFFT::FinderPeriodFFT(const BufferADC &buffer, const FFT &fft)
 {
     CalculateSums(buffer);
     
@@ -45,7 +45,7 @@ FinderPeriod::FinderPeriod(const BufferADC &buffer, const FFT &fft)
 }
 
 
-int FinderPeriod::FindDelta(const BufferADC &buffer, int per, int delta_out)
+int FinderPeriodFFT::FindDelta(const BufferADC &buffer, int per, int delta_out)
 {
     int min = (int)std::numeric_limits<int>::max();
     int max = (int)std::numeric_limits<int>::min();
@@ -86,7 +86,7 @@ int FinderPeriod::FindDelta(const BufferADC &buffer, int per, int delta_out)
 //}
 
 
-int FinderPeriod::FindDelta2(const BufferADC &, int per, int)
+int FinderPeriodFFT::FindDelta2(const BufferADC &, int per, int)
 {
     int delta = 0;
 
@@ -104,7 +104,7 @@ int FinderPeriod::FindDelta2(const BufferADC &, int per, int)
 }
 
 
-int FinderPeriod::FindIntegral(const BufferADC &buffer, int line, int index_start)
+int FinderPeriodFFT::FindIntegral(const BufferADC &buffer, int line, int index_start)
 {
     int result = 0;
 
@@ -117,7 +117,7 @@ int FinderPeriod::FindIntegral(const BufferADC &buffer, int line, int index_star
 }
 
 
-void FinderPeriod::CalculateSums(const BufferADC &buffer)
+void FinderPeriodFFT::CalculateSums(const BufferADC &buffer)
 {
     sum[0] = buffer[0].Raw();
     

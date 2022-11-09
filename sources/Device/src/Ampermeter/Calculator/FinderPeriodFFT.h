@@ -4,10 +4,10 @@
 #include "Ampermeter/Calculator/FFT.h"
 
 
-class FinderPeriod
+class FinderPeriodFFT
 {
 public:
-    FinderPeriod(const BufferADC &, const FFT &);
+    FinderPeriodFFT(const BufferADC &, const FFT &);
     int ToPoints() const { return period; }
 private:
     int period = -1;

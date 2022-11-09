@@ -1197,8 +1197,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ampermeter\Calculator\FinderPeriod.cpp</PathWithFileName>
-      <FilenameWithoutPath>FinderPeriod.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Ampermeter\Calculator\FinderPeriodFFT.cpp</PathWithFileName>
+      <FilenameWithoutPath>FinderPeriodFFT.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1209,8 +1209,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ampermeter\Calculator\FinderPeriod.h</PathWithFileName>
-      <FilenameWithoutPath>FinderPeriod.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Ampermeter\Calculator\FinderPeriodFFT.h</PathWithFileName>
+      <FilenameWithoutPath>FinderPeriodFFT.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

@@ -911,14 +911,14 @@
               <FilePath>.\src\Ampermeter\Calculator\Averager.h</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriod.cpp</FileName>
+              <FileName>FinderPeriodFFT.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriod.cpp</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodFFT.cpp</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriod.h</FileName>
+              <FileName>FinderPeriodFFT.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriod.h</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodFFT.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2082,14 +2082,14 @@
               <FilePath>.\src\Ampermeter\Calculator\Averager.h</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriod.cpp</FileName>
+              <FileName>FinderPeriodFFT.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriod.cpp</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodFFT.cpp</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriod.h</FileName>
+              <FileName>FinderPeriodFFT.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriod.h</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodFFT.h</FilePath>
             </File>
           </Files>
         </Group>
