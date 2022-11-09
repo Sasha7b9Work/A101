@@ -4,6 +4,11 @@
 #include "Ampermeter/Calculator/FFT.h"
 
 
+/*
+*  Использует для нахождения периода БПФ
+*/
+
+
 class FinderPeriodFFT
 {
 public:

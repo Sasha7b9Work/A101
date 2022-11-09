@@ -920,6 +920,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\FinderPeriodFFT.h</FilePath>
             </File>
+            <File>
+              <FileName>FinderPeriodSamples.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodSamples.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FinderPeriodSamples.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodSamples.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2090,6 +2100,16 @@
               <FileName>FinderPeriodFFT.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\FinderPeriodFFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>FinderPeriodSamples.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodSamples.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FinderPeriodSamples.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodSamples.h</FilePath>
             </File>
           </Files>
         </Group>
