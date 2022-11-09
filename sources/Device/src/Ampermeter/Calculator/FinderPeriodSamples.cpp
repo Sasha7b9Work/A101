@@ -15,6 +15,9 @@ struct DualIntegral
 
     bool IsSymmetric() const { return positive == negative; }
 
+    // ¬озвращает абсолютное значение разницы между positive и negative. 
+    uint Delta() const;
+
 private:
 
     uint CalculatePositive(const BufferADC &, const Period &);
@@ -57,7 +60,36 @@ FinderPeriodSamples::FinderPeriodSamples(const BufferADC &buffer)
     }
     else
     {
+        if (integral.Positive() > integral.Negative())
+        {
+            uint delta = integral.Delta();
 
+            while (integral.Positive() > integral.Negative())
+            {
+                delta = integral.Delta();
+
+                period.dc = ValueADC::FromRaw(period.dc - 1);
+
+                integral.Recalculate(buffer, period);
+            }
+
+            CalculateAccuracy(buffer, period.dc);
+        }
+        else
+        {
+            uint delta = integral.Delta();
+
+            while (integral.Positive() < integral.Negative())
+            {
+                delta = integral.Delta();
+
+                period.dc = ValueADC::FromRaw(period.dc + 1);
+
+                integral.Recalculate(buffer, period);
+            }
+
+            CalculateAccuracy(buffer, period.dc);
+        }
     }
 }
 
@@ -113,9 +145,9 @@ Intersection FinderPeriodSamples::FindLastIntersectionRelativeAverage(const Buff
             int current = buffer[i];
             int prev = buffer[i - 1];
 
-            if (prev > zero && current <= zero)
+            if (prev < zero && current >= zero)
             {
-                result.Set(Intersection::Type::Fall, prev, current);
+                result.Set(Intersection::Type::Rise, prev, current);
                 break;
             }
         }
@@ -127,9 +159,9 @@ Intersection FinderPeriodSamples::FindLastIntersectionRelativeAverage(const Buff
             int current = buffer[i];
             int prev = buffer[i - 1];
 
-            if (prev < zero && current >= zero)
+            if (prev > zero && current <= zero)
             {
-                result.Set(Intersection::Type::Rise, prev, current);
+                result.Set(Intersection::Type::Fall, prev, current);
                 break;
             }
         }
@@ -197,4 +229,15 @@ uint DualIntegral::CalculateNegative(const BufferADC &buffer, const Period &peri
     }
 
     return sum;
+}
+
+
+uint DualIntegral::Delta() const
+{
+    if (positive > negative)
+    {
+        return positive - negative;
+    }
+
+    return negative - positive;
 }
