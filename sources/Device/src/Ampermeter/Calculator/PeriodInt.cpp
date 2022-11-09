@@ -44,12 +44,12 @@ int PeriodInt::FindDelta(const BufferADC &buffer, int per, int delta_out)
 
         if (integral < min)
         {
-            integral = min;
+            min = integral;
         }
 
         if (integral > max)
         {
-            integral = max;
+            max = integral;
         }
 
         if (max - min >= delta_out)
