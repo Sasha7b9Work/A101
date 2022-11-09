@@ -52,17 +52,13 @@ Intersection FinderPeriodSamples::FindFirstIntersectionRelativeAverage(const Buf
 
         if (prev < zero && current >= zero)
         {
-            result.type = Intersection::Type::Rise;
-            result.first = prev;
-            result.second = current;
+            result.Set(Intersection::Type::Rise, prev, current);
             break;
         }
 
         if (prev > zero && current <= zero)
         {
-            result.type = Intersection::Type::Fall;
-            result.first = prev;
-            result.second = current;
+            result.Set(Intersection::Type::Fall, prev, current);
             break;
         }
     }
@@ -84,9 +80,7 @@ Intersection FinderPeriodSamples::FindLastIntersectionRelativeAverage(const Buff
 
             if (prev > zero && current <= zero)
             {
-                result.type = Intersection::Type::Fall;
-                result.first = prev;
-                result.second = current;
+                result.Set(Intersection::Type::Fall, prev, current);
                 break;
             }
         }
@@ -100,9 +94,7 @@ Intersection FinderPeriodSamples::FindLastIntersectionRelativeAverage(const Buff
 
             if (prev < zero && current >= zero)
             {
-                result.type = Intersection::Type::Rise;
-                result.first = prev;
-                result.second = current;
+                result.Set(Intersection::Type::Rise, prev, current);
                 break;
             }
         }
