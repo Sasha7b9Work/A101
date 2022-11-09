@@ -4,9 +4,11 @@ project (A101-Explorer)
 set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(src
-                    ../../ThirdParty/wxWidgets/include
-                    ../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
-                    
+                    ../../VS/ThirdParty/wxWidgets/include
+                    ../../generated/ThirdParty/lib/vc_dll/mswud)
+
+link_directories(../../generated/ThirdParty/lib/vc_dll)
+
 add_definitions(-DWXUSINGDLL)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -MTd")
@@ -46,14 +48,14 @@ add_compile_options(/wd4355)    # 'this': used in base member initializer list
 add_compile_options(/wd4514)    # 'xxx': unreferenced inline function has been removed
 add_compile_options(/wd4625)    # copy constructor was implicitly defined as deleted
 add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
-add_compile_options(/wd4668)
+#add_compile_options(/wd4668)
 add_compile_options(/wd4820)    # 'bytes' bytes padding added after construct 'member_name'
 add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
 add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
-add_compile_options(/wd5039)
+add_compile_options(/wd5039)    # pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-
-add_compile_options(/wd5219)    # Лоджное срабатываение на 16.7.2
+add_compile_options(/wd5219)    # implicit conversion from 'int' to 'float', possible loss of data
+add_compile_options(/wd5264)    # 'const' variable is not used
 
 
 file(GLOB DOC            doc/*)
@@ -89,10 +91,12 @@ add_executable(${PROJECT_NAME} ${DOC}
                                ${RESOURCES}
 )
 
-target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
-target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
+target_link_libraries(${PROJECT_NAME} wxbase33ud wxmsw33ud_core Ws2_32)
 
 target_link_libraries(${PROJECT_NAME} WinMM.lib)
 target_link_libraries(${PROJECT_NAME} version.lib)
 target_link_libraries(${PROJECT_NAME} Imm32.Lib)
 target_link_libraries(${PROJECT_NAME} Setupapi.lib)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxmsw330ud_core_vc_custom.dll $(OutputPath) /Y)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxbase330ud_vc_custom.dll $(OutputPath) /Y)

@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Utils.h"
 #pragma warning(push, 0)
+#pragma warning(disable:4668)
 #include <iomanip>
 #include <sstream>
 #include <cstring>
