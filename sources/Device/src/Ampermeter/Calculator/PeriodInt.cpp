@@ -20,7 +20,7 @@ PeriodInt::PeriodInt(const BufferADC &buffer, const FFT &fft)
 
     for (int per = BufferADC::SIZE / (index + 2) * index; per < BufferADC::SIZE - 10; per++)
     {
-        int delta = FindDelta(buffer, per, min_delta);
+        int delta = FindDelta2(buffer, per, min_delta);
 
         if (delta < min_delta)
         {
@@ -67,15 +67,33 @@ int PeriodInt::FindDelta(const BufferADC &buffer, int per, int delta_out)
 }
 
 
-int PeriodInt::FindDelta2(const BufferADC &buffer, int per, int delta_out)
-{  
-    for(int start = 0; start < BufferADC::SIZE - per; start++)
-    {
-        int min = (int)std::numeric_limits<int>::max();
-        int max = (int)std::numeric_limits<int>::min();
+//int PeriodInt::FindDelta2(const BufferADC &buffer, int per, int delta_out)
+//{  
+//    for(int start = 0; start < BufferADC::SIZE - per; start++)
+//    {
+//        int min = (int)std::numeric_limits<int>::max();
+//        int max = (int)std::numeric_limits<int>::min();
+//
+//        
+//    }
+//}
 
-        
+
+int PeriodInt::FindDelta2(const BufferADC &, int per, int)
+{
+    int delta = 0;
+
+    for (int start = 0; start < (BufferADC::SIZE - per - 1); start++)
+    {
+        int integral = sum[start + per] - sum[start];
+
+        if (Math::Abs<int>(integral) > delta)
+        {
+            delta = Math::Abs<int>(integral);
+        }
     }
+
+    return delta;
 }
 
 
