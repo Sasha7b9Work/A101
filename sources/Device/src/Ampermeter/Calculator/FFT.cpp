@@ -33,7 +33,7 @@ FFT::FFT(const BufferADC &_data)
 
 int FFT::FindIndexFreq() const
 {
-    for (int i = 1; i < 512; i++)
+    for (int i = 1; i < BufferADC::SIZE / 2; i++)
     {
         if (data[i] == 255)
         {
@@ -41,7 +41,7 @@ int FFT::FindIndexFreq() const
         }
     }
 
-    for (int i = 1; i < 512; i++)
+    for (int i = 1; i < BufferADC::SIZE / 2; i++)
     {
         if (data[i] == 254)
         {
@@ -138,7 +138,7 @@ void FFT::CalculateFFT(double dataR[1024], double result[1024])
         j = j + k;
     }
 
-    int num_points = 512;
+    int num_points = BufferADC::SIZE / 2;
 
     for (int i = 0; i < num_points; i++)
     {
