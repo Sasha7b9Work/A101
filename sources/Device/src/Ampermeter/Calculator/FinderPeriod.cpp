@@ -36,7 +36,12 @@ PeriodInt::PeriodInt(const BufferADC &buffer, const FFT &fft)
 
     float freq = 1.0f / ((float)(BufferADC::SIZE * buffer.GetSampleRate().TimeUS()) * 1e-6f) * (float)index;
 
-    LOG_WRITE("index %d, period %d, freq %f, time %d", fft.FindIndexFreq(), period, (double)freq, meter.ElapsedTime());
+    LOG_WRITE("index %d, period %d, index freq %.1f, freq %f",
+        fft.FindIndexFreq(),
+        period,
+        (double)freq,
+        1.0 / (index * buffer.GetSampleRate().TimeUS() * 1e-6)
+    );
 }
 
 

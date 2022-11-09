@@ -10,7 +10,7 @@ const ValueADC ValueADC::MAX = ValueADC((1 << 17) - 1);
 const ValueADC ValueADC::MIN = ValueADC((1 << 17));
 
 
-SampleRate SampleRate::current(5);      // Минимально возможное расстояние между точками - 5 мкс.
+SampleRate SampleRate::current(125);      // Минимально возможное расстояние между точками - 5 мкс.
 
 
 namespace AD7691
@@ -118,6 +118,7 @@ ValueADC AD7691::ReadReal()
 
 #ifndef WIN32
         __ASM("nop");
+        __ASM("nop");
 #endif
 
     for (int i = 0; i < 18; i++)
@@ -128,6 +129,11 @@ ValueADC AD7691::ReadReal()
         {
             result |= 1;
         }
+
+#ifndef WIN32
+        __ASM("nop");
+        __ASM("nop");
+#endif
 
         GPIOB->BSRR = GPIO_PIN_10 << 16;
 

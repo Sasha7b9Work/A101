@@ -50,6 +50,8 @@ void Ampermeter::Update()
         buffer.Push(AD7691::ReadValue());
     }
 
+    LOG_WRITE("time read %d ms", meter.ElapsedTime());
+
     HAL_TIM4::Stop();
 
     buffer.CalculateLimits();

@@ -18,7 +18,11 @@ FFT::FFT(const BufferADC &_data)
         in[i] = (float)_data[i].Real();
     }
 
+    TimeMeterMS meter;
+
     CalculateFFT(in, out);
+
+    LOG_WRITE("time fft %d ms", meter.ElapsedTime());
 
     for (int i = 0; i < SIZE; i++)
     {
