@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Ampermeter/Calculator/Calculator.h"
 #include "Ampermeter/Calculator/FFT.h"
-#include "Ampermeter/Calculator/PeriodInt.h"
+#include "Ampermeter/Calculator/FinderPeriod.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include "Ampermeter/Calculator/FinderDC.h"
 #include <cmath>

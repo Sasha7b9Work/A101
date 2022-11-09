@@ -8,13 +8,13 @@
 
 void Application::Init()
 {
-    SCPI::Init();
+//    SCPI::Init();
 
-    Screen::self->Init();
+//    Screen::self->Init();
 }
 
 
 void Application::Update()
 {
-    SCPI::Update();
+//    SCPI::Update();
 }

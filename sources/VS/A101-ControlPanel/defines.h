@@ -2,6 +2,8 @@
 #pragma once
 #define WIN32_LEAN_AND_MEAN
 
+#pragma warning(push, 0)
+
 #include <vector>
 #include <queue>
 #include <cstdarg>
@@ -11,11 +13,9 @@
 #include <mutex>
 #include <map>
 
-
 #include "wx_includes.h"
 
 
-#pragma warning(push, 0)
 #include <wx/wx.h>
 #pragma warning(pop)
 

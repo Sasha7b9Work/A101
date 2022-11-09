@@ -64,6 +64,7 @@ if(WIN32)
     add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
     add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specifie
     add_compile_options(/wd5219)    # implicit conversion from 'int' to 'float'
+    add_compile_options(/wd5264)    # variable is not used
 endif()
 
 file(GLOB SRC                   ./*.h

@@ -896,16 +896,6 @@
               <FilePath>.\src\Ampermeter\Calculator\FFT.h</FilePath>
             </File>
             <File>
-              <FileName>PeriodInt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\PeriodInt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PeriodInt.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\PeriodInt.h</FilePath>
-            </File>
-            <File>
               <FileName>FinderDC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\Calculator\FinderDC.cpp</FilePath>
@@ -914,6 +904,21 @@
               <FileName>FinderDC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\FinderDC.h</FilePath>
+            </File>
+            <File>
+              <FileName>Averager.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\Averager.h</FilePath>
+            </File>
+            <File>
+              <FileName>FinderPeriod.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriod.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FinderPeriod.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriod.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2062,16 +2067,6 @@
               <FilePath>.\src\Ampermeter\Calculator\FFT.h</FilePath>
             </File>
             <File>
-              <FileName>PeriodInt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\PeriodInt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PeriodInt.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\PeriodInt.h</FilePath>
-            </File>
-            <File>
               <FileName>FinderDC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\Calculator\FinderDC.cpp</FilePath>
@@ -2080,6 +2075,21 @@
               <FileName>FinderDC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\FinderDC.h</FilePath>
+            </File>
+            <File>
+              <FileName>Averager.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\Averager.h</FilePath>
+            </File>
+            <File>
+              <FileName>FinderPeriod.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriod.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FinderPeriod.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\FinderPeriod.h</FilePath>
             </File>
           </Files>
         </Group>
