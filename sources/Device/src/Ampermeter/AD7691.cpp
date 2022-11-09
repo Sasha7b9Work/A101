@@ -159,7 +159,7 @@ ValueADC::ValueADC(int reading)
         value -= 1 << 18;
     }
 
-    value -= 3257;
+    value -= 3290;
 }
 
 
