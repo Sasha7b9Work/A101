@@ -13,13 +13,16 @@ struct Intersection
     enum class Type
     {
         Rise,           // ѕересечение из отрицательной области в положительную
-        Fall
+        Fall,
+        Empty
     };
 
-    Type type;
+//    Intersection() : type(Type::Empty), first(0), second(0) {}
 
-    int first;          // »ндекс первой точки (до пересечени€)
-    int second;         // »ндекс последней точки (после пересечени€)
+    Type type = Type::Empty;
+
+    int first = 0;      // »ндекс первой точки (до пересечени€)
+    int second = 0;     // »ндекс последней точки (после пересечени€)
 };
 
 
@@ -35,9 +38,15 @@ struct Period
 class FinderPeriodSamples
 {
 public:
-    FinderPeriodSamples(const BufferADC &buffer);
-    const Period GetResult() const { return result; };
+    FinderPeriodSamples(const BufferADC &);
+    const Period GetResult() const { return period; }
 private:
-    Period result;
+    Period period;
+
+    // Ќайти первое пересечение с уровнем zero
+    Intersection FindFirstIntersectionRelativeAverage(const BufferADC &, const ValueADC &zero);
+
+    // Ќайти последнее пересечение с уровнем zero, соответствующее первому пересечению first (они должны быть разного типа)
+    Intersection FindLastIntersectionRelativeAverage(const BufferADC &, const ValueADC &zero, const Intersection &first);
 };
 
