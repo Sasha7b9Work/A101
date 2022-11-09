@@ -152,25 +152,25 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>40</LineNumber>
+          <LineNumber>51</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134235426</Address>
+          <Address>134238334</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Hardware\HAL\HAL_IT.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Ampermeter\Ampermeter.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Hardware/HAL/HAL_IT.cpp\40</Expression>
+          <Expression>\\A101_D\src/Ampermeter/Ampermeter.cpp\51</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>41</LineNumber>
+          <LineNumber>37</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134238484</Address>
+          <Address>134238446</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -179,23 +179,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;1&gt;.\src\Ampermeter\Calculator\Calculator.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Ampermeter/Calculator/Calculator.cpp\41</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>45</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134238508</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Ampermeter\Calculator\Calculator.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Ampermeter/Calculator/Calculator.cpp\45</Expression>
+          <Expression>\\A101_D\src/Ampermeter/Calculator/Calculator.cpp\37</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

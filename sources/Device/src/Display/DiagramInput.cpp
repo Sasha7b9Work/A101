@@ -10,12 +10,12 @@
 
 namespace DiagramInput
 {
-    static BufferADC data;
-
     static const double height = 256;        // Таков размах по вре
     static const double y0 = 128;
     static bool enabled = false;
     static uint time_next_draw = 0;         // Время следующей отрисовки картинки
+
+    static uint8 points[1024];
 
     static bool NeedDraw();
 
@@ -23,9 +23,26 @@ namespace DiagramInput
 }
 
 
-void DiagramInput::SetData(const BufferADC &_data)
+void DiagramInput::SetData(const BufferADC &data)
 {
-    data = _data;
+    double scale = height / (data.Max().Real() - data.Min().Real());
+    double ave = (data.Max().Real() + data.Min().Real()) / 2.0;
+
+    for (int i = 0; i < NumPoints(); i++)
+    {
+        double value = y0 + scale * (data[i].Real() - ave);
+
+        if (value < 0)
+        {
+            value = 0;
+        }
+        else if (value > 255)
+        {
+            value = 255;
+        }
+
+        points[i] = (uint8)value;
+    }
 }
 
 
@@ -47,27 +64,6 @@ void DiagramInput::Draw()
     if (!IsEnabled() || !NeedDraw())
     {
         return;
-    }
-
-    double scale = height / (data.Max().Real() - data.Min().Real());
-    double ave = (data.Max().Real() + data.Min().Real()) / 2.0;
-
-    uint8 points[BufferADC::SIZE];
-
-    for (int i = 0; i < NumPoints(); i++)
-    {
-        double value = y0 + scale * (data[i].Real() - ave);
-
-        if (value < 0)
-        {
-            value = 0;
-        }
-        else if (value > 255)
-        {
-            value = 255;
-        }
-
-        points[i] = (uint8)value;
     }
 
     Nextion::WaveInput::Draw(points, NumPoints());

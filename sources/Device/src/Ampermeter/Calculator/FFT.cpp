@@ -11,7 +11,7 @@ FFT::FFT(const BufferADC &_data)
 {
     float *in = (float *)std::malloc(sizeof(float) * BufferADC::SIZE);
 
-    float out[BufferADC::SIZE];
+    float *out = (float *)std::malloc(sizeof(float) * BufferADC::SIZE);
 
     for (int i = 0; i < BufferADC::SIZE; i++)
     {
@@ -26,6 +26,7 @@ FFT::FFT(const BufferADC &_data)
     }
 
     std::free(in);
+    std::free(out);
 }
 
 
