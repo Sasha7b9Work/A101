@@ -4,8 +4,8 @@
 
 struct SampleRate
 {
-    SampleRate(uint _time_points_us = current.Time()) : time_points_us(_time_points_us) {}
-    uint Time() const { return time_points_us; }
+    SampleRate(uint _time_points_us = current.TimeUS()) : time_points_us(_time_points_us) {}
+    uint TimeUS() const { return time_points_us; }
     float Freq() const { return 1.0f / ((float)time_points_us * 1e-6f); }
 
     struct Current

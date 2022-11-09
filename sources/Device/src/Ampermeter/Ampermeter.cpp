@@ -39,7 +39,7 @@ void Ampermeter::Update()
 {
     buffer.Clear(SampleRate::Current::Get());
 
-    HAL_TIM4::StartPeriodicUS(SampleRate::Current::Get().Time());
+    HAL_TIM4::StartPeriodicUS(SampleRate::Current::Get().TimeUS());
 
     while (!buffer.IsFull())
     {

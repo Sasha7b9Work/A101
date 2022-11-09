@@ -15,8 +15,8 @@ PeriodInt::PeriodInt(const BufferADC &buffer, const FFT &fft)
     period = (int)std::numeric_limits<int>::max();
 
     int min_delta = (int)std::numeric_limits<int>::max();
-    
-    int index = fft.FindIndexFreq();
+
+    const int index = fft.FindIndexFreq();
 
     for (int per = BufferADC::SIZE / (index + 2) * index; per < BufferADC::SIZE - 10; per++)
     {
@@ -34,7 +34,9 @@ PeriodInt::PeriodInt(const BufferADC &buffer, const FFT &fft)
         }
     }
 
-    LOG_WRITE("index %d, period %d, time %d", fft.FindIndexFreq(), period, meter.ElapsedTime());
+    float freq = 1.0f / ((float)(BufferADC::SIZE * buffer.GetSampleRate().TimeUS()) * 1e-6f) * (float)index;
+
+    LOG_WRITE("index %d, period %d, freq %f, time %d", fft.FindIndexFreq(), period, (double)freq, meter.ElapsedTime());
 }
 
 

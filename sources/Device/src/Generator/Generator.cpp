@@ -57,7 +57,7 @@ void Generator::SetDC(double _dc)
 
 ValueADC Generator::ReadValue()
 {
-    timeUS += SampleRate::Current::Get().Time();
+    timeUS += SampleRate::Current::Get().TimeUS();
 
     double time = (double)timeUS * 10e-6;
 
