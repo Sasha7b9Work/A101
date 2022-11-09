@@ -9,13 +9,13 @@
 
 FFT::FFT(const BufferADC &_data)
 {
-    float *in = (float *)std::malloc(sizeof(float) * BufferADC::SIZE);
+    float *in = (float *)std::malloc(sizeof(float) * BufferADC::SIZE); //-V829
 
     float *out = (float *)std::malloc(sizeof(float) * BufferADC::SIZE);
 
     for (int i = 0; i < BufferADC::SIZE; i++)
     {
-        in[i] = (float)_data[i].Real();
+        in[i] = (float)_data[i].Real(); //-V522
     }
 
     TimeMeterMS meter;
@@ -26,7 +26,7 @@ FFT::FFT(const BufferADC &_data)
 
     for (int i = 0; i < SIZE; i++)
     {
-        data[i] = (uint8)(255.0f * out[i]);
+        data[i] = (uint8)(255.0f * out[i]); //-V522
     }
 
     std::free(in);

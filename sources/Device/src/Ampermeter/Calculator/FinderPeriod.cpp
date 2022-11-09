@@ -40,7 +40,7 @@ PeriodInt::PeriodInt(const BufferADC &buffer, const FFT &fft)
         fft.FindIndexFreq(),
         period,
         (double)freq,
-        1.0 / (index * buffer.GetSampleRate().TimeUS() * 1e-6)
+        1.0 / ((double)((uint)index * buffer.GetSampleRate().TimeUS()) * 1e-6)
     );
 }
 
@@ -121,7 +121,7 @@ void PeriodInt::CalculateSums(const BufferADC &buffer)
 {
     sum[0] = buffer[0].Raw();
     
-    for(int i = 0; i < BufferADC::SIZE; i++)
+    for(int i = 1; i < BufferADC::SIZE; i++)
     {
         sum[i] = sum[i - 1] + buffer[i].Raw();
     }

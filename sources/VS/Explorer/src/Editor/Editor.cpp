@@ -122,7 +122,7 @@ Frame::Frame(const wxString &title)
 {
     SetIcon(wxICON(MAIN_ICON));
 
-    CreateMenu();
+    CreateMenus();
 
     wxFrame::CreateStatusBar(2);
 
@@ -246,7 +246,7 @@ wxRect Frame::GetMaxDisplay()
 }
 
 
-void Frame::CreateMenu()
+void Frame::CreateMenus()
 {
     wxMenu *fileMenu = new wxMenu;
     fileMenu->Append(FILE_OPEN, wxT("Загрузить\tCtrl+O"), wxT("Загрузить данные из файла"));
@@ -257,9 +257,9 @@ void Frame::CreateMenu()
     wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, wxT("Файл"));
 
-    SetMenuBar(menuBar);
+    wxFrameBase::SetMenuBar(menuBar);
 
-    toolBar = CreateToolBar();
+    toolBar = wxFrame::CreateToolBar();
 
     AddTool(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), "TOOL_OPEN");
     AddTool(FILE_SAVE, wxT("Сохранить сигнал в файл"), "TOOL_SAVE");

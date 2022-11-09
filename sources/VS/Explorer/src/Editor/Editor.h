@@ -47,7 +47,7 @@ private:
 
     wxRect GetMaxDisplay();
 
-    void CreateMenu();
+    void CreateMenus();
 
     void AddTool(int id, const wxString &label, pchar nameResource, pchar nameResourceDisabled = nullptr);
 

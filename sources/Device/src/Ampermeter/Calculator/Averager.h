@@ -11,7 +11,10 @@ public:
     {
         if (num_elements == size_buffer)
         {
-            std::memmove(buffer, buffer + 1, sizeof(T) * (size_buffer - 1));
+            if (size_buffer != 1)
+            {
+                std::memmove(buffer, buffer + 1, sizeof(T) * (size_buffer - 1));
+            }
             num_elements--;
         }
         buffer[num_elements++] = value;

@@ -206,12 +206,13 @@ void Indicator::Reset(int range)
 
     switch (range)
     {
-    case 0:        message = "*.***** mA";        break;
-    case 1:        message = "**.**** mA";        break;
-    case 2:        message = "***.*** mA";        break;
-    case 3:        message = "*.***** A";         break;
-    case 4:        message = "**.**** A";         break;
-    case 5:        message = "**.**** A";         break;
+    case 0:     message = "*.***** mA";     break;
+    case 1:     message = "**.**** mA";     break;
+    case 2:     message = "***.*** mA";     break;
+    case 3:     message = "*.***** A";      break;
+    case 4:
+    case 5:     message = "**.**** A";      break;
+    default:    message = "***.*** *";      break;
     }
 
     std::strcpy(measureDC, message);
