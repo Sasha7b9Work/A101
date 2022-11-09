@@ -6,7 +6,7 @@
 #include <limits>
 
 
-PeriodInt::PeriodInt(const BufferADC &buffer, const FFT &fft)
+FinderPeriod::FinderPeriod(const BufferADC &buffer, const FFT &fft)
 {
     CalculateSums(buffer);
     
@@ -45,7 +45,7 @@ PeriodInt::PeriodInt(const BufferADC &buffer, const FFT &fft)
 }
 
 
-int PeriodInt::FindDelta(const BufferADC &buffer, int per, int delta_out)
+int FinderPeriod::FindDelta(const BufferADC &buffer, int per, int delta_out)
 {
     int min = (int)std::numeric_limits<int>::max();
     int max = (int)std::numeric_limits<int>::min();
@@ -86,7 +86,7 @@ int PeriodInt::FindDelta(const BufferADC &buffer, int per, int delta_out)
 //}
 
 
-int PeriodInt::FindDelta2(const BufferADC &, int per, int)
+int FinderPeriod::FindDelta2(const BufferADC &, int per, int)
 {
     int delta = 0;
 
@@ -104,7 +104,7 @@ int PeriodInt::FindDelta2(const BufferADC &, int per, int)
 }
 
 
-int PeriodInt::FindIntegral(const BufferADC &buffer, int line, int index_start)
+int FinderPeriod::FindIntegral(const BufferADC &buffer, int line, int index_start)
 {
     int result = 0;
 
@@ -117,7 +117,7 @@ int PeriodInt::FindIntegral(const BufferADC &buffer, int line, int index_start)
 }
 
 
-void PeriodInt::CalculateSums(const BufferADC &buffer)
+void FinderPeriod::CalculateSums(const BufferADC &buffer)
 {
     sum[0] = buffer[0].Raw();
     
