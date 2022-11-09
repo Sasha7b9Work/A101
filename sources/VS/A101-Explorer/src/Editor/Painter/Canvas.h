@@ -1,0 +1,80 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#pragma once
+#include "Editor/Painter/Canvas.h"
+#include "Editor/Painter/Colors.h"
+
+#pragma warning(push, 0)
+#include <wx/wx.h>
+#pragma warning(pop)
+
+
+namespace Grid
+{
+    int X();
+    int Y();
+    int Width();
+    int Height();
+    int Bottom();
+    int Right();
+    void Draw();
+    void ChangeTypeGrid();
+
+    // Возвращает true, если линии сетки выводятся в процентах
+    bool TypeIsPercents();
+
+    // Возвращает расстояние между вертикальными линиями в точках или процентах
+    wxString GetScale();
+};
+
+
+class Canvas : public wxPanel
+{
+public:
+
+    Canvas(wxWindow *parent);
+
+    ~Canvas();
+
+    void Draw();
+
+    void Redraw();
+
+private:
+
+    bool mouseIsDown = false;       // true, если ЛКМ находится в нажатом положении
+    int mouseX = 0;
+    int mouseY = 0;
+    wxWindow *parent;
+
+    void BeginScene();
+
+    void EndScene();
+
+    void OnPaint(wxPaintEvent &);
+
+    void OnResize(wxSizeEvent &);
+
+    void OnMouseWheel(wxMouseEvent &);
+
+    void OnMouseMove(wxMouseEvent &);
+
+    void OnMouseLeftDown(wxMouseEvent &);
+
+    void OnMouseRightDown(wxMouseEvent &);
+
+    void OnMouseLeftUp(wxMouseEvent &);
+
+    void OnMouseRightUp(wxMouseEvent &);
+
+    void OnMouseEnter(wxMouseEvent &);
+
+    void OnMouseLeave(wxMouseEvent &);
+
+    // Установить необходимую форму курсора мыши
+    void SetMouseCursor();
+
+    bool mouseInWindow = false;
+};
+
+
+extern Canvas *TheCanvas;
