@@ -13,11 +13,16 @@ struct Intersection
     enum class Type
     {
         Rise,           // Пересечение из отрицательной области в положительную
-        Fall,
+        Fall,           // Пересечение из положительной области в отрицательную
         Empty
     };
 
-//    Intersection() : type(Type::Empty), first(0), second(0) {}
+    void Set(Type _type, int _first, int _second)
+    {
+        type = _type;
+        first = _first;
+        second = _second;
+    }
 
     Type type = Type::Empty;
 
@@ -46,7 +51,12 @@ private:
     // Найти первое пересечение с уровнем zero
     Intersection FindFirstIntersectionRelativeAverage(const BufferADC &, const ValueADC &zero);
 
-    // Найти последнее пересечение с уровнем zero, соответствующее первому пересечению first (они должны быть разного типа)
+    // Найти последнее пересечение с уровнем zero, соответствующее первому пересечению first (они должны быть одного типа)
     Intersection FindLastIntersectionRelativeAverage(const BufferADC &, const ValueADC &zero, const Intersection &first);
+
+    bool BadIntersection(const Intersection &first, const Intersection &second);
+
+    // Устанавливает результатом весь размер BufferADC
+    void SetFullPeriod(ValueADC dc);
 };
 

@@ -16,7 +16,7 @@ namespace Calculator
     static Averager<double, 1> dc;
     static Averager<double, 1> ac;
 
-    static double CalculateAC(const BufferADC &data, int period);
+    double CalculateAC(const BufferADC &data, int period);
 
     static double k = 1.0;
 }
