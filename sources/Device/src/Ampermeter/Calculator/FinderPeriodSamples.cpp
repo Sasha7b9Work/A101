@@ -24,6 +24,9 @@ FinderPeriodSamples::FinderPeriodSamples(const BufferADC &buffer)
 
         return;
     }
+
+    Period period_around(first_around, last_around, ValueADC::FromRaw(averaging));
+
 }
 
 

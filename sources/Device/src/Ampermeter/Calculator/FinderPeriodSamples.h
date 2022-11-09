@@ -33,6 +33,10 @@ struct Intersection
 
 struct Period
 {
+    Period() {}
+    Period(Intersection &_first, Intersection _last, ValueADC _dc) :
+        first(_first), last(_last), dc(_dc)   { }
+
     Intersection first; // Первое пересечение с нулём
     Intersection last;  // Второе пересечение с нулём
 
@@ -58,5 +62,11 @@ private:
 
     // Устанавливает результатом весь размер BufferADC
     void SetFullPeriod(ValueADC dc);
+
+    // Найти интеграл положительной части сигнала (над нулевой линией Period::dc)
+    int FindPositiveIntegral(const Period &);
+
+    // Найти интеграл отрицательной части сигнала (под нулевой линией Period::ac)
+    int FindNegativeIntegral(const Period &);
 };
 
