@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Ampermeter/AD7691.h"
 #include "Generator/Generator.h"
+#include "Ampermeter/InputRelays.h"
 #include "stm_includes.h"
 
 
@@ -159,7 +160,9 @@ ValueADC::ValueADC(int reading)
         value -= 1 << 18;
     }
 
-    value -= 3290;
+    static const int delta[6] = { 3290, 3254, 3250, 3254, 3290, 3290 };
+
+    value -= delta[InputRelays::GetRange()];
 }
 
 
