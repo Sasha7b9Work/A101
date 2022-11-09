@@ -29,7 +29,7 @@ void Calculator::Reset(int range)
 
     static const double koeff[6] = { 1e-2, 1e-1, 1e0, 1e-2, 1e-1, 1e0 };
 
-    k = koeff[range] * 61.79;
+    k = koeff[range] * 61.81;
 }
 
 
