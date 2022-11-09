@@ -5,6 +5,7 @@
 #include "Ampermeter/Calculator/FinderPeriod.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include "Ampermeter/Calculator/FinderDC.h"
+#include "Hardware/Timer.h"
 #include <cmath>
 
 
@@ -37,7 +38,11 @@ SampleRate Calculator::AppendData(const BufferADC &_data)
 {
     data = _data;
 
+    TimeMeterMS meter;
+
     FFT fft(data);
+
+    LOG_WRITE("time fft %d ms", meter.ElapsedTime());
 
     int period = PeriodInt(data, fft).ToPoints();
 

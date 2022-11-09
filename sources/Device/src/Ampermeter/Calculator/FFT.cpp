@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Ampermeter/Calculator/FFT.h"
 #include "Hardware/Timer.h"
+#include "Hardware/Timer.h"
 #include <cmath>
 
 
