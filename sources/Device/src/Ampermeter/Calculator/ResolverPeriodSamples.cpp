@@ -28,7 +28,7 @@ private:
 };
 
 
-ResolverPeriodSamples::ResolverPeriodSamples(const BufferADC &buffer)
+FinderPeriodSamples::FinderPeriodSamples(const BufferADC &buffer)
 {
     int sum = 0;
 
@@ -94,13 +94,13 @@ ResolverPeriodSamples::ResolverPeriodSamples(const BufferADC &buffer)
 }
 
 
-bool ResolverPeriodSamples::BadIntersection(const Intersection &first, const Intersection &second)
+bool FinderPeriodSamples::BadIntersection(const Intersection &first, const Intersection &second)
 {
     return (first.type == Intersection::Type::Empty) || (second.type == Intersection::Type::Empty);
 }
 
 
-void ResolverPeriodSamples::SetFullPeriod(ValueADC _dc)
+void FinderPeriodSamples::SetFullPeriod(ValueADC _dc)
 {
     result_period.dc = _dc;
     result_period.first.Set(Intersection::Type::Rise, 0, 1);
@@ -108,7 +108,7 @@ void ResolverPeriodSamples::SetFullPeriod(ValueADC _dc)
 }
 
 
-Intersection ResolverPeriodSamples::FindFirstIntersectionRelativeAverage(const BufferADC &buffer, const ValueADC &zero)
+Intersection FinderPeriodSamples::FindFirstIntersectionRelativeAverage(const BufferADC &buffer, const ValueADC &zero)
 {
     Intersection result;
 
@@ -119,13 +119,13 @@ Intersection ResolverPeriodSamples::FindFirstIntersectionRelativeAverage(const B
 
         if (prev < zero && current >= zero)
         {
-            result.Set(Intersection::Type::Rise, prev, current);
+            result.Set(Intersection::Type::Rise, i - 1, i);
             break;
         }
 
         if (prev > zero && current <= zero)
         {
-            result.Set(Intersection::Type::Fall, prev, current);
+            result.Set(Intersection::Type::Fall, i - 1, i);
             break;
         }
     }
@@ -134,7 +134,7 @@ Intersection ResolverPeriodSamples::FindFirstIntersectionRelativeAverage(const B
 }
 
 
-Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const BufferADC &buffer, const ValueADC &zero, const Intersection &first)
+Intersection FinderPeriodSamples::FindLastIntersectionRelativeAverage(const BufferADC &buffer, const ValueADC &zero, const Intersection &first)
 {
     Intersection result;
 
@@ -147,7 +147,7 @@ Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const Bu
 
             if (prev < zero && current >= zero)
             {
-                result.Set(Intersection::Type::Rise, prev, current);
+                result.Set(Intersection::Type::Rise, i - 1, i);
                 break;
             }
         }
@@ -161,7 +161,7 @@ Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const Bu
 
             if (prev > zero && current <= zero)
             {
-                result.Set(Intersection::Type::Fall, prev, current);
+                result.Set(Intersection::Type::Fall, i - 1, i);
                 break;
             }
         }
@@ -171,7 +171,7 @@ Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const Bu
 }
 
 
-void ResolverPeriodSamples::CalculateAccuracy(const BufferADC &, const ValueADC &)
+void FinderPeriodSamples::CalculateAccuracy(const BufferADC &, const ValueADC &)
 {
 
 }

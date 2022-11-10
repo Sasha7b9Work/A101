@@ -44,10 +44,10 @@ struct Period
 };
 
 
-class ResolverPeriodSamples
+class FinderPeriodSamples
 {
 public:
-    ResolverPeriodSamples(const BufferADC &);
+    FinderPeriodSamples(const BufferADC &);
     const Period GetResult() const { return result_period; }
 private:
     Period result_period;
