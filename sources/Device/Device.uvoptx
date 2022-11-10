@@ -1421,8 +1421,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Display\Controls\TextMeasure.h</PathWithFileName>
-      <FilenameWithoutPath>TextMeasure.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Display\Controls\WindowsMeasures.h</PathWithFileName>
+      <FilenameWithoutPath>WindowsMeasures.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1433,8 +1433,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Display\Controls\TextMeasure.cpp</PathWithFileName>
-      <FilenameWithoutPath>TextMeasure.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Display\Controls\WindowsMeasures.cpp</PathWithFileName>
+      <FilenameWithoutPath>WindowsMeasures.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

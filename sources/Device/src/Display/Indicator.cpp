@@ -7,6 +7,7 @@
 #include "Display/DiagramFFT.h"
 #include "Hardware/HAL/HAL.h"
 #include "Display/Controls/TextString.h"
+#include "Display/Controls/WindowsMeasures.h"
 #include <cstdio>
 #include <cstring>
 #include <cmath>
@@ -17,11 +18,11 @@ namespace Indicator
     static const int big_x_label = 38;
     static const int big_y_0 = 74;
     static const int big_y_1 = 236;
-    static const int big_width_label = 175;
-    static const int big_height = 95;
+//    static const int big_width_label = 175;
+//    static const int big_height = 95;
 
-    static const int big_x_text = 220;
-    static const int big_width_text = 550;
+//    static const int big_x_text = 220;
+//    static const int big_width_text = 550;
 
     static const int small_x_label = 146;
     static const int small_y_0 = 220;
@@ -32,17 +33,18 @@ namespace Indicator
     static const int small_x_text = 361;
     static const int small_width_text = 300;
 
+    static WindowMeasureDC windowDC(big_x_label, big_y_0, 7);
+//    static TextString labelDC(big_x_label, big_y_0, big_width_label, big_height, 7, "DC:", Color::MeasureDC, Color::ButtonPress);
+//    static TextString textDC(big_x_text, big_y_0, big_width_text, big_height, 7, "", Color::MeasureDC, Color::ButtonPress);
 
-    static TextString labelDC(big_x_label, big_y_0, big_width_label, big_height, 7, "DC:", Color::MeasureDC, Color::ButtonPress);
+    static WindowMeasureAC windowAC(big_x_label, big_y_1, 7);
+//    static TextString labelAC(big_x_label, big_y_1, big_width_label, big_height, 7, "AC:", Color::MeasureAC, Color::ButtonPress);
+//    static TextString textAC(big_x_text, big_y_1, big_width_text, big_height, 7, "", Color::MeasureAC, Color::ButtonPress);
+
     static TextString labelDCsmall(small_x_label, small_y_0, small_width_label, small_height, 0, "DC:", Color::MeasureDC);
-    static TextString labelAC(big_x_label, big_y_1, big_width_label, big_height, 7, "AC:", Color::MeasureAC, Color::ButtonPress);
     static TextString labelACsmall(small_x_label, small_y_1, small_width_label, small_height, 0, "AC:", Color::MeasureAC);
-
-    static TextString textDC(big_x_text, big_y_0, big_width_text, big_height, 7, "", Color::MeasureDC, Color::ButtonPress);
     static TextString textDCsmall(small_x_text, small_y_0, small_width_text, small_height, 0, "", Color::MeasureDC);
-    static TextString textAC(big_x_text, big_y_1, big_width_text, big_height, 7, "", Color::MeasureAC, Color::ButtonPress);
     static TextString textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "", Color::MeasureAC);
-
     static TextString textDeltaADC(7, 207, 150, 40, 3, "", Color::White);
 
     static bool is_big = true;
@@ -83,15 +85,21 @@ void Indicator::SetBig()
     textDCsmall.Disable();
     textACsmall.Disable();
 
-    labelDC.Enable();
-    labelAC.Enable();
-    textDC.Enable();
-    textAC.Enable();
+    windowDC.Enable();
+//    textDC.Enable();
+//    labelDC.Enable();
 
-    textDC.SetText(measureDC);
-    textAC.SetText(measureAC);
+    windowAC.Enable();
+//    labelAC.Enable();
+//    textAC.Enable();
 
-    labelAC.Enable();
+    windowDC.SetText(measureDC);
+//    textDC.SetText(measureDC);
+
+    windowAC.SetText(measureAC);
+//    textAC.SetText(measureAC);
+
+//    labelAC.Enable();
 }
 
 
@@ -99,10 +107,13 @@ void Indicator::SetSmall()
 {
     is_big = false;
 
-    labelDC.Disable();
-    labelAC.Disable();
-    textDC.Disable();
-    textAC.Disable();
+    windowDC.Disable();
+//     labelDC.Disable();
+//    textDC.Disable();
+
+    windowAC.Disable();
+//    labelAC.Disable();
+//    textAC.Disable();
 
     labelDCsmall.Enable();
     labelACsmall.Enable();
@@ -143,8 +154,10 @@ void Indicator::WriteMeasures()
 {
     if (is_big)
     {
-        textDC.SetText(measureDC);
-        textAC.SetText(measureAC);
+        windowDC.SetText(measureDC);
+        //textDC.SetText(measureDC);
+
+        windowAC.SetText(measureAC);
     }
     else
     {

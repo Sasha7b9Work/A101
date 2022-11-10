@@ -1001,14 +1001,14 @@
               <FilePath>.\src\Display\Controls\TextString.h</FilePath>
             </File>
             <File>
-              <FileName>TextMeasure.h</FileName>
+              <FileName>WindowsMeasures.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Controls\TextMeasure.h</FilePath>
+              <FilePath>.\src\Display\Controls\WindowsMeasures.h</FilePath>
             </File>
             <File>
-              <FileName>TextMeasure.cpp</FileName>
+              <FileName>WindowsMeasures.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Controls\TextMeasure.cpp</FilePath>
+              <FilePath>.\src\Display\Controls\WindowsMeasures.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2207,14 +2207,14 @@
               <FilePath>.\src\Display\Controls\TextString.h</FilePath>
             </File>
             <File>
-              <FileName>TextMeasure.h</FileName>
+              <FileName>WindowsMeasures.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Controls\TextMeasure.h</FilePath>
+              <FilePath>.\src\Display\Controls\WindowsMeasures.h</FilePath>
             </File>
             <File>
-              <FileName>TextMeasure.cpp</FileName>
+              <FileName>WindowsMeasures.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Controls\TextMeasure.cpp</FilePath>
+              <FilePath>.\src\Display\Controls\WindowsMeasures.cpp</FilePath>
             </File>
           </Files>
         </Group>
