@@ -14,10 +14,10 @@
 namespace Calculator
 {
     static int num_averages = 0;
-    static Averager<double, 1> dc;
-    static Averager<double, 1> ac;
+    static Averager<float, 1> dc;
+    static Averager<float, 1> ac;
 
-    static double k = 1.0;
+    static float k = 1.0f;
 }
 
 
@@ -26,9 +26,9 @@ void Calculator::Reset(int range)
     dc.Reset();
     ac.Reset();
 
-    static const double koeff[6] = { 1e-2, 1e-1, 1e0, 1e-2, 1e-1, 1e0 };
+    static const float koeff[6] = { 1e-2f, 1e-1f, 1e0f, 1e-2f, 1e-1f, 1e0f };
 
-    k = koeff[range] * 61.81;
+    k = koeff[range] * 61.81f;
 }
 
 

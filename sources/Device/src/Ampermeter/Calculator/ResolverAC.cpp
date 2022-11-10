@@ -6,14 +6,14 @@
 
 ResolverAC::ResolverAC(const BufferADC &data, const Period &period)
 {
-    double sum = 0.0;
+    float sum = 0.0f;
 
     for (int i = period.first.first; i < period.last.first; i++)
     {
-        double value = data[i].Real() - period.dc.Real();
+        float value = data[i].Real() - period.dc.Real();
 
         sum += value * value;
     }
 
-    result = std::sqrt(sum / (period.last.first - period.first.first));
+    result = std::sqrtf(sum / (period.last.first - period.first.first));
 }
