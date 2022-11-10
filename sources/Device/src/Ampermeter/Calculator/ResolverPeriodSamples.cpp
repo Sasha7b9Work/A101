@@ -1,6 +1,7 @@
 // 2022/11/09 20:49:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Ampermeter/Calculator/ResolverPeriodSamples.h"
+#include "Hardware/Timer.h"
 
 
 // Структура для расчёт положительного и отрицательного интегралов
@@ -56,25 +57,35 @@ FinderPeriodSamples::FinderPeriodSamples(const BufferADC &buffer)
     }
     else
     {
+        int counter = 0;
+
         if (integral.Delta() > 0)
         {
             while (integral.Delta() > 0)
             {
-                period.dc = ValueADC::FromRaw(period.dc - 1);
+                period.dc = ValueADC::FromRaw(period.dc + 1);
 
                 integral.Recalculate(buffer, period);
+
+                counter++;
             }
 
             CalculateAccuracy(buffer, period.dc);
         }
         else
         {
+            TimeMeterMS meter;
+
             while (integral.Delta() < 0)
             {
-                period.dc = ValueADC::FromRaw(period.dc + 1);
+                period.dc = ValueADC::FromRaw(period.dc - 1);
 
                 integral.Recalculate(buffer, period);
+
+                counter++;
             }
+
+            LOG_WRITE("Time calculate %d ms, counter %d, period %d", meter.ElapsedTime(), counter, period.last.first - period.first.first);
 
             CalculateAccuracy(buffer, period.dc);
         }

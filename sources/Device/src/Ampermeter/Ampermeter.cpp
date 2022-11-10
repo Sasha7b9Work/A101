@@ -50,7 +50,7 @@ void Ampermeter::Update()
         buffer.Push(AD7691::ReadValue());
     }
 
-    LOG_WRITE("time read %d ms", meter.ElapsedTime());
+//    LOG_WRITE("time read %d ms", meter.ElapsedTime());
 
     HAL_TIM4::Stop();
 
@@ -62,5 +62,5 @@ void Ampermeter::Update()
 
     DiagramInput::SetData(buffer);
 
-    LOG_WRITE("time cycle %d ms", meter.ElapsedTime());
+//    LOG_WRITE("time cycle %d ms", meter.ElapsedTime());
 }
