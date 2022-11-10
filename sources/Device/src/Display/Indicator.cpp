@@ -6,6 +6,7 @@
 #include "Display/DiagramInput.h"
 #include "Display/DiagramFFT.h"
 #include "Hardware/HAL/HAL.h"
+#include "Display/Controls/TextString.h"
 #include <cstdio>
 #include <cstring>
 #include <cmath>
@@ -13,26 +14,6 @@
 
 namespace Indicator
 {
-    static const int MAX_LEN = 32;
-
-    struct TextString
-    {
-        TextString(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, const Color &_colorBack = Color::Count);
-        void Disable();
-        void Enable();
-        void SetText(const char[MAX_LEN]);
-    private:
-        char  text[MAX_LEN];
-        int   x;
-        int   y;
-        int   width;
-        int   height;
-        int   font;
-        Color colorText;
-        Color colorBack;
-    };
-
-
     static const int big_x_label = 38;
     static const int big_y_0 = 74;
     static const int big_y_1 = 236;
@@ -66,15 +47,15 @@ namespace Indicator
 
     static bool is_big = true;
 
-    static char measureDC[MAX_LEN] = { '\0' };
-    static char measureAC[MAX_LEN] = { '\0' };
+    static char measureDC[TextString::MAX_LEN] = { '\0' };
+    static char measureAC[TextString::MAX_LEN] = { '\0' };
 
     static void SetBig();
 
     static void SetSmall();
 
     // before - количество цифр (без учёта знака) перед запятой, after - количество цифр после запятой
-    static void ConvertDoubleToText(float value, char buffer[MAX_LEN], int after, pchar suffix);
+    static void ConvertDoubleToText(float value, char buffer[TextString::MAX_LEN], int after, pchar suffix);
 
     static void WriteMeasures();
 }
@@ -173,7 +154,7 @@ void Indicator::WriteMeasures()
 }
 
 
-void Indicator::ConvertDoubleToText(float value, char out[MAX_LEN], int after, pchar suffix)
+void Indicator::ConvertDoubleToText(float value, char out[TextString::MAX_LEN], int after, pchar suffix)
 {
     std::strcpy(out, value < 0.0f ? "-" : "+");
 
@@ -198,7 +179,7 @@ void Indicator::ConvertDoubleToText(float value, char out[MAX_LEN], int after, p
         std::strcat(out, "0");
     }
 
-    char buffer[MAX_LEN];
+    char buffer[TextString::MAX_LEN];
 
     char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0'};
 
@@ -235,36 +216,4 @@ void Indicator::SetDeltaADC(int delta)
     char buffer[32];
     std::sprintf(buffer, "%d", delta);
 //    textDeltaADC.SetText(buffer);
-}
-
-
-Indicator::TextString::TextString(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, const Color &_colorBack) :
-    x(_x), y(_y), width(_w), height(_h), font(_font), colorText(_colorText), colorBack(_colorBack)
-{
-    std::strcpy(text, _text);
-}
-
-
-void Indicator::TextString::Enable()
-{
-    Nextion::DrawString(x, y, width, height, font, colorText, (colorBack.value == Color::Count.value) ? Color::Background : Color::ButtonPress, text);
-}
-
-
-void Indicator::TextString::Disable()
-{
-    Nextion::DrawString(x, y, width, height, font, colorText, Color::Background, "");
-}
-
-
-void Indicator::TextString::SetText(const char _text[MAX_LEN])
-{
-    if (std::strcmp(_text, text) == 0)
-    {
-        return;
-    }
-
-    std::strcpy(text, _text);
-
-    Enable();
 }

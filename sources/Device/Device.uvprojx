@@ -988,6 +988,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Display/Controls</GroupName>
+          <Files>
+            <File>
+              <FileName>TextString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Controls\TextString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TextString.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Controls\TextString.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Generator</GroupName>
           <Files>
             <File>
@@ -2165,6 +2180,21 @@
               <FileName>Indicator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Indicator.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Display/Controls</GroupName>
+          <Files>
+            <File>
+              <FileName>TextString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Controls\TextString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TextString.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Controls\TextString.h</FilePath>
             </File>
           </Files>
         </Group>
