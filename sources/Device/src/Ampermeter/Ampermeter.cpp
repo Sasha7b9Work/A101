@@ -18,7 +18,7 @@
 
 namespace Ampermeter
 {
-    static BufferADC buffer;
+    static BufferADC __attribute__((section("CCM_DATA"))) buffer;
 }
 
 

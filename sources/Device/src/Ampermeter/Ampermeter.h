@@ -7,6 +7,4 @@ namespace Ampermeter
     void Init();
 
     void Update();
-
-
 }
