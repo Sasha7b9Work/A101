@@ -891,16 +891,6 @@
               <FilePath>.\src\Ampermeter\Calculator\Averager.h</FilePath>
             </File>
             <File>
-              <FileName>ResolverDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\ResolverDC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ResolverDC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\ResolverDC.h</FilePath>
-            </File>
-            <File>
               <FileName>ResolverFFT.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\Calculator\ResolverFFT.cpp</FilePath>
@@ -2080,16 +2070,6 @@
               <FileName>Averager.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\Averager.h</FilePath>
-            </File>
-            <File>
-              <FileName>ResolverDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\ResolverDC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ResolverDC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\ResolverDC.h</FilePath>
             </File>
             <File>
               <FileName>ResolverFFT.cpp</FileName>

@@ -5,7 +5,6 @@
 #include "Ampermeter/Calculator/ResolverPeriodFFT.h"
 #include "Ampermeter/Calculator/ResolverPeriodSamples.h"
 #include "Ampermeter/Calculator/Averager.h"
-#include "Ampermeter/Calculator/ResolverDC.h"
 #include "Ampermeter/Calculator/ResolverAC.h"
 #include "Hardware/Timer.h"
 #include <cmath>
@@ -46,14 +45,6 @@ SampleRate Calculator::AppendData(const BufferADC &data)
 
     return SampleRate::Current::Get();
 }
-
-
-//SampleRate Calculator::AppendData(const BufferADC &data)
-//{
-//    double dc_val = ResolverDC::Calculate(data, period);
-//
-//    dc.Push(dc_val * k);
-//}
 
 
 float Calculator::GetAC()

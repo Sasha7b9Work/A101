@@ -7,8 +7,12 @@
 class ResolverAC
 {
 public:
+
     ResolverAC(const BufferADC &, const Period &);
+
     float GetResult() const { return result; }
+
 private:
+
     float result = 0.0f;
 };

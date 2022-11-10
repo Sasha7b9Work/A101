@@ -25,6 +25,20 @@ private:
 };
 
 
+class ResolverDC
+{
+public:
+
+    ResolverDC(const BufferADC &, const Period &);
+
+    ValueADC GetResult() const { return result; }
+
+private:
+
+    ValueADC result;
+};
+
+
 ResolverPeriodSamples::ResolverPeriodSamples(const BufferADC &buffer)
 {
     int sum = 0;
@@ -45,50 +59,9 @@ ResolverPeriodSamples::ResolverPeriodSamples(const BufferADC &buffer)
         return;
     }
 
-    DualIntegral integral(buffer, period);
+    ValueADC dc = ResolverDC(buffer, period).GetResult();
 
-    if (integral.Delta() == 0)
-    {
-        CalculateAccuracy(buffer, period.dc);
-    }
-    else
-    {
-        int counter = 0;
-
-        if (integral.Delta() > 0)
-        {
-            while (integral.Delta() > 0)
-            {
-                period.dc = ValueADC::FromRaw(period.dc + 1);
-
-                integral.Recalculate(buffer, period);
-
-                counter++;
-            }
-
-            CalculateAccuracy(buffer, period.dc);
-        }
-        else
-        {
-//            TimeMeterMS meter;
-
-            while (integral.Delta() < 0)
-            {
-                period.dc = ValueADC::FromRaw(period.dc - 1);
-
-                integral.Recalculate(buffer, period);
-
-                counter++;
-            }
-
-//            LOG_WRITE("Time calculate %d ms, counter %d, period %d", meter.ElapsedTime(), counter, period.last.first - period.first.first);
-
-            CalculateAccuracy(buffer, period.dc);
-//            LOG_WRITE("                         accuracy period %d", result_period.last.first - result_period.first.first);
-        }
-
-        LOG_WRITE("counter %d", counter);
-    }
+    CalculateAccuracy(buffer, dc);
 }
 
 
@@ -255,4 +228,10 @@ uint DualIntegral::CalculateNegative(const BufferADC &buffer, const Period &peri
     }
 
     return sum;
+}
+
+
+ResolverDC::ResolverDC(const BufferADC &buffer, const Period &period)
+{
+
 }
