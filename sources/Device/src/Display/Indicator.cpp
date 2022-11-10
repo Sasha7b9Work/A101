@@ -240,7 +240,7 @@ void Indicator::SetDeltaADC(int delta)
 {
     char buffer[32];
     std::sprintf(buffer, "%d", delta);
-    textDeltaADC.SetText(buffer);
+//    textDeltaADC.SetText(buffer);
 }
 
 
