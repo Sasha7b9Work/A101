@@ -75,7 +75,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>0</IsCurrentTarget>
+        <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>
@@ -152,9 +152,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>95</LineNumber>
+          <LineNumber>244</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134242272</Address>
+          <Address>134239676</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,14 +163,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;1&gt;.\src\Ampermeter\Calculator\ResolverPeriodSamples.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Ampermeter/Calculator/ResolverPeriodSamples.cpp\95</Expression>
+          <Expression>\\A101_D\src/Ampermeter/Calculator/ResolverPeriodSamples.cpp\244</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>92</LineNumber>
+          <LineNumber>272</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134242266</Address>
+          <Address>134239830</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -179,7 +179,23 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;1&gt;.\src\Ampermeter\Calculator\ResolverPeriodSamples.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Ampermeter/Calculator/ResolverPeriodSamples.cpp\92</Expression>
+          <Expression>\\A101_D\src/Ampermeter/Calculator/ResolverPeriodSamples.cpp\272</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>269</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134239822</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Ampermeter\Calculator\ResolverPeriodSamples.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\A101_D\src/Ampermeter/Calculator/ResolverPeriodSamples.cpp\269</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -319,7 +335,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>1</IsCurrentTarget>
+        <IsCurrentTarget>0</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>

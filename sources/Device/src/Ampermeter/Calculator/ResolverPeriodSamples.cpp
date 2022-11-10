@@ -247,7 +247,9 @@ ResolverDC::ResolverDC(const BufferADC &buffer, const Period &_period)
 
     int dc_value = period.dc.Raw();
 
-    while (min - max > 10)
+    int counter = 0;
+
+    while (max - min > 1)
     {
         if (integral.Delta() > 0)
         {
@@ -258,12 +260,16 @@ ResolverDC::ResolverDC(const BufferADC &buffer, const Period &_period)
             max = dc_value;
         }
 
-        dc_value = (max - min) / 2;
+        dc_value = (max + min) / 2;
 
         period.dc = ValueADC::FromRaw(dc_value);
 
         integral.Recalculate(buffer, period);
+
+        counter++;
     }
+
+    LOG_WRITE("counter %d, delta %d", counter, max - min);
 
     result = period.dc;
 }
