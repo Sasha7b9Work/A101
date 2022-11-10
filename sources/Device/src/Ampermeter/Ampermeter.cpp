@@ -40,11 +40,13 @@ void Ampermeter::Update()
 
     while (!BufferADC::IsFull())
     {
+#ifndef WIN32
         while (TIM4->CNT < period)
         {
         }
 
         TIM4->CNT = 0;
+#endif
 
         BufferADC::Push(AD7691::ReadValue());
     }
