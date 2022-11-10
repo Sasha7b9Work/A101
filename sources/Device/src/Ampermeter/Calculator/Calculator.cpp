@@ -6,6 +6,7 @@
 #include "Ampermeter/Calculator/ResolverPeriodSamples.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include "Ampermeter/Calculator/ResolverDC.h"
+#include "Ampermeter/Calculator/ResolverAC.h"
 #include "Hardware/Timer.h"
 #include <cmath>
 
@@ -15,8 +16,6 @@ namespace Calculator
     static int num_averages = 0;
     static Averager<double, 1> dc;
     static Averager<double, 1> ac;
-
-    double CalculateAC(const BufferADC &data, int period);
 
     static double k = 1.0;
 }
@@ -37,23 +36,17 @@ SampleRate Calculator::AppendData(const BufferADC &data)
 {
     Period period = ResolverPeriodSamples(data).GetResult();
 
+    ac.Push(ResolverAC(data, period).GetResult() * k);
+
     return SampleRate::Current::Get();
 }
 
 
 //SampleRate Calculator::AppendData(const BufferADC &data)
 //{
-//    ResolverFFT fft(data);
-//
-//    int period = ResolverPeriodFFT(data, fft).ToPoints();
-//
 //    double dc_val = ResolverDC::Calculate(data, period);
 //
 //    dc.Push(dc_val * k);
-//
-//    ac.Push(CalculateAC(data, period ) * k);
-//
-//    return SampleRate::Current::Get();
 //}
 
 
@@ -72,19 +65,4 @@ double Calculator::GetDC()
 void Calculator::SetAverages(int num_ave)
 {
     num_averages = num_ave;
-}
-
-
-double Calculator::CalculateAC(const BufferADC &data, int period)
-{
-    double sum = 0.0;
-
-    for (uint i = 0; i < (uint)period; i++)
-    {
-        double value = data[(int)i].Real();
-
-        sum += value * value;
-    }
-
-    return std::sqrt(sum / period);
 }

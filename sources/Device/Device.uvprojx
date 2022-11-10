@@ -930,6 +930,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\ResolverPeriodSamples.h</FilePath>
             </File>
+            <File>
+              <FileName>ResolverAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverAC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverAC.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2110,6 +2120,16 @@
               <FileName>ResolverPeriodSamples.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\ResolverPeriodSamples.h</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverAC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverAC.h</FilePath>
             </File>
           </Files>
         </Group>
