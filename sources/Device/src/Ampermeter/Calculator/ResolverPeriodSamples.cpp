@@ -86,6 +86,8 @@ ResolverPeriodSamples::ResolverPeriodSamples(const BufferADC &buffer)
             CalculateAccuracy(buffer, period.dc);
 //            LOG_WRITE("                         accuracy period %d", result_period.last.first - result_period.first.first);
         }
+
+        LOG_WRITE("counter %d", counter);
     }
 }
 
