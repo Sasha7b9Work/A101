@@ -9,10 +9,10 @@
 */
 
 
-class FinderPeriodFFT
+class ResolverPeriodFFT
 {
 public:
-    FinderPeriodFFT(const BufferADC &, const FFT &);
+    ResolverPeriodFFT(const BufferADC &, const ResolverFFT &);
     int ToPoints() const { return period; }
 private:
     int period = -1;

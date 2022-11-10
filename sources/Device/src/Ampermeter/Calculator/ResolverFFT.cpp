@@ -7,7 +7,7 @@
 #include <cstdlib>
 
 
-FFT::FFT(const BufferADC &_data)
+ResolverFFT::ResolverFFT(const BufferADC &_data)
 {
     float *in = (float *)std::malloc(sizeof(float) * BufferADC::SIZE); //-V829
 
@@ -34,7 +34,7 @@ FFT::FFT(const BufferADC &_data)
 }
 
 
-int FFT::FindIndexFreq() const
+int ResolverFFT::FindIndexFreq() const
 {
     for (int i = 1; i < BufferADC::SIZE / 2; i++)
     {
@@ -56,7 +56,7 @@ int FFT::FindIndexFreq() const
 }
 
 
-int FFT::GetLogN()
+int ResolverFFT::GetLogN()
 {
     if (BufferADC::SIZE == 4096)
     {
@@ -71,7 +71,7 @@ int FFT::GetLogN()
 }
 
 
-void FFT::CalculateFFT(float dataR[BufferADC::SIZE], float result[BufferADC::SIZE])
+void ResolverFFT::CalculateFFT(float dataR[BufferADC::SIZE], float result[BufferADC::SIZE])
 {
     for (int i = 0; i < BufferADC::SIZE; i++)
     {
@@ -169,7 +169,7 @@ void FFT::CalculateFFT(float dataR[BufferADC::SIZE], float result[BufferADC::SIZ
 }
 
 
-void FFT::Normalize(float *in, int num_points)
+void ResolverFFT::Normalize(float *in, int num_points)
 {
     float max = 0.0;
 

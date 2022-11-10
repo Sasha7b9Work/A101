@@ -3,10 +3,10 @@
 #include "Ampermeter/BufferADC.h"
 
 
-class FFT
+class ResolverFFT
 {
 public:
-    FFT(const BufferADC &);
+    ResolverFFT(const BufferADC &);
     // Находит индекс массива частоты
     int FindIndexFreq() const;
 private:

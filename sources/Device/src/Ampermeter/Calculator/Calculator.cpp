@@ -35,7 +35,7 @@ void Calculator::Reset(int range)
 
 SampleRate Calculator::AppendData(const BufferADC &data)
 {
-    Period period = FinderPeriodSamples(data).GetResult();
+    Period period = ResolverPeriodSamples(data).GetResult();
 
     return SampleRate::Current::Get();
 }
@@ -43,11 +43,11 @@ SampleRate Calculator::AppendData(const BufferADC &data)
 
 //SampleRate Calculator::AppendData(const BufferADC &data)
 //{
-//    FFT fft(data);
+//    ResolverFFT fft(data);
 //
-//    int period = FinderPeriodFFT(data, fft).ToPoints();
+//    int period = ResolverPeriodFFT(data, fft).ToPoints();
 //
-//    double dc_val = FinderDC::Calculate(data, period);
+//    double dc_val = ResolverDC::Calculate(data, period);
 //
 //    dc.Push(dc_val * k);
 //

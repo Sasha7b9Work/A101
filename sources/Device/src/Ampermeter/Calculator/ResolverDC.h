@@ -3,7 +3,7 @@
 #include "Ampermeter/BufferADC.h"
 
 
-namespace FinderDC
+namespace ResolverDC
 {
     double Calculate(const BufferADC &, int period);
 }

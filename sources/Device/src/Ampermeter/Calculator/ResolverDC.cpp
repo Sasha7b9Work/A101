@@ -3,14 +3,14 @@
 #include "Ampermeter/Calculator/ResolverDC.h"
 
 
-namespace FinderDC
+namespace ResolverDC
 {
     // √рубо найти посто€нную составл€ющую
     double FindRough(const BufferADC &, int period);
 }
 
 
-double FinderDC::Calculate(const BufferADC &data, int period)
+double ResolverDC::Calculate(const BufferADC &data, int period)
 {
     double dc_rough = FindRough(data, period);
 
@@ -18,7 +18,7 @@ double FinderDC::Calculate(const BufferADC &data, int period)
 }
 
 
-double FinderDC::FindRough(const BufferADC &data, int period)
+double ResolverDC::FindRough(const BufferADC &data, int period)
 {
     double sum = 0.0;
 
