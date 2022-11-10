@@ -75,7 +75,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>0</IsCurrentTarget>
+        <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>
@@ -152,34 +152,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>51</LineNumber>
+          <LineNumber>42</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134238334</Address>
+          <Address>134241878</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Ampermeter\Ampermeter.cpp</Filename>
+          <Filename>D:\Projects\A101\sources\Device\src\Ampermeter\Calculator\FinderPeriodSamples.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Ampermeter/Ampermeter.cpp\51</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>37</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134238446</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Ampermeter\Calculator\Calculator.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Ampermeter/Calculator/Calculator.cpp\37</Expression>
+          <Expression>\\A101_D\src/Ampermeter/Calculator/FinderPeriodSamples.cpp\42</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -319,7 +303,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>1</IsCurrentTarget>
+        <IsCurrentTarget>0</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>
@@ -710,7 +694,7 @@
 
   <Group>
     <GroupName>Hardware/CMSIS</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -974,7 +958,7 @@
 
   <Group>
     <GroupName>Ampermeter</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1102,7 +1086,7 @@
 
   <Group>
     <GroupName>Ampermeter/Calculator</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1133,54 +1117,6 @@
     <File>
       <GroupNumber>7</GroupNumber>
       <FileNumber>51</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ampermeter\Calculator\FFT.cpp</PathWithFileName>
-      <FilenameWithoutPath>FFT.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>7</GroupNumber>
-      <FileNumber>52</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ampermeter\Calculator\FFT.h</PathWithFileName>
-      <FilenameWithoutPath>FFT.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>7</GroupNumber>
-      <FileNumber>53</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ampermeter\Calculator\FinderDC.cpp</PathWithFileName>
-      <FilenameWithoutPath>FinderDC.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>7</GroupNumber>
-      <FileNumber>54</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ampermeter\Calculator\FinderDC.h</PathWithFileName>
-      <FilenameWithoutPath>FinderDC.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>7</GroupNumber>
-      <FileNumber>55</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1192,13 +1128,61 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
+      <FileNumber>52</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Ampermeter\Calculator\ResolverDC.cpp</PathWithFileName>
+      <FilenameWithoutPath>ResolverDC.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>53</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Ampermeter\Calculator\ResolverDC.h</PathWithFileName>
+      <FilenameWithoutPath>ResolverDC.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>54</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Ampermeter\Calculator\ResolverFFT.cpp</PathWithFileName>
+      <FilenameWithoutPath>ResolverFFT.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>55</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Ampermeter\Calculator\ResolverFFT.h</PathWithFileName>
+      <FilenameWithoutPath>ResolverFFT.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>56</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ampermeter\Calculator\FinderPeriodFFT.cpp</PathWithFileName>
-      <FilenameWithoutPath>FinderPeriodFFT.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Ampermeter\Calculator\ResolverPeriodFFT.cpp</PathWithFileName>
+      <FilenameWithoutPath>ResolverPeriodFFT.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1209,8 +1193,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ampermeter\Calculator\FinderPeriodFFT.h</PathWithFileName>
-      <FilenameWithoutPath>FinderPeriodFFT.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Ampermeter\Calculator\ResolverPeriodFFT.h</PathWithFileName>
+      <FilenameWithoutPath>ResolverPeriodFFT.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1221,8 +1205,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ampermeter\Calculator\FinderPeriodSamples.cpp</PathWithFileName>
-      <FilenameWithoutPath>FinderPeriodSamples.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Ampermeter\Calculator\ResolverPeriodSamples.cpp</PathWithFileName>
+      <FilenameWithoutPath>ResolverPeriodSamples.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1233,8 +1217,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ampermeter\Calculator\FinderPeriodSamples.h</PathWithFileName>
-      <FilenameWithoutPath>FinderPeriodSamples.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Ampermeter\Calculator\ResolverPeriodSamples.h</PathWithFileName>
+      <FilenameWithoutPath>ResolverPeriodSamples.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

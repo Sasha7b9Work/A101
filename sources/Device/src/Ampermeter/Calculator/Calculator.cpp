@@ -1,11 +1,11 @@
 // 2022/10/19 08:16:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Ampermeter/Calculator/Calculator.h"
-#include "Ampermeter/Calculator/FFT.h"
-#include "Ampermeter/Calculator/FinderPeriodFFT.h"
-#include "Ampermeter/Calculator/FinderPeriodSamples.h"
+#include "Ampermeter/Calculator/ResolverFFT.h"
+#include "Ampermeter/Calculator/ResolverPeriodFFT.h"
+#include "Ampermeter/Calculator/ResolverPeriodSamples.h"
 #include "Ampermeter/Calculator/Averager.h"
-#include "Ampermeter/Calculator/FinderDC.h"
+#include "Ampermeter/Calculator/ResolverDC.h"
 #include "Hardware/Timer.h"
 #include <cmath>
 
@@ -35,7 +35,7 @@ void Calculator::Reset(int range)
 
 SampleRate Calculator::AppendData(const BufferADC &data)
 {
-    FinderPeriodSamples(data).GetResult();
+    Period period = FinderPeriodSamples(data).GetResult();
 
     return SampleRate::Current::Get();
 }

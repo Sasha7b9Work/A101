@@ -886,49 +886,49 @@
               <FilePath>.\src\Ampermeter\Calculator\Calculator.h</FilePath>
             </File>
             <File>
-              <FileName>FFT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FFT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FFT.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FFT.h</FilePath>
-            </File>
-            <File>
-              <FileName>FinderDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderDC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FinderDC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderDC.h</FilePath>
-            </File>
-            <File>
               <FileName>Averager.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\Averager.h</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriodFFT.cpp</FileName>
+              <FileName>ResolverDC.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodFFT.cpp</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverDC.cpp</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriodFFT.h</FileName>
+              <FileName>ResolverDC.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodFFT.h</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverDC.h</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriodSamples.cpp</FileName>
+              <FileName>ResolverFFT.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodSamples.cpp</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverFFT.cpp</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriodSamples.h</FileName>
+              <FileName>ResolverFFT.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodSamples.h</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverFFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverPeriodFFT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverPeriodFFT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverPeriodFFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverPeriodFFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverPeriodSamples.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverPeriodSamples.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverPeriodSamples.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverPeriodSamples.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2067,49 +2067,49 @@
               <FilePath>.\src\Ampermeter\Calculator\Calculator.h</FilePath>
             </File>
             <File>
-              <FileName>FFT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FFT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FFT.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FFT.h</FilePath>
-            </File>
-            <File>
-              <FileName>FinderDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderDC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FinderDC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderDC.h</FilePath>
-            </File>
-            <File>
               <FileName>Averager.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\Averager.h</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriodFFT.cpp</FileName>
+              <FileName>ResolverDC.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodFFT.cpp</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverDC.cpp</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriodFFT.h</FileName>
+              <FileName>ResolverDC.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodFFT.h</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverDC.h</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriodSamples.cpp</FileName>
+              <FileName>ResolverFFT.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodSamples.cpp</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverFFT.cpp</FilePath>
             </File>
             <File>
-              <FileName>FinderPeriodSamples.h</FileName>
+              <FileName>ResolverFFT.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\FinderPeriodSamples.h</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverFFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverPeriodFFT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverPeriodFFT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverPeriodFFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverPeriodFFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverPeriodSamples.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverPeriodSamples.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverPeriodSamples.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverPeriodSamples.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,7 +1,7 @@
 // 2022/11/06 17:18:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Ampermeter/BufferADC.h"
-#include "Ampermeter/Calculator/FFT.h"
+#include "Ampermeter/Calculator/ResolverFFT.h"
 
 
 /*
