@@ -21,7 +21,8 @@ namespace Indicator
         Label(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, const Color &_colorBack = Color::Count);
         void Disable();
         void Enable();
-    protected:
+        void SetText(const char[MAX_LEN]);
+    private:
         char  text[MAX_LEN];
         int   x;
         int   y;
@@ -32,13 +33,12 @@ namespace Indicator
         Color colorBack;
     };
 
-    // Изменяемый текст
-    struct Text : public Label
-    {
-        Text(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, const Color &_colorBack = Color::Count) :
-         Label(_x, _y, _w, _h, _font, _text, _colorText, _colorBack) {}
-        void SetText(const char[MAX_LEN]);
-    };
+//    // Изменяемый текст
+//    struct Text : public Label
+//    {
+//        Text(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, const Color &_colorBack = Color::Count) :
+//         Label(_x, _y, _w, _h, _font, _text, _colorText, _colorBack) {}
+//    };
 
     static const int big_x_label = 38;
     static const int big_y_0 = 74;
@@ -64,12 +64,12 @@ namespace Indicator
     static Label labelAC(big_x_label, big_y_1, big_width_label, big_height, 7, "AC:", Color::MeasureAC, Color::ButtonPress);
     static Label labelACsmall(small_x_label, small_y_1, small_width_label, small_height, 0, "AC:", Color::MeasureAC);
 
-    static Text textDC(big_x_text, big_y_0, big_width_text, big_height, 7, "", Color::MeasureDC, Color::ButtonPress);
-    static Text textDCsmall(small_x_text, small_y_0, small_width_text, small_height, 0, "", Color::MeasureDC);
-    static Text textAC(big_x_text, big_y_1, big_width_text, big_height, 7, "", Color::MeasureAC, Color::ButtonPress);
-    static Text textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "", Color::MeasureAC);
+    static Label textDC(big_x_text, big_y_0, big_width_text, big_height, 7, "", Color::MeasureDC, Color::ButtonPress);
+    static Label textDCsmall(small_x_text, small_y_0, small_width_text, small_height, 0, "", Color::MeasureDC);
+    static Label textAC(big_x_text, big_y_1, big_width_text, big_height, 7, "", Color::MeasureAC, Color::ButtonPress);
+    static Label textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "", Color::MeasureAC);
 
-    static Text textDeltaADC(7, 207, 150, 40, 3, "", Color::White);
+    static Label textDeltaADC(7, 207, 150, 40, 3, "", Color::White);
 
     static bool is_big = true;
 
@@ -264,7 +264,7 @@ void Indicator::Label::Disable()
 }
 
 
-void Indicator::Text::SetText(const char _text[MAX_LEN])
+void Indicator::Label::SetText(const char _text[MAX_LEN])
 {
     if (std::strcmp(_text, text) == 0)
     {
