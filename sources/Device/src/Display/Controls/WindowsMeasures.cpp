@@ -22,7 +22,7 @@ void WindowMeasure::Disable()
 }
 
 
-void WindowMeasure::SetText(char[TextString::MAX_LEN])
+void WindowMeasure::SetMeasure(char[TextString::MAX_LEN])
 {
 
 }

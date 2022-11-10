@@ -15,15 +15,6 @@
 
 namespace Indicator
 {
-    static const int big_x_label = 38;
-    static const int big_y_0 = 74;
-    static const int big_y_1 = 236;
-//    static const int big_width_label = 175;
-//    static const int big_height = 95;
-
-//    static const int big_x_text = 220;
-//    static const int big_width_text = 550;
-
     static const int small_x_label = 146;
     static const int small_y_0 = 220;
     static const int small_y_1 = 294;
@@ -33,13 +24,8 @@ namespace Indicator
     static const int small_x_text = 361;
     static const int small_width_text = 300;
 
-    static WindowMeasureDC windowDC(big_x_label, big_y_0, 7);
-//    static TextString labelDC(big_x_label, big_y_0, big_width_label, big_height, 7, "DC:", Color::MeasureDC, Color::ButtonPress);
-//    static TextString textDC(big_x_text, big_y_0, big_width_text, big_height, 7, "", Color::MeasureDC, Color::ButtonPress);
-
-    static WindowMeasureAC windowAC(big_x_label, big_y_1, 7);
-//    static TextString labelAC(big_x_label, big_y_1, big_width_label, big_height, 7, "AC:", Color::MeasureAC, Color::ButtonPress);
-//    static TextString textAC(big_x_text, big_y_1, big_width_text, big_height, 7, "", Color::MeasureAC, Color::ButtonPress);
+    static WindowMeasureDC windowDC(38, 74, 7);
+    static WindowMeasureAC windowAC(38, 236, 7);
 
     static TextString labelDCsmall(small_x_label, small_y_0, small_width_label, small_height, 0, "DC:", Color::MeasureDC);
     static TextString labelACsmall(small_x_label, small_y_1, small_width_label, small_height, 0, "AC:", Color::MeasureAC);
@@ -86,20 +72,10 @@ void Indicator::SetBig()
     textACsmall.Disable();
 
     windowDC.Enable();
-//    textDC.Enable();
-//    labelDC.Enable();
-
     windowAC.Enable();
-//    labelAC.Enable();
-//    textAC.Enable();
 
-    windowDC.SetText(measureDC);
-//    textDC.SetText(measureDC);
-
-    windowAC.SetText(measureAC);
-//    textAC.SetText(measureAC);
-
-//    labelAC.Enable();
+    windowDC.SetMeasure(measureDC);
+    windowAC.SetMeasure(measureAC);
 }
 
 
@@ -108,12 +84,7 @@ void Indicator::SetSmall()
     is_big = false;
 
     windowDC.Disable();
-//     labelDC.Disable();
-//    textDC.Disable();
-
     windowAC.Disable();
-//    labelAC.Disable();
-//    textAC.Disable();
 
     labelDCsmall.Enable();
     labelACsmall.Enable();
@@ -154,10 +125,8 @@ void Indicator::WriteMeasures()
 {
     if (is_big)
     {
-        windowDC.SetText(measureDC);
-        //textDC.SetText(measureDC);
-
-        windowAC.SetText(measureAC);
+        windowDC.SetMeasure(measureDC);
+        windowAC.SetMeasure(measureAC);
     }
     else
     {

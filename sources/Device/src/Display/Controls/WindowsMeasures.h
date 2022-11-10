@@ -9,7 +9,7 @@ public:
     WindowMeasure(int x, int y, int font, pchar _title);
     void Enable();
     void Disable();
-    void SetText(char [TextString::MAX_LEN]);
+    void SetMeasure(char [TextString::MAX_LEN]);
 private:
     TextString title;
 };
