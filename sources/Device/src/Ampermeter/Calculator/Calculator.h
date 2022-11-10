@@ -10,8 +10,6 @@ namespace Calculator
     // Функция возвращает частоту дискретизации для следующего сбора данных
     SampleRate AppendData();
 
-    void SetAverages(int num_ave);
-
     float GetAC();
 
     float GetDC();

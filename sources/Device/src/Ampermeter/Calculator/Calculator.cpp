@@ -12,10 +12,6 @@
 
 namespace Calculator
 {
-    static int num_averages = 0;
-//    static Averager<float, 1> dc;
-//    static Averager<float, 1> ac;
-
     static float dc = 0.0f;
     static float ac = 0.0f;
 
@@ -25,9 +21,6 @@ namespace Calculator
 
 void Calculator::Reset(int range)
 {
-//    dc.Reset();
-//    ac.Reset();
-
     static const float koeff[6] = { 1e-2f, 1e-1f, 1e0f, 1e-2f, 1e-1f, 1e0f };
 
     k = koeff[range] * 61.81f;
@@ -36,17 +29,13 @@ void Calculator::Reset(int range)
 
 SampleRate Calculator::AppendData()
 {
-//    TimeMeterMS meter;
-
     Period period = ResolverPeriodSamples().GetResult();
 
     float value_ac = ResolverAC(period).GetResult();
 
-//    LOG_WRITE("period %d, ac %f : %f, time %d ms", period.Lenght(), (double)value_ac, (double)(value_ac * k), meter.ElapsedTime());
-
     ac = value_ac * k;
 
-    dc = period.dc.Real() * k;
+    dc = -period.dc.Real() * k;
 
     return SampleRate::Current::Get();
 }
@@ -61,10 +50,4 @@ float Calculator::GetAC()
 float Calculator::GetDC()
 {
     return dc;
-}
-
-
-void Calculator::SetAverages(int num_ave)
-{
-    num_averages = num_ave;
 }
