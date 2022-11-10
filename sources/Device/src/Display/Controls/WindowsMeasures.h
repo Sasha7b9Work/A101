@@ -6,18 +6,19 @@
 class WindowMeasure
 {
 public:
-    WindowMeasure(int x, int y, int font);
+    WindowMeasure(int x, int y, int font, pchar _title);
     void Enable();
     void Disable();
     void SetText(char [TextString::MAX_LEN]);
 private:
+    TextString title;
 };
 
 
 class WindowMeasureAC : public WindowMeasure
 {
 public:
-    WindowMeasureAC(int x, int y, int font) : WindowMeasure(x, y, font) {}
+    WindowMeasureAC(int x, int y, int font) : WindowMeasure(x, y, font, "AC:") {}
 private:
 };
 
@@ -25,6 +26,6 @@ private:
 class WindowMeasureDC : public WindowMeasure
 {
 public:
-    WindowMeasureDC(int x, int y, int font) : WindowMeasure(x, y, font) {}
+    WindowMeasureDC(int x, int y, int font) : WindowMeasure(x, y, font, "DC:") {}
 private:
 };

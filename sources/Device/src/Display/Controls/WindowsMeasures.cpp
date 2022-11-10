@@ -3,7 +3,8 @@
 #include "Display/Controls/WindowsMeasures.h"
 
 
-WindowMeasure::WindowMeasure(int, int, int)
+WindowMeasure::WindowMeasure(int x, int y, int font, pchar _title) :
+    title(x, y, 175, 95, font, _title, Color::MeasureAC, Color::ButtonPress)
 {
 
 }
@@ -11,13 +12,13 @@ WindowMeasure::WindowMeasure(int, int, int)
 
 void WindowMeasure::Enable()
 {
-
+    title.Enable();
 }
 
 
 void WindowMeasure::Disable()
 {
-
+    title.Disable();
 }
 
 
