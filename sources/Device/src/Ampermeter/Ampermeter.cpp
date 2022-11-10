@@ -38,8 +38,6 @@ void Ampermeter::Init()
 
 void Ampermeter::Update()
 {
-    TimeMeterMS meter;
-
     buffer.Clear(SampleRate::Current::Get());
 
     uint period = SampleRate::Current::Get().TimeUS();
@@ -57,28 +55,13 @@ void Ampermeter::Update()
         buffer.Push(AD7691::ReadValue());
     }
 
-    LOG_WRITE("point 1 %d", meter.ElapsedTime());
-    meter.Reset();
-
     HAL_TIM4::Stop();
 
     buffer.CalculateLimits();
 
-    LOG_WRITE("point 2 %d", meter.ElapsedTime());
-    meter.Reset();
-
     SampleRate::Current::Set(Calculator::AppendData(buffer));
-
-    LOG_WRITE("point 3 %d", meter.ElapsedTime());
-    meter.Reset();
 
     Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC(), InputRelays::GetRange());
 
-    LOG_WRITE("point 4 %d", meter.ElapsedTime());
-    meter.Reset();
-
     DiagramInput::SetData(buffer);
-
-    LOG_WRITE("point 5 %d", meter.ElapsedTime());
-    meter.Reset();
 }
