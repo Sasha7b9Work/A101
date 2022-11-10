@@ -25,7 +25,7 @@ private:
 };
 
 
-FinderPeriodSamples::FinderPeriodSamples(const BufferADC &buffer)
+ResolverPeriodSamples::ResolverPeriodSamples(const BufferADC &buffer)
 {
     int sum = 0;
 
@@ -93,13 +93,13 @@ FinderPeriodSamples::FinderPeriodSamples(const BufferADC &buffer)
 }
 
 
-bool FinderPeriodSamples::BadIntersection(const Intersection &first, const Intersection &second)
+bool ResolverPeriodSamples::BadIntersection(const Intersection &first, const Intersection &second)
 {
     return (first.type == Intersection::Type::Empty) || (second.type == Intersection::Type::Empty);
 }
 
 
-void FinderPeriodSamples::SetFullPeriod(ValueADC _dc)
+void ResolverPeriodSamples::SetFullPeriod(ValueADC _dc)
 {
     result_period.dc = _dc;
     result_period.first.Set(Intersection::Type::Rise, 0, 1);
@@ -107,7 +107,7 @@ void FinderPeriodSamples::SetFullPeriod(ValueADC _dc)
 }
 
 
-Intersection FinderPeriodSamples::FindFirstIntersectionRelativeAverage(const BufferADC &buffer, const ValueADC &zero)
+Intersection ResolverPeriodSamples::FindFirstIntersectionRelativeAverage(const BufferADC &buffer, const ValueADC &zero)
 {
     Intersection result;
 
@@ -133,7 +133,7 @@ Intersection FinderPeriodSamples::FindFirstIntersectionRelativeAverage(const Buf
 }
 
 
-Intersection FinderPeriodSamples::FindLastIntersectionRelativeAverage(const BufferADC &buffer, const ValueADC &zero, const Intersection &first)
+Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const BufferADC &buffer, const ValueADC &zero, const Intersection &first)
 {
     Intersection result;
 
@@ -170,13 +170,13 @@ Intersection FinderPeriodSamples::FindLastIntersectionRelativeAverage(const Buff
 }
 
 
-void FinderPeriodSamples::CalculateRoughly(const BufferADC &buffer, const ValueADC &dc)
+void ResolverPeriodSamples::CalculateRoughly(const BufferADC &buffer, const ValueADC &dc)
 {
 
 }
 
 
-void FinderPeriodSamples::CalculateAccuracy(const BufferADC &buffer, const ValueADC &dc)
+void ResolverPeriodSamples::CalculateAccuracy(const BufferADC &buffer, const ValueADC &dc)
 {
 
 }
