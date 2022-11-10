@@ -79,7 +79,7 @@ namespace Indicator
     static void SetSmall();
 
     // before - количество цифр (без учёта знака) перед запятой, after - количество цифр после запятой
-    static void ConvertDoubleToText(double value, char buffer[MAX_LEN], int after, pchar suffix);
+    static void ConvertDoubleToText(float value, char buffer[MAX_LEN], int after, pchar suffix);
 
     static void WriteMeasures();
 }
@@ -138,7 +138,7 @@ void Indicator::SetSmall()
 }
 
 
-void Indicator::SetMeasures(double dc, double ac, int range)
+void Indicator::SetMeasures(float dc, float ac, int range)
 {
     static const int after[6]    = { 4, 3, 2, 4, 3, 3 };
     static const pchar suffix[6] = { "mA", "mA", "mA", "A", "A", "A" };
@@ -165,9 +165,9 @@ void Indicator::WriteMeasures()
 }
 
 
-void Indicator::ConvertDoubleToText(double value, char out[MAX_LEN], int after, pchar suffix)
+void Indicator::ConvertDoubleToText(float value, char out[MAX_LEN], int after, pchar suffix)
 {
-    std::strcpy(out, value < 0.0 ? "-" : "+");
+    std::strcpy(out, value < 0.0f ? "-" : "+");
 
     value = std::fabs(value);
 
@@ -175,17 +175,17 @@ void Indicator::ConvertDoubleToText(double value, char out[MAX_LEN], int after, 
 
     if (before == 3)
     {
-        if (value < 10.0)
+        if (value < 10.0f)
         {
             std::strcat(out, "00");
         }
-        else if (value < 100.0)
+        else if (value < 100.0f)
         {
             std::strcat(out, "0");
         }
     }
 
-    if (before == 2 && value < 10.0)
+    if (before == 2 && value < 10.0f)
     {
         std::strcat(out, "0");
     }
@@ -194,7 +194,7 @@ void Indicator::ConvertDoubleToText(double value, char out[MAX_LEN], int after, 
 
     char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0'};
 
-    std::sprintf(buffer, format, value, suffix);
+    std::sprintf(buffer, format, (double)value, suffix);
 
     std::strcat(out, buffer);
 }

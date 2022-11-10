@@ -44,6 +44,8 @@ struct Period
         dc = _dc;
     }
 
+    int Lenght() const { return last.first - first.first; }
+
     Intersection first; // Первое пересечение с нулём
     Intersection last;  // Второе пересечение с нулём
 

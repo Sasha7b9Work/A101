@@ -70,7 +70,7 @@ ResolverPeriodSamples::ResolverPeriodSamples(const BufferADC &buffer)
         }
         else
         {
-            TimeMeterMS meter;
+//            TimeMeterMS meter;
 
             while (integral.Delta() < 0)
             {
@@ -81,10 +81,10 @@ ResolverPeriodSamples::ResolverPeriodSamples(const BufferADC &buffer)
                 counter++;
             }
 
-            LOG_WRITE("Time calculate %d ms, counter %d, period %d", meter.ElapsedTime(), counter, period.last.first - period.first.first);
+//            LOG_WRITE("Time calculate %d ms, counter %d, period %d", meter.ElapsedTime(), counter, period.last.first - period.first.first);
 
             CalculateAccuracy(buffer, period.dc);
-            LOG_WRITE("                         accuracy period %d", result_period.last.first - result_period.first.first);
+//            LOG_WRITE("                         accuracy period %d", result_period.last.first - result_period.first.first);
         }
     }
 }

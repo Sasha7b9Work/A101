@@ -12,7 +12,7 @@ namespace Calculator
 
     void SetAverages(int num_ave);
 
-    double GetAC();
+    float GetAC();
 
-    double GetDC();
+    float GetDC();
 }

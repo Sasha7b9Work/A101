@@ -50,13 +50,13 @@ SampleRate Calculator::AppendData(const BufferADC &data)
 //}
 
 
-double Calculator::GetAC()
+float Calculator::GetAC()
 {
     return ac.Get();
 }
 
 
-double Calculator::GetDC()
+float Calculator::GetDC()
 {
     return dc.Get();
 }
