@@ -269,7 +269,7 @@ ResolverDC::ResolverDC(const Period &_period)
         counter++;
     }
 
-    LOG_WRITE("counter %d, delta %d", counter, max - min);
+//    LOG_WRITE("counter %d, delta %d", counter, max - min);
 
     result = period.dc;
 }

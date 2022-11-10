@@ -5,6 +5,7 @@
 #include "Display/Colors.h"
 #include "Display/DiagramInput.h"
 #include "Display/DiagramFFT.h"
+#include "Hardware/HAL/HAL.h"
 #include <cstdio>
 #include <cstring>
 #include <cmath>
@@ -138,6 +139,21 @@ void Indicator::SetSmall()
 }
 
 
+void Indicator::Update()
+{
+    static uint next_time = 0;
+
+    if (HAL_TIM::TimeMS() < next_time)
+    {
+        return;
+    }
+
+    next_time += 500;
+
+    WriteMeasures();
+}
+
+
 void Indicator::SetMeasures(float dc, float ac, int range)
 {
     static const int after[6]    = { 4, 3, 2, 4, 3, 3 };
@@ -145,8 +161,6 @@ void Indicator::SetMeasures(float dc, float ac, int range)
 
     ConvertDoubleToText(dc, measureDC, after[range], suffix[range]);
     ConvertDoubleToText(ac, measureAC, after[range], suffix[range]);
-
-    WriteMeasures();
 }
 
 
@@ -251,6 +265,11 @@ void Indicator::Label::Disable()
 
 void Indicator::Label::SetText(const char _text[MAX_LEN])
 {
+    if (std::strcmp(_text, text) == 0)
+    {
+        return;
+    }
+
     std::strcpy(text, _text);
 
     Enable();

@@ -23,4 +23,6 @@ void Display::Init()
 void Display::Update()
 {
     DiagramInput::Draw();
+
+    Indicator::Update();
 }
