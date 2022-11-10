@@ -249,7 +249,7 @@ ResolverDC::ResolverDC(const BufferADC &buffer, const Period &_period)
 
     int counter = 0;
 
-    while (max - min > 1)
+    while (max - min > 2)
     {
         if (integral.Delta() > 0)
         {

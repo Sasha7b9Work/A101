@@ -13,8 +13,11 @@
 namespace Calculator
 {
     static int num_averages = 0;
-    static Averager<float, 1> dc;
-    static Averager<float, 1> ac;
+//    static Averager<float, 1> dc;
+//    static Averager<float, 1> ac;
+
+    static float dc = 0.0f;
+    static float ac = 0.0f;
 
     static float k = 1.0f;
 }
@@ -22,8 +25,8 @@ namespace Calculator
 
 void Calculator::Reset(int range)
 {
-    dc.Reset();
-    ac.Reset();
+//    dc.Reset();
+//    ac.Reset();
 
     static const float koeff[6] = { 1e-2f, 1e-1f, 1e0f, 1e-2f, 1e-1f, 1e0f };
 
@@ -41,7 +44,9 @@ SampleRate Calculator::AppendData(const BufferADC &data)
 
     LOG_WRITE("period %d, ac %f : %f, time %d ms", period.Lenght(), (double)value_ac, (double)(value_ac * k), meter.ElapsedTime());
 
-    ac.Push(value_ac * k);
+    ac = value_ac * k;
+
+    dc = period.dc.Real() * k;
 
     return SampleRate::Current::Get();
 }
@@ -49,13 +54,13 @@ SampleRate Calculator::AppendData(const BufferADC &data)
 
 float Calculator::GetAC()
 {
-    return ac.Get();
+    return ac;
 }
 
 
 float Calculator::GetDC()
 {
-    return dc.Get();
+    return dc;
 }
 
 
