@@ -5,5 +5,5 @@
 
 namespace ResolverDC
 {
-    double Calculate(const BufferADC &, int period);
+    float Calculate(const BufferADC &, int period);
 }

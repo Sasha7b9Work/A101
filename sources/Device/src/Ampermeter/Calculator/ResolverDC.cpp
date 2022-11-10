@@ -6,19 +6,19 @@
 namespace ResolverDC
 {
     // √рубо найти посто€нную составл€ющую
-    double FindRough(const BufferADC &, int period);
+    float FindRough(const BufferADC &, int period);
 }
 
 
-double ResolverDC::Calculate(const BufferADC &data, int period)
+float ResolverDC::Calculate(const BufferADC &data, int period)
 {
-    double dc_rough = FindRough(data, period);
+    float dc_rough = FindRough(data, period);
 
     return dc_rough;
 }
 
 
-double ResolverDC::FindRough(const BufferADC &data, int period)
+float ResolverDC::FindRough(const BufferADC &data, int period)
 {
     float sum = 0.0f;
 
