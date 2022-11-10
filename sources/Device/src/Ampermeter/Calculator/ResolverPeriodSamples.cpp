@@ -170,7 +170,13 @@ Intersection FinderPeriodSamples::FindLastIntersectionRelativeAverage(const Buff
 }
 
 
-void FinderPeriodSamples::CalculateAccuracy(const BufferADC &, const ValueADC &)
+void FinderPeriodSamples::CalculateRoughly(const BufferADC &buffer, const ValueADC &dc)
+{
+
+}
+
+
+void FinderPeriodSamples::CalculateAccuracy(const BufferADC &buffer, const ValueADC &dc)
 {
 
 }

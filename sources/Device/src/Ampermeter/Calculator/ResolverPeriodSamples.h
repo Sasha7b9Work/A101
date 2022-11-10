@@ -63,6 +63,10 @@ private:
     // Устанавливает результатом весь размер BufferADC
     void SetFullPeriod(ValueADC dc);
 
+    // Рассчитать грубо
+    void CalculateRoughly(const BufferADC &, const ValueADC &dc);
+
+    // Рассчитать точно
     void CalculateAccuracy(const BufferADC &, const ValueADC &zero);
 };
 
