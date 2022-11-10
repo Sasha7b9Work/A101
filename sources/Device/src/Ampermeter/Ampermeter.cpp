@@ -13,6 +13,7 @@
 #include "Ampermeter/Calibrator.h"
 #include "Hardware/Timer.h"
 #include "Display/DiagramInput.h"
+#include "stm_includes.h"
 
 
 namespace Ampermeter
@@ -41,11 +42,17 @@ void Ampermeter::Update()
 
     buffer.Clear(SampleRate::Current::Get());
 
-    HAL_TIM4::StartPeriodicUS(SampleRate::Current::Get().TimeUS());
+    uint period = SampleRate::Current::Get().TimeUS();
+
+    HAL_TIM4::StartPeriodicUS(period);
 
     while (!buffer.IsFull())
     {
-        HAL_TIM4::WaitEvent();
+        while (TIM4->CNT < period)
+        {
+        }
+
+        TIM4->CNT = 0;
 
         buffer.Push(AD7691::ReadValue());
     }
