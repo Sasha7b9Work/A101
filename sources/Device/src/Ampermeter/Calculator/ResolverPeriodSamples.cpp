@@ -2,14 +2,19 @@
 #include "defines.h"
 #include "Ampermeter/Calculator/ResolverPeriodSamples.h"
 #include "Hardware/Timer.h"
+#include <cmath>
 
 
-// Структура для расчёт положительного и отрицательного интегралов
+// Структура для расчётa положительного и отрицательного интегралов
 struct DualIntegral
 {
     DualIntegral(const BufferADC &, const Period &);
 
     void Recalculate(const BufferADC &, const Period &);
+
+    int64 Positive() const { return positive; }
+
+    int64 Negative() const { return negative; }
 
     // Возвращает абсолютное значение разницы между positive и negative. 
     int64 Delta() const { return delta; }
@@ -231,7 +236,34 @@ uint DualIntegral::CalculateNegative(const BufferADC &buffer, const Period &peri
 }
 
 
-ResolverDC::ResolverDC(const BufferADC &buffer, const Period &period)
+ResolverDC::ResolverDC(const BufferADC &buffer, const Period &_period)
 {
+    int min = buffer.Min();
+    int max = buffer.Max();
 
+    Period period = _period;
+
+    DualIntegral integral(buffer, period);
+
+    int dc_value = period.dc.Raw();
+
+    while (min - max > 10)
+    {
+        if (integral.Delta() > 0)
+        {
+            min = dc_value;
+        }
+        else
+        {
+            max = dc_value;
+        }
+
+        dc_value = (max - min) / 2;
+
+        period.dc = ValueADC::FromRaw(dc_value);
+
+        integral.Recalculate(buffer, period);
+    }
+
+    result = period.dc;
 }
