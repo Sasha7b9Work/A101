@@ -20,12 +20,12 @@ double ResolverDC::Calculate(const BufferADC &data, int period)
 
 double ResolverDC::FindRough(const BufferADC &data, int period)
 {
-    double sum = 0.0;
+    float sum = 0.0f;
 
     for (int i = 0; i < period; i++)
     {
         sum += data[i].Real();
     }
 
-    return sum / (double)period;
+    return sum / (float)period;
 }

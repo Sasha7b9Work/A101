@@ -17,6 +17,4 @@ ResolverAC::ResolverAC(const BufferADC &data, const Period &period)
     }
 
     result = std::sqrtf(sum / (period.last.first - period.first.first));
-
-    LOG_WRITE("period %d, ac %f", period.Lenght(), (double)result);
 }

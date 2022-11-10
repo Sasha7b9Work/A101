@@ -5,7 +5,7 @@
 
 struct BufferADC
 {
-    static const int SIZE = 1024;
+    static const int SIZE = 8192;
 
     BufferADC() : pointer(0) { } //-V730
 
