@@ -33,12 +33,6 @@ namespace Indicator
         Color colorBack;
     };
 
-//    // Изменяемый текст
-//    struct Text : public Label
-//    {
-//        Text(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, const Color &_colorBack = Color::Count) :
-//         Label(_x, _y, _w, _h, _font, _text, _colorText, _colorBack) {}
-//    };
 
     static const int big_x_label = 38;
     static const int big_y_0 = 74;
