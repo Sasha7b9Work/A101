@@ -1000,6 +1000,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Controls\TextString.h</FilePath>
             </File>
+            <File>
+              <FileName>TextMeasure.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Controls\TextMeasure.h</FilePath>
+            </File>
+            <File>
+              <FileName>TextMeasure.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Controls\TextMeasure.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2195,6 +2205,16 @@
               <FileName>TextString.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Controls\TextString.h</FilePath>
+            </File>
+            <File>
+              <FileName>TextMeasure.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Controls\TextMeasure.h</FilePath>
+            </File>
+            <File>
+              <FileName>TextMeasure.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Controls\TextMeasure.cpp</FilePath>
             </File>
           </Files>
         </Group>
