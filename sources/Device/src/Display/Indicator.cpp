@@ -21,8 +21,7 @@ namespace Indicator
         Label(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, const Color &_colorBack = Color::Count);
         void Disable();
         void Enable();
-        void SetText(const char [MAX_LEN]);
-    private:
+    protected:
         char  text[MAX_LEN];
         int   x;
         int   y;
@@ -38,6 +37,7 @@ namespace Indicator
     {
         Text(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, const Color &_colorBack = Color::Count) :
          Label(_x, _y, _w, _h, _font, _text, _colorText, _colorBack) {}
+        void SetText(const char[MAX_LEN]);
     };
 
     static const int big_x_label = 38;
@@ -264,7 +264,7 @@ void Indicator::Label::Disable()
 }
 
 
-void Indicator::Label::SetText(const char _text[MAX_LEN])
+void Indicator::Text::SetText(const char _text[MAX_LEN])
 {
     if (std::strcmp(_text, text) == 0)
     {
