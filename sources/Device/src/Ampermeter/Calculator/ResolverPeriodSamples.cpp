@@ -8,23 +8,21 @@ struct DualIntegral
 {
     DualIntegral(const BufferADC &, const Period &);
 
-    uint Positive() const { return positive; }
-    uint Negative() const { return negative; }
-
     void Recalculate(const BufferADC &, const Period &);
 
     bool IsSymmetric() const { return positive == negative; }
 
     // ¬озвращает абсолютное значение разницы между positive и negative. 
-    uint Delta() const;
+    int64 Delta() const { return delta; }
 
 private:
 
     uint CalculatePositive(const BufferADC &, const Period &);
     uint CalculateNegative(const BufferADC &, const Period &);
 
-    uint positive = 0xFFFFFFFF;
-    uint negative = 0;
+    int64 positive = 0;
+    int64 negative = 0;
+    int64 delta = 0;
 };
 
 
@@ -60,14 +58,10 @@ FinderPeriodSamples::FinderPeriodSamples(const BufferADC &buffer)
     }
     else
     {
-        if (integral.Positive() > integral.Negative())
+        if (integral.Delta() > 0)
         {
-            uint delta = integral.Delta();
-
-            while (integral.Positive() > integral.Negative())
+            while (integral.Delta() > 0)
             {
-                delta = integral.Delta();
-
                 period.dc = ValueADC::FromRaw(period.dc - 1);
 
                 integral.Recalculate(buffer, period);
@@ -77,12 +71,8 @@ FinderPeriodSamples::FinderPeriodSamples(const BufferADC &buffer)
         }
         else
         {
-            uint delta = integral.Delta();
-
-            while (integral.Positive() < integral.Negative())
+            while (integral.Delta() < 0)
             {
-                delta = integral.Delta();
-
                 period.dc = ValueADC::FromRaw(period.dc + 1);
 
                 integral.Recalculate(buffer, period);
@@ -187,6 +177,8 @@ void DualIntegral::Recalculate(const BufferADC &buffer, const Period &period)
 {
     positive = CalculatePositive(buffer, period);
     negative = CalculateNegative(buffer, period);
+
+    delta = positive - negative;
 }
 
 
@@ -229,15 +221,4 @@ uint DualIntegral::CalculateNegative(const BufferADC &buffer, const Period &peri
     }
 
     return sum;
-}
-
-
-uint DualIntegral::Delta() const
-{
-    if (positive > negative)
-    {
-        return positive - negative;
-    }
-
-    return negative - positive;
 }
