@@ -5,9 +5,7 @@
 
 struct BufferADC
 {
-    static const int SIZE = 16 * 1000;
-
-    BufferADC() : pointer(0) { } //-V730
+    static const int SIZE = 16 * 1024;
 
     void Push(ValueADC word)
     {
@@ -36,10 +34,10 @@ struct BufferADC
     ValueADC operator[](int i) const { return raw[i]; }
 
 private:
-    int        pointer;         // Указатель используется при чтении данных (массив raw)
-    ValueADC   raw[SIZE];       // Данные, считанные с АЦП
-    SampleRate sampleRate;
+    static int        pointer;         // Указатель используется при чтении данных (массив raw)
+    static ValueADC   raw[SIZE];       // Данные, считанные с АЦП
+    static SampleRate sampleRate;
 
-    ValueADC   min;
-    ValueADC   max;
+    static ValueADC   min;
+    static ValueADC   max;
 };

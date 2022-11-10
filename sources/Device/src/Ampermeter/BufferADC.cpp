@@ -7,6 +7,14 @@
 #include <limits>
 
 
+int        BufferADC::pointer = 0;                                      // Указатель используется при чтении данных (массив raw)
+ValueADC   BufferADC::raw[SIZE] __attribute__((section("CCM_DATA")));   // Данные, считанные с АЦП
+SampleRate BufferADC::sampleRate;
+
+ValueADC   BufferADC::min;
+ValueADC   BufferADC::max;
+
+
 void BufferADC::CalculateLimits()
 {
     min = ValueADC::MAX;
