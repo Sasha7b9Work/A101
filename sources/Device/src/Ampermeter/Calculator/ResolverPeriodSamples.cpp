@@ -10,8 +10,6 @@ struct DualIntegral
 
     void Recalculate(const BufferADC &, const Period &);
 
-    bool IsSymmetric() const { return positive == negative; }
-
     // ¬озвращает абсолютное значение разницы между positive и negative. 
     int64 Delta() const { return delta; }
 
@@ -52,7 +50,7 @@ FinderPeriodSamples::FinderPeriodSamples(const BufferADC &buffer)
 
     DualIntegral integral(buffer, period);
 
-    if (integral.IsSymmetric())
+    if (integral.Delta() == 0)
     {
         CalculateAccuracy(buffer, period.dc);
     }
