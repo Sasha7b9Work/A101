@@ -6,15 +6,14 @@
 class ResolverFFT
 {
 public:
-    ResolverFFT(const BufferADC &);
+    static const int NUM_POINTS = 1024;
+    ResolverFFT();
     // Находит индекс массива частоты
     int FindIndexFreq() const;
 private:
-    static const int SIZE = BufferADC::SIZE / 2;
+    static const int SIZE = NUM_POINTS / 2;
     uint8 data[SIZE];
 
-    void CalculateFFT(float dataR[BufferADC::SIZE], float result[BufferADC::SIZE]);
+    void CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]);
     void Normalize(float *data, int);
-
-    int GetLogN();
 };

@@ -7,15 +7,15 @@
 #include <cstdlib>
 
 
-ResolverFFT::ResolverFFT(const BufferADC &_data)
+ResolverFFT::ResolverFFT()
 {
-    float *in = (float *)std::malloc(sizeof(float) * BufferADC::SIZE); //-V829
+    float *in = (float *)std::malloc(sizeof(float) * NUM_POINTS); //-V829
 
-    float *out = (float *)std::malloc(sizeof(float) * BufferADC::SIZE);
+    float *out = (float *)std::malloc(sizeof(float) * NUM_POINTS);
 
-    for (int i = 0; i < BufferADC::SIZE; i++)
+    for (int i = 0; i < NUM_POINTS; i++)
     {
-        in[i] = (float)_data[i].Real(); //-V522
+        in[i] = (float)BufferADC::At(i).Real(); //-V522
     }
 
     TimeMeterMS meter;
@@ -36,7 +36,7 @@ ResolverFFT::ResolverFFT(const BufferADC &_data)
 
 int ResolverFFT::FindIndexFreq() const
 {
-    for (int i = 1; i < BufferADC::SIZE / 2; i++)
+    for (int i = 1; i < SIZE / 2; i++)
     {
         if (data[i] == 255)
         {
@@ -44,7 +44,7 @@ int ResolverFFT::FindIndexFreq() const
         }
     }
 
-    for (int i = 1; i < BufferADC::SIZE / 2; i++)
+    for (int i = 1; i < SIZE / 2; i++)
     {
         if (data[i] == 254)
         {
@@ -56,29 +56,14 @@ int ResolverFFT::FindIndexFreq() const
 }
 
 
-int ResolverFFT::GetLogN()
+void ResolverFFT::CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS])
 {
-    if (BufferADC::SIZE == 4096)
-    {
-        return 12;
-    }
-    else if (BufferADC::SIZE == 2048)
-    {
-        return 11;
-    }
-
-    return 10;
-}
-
-
-void ResolverFFT::CalculateFFT(float dataR[BufferADC::SIZE], float result[BufferADC::SIZE])
-{
-    for (int i = 0; i < BufferADC::SIZE; i++)
+    for (int i = 0; i < NUM_POINTS; i++)
     {
         result[i] = 0.0;
     }
 
-    int logN = GetLogN();
+    int logN = 10;
 
     static const float Rcoef[14] =
     {
@@ -98,8 +83,8 @@ void ResolverFFT::CalculateFFT(float dataR[BufferADC::SIZE], float result[Buffer
         -0.0007669903187427f, -0.0003834951875714f
     };
 
-    int nn = BufferADC::SIZE >> 1;
-    int ie = BufferADC::SIZE;
+    int nn = NUM_POINTS >> 1;
+    int ie = NUM_POINTS;
 
     for (int n = 1; n <= logN; n++)
     {
@@ -110,7 +95,7 @@ void ResolverFFT::CalculateFFT(float dataR[BufferADC::SIZE], float result[Buffer
         float iu = 0.0;
         for (int j = 0; j < in; j++)
         {
-            for (int i = j; i < BufferADC::SIZE; i += ie)
+            for (int i = j; i < NUM_POINTS; i += ie)
             {
                 int io = i + in;
                 float dRi = dataR[i]; //-V2563
@@ -131,7 +116,7 @@ void ResolverFFT::CalculateFFT(float dataR[BufferADC::SIZE], float result[Buffer
         ie >>= 1;
     }
 
-    for (int j = 1, i = 1; i < BufferADC::SIZE; i++)
+    for (int j = 1, i = 1; i < NUM_POINTS; i++)
     {
         if (i < j)
         {
@@ -156,16 +141,14 @@ void ResolverFFT::CalculateFFT(float dataR[BufferADC::SIZE], float result[Buffer
         j = j + k;
     }
 
-    int num_points = BufferADC::SIZE / 2;
-
-    for (int i = 0; i < num_points; i++)
+    for (int i = 0; i < SIZE; i++)
     {
         result[i] = std::sqrtf(dataR[i] * dataR[i] + result[i] * result[i]); //-V2563
     }
 
     result[0] = 0.0;       // \todo нулева€ составл€юща€ мешает посто€нно. надо еЄ убрать //-V2563
 
-    Normalize(result, num_points);
+    Normalize(result, SIZE);
 }
 
 

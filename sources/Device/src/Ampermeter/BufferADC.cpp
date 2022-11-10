@@ -32,7 +32,7 @@ void BufferADC::CalculateLimits()
 }
 
 
-void BufferADC::LogUART() const
+void BufferADC::LogUART()
 {
     for (int i = 0; i < Size(); i++)
     {

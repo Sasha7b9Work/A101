@@ -16,12 +16,6 @@
 #include "stm_includes.h"
 
 
-namespace Ampermeter
-{
-    static BufferADC buffer;
-}
-
-
 void Ampermeter::Init()
 {
     HAL_TIM4::Init();
@@ -38,13 +32,13 @@ void Ampermeter::Init()
 
 void Ampermeter::Update()
 {
-    buffer.Clear(SampleRate::Current::Get());
+    BufferADC::Clear(SampleRate::Current::Get());
 
     uint period = SampleRate::Current::Get().TimeUS();
 
     HAL_TIM4::StartPeriodicUS(period);
 
-    while (!buffer.IsFull())
+    while (!BufferADC::IsFull())
     {
         while (TIM4->CNT < period)
         {
@@ -52,16 +46,16 @@ void Ampermeter::Update()
 
         TIM4->CNT = 0;
 
-        buffer.Push(AD7691::ReadValue());
+        BufferADC::Push(AD7691::ReadValue());
     }
 
     HAL_TIM4::Stop();
 
-    buffer.CalculateLimits();
+    BufferADC::CalculateLimits();
 
-    SampleRate::Current::Set(Calculator::AppendData(buffer));
+    SampleRate::Current::Set(Calculator::AppendData());
 
     Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC(), InputRelays::GetRange());
 
-    DiagramInput::SetData(buffer);
+    DiagramInput::SetData();
 }

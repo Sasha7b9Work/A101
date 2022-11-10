@@ -8,9 +8,9 @@
 // Структура для расчётa положительного и отрицательного интегралов
 struct DualIntegral
 {
-    DualIntegral(const BufferADC &, const Period &);
+    DualIntegral(const Period &);
 
-    void Recalculate(const BufferADC &, const Period &);
+    void Recalculate(const Period &);
 
     int64 Positive() const { return positive; }
 
@@ -21,8 +21,8 @@ struct DualIntegral
 
 private:
 
-    uint CalculatePositive(const BufferADC &, const Period &);
-    uint CalculateNegative(const BufferADC &, const Period &);
+    uint CalculatePositive(const Period &);
+    uint CalculateNegative(const Period &);
 
     int64 positive = 0;
     int64 negative = 0;
@@ -34,7 +34,7 @@ class ResolverDC
 {
 public:
 
-    ResolverDC(const BufferADC &, const Period &);
+    ResolverDC(const Period &);
 
     ValueADC GetResult() const { return result; }
 
@@ -44,29 +44,29 @@ private:
 };
 
 
-ResolverPeriodSamples::ResolverPeriodSamples(const BufferADC &buffer)
+ResolverPeriodSamples::ResolverPeriodSamples()
 {
     int sum = 0;
 
     for (int i = 0; i < BufferADC::SIZE; i++)
     {
-        sum += buffer[i];
+        sum += BufferADC::At(i);
     }
 
     int averaging = sum / BufferADC::SIZE;
 
     Period period;
 
-    if (!CalculateRoughly(buffer, ValueADC::FromRaw(averaging), period))
+    if (!CalculateRoughly(ValueADC::FromRaw(averaging), period))
     {
         SetFullPeriod(ValueADC::FromRaw(averaging));
 
         return;
     }
 
-    ValueADC dc = ResolverDC(buffer, period).GetResult();
+    ValueADC dc = ResolverDC(period).GetResult();
 
-    CalculateAccuracy(buffer, dc);
+    CalculateAccuracy(dc);
 }
 
 
@@ -84,14 +84,14 @@ void ResolverPeriodSamples::SetFullPeriod(ValueADC _dc)
 }
 
 
-Intersection ResolverPeriodSamples::FindFirstIntersectionRelativeAverage(const BufferADC &buffer, const ValueADC &zero)
+Intersection ResolverPeriodSamples::FindFirstIntersectionRelativeAverage(const ValueADC &zero)
 {
     Intersection result;
 
     for (int i = 1; i < BufferADC::SIZE; i++)
     {
-        int current = buffer[i];
-        int prev = buffer[i - 1];
+        int current = BufferADC::At(i);
+        int prev = BufferADC::At(i - 1);
 
         if (prev < zero && current >= zero)
         {
@@ -110,7 +110,7 @@ Intersection ResolverPeriodSamples::FindFirstIntersectionRelativeAverage(const B
 }
 
 
-Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const BufferADC &buffer, const ValueADC &zero, const Intersection &first)
+Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const ValueADC &zero, const Intersection &first)
 {
     Intersection result;
 
@@ -118,8 +118,8 @@ Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const Bu
     {
         for (int i = BufferADC::SIZE - 1; i > 0; i--)
         {
-            int current = buffer[i];
-            int prev = buffer[i - 1];
+            int current = BufferADC::At(i);
+            int prev = BufferADC::At(i - 1);
 
             if (prev < zero && current >= zero)
             {
@@ -132,8 +132,8 @@ Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const Bu
     {
         for (int i = BufferADC::SIZE - 1; i > 0; i--)
         {
-            int current = buffer[i];
-            int prev = buffer[i - 1];
+            int current = BufferADC::At(i);
+            int prev = BufferADC::At(i - 1);
 
             if (prev > zero && current <= zero)
             {
@@ -147,11 +147,11 @@ Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const Bu
 }
 
 
-bool ResolverPeriodSamples::CalculateRoughly(const BufferADC &buffer, const ValueADC &dc, Period &period)
+bool ResolverPeriodSamples::CalculateRoughly(const ValueADC &dc, Period &period)
 {
-    Intersection first_around = FindFirstIntersectionRelativeAverage(buffer, dc);
+    Intersection first_around = FindFirstIntersectionRelativeAverage(dc);
 
-    Intersection last_around = FindLastIntersectionRelativeAverage(buffer, dc, first_around);
+    Intersection last_around = FindLastIntersectionRelativeAverage(dc, first_around);
 
     period.Set(first_around, last_around, dc);
 
@@ -164,11 +164,11 @@ bool ResolverPeriodSamples::CalculateRoughly(const BufferADC &buffer, const Valu
 }
 
 
-void ResolverPeriodSamples::CalculateAccuracy(const BufferADC &buffer, const ValueADC &dc)
+void ResolverPeriodSamples::CalculateAccuracy(const ValueADC &dc)
 {
-    Intersection first = FindFirstIntersectionRelativeAverage(buffer, dc);
+    Intersection first = FindFirstIntersectionRelativeAverage(dc);
 
-    Intersection last = FindLastIntersectionRelativeAverage(buffer, dc, first);
+    Intersection last = FindLastIntersectionRelativeAverage(dc, first);
 
     result_period.Set(first, last, dc);
 
@@ -179,22 +179,22 @@ void ResolverPeriodSamples::CalculateAccuracy(const BufferADC &buffer, const Val
 }
 
 
-DualIntegral::DualIntegral(const BufferADC &buffer, const Period &period)
+DualIntegral::DualIntegral(const Period &period)
 {
-    Recalculate(buffer, period);
+    Recalculate(period);
 }
 
 
-void DualIntegral::Recalculate(const BufferADC &buffer, const Period &period)
+void DualIntegral::Recalculate(const Period &period)
 {
-    positive = CalculatePositive(buffer, period);
-    negative = CalculateNegative(buffer, period);
+    positive = CalculatePositive(period);
+    negative = CalculateNegative(period);
 
     delta = positive - negative;
 }
 
 
-uint DualIntegral::CalculatePositive(const BufferADC &buffer, const Period &period)
+uint DualIntegral::CalculatePositive(const Period &period)
 {
     int i_first = period.first.first;
     int i_last = period.last.second;
@@ -205,9 +205,9 @@ uint DualIntegral::CalculatePositive(const BufferADC &buffer, const Period &peri
 
     for (int i = i_first; i < i_last; i++)
     {
-        if (buffer[i] > zero)
+        if (BufferADC::At(i) > zero)
         {
-            sum += (uint)(buffer[i] - zero);
+            sum += (uint)(BufferADC::At(i) - zero);
         }
     }
 
@@ -215,7 +215,7 @@ uint DualIntegral::CalculatePositive(const BufferADC &buffer, const Period &peri
 }
 
 
-uint DualIntegral::CalculateNegative(const BufferADC &buffer, const Period &period)
+uint DualIntegral::CalculateNegative(const Period &period)
 {
     int i_first = period.first.first;
     int i_last = period.last.second;
@@ -226,9 +226,9 @@ uint DualIntegral::CalculateNegative(const BufferADC &buffer, const Period &peri
 
     for (int i = i_first; i < i_last; i++)
     {
-        if (buffer[i] < zero)
+        if (BufferADC::At(i) < zero)
         {
-            sum += (uint)(zero - buffer[i]);
+            sum += (uint)(zero - BufferADC::At(i));
         }
     }
 
@@ -236,14 +236,14 @@ uint DualIntegral::CalculateNegative(const BufferADC &buffer, const Period &peri
 }
 
 
-ResolverDC::ResolverDC(const BufferADC &buffer, const Period &_period)
+ResolverDC::ResolverDC(const Period &_period)
 {
-    int min = buffer.Min();
-    int max = buffer.Max();
+    int min = BufferADC::Min();
+    int max = BufferADC::Max();
 
     Period period = _period;
 
-    DualIntegral integral(buffer, period);
+    DualIntegral integral(period);
 
     int dc_value = period.dc.Raw();
 
@@ -264,7 +264,7 @@ ResolverDC::ResolverDC(const BufferADC &buffer, const Period &_period)
 
         period.dc = ValueADC::FromRaw(dc_value);
 
-        integral.Recalculate(buffer, period);
+        integral.Recalculate(period);
 
         counter++;
     }

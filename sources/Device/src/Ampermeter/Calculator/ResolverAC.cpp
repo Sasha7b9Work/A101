@@ -4,14 +4,14 @@
 #include <cmath>
 
 
-ResolverAC::ResolverAC(const BufferADC &data, const Period &period)
+ResolverAC::ResolverAC(const Period &period)
 {
     float sum = 0.0f;
     float dc = period.dc.Real();
 
     for (int i = period.first.first; i < period.last.first; i++)
     {
-        float value = data[i].Real() - dc;
+        float value = BufferADC::At(i).Real() - dc;
 
         sum += value * value;
     }

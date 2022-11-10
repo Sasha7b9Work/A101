@@ -56,16 +56,16 @@ struct Period
 class ResolverPeriodSamples
 {
 public:
-    ResolverPeriodSamples(const BufferADC &);
+    ResolverPeriodSamples();
     const Period GetResult() const { return result_period; }
 private:
     Period result_period;
 
     // Ќайти первое пересечение с уровнем zero
-    Intersection FindFirstIntersectionRelativeAverage(const BufferADC &, const ValueADC &zero);
+    Intersection FindFirstIntersectionRelativeAverage(const ValueADC &zero);
 
     // Ќайти последнее пересечение с уровнем zero, соответствующее первому пересечению first (они должны быть одного типа)
-    Intersection FindLastIntersectionRelativeAverage(const BufferADC &, const ValueADC &zero, const Intersection &first);
+    Intersection FindLastIntersectionRelativeAverage(const ValueADC &zero, const Intersection &first);
 
     bool BadIntersection(const Intersection &first, const Intersection &second);
 
@@ -73,9 +73,9 @@ private:
     void SetFullPeriod(ValueADC dc);
 
     // –ассчитать грубо
-    bool CalculateRoughly(const BufferADC &, const ValueADC &dc, Period &);
+    bool CalculateRoughly(const ValueADC &dc, Period &);
 
     // –ассчитать точно
-    void CalculateAccuracy(const BufferADC &, const ValueADC &zero);
+    void CalculateAccuracy(const ValueADC &zero);
 };
 

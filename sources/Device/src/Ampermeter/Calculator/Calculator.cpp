@@ -34,13 +34,13 @@ void Calculator::Reset(int range)
 }
 
 
-SampleRate Calculator::AppendData(const BufferADC &data)
+SampleRate Calculator::AppendData()
 {
     TimeMeterMS meter;
 
-    Period period = ResolverPeriodSamples(data).GetResult();
+    Period period = ResolverPeriodSamples().GetResult();
 
-    float value_ac = ResolverAC(data, period).GetResult();
+    float value_ac = ResolverAC(period).GetResult();
 
     LOG_WRITE("period %d, ac %f : %f, time %d ms", period.Lenght(), (double)value_ac, (double)(value_ac * k), meter.ElapsedTime());
 

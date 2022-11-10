@@ -9,7 +9,7 @@ namespace DiagramInput
 
     bool IsEnabled();
 
-    void SetData(const BufferADC &);
+    void SetData();
 
     void Draw();
 

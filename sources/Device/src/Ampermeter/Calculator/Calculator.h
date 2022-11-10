@@ -8,7 +8,7 @@ namespace Calculator
     void Reset(int range);
 
     // Функция возвращает частоту дискретизации для следующего сбора данных
-    SampleRate AppendData(const BufferADC &);
+    SampleRate AppendData();
 
     void SetAverages(int num_ave);
 

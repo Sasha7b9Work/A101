@@ -7,7 +7,7 @@ struct BufferADC
 {
     static const int SIZE = 16 * 1024;
 
-    void Push(ValueADC word)
+    static void Push(ValueADC word)
     {
         if (pointer < SIZE)
         {
@@ -15,23 +15,23 @@ struct BufferADC
         }
     }
 
-    bool IsFull()     { return (pointer == SIZE); }
+    static bool IsFull()     { return (pointer == SIZE); }
 
-    void Clear(SampleRate _rate) { pointer = 0; sampleRate = _rate; }
+    static void Clear(SampleRate _rate) { pointer = 0; sampleRate = _rate; }
 
-    int Size() const  { return SIZE; }
+    static int Size() { return SIZE; }
 
-    void CalculateLimits();
+    static void CalculateLimits();
 
-    ValueADC Min() const { return min; }
+    static ValueADC Min() { return min; }
 
-    ValueADC Max() const { return max; }
+    static ValueADC Max() { return max; }
 
-    void LogUART() const;
+    static void LogUART();
 
-    SampleRate GetSampleRate() const { return sampleRate; }
+    static SampleRate GetSampleRate() { return sampleRate; }
 
-    ValueADC operator[](int i) const { return raw[i]; }
+    static ValueADC At(int i) { return raw[i]; }
 
 private:
     static int        pointer;         // ”казатель используетс€ при чтении данных (массив raw)
