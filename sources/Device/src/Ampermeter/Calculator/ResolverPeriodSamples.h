@@ -37,6 +37,13 @@ struct Period
     Period(Intersection &_first, Intersection _last, ValueADC _dc) :
         first(_first), last(_last), dc(_dc)   { }
 
+    void Set(Intersection &_first, Intersection _last, ValueADC _dc)
+    {
+        first = _first;
+        last = _last;
+        dc = _dc;
+    }
+
     Intersection first; // Первое пересечение с нулём
     Intersection last;  // Второе пересечение с нулём
 
@@ -64,7 +71,7 @@ private:
     void SetFullPeriod(ValueADC dc);
 
     // Рассчитать грубо
-    void CalculateRoughly(const BufferADC &, const ValueADC &dc);
+    bool CalculateRoughly(const BufferADC &, const ValueADC &dc, Period &);
 
     // Рассчитать точно
     void CalculateAccuracy(const BufferADC &, const ValueADC &zero);

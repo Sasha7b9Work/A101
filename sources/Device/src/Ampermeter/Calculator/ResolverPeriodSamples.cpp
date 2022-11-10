@@ -36,18 +36,14 @@ ResolverPeriodSamples::ResolverPeriodSamples(const BufferADC &buffer)
 
     int averaging = sum / BufferADC::SIZE;
 
-    Intersection first_around = FindFirstIntersectionRelativeAverage(buffer, ValueADC::FromRaw(averaging));
+    Period period;
 
-    Intersection last_around = FindLastIntersectionRelativeAverage(buffer, ValueADC::FromRaw(averaging), first_around);
-
-    if (BadIntersection(first_around, last_around))
+    if (!CalculateRoughly(buffer, ValueADC::FromRaw(averaging), period))
     {
         SetFullPeriod(ValueADC::FromRaw(averaging));
 
         return;
     }
-
-    Period period(first_around, last_around, ValueADC::FromRaw(averaging));
 
     DualIntegral integral(buffer, period);
 
@@ -88,6 +84,7 @@ ResolverPeriodSamples::ResolverPeriodSamples(const BufferADC &buffer)
             LOG_WRITE("Time calculate %d ms, counter %d, period %d", meter.ElapsedTime(), counter, period.last.first - period.first.first);
 
             CalculateAccuracy(buffer, period.dc);
+            LOG_WRITE("                         accuracy period %d", result_period.last.first - result_period.first.first);
         }
     }
 }
@@ -170,15 +167,35 @@ Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const Bu
 }
 
 
-void ResolverPeriodSamples::CalculateRoughly(const BufferADC &buffer, const ValueADC &dc)
+bool ResolverPeriodSamples::CalculateRoughly(const BufferADC &buffer, const ValueADC &dc, Period &period)
 {
+    Intersection first_around = FindFirstIntersectionRelativeAverage(buffer, dc);
 
+    Intersection last_around = FindLastIntersectionRelativeAverage(buffer, dc, first_around);
+
+    period.Set(first_around, last_around, dc);
+
+    if (BadIntersection(first_around, last_around))
+    {
+        return false;
+    }
+
+    return true;
 }
 
 
 void ResolverPeriodSamples::CalculateAccuracy(const BufferADC &buffer, const ValueADC &dc)
 {
+    Intersection first = FindFirstIntersectionRelativeAverage(buffer, dc);
 
+    Intersection last = FindLastIntersectionRelativeAverage(buffer, dc, first);
+
+    result_period.Set(first, last, dc);
+
+    if (BadIntersection(first, last))
+    {
+        SetFullPeriod(dc);
+    }
 }
 
 
