@@ -7,10 +7,11 @@
 ResolverAC::ResolverAC(const BufferADC &data, const Period &period)
 {
     float sum = 0.0f;
+    float dc = period.dc.Real();
 
     for (int i = period.first.first; i < period.last.first; i++)
     {
-        float value = data[i].Real() - period.dc.Real();
+        float value = data[i].Real() - dc;
 
         sum += value * value;
     }
