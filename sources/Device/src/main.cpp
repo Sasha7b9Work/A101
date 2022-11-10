@@ -31,6 +31,8 @@ int main()
 
     while (1)
     {
+        TimeMeterMS meter;
+
         Ampermeter::Update();
 
         Display::Update();
@@ -40,5 +42,7 @@ int main()
         Profiler::Update();
 
         SCPI::Update();
+
+        LOG_WRITE("time frame %d ms", meter.ElapsedTime());
     }
 }
