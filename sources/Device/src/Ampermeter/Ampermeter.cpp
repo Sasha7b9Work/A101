@@ -31,7 +31,7 @@ void Ampermeter::Init()
 }
 
 
-int middle_of_3(int a, int b, int c)
+static int middle_of_3(int a, int b, int c)
 {
     int middle;
 
