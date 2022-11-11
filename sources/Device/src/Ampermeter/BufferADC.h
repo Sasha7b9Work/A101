@@ -35,6 +35,9 @@ struct BufferADC
 
     static ValueADC At(int i) { return raw[i]; }
 
+    // Прменить медианный фильтр по трём
+    static void MiddleOf3();
+
 private:
     static int        pointer;         // Указатель используется при чтении данных (массив raw)
     static ValueADC   raw[SIZE];       // Данные, считанные с АЦП

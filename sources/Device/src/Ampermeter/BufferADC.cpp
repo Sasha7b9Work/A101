@@ -39,3 +39,33 @@ void BufferADC::LogUART()
         LOG_WRITE("%d", raw[i].Raw());
     }
 }
+
+
+static int middle_of_3(int a, int b, int c)
+{
+    if ((a <= b) && (a <= c))
+    {
+        return (b <= c) ? b : c;
+    }
+    else if ((b <= a) && (b <= c))
+    {
+        return (a <= c) ? a : c;
+    }
+    return (a <= b) ? a : b;
+}
+
+
+void BufferADC::MiddleOf3()
+{
+    int raw_i_1 = raw[0];   // Ёлемент raw[i - 1]
+    int raw_i_0 = 0;        // Ёлемент raw[i]
+
+    for (int i = 1; i < SIZE - 1; i++)
+    {
+        raw_i_0 = raw[i];
+
+        raw[i] = ValueADC::FromRaw(middle_of_3(raw_i_1, raw[i], raw[i + 1]));
+
+        raw_i_1 = raw_i_0;
+    }
+}

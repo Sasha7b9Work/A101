@@ -17,6 +17,50 @@
 #include "stm_includes.h"
 
 
+
+namespace Ampermeter
+{
+    // Медианный фильтр по трём
+    struct MiddlerOf3
+    {
+        void Push(ValueADC value)
+        {
+            averager.Push(value);
+        }
+        ValueADC Get()
+        {
+            if (averager.NumElements() > 2)
+            {
+                return ValueADC::FromRaw(middle_of_3(averager.Pop(0), averager.Pop(1), averager.Pop(2)));
+            }
+            else if (averager.NumElements() == 2)
+            {
+                return averager.Pop(1);
+            }
+
+            return averager.Pop(0);
+        }
+
+    private:
+
+        Averager <ValueADC, 3> averager;
+
+        int middle_of_3(int a, int b, int c)
+        {
+            if ((a <= b) && (a <= c))
+            {
+                return (b <= c) ? b : c;
+            }
+            else if ((b <= a) && (b <= c))
+            {
+                return (a <= c) ? a : c;
+            }
+            return (a <= b) ? a : b;
+        }
+    };
+}
+
+
 void Ampermeter::Init()
 {
     HAL_TIM4::Init();
@@ -31,29 +75,9 @@ void Ampermeter::Init()
 }
 
 
-static int middle_of_3(int a, int b, int c)
-{
-    int middle;
-
-    if ((a <= b) && (a <= c)) {
-        middle = (b <= c) ? b : c;
-    }
-    else {
-        if ((b <= a) && (b <= c)) {
-            middle = (a <= c) ? a : c;
-        }
-        else {
-            middle = (a <= b) ? a : b;
-        }
-    }
-
-    return middle;
-}
-
-
 void Ampermeter::Update()
 {
-    Averager <ValueADC, 3> averager;
+    static MiddlerOf3 middler;
 
     BufferADC::Clear(SampleRate::Current::Get());
 
@@ -71,19 +95,15 @@ void Ampermeter::Update()
         TIM4->CNT = 0;
 #endif
 
-        ValueADC value = AD7691::ReadValue();
-
-        averager.Push(value);
-
-        if (averager.NumElements() > 2)
-        {
-            value = ValueADC::FromRaw(middle_of_3(averager.Pop(0), averager.Pop(1), averager.Pop(2)));
-        }
-
-        BufferADC::Push(value);
+        BufferADC::Push(AD7691::ReadValue());
     }
 
     HAL_TIM4::Stop();
+
+    for (int i = 0; i < 100; i++)
+    {
+        BufferADC::MiddleOf3();
+    }
 
     BufferADC::CalculateLimits();
 
