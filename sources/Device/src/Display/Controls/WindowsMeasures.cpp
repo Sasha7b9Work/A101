@@ -88,23 +88,21 @@ void WindowMeasure::SetMeasure(char measure[TextString::MAX_LEN])
 {
     int index = 0;
 
-    char str[2] = { '\0', '\0' };
-
     for (int i = 0; (i < 7) && (index < 5); i++)
     {
         char symbol = measure[i];
+
+        char str[2] = { symbol, '\0' };
 
         if (symbol == '-' || symbol == '+')
         {
             if (is_signed)
             {
-                str[0] = symbol;
                 sign.SetText(str);
             }
         }
         else if ((symbol >= '0' && symbol <= '9') || symbol == '*')
         {
-            str[0] = symbol;
             digits[index]->SetText(str);
             index++;
 
