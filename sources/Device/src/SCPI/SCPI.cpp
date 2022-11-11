@@ -79,5 +79,7 @@ bool SCPI::Command::Execute()
         return false;
     }
 
+    if(IsEquals(""))
+
     return true;
 }

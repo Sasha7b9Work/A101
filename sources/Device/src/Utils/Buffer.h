@@ -105,6 +105,18 @@ public:
         return null;
     }
 
+    // Содержимое эквалентно данной строке
+    bool IsEquals(char *)
+    {
+        return false;
+    }
+
+    // Содержимое начинается с данной строки
+    bool BeginWith(char *)
+    {
+        return false;
+    }
+
 protected:
 
     int size;

@@ -1,3 +1,9 @@
 *IDN?
 *RST
 
+ABORT
+RANGE { 2mA | 20mA | 200mA | 2A | 20A | 50A }
+READ?
+READ?[1...0xFFFFFFFF]
+SAMPLES?
+FFT?
