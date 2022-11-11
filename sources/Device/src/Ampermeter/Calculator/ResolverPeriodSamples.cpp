@@ -269,7 +269,22 @@ ResolverDC::ResolverDC(const Period &_period)
         counter++;
     }
 
-//    LOG_WRITE("counter %d, delta %d", counter, max - min);
+    period.dc = ValueADC::FromRaw(period.dc.Raw());
 
     result = period.dc;
+
+    {
+//        int64 sum = 0;
+//
+//        int num_elements = 0;
+//
+//        for (int i = _period.first.first; i < _period.last.first; i++)
+//        {
+//            sum += BufferADC::At(i);
+//
+//            num_elements++;
+//        }
+//
+//        result = ValueADC::FromRaw((int)(sum / num_elements));
+    }
 }
