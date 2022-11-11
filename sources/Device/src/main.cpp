@@ -43,6 +43,6 @@ int main()
 
         SCPI::Update();
 
-        LOG_WRITE("time frame %d", meter.ElapsedTime());
+//        LOG_WRITE("time frame %d", meter.ElapsedTime());
     }
 }

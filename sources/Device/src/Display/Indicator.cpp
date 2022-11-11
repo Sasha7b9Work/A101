@@ -118,6 +118,8 @@ void Indicator::SetMeasures(float dc, float ac, int range)
 
     ConvertDoubleToText(dc, measureDC, after[range], suffix[range]);
     ConvertDoubleToText(ac, measureAC, after[range], suffix[range]);
+
+    LOG_WRITE("dc = %.4f, ac = %.4f", dc, ac);
 }
 
 
@@ -197,5 +199,5 @@ void Indicator::SetDeltaADC(int delta)
 {
     char buffer[32];
     std::sprintf(buffer, "%d", delta);
-//    textDeltaADC.SetText(buffer);
+    textDeltaADC.SetText(buffer);
 }
