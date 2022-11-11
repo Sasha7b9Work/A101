@@ -11,6 +11,8 @@ struct TextString
     void Disable();
     void Enable();
     void SetText(const char[MAX_LEN]);
+    void SetX(int _x) { x = _x; }
+    int GetX() const { return x; }
 private:
     char  text[MAX_LEN];
     int   x;

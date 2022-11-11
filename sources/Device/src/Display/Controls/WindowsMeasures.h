@@ -11,8 +11,19 @@ public:
     void Disable();
     void SetMeasure(char [TextString::MAX_LEN]);
 private:
+    static const int HEIGHT = 92;
+    static const int WIDTH_DIGIT = 40;
+    static const int DELTA = 5;
+
     TextString title;
     TextString point;
+    TextString digit1;
+    TextString digit2;
+    TextString digit3;
+    TextString digit4;
+    TextString digit5;
+
+    TextString *digits[5];
 };
 
 
