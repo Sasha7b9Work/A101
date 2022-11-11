@@ -7,7 +7,7 @@ struct TextString
 {
     static const int MAX_LEN = 32;
 
-    TextString(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, const Color &_colorBack = Color::Count);
+    TextString(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, bool _h_aligned = false, const Color &_colorBack = Color::Count);
     void Disable();
     void Enable();
     void SetText(const char[MAX_LEN]);
@@ -18,6 +18,7 @@ private:
     int   width;
     int   height;
     int   font;
+    bool  h_aligned;
     Color colorText;
     Color colorBack;
 };

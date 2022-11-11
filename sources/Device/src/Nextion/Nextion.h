@@ -60,7 +60,8 @@ namespace Nextion
 
     void DrawLineV(int x, int y1, int y2, const Color & = Color::Count);
 
-    void DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar);
+    // h_align - горизонтальное выравнивание. 0 - лево, 1 - центр
+    void DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar, int h_align = 0);
 
     namespace WaveInput
     {

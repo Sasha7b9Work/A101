@@ -4,8 +4,8 @@
 
 
 WindowMeasure::WindowMeasure(int x, int y, int font, pchar _title) :
-    title(x, y, 172, 92, font, _title, Color::MeasureAC, Color::ButtonPress),
-    point(x + 200, y, 28, 92, font, ".", Color::MeasureAC, Color::ButtonPress)
+    title(x, y, 172, 92, font, _title, Color::MeasureAC, false, Color::ButtonPress),
+    point(x + 200, y, 28, 92, font, ".", Color::MeasureAC, true, Color::ButtonPress)
 {
 
 }

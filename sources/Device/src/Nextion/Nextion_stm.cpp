@@ -58,9 +58,9 @@ void Nextion::DrawLine(int x1, int y1, int x2, int y2, const Color &color)
 }
 
 
-void Nextion::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text)
+void Nextion::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text, int h_align)
 {
-    SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,0,0,1,\"%s\"", x, y, width, height, font, color.ToRaw(), back_color.ToRaw(), text);
+    SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,%d,0,1,\"%s\"", x, y, width, height, font, color.ToRaw(), back_color.ToRaw(), h_align, text);
 }
 
 

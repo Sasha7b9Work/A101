@@ -5,8 +5,8 @@
 #include <cstring>
 
 
-TextString::TextString(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, const Color &_colorBack) :
-    x(_x), y(_y), width(_w), height(_h), font(_font), colorText(_colorText), colorBack(_colorBack)
+TextString::TextString(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, bool _h_align, const Color &_colorBack) :
+    x(_x), y(_y), width(_w), height(_h), font(_font), h_aligned(_h_align), colorText(_colorText), colorBack(_colorBack)
 {
     std::strcpy(text, _text);
 }
@@ -14,7 +14,7 @@ TextString::TextString(int _x, int _y, int _w, int _h, int _font, pchar _text, c
 
 void TextString::Enable()
 {
-    Nextion::DrawString(x, y, width, height, font, colorText, (colorBack.value == Color::Count.value) ? Color::Background : Color::ButtonPress, text);
+    Nextion::DrawString(x, y, width, height, font, colorText, (colorBack.value == Color::Count.value) ? Color::Background : Color::ButtonPress, text, h_aligned ? 1 : 0);
 }
 
 
