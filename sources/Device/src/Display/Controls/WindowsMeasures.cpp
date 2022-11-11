@@ -79,7 +79,18 @@ void WindowMeasure::Disable()
 }
 
 
-void WindowMeasure::SetMeasure(char[TextString::MAX_LEN])
+void WindowMeasure::SetMeasure(char measure[TextString::MAX_LEN])
 {
+    int index = 0;
 
+    for (int i = 0; (i < 7) && (index < 5); i++)
+    {
+        if (measure[i] >= '0' && measure[i] <= '9')
+        {
+            char str[2] = { '\0', '\0' };
+            str[0] = measure[i];
+            digits[index]->SetText(str);
+            index++;
+        }
+    }
 }
