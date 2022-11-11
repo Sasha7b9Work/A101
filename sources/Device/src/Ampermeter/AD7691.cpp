@@ -3,6 +3,7 @@
 #include "Ampermeter/AD7691.h"
 #include "Generator/Generator.h"
 #include "Ampermeter/InputRelays.h"
+#include "Ampermeter/Calculator/Averager.h"
 #include "stm_includes.h"
 
 

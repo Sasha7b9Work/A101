@@ -1,6 +1,7 @@
 // 2022/11/10 10:47:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Ampermeter/Calculator/ResolverAC.h"
+#include "Ampermeter/Calculator/Averager.h"
 #include <cmath>
 
 
