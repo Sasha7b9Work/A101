@@ -6,7 +6,7 @@
 class WindowMeasure
 {
 public:
-    WindowMeasure(int x, int y, bool is_signed, int font, pchar _title, const Color &back = Color::Count);
+    WindowMeasure(int x, int y, bool is_signed, int font, pchar _title, const Color &back = Color::Background);
     void Enable();
     void Disable();
     void SetMeasure(char [TextString::MAX_LEN]);
@@ -18,6 +18,7 @@ private:
     static const int DELTA = 0;
 
     TextString title;
+
     TextString point;
     TextString digit1;
     TextString digit2;
@@ -25,7 +26,7 @@ private:
     TextString digit4;
     TextString digit5;
 
-//    TextString sign;
+    TextString sign;
     TextString units;
 
     TextString *digits[5];

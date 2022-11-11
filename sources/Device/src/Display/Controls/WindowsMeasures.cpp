@@ -13,6 +13,7 @@ WindowMeasure::WindowMeasure(int x, int y, bool _is_signed, int font, pchar _tit
     digit3(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
     digit4(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
     digit5(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
+    sign(x + 200, y, 30, HEIGHT, font, "+", Color::MeasureAC, true, back),
     units(x + 500, y, 50, HEIGHT, font, "", Color::MeasureAC, true, back),
     colorBack(back), is_signed(_is_signed)
 {
@@ -65,6 +66,10 @@ void WindowMeasure::Enable()
     title.Enable();
     point.Enable();
     units.Enable();
+    if (is_signed)
+    {
+        sign.Enable();
+    }
 
     for (int i = 0; i < 5; i++)
     {
@@ -75,7 +80,7 @@ void WindowMeasure::Enable()
 
 void WindowMeasure::Disable()
 {
-    Nextion::FillRect(title.GetX(), title.GetY(), WIDTH, HEIGHT, Color::Black);
+    Nextion::FillRect(title.GetX(), title.GetY(), WIDTH, HEIGHT, colorBack);
 }
 
 
@@ -83,11 +88,20 @@ void WindowMeasure::SetMeasure(char measure[TextString::MAX_LEN])
 {
     int index = 0;
 
+    char str[2] = { '\0', '\0' };
+
     for (int i = 0; (i < 7) && (index < 5); i++)
     {
-        if (measure[i] >= '0' && measure[i] <= '9')
+        if (measure[i] == '-' || measure[i] == '+')
         {
-            char str[2] = { '\0', '\0' };
+            if (is_signed)
+            {
+                str[0] = measure[i];
+                sign.SetText(str);
+            }
+        }
+        else if (measure[i] >= '0' && measure[i] <= '9')
+        {
             str[0] = measure[i];
             digits[index]->SetText(str);
             index++;
