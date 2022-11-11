@@ -5,7 +5,7 @@
 #include "Nextion/Nextion.h"
 
 
-WindowMeasure::WindowMeasure(int x, int y, int font, pchar _title, const Color &back) :
+WindowMeasure::WindowMeasure(int x, int y, bool _is_signed, int font, pchar _title, const Color &back) :
     title(x, y, 172, HEIGHT, font, _title, Color::MeasureAC, false, back),
     point(x + 200, y, 28, HEIGHT, font, ".", Color::MeasureAC, true, back),
     digit1(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
@@ -14,7 +14,7 @@ WindowMeasure::WindowMeasure(int x, int y, int font, pchar _title, const Color &
     digit4(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
     digit5(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
     units(x + 500, y, 50, HEIGHT, font, "", Color::MeasureAC, true, back),
-    colorBack(back)
+    colorBack(back), is_signed(_is_signed)
 {
     digits[0] = &digit1;
     digits[1] = &digit2;

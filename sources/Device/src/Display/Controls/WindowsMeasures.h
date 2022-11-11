@@ -6,7 +6,7 @@
 class WindowMeasure
 {
 public:
-    WindowMeasure(int x, int y, int font, pchar _title, const Color &back = Color::Count);
+    WindowMeasure(int x, int y, bool is_signed, int font, pchar _title, const Color &back = Color::Count);
     void Enable();
     void Disable();
     void SetMeasure(char [TextString::MAX_LEN]);
@@ -31,13 +31,15 @@ private:
     TextString *digits[5];
 
     Color colorBack;
+
+    bool is_signed;
 };
 
 
 class WindowMeasureAC : public WindowMeasure
 {
 public:
-    WindowMeasureAC(int x, int y, int font) : WindowMeasure(x, y, font, "AC:") {}
+    WindowMeasureAC(int x, int y, int font) : WindowMeasure(x, y, false, font, "AC:") {}
 private:
 };
 
@@ -45,6 +47,6 @@ private:
 class WindowMeasureDC : public WindowMeasure
 {
 public:
-    WindowMeasureDC(int x, int y, int font) : WindowMeasure(x, y, font, "DC:") {}
+    WindowMeasureDC(int x, int y, int font) : WindowMeasure(x, y, true, font, "DC:") {}
 private:
 };
