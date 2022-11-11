@@ -12,6 +12,7 @@ public:
     void SetMeasure(char [TextString::MAX_LEN]);
 private:
     TextString title;
+    TextString point;
 };
 
 

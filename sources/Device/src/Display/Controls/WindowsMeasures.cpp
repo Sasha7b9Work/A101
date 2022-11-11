@@ -4,7 +4,8 @@
 
 
 WindowMeasure::WindowMeasure(int x, int y, int font, pchar _title) :
-    title(x, y, 175, 95, font, _title, Color::MeasureAC, Color::ButtonPress)
+    title(x, y, 172, 92, font, _title, Color::MeasureAC, Color::ButtonPress),
+    point(x + 200, y, 28, 92, font, ".", Color::MeasureAC, Color::ButtonPress)
 {
 
 }
@@ -13,12 +14,14 @@ WindowMeasure::WindowMeasure(int x, int y, int font, pchar _title) :
 void WindowMeasure::Enable()
 {
     title.Enable();
+    point.Enable();
 }
 
 
 void WindowMeasure::Disable()
 {
     title.Disable();
+    point.Disable();
 }
 
 
