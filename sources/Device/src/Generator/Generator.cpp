@@ -12,7 +12,7 @@ namespace Generator
     static double frequency = 100.0;
     static double picAC = 1.0;
     static double dc = 0.0;
-    static double picNoise = 0.1;
+    static double picNoise = 0.0;
     static uint64 timeUS = 0;
 
     static ValueADC ConvertToValueADC(double);

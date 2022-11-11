@@ -92,19 +92,26 @@ void WindowMeasure::SetMeasure(char measure[TextString::MAX_LEN])
 
     for (int i = 0; (i < 7) && (index < 5); i++)
     {
-        if (measure[i] == '-' || measure[i] == '+')
+        char symbol = measure[i];
+
+        if (symbol == '-' || symbol == '+')
         {
             if (is_signed)
             {
-                str[0] = measure[i];
+                str[0] = symbol;
                 sign.SetText(str);
             }
         }
-        else if (measure[i] >= '0' && measure[i] <= '9')
+        else if ((symbol >= '0' && symbol <= '9') || symbol == '*')
         {
-            str[0] = measure[i];
+            str[0] = symbol;
             digits[index]->SetText(str);
             index++;
+
+            if (symbol == '*' && is_signed)
+            {
+                sign.SetText("");
+            }
         }
     }
 }
