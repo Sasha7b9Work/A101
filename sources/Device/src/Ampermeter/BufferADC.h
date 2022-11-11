@@ -15,6 +15,8 @@ struct BufferADC
         }
     }
 
+    static int NumElements() { return pointer; }
+
     static bool IsFull()     { return (pointer == SIZE); }
 
     static void Clear(SampleRate _rate) { pointer = 0; sampleRate = _rate; }

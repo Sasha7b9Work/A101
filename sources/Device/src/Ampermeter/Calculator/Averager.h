@@ -19,6 +19,12 @@ public:
         }
         buffer[num_elements++] = value;
     }
+
+    T Pop(int index)
+    {
+        return buffer[index];
+    }
+
     T Get()
     {
         T sum = 0;
@@ -30,6 +36,7 @@ public:
 
         return sum / (T)num_elements;
     }
+    int NumElements() const { return num_elements; }
     void Reset() { num_elements = 0; }
 private:
     T buffer[size_buffer];
