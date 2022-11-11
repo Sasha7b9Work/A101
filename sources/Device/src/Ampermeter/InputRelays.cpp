@@ -15,13 +15,15 @@ namespace InputRelays
 
 void InputRelays::SetRange(int _range)
 {
-    if (range != _range)
+    bool need_event = range != _range;
+
+    range = _range;
+
+    if (need_event)
     {
         Indicator::OnCnageRangeEvent();
         Calculator::OnChangeRangeEvent();
     }
-
-    range = _range;
 
     static int states[6][7] =
     {

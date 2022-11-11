@@ -6,15 +6,16 @@
 class WindowMeasure
 {
 public:
-    WindowMeasure(int x, int y, int font, pchar _title);
+    WindowMeasure(int x, int y, int font, pchar _title, const Color &back = Color::Count);
     void Enable();
     void Disable();
     void SetMeasure(char [TextString::MAX_LEN]);
     void OnChangeRangeEvent();
 private:
     static const int HEIGHT = 92;
+    static const int WIDTH = 600;
     static const int WIDTH_DIGIT = 40;
-    static const int DELTA = 5;
+    static const int DELTA = 0;
 
     TextString title;
     TextString point;
@@ -24,7 +25,12 @@ private:
     TextString digit4;
     TextString digit5;
 
+//    TextString sign;
+//    TextString units;
+
     TextString *digits[5];
+
+    Color colorBack;
 };
 
 

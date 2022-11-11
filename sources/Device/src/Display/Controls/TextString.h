@@ -13,6 +13,8 @@ struct TextString
     void SetText(const char[MAX_LEN]);
     void SetX(int _x) { x = _x; }
     int GetX() const { return x; }
+    int GetY() const { return y; }
+    int GetWidth() const { return width; }
 private:
     char  text[MAX_LEN];
     int   x;
