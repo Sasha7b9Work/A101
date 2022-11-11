@@ -119,7 +119,7 @@ void Indicator::SetMeasures(float dc, float ac, int range)
     ConvertDoubleToText(dc, measureDC, after[range], suffix[range]);
     ConvertDoubleToText(ac, measureAC, after[range], suffix[range]);
 
-    LOG_WRITE("dc = %.4f, ac = %.4f", dc, ac);
+    LOG_WRITE("dc = %s, ac = %s", measureDC, measureAC);
 }
 
 
