@@ -16,7 +16,7 @@ namespace Indicator
 
     void SetMeasures(float dc, float ac, int range);
 
-    void Reset(int range);
+    void OnCnageRangeEvent();
 
     void SetDeltaADC(int);
 }

@@ -69,9 +69,9 @@ void Ampermeter::Init()
 
     AD7691::Init();
 
-    Indicator::Reset(InputRelays::GetRange());
+    Indicator::OnCnageRangeEvent();
 
-    Calculator::Reset(InputRelays::GetRange());
+    Calculator::OnChangeRangeEvent();
 }
 
 

@@ -17,8 +17,8 @@ void InputRelays::SetRange(int _range)
 {
     if (range != _range)
     {
-        Indicator::Reset(_range);
-        Calculator::Reset(_range);
+        Indicator::OnCnageRangeEvent();
+        Calculator::OnChangeRangeEvent();
     }
 
     range = _range;

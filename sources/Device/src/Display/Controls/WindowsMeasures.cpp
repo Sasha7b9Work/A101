@@ -29,6 +29,12 @@ WindowMeasure::WindowMeasure(int x, int y, int font, pchar _title) :
 }
 
 
+void WindowMeasure::OnChangeRangeEvent()
+{
+
+}
+
+
 void WindowMeasure::Enable()
 {
     title.Enable();

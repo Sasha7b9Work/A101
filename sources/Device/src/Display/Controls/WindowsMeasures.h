@@ -10,6 +10,7 @@ public:
     void Enable();
     void Disable();
     void SetMeasure(char [TextString::MAX_LEN]);
+    void OnChangeRangeEvent();
 private:
     static const int HEIGHT = 92;
     static const int WIDTH_DIGIT = 40;

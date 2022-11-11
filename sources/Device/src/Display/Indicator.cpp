@@ -8,6 +8,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Display/Controls/TextString.h"
 #include "Display/Controls/WindowsMeasures.h"
+#include "Ampermeter/InputRelays.h"
 #include <cstdio>
 #include <cstring>
 #include <cmath>
@@ -173,8 +174,13 @@ void Indicator::ConvertDoubleToText(float value, char out[TextString::MAX_LEN], 
 }
 
 
-void Indicator::Reset(int range)
+void Indicator::OnCnageRangeEvent()
 {
+    int range = InputRelays::GetRange();
+
+    windowAC.OnChangeRangeEvent();
+    windowDC.OnChangeRangeEvent();
+
     pchar message = nullptr;
 
     switch (range)
