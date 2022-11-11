@@ -8,7 +8,7 @@
 static int width = 500;
 
 
-wxPanel *GaussDialog::CreatePanelWidth(wxDialog *dlg)
+wxPanel *GaussDialog::CreatePanelWidth(wxDialog *dlg) //-V2009
 {
     wxPanel *panel = new wxPanel(dlg);
 

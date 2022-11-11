@@ -7,7 +7,7 @@
 static int numPeriods = 1;
 
 
-wxPanel *SinXDialog::CreatePanelNumPeriods(wxDialog *dlg)
+wxPanel *SinXDialog::CreatePanelNumPeriods(wxDialog *dlg) //-V2009
 {
     wxPanel *panel = new wxPanel(dlg);
 

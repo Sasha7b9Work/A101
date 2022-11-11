@@ -33,11 +33,11 @@ struct Intersection
 
 struct Period
 {
-    Period() {}
+    Period() = default;
     Period(Intersection &_first, Intersection _last, ValueADC _dc) :
         first(_first), last(_last), dc(_dc)   { }
 
-    void Set(Intersection &_first, Intersection _last, ValueADC _dc)
+    void Set(const Intersection &_first, Intersection _last, ValueADC _dc)
     {
         first = _first;
         last = _last;
