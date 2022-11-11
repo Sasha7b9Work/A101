@@ -21,15 +21,6 @@ WindowMeasure::WindowMeasure(int x, int y, int font, pchar _title, const Color &
     digits[3] = &digit4;
     digits[4] = &digit5;
 
-//    int x0 = title.GetX() + 250;
-//
-//    for (int i = 0; i < 5; i++)
-//    {
-//        digits[i]->SetX(x0);
-//
-//        x0 += DELTA + WIDTH_DIGIT;
-//    }
-
     OnChangeRangeEvent();
 }
 
@@ -42,43 +33,29 @@ void WindowMeasure::OnChangeRangeEvent()
 
     Disable();
 
-    if (range == 0)
+    static const int firsts[6] = { 0, 1, 2, 0, 1, 1 };
+    static const int seconds[6] = { 1, 2, 3, 1, 2, 2 };
+
+    for (int i = 0; i <= firsts[range]; i++)
     {
-        digits[0]->SetX(x0);
+        digits[i]->SetX(x0);
 
         x0 += DELTA + WIDTH_DIGIT;
-
-        point.SetX(x0);
-
-        x0 += DELTA + point.GetWidth();
-
-        for (int i = 1; i < 5; i++)
-        {
-            digits[i]->SetX(x0);
-
-            x0 += DELTA + WIDTH_DIGIT;
-        }
     }
-    else if (range == 1)
+
+    point.SetX(x0);
+
+    x0 += DELTA + point.GetWidth();
+
+    for (int i = seconds[range]; i < 5; i++)
     {
-        digits[0]->SetX(x0);
-
+        digits[i]->SetX(x0);
         x0 += DELTA + WIDTH_DIGIT;
+    }
 
-        digits[1]->SetX(x0);
+    if (range < 3)
+    {
 
-        x0 += DELTA + WIDTH_DIGIT;
-
-        point.SetX(x0);
-
-        x0 += DELTA + point.GetWidth();
-
-        for (int i = 2; i < 5; i++)
-        {
-            digits[i]->SetX(x0);
-
-            x0 += DELTA + WIDTH_DIGIT;
-        }
     }
 
     Enable();
