@@ -77,8 +77,6 @@ void Ampermeter::Init()
 
 void Ampermeter::Update()
 {
-    static MiddlerOf3 middler;
-
     BufferADC::Clear(SampleRate::Current::Get());
 
     uint period = SampleRate::Current::Get().TimeUS();
@@ -100,10 +98,7 @@ void Ampermeter::Update()
 
     HAL_TIM4::Stop();
 
-    for (int i = 0; i < 100; i++)
-    {
-        BufferADC::MiddleOf3();
-    }
+    BufferADC::MiddleOf3();
 
     BufferADC::CalculateLimits();
 
