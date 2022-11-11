@@ -13,7 +13,7 @@ public:
     void OnChangeRangeEvent();
 private:
     static const int HEIGHT = 92;
-    static const int WIDTH = 600;
+    static const int WIDTH = 620;
     static const int WIDTH_DIGIT = 40;
     static const int DELTA = 0;
 
@@ -26,7 +26,7 @@ private:
     TextString digit5;
 
 //    TextString sign;
-//    TextString units;
+    TextString units;
 
     TextString *digits[5];
 

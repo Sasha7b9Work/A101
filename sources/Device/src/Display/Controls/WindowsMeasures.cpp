@@ -13,6 +13,7 @@ WindowMeasure::WindowMeasure(int x, int y, int font, pchar _title, const Color &
     digit3(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
     digit4(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
     digit5(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
+    units(x + 500, y, 50, HEIGHT, font, "", Color::MeasureAC, true, back),
     colorBack(back)
 {
     digits[0] = &digit1;
@@ -53,10 +54,7 @@ void WindowMeasure::OnChangeRangeEvent()
         x0 += DELTA + WIDTH_DIGIT;
     }
 
-    if (range < 3)
-    {
-
-    }
+    units.SetText(range < 3 ? "mA" : "A");
 
     Enable();
 }
@@ -66,6 +64,7 @@ void WindowMeasure::Enable()
 {
     title.Enable();
     point.Enable();
+    units.Enable();
 
     for (int i = 0; i < 5; i++)
     {
