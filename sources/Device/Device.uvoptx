@@ -152,50 +152,50 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>244</LineNumber>
+          <LineNumber>56</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134239676</Address>
+          <Address>134241134</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Ampermeter\Calculator\ResolverPeriodSamples.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Display\DiagramInput.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Ampermeter/Calculator/ResolverPeriodSamples.cpp\244</Expression>
+          <Expression>\\A101_D\src/Display/DiagramInput.cpp\56</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>272</LineNumber>
+          <LineNumber>51</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134239830</Address>
+          <Address>134241044</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Ampermeter\Calculator\ResolverPeriodSamples.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Display\DiagramInput.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Ampermeter/Calculator/ResolverPeriodSamples.cpp\272</Expression>
+          <Expression>\\A101_D\src/Display/DiagramInput.cpp\51</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>269</LineNumber>
+          <LineNumber>244</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134239822</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>&lt;1&gt;.\src\Ampermeter\Calculator\ResolverPeriodSamples.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Ampermeter/Calculator/ResolverPeriodSamples.cpp\269</Expression>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -1258,7 +1258,7 @@
 
   <Group>
     <GroupName>Display</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
