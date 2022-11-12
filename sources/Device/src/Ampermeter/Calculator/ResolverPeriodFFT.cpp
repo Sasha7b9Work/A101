@@ -14,13 +14,13 @@ ResolverPeriodFFT::ResolverPeriodFFT(const ResolverFFT &fft)
     
     period = (int)std::numeric_limits<int>::max();
 
-    int min_delta = (int)std::numeric_limits<int>::max();
+    float min_delta = (float)std::numeric_limits<int>::max();
 
     const int index = fft.FindIndexFreq();
 
     for (int per = BufferADC::SIZE / (index + 2) * index; per < BufferADC::SIZE - 10; per++)
     {
-        int delta = FindDelta2(per, min_delta);
+        float delta = FindDelta2(per, min_delta);
 
         if (delta < min_delta)
         {
@@ -28,7 +28,7 @@ ResolverPeriodFFT::ResolverPeriodFFT(const ResolverFFT &fft)
             period = per;
         }
 
-        if (min_delta == 0)
+        if (min_delta == 0.0f)
         {
             break;
         }
@@ -45,14 +45,14 @@ ResolverPeriodFFT::ResolverPeriodFFT(const ResolverFFT &fft)
 }
 
 
-int ResolverPeriodFFT::FindDelta(int per, int delta_out)
+float ResolverPeriodFFT::FindDelta(int per, float delta_out)
 {
-    int min = (int)std::numeric_limits<int>::max();
-    int max = (int)std::numeric_limits<int>::min();
+    float min = (float)std::numeric_limits<int>::max();
+    float max = (float)std::numeric_limits<int>::min();
 
     for (int start = 0; start < (BufferADC::SIZE - per - 1); start++)
     {
-        int integral = FindIntegral(per, start);
+        float integral = FindIntegral(per, start);
 
         if (integral < min)
         {
@@ -74,17 +74,17 @@ int ResolverPeriodFFT::FindDelta(int per, int delta_out)
 }
 
 
-int ResolverPeriodFFT::FindDelta2(int per, int)
+float ResolverPeriodFFT::FindDelta2(int per, float)
 {
-    int delta = 0;
+    float delta = 0.0f;
 
     for (int start = 0; start < (BufferADC::SIZE - per - 1); start++)
     {
-        int integral = sum[start + per] - sum[start];
+        float integral = sum[start + per] - sum[start];
 
-        if (Math::Abs<int>(integral) > delta)
+        if (Math::Abs<float>(integral) > delta)
         {
-            delta = Math::Abs<int>(integral);
+            delta = Math::Abs<float>(integral);
         }
     }
 
@@ -92,13 +92,13 @@ int ResolverPeriodFFT::FindDelta2(int per, int)
 }
 
 
-int ResolverPeriodFFT::FindIntegral(int line, int index_start)
+float ResolverPeriodFFT::FindIntegral(int line, int index_start)
 {
-    int result = 0;
+    float result = 0.0f;
 
     for (int i = index_start; i < index_start + line; i++)
     {
-        result += BufferADC::At(i).Raw();
+        result += BufferADC::At(i).Real();
     }
 
     return result;
@@ -107,10 +107,10 @@ int ResolverPeriodFFT::FindIntegral(int line, int index_start)
 
 void ResolverPeriodFFT::CalculateSums()
 {
-    sum[0] = BufferADC::At(0).Raw();
-    
+    sum[0] = BufferADC::At(0).Real();
+
     for(int i = 1; i < BufferADC::SIZE; i++)
     {
-        sum[i] = sum[i - 1] + BufferADC::At(i).Raw();
+        sum[i] = sum[i - 1] + BufferADC::At(i).Real();
     }
 }

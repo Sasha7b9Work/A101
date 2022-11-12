@@ -201,9 +201,9 @@ void Indicator::OnCnageRangeEvent()
 }
 
 
-void Indicator::SetDeltaADC(int delta)
+void Indicator::SetDeltaADC(float delta)
 {
     char buffer[32];
-    std::sprintf(buffer, "%d", delta);
+    std::sprintf(buffer, "%f", (double)delta);
     textDeltaADC.SetText(buffer);
 }

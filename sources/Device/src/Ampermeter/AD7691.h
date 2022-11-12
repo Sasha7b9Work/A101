@@ -24,16 +24,16 @@ struct ValueADC
 {
     // В конструктор подаётся считанное с АЦП значение, которое подвергается корректировке
     explicit ValueADC(int _reading = 0);
-    static ValueADC FromRaw(int raw) { ValueADC result; result.value = raw; return result; }
-    float Real() const { return 5.0f / (1 << 17) * (float)value; }
-    int Raw()    const { return value; }
+//    static ValueADC FromRaw(int raw) { ValueADC result; result.value = raw; return result; }
+    static ValueADC FromReal(float real) { ValueADC result; result.value = real; return result; }
+    float Real() const { return value; }
     static const ValueADC MIN;
     static const ValueADC MAX;
     bool operator <(const ValueADC &rhs) const { return value < rhs.value; }
     bool operator >(const ValueADC &rhs) const { return value > rhs.value; }
-    operator int() const { return value; }
+    static float ToReal(int raw);
 private:
-    int value;        // Прочитанное значение, уже преобразованное
+    float value;        // Прочитанное значение, уже преобразованное
 };
 
 
