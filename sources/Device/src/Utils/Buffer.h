@@ -106,7 +106,7 @@ public:
     }
 
     // Содержимое эквалентно данной строке
-    bool IsEquals(char *)
+    bool IsEquals(pchar)
     {
         return false;
     }

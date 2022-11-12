@@ -1,0 +1,9 @@
+.\armcm4_debug\system_armcm4.o: RTE\Device\ARMCM4_FP\system_ARMCM4.c
+.\armcm4_debug\system_armcm4.o: C:\Users\Sasha\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM4\Include\ARMCM4_FP.h
+.\armcm4_debug\system_armcm4.o: C:\Users\Sasha\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm4.h
+.\armcm4_debug\system_armcm4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\armcm4_debug\system_armcm4.o: C:\Users\Sasha\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_version.h
+.\armcm4_debug\system_armcm4.o: C:\Users\Sasha\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h
+.\armcm4_debug\system_armcm4.o: C:\Users\Sasha\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armcc.h
+.\armcm4_debug\system_armcm4.o: C:\Users\Sasha\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\mpu_armv7.h
+.\armcm4_debug\system_armcm4.o: C:\Users\Sasha\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM4\Include\system_ARMCM4.h

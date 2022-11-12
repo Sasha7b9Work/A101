@@ -80,6 +80,9 @@ bool SCPI::Command::Execute()
     }
 
     if(IsEquals(""))
+    {
+        return false;
+    }
 
     return true;
 }
