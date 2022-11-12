@@ -28,7 +28,7 @@ void BufferADC::CalculateLimits()
         if (value > max) { max = value; }
     }
 
-    Indicator::SetDeltaADC(max.Real() - min.Real());
+    Indicator::SetDeltaADC((int)(max.Raw() - min.Raw()));
 }
 
 
@@ -36,12 +36,12 @@ void BufferADC::LogUART()
 {
     for (int i = 0; i < Size(); i++)
     {
-        LOG_WRITE("%f", (double)raw[i].Real());
+        LOG_WRITE("%d", raw[i].Raw());
     }
 }
 
 
-static float middle_of_3(float a, float b, float c)
+static int middle_of_3(int a, int b, int c)
 {
     if ((a <= b) && (a <= c))
     {
@@ -57,14 +57,14 @@ static float middle_of_3(float a, float b, float c)
 
 void BufferADC::MiddleOf3()
 {
-    float raw_i_1 = raw[0].Real();   // Ёлемент raw[i - 1]
-    float raw_i_0 = 0;              // Ёлемент raw[i]
+    int raw_i_1 = raw[0];   // Ёлемент raw[i - 1]
+    int raw_i_0 = 0;        // Ёлемент raw[i]
 
     for (int i = 1; i < SIZE - 1; i++)
     {
-        raw_i_0 = raw[i].Real();
+        raw_i_0 = raw[i];
 
-        raw[i] = ValueADC::FromReal(middle_of_3(raw_i_1, raw[i].Real(), raw[i + 1].Real()));
+        raw[i] = ValueADC::FromRaw(middle_of_3(raw_i_1, raw[i], raw[i + 1]));
 
         raw_i_1 = raw_i_0;
     }

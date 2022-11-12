@@ -155,24 +155,16 @@ ValueADC AD7691::ReadReal()
 
 ValueADC::ValueADC(int reading)
 {
-    int raw = reading;
+    value = reading;
 
-    if (_GET_BIT(raw, 17))
+    if (_GET_BIT(value, 17))
     {
-        raw -= 1 << 18;
+        value -= 1 << 18;
     }
 
     static const int delta[6] = { 3290, 3254, 3250, 3254, 3290, 3290 };
 
-    raw -= delta[InputRelays::GetRange()];
-
-    value = ToReal(raw);
-}
-
-
-float ValueADC::ToReal(int raw)
-{
-    return 5.0f / (1 << 17) * (float)raw;
+    value -= delta[InputRelays::GetRange()];
 }
 
 

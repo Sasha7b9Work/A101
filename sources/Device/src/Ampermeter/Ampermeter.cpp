@@ -25,27 +25,27 @@ namespace Ampermeter
     {
         void Push(ValueADC value)
         {
-            averager.Push(value.Real());
+            averager.Push(value);
         }
         ValueADC Get()
         {
             if (averager.NumElements() > 2)
             {
-                return ValueADC::FromReal(middle_of_3(averager.Pop(0), averager.Pop(1), averager.Pop(2)));
+                return ValueADC::FromRaw(middle_of_3(averager.Pop(0), averager.Pop(1), averager.Pop(2)));
             }
             else if (averager.NumElements() == 2)
             {
-                return ValueADC::FromReal(averager.Pop(1));
+                return averager.Pop(1);
             }
 
-            return ValueADC::FromReal(averager.Pop(0));
+            return averager.Pop(0);
         }
 
     private:
 
-        Averager <float, 3> averager;
+        Averager <ValueADC, 3> averager;
 
-        float middle_of_3(float a, float b, float c)
+        int middle_of_3(int a, int b, int c)
         {
             if ((a <= b) && (a <= c))
             {
@@ -98,7 +98,7 @@ void Ampermeter::Update()
 
     HAL_TIM4::Stop();
 
-//    BufferADC::MiddleOf3();
+    BufferADC::MiddleOf3();
 
     BufferADC::CalculateLimits();
 

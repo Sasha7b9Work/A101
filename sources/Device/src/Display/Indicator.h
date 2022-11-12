@@ -18,5 +18,5 @@ namespace Indicator
 
     void OnCnageRangeEvent();
 
-    void SetDeltaADC(float);
+    void SetDeltaADC(int);
 }

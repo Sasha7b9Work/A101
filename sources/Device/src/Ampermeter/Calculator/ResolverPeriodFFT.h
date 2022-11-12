@@ -16,17 +16,17 @@ public:
     int ToPoints() const { return period; }
 private:
     int period = -1;
-    float sum[BufferADC::SIZE];
+    int sum[BufferADC::SIZE];
 
     // Найти разницу между максимальным и минимальным интегралом при изменении начала измеряемого отрезка от
     // минимального возможного до минимально возможного
     // Если 
-    float FindDelta(int per, float delta_out);
+    int FindDelta(int per, int delta_out);
 
-    float FindDelta2(int per, float delta_out);
+    int FindDelta2(int per, int delta_out);
 
     // Найти интеграл для данного отрезка, начиная с точки index_start
-    float FindIntegral(int line, int index_start);
+    int FindIntegral(int line, int index_start);
 
     void CalculateSums();
 };
