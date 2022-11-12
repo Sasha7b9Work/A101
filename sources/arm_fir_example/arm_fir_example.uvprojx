@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>ARM_MATH_CM4 __FPU_PRESENT=1U, STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include</IncludePath>
+              <IncludePath>..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\CMSIS\DSP\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -421,7 +421,19 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>::CMSIS</GroupName>
+          <GroupName>DSP</GroupName>
+          <Files>
+            <File>
+              <FileName>arm_fir_f32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Drivers\CMSIS\DSP\Source\FilteringFunctions\arm_fir_f32.c</FilePath>
+            </File>
+            <File>
+              <FileName>arm_fir_init_f32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Drivers\CMSIS\DSP\Source\FilteringFunctions\arm_fir_init_f32.c</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
@@ -429,14 +441,7 @@
 
   <RTE>
     <apis/>
-    <components>
-      <component Cclass="CMSIS" Cgroup="DSP" Cvariant="Source" Cvendor="ARM" Cversion="1.10.0" condition="CMSIS DSP">
-        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"/>
-        <targetInfos>
-          <targetInfo name="ARMCM4_FP"/>
-        </targetInfos>
-      </component>
-    </components>
+    <components/>
     <files>
       <file attr="config" category="sourceAsm" condition="ARMCC" name="Device\ARM\ARMCM0\Source\ARM\startup_ARMCM0.s" version="1.0.1">
         <instance index="0" removed="1">RTE\Device\ARMCM0\startup_ARMCM0.s</instance>
