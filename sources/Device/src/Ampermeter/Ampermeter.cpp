@@ -98,7 +98,7 @@ void Ampermeter::Update()
 
     HAL_TIM4::Stop();
 
-    BufferADC::MiddleOf3();
+//    BufferADC::MiddleOf3();
 
     BufferADC::CalculateLimits();
 

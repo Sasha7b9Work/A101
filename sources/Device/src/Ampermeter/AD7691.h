@@ -24,7 +24,6 @@ struct ValueADC
 {
     // В конструктор подаётся считанное с АЦП значение, которое подвергается корректировке
     explicit ValueADC(int _reading = 0);
-//    static ValueADC FromRaw(int raw) { ValueADC result; result.value = raw; return result; }
     static ValueADC FromReal(float real) { ValueADC result; result.value = real; return result; }
     float Real() const { return value; }
     static const ValueADC MIN;
