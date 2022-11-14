@@ -183,28 +183,28 @@ void Indicator::ConvertDoubleToText(float value, char out[TextString::MAX_LEN], 
 
 void Indicator::OnCnageRangeEvent()
 {
-    int range = InputRelays::GetRange();
+//    int range = InputRelays::GetRange();
 
     windowAC.OnChangeRangeEvent();
     windowDC.OnChangeRangeEvent();
 
-    pchar message = nullptr;
-
-    switch (range)
-    {
-    case 0:     message = "*.***** mA";     break;
-    case 1:     message = "**.**** mA";     break;
-    case 2:     message = "***.*** mA";     break;
-    case 3:     message = "*.***** A";      break;
-    case 4:
-    case 5:     message = "**.**** A";      break;
-    default:    message = "***.*** *";      break;
-    }
-
-    std::strcpy(measureDC, message);
-    std::strcpy(measureAC, message);
-
-    WriteMeasures();
+//    pchar message = nullptr;
+//
+//    switch (range)
+//    {
+//    case 0:     message = "*.***** mA";     break;
+//    case 1:     message = "**.**** mA";     break;
+//    case 2:     message = "***.*** mA";     break;
+//    case 3:     message = "*.***** A";      break;
+//    case 4:
+//    case 5:     message = "**.**** A";      break;
+//    default:    message = "***.*** *";      break;
+//    }
+//
+//    std::strcpy(measureDC, message);
+//    std::strcpy(measureAC, message);
+//
+//    WriteMeasures();
 }
 
 

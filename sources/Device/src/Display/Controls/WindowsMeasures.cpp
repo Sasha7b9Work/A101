@@ -8,11 +8,11 @@
 WindowMeasure::WindowMeasure(int x, int y, bool _is_signed, int font, pchar _title, const Color &back) :
     title(x, y, 172, HEIGHT, font, _title, Color::MeasureAC, false, back),
     point(x + 200, y, 28, HEIGHT, font, ".", Color::MeasureAC, true, back),
-    digit1(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true),
-    digit2(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true),
-    digit3(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true),
-    digit4(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true),
-    digit5(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true),
+    digit1(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "*", Color::MeasureAC, true),
+    digit2(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "*", Color::MeasureAC, true),
+    digit3(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "*", Color::MeasureAC, true),
+    digit4(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "*", Color::MeasureAC, true),
+    digit5(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "*", Color::MeasureAC, true),
     sign(x + 200, y,
 #ifdef WIN32
         30,
