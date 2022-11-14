@@ -14,7 +14,8 @@ TextString::TextString(int _x, int _y, int _w, int _h, int _font, pchar _text, c
 
 void TextString::Enable()
 {
-    Nextion::DrawString(x, y, width, height, font, colorText, Color::Background, text, h_aligned ? 1 : 0);
+    Nextion::DrawString(x, y, width, height, font, colorText,
+        (colorBack.value == Color::Count.value) ? Color::Background : colorBack, text, h_aligned ? 1 : 0);
 }
 
 

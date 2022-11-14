@@ -8,13 +8,25 @@
 WindowMeasure::WindowMeasure(int x, int y, bool _is_signed, int font, pchar _title, const Color &back) :
     title(x, y, 172, HEIGHT, font, _title, Color::MeasureAC, false, back),
     point(x + 200, y, 28, HEIGHT, font, ".", Color::MeasureAC, true, back),
-    digit1(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
-    digit2(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
-    digit3(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
-    digit4(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
-    digit5(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true, back),
-    sign(x + 200, y, 30, HEIGHT, font, "+", Color::MeasureAC, true, back),
-    units(x + 500, y, 50, HEIGHT, font, "", Color::MeasureAC, true, back),
+    digit1(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true),
+    digit2(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true),
+    digit3(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true),
+    digit4(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true),
+    digit5(x + 200, y, WIDTH_DIGIT, HEIGHT, font, "8", Color::MeasureAC, true),
+    sign(x + 200, y,
+#ifdef WIN32
+        30,
+#else
+        60,
+#endif
+        HEIGHT, font, "+", Color::MeasureAC, true),
+    units(x + 500, y,
+#ifdef WIN32
+        50,
+#else
+        150,
+#endif
+        HEIGHT, font, "", Color::MeasureAC, false),
     colorBack(back), is_signed(_is_signed)
 {
     digits[0] = &digit1;
@@ -35,7 +47,7 @@ void WindowMeasure::OnChangeRangeEvent()
 {
     int range = InputRelays::GetRange();
 
-    int x0 = title.GetX() + 250;
+    int x0 = sign.GetX() + sign.GetWidth() + DELTA;
 
     Disable();
 
@@ -59,9 +71,11 @@ void WindowMeasure::OnChangeRangeEvent()
         x0 += DELTA + WIDTH_DIGIT;
     }
 
-    units.SetText(range < 3 ? "mA" : "A");
+    units.SetX(digit5.GetX() + digit5.GetWidth() + 10);
 
     Enable();
+
+    units.SetText(range < 3 ? "mA" : "A");
 }
 
 
@@ -84,7 +98,8 @@ void WindowMeasure::Enable()
 
 void WindowMeasure::Disable()
 {
-    Nextion::FillRect(title.GetX(), title.GetY(), WIDTH, HEIGHT, colorBack);
+    Nextion::FillRect(title.GetX(), title.GetY(), WIDTH, HEIGHT,
+        (colorBack.value == Color::Count.value) ? Color::Background : colorBack);
 }
 
 
