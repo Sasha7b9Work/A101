@@ -5,7 +5,7 @@
 
 namespace PasswordResolver
 {
-    static const int NUM_BYTES = 12;
+    static const int NUM_BYTES = 11;
     static const uint8 bytes[NUM_BYTES] = { 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0 };
     static int pointer = 0;
 }
@@ -13,7 +13,7 @@ namespace PasswordResolver
 
 void PasswordResolver::AppendByte(uint8 byte)
 {
-    if (bytes[pointer] == byte)
+    if (bytes[pointer] == (byte & 0x0F))
     {
         pointer++;
     }
@@ -24,6 +24,6 @@ void PasswordResolver::AppendByte(uint8 byte)
 
     if (pointer == NUM_BYTES)
     {
-        LOG_WRITE("Password worked");
+
     }
 }
