@@ -123,6 +123,12 @@ Button *Page::GetButton(int index)
 }
 
 
+void Page::SetButton(int index, Button *button)
+{
+    buttons[index] = button;
+}
+
+
 void Page::SetAsCurrent()
 {
     current = this;

@@ -12,6 +12,12 @@ namespace PageMain
 namespace PageTwo
 {
     extern Page *self;
+
+    // ¬ключить страницу отладки
+    void EnableDebug();
+
+    // ¬ключить страницу калибровки
+    void EnableCalibration();
 }
 
 

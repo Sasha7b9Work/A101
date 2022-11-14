@@ -42,19 +42,36 @@ namespace PageTwo
     static Button button3("button3", "", false, [](Button *) {});
 
 
+    static Button button4("button4", "", false, [](Button *) {});
+
+
+    static Button button5("button5", "", false, [](Button *) {});
+
+
     static Button buttonDebug("button4", "Отладка", false, [](Button *)
         {
             PageDebug::self->SetAsCurrent();
         });
 
 
-    static Button buttonCalibration("button5", "Калибр", false, [](Button *)
+    static Button buttonCalibration("button5", "Калиб", false, [](Button *)
         {
             PageCalibration::self->SetAsCurrent();
         });
 
 
-    static Page pageTwo(&buttonInput, &buttonFFT, &button2, &button3, &buttonDebug, &buttonCalibration);
+    static Page pageTwo(&buttonInput, &buttonFFT, &button2, &button3, &button4, &button5);
 
     Page *self = &pageTwo;
+
+    void EnableDebug()
+    {
+        pageTwo.SetButton(4, &buttonDebug);
+    }
+
+
+    void EnableCalibration()
+    {
+        pageTwo.SetButton(5, &buttonCalibration);
+    }
 }
