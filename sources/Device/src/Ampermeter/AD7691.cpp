@@ -4,6 +4,7 @@
 #include "Generator/Generator.h"
 #include "Ampermeter/InputRelays.h"
 #include "Ampermeter/Calculator/Averager.h"
+#include "Settings.h"
 #include "stm_includes.h"
 
 
@@ -162,9 +163,7 @@ ValueADC::ValueADC(int reading)
         value -= 1 << 18;
     }
 
-    static const int delta[6] = { 3252, 3252, 3250, 3255, 3275, 3490 };
-
-    value -= delta[InputRelays::GetRange()];
+    value -= set.cal.Zero(InputRelays::GetRange());
 }
 
 
