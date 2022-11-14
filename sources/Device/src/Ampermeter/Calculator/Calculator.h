@@ -5,8 +5,6 @@
 
 namespace Calculator
 {
-    void OnChangeRangeEvent();
-
     // Функция возвращает частоту дискретизации для следующего сбора данных
     SampleRate AppendData();
 

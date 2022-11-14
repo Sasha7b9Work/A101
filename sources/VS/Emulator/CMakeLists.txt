@@ -69,6 +69,7 @@ endif()
 
 file(GLOB SRC                   ./*.h
                                 ./*.cpp
+                                ../../Device/src/Settings.*
                                 ../../Device/src/defines.h
                                 ../../Device/src/stm_includes.h)
 file(GLOB DISPLAY               ./Display/*.*

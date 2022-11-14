@@ -71,7 +71,7 @@ void Ampermeter::Init()
 
     Indicator::OnCnageRangeEvent();
 
-    Calculator::OnChangeRangeEvent();
+//    Calculator::OnChangeRangeEvent();
 }
 
 

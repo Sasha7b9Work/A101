@@ -815,6 +815,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\stm_includes.h</FilePath>
             </File>
+            <File>
+              <FileName>Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2030,6 +2040,16 @@
               <FileName>stm_includes.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\stm_includes.h</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings.h</FilePath>
             </File>
           </Files>
         </Group>
