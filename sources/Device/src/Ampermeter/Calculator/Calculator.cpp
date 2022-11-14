@@ -24,7 +24,7 @@ void Calculator::OnChangeRangeEvent()
 {
     static const float koeff[6] = { 1e-2f, 1e-1f, 1e0f, 1e-2f, 1e-1f, 1e0f };
 
-    k = koeff[InputRelays::GetRange()] * 61.81f;
+    k = koeff[InputRelays::GetRange()] * 61.521f;
 }
 
 

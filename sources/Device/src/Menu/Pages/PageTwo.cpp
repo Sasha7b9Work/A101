@@ -8,7 +8,7 @@
 
 namespace PageTwo
 {
-    static Button buttonInput("button0", "Âõîä", false, [](Button *button)
+    static Button buttonInput("button0", "÷ÈÏÄ", false, [](Button *button)
         {
             button->ToggleHighlight();
 
@@ -22,7 +22,7 @@ namespace PageTwo
         });
 
 
-    static Button buttonFFT("button1", "ÁÏÔ", false, [](Button *button)
+    static Button buttonFFT("button1", "âğæ", false, [](Button *button)
         {
             button->ToggleHighlight();
 
@@ -42,13 +42,13 @@ namespace PageTwo
     static Button button3("button3", "", false, [](Button *) {});
 
 
-    static Button buttonDebug("button4", "Îòëàäêà", false, [](Button *)
+    static Button buttonDebug("button4", "ïÔÌÁÄËÁ", false, [](Button *)
         {
             PageDebug::self->SetAsCurrent();
         });
 
 
-    static Button buttonCalibration("button5", "Êàëèáğ", false, [](Button *)
+    static Button buttonCalibration("button5", "ëÁÌÉÂÒ", false, [](Button *)
         {
             PageCalibration::self->SetAsCurrent();
         });
