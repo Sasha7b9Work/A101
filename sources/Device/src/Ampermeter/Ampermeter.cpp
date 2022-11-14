@@ -14,8 +14,8 @@
 #include "Hardware/Timer.h"
 #include "Display/DiagramInput.h"
 #include "Ampermeter/Calculator/Averager.h"
+#include "Settings.h"
 #include "stm_includes.h"
-
 
 
 namespace Ampermeter
@@ -94,9 +94,15 @@ void Ampermeter::Update()
 
     HAL_TIM4::Stop();
 
-    BufferADC::MiddleOf3();
+    if (set.middle_of_3)
+    {
+        BufferADC::MiddleOf3();
+    }
 
-    BufferADC::SmoothOut();
+    if (set.smooth)
+    {
+        BufferADC::SmoothOut();
+    }
 
     BufferADC::CalculateLimits();
 

@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
+#include "Settings.h"
 
 
 namespace PageDebug
@@ -20,7 +21,30 @@ namespace PageDebug
             }
         });
 
-    static Button buttonMiddleOf3("button1", "Медиан", false, [](Button *) {});
+    static Button buttonMiddleOf3("button1", "Медиан", false,
+        [](Button *button)
+        {
+            button->ToggleHighlight();
+
+            set.middle_of_3 = button->IsHightlight();
+        },
+        [](Button *button)
+        {
+            if (button->IsHightlight())
+            {
+                if (!set.middle_of_3)
+                {
+                    button->SetHighlight(false);
+                }
+            }
+            else
+            {
+                if (set.middle_of_3)
+                {
+                    button->SetHighlight(true);
+                }
+            }
+        });
 
     static Button buttonSmooth("button2", "Сглаж", false, [](Button *) {});
 
