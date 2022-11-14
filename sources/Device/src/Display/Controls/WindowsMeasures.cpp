@@ -22,7 +22,11 @@ WindowMeasure::WindowMeasure(int x, int y, bool _is_signed, int font, pchar _tit
     digits[2] = &digit3;
     digits[3] = &digit4;
     digits[4] = &digit5;
+}
 
+
+void WindowMeasure::Init()
+{
     OnChangeRangeEvent();
 }
 

@@ -50,6 +50,13 @@ namespace Indicator
 }
 
 
+void Indicator::Init()
+{
+    windowDC.Init();
+    windowAC.Init();
+}
+
+
 void Indicator::AutoSize()
 {
     if (DiagramInput::IsEnabled() || DiagramFFT::IsEnabled())

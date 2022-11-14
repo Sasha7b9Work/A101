@@ -7,6 +7,7 @@ class WindowMeasure
 {
 public:
     WindowMeasure(int x, int y, bool is_signed, int font, pchar _title, const Color &back = Color::Background);
+    void Init();
     void Enable();
     void Disable();
     void SetMeasure(char [TextString::MAX_LEN]);
