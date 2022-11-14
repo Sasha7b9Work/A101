@@ -46,7 +46,30 @@ namespace PageDebug
             }
         });
 
-    static Button buttonSmooth("button2", "Сглаж", false, [](Button *) {});
+    static Button buttonSmooth("button2", "Сглаж", false,
+        [](Button *button)
+        {
+            button->ToggleHighlight();
+
+            set.smooth = button->IsHightlight();
+        },
+        [](Button *button)
+        {
+            if (button->IsHightlight())
+            {
+                if (!set.smooth)
+                {
+                    button->SetHighlight(false);
+                }
+            }
+            else
+            {
+                if (set.smooth)
+                {
+                    button->SetHighlight(true);
+                }
+            }
+        });
 
     static Button button3("button3", "", false, [](Button *) {});
 
