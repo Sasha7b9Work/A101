@@ -4,11 +4,11 @@
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Display/Indicator.h"
 #include "Ampermeter/Calculator/Calculator.h"
+#include "Settings.h"
 
 
 namespace InputRelays
 {
-    static bool enabled_zero = false;
     static int range = 3;
 }
 
@@ -39,7 +39,7 @@ void InputRelays::SetRange(int _range)
     HAL_PIO::Write(PIN_US3, states[range][2] == 1);
     HAL_PIO::Write(PIN_US4, states[range][3] == 1);
 
-    if (enabled_zero)
+    if (set.enabled_zero)
     {
         HAL_PIO::Write(PIN_US6, false);
         HAL_PIO::Write(PIN_US7, false);
@@ -56,21 +56,21 @@ void InputRelays::SetRange(int _range)
 
 void InputRelays::DisableZero()
 {
-    enabled_zero = false;
+    set.enabled_zero = false;
     SetRange(range);
 }
 
 
 void InputRelays::EnableZero()
 {
-    enabled_zero = true;
+    set.enabled_zero = true;
     SetRange(range);
 }
 
 
 bool InputRelays::IsEnabledZero()
 {
-    return enabled_zero;
+    return set.enabled_zero;
 }
 
 

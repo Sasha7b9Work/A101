@@ -20,9 +20,9 @@ namespace PageDebug
             }
         });
 
-    static Button button1("button1", "", false, [](Button *) {});
+    static Button buttonMiddleOf3("button1", "Медиан", false, [](Button *) {});
 
-    static Button button2("button2", "", false, [](Button *) {});
+    static Button buttonSmooth("button2", "Сглаж", false, [](Button *) {});
 
     static Button button3("button3", "", false, [](Button *) {});
 
@@ -31,7 +31,7 @@ namespace PageDebug
     static Button button5("button5", "", false, [](Button *) {});
 
 
-    static Page pageDebug(&buttonZero, &button1, &button2, &button3, &button4, &button5);
+    static Page pageDebug(&buttonZero, &buttonMiddleOf3, &buttonSmooth, &button3, &button4, &button5);
 
     Page *self = &pageDebug;
 }

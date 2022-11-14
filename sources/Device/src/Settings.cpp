@@ -3,14 +3,21 @@
 #include "Settings.h"
 
 
-Settings set;
+Settings set
+{
+    true,       // middle_of_3
+    true,       // smooth
+    false,      // enabled_zero
+    {
+    }
+};
 
 
 float CalibrationSettings::Gain(int range)
 {
     static const float koeff[6] = { 1e-2f, 1e-1f, 1e0f, 1e-2f, 1e-1f, 1e0f };
 
-    return koeff[range] * 61.521f;
+    return koeff[range] * 61.53f;
 }
 
 

@@ -61,7 +61,7 @@ namespace PageTwo
         });
 
 
-    static Page pageTwo(&buttonInput, &buttonFFT, &button2, &button3, &button4, &button5);
+    static Page pageTwo(&buttonInput, &buttonFFT, &button2, &button3, &buttonDebug, &buttonCalibration);
 
     Page *self = &pageTwo;
 
