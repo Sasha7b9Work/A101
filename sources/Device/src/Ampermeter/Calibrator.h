@@ -4,5 +4,6 @@
 
 namespace Calibrator
 {
-    void Init();
+    // Запустить процедуру калибровки
+    void ExecuteCalibration();
 }

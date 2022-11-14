@@ -3,7 +3,7 @@
 #include "Ampermeter/Calibrator.h"
 
 
-void Calibrator::Init()
+void Calibrator::ExecuteCalibration()
 {
 
 }

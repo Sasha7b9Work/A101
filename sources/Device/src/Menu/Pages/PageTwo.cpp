@@ -4,6 +4,7 @@
 #include "Display/DiagramFFT.h"
 #include "Display/Indicator.h"
 #include "Menu/Pages/Pages.h"
+#include "Ampermeter/Calibrator.h"
 
 
 namespace PageTwo
@@ -56,7 +57,7 @@ namespace PageTwo
 
     static Button buttonCalibration("button5", "Калиб", false, [](Button *)
         {
-            PageCalibration::self->SetAsCurrent();
+            Calibrator::ExecuteCalibration();
         });
 
 

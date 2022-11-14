@@ -65,13 +65,9 @@ void Ampermeter::Init()
 {
     HAL_TIM4::Init();
 
-    Calibrator::Init();
-
     AD7691::Init();
 
     Indicator::OnCnageRangeEvent();
-
-//    Calculator::OnChangeRangeEvent();
 }
 
 
