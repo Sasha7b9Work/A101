@@ -6,7 +6,7 @@
 class WindowMeasure
 {
 public:
-    WindowMeasure(int x, int y, bool is_signed, int font, pchar _title, const Color &back = Color::Count);
+    WindowMeasure(int x, int y, bool is_signed, int font, pchar _title, const Color &back = Color::Black);
     void Init();
     void Enable();
     void Disable();
