@@ -6,6 +6,7 @@
 #include "Menu/MenuItems.h"
 #include "Hardware/Timer.h"
 #include "Utils/Profiler.h"
+#include "Menu/PasswordResolver.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -189,6 +190,8 @@ bool Nextion::CommandZ::Execute()
             int button = (byte1 & 0x0F);
 
             Page::Current()->GetButton(button)->Press();
+
+            PasswordResolver::AppendByte(byte1);
 
             return true;
         }

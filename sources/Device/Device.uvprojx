@@ -1050,6 +1050,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Menu\MenuItems.h</FilePath>
             </File>
+            <File>
+              <FileName>PasswordResolver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\PasswordResolver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PasswordResolver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\PasswordResolver.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2255,6 +2265,16 @@
               <FileName>MenuItems.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\MenuItems.h</FilePath>
+            </File>
+            <File>
+              <FileName>PasswordResolver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\PasswordResolver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PasswordResolver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\PasswordResolver.h</FilePath>
             </File>
           </Files>
         </Group>
