@@ -162,7 +162,7 @@ ValueADC::ValueADC(int reading)
         value -= 1 << 18;
     }
 
-    static const int delta[6] = { 3290, 3254, 3250, 3254, 3290, 3290 };
+    static const int delta[6] = { 3291, 3254, 3250, 3254, 3290, 3290 };
 
     value -= delta[InputRelays::GetRange()];
 }
