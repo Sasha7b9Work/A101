@@ -6,7 +6,7 @@
 class WindowMeasure
 {
 public:
-    WindowMeasure(int x, int y, bool is_signed, int font, pchar _title, const Color &back = Color::Black);
+    WindowMeasure(int x, int y, bool is_signed, int font, pchar _title, const Color &back = Color::Count);
     void Init();
     void Enable();
     void Disable();
@@ -20,7 +20,7 @@ private:
     static const int DELTA = 0;
 #else
     static const int HEIGHT = 92;
-    static const int WIDTH = 620;
+    static const int WIDTH = 720;
     static const int WIDTH_DIGIT = 55;
     static const int DELTA = 0;
 #endif
