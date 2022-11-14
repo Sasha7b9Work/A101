@@ -96,6 +96,8 @@ void Ampermeter::Update()
 
     BufferADC::MiddleOf3();
 
+    BufferADC::SmoothOut();
+
     BufferADC::CalculateLimits();
 
     SampleRate::Current::Set(Calculator::AppendData());

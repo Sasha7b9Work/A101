@@ -4,6 +4,7 @@
 #include "Nextion/Nextion.h"
 #include "Display/Indicator.h"
 #include "Hardware/HAL/HAL.h"
+#include "Ampermeter/Calculator/Averager.h"
 #include <limits>
 
 
@@ -67,5 +68,17 @@ void BufferADC::MiddleOf3()
         raw[i] = ValueADC::FromRaw(middle_of_3(raw_i_1, raw[i], raw[i + 1]));
 
         raw_i_1 = raw_i_0;
+    }
+}
+
+
+void BufferADC::SmoothOut()
+{
+    Averager<int, 3> averager;
+
+    for (int i = 0; i < SIZE; i++)
+    {
+        averager.Push(raw[i].Raw());
+        raw[i] = ValueADC::FromRaw(averager.Get());
     }
 }
