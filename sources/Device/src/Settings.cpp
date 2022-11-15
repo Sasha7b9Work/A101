@@ -5,8 +5,8 @@
 
 Settings set
 {
-    true,       // middle_of_3
-    true,       // smooth
+    false,      // middle_of_3
+    false,      // smooth
     false,      // enabled_zero
     {
     }

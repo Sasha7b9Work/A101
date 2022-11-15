@@ -15,6 +15,7 @@
 #include "Display/DiagramInput.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include "Settings.h"
+#include "Ampermeter/FIR.h"
 #include "stm_includes.h"
 
 
@@ -73,6 +74,8 @@ void Ampermeter::Init()
 
 void Ampermeter::Update()
 {
+    TimeMeterMS meter;
+
     BufferADC::Clear(SampleRate::Current::Get());
 
     uint period = SampleRate::Current::Get().TimeUS();
@@ -89,8 +92,12 @@ void Ampermeter::Update()
         TIM4->CNT = 0;
 #endif
 
+        ValueADC value(FIR::Step(AD7691::ReadValue().Raw()));
+
         BufferADC::Push(AD7691::ReadValue());
     }
+
+    LOG_WRITE("time measure %d ms", meter.ElapsedTime());
 
     HAL_TIM4::Stop();
 

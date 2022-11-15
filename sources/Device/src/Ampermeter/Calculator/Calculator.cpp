@@ -14,8 +14,8 @@
 
 namespace Calculator
 {
-    static float dc = 0.0f;
-    static float ac = 0.0f;
+    static Averager<float, 1> dc;
+    static Averager<float, 1> ac;
 }
 
 
@@ -27,9 +27,9 @@ SampleRate Calculator::AppendData()
 
     float k = set.cal.Gain(InputRelays::GetRange());
 
-    ac = value_ac * k;
+    ac.Push(value_ac * k);
 
-    dc = -period.dc.Real() * k;
+    dc.Push(-period.dc.Real() * k);
 
     return SampleRate::Current::Get();
 }
@@ -37,11 +37,11 @@ SampleRate Calculator::AppendData()
 
 float Calculator::GetAC()
 {
-    return ac;
+    return ac.Get();
 }
 
 
 float Calculator::GetDC()
 {
-    return dc;
+    return dc.Get();
 }

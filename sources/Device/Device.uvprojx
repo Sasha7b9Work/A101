@@ -880,6 +880,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calibrator.h</FilePath>
             </File>
+            <File>
+              <FileName>FIR.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\FIR.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FIR.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\FIR.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2105,6 +2115,16 @@
               <FileName>Calibrator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calibrator.h</FilePath>
+            </File>
+            <File>
+              <FileName>FIR.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\FIR.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FIR.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\FIR.h</FilePath>
             </File>
           </Files>
         </Group>
