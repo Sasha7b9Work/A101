@@ -92,9 +92,16 @@ void Ampermeter::Update()
         TIM4->CNT = 0;
 #endif
 
-        ValueADC value = ValueADC::FromRaw(FIR::Step(AD7691::ReadValue().Raw()));
+        if (set.middle_of_3)
+        {
+            ValueADC value = ValueADC::FromRaw(FIR::Step(AD7691::ReadValue().Raw()));
 
-        BufferADC::Push(value);
+            BufferADC::Push(value);
+        }
+        else
+        {
+            BufferADC::Push(AD7691::ReadValue());
+        }
     }
 
     LOG_WRITE("time measure %d ms", meter.ElapsedTime());
@@ -103,7 +110,7 @@ void Ampermeter::Update()
 
     if (set.middle_of_3)
     {
-        BufferADC::MiddleOf3();
+//        BufferADC::MiddleOf3();
     }
 
     if (set.smooth)

@@ -5,7 +5,7 @@
 
 struct BufferADC
 {
-    static const int SIZE = 16 * 1024;
+    static const int SIZE = 4 * 1024;
 
     static void Push(ValueADC word)
     {
