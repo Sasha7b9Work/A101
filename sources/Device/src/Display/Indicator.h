@@ -18,6 +18,9 @@ namespace Indicator
 
     void SetMeasures(float dc, float ac);
 
+    // Установить признак переполнения
+    void SetOverflow();
+
     void OnCnageRangeEvent();
 
     void SetDeltaADC(int);

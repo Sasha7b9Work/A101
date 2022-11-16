@@ -17,6 +17,7 @@
 #include "Settings.h"
 #include "Ampermeter/FIR.h"
 #include "stm_includes.h"
+#include <cmath>
 
 
 namespace Ampermeter
@@ -59,6 +60,9 @@ namespace Ampermeter
             return (a <= b) ? a : b;
         }
     };
+
+    // —читанные значени€ выход€т за пределы диапазона
+    static bool OutOfRange();
 }
 
 
@@ -127,9 +131,37 @@ void Ampermeter::Update()
 
     BufferADC::CalculateLimits();
 
-    SampleRate::Current::Set(Calculator::AppendData());
+    if (OutOfRange())
+    {
+        Indicator::SetOverflow();
+    }
+    else
+    {
+        SampleRate::Current::Set(Calculator::AppendData());
 
-    Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC());
+        Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC());
 
-    DiagramInput::SetData();
+        DiagramInput::SetData();
+    }
+}
+
+
+bool Ampermeter::OutOfRange()
+{
+    static const float maxs[6] = { 2e-3f, 20e-3f, 200e-3f, 2.0f, 20.0f, 50.0f };
+
+    float max = maxs[InputRelays::Range::Current()] * 1.1f;
+
+
+    if (std::fabsf(BufferADC::Max().Real()) > max)
+    {
+        return true;
+    }
+
+    if (std::fabsf(BufferADC::Min().Real()) > max)
+    {
+        return true;
+    }
+
+    return false;
 }

@@ -123,7 +123,7 @@ void WindowMeasure::SetMeasure(const char measure[TextString::MAX_LEN])
                 sign.SetText(str);
             }
         }
-        else if ((symbol >= '0' && symbol <= '9') || symbol == '*')
+        else if ((symbol >= '0' && symbol <= '9') || symbol == '*' || symbol == '^')
         {
             digits[index]->SetText(str);
             index++;
