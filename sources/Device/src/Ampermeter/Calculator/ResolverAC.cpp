@@ -85,7 +85,7 @@ ResolverAC::ResolverAC(const Period &period)
         sum += value * value;
     }
 
-    LOG_WRITE("sum = %f, min_value = %.10e, num_min = %d", (double)sum, min_value, num_min);
+//    LOG_WRITE("sum = %f, min_value = %.10e, num_min = %d", (double)sum, min_value, num_min);
 
     result = (float)std::sqrt(sum / (period.last.first - period.first.first));
 }

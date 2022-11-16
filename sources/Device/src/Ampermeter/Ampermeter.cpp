@@ -94,22 +94,24 @@ void Ampermeter::Update()
         TIM4->CNT = 0;
 #endif
 
+        ValueADC value = AD7691::ReadValue();
+
         if (set.firLPF)
         {
-            ValueADC value = ValueADC::FromRaw(FIR::Step(AD7691::ReadValue().Raw()));
+            value = ValueADC::FromRaw(FIR::Step(value.Raw()));
 
-            if (num_sample++ > 1000)
+            if (num_sample++ > 200)
             {
                 BufferADC::Push(value);
             }
         }
         else
         {
-            BufferADC::Push(AD7691::ReadValue());
+            BufferADC::Push(value);
         }
     }
 
-    LOG_WRITE("time measure %d ms", meter.ElapsedTime());
+    LOG_WRITE("time measure %d ms, time point %f us", meter.ElapsedTime(), (meter.ElapsedTime() / (double)BufferADC::SIZE) * 1e3);
 
     HAL_TIM4::Stop();
 
