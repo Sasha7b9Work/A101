@@ -103,7 +103,7 @@ void WindowMeasure::Disable()
 }
 
 
-void WindowMeasure::SetMeasure(char measure[TextString::MAX_LEN])
+void WindowMeasure::SetMeasure(const char measure[TextString::MAX_LEN])
 {
     int index = 0;
 

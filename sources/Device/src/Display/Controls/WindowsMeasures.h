@@ -10,7 +10,7 @@ public:
     void Init();
     void Enable();
     void Disable();
-    void SetMeasure(char [TextString::MAX_LEN]);
+    void SetMeasure(const char [TextString::MAX_LEN]);
     void OnChangeRangeEvent();
 private:
 #ifdef WIN32
