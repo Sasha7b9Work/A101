@@ -111,7 +111,7 @@ void Ampermeter::Update()
         }
     }
 
-    LOG_WRITE("time measure %d ms, time point %f us", meter.ElapsedTime(), (meter.ElapsedTime() / (double)BufferADC::SIZE) * 1e3);
+//    LOG_WRITE("time measure %d ms, time point %f us", meter.ElapsedTime(), (meter.ElapsedTime() / (double)BufferADC::SIZE) * 1e3);
 
     HAL_TIM4::Stop();
 
