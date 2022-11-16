@@ -16,7 +16,7 @@ Settings set
 
 float CalibrationSettings::Gain(int range)
 {
-    static const float koeff[6] = { 1e-2f, 1e-1f, 1e0f, 1e-2f, 1e-1f, 1e0f };
+    static const float koeff[6] = { 1e-2f, 1e-1f, 1e0f, 1e-2f, 1e0f, 1e-1f };
 
     return koeff[range] * 61.53f;
 }
@@ -25,7 +25,7 @@ float CalibrationSettings::Gain(int range)
 
 int CalibrationSettings::Zero(int range)
 {
-    static const int zeros[6] = { 3244, 3234, 3234, 3250, 3235, 3233 };
+    static const int zeros[6] = { 3244, 3234, 3234, 3250, 3232, 3233 };
 
     return zeros[range];
 }

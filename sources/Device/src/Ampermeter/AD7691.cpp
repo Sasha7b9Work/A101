@@ -163,7 +163,7 @@ ValueADC::ValueADC(int reading)
         value -= 1 << 18;
     }
 
-    value -= set.cal.Zero(InputRelays::GetRange());
+    value -= set.cal.Zero(InputRelays::Range::Current());
 }
 
 

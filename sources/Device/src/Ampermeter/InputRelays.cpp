@@ -9,15 +9,25 @@
 
 namespace InputRelays
 {
-    static int range = 3;
+    namespace Range
+    {
+        static int current = 3;
+        static int prev = 0;
+
+        static void Load()
+        {
+            Set(current);
+        }
+    }
 }
 
 
-void InputRelays::SetRange(int _range)
+void InputRelays::Range::Set(int _range)
 {
-    bool need_event = range != _range;
+    bool need_event = (current != _range);
 
-    range = _range;
+    prev = current;
+    current = _range;
 
     if (need_event)
     {
@@ -34,10 +44,10 @@ void InputRelays::SetRange(int _range)
         {1, 1, 0, 1, 0, 1, 0}       // 50A
     };
 
-    HAL_PIO::Write(PIN_US1, states[range][0] == 1); //-V525
-    HAL_PIO::Write(PIN_US2, states[range][1] == 1);
-    HAL_PIO::Write(PIN_US3, states[range][2] == 1);
-    HAL_PIO::Write(PIN_US4, states[range][3] == 1);
+    HAL_PIO::Write(PIN_US1, states[current][0] == 1); //-V525
+    HAL_PIO::Write(PIN_US2, states[current][1] == 1);
+    HAL_PIO::Write(PIN_US3, states[current][2] == 1);
+    HAL_PIO::Write(PIN_US4, states[current][3] == 1);
 
     if (set.enabled_zero)
     {
@@ -47,9 +57,9 @@ void InputRelays::SetRange(int _range)
     }
     else
     {
-        HAL_PIO::Write(PIN_US6, states[range][4] == 1);
-        HAL_PIO::Write(PIN_US7, states[range][5] == 1);
-        HAL_PIO::Write(PIN_US8, states[range][6] == 1);
+        HAL_PIO::Write(PIN_US6, states[current][4] == 1);
+        HAL_PIO::Write(PIN_US7, states[current][5] == 1);
+        HAL_PIO::Write(PIN_US8, states[current][6] == 1);
     }
 }
 
@@ -57,14 +67,14 @@ void InputRelays::SetRange(int _range)
 void InputRelays::DisableZero()
 {
     set.enabled_zero = false;
-    SetRange(range);
+    Range::Load();
 }
 
 
 void InputRelays::EnableZero()
 {
     set.enabled_zero = true;
-    SetRange(range);
+    Range::Load();
 }
 
 
@@ -74,7 +84,13 @@ bool InputRelays::IsEnabledZero()
 }
 
 
-int InputRelays::GetRange()
+int InputRelays::Range::Current()
 {
-    return range;
+    return current;
+}
+
+
+int InputRelays::Range::Prev()
+{
+    return prev;
 }

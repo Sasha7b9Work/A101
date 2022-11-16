@@ -25,7 +25,7 @@ SampleRate Calculator::AppendData()
 
     float value_ac = ResolverAC(period).GetResult();
 
-    float k = set.cal.Gain(InputRelays::GetRange());
+    float k = set.cal.Gain(InputRelays::Range::Current());
 
     ac.Push(value_ac * k);
 

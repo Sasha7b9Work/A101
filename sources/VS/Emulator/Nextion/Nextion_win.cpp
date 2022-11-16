@@ -99,3 +99,9 @@ void Nextion::Button::Disable(pchar _name_button)
 {
     Screen::Button::Disable(_name_button);
 }
+
+
+void Nextion::Page::Enable(int)
+{
+
+}

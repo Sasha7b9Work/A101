@@ -4,9 +4,16 @@
 
 namespace InputRelays
 {
-    void SetRange(int);
+    namespace Range
+    {
+        void Set(int);
 
-    int GetRange();
+        // Текущее значение
+        int Current();
+
+        // Предыдущее значение
+        int Prev();
+    }
 
     // Включить режим "нуль" (измерения невозможны)
     void EnableZero();
