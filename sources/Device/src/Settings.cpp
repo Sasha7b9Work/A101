@@ -8,7 +8,7 @@ Settings set
     false,      // middle_of_3
     false,      // smooth
     false,      // enabled_zero
-    true,      // firLPF
+    false,      // firLPF
     {
     }
 };
@@ -25,7 +25,7 @@ float CalibrationSettings::Gain(int range)
 
 int CalibrationSettings::Zero(int range)
 {
-    static const int zeros[6] = { 3252, 3252, 3250, 3255, 3275, 3490 };
+    static const int zeros[6] = { 3244, 3234, 3234, 3250, 3235, 3233 };
 
     return zeros[range];
 }

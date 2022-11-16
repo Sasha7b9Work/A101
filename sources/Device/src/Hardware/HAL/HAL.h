@@ -16,6 +16,12 @@ namespace HAL
 }
 
 
+namespace HAL_EEPROM
+{
+
+}
+
+
 namespace HAL_TIM
 {
     uint TimeMS();
