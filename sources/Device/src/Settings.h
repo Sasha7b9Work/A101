@@ -14,7 +14,7 @@ struct Settings
     bool middle_of_3;           // Влючение медианного фильтра
     bool smooth;                // Включение сглаживания по соседним точкам
     bool enabled_zero;          // "Влючён ноль"
-
+    bool firLPF;                // Включён цифровой ФНЧ
 
     CalibrationSettings cal;
 };

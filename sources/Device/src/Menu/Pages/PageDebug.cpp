@@ -21,7 +21,7 @@ namespace PageDebug
             }
         });
 
-    static Button buttonMiddleOf3("button1", "Медиан", false,
+    static Button buttonMiddleOf3("button1", "Middle", false,
         [](Button *button)
         {
             button->ToggleHighlight();
@@ -46,7 +46,7 @@ namespace PageDebug
             }
         });
 
-    static Button buttonSmooth("button2", "Сглаж", false,
+    static Button buttonSmooth("button2", "Smooth", false,
         [](Button *button)
         {
             button->ToggleHighlight();
@@ -71,14 +71,24 @@ namespace PageDebug
             }
         });
 
-    static Button button3("button3", "", false, [](Button *) {});
+    static Button buttonFIR("button3", "LPF", false,
+        [](Button *button)
+        {
+            button->ToggleHighlight();
+
+            set.firLPF = button->IsHightlight();
+        },
+        [](Button *button)
+        {
+            button->SetHighlight(set.firLPF);
+        });
 
     static Button button4("button4", "", false, [](Button *) {});
 
     static Button button5("button5", "", false, [](Button *) {});
 
 
-    static Page pageDebug(&buttonZero, &buttonMiddleOf3, &buttonSmooth, &button3, &button4, &button5);
+    static Page pageDebug(&buttonZero, &buttonMiddleOf3, &buttonSmooth, &buttonFIR, &button4, &button5);
 
     Page *self = &pageDebug;
 }

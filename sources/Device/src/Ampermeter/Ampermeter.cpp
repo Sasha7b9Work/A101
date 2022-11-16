@@ -82,6 +82,8 @@ void Ampermeter::Update()
 
     HAL_TIM4::StartPeriodicUS(period);
 
+    int num_sample = 0;
+
     while (!BufferADC::IsFull())
     {
 #ifndef WIN32
@@ -92,11 +94,14 @@ void Ampermeter::Update()
         TIM4->CNT = 0;
 #endif
 
-        if (set.middle_of_3)
+        if (set.firLPF)
         {
             ValueADC value = ValueADC::FromRaw(FIR::Step(AD7691::ReadValue().Raw()));
 
-            BufferADC::Push(value);
+            if (num_sample++ > 1000)
+            {
+                BufferADC::Push(value);
+            }
         }
         else
         {
@@ -110,7 +115,7 @@ void Ampermeter::Update()
 
     if (set.middle_of_3)
     {
-//        BufferADC::MiddleOf3();
+        BufferADC::MiddleOf3();
     }
 
     if (set.smooth)

@@ -8,6 +8,7 @@ Settings set
     false,      // middle_of_3
     false,      // smooth
     false,      // enabled_zero
+    true,       // firLPF
     {
     }
 };
