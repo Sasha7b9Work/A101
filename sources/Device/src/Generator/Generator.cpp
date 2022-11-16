@@ -13,11 +13,11 @@ namespace Generator
     static double picAC = 1.0;
     static double dc = 0.0;
     static double picNoise = 0.2;
-    static uint64 timeUS = 0;
+//    static uint64 timeUS = 0;
 
     static ValueADC ConvertToValueADC(double);
 
-    static double CalculateNoise();
+    double CalculateNoise();
 }
 
 
