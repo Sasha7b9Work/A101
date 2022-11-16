@@ -3,6 +3,7 @@
 #include "Ampermeter/Calibrator.h"
 #include "Nextion/Nextion.h"
 #include "Hardware/Timer.h"
+#include "Menu/Pages/Pages.h"
 
 
 namespace Calibrator
@@ -25,6 +26,8 @@ void Calibrator::ExecuteCalibration()
     }
 
     Nextion::Page::Enable(0);
+
+    PageTwo::self->SetAsCurrent();
 }
 
 
