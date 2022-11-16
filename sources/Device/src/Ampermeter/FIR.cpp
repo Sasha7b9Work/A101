@@ -5,11 +5,10 @@
 
 /*
 Filter type: Low Pass
-Filter model: Chebyshev
-Filter order: 6
+Filter model: Butterworth
+Filter order: 5
 Sampling Frequency: 100 KHz
-Cut Frequency: 25.000000 KHz
-Pass band Ripple: 1.000000 dB
+Cut Frequency: 1.000000 KHz
 Coefficents Quantization: float
 
 Z domain Zeros
@@ -18,47 +17,53 @@ z = -1.000000 + j 0.000000
 z = -1.000000 + j 0.000000
 z = -1.000000 + j 0.000000
 z = -1.000000 + j 0.000000
-z = -1.000000 + j 0.000000
 
 Z domain Poles
-z = 0.233088 + j -0.766518
-z = 0.233088 + j 0.766518
-z = 0.004382 + j -0.939354
-z = 0.004382 + j 0.939354
-z = 0.550903 + j -0.335068
-z = 0.550903 + j 0.335068
+z = 0.939071 + j -0.000010
+z = 0.949781 + j -0.035114
+z = 0.949781 + j 0.035114
+z = 0.979028 + j -0.058577
+z = 0.979028 + j 0.058577
 */
 
 
 int FIR::Step(int new_sample)
 {
-#define Ntap 10
+#define NCoef 5
 
-    static const float FIRCoef[Ntap] = {
-         0.02065669729811002800f,
-        -0.10052613592106527000f,
-        -0.02458774331870564400f,
-         0.31633576202006775000f,
-         0.52573151785445693000f,
-         0.31633576202006775000f,
-        -0.02458774331870564400f,
-        -0.10052613592106527000f,
-         0.02065669729811002800f,
-         0.05051132198872929100f
+    float ACoef[NCoef + 1] = {
+        0.00000002711726268756f,
+        0.00000013558631343779f,
+        0.00000027117262687557f,
+        0.00000027117262687557f,
+        0.00000013558631343779f,
+        0.00000002711726268756f
     };
 
-    static float x[Ntap];   //input samples
-    float y = 0.0;            //output sample
+    float BCoef[NCoef + 1] = {
+         1.00000000000000000000f,
+        -4.79668159981780740000f,
+         9.20724237509200980000f,
+        -8.84036968250099160000f,
+         4.24578647328991910000f,
+        -0.81597668002427803000f
+    };
+
+    static float y[NCoef + 1]; //output samples
+    static float x[NCoef + 1]; //input samples
     int n;
 
     //shift the old samples
-    for (n = Ntap - 1; n > 0; n--)
+    for (n = NCoef; n > 0; n--) {
         x[n] = x[n - 1];
+        y[n] = y[n - 1];
+    }
 
     //Calculate the new output
     x[0] = (float)new_sample;
-    for (n = 0; n < Ntap; n++)
-        y += FIRCoef[n] * x[n];
+    y[0] = ACoef[0] * x[0];
+    for (n = 1; n <= NCoef; n++)
+        y[0] += ACoef[n] * x[n] - BCoef[n] * y[n];
 
-    return (int)y;
+    return (int)y[0];
 }
