@@ -16,7 +16,7 @@ namespace Indicator
     // Вызов этой функции устанавливает размер автоматически в зависимости от установленных режимов
     void AutoSize();
 
-    void SetMeasures(float dc, float ac, int range);
+    void SetMeasures(float dc, float ac);
 
     void OnCnageRangeEvent();
 

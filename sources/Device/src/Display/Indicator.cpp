@@ -119,8 +119,10 @@ void Indicator::Update()
 }
 
 
-void Indicator::SetMeasures(float dc, float ac, int range)
+void Indicator::SetMeasures(float dc, float ac)
 {
+    int range = InputRelays::Range::Current();
+
     static const int after[6]    = { 4, 3, 2, 4, 3, 3 };
     static const pchar suffix[6] = { "mA", "mA", "mA", "A", "A", "A" };
 

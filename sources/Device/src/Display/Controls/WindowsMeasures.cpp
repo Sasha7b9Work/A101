@@ -77,7 +77,7 @@ void WindowMeasure::OnChangeRangeEvent()
 
     for (int i = 0; i < 5; i++)
     {
-        digits[i]->SetText("^");
+        digits[i]->SetText("*");
     }
 }
 
