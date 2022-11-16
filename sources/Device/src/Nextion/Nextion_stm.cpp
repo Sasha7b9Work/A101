@@ -135,7 +135,10 @@ void Nextion::Button::Highligth(pchar name_button, bool val)
 {
     uint color_val = val ? Color::ButtonPress.ToRaw() : Color::Background.ToRaw();
 
+//    LOG_WRITE("%s higthligth = %d, color %d", name_button, (int)val, color_val);
+
     Nextion::SendCommandFormat("%s.bco=%d", name_button, color_val);
+    Nextion::SendCommandFormat("%s.bco2=%d", name_button, color_val);
 }
 
 

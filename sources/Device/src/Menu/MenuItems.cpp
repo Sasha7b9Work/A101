@@ -68,7 +68,7 @@ void Button::Disable()
 }
 
 
-void Button::SendHighlight()
+void Button::SendHighlightState()
 {
     Nextion::Button::Highligth(name, highlight);
 }
@@ -78,7 +78,7 @@ void Button::SetHighlight(bool _higthligth)
 {
     highlight = _higthligth;
 
-    SendHighlight();
+    SendHighlightState();
 }
 
 
@@ -142,7 +142,7 @@ void Page::SetAsCurrent()
             button->Init();
             button->Enable();
             button->SetText();
-            button->SendHighlight();
+            button->SendHighlightState();
         }
         else
         {

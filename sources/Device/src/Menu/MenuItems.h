@@ -19,7 +19,7 @@ public:
 
     void SetText();
 
-    void SendHighlight();
+    void SendHighlightState();
 
     void SetHighlight(bool);
 
