@@ -49,8 +49,6 @@ void WindowMeasure::OnChangeRangeEvent()
 
     int x0 = sign.GetX() + sign.GetWidth();
 
-    Disable();
-
     static const int firsts[6] = { 0, 1, 2, 0, 1, 1 };
     static const int seconds[6] = { 1, 2, 3, 1, 2, 2 };
 
@@ -76,6 +74,11 @@ void WindowMeasure::OnChangeRangeEvent()
     Enable();
 
     units.SetText(range < 3 ? "mA" : "A");
+
+    for (int i = 0; i < 5; i++)
+    {
+        digits[i]->SetText("^");
+    }
 }
 
 
