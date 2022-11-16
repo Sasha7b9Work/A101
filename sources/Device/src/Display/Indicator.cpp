@@ -124,12 +124,10 @@ void Indicator::SetMeasures(float dc, float ac)
     int range = InputRelays::Range::Current();
 
     static const int after[6]    = { 4, 3, 2, 4, 3, 3 };
-    static const pchar suffix[6] = { "mA", "mA", "mA", "A", "A", "A" };
+    static const pchar suffix = (range < 3) ? "mA" : "A";
 
-    ConvertDoubleToText(dc, measureDC, after[range], suffix[range]);
-    ConvertDoubleToText(ac, measureAC, after[range], suffix[range]);
-
-//    LOG_WRITE("dc = %s, ac = %s", measureDC, measureAC);
+    ConvertDoubleToText(dc, measureDC, after[range], suffix);
+    ConvertDoubleToText(ac, measureAC, after[range], suffix);
 }
 
 
