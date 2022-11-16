@@ -227,3 +227,8 @@ void Nextion::WaitResponse(pchar command, ResponseCode::E code)
     }
 }
 
+
+void Nextion::Page::Enable(int number)
+{
+    Nextion::SendCommandFormat("page%d", number);
+}

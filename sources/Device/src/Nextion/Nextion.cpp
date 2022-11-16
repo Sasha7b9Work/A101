@@ -189,7 +189,7 @@ bool Nextion::CommandZ::Execute()
         {
             int button = (byte1 & 0x0F);
 
-            Page::Current()->GetButton(button)->Press();
+            ::Page::Current()->GetButton(button)->Press();
 
             PasswordResolver::AppendByte(byte1);
 
