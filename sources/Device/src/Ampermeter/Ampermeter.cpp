@@ -131,14 +131,14 @@ void Ampermeter::Update()
 
     BufferADC::CalculateLimits();
 
+    SampleRate::Current::Set(Calculator::AppendData());
+
     if (OutOfRange())
     {
         Indicator::SetOverflow();
     }
     else
     {
-        SampleRate::Current::Set(Calculator::AppendData());
-
         Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC());
 
         DiagramInput::SetData();
@@ -150,16 +150,14 @@ bool Ampermeter::OutOfRange()
 {
     static const float maxs[6] = { 2e-3f, 20e-3f, 200e-3f, 2.0f, 20.0f, 50.0f };
 
-    float max = maxs[InputRelays::Range::Current()] * 1.1f;
+    float max = maxs[InputRelays::Range::Current()] * 1.1f * 1e3f;
 
+    float value = std::fabsf(Calculator::GetDC()) + Calculator::GetAC();
 
-    if (std::fabsf(BufferADC::Max().Real()) > max)
+    if (value > max)
     {
-        return true;
-    }
+        LOG_WRITE("out range dc = %f, ac = %f", Calculator::GetDC(), Calculator::GetAC());
 
-    if (std::fabsf(BufferADC::Min().Real()) > max)
-    {
         return true;
     }
 

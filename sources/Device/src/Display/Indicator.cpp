@@ -135,14 +135,8 @@ void Indicator::SetOverflow()
 {
     for (int i = 0; (i < TextString::MAX_LEN) && (measureDC[i] != '\0'); i++)
     {
-        if (measureDC[i] != '.')
-        {
-            measureDC[i] = '^';
-        }
-        else if (measureAC[i] != '.')
-        {
-            measureAC[i] = '^';
-        }
+        if (measureDC[i] != '.') { measureDC[i] = '^'; }
+        if (measureAC[i] != '.') { measureAC[i] = '^'; }
     }
 }
 
