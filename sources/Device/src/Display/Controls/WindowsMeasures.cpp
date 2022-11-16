@@ -47,7 +47,7 @@ void WindowMeasure::OnChangeRangeEvent()
 {
     int range = InputRelays::GetRange();
 
-    int x0 = sign.GetX() + sign.GetWidth() + DELTA;
+    int x0 = sign.GetX() + sign.GetWidth();
 
     Disable();
 
@@ -58,17 +58,17 @@ void WindowMeasure::OnChangeRangeEvent()
     {
         digits[i]->SetX(x0);
 
-        x0 += DELTA + WIDTH_DIGIT;
+        x0 += WIDTH_DIGIT;
     }
 
     point.SetX(x0);
 
-    x0 += DELTA + point.GetWidth();
+    x0 += point.GetWidth();
 
     for (int i = seconds[range]; i < 5; i++)
     {
         digits[i]->SetX(x0);
-        x0 += DELTA + WIDTH_DIGIT;
+        x0 += WIDTH_DIGIT;
     }
 
     units.SetX(digit5.GetX() + digit5.GetWidth() + 10);

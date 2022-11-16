@@ -17,12 +17,10 @@ private:
     static const int HEIGHT = 92;
     static const int WIDTH = 620;
     static const int WIDTH_DIGIT = 40;
-    static const int DELTA = 0;
 #else
     static const int HEIGHT = 92;
     static const int WIDTH = 720;
     static const int WIDTH_DIGIT = 55;
-    static const int DELTA = 0;
 #endif
 
     TextString title;
