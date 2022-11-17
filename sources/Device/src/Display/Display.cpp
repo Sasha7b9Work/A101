@@ -12,9 +12,6 @@
 
 void Display::Init()
 {
-    Nextion::Page::SetColorBackground(0, Color::Background);
-    Nextion::Page::SetColorBackground(1, Color::Background);
-
     Nextion::WaveInput::Disable(0);
     Nextion::WaveInput::Disable(1);
     Nextion::WaveFFT::Disable(0);

@@ -25,8 +25,8 @@ static uint16 colors[255] =
     Color::MakeColor(1.0f, 1.0f, 1.0f),     // White
     Color::MakeColor(0.0f, 0.0f, 1.0f),     // Background
     6700,                                   // ButtonPress
-    Color::MakeColor(1.0f, 1.0f, 1.0f),     // MeasureDC
-    Color::MakeColor(1.0f, 1.0f, 1.0f)      // MeasureAC
+    Color::MakeColor(1.0f, 1.0f, 0.0f),     // MeasureDC
+    Color::MakeColor(1.0f, 1.0f, 0.0f)      // MeasureAC
 };
 
 
