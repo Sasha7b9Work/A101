@@ -28,7 +28,7 @@ void Calibrator::ExecuteCalibration()
 
     TimeMeterMS meter;
 
-    
+//    Nextion::DrawString(10, 10, 780, 300, "")
 
     Nextion::Page::Enable(0);
 

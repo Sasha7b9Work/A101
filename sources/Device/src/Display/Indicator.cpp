@@ -25,14 +25,14 @@ namespace Indicator
     static const int small_x_text = 361;
     static const int small_width_text = 300;
 
-    static WindowMeasureDC windowDC(38, 74, 7);
-    static WindowMeasureAC windowAC(38, 236, 7);
+    static WindowMeasureDC windowDC(38, 74, 5);
+    static WindowMeasureAC windowAC(38, 236, 5);
 
     static TextString labelDCsmall(small_x_label, small_y_0, small_width_label, small_height, 0, "DC:", Color::MeasureDC);
     static TextString labelACsmall(small_x_label, small_y_1, small_width_label, small_height, 0, "AC:", Color::MeasureAC);
     static TextString textDCsmall(small_x_text, small_y_0, small_width_text, small_height, 0, "", Color::MeasureDC);
     static TextString textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "", Color::MeasureAC);
-    static TextString textDeltaADC(7, 207, 150, 40, 3, "", Color::White);
+    static TextString textDeltaADC(7, 207, 150, 40, 2, "", Color::White);
 
     static bool is_big = true;
 
