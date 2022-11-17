@@ -230,5 +230,11 @@ void Nextion::WaitResponse(pchar command, ResponseCode::E code)
 
 void Nextion::Page::Enable(int number)
 {
-    Nextion::SendCommandFormat("page %d", number);
+    SendCommandFormat("page %d", number);
+}
+
+
+void Nextion::Page::SetColorBackground(int number, const Color &color)
+{
+    SendCommandFormat("page%d.bco=%d", number, color.ToRaw());
 }

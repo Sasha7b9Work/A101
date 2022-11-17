@@ -19,9 +19,9 @@ int main()
 
     Ampermeter::Init();
 
-    Menu::Init();
-
     Display::Init();
+
+    Menu::Init();
 
     Generator::SetPicAC(1);
 

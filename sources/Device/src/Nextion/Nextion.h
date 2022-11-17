@@ -68,6 +68,8 @@ namespace Nextion
         // 0 - основная страница
         // 1 - страница калибровки
         void Enable(int number);
+
+        void SetColorBackground(int number, const Color &);
     }
 
     namespace WaveInput
