@@ -10,6 +10,13 @@
 namespace Calibrator
 {
     static bool in_process = false;
+
+    enum class State
+    {
+        Start
+    };
+
+    static State state = State::Start;
 }
 
 
@@ -21,10 +28,7 @@ void Calibrator::ExecuteCalibration()
 
     TimeMeterMS meter;
 
-    while (meter.ElapsedTime() < 500)
-    {
-
-    }
+    
 
     Nextion::Page::Enable(0);
 
