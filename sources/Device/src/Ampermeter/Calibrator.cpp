@@ -5,6 +5,7 @@
 #include "Hardware/Timer.h"
 #include "Menu/Pages/Pages.h"
 #include "Display/Indicator.h"
+#include "Hardware/HAL/HAL.h"
 
 
 namespace Calibrator
@@ -26,9 +27,14 @@ void Calibrator::ExecuteCalibration()
 
     Nextion::Page::Enable(1);
 
-    TimeMeterMS meter;
+    Nextion::DrawString(10, 10, 780, 300, 2,
+        Color::White, Color::Background,
+        "Калибровка диапазона 50 А.");
+//        Подайте на вход амперметра\n            \
+//        постоянный ток величиной 50 А\n         \
+//        и нажмите кнопку \"Готово\"");
 
-//    Nextion::DrawString(10, 10, 780, 300, "")
+    HAL_TIM::Delay(1000);
 
     Nextion::Page::Enable(0);
 
