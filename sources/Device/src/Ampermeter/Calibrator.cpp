@@ -6,6 +6,7 @@
 #include "Menu/Pages/Pages.h"
 #include "Display/Indicator.h"
 #include "Hardware/HAL/HAL.h"
+#include <cstdio>
 
 
 namespace Calibrator
@@ -18,6 +19,9 @@ namespace Calibrator
     };
 
     static State state = State::Start;
+
+    // level - 0: 0mA, 1 - верхний уровень
+    static void DrawPromt(int range, int level);
 }
 
 
@@ -27,11 +31,7 @@ void Calibrator::ExecuteCalibration()
 
     Nextion::Page::Enable(1);
 
-    Nextion::DrawString(10, 10, 780, 300, 2,
-        Color::White, Color::Background,
-        "Мвнкчфрюмв дквтвярпв 50 В.\n"
-        "рПДБКФЕ ОБ ЧИПД БНРЕТНЕФТБ\n"
-    );
+    DrawPromt(0, 0);
 
     HAL_TIM::Delay(1000);
 
@@ -46,4 +46,35 @@ void Calibrator::ExecuteCalibration()
 bool Calibrator::InProcess()
 {
     return in_process;
+}
+
+
+void Calibrator::DrawPromt(int range, int level)
+{
+    static const int height = 30;
+    static const int delta = 60;
+
+    int y = 0;
+
+    static const char *ranges[6] = { "2 mA", "20 mA", "200 mA", "2 A", "20 A", "50 A" };
+
+    char buffer[50] = { '\0' };
+
+    std::sprintf(buffer, "Калибровка диапазона %s", ranges[range]);
+
+    Nextion::DrawString(10, y, 780, height, 2, Color::White, Color::Background, buffer, 1);
+
+    y += delta + delta / 2;
+
+    Nextion::DrawString(10, y, 780, height, 2, Color::White, Color::Background, "Подайте на вход амперметра");
+
+    y += delta;
+
+    std::sprintf(buffer, "постоянный ток величиной %s", level == 0 ? "0 mA" : ranges[range]);
+
+    Nextion::DrawString(10, y, 780, height, 2, Color::White, Color::Background, buffer);
+
+    y += delta;
+
+    Nextion::DrawString(10, y, 780, height, 2, Color::White, Color::Background, "и нажмите кнопку \"Готово\".");
 }
