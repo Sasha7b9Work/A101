@@ -156,7 +156,7 @@ bool Ampermeter::OutOfRange()
 
     if (value > max)
     {
-        LOG_WRITE("out range dc = %f, ac = %f", Calculator::GetDC(), Calculator::GetAC());
+        LOG_WRITE("out range dc = %f, ac = %f", (double)Calculator::GetDC(), (double)Calculator::GetAC());
 
         return true;
     }

@@ -18,7 +18,7 @@ namespace Calibrator
         Start
     };
 
-    static State state = State::Start;
+//    static State state = State::Start;
 
     // level - 0: 0mA, 1 - верхний уровень
     static void DrawPromt(int range, int level);
@@ -51,8 +51,8 @@ bool Calibrator::InProcess()
 
 void Calibrator::DrawPromt(int range, int level)
 {
-    static const int height = 30;
-    static const int delta = 60;
+    const int height = 30;
+    const int delta = 60;
 
     int y = 0;
 
