@@ -101,19 +101,23 @@ void Calibrator::ExecuteCalibration()
 
     for (int range = 0; range < 6; range++)
     {
-        int width = 120;
+        int width = 140;
         int height = 40;
-        int x0 = 50;
-        int x = x0 + range * width;
-        int dY = 80;
-        int y0 = 50;
+        int x0 = 150;
+        int dY = 50;
+        int y0 = 30;
+        int y = y0 + range * dY;
 
-        Nextion::DrawString(x, y0, width, height, 2, Color::White, Color::Background, units[range]);
+        Nextion::DrawString(x0, y, width, height, 2, Color::White, Color::Background, units[range]);
 
         char buffer[30];
         std::sprintf(buffer, "%d", set.cal.GetZero(range));
 
-        Nextion::DrawString(x, y0 + dY, width, height, 2, Color::White, Color::Background, buffer);
+        Nextion::DrawString(x0 + width, y, width, height, 2, Color::White, Color::Background, buffer);
+
+        std::sprintf(buffer, "%e", (double)set.cal.GetGain(range));
+
+        Nextion::DrawString(x0 + width * 2, y, width * 2, height, 2, Color::White, Color::Background, buffer);
     }
 
     event_ready = false;
@@ -213,8 +217,6 @@ void Calibrator::CalibratorZero::Run()
 
                 dc = CalculateDC(z);
 
-                LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(), (double)dc);
-
                 if (std::fabsf(dc) < 1e-10f)
                 {
                     break;
@@ -226,6 +228,8 @@ void Calibrator::CalibratorZero::Run()
             delta = -delta / 10;
         }
     }
+
+    LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(), (double)dc);
 
     if (Math::Abs(z) < 10000)
     {
@@ -259,9 +263,9 @@ void Calibrator::ReadDataAndCalculate(int range)
 }
 
 
-void Calibrator::CalibrateGain(int range)
+void Calibrator::CalibrateGain(int)
 {
-    set.cal.SetGain(range, 1.0f);
+//    set.cal.SetGain(range, 1.0f);
 }
 
 
