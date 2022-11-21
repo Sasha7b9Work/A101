@@ -11,6 +11,11 @@ namespace Math
         return (value < T(0)) ? -value : value;
     }
 
+    template<class T> T Sign(T value)
+    {
+        return (value < T(0)) ? (T)-1 : (T)1;
+    }
+
     template<class T> T Limitation(T *value, T min, T max)
     {
         if (*value < min)       { *value = min; }

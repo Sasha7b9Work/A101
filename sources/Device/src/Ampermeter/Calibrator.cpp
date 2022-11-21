@@ -10,6 +10,7 @@
 #include "Ampermeter/Ampermeter.h"
 #include "Ampermeter/Calculator/Calculator.h"
 #include "Ampermeter/InputRelays.h"
+#include "Utils/Math.h"
 #include <cstdio>
 
 
@@ -157,19 +158,43 @@ void Calibrator::CalibrateZero(int range)
 {
     const int zero = set.cal.GetZero(range);
 
+    set.cal.SetZero(range, 0);
     Ampermeter::ReadData();
+    Calculator::AppendData();
+    float dc0 = Calculator::GetDC();
 
-    const int zeros[3] = { -1000, 0, 1000 };
+    set.cal.SetZero(range, 1000);
+    Ampermeter::ReadData();
+    Calculator::AppendData();
+    float dc1000 = Calculator::GetDC();
 
-    for (int i = 0; i < 3; i++)
+    int delta = (dc1000 > dc0) ? 1 : -1;                              // На эту величину будем увеличивать ноль в каждой итерации
+
+    float sign = Math::Sign(dc0);
+
+    int z = 3200;
+
+    while (sign == Math::Sign(dc0))
     {
-        set.cal.SetZero(range, zeros[i]);
+        timeLine.Draw();
+        set.cal.SetZero(range, z);
+        Ampermeter::ReadData();
+        Calculator::AppendData();
+        dc0 = Calculator::GetDC();
 
-        ReadDataAndCalculate(range);
+        LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(), (double)dc0);
+
+        z += delta;
     }
 
-
-    set.cal.SetZero(range, zero);
+    if (Math::Abs(z) < 10000)
+    {
+        set.cal.SetZero(range, z);
+    }
+    else
+    {
+        set.cal.SetZero(range, zero);
+    }
 }
 
 
