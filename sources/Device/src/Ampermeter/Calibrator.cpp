@@ -24,8 +24,6 @@ namespace Calibrator
     // level - 0: 0mA, 1 - верхний уровень
     static void DrawPromt(int range, int level);
 
-    static void WaitButton();
-
     static void Calibrate(int range, int level);
 }
 
@@ -54,28 +52,21 @@ void Calibrator::Calibrate(int range, int level)
 {
     DrawPromt(range, level);
 
-    while (!event_skip && !event_ready)
-    {
-        WaitButton();
-
-        if (event_skip)
-        {
-        }
-        else if (event_ready)
-        {
-        }
-    }
-}
-
-
-void Calibrator::WaitButton()
-{
     event_ready = false;
     event_skip = false;
 
     while (!event_ready && !event_skip)
     {
         Nextion::Update();
+    }
+
+    if (event_ready)
+    {
+
+    }
+    else if (event_skip)
+    {
+
     }
 }
 
