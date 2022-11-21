@@ -38,7 +38,7 @@ void Nextion::DrawRect(int x, int y, int width, int height, const Color &color)
 {
     color.SetAsCurrent();
 
-    SendCommandFormat("draw %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
+    SendCommandFormat("draw %d,%d,%d,%d,%s", x, y, x + width, y + height, Color::CurrentValue());
 }
 
 

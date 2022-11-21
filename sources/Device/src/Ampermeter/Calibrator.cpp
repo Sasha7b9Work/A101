@@ -11,6 +11,23 @@
 
 namespace Calibrator
 {
+    struct TimeLine
+    {
+        void Reset();
+        void Draw();
+    private:
+        static const int x = 150;
+        static const int y = 150;
+        static const int width = 500;
+        static const int height = 50;
+
+        int last = 0;                   // Последняя закрашенная линия
+
+        Color color = Color::White;
+    };
+
+    static TimeLine timeLine;
+
     enum class State
     {
         Start
@@ -27,8 +44,6 @@ namespace Calibrator
     static void ProcedureCalibrate(int range, int level);
 
     static void CalibrateHardware(int range, int level);
-
-    static void DrawTimeLine(uint time);
 }
 
 
@@ -81,16 +96,39 @@ void Calibrator::CalibrateHardware(int range, int level)
 
     Nextion::FillRect(100, 90, 600, 200, Color::Background);
 
-    while (meter.ElapsedTime() < 1000)
+    timeLine.Reset();
+
+    while (meter.ElapsedTime() < 5000)
     {
-        DrawTimeLine(meter.ElapsedTime());
+        timeLine.Draw();
     }
+
+    Nextion::FillRect(100, 90, 600, 200, Color::Background);
 }
 
 
-void Calibrator::DrawTimeLine(uint)
+void Calibrator::TimeLine::Reset()
 {
+    Nextion::DrawRect(150, 150, 500, 50, Color::White);
 
+    last = x;
+
+    color = Color::White;
+}
+
+
+void Calibrator::TimeLine::Draw()
+{
+    last++;
+
+    Nextion::DrawLineV(last, y + 1, y + height - 1, color);
+
+    if (last == x + width - 1)
+    {
+        last = x;
+
+        color = (color.value == Color::White.value) ? Color::Background : Color::White;
+    }
 }
 
 
