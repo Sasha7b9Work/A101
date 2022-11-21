@@ -79,7 +79,7 @@ void Calibrator::CalibrateHardware(int range, int level)
 {
     TimeMeterMS meter;
 
-    Nextion::FillRect(50, 50, 300, 200, Color::ButtonPress);
+    Nextion::FillRect(100, 90, 600, 200, Color::Background);
 
     while (meter.ElapsedTime() < 1000)
     {

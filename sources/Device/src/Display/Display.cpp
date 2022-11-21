@@ -12,6 +12,8 @@
 
 void Display::Init()
 {
+    Nextion::Page::Enable(0);
+
     Nextion::WaveInput::Disable(0);
     Nextion::WaveInput::Disable(1);
     Nextion::WaveFFT::Disable(0);
