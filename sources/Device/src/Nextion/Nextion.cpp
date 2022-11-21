@@ -7,6 +7,7 @@
 #include "Hardware/Timer.h"
 #include "Utils/Profiler.h"
 #include "Menu/PasswordResolver.h"
+#include "Ampermeter/Calibrator.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -20,17 +21,21 @@
 
 /*
 *   Принимаем от дисплея
-*  +--------+---------------+
-*  | кнопка | нажата/отжата |
-*  +--------+---------------+
-*  |   1    | "01Z" / "00Z" |
-*  |   2    | "11Z" / "10Z" |
-*  |   3    | "21Z" / "20Z" |
-*  |   4    | "31Z" / "30Z" |
-*  |   5    | "41Z" / "40Z" |
-*  |   6    | "51Z" / "50Z" |
-*  |  Меню  | "61Z" / "60Z" |
-*  +--------+---------------+
+*  +------------+--------+
+*  | кнопка     | нажата |
+*  +------------+--------+
+*  |     Page 0          |
+*  |   1        |  "0Z"  |
+*  |   2        |  "1Z"  |
+*  |   3        |  "2Z"  |
+*  |   4        |  "3Z"  |
+*  |   5        |  "4Z"  |
+*  |   6        |  "5Z"  |
+*  |  Меню      |  "6Z"  |
+*  | Page 1 калибровка   |
+*  | Пропустить |  "7Z"  |
+*  | Готово     |  "8Z"  |
+*  +------------+--------+
 * 
 *   Передаём в дисплей
 * 
@@ -185,13 +190,25 @@ bool Nextion::CommandZ::Execute()
     {
         uint8 byte1 = buffer[0];
 
-        if (byte1 >= '0' && byte1 <= '9')
+        if (byte1 >= '0' && byte1 <= '6')
         {
             int button = (byte1 & 0x0F);
 
             ::Page::Current()->GetButton(button)->Press();
 
             PasswordResolver::AppendByte(byte1);
+
+            return true;
+        }
+        else if (byte1 == '7')
+        {
+            Calibrator::OnEvent::ButtonSkip();
+
+            return true;
+        }
+        else if (byte1 == '8')
+        {
+            Calibrator::OnEvent::ButtonReady();
 
             return true;
         }

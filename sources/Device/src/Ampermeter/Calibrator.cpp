@@ -11,8 +11,6 @@
 
 namespace Calibrator
 {
-    static bool in_process = false;
-
     enum class State
     {
         Start
@@ -20,32 +18,65 @@ namespace Calibrator
 
 //    static State state = State::Start;
 
+    static bool event_skip = false;
+    static bool event_ready = false;
+
     // level - 0: 0mA, 1 - верхний уровень
     static void DrawPromt(int range, int level);
+
+    static void WaitButton();
 }
 
 
 void Calibrator::ExecuteCalibration()
 {
-    in_process = true;
-
     Nextion::Page::Enable(1);
 
     DrawPromt(0, 0);
 
-    HAL_TIM::Delay(1000);
+    while (true)
+    {
+        WaitButton();
 
-    Nextion::Page::Enable(0);
+        if (event_skip)
+        {
+            Nextion::Page::Enable(0);
 
-    PageTwo::self->SetAsCurrent();
+            PageTwo::self->SetAsCurrent();
 
-    Indicator::OnEvent::CnageRange();
+            Indicator::OnEvent::CnageRange();
+
+            break;
+        }
+        else if (event_ready)
+        {
+
+        }
+    }
 }
 
 
-bool Calibrator::InProcess()
+void Calibrator::WaitButton()
 {
-    return in_process;
+    event_ready = false;
+    event_skip = false;
+
+    while (!event_ready && !event_skip)
+    {
+        Nextion::Update();
+    }
+}
+
+
+void Calibrator::OnEvent::ButtonReady()
+{
+    event_ready = true;
+}
+
+
+void Calibrator::OnEvent::ButtonSkip()
+{
+    event_skip = true;
 }
 
 

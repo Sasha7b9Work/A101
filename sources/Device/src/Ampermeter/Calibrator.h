@@ -7,5 +7,10 @@ namespace Calibrator
     // Запустить процедуру калибровки
     void ExecuteCalibration();
 
-    bool InProcess();
+    namespace OnEvent
+    {
+        void ButtonSkip();
+
+        void ButtonReady();
+    }
 }
