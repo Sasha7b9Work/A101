@@ -31,6 +31,15 @@ namespace Calibrator
         Color color = Color::White;
     };
 
+    struct CalibratorZero
+    {
+        CalibratorZero(int _range) : range(_range) {}
+        void Run();
+    private:
+        int range;
+        float CalculateDC(int zero);
+    };
+
     static TimeLine timeLine;
 
     static Settings stored_set;
@@ -46,9 +55,6 @@ namespace Calibrator
     static void ProcedureCalibrate(int range, int level);
 
     static void CalibrateHardware(int range, int level);
-
-    // Откалибровать смещение нуля
-    static void CalibrateZero(int range);
 
     // Откалибровать усиление
     static void CalibrateGain(int range);
@@ -141,9 +147,7 @@ void Calibrator::CalibrateHardware(int range, int level)
 
     if (level == 0)
     {
-        InputRelays::Range::Set(range);
-
-        CalibrateZero(range);
+        CalibratorZero(range).Run();
     }
     else if (level == 1)
     {
@@ -154,19 +158,15 @@ void Calibrator::CalibrateHardware(int range, int level)
 }
 
 
-void Calibrator::CalibrateZero(int range)
+void Calibrator::CalibratorZero::Run()
 {
     const int zero = set.cal.GetZero(range);
 
-    set.cal.SetZero(range, 0);
-    Ampermeter::ReadData();
-    Calculator::AppendData();
-    float dc0 = Calculator::GetDC();
+    InputRelays::Range::Set(range);
 
-    set.cal.SetZero(range, 1000);
-    Ampermeter::ReadData();
-    Calculator::AppendData();
-    float dc1000 = Calculator::GetDC();
+    float dc0 = CalculateDC(0);
+
+    float dc1000 = CalculateDC(1000);
 
     int delta = (dc1000 > dc0) ? 1 : -1;                              // На эту величину будем увеличивать ноль в каждой итерации
 
@@ -177,10 +177,8 @@ void Calibrator::CalibrateZero(int range)
     while (sign == Math::Sign(dc0))
     {
         timeLine.Draw();
-        set.cal.SetZero(range, z);
-        Ampermeter::ReadData();
-        Calculator::AppendData();
-        dc0 = Calculator::GetDC();
+
+        dc0 = CalculateDC(z);
 
         LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(), (double)dc0);
 
@@ -195,6 +193,15 @@ void Calibrator::CalibrateZero(int range)
     {
         set.cal.SetZero(range, zero);
     }
+}
+
+
+float Calibrator::CalibratorZero::CalculateDC(int zero)
+{
+    set.cal.SetZero(range, zero);
+    Ampermeter::ReadData();
+    Calculator::AppendData();
+    return Calculator::GetDC();
 }
 
 
