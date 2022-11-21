@@ -218,7 +218,7 @@ void Calibrator::CalibratorZero::Run()
         {
             float sign = Math::Sign(dc);
 
-            while (sign == Math::Sign(dc))
+            while (std::fabsf(sign - Math::Sign(dc)) < 1e-3f)
             {
                 timeLine.Draw();
 
@@ -258,7 +258,7 @@ float Calibrator::CalibratorZero::CalculateDC(int zero)
 }
 
 
-void Calibrator::CalibrateGain(int)
+void Calibrator::CalibrateGain(int range)
 {
 
 }

@@ -8,16 +8,8 @@
 #include "Settings.h"
 
 
-namespace Range
-{
-    static int current = 3;
-    static int prev = 0;
-
-    static void Load()
-    {
-        Set(current);
-    }
-}
+int Range::current = 3;
+int Range::prev = 0;
 
 
 void Range::Set(int _range)

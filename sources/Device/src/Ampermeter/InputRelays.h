@@ -2,16 +2,23 @@
 #pragma once
 
 
-namespace Range
+struct Range
 {
-    void Set(int);
+    static void Set(int);
 
     // Текущее значение
-    int Current();
+    static int Current();
 
     // Предыдущее значение
-    int Prev();
-}
+    static int Prev();
+
+    static void Load() { Set(current); }
+
+private:
+
+    static int current;
+    static int prev;
+};
 
 
 namespace InputRelays
