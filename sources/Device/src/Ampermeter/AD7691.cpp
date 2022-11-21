@@ -167,7 +167,7 @@ ValueADC::ValueADC(int reading)
 }
 
 
-void AD7691::GeneratorChangedEvent()
+void AD7691::OnEvent::GeneratorChanged()
 {
     funcRead = Generator::IsEanbled() ? Generator::ReadValue : ReadReal;
 }

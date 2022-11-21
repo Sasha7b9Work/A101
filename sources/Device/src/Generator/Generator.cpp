@@ -25,7 +25,7 @@ void Generator::Enable()
 {
     enabled = true;
 
-    AD7691::GeneratorChangedEvent();
+    AD7691::OnEvent::GeneratorChanged();
 }
 
 
@@ -33,7 +33,7 @@ void Generator::Disable()
 {
     enabled = false;
 
-    AD7691::GeneratorChangedEvent();
+    AD7691::OnEvent::GeneratorChanged();
 }
 
 
