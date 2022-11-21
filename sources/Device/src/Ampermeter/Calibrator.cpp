@@ -12,6 +12,7 @@
 #include "Ampermeter/InputRelays.h"
 #include "Utils/Math.h"
 #include <cstdio>
+#include <cmath>
 
 
 namespace Calibrator
@@ -164,25 +165,37 @@ void Calibrator::CalibratorZero::Run()
 
     InputRelays::Range::Set(range);
 
-    float dc0 = CalculateDC(0);
+    float dc = CalculateDC(0);
 
     float dc1000 = CalculateDC(1000);
 
-    int delta = (dc1000 > dc0) ? 1 : -1;                              // На эту величину будем увеличивать ноль в каждой итерации
+    int z = 0;
 
-    float sign = Math::Sign(dc0);
+    int delta = (dc1000 > dc) ? 1000 : -1000;                              // На эту величину будем увеличивать ноль в каждой итерации
 
-    int z = 3200;
-
-    while (sign == Math::Sign(dc0))
     {
-        timeLine.Draw();
+        for (int i = 0; i < 4; i++)
+        {
+            float sign = Math::Sign(dc);
 
-        dc0 = CalculateDC(z);
+            while (sign == Math::Sign(dc))
+            {
+                timeLine.Draw();
 
-        LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(), (double)dc0);
+                dc = CalculateDC(z);
 
-        z += delta;
+                LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(), (double)dc);
+
+                if (std::fabsf(dc) < 1e-10f)
+                {
+                    break;
+                }
+
+                z += delta;
+            }
+
+            delta = -delta / 10;
+        }
     }
 
     if (Math::Abs(z) < 10000)
