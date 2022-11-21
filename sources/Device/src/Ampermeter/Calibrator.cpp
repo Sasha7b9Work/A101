@@ -25,6 +25,8 @@ namespace Calibrator
     static void DrawPromt(int range, int level);
 
     static void WaitButton();
+
+    static void Calibrate(int range, int level);
 }
 
 
@@ -32,25 +34,35 @@ void Calibrator::ExecuteCalibration()
 {
     Nextion::Page::Enable(1);
 
-    DrawPromt(0, 0);
+    for (int range = 0; range < 6; range++)
+    {
+        for (int level = 0; level < 2; level++)
+        {
+            Calibrate(range, level);
+        }
+    }
 
-    while (true)
+    Nextion::Page::Enable(0);
+
+    PageTwo::self->SetAsCurrent();
+
+    Indicator::OnEvent::CnageRange();
+}
+
+
+void Calibrator::Calibrate(int range, int level)
+{
+    DrawPromt(range, level);
+
+    while (!event_skip && !event_ready)
     {
         WaitButton();
 
         if (event_skip)
         {
-            Nextion::Page::Enable(0);
-
-            PageTwo::self->SetAsCurrent();
-
-            Indicator::OnEvent::CnageRange();
-
-            break;
         }
         else if (event_ready)
         {
-
         }
     }
 }
