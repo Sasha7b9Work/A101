@@ -10,22 +10,31 @@ Settings set
     false,      // enabled_zero
     false,      // firLPF
     {
+        { 61.53e-2f, 61.53e-1f, 61.53e0f, 61.53e-2f, 61.53e0f, 61.53e-1f },
+        { 3244,      3234,      3234,     3250,      3232,     3233 }
     }
 };
 
 
 float CalibrationSettings::GetGain(int range)
 {
-    static const float koeff[6] = { 1e-2f, 1e-1f, 1e0f, 1e-2f, 1e0f, 1e-1f };
-
-    return koeff[range] * 61.53f;
+    return gain[range];
 }
 
+
+void CalibrationSettings::SetGain(int range, float value)
+{
+    gain[range] = value;
+}
 
 
 int CalibrationSettings::GetZero(int range)
 {
-    static const int zeros[6] = { 3244, 3234, 3234, 3250, 3232, 3233 };
+    return zero[range];
+}
 
-    return zeros[range];
+
+void CalibrationSettings::SetZero(int range, int value)
+{
+    zero[range] = value;
 }

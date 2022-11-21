@@ -118,10 +118,6 @@ void Calibrator::ProcedureCalibrate(int range, int level)
         Nextion::Button::Enable("buttonOk");
         Nextion::Button::Enable("buttonCancel");
     }
-    else if (event_skip)
-    {
-       
-    }
 }
 
 
@@ -144,15 +140,15 @@ void Calibrator::CalibrateHardware(int range, int level)
 }
 
 
-void Calibrator::CalibrateZero(int)
+void Calibrator::CalibrateZero(int range)
 {
-
+    set.cal.SetZero(range, 0);
 }
 
 
-void Calibrator::CalibrateGain(int)
+void Calibrator::CalibrateGain(int range)
 {
-
+    set.cal.SetGain(range, 1.0f);
 }
 
 
