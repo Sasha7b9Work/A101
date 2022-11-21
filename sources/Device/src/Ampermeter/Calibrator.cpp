@@ -95,22 +95,25 @@ void Calibrator::ExecuteCalibration()
 
     RestoreSettings();
 
-    Nextion::FillRect(1, 1, 795, 400, Color::Background);
+    Nextion::FillRect(1, 1, 795, 350, Color::Background);
 
     static const pchar units[6] = {"2 mA", "20 mA", "200 mA", "2 A", "20 A", "50 A"};
 
     for (int range = 0; range < 6; range++)
     {
-        int x = 10 + range * 40;
-        int width = 40;
-        int height = 20;
+        int width = 120;
+        int height = 40;
+        int x0 = 50;
+        int x = x0 + range * width;
+        int dY = 80;
+        int y0 = 50;
 
-        Nextion::DrawString(x, 20, width, height, 2, Color::White, Color::Background, units[range]);
+        Nextion::DrawString(x, y0, width, height, 2, Color::White, Color::Background, units[range]);
 
         char buffer[30];
         std::sprintf(buffer, "%d", set.cal.GetZero(range));
 
-        Nextion::DrawString(x, 50, width, height, 2, Color::White, Color::Background, buffer);
+        Nextion::DrawString(x, y0 + dY, width, height, 2, Color::White, Color::Background, buffer);
     }
 
     event_ready = false;
