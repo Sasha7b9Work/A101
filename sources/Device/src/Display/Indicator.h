@@ -21,7 +21,10 @@ namespace Indicator
     // Установить признак переполнения
     void SetOverflow();
 
-    void OnCnageRangeEvent();
-
     void SetDeltaADC(int);
+
+    namespace OnEvent
+    {
+        void CnageRange();
+    }
 }

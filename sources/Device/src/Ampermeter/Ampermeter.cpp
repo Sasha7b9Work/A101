@@ -72,7 +72,7 @@ void Ampermeter::Init()
 
     AD7691::Init();
 
-    Indicator::OnCnageRangeEvent();
+    Indicator::OnEvent::CnageRange();
 }
 
 

@@ -191,10 +191,10 @@ void Indicator::ConvertDoubleToText(float value, char out[TextString::MAX_LEN], 
 }
 
 
-void Indicator::OnCnageRangeEvent()
+void Indicator::OnEvent::CnageRange()
 {
-    windowAC.OnChangeRangeEvent();
-    windowDC.OnChangeRangeEvent();
+    windowAC.OnEventChangeRange();
+    windowDC.OnEventChangeRange();
 }
 
 

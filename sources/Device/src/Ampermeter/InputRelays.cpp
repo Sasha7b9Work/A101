@@ -31,7 +31,7 @@ void InputRelays::Range::Set(int _range)
 
     if (need_event)
     {
-        Indicator::OnCnageRangeEvent();
+        Indicator::OnEvent::CnageRange();
     }
 
     static int states[6][7] =

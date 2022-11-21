@@ -11,7 +11,7 @@ public:
     void Enable();
     void Disable();
     void SetMeasure(const char [TextString::MAX_LEN]);
-    void OnChangeRangeEvent();
+    void OnEventChangeRange();
 private:
 #ifdef WIN32
     static const int HEIGHT = 92;

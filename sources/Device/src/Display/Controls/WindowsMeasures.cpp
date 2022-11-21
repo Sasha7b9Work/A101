@@ -39,11 +39,11 @@ WindowMeasure::WindowMeasure(int x, int y, bool _is_signed, int font, pchar _tit
 
 void WindowMeasure::Init()
 {
-    OnChangeRangeEvent();
+    OnEventChangeRange();
 }
 
 
-void WindowMeasure::OnChangeRangeEvent()
+void WindowMeasure::OnEventChangeRange()
 {
     int range = InputRelays::Range::Current();
 

@@ -18,7 +18,7 @@ namespace Calibrator
         Start
     };
 
-    static State state = State::Start;
+//    static State state = State::Start;
 
     // level - 0: 0mA, 1 - верхний уровень
     static void DrawPromt(int range, int level);
@@ -39,7 +39,7 @@ void Calibrator::ExecuteCalibration()
 
     PageTwo::self->SetAsCurrent();
 
-    Indicator::OnCnageRangeEvent();
+    Indicator::OnEvent::CnageRange();
 }
 
 
