@@ -8,7 +8,8 @@ struct CalibrationSettings
     int zero[6];
 
     float GetGain(int range);      // Коэффициент усиления
-    void SetGain(int range, float);
+    void SetGainK(int range, float);
+    float GetGainK(int range);
 
     int GetZero(int range);
     void SetZero(int range, int);

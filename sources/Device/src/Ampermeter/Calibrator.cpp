@@ -61,9 +61,6 @@ namespace Calibrator
     static void CalibrateGain(int range);
 
     static void RestoreSettings();
-
-    // ѕрочитать данные и рассчитать параметры
-    static void ReadDataAndCalculate(int range);
 }
 
 
@@ -115,7 +112,7 @@ void Calibrator::ExecuteCalibration()
 
         Nextion::DrawString(x0 + width, y, width, height, 2, Color::White, Color::Background, buffer);
 
-        std::sprintf(buffer, "%e", (double)set.cal.GetGain(range));
+        std::sprintf(buffer, "%.10f", (double)set.cal.GetGainK(range));
 
         Nextion::DrawString(x0 + width * 2, y, width * 2, height, 2, Color::White, Color::Background, buffer);
     }
@@ -248,18 +245,6 @@ float Calibrator::CalibratorZero::CalculateDC(int zero)
     Ampermeter::ReadData();
     Calculator::AppendData();
     return Calculator::GetDC();
-}
-
-
-void Calibrator::ReadDataAndCalculate(int range)
-{
-    timeLine.Draw();
-
-    Ampermeter::ReadData();
-
-    Calculator::AppendData();
-
-    LOG_WRITE("zero = %d, ac = %e, dc = %e", set.cal.GetZero(range), (double)Calculator::GetAC(), (double)Calculator::GetDC());
 }
 
 
