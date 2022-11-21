@@ -18,9 +18,9 @@ namespace Calibrator
         Start
     };
 
-//    static State state = State::Start;
+    static State state = State::Start;
 
-    // level - 0: 0mA, 1 - верхний уровень
+    // level - 0: 0mA, 1 - ЧЕТИОЙК ХТПЧЕОШ
     static void DrawPromt(int range, int level);
 }
 
@@ -51,30 +51,32 @@ bool Calibrator::InProcess()
 
 void Calibrator::DrawPromt(int range, int level)
 {
-    const int height = 30;
+    const int height = 40;
+    const int width = 550;
     const int delta = 60;
+    const int x = 140;
 
-    int y = 0;
+    int y = 30;
 
     static const char *ranges[6] = { "2 mA", "20 mA", "200 mA", "2 A", "20 A", "50 A" };
 
     char buffer[50] = { '\0' };
 
-    std::sprintf(buffer, "Калибровка диапазона %s", ranges[range]);
+    std::sprintf(buffer, "лБМЙВТПЧЛБ ДЙБРБЪПОБ %s.", ranges[range]);
 
     Nextion::DrawString(10, y, 780, height, 2, Color::White, Color::Background, buffer, 1);
 
     y += delta + delta / 2;
 
-    Nextion::DrawString(10, y, 780, height, 2, Color::White, Color::Background, "Подайте на вход амперметра");
+    Nextion::DrawString(x, y, width, height, 2, Color::White, Color::Background, "рПДБКФЕ ОБ ЧИПД БНРЕТНЕФТБ");
 
     y += delta;
 
-    std::sprintf(buffer, "постоянный ток величиной %s", level == 0 ? "0 mA" : ranges[range]);
+    std::sprintf(buffer, "РПУФПСООЩК ФПЛ ЧЕМЙЮЙОПК %s", level == 0 ? "0 mA" : ranges[range]);
 
-    Nextion::DrawString(10, y, 780, height, 2, Color::White, Color::Background, buffer);
+    Nextion::DrawString(x, y, width, height, 2, Color::White, Color::Background, buffer);
 
     y += delta;
 
-    Nextion::DrawString(10, y, 780, height, 2, Color::White, Color::Background, "и нажмите кнопку \"Готово\".");
+    Nextion::DrawString(x, y, width, height, 2, Color::White, Color::Background, "Й ОБЦНЙФЕ ЛОПРЛХ <зПФПЧП>.");
 }
