@@ -4,8 +4,8 @@
 
 struct CalibrationSettings
 {
-    float Gain(int range);      // Коэффициент усиления
-    int Zero(int range);
+    float GetGain(int range);      // Коэффициент усиления
+    int GetZero(int range);
 };
 
 

@@ -89,7 +89,7 @@ void Nextion::Button::Highligth(pchar _name_button, bool _highlight)
 }
 
 
-void Nextion::Button::Eanble(pchar _name_button)
+void Nextion::Button::Enable(pchar _name_button)
 {
     Screen::Button::Enable(_name_button);
 }

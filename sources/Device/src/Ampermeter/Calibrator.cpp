@@ -6,6 +6,7 @@
 #include "Menu/Pages/Pages.h"
 #include "Display/Indicator.h"
 #include "Hardware/HAL/HAL.h"
+#include "Settings.h"
 #include <cstdio>
 
 
@@ -96,9 +97,15 @@ void Calibrator::ProcedureCalibrate(int range, int level)
 }
 
 
-void Calibrator::CalibrateHardware(int range, int level)
+void Calibrator::CalibrateHardware(int, int)
 {
     TimeMeterMS meter;
+
+    Settings settings = set;
+
+    set.firLPF = false;
+    set.middle_of_3 = false;
+    set.smooth = false;
 
     Nextion::FillRect(100, 90, 600, 200, Color::Background);
 
@@ -107,7 +114,11 @@ void Calibrator::CalibrateHardware(int range, int level)
     while (meter.ElapsedTime() < 5000)
     {
         timeLine.Draw();
+
+
     }
+
+    set = settings;
 
     Nextion::FillRect(100, 90, 600, 200, Color::Background);
 }
