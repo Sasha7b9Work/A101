@@ -156,7 +156,7 @@ bool Ampermeter::OutOfRange()
 {
     static const float maxs[6] = { 2e-3f, 20e-3f, 200e-3f, 2.0f, 20.0f, 50.0f };
 
-    float max = maxs[InputRelays::Range::Current()] * 1.1f * 1e3f;
+    float max = maxs[Range::Current()] * 1.1f * 1e3f;
 
     float value = std::fabsf(Calculator::GetDC()) + Calculator::GetAC();
 

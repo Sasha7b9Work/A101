@@ -8,22 +8,19 @@
 #include "Settings.h"
 
 
-namespace InputRelays
+namespace Range
 {
-    namespace Range
-    {
-        static int current = 3;
-        static int prev = 0;
+    static int current = 3;
+    static int prev = 0;
 
-        static void Load()
-        {
-            Set(current);
-        }
+    static void Load()
+    {
+        Set(current);
     }
 }
 
 
-void InputRelays::Range::Set(int _range)
+void Range::Set(int _range)
 {
     bool need_event = (current != _range);
 
@@ -88,13 +85,13 @@ bool InputRelays::IsEnabledZero()
 }
 
 
-int InputRelays::Range::Current()
+int Range::Current()
 {
     return current;
 }
 
 
-int InputRelays::Range::Prev()
+int Range::Prev()
 {
     return prev;
 }

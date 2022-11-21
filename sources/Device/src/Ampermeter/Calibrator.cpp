@@ -203,7 +203,7 @@ void Calibrator::CalibratorZero::Run()
 {
     const int zero = set.cal.GetZero(range);
 
-    InputRelays::Range::Set(range);
+    Range::Set(range);
 
     float dc = CalculateDC(0);
 
@@ -260,7 +260,7 @@ float Calibrator::CalibratorZero::CalculateDC(int zero)
 
 void Calibrator::CalibrateGain(int)
 {
-//    set.cal.SetGain(range, 1.0f);
+
 }
 
 

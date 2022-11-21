@@ -45,7 +45,7 @@ void WindowMeasure::Init()
 
 void WindowMeasure::OnEventChangeRange()
 {
-    int range = InputRelays::Range::Current();
+    int range = Range::Current();
 
     int x0 = sign.GetX() + sign.GetWidth();
 

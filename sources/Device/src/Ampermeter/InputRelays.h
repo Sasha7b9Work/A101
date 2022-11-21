@@ -2,19 +2,20 @@
 #pragma once
 
 
+namespace Range
+{
+    void Set(int);
+
+    // Текущее значение
+    int Current();
+
+    // Предыдущее значение
+    int Prev();
+}
+
+
 namespace InputRelays
 {
-    namespace Range
-    {
-        void Set(int);
-
-        // Текущее значение
-        int Current();
-
-        // Предыдущее значение
-        int Prev();
-    }
-
     // Включить режим "нуль" (измерения невозможны)
     void EnableZero();
 
