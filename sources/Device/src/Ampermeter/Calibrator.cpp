@@ -61,6 +61,8 @@ namespace Calibrator
     static void CalibrateGain(int range);
 
     static void RestoreSettings();
+
+    static void DrawParameters();
 }
 
 
@@ -92,9 +94,23 @@ void Calibrator::ExecuteCalibration()
 
     RestoreSettings();
 
+    DrawParameters();
+
+    Nextion::Page::Enable(0);
+
+    PageTwo::self->SetAsCurrent();
+
+    Indicator::OnEvent::CnageRange();
+
+    in_process = false;
+}
+
+
+void Calibrator::DrawParameters()
+{
     Nextion::FillRect(1, 1, 795, 350, Color::Background);
 
-    static const pchar units[6] = {"2 mA", "20 mA", "200 mA", "2 A", "20 A", "50 A"};
+    static const pchar units[6] = { "2 mA", "20 mA", "200 mA", "2 A", "20 A", "50 A" };
 
     for (int range = 0; range < 6; range++)
     {
@@ -124,14 +140,6 @@ void Calibrator::ExecuteCalibration()
     {
         Nextion::Update();
     }
-
-    Nextion::Page::Enable(0);
-
-    PageTwo::self->SetAsCurrent();
-
-    Indicator::OnEvent::CnageRange();
-
-    in_process = false;
 }
 
 
