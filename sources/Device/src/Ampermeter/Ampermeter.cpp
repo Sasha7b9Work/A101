@@ -78,6 +78,25 @@ void Ampermeter::Init()
 
 void Ampermeter::Update()
 {
+    ReadData();
+
+    SampleRate::Current::Set(Calculator::AppendData());
+
+    if (OutOfRange())
+    {
+        Indicator::SetOverflow();
+    }
+    else
+    {
+        Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC());
+
+        DiagramInput::SetData();
+    }
+}
+
+
+void Ampermeter::ReadData()
+{
     TimeMeterMS meter;
 
     BufferADC::Clear(SampleRate::Current::Get());
@@ -115,7 +134,7 @@ void Ampermeter::Update()
         }
     }
 
-//    LOG_WRITE("time measure %d ms, time point %f us", meter.ElapsedTime(), (meter.ElapsedTime() / (double)BufferADC::SIZE) * 1e3);
+    //    LOG_WRITE("time measure %d ms, time point %f us", meter.ElapsedTime(), (meter.ElapsedTime() / (double)BufferADC::SIZE) * 1e3);
 
     HAL_TIM4::Stop();
 
@@ -130,19 +149,6 @@ void Ampermeter::Update()
     }
 
     BufferADC::CalculateLimits();
-
-    SampleRate::Current::Set(Calculator::AppendData());
-
-    if (OutOfRange())
-    {
-        Indicator::SetOverflow();
-    }
-    else
-    {
-        Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC());
-
-        DiagramInput::SetData();
-    }
 }
 
 

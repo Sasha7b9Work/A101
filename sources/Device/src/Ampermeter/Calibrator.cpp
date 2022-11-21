@@ -29,6 +29,8 @@ namespace Calibrator
 
     static TimeLine timeLine;
 
+    static Settings stored_set;
+
     enum class State
     {
         Start
@@ -45,11 +47,25 @@ namespace Calibrator
     static void ProcedureCalibrate(int range, int level);
 
     static void CalibrateHardware(int range, int level);
+
+    // Откалибровать смещение нуля
+    static void CalibrateZero(int range);
+
+    // Откалибровать усиление
+    static void CalibrateGain(int range);
+
+    static void RestoreSettings();
 }
 
 
 void Calibrator::ExecuteCalibration()
 {
+    stored_set = set;
+
+    set.firLPF = false;
+    set.middle_of_3 = false;
+    set.smooth = false;
+
     Nextion::Page::Enable(1);
 
     for (int range = 0; range < 6; range++)
@@ -60,11 +76,23 @@ void Calibrator::ExecuteCalibration()
         }
     }
 
+    RestoreSettings();
+
     Nextion::Page::Enable(0);
 
     PageTwo::self->SetAsCurrent();
 
     Indicator::OnEvent::CnageRange();
+}
+
+
+void Calibrator::RestoreSettings()
+{
+    CalibrationSettings cal_set = set.cal;
+
+    set = stored_set;
+
+    set.cal = cal_set;
 }
 
 
@@ -92,35 +120,39 @@ void Calibrator::ProcedureCalibrate(int range, int level)
     }
     else if (event_skip)
     {
-
+       
     }
 }
 
 
-void Calibrator::CalibrateHardware(int, int)
+void Calibrator::CalibrateHardware(int range, int level)
 {
-    TimeMeterMS meter;
-
-    Settings settings = set;
-
-    set.firLPF = false;
-    set.middle_of_3 = false;
-    set.smooth = false;
-
-    Nextion::FillRect(100, 90, 600, 200, Color::Background);
-
     timeLine.Reset();
 
-    while (meter.ElapsedTime() < 5000)
+    Nextion::FillRect(100, 90, 600, 200, Color::Background);
+
+    if (level == 0)
     {
-        timeLine.Draw();
-
-
+        CalibrateZero(range);
+    }
+    else if (level == 1)
+    {
+        CalibrateGain(range);
     }
 
-    set = settings;
-
     Nextion::FillRect(100, 90, 600, 200, Color::Background);
+}
+
+
+void Calibrator::CalibrateZero(int)
+{
+
+}
+
+
+void Calibrator::CalibrateGain(int)
+{
+
 }
 
 
