@@ -27,6 +27,8 @@ namespace Calibrator
     static void ProcedureCalibrate(int range, int level);
 
     static void CalibrateHardware(int range, int level);
+
+    static void DrawTimeLine(uint time);
 }
 
 
@@ -74,6 +76,19 @@ void Calibrator::ProcedureCalibrate(int range, int level)
 
 
 void Calibrator::CalibrateHardware(int range, int level)
+{
+    TimeMeterMS meter;
+
+    Nextion::FillRect(50, 50, 300, 200, Color::ButtonPress);
+
+    while (meter.ElapsedTime() < 1000)
+    {
+        DrawTimeLine(meter.ElapsedTime());
+    }
+}
+
+
+void Calibrator::DrawTimeLine(uint)
 {
 
 }
