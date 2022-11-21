@@ -7,6 +7,9 @@
 #include "Display/Indicator.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings.h"
+#include "Ampermeter/Ampermeter.h"
+#include "Ampermeter/Calculator/Calculator.h"
+#include "Ampermeter/InputRelays.h"
 #include <cstdio>
 
 
@@ -31,15 +34,10 @@ namespace Calibrator
 
     static Settings stored_set;
 
-    enum class State
-    {
-        Start
-    };
-
-//    static State state = State::Start;
-
     static bool event_skip = false;
     static bool event_ready = false;
+
+    static bool in_process = false;
 
     // level - 0: 0mA, 1 - ×ÅÒÈÎÉÊ ÕÒÏ×ÅÎØ
     static void DrawPromt(int range, int level);
@@ -55,11 +53,22 @@ namespace Calibrator
     static void CalibrateGain(int range);
 
     static void RestoreSettings();
+
+    // Ïðî÷èòàòü äàííûå è ðàññ÷èòàòü ïàðàìåòðû
+    static void ReadDataAndCalculate(int range);
+}
+
+
+bool Calibrator::InProcess()
+{
+    return in_process;
 }
 
 
 void Calibrator::ExecuteCalibration()
 {
+    in_process = true;
+
     stored_set = set;
 
     set.firLPF = false;
@@ -83,6 +92,8 @@ void Calibrator::ExecuteCalibration()
     PageTwo::self->SetAsCurrent();
 
     Indicator::OnEvent::CnageRange();
+
+    in_process = false;
 }
 
 
@@ -129,6 +140,8 @@ void Calibrator::CalibrateHardware(int range, int level)
 
     if (level == 0)
     {
+        InputRelays::Range::Set(range);
+
         CalibrateZero(range);
     }
     else if (level == 1)
@@ -142,7 +155,33 @@ void Calibrator::CalibrateHardware(int range, int level)
 
 void Calibrator::CalibrateZero(int range)
 {
-    set.cal.SetZero(range, 0);
+    const int zero = set.cal.GetZero(range);
+
+    Ampermeter::ReadData();
+
+    const int zeros[3] = { -1000, 0, 1000 };
+
+    for (int i = 0; i < 3; i++)
+    {
+        set.cal.SetZero(range, zeros[i]);
+
+        ReadDataAndCalculate(range);
+    }
+
+
+    set.cal.SetZero(range, zero);
+}
+
+
+void Calibrator::ReadDataAndCalculate(int range)
+{
+    timeLine.Draw();
+
+    Ampermeter::ReadData();
+
+    Calculator::AppendData();
+
+    LOG_WRITE("zero = %d, ac = %e, dc = %e", set.cal.GetZero(range), (double)Calculator::GetAC(), (double)Calculator::GetDC());
 }
 
 
@@ -214,7 +253,7 @@ void Calibrator::DrawPromt(int range, int level)
 
     std::sprintf(buffer, "ÐÏÓÔÏÑÎÎÙÊ ÔÏË ×ÅÌÉÞÉÎÏÊ %s", level == 0 ? "0 mA" : ranges[range]);
 
-    Nextion::DrawString(x, y, width, height, 2, Color::White, Color::Background, buffer);
+    Nextion::DrawString(x, y, width + 20, height, 2, Color::White, Color::Background, buffer);
 
     y += delta;
 

@@ -7,6 +7,9 @@ namespace Calibrator
     // Запустить процедуру калибровки
     void ExecuteCalibration();
 
+    // true означает, что находимся в процессе калибровки
+    bool InProcess();
+
     namespace OnEvent
     {
         void ButtonSkip();

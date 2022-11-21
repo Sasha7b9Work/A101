@@ -4,6 +4,7 @@
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Display/Indicator.h"
 #include "Ampermeter/Calculator/Calculator.h"
+#include "Ampermeter/Calibrator.h"
 #include "Settings.h"
 
 
@@ -31,7 +32,10 @@ void InputRelays::Range::Set(int _range)
 
     if (need_event)
     {
-        Indicator::OnEvent::CnageRange();
+        if (!Calibrator::InProcess())
+        {
+            Indicator::OnEvent::CnageRange();
+        }
     }
 
     static int states[6][7] =
