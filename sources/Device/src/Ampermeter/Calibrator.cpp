@@ -63,6 +63,8 @@ namespace Calibrator
     static void RestoreSettings();
 
     static void DrawParameters();
+
+    static void WaitButton();
 }
 
 
@@ -133,13 +135,7 @@ void Calibrator::DrawParameters()
         Nextion::DrawString(x0 + width * 2, y, width * 2, height, 2, Color::White, Color::Background, buffer);
     }
 
-    event_ready = false;
-    event_skip = false;
-
-    while (!event_ready && !event_skip)
-    {
-        Nextion::Update();
-    }
+    WaitButton();
 }
 
 
@@ -157,13 +153,7 @@ void Calibrator::ProcedureCalibrate(int range, int level)
 {
     DrawPromt(range, level);
 
-    event_ready = false;
-    event_skip = false;
-
-    while (!event_ready && !event_skip)
-    {
-        Nextion::Update();
-    }
+    WaitButton();
 
     if (event_ready)
     {
@@ -174,6 +164,18 @@ void Calibrator::ProcedureCalibrate(int range, int level)
 
         Nextion::Button::Enable("buttonOk");
         Nextion::Button::Enable("buttonCancel");
+    }
+}
+
+
+void Calibrator::WaitButton()
+{
+    event_ready = false;
+    event_skip = false;
+
+    while (!event_ready && !event_skip)
+    {
+        Nextion::Update();
     }
 }
 
