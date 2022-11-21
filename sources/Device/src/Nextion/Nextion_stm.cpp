@@ -142,7 +142,7 @@ void Nextion::Button::Highligth(pchar name_button, bool val)
 }
 
 
-void Nextion::Button::Eanble(pchar name_button)
+void Nextion::Button::Enable(pchar name_button)
 {
     Nextion::SendCommandFormat("vis %s,1", name_button);
 }

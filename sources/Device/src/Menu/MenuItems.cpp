@@ -58,7 +58,7 @@ void Button::SetText(pchar _text)
 
 void Button::Enable()
 {
-    Nextion::Button::Eanble(name);
+    Nextion::Button::Enable(name);
 }
 
 

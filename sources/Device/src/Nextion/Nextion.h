@@ -104,7 +104,7 @@ namespace Nextion
 
         void Highligth(pchar name_button, bool);
 
-        void Eanble(pchar name_button);
+        void Enable(pchar name_button);
 
         void Disable(pchar name_button);
     }

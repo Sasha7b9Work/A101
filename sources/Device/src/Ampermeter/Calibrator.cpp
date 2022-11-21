@@ -17,7 +17,7 @@ namespace Calibrator
         void Draw();
     private:
         static const int x = 150;
-        static const int y = 150;
+        static const int y = 220;
         static const int width = 500;
         static const int height = 50;
 
@@ -81,7 +81,13 @@ void Calibrator::ProcedureCalibrate(int range, int level)
 
     if (event_ready)
     {
+        Nextion::Button::Disable("buttonOk");
+        Nextion::Button::Disable("buttonCancel");
+
         CalibrateHardware(range, level);
+
+        Nextion::Button::Enable("buttonOk");
+        Nextion::Button::Enable("buttonCancel");
     }
     else if (event_skip)
     {
@@ -109,7 +115,7 @@ void Calibrator::CalibrateHardware(int range, int level)
 
 void Calibrator::TimeLine::Reset()
 {
-    Nextion::DrawRect(150, 150, 500, 50, Color::White);
+    Nextion::DrawRect(x, y, width, height, Color::White);
 
     last = x;
 
