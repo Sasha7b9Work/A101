@@ -24,7 +24,9 @@ namespace Calibrator
     // level - 0: 0mA, 1 - верхний уровень
     static void DrawPromt(int range, int level);
 
-    static void Calibrate(int range, int level);
+    static void ProcedureCalibrate(int range, int level);
+
+    static void CalibrateHardware(int range, int level);
 }
 
 
@@ -36,7 +38,7 @@ void Calibrator::ExecuteCalibration()
     {
         for (int level = 0; level < 2; level++)
         {
-            Calibrate(range, level);
+            ProcedureCalibrate(range, level);
         }
     }
 
@@ -48,7 +50,7 @@ void Calibrator::ExecuteCalibration()
 }
 
 
-void Calibrator::Calibrate(int range, int level)
+void Calibrator::ProcedureCalibrate(int range, int level)
 {
     DrawPromt(range, level);
 
@@ -62,12 +64,18 @@ void Calibrator::Calibrate(int range, int level)
 
     if (event_ready)
     {
-
+        CalibrateHardware(range, level);
     }
     else if (event_skip)
     {
 
     }
+}
+
+
+void Calibrator::CalibrateHardware(int range, int level)
+{
+
 }
 
 
