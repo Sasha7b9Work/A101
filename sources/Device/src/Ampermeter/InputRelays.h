@@ -14,6 +14,8 @@ struct Range
 
     static void Load() { Set(current); }
 
+    static float Max(int);
+
 private:
 
     static int current;

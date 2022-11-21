@@ -12,6 +12,14 @@ int Range::current = 3;
 int Range::prev = 0;
 
 
+float Range::Max(int range)
+{
+    static const float max[6] = { 2e-3f, 20e-3f, 200e-3f, 2.0f, 20.0f, 50.0f };
+
+    return max[range];
+}
+
+
 void Range::Set(int _range)
 {
     bool need_event = (current != _range);

@@ -83,6 +83,7 @@ void Calibrator::ExecuteCalibration()
     set.firLPF = false;
     set.middle_of_3 = false;
     set.smooth = false;
+    set.enabled_zero = false;
 
     Nextion::Page::Enable(1);
 
@@ -90,6 +91,8 @@ void Calibrator::ExecuteCalibration()
     {
         for (int level = 0; level < 2; level++)
         {
+            Range::Set(3);
+
             ProcedureCalibrate(range, level);
         }
     }
@@ -260,7 +263,23 @@ float Calibrator::CalibratorZero::CalculateDC(int zero)
 
 void Calibrator::CalibrateGain(int range)
 {
+    Range::Set(range);
 
+    Ampermeter::ReadData();
+    Calculator::AppendData();
+
+    float dc = std::fabsf(Calculator::GetDC());
+
+    float k = Range::Max(range) / dc;
+
+    if (range < 3)
+    {
+        k *= 1e3f;
+    }
+
+    set.cal.SetGainK(range, k);
+
+    LOG_WRITE("range = %d, dc = %f, k = %f", range, (double)dc, (double)k);
 }
 
 
