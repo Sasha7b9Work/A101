@@ -189,6 +189,10 @@ void Calibrator::CalibrateHardware(int range, int level)
 
     Nextion::FillRect(100, 90, 600, 200, Color::Background);
 
+    Range::Set(range);
+
+    TimeMeterMS().Wait(1000);
+
     if (level == 0)
     {
         CalibratorZero(range).Run();
@@ -205,8 +209,6 @@ void Calibrator::CalibrateHardware(int range, int level)
 void Calibrator::CalibratorZero::Run()
 {
     const int zero = set.cal.GetZero(range);
-
-    Range::Set(range);
 
     float dc = CalculateDC(0);
 
@@ -263,8 +265,6 @@ float Calibrator::CalibratorZero::CalculateDC(int zero)
 
 void Calibrator::CalibrateGain(int range)
 {
-    Range::Set(range);
-
     Ampermeter::ReadData();
     Calculator::AppendData();
 
