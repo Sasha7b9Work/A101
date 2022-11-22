@@ -27,10 +27,14 @@
 
 /* Includes ------------------------------------------------------------------*/
 
+#ifndef WIN32
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wpadded"
+#endif
 #include "stm32f4xx_hal_conf.h"
+#ifndef WIN32
 #pragma clang diagnostic pop
+#endif
 
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{

@@ -56,13 +56,21 @@ bool Settings::IsEqual(const Settings *rhs) const
         return false;
     }
 
-    return std::memcmp(PointerToFirstData(), rhs->PointerToFirstData(), SizeData()) == 0;
+    const uint8 *lhs_data = PointerToFirstData();
+    const uint8 *rhs_data = rhs->PointerToFirstData();
+    uint size_data = SizeData();
+
+    bool result = std::memcmp(lhs_data, rhs_data, size_data) == 0;
+
+    return result;
 }
 
 
 uint Settings::SizeData() const
 {
-    return sizeof(Settings) - 2 * sizeof(size);
+    uint result = sizeof(*this) - 2 * sizeof(size);
+
+    return result;
 }
 
 

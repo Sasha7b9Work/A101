@@ -40,16 +40,16 @@ namespace HAL_EEPROM
         // Возвращает первое свободное для записи место
         uint8 *FindEmptyPlace()
         {
-            uint8 *pointer = (uint8 *)address;
+            uint *pointer = (uint *)address;
 
             while ((uint)pointer < address + size)
             {
-                if ((uint)(*pointer) == (uint)(-1))
+                if (*pointer == (uint)(-1))
                 {
-                    return pointer;
+                    return (uint8 *)pointer;
                 }
 
-                pointer += size_place;
+                pointer += size_place / sizeof(uint);
             }
 
             Erase();
@@ -59,16 +59,16 @@ namespace HAL_EEPROM
         // Возвращает последние сохранённые данные
         uint8 *FindLastSaved()
         {
-            uint8 *pointer = (uint8 *)address;
+            uint *pointer = (uint *)address;
 
             while ((uint)pointer < address + size)
             {
-                if ((uint)(*pointer) != (uint)(-1))
+                if (*pointer != (uint)(-1))
                 {
-                    return pointer;
+                    return (uint8 *)pointer;
                 }
 
-                pointer += size_place;
+                pointer += size_place / sizeof(uint);
             }
 
             return nullptr;
@@ -105,7 +105,7 @@ namespace HAL_EEPROM
 
             HAL_FLASH_Lock();
         }
-        void Read(uint8 *place, void *data, uint num_bytes)
+        void Read(const uint8 *place, void *data, uint num_bytes)
         {
             std::memcpy(data, place, num_bytes);
         }
@@ -165,7 +165,7 @@ namespace HAL_EEPROM
             {
                 uint8 *place = FindEmptyPlace();
 
-                Sector::Write(place, settings, sizeof(settings));
+                Sector::Write(place, settings, sizeof(*settings));
 
                 T loaded;
 
@@ -179,7 +179,7 @@ namespace HAL_EEPROM
         {
             uint8 *place = FindLastSaved();
 
-            uint size_settings = (uint)(*place);
+            uint size_settings = *((uint *)place); //-V522
 
             if (size_settings != sizeof(T))
             {
@@ -188,9 +188,11 @@ namespace HAL_EEPROM
 
             Sector::Read(place, settings, size_settings);
 
-            uint crc32_settings = (uint)(*(place + sizeof(settings->size)));
+            uint crc32_settings = *((uint *)(place + sizeof(settings->size)));
 
-            return (crc32_settings == settings->CalculateCRC32());
+            bool result = (crc32_settings == settings->CalculateCRC32());
+
+            return result;
         }
     };
 
