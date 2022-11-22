@@ -74,6 +74,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#pragma clang diagnostic ignored "-Wextra-semi-stmt"
+#pragma clang diagnostic ignored "-Wmissing-variable-declarations"
 
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{

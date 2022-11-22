@@ -26,7 +26,11 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wpadded"
 #include "stm32f4xx_hal_conf.h"
+#pragma clang diagnostic pop
 
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{
