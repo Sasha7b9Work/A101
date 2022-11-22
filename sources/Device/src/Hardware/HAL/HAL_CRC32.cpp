@@ -23,7 +23,7 @@ void HAL_CRC32::Init()
 }
 
 
-uint HAL_CRC32::Calculate(void *data, uint size)
+uint HAL_CRC32::Calculate(const void *data, uint size)
 {
     if ((size % 4) == 0)
     {

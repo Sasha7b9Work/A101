@@ -23,7 +23,7 @@ namespace NS_Settings
 Settings set = NS_Settings::set_def;
 
 
-void Settings::Store()
+void Settings::Store() const
 {
     NS_Settings::stored = *this;
 }
@@ -37,6 +37,9 @@ void Settings::Restore()
 
 void Settings::Save()
 {
+    size = sizeof(*this);
+    crc32 = CalculateCRC32();
+
     Settings loaded;
 
     if (!HAL_EEPROM::Load(&loaded) || !loaded.IsEqual(this))
@@ -46,7 +49,7 @@ void Settings::Save()
 }
 
 
-bool Settings::IsEqual(Settings *rhs)
+bool Settings::IsEqual(const Settings *rhs) const
 {
     if (size != rhs->size)
     {
@@ -57,15 +60,15 @@ bool Settings::IsEqual(Settings *rhs)
 }
 
 
-uint Settings::SizeData()
+uint Settings::SizeData() const
 {
     return sizeof(Settings) - 2 * sizeof(size);
 }
 
 
-uint8 *Settings::PointerToFirstData()
+const uint8 *Settings::PointerToFirstData() const
 {
-    return (uint8 *)this + 2 * sizeof(size);
+    return (const uint8 *)this + 2 * sizeof(size);
 }
 
 
@@ -78,7 +81,7 @@ void Settings::Load()
 }
 
 
-uint Settings::CalculateCRC32()
+uint Settings::CalculateCRC32() const
 {
     return HAL_CRC32::Calculate(PointerToFirstData(), SizeData());
 }

@@ -2,12 +2,15 @@
 #include "defines.h"
 #include "Settings/CalibrationSettings.h"
 #include "Hardware/HAL/HAL.h"
+#include <cstring>
 
 
 namespace NS_CalibrationSettings
 {
     static CalibrationSettings cal_def
     {
+        sizeof(CalibrationSettings),
+        0,
         { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f },
         { 3245, 3245, 3245, 3251, 3245, 3242 }
     };
@@ -61,4 +64,33 @@ void CalibrationSettings::Load()
     {
         *this = NS_CalibrationSettings::cal_def;
     }
+}
+
+
+uint CalibrationSettings::CalculateCRC32() const
+{
+    return HAL_CRC32::Calculate(PointerToFirstData(), SizeData());
+}
+
+
+bool CalibrationSettings::IsEqual(const CalibrationSettings *rhs) const
+{
+    if (size != rhs->size)
+    {
+        return false;
+    }
+
+    return std::memcmp(PointerToFirstData(), rhs->PointerToFirstData(), SizeData()) == 0;
+}
+
+
+uint CalibrationSettings::SizeData() const
+{
+    return sizeof(*this) - 2 * sizeof(size);
+}
+
+
+const uint8 *CalibrationSettings::PointerToFirstData() const
+{
+    return (const uint8 *)this + 2 * sizeof(size);
 }

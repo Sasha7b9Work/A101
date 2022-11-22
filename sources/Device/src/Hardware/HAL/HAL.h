@@ -21,7 +21,7 @@ namespace HAL_CRC32
 {
     void Init();
 
-    uint Calculate(void *data, uint num_bytes);
+    uint Calculate(const void *data, uint num_bytes);
 }
 
 

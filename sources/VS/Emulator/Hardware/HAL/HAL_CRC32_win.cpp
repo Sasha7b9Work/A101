@@ -3,7 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 
 
-uint HAL_CRC32::Calculate(void *, uint)
+uint HAL_CRC32::Calculate(const void *, uint)
 {
     return 0;
 }

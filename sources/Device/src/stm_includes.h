@@ -4,6 +4,7 @@
 #ifndef WIN32
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+#pragma clang diagnostic ignored "-Wpadded"
 #endif
 #include <stm32f4xx_hal.h>
 #ifndef WIN32

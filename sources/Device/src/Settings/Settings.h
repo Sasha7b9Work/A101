@@ -7,6 +7,7 @@ struct Settings
 {
     uint size;                  // Здесь размер настроек - для проверки того, что версии соответствуют
     uint crc32;                 // Здесь контрольная сумма - для проверки правильности сохранения
+
     bool middle_of_3;           // Влючение медианного фильтра
     bool smooth;                // Включение сглаживания по соседним точкам
     bool enabled_zero;          // "Влючён ноль"
@@ -15,14 +16,14 @@ struct Settings
     void Save();
     void Load();
 
-    void Store();
+    void Store() const;
     void Restore();
 
-    uint CalculateCRC32();
-    bool IsEqual(Settings *);
+    uint CalculateCRC32() const;
+    bool IsEqual(const Settings *) const;
 
-    uint8 *PointerToFirstData();
-    uint SizeData();
+    const uint8 *PointerToFirstData() const;
+    uint SizeData() const;
 };
 
 

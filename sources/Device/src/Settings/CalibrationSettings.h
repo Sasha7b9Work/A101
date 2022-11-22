@@ -4,18 +4,27 @@
 
 struct CalibrationSettings
 {
+    uint size;                      // Здесь размер настроек - для проверки того, что версии соответствуют
+    uint crc32;                     // Здесь контрольная сумма - для проверки правильности сохранения
+
     float gain[6];
     int zero[6];
 
-    float GetGain(int range);      // Коэффициент усиления
+    float GetGain(int range);       // Коэффициент усиления
     void SetGainK(int range, float);
     float GetGainK(int range);
+
+    void Save();
+    void Load();
 
     int GetZero(int range);
     void SetZero(int range, int);
 
-    void Save();
-    void Load();
+    uint CalculateCRC32() const;
+    bool IsEqual(const CalibrationSettings *) const;
+
+    const uint8 *PointerToFirstData() const;
+    uint SizeData() const;
 };
 
 
