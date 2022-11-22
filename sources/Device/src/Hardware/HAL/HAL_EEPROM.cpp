@@ -167,6 +167,8 @@ namespace HAL_EEPROM
 
                 Sector::Write(place, settings, sizeof(*settings));
 
+                LOG_WRITE("Saving settings to %x", place);
+
                 T loaded;
 
                 Read(&loaded);

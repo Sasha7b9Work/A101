@@ -90,7 +90,7 @@ void Button::ToggleHighlight()
 
 void Button::Press()
 {
-    LOG_WRITE("Press button %s", text);
+//    LOG_WRITE("Press button %s", text);
 
     funcOnPress(this);
 }
