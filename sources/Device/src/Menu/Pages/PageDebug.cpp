@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
-#include "Settings.h"
+#include "Settings/Settings.h"
 
 
 namespace PageDebug

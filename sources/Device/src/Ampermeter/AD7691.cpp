@@ -4,7 +4,7 @@
 #include "Generator/Generator.h"
 #include "Ampermeter/InputRelays.h"
 #include "Ampermeter/Calculator/Averager.h"
-#include "Settings.h"
+#include "Settings/Settings.h"
 #include "stm_includes.h"
 
 

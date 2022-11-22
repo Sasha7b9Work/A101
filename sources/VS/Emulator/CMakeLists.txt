@@ -95,6 +95,7 @@ file(GLOB NEXTION               ./Nextion/*.*
                                 ../../Device/src/Nextion/Nextion.cpp)
 file(GLOB SCPI                  ../../Device/src/SCPI/*.*)
 file(GLOB SCPI_PARSER           ../../Device/src/SCPI/Parser/*.*)
+file(GLOB SETTINGS              ../../Device/src/Settings/*.*)
 file(GLOB UTILS                 ../../Device/src/Utils/*.*)
 
 source_group(src                   FILES ${SRC})
@@ -110,6 +111,7 @@ source_group(Menu/Pages            FILES ${MENU_PAGES})
 source_group(Nextion               FILES ${NEXTION})
 source_group(SCPI                  FILES ${SCPI})
 source_group(SCPI/Parser           FILES ${SCPI_PARSER})
+source_group(Settings              FILES ${SETTINGS})
 source_group(Utils                 FILES ${UTILS})
 
 add_executable( ${PROJECT_NAME}
@@ -126,6 +128,7 @@ add_executable( ${PROJECT_NAME}
                 ${NEXTION}
                 ${SCPI}
                 ${SCPI_PARSER}
+                ${SETTINGS}
                 ${UTILS}
                 )
 

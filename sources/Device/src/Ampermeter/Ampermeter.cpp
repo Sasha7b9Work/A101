@@ -14,7 +14,7 @@
 #include "Hardware/Timer.h"
 #include "Display/DiagramInput.h"
 #include "Ampermeter/Calculator/Averager.h"
-#include "Settings.h"
+#include "Settings/Settings.h"
 #include "Ampermeter/FIR.h"
 #include "stm_includes.h"
 #include <cmath>

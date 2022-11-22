@@ -6,7 +6,7 @@
 #include "Menu/Pages/Pages.h"
 #include "Display/Indicator.h"
 #include "Hardware/HAL/HAL.h"
-#include "Settings.h"
+#include "Settings/Settings.h"
 #include "Ampermeter/Ampermeter.h"
 #include "Ampermeter/Calculator/Calculator.h"
 #include "Ampermeter/InputRelays.h"

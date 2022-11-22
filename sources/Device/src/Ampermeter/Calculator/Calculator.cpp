@@ -8,7 +8,7 @@
 #include "Ampermeter/Calculator/ResolverAC.h"
 #include "Hardware/Timer.h"
 #include "Ampermeter/InputRelays.h"
-#include "Settings.h"
+#include "Settings/Settings.h"
 #include <cmath>
 
 

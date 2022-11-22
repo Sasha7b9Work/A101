@@ -5,7 +5,7 @@
 #include "Display/Indicator.h"
 #include "Ampermeter/Calculator/Calculator.h"
 #include "Ampermeter/Calibrator.h"
-#include "Settings.h"
+#include "Settings/Settings.h"
 
 
 int Range::current = 3;
