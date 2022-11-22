@@ -805,6 +805,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_CRC32.cpp</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_hal_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_crc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2065,6 +2070,11 @@
               <FileName>HAL_CRC32.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_CRC32.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_crc.c</FilePath>
             </File>
           </Files>
         </Group>
