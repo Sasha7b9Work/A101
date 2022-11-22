@@ -93,11 +93,16 @@ void Calibrator::ExecuteCalibration()
         }
     }
 
-    cal.Save();
-
     set.Restore();
 
     DrawParameters();
+
+    WaitButton();
+
+    if (event_ready)
+    {
+        cal.Save();
+    }
 
     Nextion::Page::Enable(0);
 
@@ -135,8 +140,6 @@ void Calibrator::DrawParameters()
 
         Nextion::DrawString(x0 + width * 2, y, width * 2, height, 2, Color::White, Color::Background, buffer);
     }
-
-    WaitButton();
 }
 
 

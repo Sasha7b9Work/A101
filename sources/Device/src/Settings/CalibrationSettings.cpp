@@ -54,7 +54,17 @@ void CalibrationSettings::SetZero(int range, int value)
 
 void CalibrationSettings::Save()
 {
-    HAL_EEPROM::Save(this);
+    size = sizeof(*this);
+    crc32 = CalculateCRC32();
+
+    CalibrationSettings loaded;
+
+    HAL_EEPROM::Load(&loaded);
+
+    if (!loaded.IsEqual(this))
+    {
+        HAL_EEPROM::Save(this);
+    }
 }
 
 

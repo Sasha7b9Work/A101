@@ -70,9 +70,7 @@ bool Settings::IsEqual(const Settings *rhs) const
 
 uint Settings::SizeData() const
 {
-    uint result = sizeof(*this) - 2 * sizeof(size);
-
-    return result;
+    return sizeof(*this) - 2 * sizeof(size);
 }
 
 

@@ -63,9 +63,16 @@ namespace HAL_EEPROM
 
             while ((uint)pointer < address + size)
             {
-                if (*pointer != (uint)(-1))
+                if (*pointer == (uint)(-1))
                 {
-                    return (uint8 *)pointer;
+                    if (pointer == (uint *)address)
+                    {
+                        return nullptr;
+                    }
+                    else
+                    {
+                        return (uint8 *)(pointer - size_place / sizeof(uint));
+                    }
                 }
 
                 pointer += size_place / sizeof(uint);
@@ -154,10 +161,10 @@ namespace HAL_EEPROM
         }
     };
 
-    template<class T>
+    template<class T, uint addr>
     struct SectorSettings : public Sector
     {
-        SectorSettings() : Sector(SECTOR_SETTINGS, 128 * 1024, 128) {}
+        SectorSettings() : Sector(addr, 128 * 1024, 128) {}
 
         void Write(T *settings)
         {
@@ -200,8 +207,8 @@ namespace HAL_EEPROM
         }
     };
 
-    static SectorSettings<Settings> sect_set;
-    static SectorSettings<CalibrationSettings> sect_cal;
+    static SectorSettings<Settings, SECTOR_SETTINGS> sect_set;
+    static SectorSettings<CalibrationSettings, SECTOR_CALIBRATION> sect_cal;
 }
 
 
