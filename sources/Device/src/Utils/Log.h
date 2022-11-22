@@ -6,10 +6,16 @@
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
 #endif
 
-#define LOG_WRITE(...)  Log::Write(__VA_ARGS__)
-#define LOG_ERROR(...)  Log::Write(__VA_ARGS__)
-//#define LOG_TRACE()     Log::Write(__FILE__, __LINE__, "")
-#define LOG_WRITE_TRACE(...) Log::Write(__FILE__, __LINE__, __VA_ARGS__)
+#ifdef LOGGED
+    #define LOG_WRITE(...)  Log::Write(__VA_ARGS__)
+    #define LOG_ERROR(...)  Log::Write(__VA_ARGS__)
+    //#define LOG_TRACE()     Log::Write(__FILE__, __LINE__, "")
+    #define LOG_WRITE_TRACE(...) Log::Write(__FILE__, __LINE__, __VA_ARGS__)
+#else
+    #define LOG_WRITE(...)
+    #define LOG_ERROR(...)
+    #define LOG_WRITE_TRACE(...)
+#endif
 
 #ifndef WIN32
 #pragma clang diagnostic pop

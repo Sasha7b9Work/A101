@@ -42,7 +42,9 @@ void Settings::Save()
 
     Settings loaded;
 
-    if (!HAL_EEPROM::Load(&loaded) || !loaded.IsEqual(this))
+    HAL_EEPROM::Load(&loaded);
+
+    if (!loaded.IsEqual(this))
     {
         HAL_EEPROM::Save(this);
     }

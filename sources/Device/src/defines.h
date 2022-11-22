@@ -2,6 +2,10 @@
 #pragma once
 
 
+// Закомментировать, чтобы логи не валили в UART
+#define LOGGED
+
+
 #ifndef WIN32
 #pragma clang diagnostic ignored "-Wglobal-constructors"
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
