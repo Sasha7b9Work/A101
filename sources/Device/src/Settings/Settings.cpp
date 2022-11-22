@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
+#include <cstring>
 
 
 namespace NS_Settings
@@ -36,7 +37,35 @@ void Settings::Restore()
 
 void Settings::Save()
 {
-    HAL_EEPROM::Save(this);
+    Settings loaded;
+
+    if (!HAL_EEPROM::Load(&loaded) || !loaded.IsEqual(this))
+    {
+        HAL_EEPROM::Save(this);
+    }
+}
+
+
+bool Settings::IsEqual(Settings *rhs)
+{
+    if (size != rhs->size)
+    {
+        return false;
+    }
+
+    return std::memcmp(PointerToFirstData(), rhs->PointerToFirstData(), SizeData()) == 0;
+}
+
+
+uint Settings::SizeData()
+{
+    return sizeof(Settings) - 2 * sizeof(size);
+}
+
+
+uint8 *Settings::PointerToFirstData()
+{
+    return (uint8 *)this + 2 * sizeof(size);
 }
 
 
@@ -51,5 +80,5 @@ void Settings::Load()
 
 uint Settings::CalculateCRC32()
 {
-    return HAL_CRC32::Calculate((uint8 *)this + 2 * sizeof(uint), sizeof(*this) - 2 * sizeof(uint));
+    return HAL_CRC32::Calculate(PointerToFirstData(), SizeData());
 }

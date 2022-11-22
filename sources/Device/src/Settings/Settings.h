@@ -15,10 +15,14 @@ struct Settings
     void Save();
     void Load();
 
-    uint CalculateCRC32();
-
     void Store();
     void Restore();
+
+    uint CalculateCRC32();
+    bool IsEqual(Settings *);
+
+    uint8 *PointerToFirstData();
+    uint SizeData();
 };
 
 
