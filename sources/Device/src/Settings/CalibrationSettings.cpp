@@ -72,8 +72,14 @@ void CalibrationSettings::Load()
 {
     if (!HAL_EEPROM::Load(this))
     {
-        *this = NS_CalibrationSettings::cal_def;
+        Reset();
     }
+}
+
+
+void CalibrationSettings::Reset()
+{
+    *this = NS_CalibrationSettings::cal_def;
 }
 
 

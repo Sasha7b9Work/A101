@@ -17,6 +17,8 @@ struct CalibrationSettings
     void Save();
     void Load();
 
+    void Reset();
+
     int GetZero(int range);
     void SetZero(int range, int);
 

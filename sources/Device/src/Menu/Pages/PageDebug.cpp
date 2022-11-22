@@ -85,10 +85,13 @@ namespace PageDebug
 
     static Button button4("button4", "", false, [](Button *) {});
 
-    static Button button5("button5", "", false, [](Button *) {});
+    static Button buttonResetCal("button5", "Res cal", false,
+        [](Button *)
+        {
+            cal.Reset();
+        });
 
-
-    static Page pageDebug(&buttonZero, &buttonMiddleOf3, &buttonSmooth, &buttonFIR, &button4, &button5);
+    static Page pageDebug(&buttonZero, &buttonMiddleOf3, &buttonSmooth, &buttonFIR, &button4, &buttonResetCal);
 
     Page *self = &pageDebug;
 }
