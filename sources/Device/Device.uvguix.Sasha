@@ -6,7 +6,7 @@
   <Header>### uVision Project, (C) Keil Software</Header>
 
   <PrjGuiSettings>
-    <LastAddFilePath>D:\Projects\A101\sources\Device\src\Settings</LastAddFilePath>
+    <LastAddFilePath>D:\Projects\A101\sources\Device\src\Hardware\HAL</LastAddFilePath>
   </PrjGuiSettings>
 
   <ViewPool/>
@@ -3623,7 +3623,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>D:\Projects\A101\sources\Device\src\Hardware\HAL\HAL_EEPROM.cpp</Name>
+        <Name>&lt;1&gt;.\src\Hardware\HAL\HAL_EEPROM.cpp</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>139</TopLine>
         <CurrentLine>168</CurrentLine>

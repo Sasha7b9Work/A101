@@ -1,19 +1,6 @@
 // 2022/11/14 13:39:00 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-
-
-struct CalibrationSettings
-{
-    float gain[6];
-    int zero[6];
-
-    float GetGain(int range);      // Коэффициент усиления
-    void SetGainK(int range, float);
-    float GetGainK(int range);
-
-    int GetZero(int range);
-    void SetZero(int range, int);
-};
+#include "Settings/CalibrationSettings.h"
 
 
 struct Settings
@@ -23,7 +10,11 @@ struct Settings
     bool enabled_zero;          // "Влючён ноль"
     bool firLPF;                // Включён цифровой ФНЧ
 
-    CalibrationSettings cal;
+    void Save();
+    void Load();
+
+    void Store();
+    void Restore();
 };
 
 

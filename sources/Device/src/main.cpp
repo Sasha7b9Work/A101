@@ -9,6 +9,7 @@
 #include "Generator/Generator.h"
 #include "Hardware/Timer.h"
 #include "SCPI/SCPI.h"
+#include "Settings/Settings.h"
 
 
 int main()
@@ -16,6 +17,9 @@ int main()
     HAL::Init();
 
     HAL_TIM::Delay(500);
+
+    cal.Load();
+    set.Load();
 
     Ampermeter::Init();
 
@@ -40,5 +44,7 @@ int main()
         Profiler::Update();
 
         SCPI::Update();
+
+        set.Save();
     }
 }

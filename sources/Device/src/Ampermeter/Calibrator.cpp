@@ -43,8 +43,6 @@ namespace Calibrator
 
     static TimeLine timeLine;
 
-    static Settings stored_set;
-
     static bool event_skip = false;
     static bool event_ready = false;
 
@@ -59,8 +57,6 @@ namespace Calibrator
 
     // Откалибровать усиление
     static void CalibrateGain(int range);
-
-    static void RestoreSettings();
 
     static void DrawParameters();
 
@@ -78,7 +74,7 @@ void Calibrator::ExecuteCalibration()
 {
     in_process = true;
 
-    stored_set = set;
+    set.Store();
 
     set.firLPF = false;
     set.middle_of_3 = false;
@@ -97,7 +93,9 @@ void Calibrator::ExecuteCalibration()
         }
     }
 
-    RestoreSettings();
+    cal.Save();
+
+    set.Restore();
 
     DrawParameters();
 
@@ -129,26 +127,16 @@ void Calibrator::DrawParameters()
         Nextion::DrawString(x0, y, width, height, 2, Color::White, Color::Background, units[range]);
 
         char buffer[30];
-        std::sprintf(buffer, "%d", set.cal.GetZero(range));
+        std::sprintf(buffer, "%d", cal.GetZero(range));
 
         Nextion::DrawString(x0 + width, y, width, height, 2, Color::White, Color::Background, buffer);
 
-        std::sprintf(buffer, "%.10f", (double)set.cal.GetGainK(range));
+        std::sprintf(buffer, "%.10f", (double)cal.GetGainK(range));
 
         Nextion::DrawString(x0 + width * 2, y, width * 2, height, 2, Color::White, Color::Background, buffer);
     }
 
     WaitButton();
-}
-
-
-void Calibrator::RestoreSettings()
-{
-    CalibrationSettings cal_set = set.cal;
-
-    set = stored_set;
-
-    set.cal = cal_set;
 }
 
 
@@ -208,7 +196,7 @@ void Calibrator::CalibrateHardware(int range, int level)
 
 void Calibrator::CalibratorZero::Run()
 {
-    const int zero = set.cal.GetZero(range);
+    const int zero = cal.GetZero(range);
 
     float dc = CalculateDC(0);
 
@@ -245,18 +233,18 @@ void Calibrator::CalibratorZero::Run()
 
     if (Math::Abs(z) < 10000)
     {
-        set.cal.SetZero(range, z);
+        cal.SetZero(range, z);
     }
     else
     {
-        set.cal.SetZero(range, zero);
+        cal.SetZero(range, zero);
     }
 }
 
 
 float Calibrator::CalibratorZero::CalculateDC(int zero)
 {
-    set.cal.SetZero(range, zero);
+    cal.SetZero(range, zero);
     Ampermeter::ReadData();
     Calculator::AppendData();
     return Calculator::GetDC();
@@ -277,7 +265,7 @@ void Calibrator::CalibrateGain(int range)
         k *= 1e3f;
     }
 
-    set.cal.SetGainK(range, k);
+    cal.SetGainK(range, k);
 
     LOG_WRITE("range = %d, dc = %f, k = %f", range, (double)dc, (double)k);
 }

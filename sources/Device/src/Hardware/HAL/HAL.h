@@ -3,6 +3,7 @@
 
 
 struct CalibrationSettings;
+struct Settings;
 
 
 #define ERROR_HANDLER() HAL::ErrorHandler()
@@ -18,6 +19,11 @@ namespace HAL
 
 namespace HAL_EEPROM
 {
+    void Save(CalibrationSettings *);
+    bool Load(CalibrationSettings *);
+
+    void Save(Settings *);
+    bool Load(Settings *);
 
 }
 

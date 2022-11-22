@@ -163,7 +163,7 @@ ValueADC::ValueADC(int reading)
         value -= 1 << 18;
     }
 
-    value -= set.cal.GetZero(Range::Current());
+    value -= cal.GetZero(Range::Current());
 }
 
 

@@ -1,48 +1,47 @@
 // 2022/11/14 13:39:09 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Settings.h"
+#include "Settings/Settings.h"
+#include "Hardware/HAL/HAL.h"
 
 
-Settings set
+namespace NS_Settings
 {
-    false,      // middle_of_3
-    false,      // smooth
-    false,      // enabled_zero
-    false,      // firLPF
+    static Settings set_def
     {
-        { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f },
-        { 3245, 3245, 3245, 3251, 3245, 3242 }
+        false,      // middle_of_3
+        false,      // smooth
+        false,      // enabled_zero
+        false       // firLPF
+    };
+
+    static Settings stored = set_def;
+}
+
+Settings set = NS_Settings::set_def;
+
+
+void Settings::Store()
+{
+    NS_Settings::stored = *this;
+}
+
+
+void Settings::Restore()
+{
+    *this = NS_Settings::stored;
+}
+
+
+void Settings::Save()
+{
+    HAL_EEPROM::Save(this);
+}
+
+
+void Settings::Load()
+{
+    if (!HAL_EEPROM::Load(this))
+    {
+        *this = NS_Settings::set_def;
     }
-};
-
-
-float CalibrationSettings::GetGain(int range)
-{
-    static const float k[6] = { 61.53e-2f, 61.53e-1f, 61.53e0f, 61.53e-2f, 61.53e0f, 61.53e-1f };
-
-    return gain[range] * k[range];
-}
-
-
-void CalibrationSettings::SetGainK(int range, float value)
-{
-    gain[range] = value;
-}
-
-
-float CalibrationSettings::GetGainK(int range)
-{
-    return gain[range];
-}
-
-
-int CalibrationSettings::GetZero(int range)
-{
-    return zero[range];
-}
-
-
-void CalibrationSettings::SetZero(int range, int value)
-{
-    zero[range] = value;
 }
