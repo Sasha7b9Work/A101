@@ -17,6 +17,12 @@ namespace HAL
 }
 
 
+namespace HAL_CRC32
+{
+    uint Calculate(void *address, uint num_bytes);
+}
+
+
 namespace HAL_EEPROM
 {
     void Save(CalibrationSettings *);

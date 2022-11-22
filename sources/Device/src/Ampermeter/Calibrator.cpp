@@ -22,9 +22,9 @@ namespace Calibrator
         void Reset();
         void Draw();
     private:
-        static const int x = 150;
+        static const int x = 175;
         static const int y = 220;
-        static const int width = 500;
+        static const int width = 450;
         static const int height = 50;
 
         int last = 0;                   // Последняя закрашенная линия

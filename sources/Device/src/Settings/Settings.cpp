@@ -8,6 +8,8 @@ namespace NS_Settings
 {
     static Settings set_def
     {
+        sizeof(Settings),
+        0,
         false,      // middle_of_3
         false,      // smooth
         false,      // enabled_zero
@@ -44,4 +46,10 @@ void Settings::Load()
     {
         *this = NS_Settings::set_def;
     }
+}
+
+
+uint Settings::CalculateCRC32()
+{
+    return HAL_CRC32::Calculate((uint8 *)this + 2 * sizeof(uint), sizeof(*this) - 2 * sizeof(uint));
 }
