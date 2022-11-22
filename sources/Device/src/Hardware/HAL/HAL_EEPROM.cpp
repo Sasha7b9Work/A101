@@ -75,6 +75,8 @@ namespace HAL_EEPROM
         }
         void Erase()
         {
+            LOG_WRITE("Erase sector %X", address);
+
             CLEAR_FLASH_FLAGS;
 
             HAL_FLASH_Unlock();
