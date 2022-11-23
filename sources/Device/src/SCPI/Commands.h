@@ -11,6 +11,7 @@ namespace SCPI
     {
     public:
         virtual bool Execute();
+        virtual ~Command() {}
     };
 
 
@@ -18,6 +19,7 @@ namespace SCPI
     {
     public:
         virtual bool Execute() override;
+        virtual ~CommandIDN() override {}
     };
 
 }

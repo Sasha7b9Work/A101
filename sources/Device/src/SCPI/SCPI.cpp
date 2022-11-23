@@ -12,7 +12,9 @@ namespace SCPI
     class InBuffer : public Buffer2048<uint8>
     {
     public:
-        Command ExtractCommand();
+        Command *ExtractCommand();
+
+        Command *ParseCommand(Buffer<uint8, 1024> &);
     };
 
     void Send(pchar);
@@ -26,7 +28,18 @@ void SCPI::Update()
 {
     static int counter = 0;
 
-    while (in.ExtractCommand().Execute())
+    bool run = true;
+
+    while (run)
+    {
+        Command *command = in.ExtractCommand();
+
+        run = !command->Execute();
+
+        delete command;
+    }
+
+    while (in.ExtractCommand()->Execute())
     {
         counter++;
     }
@@ -39,7 +52,7 @@ void SCPI::CallbackOnReceive(uint8 byte)
 }
 
 
-SCPI::Command SCPI::InBuffer::ExtractCommand()
+SCPI::Command *SCPI::InBuffer::ExtractCommand()
 {
     while (Size() && (buffer[0] == 0x0a || buffer[0] == 0x0d))
     {
@@ -52,27 +65,33 @@ SCPI::Command SCPI::InBuffer::ExtractCommand()
     {
         if (buffer[i] == 0x0a || buffer[i] == 0x0d)
         {
-            break;
+            RemoveFirst(symbols.Size());
+
+            while (Size() && (buffer[0] == 0x0a || buffer[0] == 0x0d))
+            {
+                RemoveFirst(1);
+            }
+
+            symbols.Append('\0');
+
+            return ParseCommand(symbols);
         }
 
         symbols.Append(buffer[i]);
     }
 
-    RemoveFirst(symbols.Size());
+    return new Command();
+}
 
-    while (Size() && (buffer[0] == 0x0a || buffer[0] == 0x0d))
-    {
-        RemoveFirst(1);
-    }
 
-    symbols.Append('\0');
-
+SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
+{
     if (std::strcmp((char *)symbols.Data(), "*IDN?") == 0)
     {
-        return CommandIDN();
+        return new CommandIDN();
     }
 
-    return Command();
+    return new Command();
 }
 
 
