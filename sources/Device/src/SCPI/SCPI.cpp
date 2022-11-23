@@ -21,6 +21,8 @@ namespace SCPI
 
     void Send(pchar);
 
+    void Error(pchar);
+
     // Входной буфер. Здесь находятся принимаемые символы
     static InBuffer in;
 }
@@ -110,6 +112,10 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
         return new CommandDATA((pchar)(symbols.Data() + first_word.Size()));
     }
 
+    String<1024> message((char *)symbols.Data());
+
+    SCPI::Error(message.c_str());
+
     return new Command();
 }
 
@@ -144,4 +150,11 @@ String<> SCPI::InBuffer::FirstWord(Buffer<uint8, 1024> &symbols)
 void SCPI::Send(pchar message)
 {
     Communicator::SendWith0D0A(message);
+}
+
+
+void SCPI::Error(pchar text)
+{
+    Communicator::Send("ERROR !!! Unknown sequence : ");
+    Communicator::SendWith0D0A(text);
 }

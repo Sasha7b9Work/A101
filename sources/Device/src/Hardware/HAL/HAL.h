@@ -118,6 +118,8 @@ namespace HAL_USART3
 {
     void Init();
 
+    void SendText(pchar);
+
     // Послать с 0d0a в конце
     void SendTextWith0D0A(pchar);
 

@@ -9,6 +9,8 @@
 namespace SCPI
 {
     void Send(pchar);
+
+    void Error(pchar);
 }
 
 
@@ -49,9 +51,12 @@ bool SCPI::CommandRANGE::Execute()
         if (char_range == titles[i])
         {
             PageMain::self->GetButton(i)->Press();
-            break;
+
+            return true;
         }
     }
+
+    Error(params.c_str());
 
     return true;
 }
@@ -63,9 +68,14 @@ bool SCPI::CommandDATA::Execute()
 
     int num = 0;
 
-    char_num.ToInt(&num);
-
-    Indicator::OnEvent::SendDataToCommunicator(num);
+    if (char_num.ToInt(&num))
+    {
+        Indicator::OnEvent::SendDataToCommunicator(num);
+    }
+    else
+    {
+        Error(params.c_str());
+    }
 
     return true;
 }

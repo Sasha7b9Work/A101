@@ -10,4 +10,6 @@
 namespace Communicator
 {
     void SendWith0D0A(pchar);
+
+    void Send(pchar);
 }
