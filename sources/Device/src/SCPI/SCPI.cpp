@@ -15,7 +15,7 @@ namespace SCPI
 
 
     // Входной буфер. Здесь находятся принимаемые символы
-    static InBuffer buffer;
+    static InBuffer in;
 }
 
 
@@ -23,7 +23,7 @@ void SCPI::Update()
 {
     static int counter = 0;
 
-    while (buffer.ExtractCommand().Execute())
+    while (in.ExtractCommand().Execute())
     {
         counter++;
     }
@@ -32,7 +32,7 @@ void SCPI::Update()
 
 void SCPI::CallbackOnReceive(uint8 byte)
 {
-    buffer.Append(byte);
+    in.Append(byte);
 }
 
 
@@ -43,7 +43,7 @@ SCPI::Command SCPI::InBuffer::ExtractCommand()
         RemoveFirst(1);
     }
 
-    Command command;
+    Buffer<uint8, 1024> data;
 
     for (int i = 0; i < Size(); i++)
     {
@@ -52,31 +52,21 @@ SCPI::Command SCPI::InBuffer::ExtractCommand()
             break;
         }
 
-        command.Append(buffer[i]);
+        data.Append(buffer[i]);
     }
 
-    RemoveFirst(command.Size());
+    RemoveFirst(data.Size());
 
     while (Size() && (buffer[0] == 0x0a || buffer[0] == 0x0d))
     {
         RemoveFirst(1);
     }
 
-    return command;
+    return Command();
 }
 
 
 bool SCPI::Command::Execute()
 {
-    if (Size() == 0)
-    {
-        return false;
-    }
-
-    if(IsEquals(""))
-    {
-        return false;
-    }
-
-    return true;
+    return false;
 }

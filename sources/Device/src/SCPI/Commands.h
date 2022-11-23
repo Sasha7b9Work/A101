@@ -1,12 +1,13 @@
 // 2022/11/23 11:21:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Utils/Buffer.h"
+#include "Hardware/Communicator.h"
 
 
 namespace SCPI
 {
 
-    class Command : public Buffer<uint8, 128>
+    class Command
     {
     public:
         virtual bool Execute();
@@ -16,7 +17,11 @@ namespace SCPI
     class CommandIDN : public Command
     {
     public:
-        virtual bool Execute() override;
+        virtual bool Execute() override
+        {
+            Communicator::Send("OAO MNIPI, A101");
+            return true;
+        }
     };
 
 }
