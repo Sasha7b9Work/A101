@@ -2,6 +2,8 @@
 #pragma once
 #include "Utils/Buffer.h"
 #include "Hardware/Communicator.h"
+#include "Utils/Buffer.h"
+#include "Utils/String.h"
 
 
 namespace SCPI
@@ -28,5 +30,16 @@ namespace SCPI
     public:
         virtual bool Execute() override;
         virtual ~CommandRST() override {}
+    };
+
+
+    class CommandRANGE : public Command
+    {
+    public:
+        CommandRANGE(pchar);
+        virtual ~CommandRANGE() override {}
+        virtual bool Execute() override;
+    private:
+        String<> params;
     };
 }

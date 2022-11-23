@@ -4,6 +4,7 @@
 #include "SCPI/Parser/Parser.h"
 #include "SCPI/Commands.h"
 #include "Hardware/Communicator.h"
+#include "Utils/String.h"
 #include <cctype>
 
 
@@ -13,8 +14,9 @@ namespace SCPI
     {
     public:
         Command *ExtractCommand();
-
+    private:
         Command *ParseCommand(Buffer<uint8, 1024> &);
+        String<> FirstWord(Buffer<uint8, 1024> &);
     };
 
     void Send(pchar);
@@ -96,7 +98,41 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
         return new CommandRST();
     }
 
+    String<> first_word = FirstWord(symbols);
+
+    if (first_word == "RANGE")
+    {
+        return new CommandRANGE((pchar)(symbols.Data() + first_word.Size()));
+    }
+
     return new Command();
+}
+
+String<> SCPI::InBuffer::FirstWord(Buffer<uint8, 1024> &symbols)
+{
+    String<> result;
+
+    int pos = 0;
+
+    // Пропускаем первые пробелы
+
+    while (pos < symbols.Size() && symbols[pos] == ' ')
+    {
+        pos++;
+    }
+
+    if (pos == symbols.Size())
+    {
+        return result;
+    }
+
+    while (pos < symbols.Size() && symbols[pos] != ' ')
+    {
+        result.Append((char)symbols[pos]);
+        pos++;
+    }
+
+    return result;
 }
 
 
