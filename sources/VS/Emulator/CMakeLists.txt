@@ -72,7 +72,8 @@ file(GLOB SRC                   ./*.h
                                 ./*.cpp
                                 ../../Device/src/Settings.*
                                 ../../Device/src/defines.h
-                                ../../Device/src/stm_includes.h)
+                                ../../Device/src/stm_includes.h
+                                ../../Device/src/Device.*)
 file(GLOB DISPLAY               ./Display/*.*
                                 ../../Device/src/Display/*.h
                                 ../../Device/src/Display/Colors.cpp

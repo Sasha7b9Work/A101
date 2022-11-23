@@ -91,6 +91,11 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
         return new CommandIDN();
     }
 
+    if (std::strcmp((char *)symbols.Data(), "*RST") == 0)
+    {
+        return new CommandRST();
+    }
+
     return new Command();
 }
 

@@ -22,4 +22,11 @@ namespace SCPI
         virtual ~CommandIDN() override {}
     };
 
+
+    class CommandRST : public Command
+    {
+    public:
+        virtual bool Execute() override;
+        virtual ~CommandRST() override {}
+    };
 }

@@ -11,6 +11,7 @@
 #include "Hardware/Timer.h"
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
+#include "Menu/Pages/Pages.h"
 
 
 void Device::Init()
@@ -54,5 +55,5 @@ void Device::Update()
 
 void Device::Reset()
 {
-
+    PageMain::self->GetButton(3)->Press();
 }
