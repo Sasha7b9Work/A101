@@ -2,18 +2,11 @@
 #include "defines.h"
 #include "SCPI/SCPI.h"
 #include "SCPI/Parser/Parser.h"
-#include "Utils/Buffer.h"
+#include "SCPI/Commands.h"
 
 
 namespace SCPI
 {
-    class Command : public Buffer<uint8, 128>
-    {
-    public:
-        bool Execute();
-    };
-
-
     class InBuffer : public Buffer2048<uint8>
     {
     public:
@@ -21,6 +14,7 @@ namespace SCPI
     };
 
 
+    // Входной буфер. Здесь находятся принимаемые символы
     static InBuffer buffer;
 }
 

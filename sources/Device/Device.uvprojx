@@ -1160,6 +1160,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\SCPI.txt</FilePath>
             </File>
+            <File>
+              <FileName>Commands.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\Commands.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2440,6 +2445,11 @@
               <FileName>SCPI.txt</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\SCPI.txt</FilePath>
+            </File>
+            <File>
+              <FileName>Commands.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\Commands.h</FilePath>
             </File>
           </Files>
         </Group>

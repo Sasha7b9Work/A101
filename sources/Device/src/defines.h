@@ -17,6 +17,7 @@
 #pragma clang diagnostic ignored "-Wimplicit-int-float-conversion"
 #pragma clang diagnostic ignored "-Wcast-qual"
 #pragma clang diagnostic ignored "-Wcast-align"
+#pragma clang diagnostic ignored "-Wnon-virtual-dtor"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
