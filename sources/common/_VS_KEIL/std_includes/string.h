@@ -11,6 +11,6 @@ void    memcpy(void *dest, const void *src, unsigned int);
 void   *memmove(void *destptr, const void *srcptr, size_t num);
 int     memcmp(const void *, const void *, unsigned int);
 char   *strchr(const char *str, int c);
-char    toupper(char);
+int     toupper(int);
 int     sscanf(void *, void *, ...);
 unsigned int  strlen(const char *);

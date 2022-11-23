@@ -17,11 +17,7 @@ namespace SCPI
     class CommandIDN : public Command
     {
     public:
-        virtual bool Execute() override
-        {
-            Communicator::Send("OAO MNIPI, A101");
-            return true;
-        }
+        virtual bool Execute() override;
     };
 
 }

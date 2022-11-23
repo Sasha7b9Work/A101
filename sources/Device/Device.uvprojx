@@ -710,6 +710,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
+            <File>
+              <FileName>Communicator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Communicator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Communicator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Communicator.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1164,6 +1174,11 @@
               <FileName>Commands.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\Commands.h</FilePath>
+            </File>
+            <File>
+              <FileName>Commands.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\Commands.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1996,6 +2011,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
+            <File>
+              <FileName>Communicator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Communicator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Communicator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Communicator.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2450,6 +2475,11 @@
               <FileName>Commands.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\Commands.h</FilePath>
+            </File>
+            <File>
+              <FileName>Commands.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\Commands.cpp</FilePath>
             </File>
           </Files>
         </Group>
