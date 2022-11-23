@@ -128,7 +128,7 @@ void Indicator::SetMeasures(float dc, float ac)
     int range = Range::Current();
 
     static const int after[6]    = { 4, 3, 2, 4, 3, 3 };
-    static const pchar suffix = (range < 3) ? "mA" : "A";
+    const pchar suffix = (range < 3) ? "mA" : "A";
 
     ConvertDoubleToText(dc, measureDC, after[range], suffix);
     ConvertDoubleToText(ac, measureAC, after[range], suffix);
