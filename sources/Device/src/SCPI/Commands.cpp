@@ -59,7 +59,13 @@ bool SCPI::CommandRANGE::Execute()
 
 bool SCPI::CommandDATA::Execute()
 {
-    Indicator::OnEvent::SendDataToCommunicator(1);
+    String<> char_num = params.GetWord(0);
+
+    int num = 0;
+
+    char_num.ToInt(&num);
+
+    Indicator::OnEvent::SendDataToCommunicator(num);
 
     return true;
 }
