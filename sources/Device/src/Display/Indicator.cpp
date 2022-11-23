@@ -202,5 +202,8 @@ void Indicator::SetDeltaADC(int delta)
 {
     char buffer[32];
     std::sprintf(buffer, "%d", delta);
+
+#ifdef LOGGED
     textDeltaADC.SetText(buffer);
+#endif
 }

@@ -205,7 +205,15 @@ void Nextion::SendCommandRAW(pchar command, bool wait)
 }
 
 
-void Nextion::WaitResponse(pchar command, ResponseCode::E code)
+void Nextion::WaitResponse(pchar
+#ifdef LOGGED
+    command
+#endif
+    , ResponseCode::E
+#ifdef LOGGED
+    code
+#endif
+)
 {
     TimeMeterMS meter;
 
@@ -221,10 +229,12 @@ void Nextion::WaitResponse(pchar command, ResponseCode::E code)
         }
     }
 
+#ifdef LOGGED
     if (LastCode::Get() != code)
     {
         LOG_WRITE("Error in %s : Received %02Xh but expected %02Xh", command, LastCode::Get(), code);
     }
+#endif
 }
 
 
