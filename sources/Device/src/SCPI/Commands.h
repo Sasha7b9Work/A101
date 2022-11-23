@@ -17,6 +17,17 @@ namespace SCPI
     };
 
 
+    class CommandWithParameters : public Command
+    {
+    public:
+        CommandWithParameters(pchar _params) { params.SetFormat(_params); }
+        virtual ~CommandWithParameters() override {}
+        virtual bool Execute() override;
+    protected:
+        String<> params;
+    };
+
+
     class CommandIDN : public Command
     {
     public:
@@ -33,13 +44,20 @@ namespace SCPI
     };
 
 
-    class CommandRANGE : public Command
+    class CommandRANGE : public CommandWithParameters
     {
     public:
-        CommandRANGE(pchar);
+        CommandRANGE(pchar par) : CommandWithParameters(par) {}
         virtual ~CommandRANGE() override {}
         virtual bool Execute() override;
-    private:
-        String<> params;
+    };
+
+
+    class CommandDATA : public CommandWithParameters
+    {
+    public:
+        CommandDATA(pchar par) : CommandWithParameters(par) {}
+        virtual ~CommandDATA() override {}
+        virtual bool Execute() override;
     };
 }

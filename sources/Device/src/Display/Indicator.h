@@ -26,5 +26,8 @@ namespace Indicator
     namespace OnEvent
     {
         void CnageRange();
+
+        // Послать num измерений в Communicator
+        void SendDataToCommunicator(int num);
     }
 }

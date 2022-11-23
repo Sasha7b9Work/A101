@@ -9,6 +9,7 @@
 #include "Display/Controls/TextString.h"
 #include "Display/Controls/WindowsMeasures.h"
 #include "Ampermeter/InputRelays.h"
+#include "Hardware/Communicator.h"
 #include <cstdio>
 #include <cstring>
 #include <cmath>
@@ -38,6 +39,8 @@ namespace Indicator
 
     static char measureDC[TextString::MAX_LEN] = { '\0' };
     static char measureAC[TextString::MAX_LEN] = { '\0' };
+
+    static int need_send = 0;                                       // —только раз нужно передавать данные наружу
 
     static void SetBig();
 
@@ -128,6 +131,14 @@ void Indicator::SetMeasures(float dc, float ac)
 
     ConvertDoubleToText(dc, measureDC, after[range], suffix);
     ConvertDoubleToText(ac, measureAC, after[range], suffix);
+
+    if (need_send)
+    {
+        need_send--;
+
+        Communicator::SendWith0D0A(measureDC);
+        Communicator::SendWith0D0A(measureAC);
+    }
 }
 
 
@@ -195,6 +206,12 @@ void Indicator::OnEvent::CnageRange()
 {
     windowAC.OnEventChangeRange();
     windowDC.OnEventChangeRange();
+}
+
+
+void Indicator::OnEvent::SendDataToCommunicator(int num)
+{
+    need_send = num;
 }
 
 

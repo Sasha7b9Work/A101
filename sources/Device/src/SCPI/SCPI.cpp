@@ -105,6 +105,11 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
         return new CommandRANGE((pchar)(symbols.Data() + first_word.Size()));
     }
 
+    if (first_word == "DATA?")
+    {
+        return new CommandDATA((pchar)(symbols.Data() + first_word.Size()));
+    }
+
     return new Command();
 }
 

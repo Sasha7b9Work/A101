@@ -3,6 +3,7 @@
 #include "SCPI/Commands.h"
 #include "Device.h"
 #include "Menu/Pages/Pages.h"
+#include "Display/Indicator.h"
 
 
 namespace SCPI
@@ -12,6 +13,12 @@ namespace SCPI
 
 
 bool SCPI::Command::Execute()
+{
+    return false;
+}
+
+
+bool SCPI::CommandWithParameters::Execute()
 {
     return false;
 }
@@ -31,12 +38,6 @@ bool SCPI::CommandRST::Execute()
 }
 
 
-SCPI::CommandRANGE::CommandRANGE(pchar data)
-{
-    params.SetFormat(data);
-}
-
-
 bool SCPI::CommandRANGE::Execute()
 {
     String<> char_range = params.GetWord(0);
@@ -51,6 +52,14 @@ bool SCPI::CommandRANGE::Execute()
             break;
         }
     }
+
+    return true;
+}
+
+
+bool SCPI::CommandDATA::Execute()
+{
+    Indicator::OnEvent::SendDataToCommunicator(1);
 
     return true;
 }
