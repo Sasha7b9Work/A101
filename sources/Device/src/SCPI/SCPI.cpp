@@ -34,7 +34,7 @@ void SCPI::Update()
     {
         Command *command = in.ExtractCommand();
 
-        run = !command->Execute();
+        run = command->Execute();
 
         delete command;
     }
