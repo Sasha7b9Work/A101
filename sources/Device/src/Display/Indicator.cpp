@@ -10,6 +10,7 @@
 #include "Display/Controls/WindowsMeasures.h"
 #include "Ampermeter/InputRelays.h"
 #include "Hardware/Communicator.h"
+#include "Utils/String.h"
 #include <cstdio>
 #include <cstring>
 #include <cmath>
@@ -136,8 +137,11 @@ void Indicator::SetMeasures(float dc, float ac)
     {
         need_send--;
 
-        Communicator::SendWith0D0A(measureDC);
-        Communicator::SendWith0D0A(measureAC);
+        String<> message("DC:%s", measureDC);
+        Communicator::SendWith0D0A(message.c_str());
+
+        message.SetFormat("AC:%s", measureAC + 1);
+        Communicator::SendWith0D0A(message.c_str());
     }
 }
 
