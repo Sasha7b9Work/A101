@@ -108,30 +108,50 @@ void WindowMeasure::Disable()
 
 void WindowMeasure::SetMeasure(const char measure[TextString::MAX_LEN])
 {
-    int index = 0;
+    int num_digits = 0;
+    int num_zeros = 0;
+    char symbol_sign = '\0';
 
-    for (int i = 0; (i < 7) && (index < 5); i++)
+    for (int i = 0; (i < 7) && (num_digits < 5); i++)
     {
         char symbol = measure[i];
 
-        char str[2] = { symbol, '\0' };
-
         if (symbol == '-' || symbol == '+')
         {
-            if (is_signed)
-            {
-                sign.SetText(str);
-            }
+            symbol_sign = symbol;
         }
         else if ((symbol >= '0' && symbol <= '9') || symbol == '*' || symbol == '^')
         {
-            digits[index]->SetText(str);
-            index++;
+            if (symbol == '0')
+            {
+                num_zeros++;
+            }
+
+            char str[2] = { symbol, '\0' };
+
+            digits[num_digits]->SetText(str);
+            num_digits++;
 
             if (symbol == '*' && is_signed)
             {
                 sign.SetText("");
             }
+        }
+    }
+
+    if(is_signed)
+    {
+        if (num_zeros != 5)
+        {
+            if (symbol_sign != '\0')
+            {
+                char str[2] = { symbol_sign, '\0' };
+                sign.SetText(str);
+            }
+        }
+        else
+        {
+            sign.SetText("");
         }
     }
 }
