@@ -3,7 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 
 
-void HAL_USART3::SendODOA(pchar)
+void HAL_USART3::SendTextWith0D0A(pchar)
 {
 
 }

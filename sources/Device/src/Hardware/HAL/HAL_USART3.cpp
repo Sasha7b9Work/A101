@@ -39,6 +39,8 @@ namespace HAL_USART3
     void *handle = (void *)&handleUSART3;
 
     static uint8 buffer = 0;
+
+    static void Send0D0A();
 }
 
 
@@ -58,9 +60,16 @@ void HAL_USART3::Init()
 }
 
 
-void HAL_USART3::SendODOA(pchar message)
+void HAL_USART3::SendTextWith0D0A(pchar message)
 {
-    HAL_UART_Transmit(&handleUSART3, (const uint8 *)message, (uint16)(std::strlen(message) + 1), 100);
+    HAL_UART_Transmit(&handleUSART3, (const uint8 *)message, (uint16)(std::strlen(message)), 100);
+    Send0D0A();
+}
+
+
+void HAL_USART3::Send0D0A()
+{
+    HAL_UART_Transmit(&handleUSART3, (const uint8 *)"\x0D\x0A", 2, 100);
 }
 
 

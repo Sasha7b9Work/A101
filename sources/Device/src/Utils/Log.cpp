@@ -26,7 +26,7 @@ void Log::Write(const char *format, ...)
 
     std::sprintf(line, "%d : %s", counter++, message);
 
-    HAL_USART3::SendODOA(line);
+    HAL_USART3::SendTextWith0D0A(line);
 }
 
 
@@ -43,5 +43,5 @@ void Log::Write(const char *file, int line, const char *format, ...)
 
     std::sprintf(buffer, "%d : %s          %s:%d", counter++, message, file, line);
 
-    HAL_USART3::SendODOA(buffer);
+    HAL_USART3::SendTextWith0D0A(buffer);
 }
