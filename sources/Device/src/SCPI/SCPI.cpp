@@ -50,7 +50,7 @@ SCPI::Command SCPI::InBuffer::ExtractCommand()
 
     for (int i = 0; i < Size(); i++)
     {
-        if (buffer[0] == 0x0a || buffer[0] == 0x0d)
+        if (buffer[i] == 0x0a || buffer[i] == 0x0d)
         {
             break;
         }
@@ -67,7 +67,7 @@ SCPI::Command SCPI::InBuffer::ExtractCommand()
 
     symbols.Append('\0');
 
-    if (std::strcmp((char *)symbols.Data(), "*IDN?"))
+    if (std::strcmp((char *)symbols.Data(), "*IDN?") == 0)
     {
         return CommandIDN();
     }
