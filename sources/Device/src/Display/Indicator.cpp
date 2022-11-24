@@ -247,7 +247,7 @@ void Indicator::SetPeakADC(int
 )
 {
 #ifdef LOGGED
-    textPeakADC.SetText(String<>("peak:%d", delta).c_str());
+    textPeakADC.SetText(String<>("peak: %d", delta).c_str());
 #endif
 }
 
@@ -259,6 +259,6 @@ void Indicator::SetAveADC(int
 )
 {
 #ifdef LOGGED
-    textAveADC.SetText(String<>("ave:%d", delta).c_str());
+    textAveADC.SetText(String<>("ave: %d", delta).c_str());
 #endif
 }
