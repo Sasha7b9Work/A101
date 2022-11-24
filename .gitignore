@@ -13,5 +13,10 @@ sources/Device/Objects-Debug/*
 sources/Device/Listings/*
 sources/Device/Listings-Debug/*
 
+sources/Loader/Objects/*
+sources/Loader/Objects-Debug/*
+sources/Loader/Listings/*
+sources/Loader/Listings-Debug/*
+
 sources/arm_fir_example/ARMCM4_debug/*
 sources/arm_fir_example/RTE/*
