@@ -41,7 +41,6 @@ public:
     {
         if (num_elements > size)
         {
-            LOG_ERROR("Too many elements");
             num_elements = size;
         }
 
@@ -60,7 +59,6 @@ public:
     {
         if (Size() + _size > Capacity())
         {
-            LOG_ERROR("Нет места в буфере");
         }
         else
         {
@@ -73,7 +71,6 @@ public:
     {
         if (Size() + 1 > Capacity())
         {
-            LOG_ERROR("Buffer is full");
         }
         else
         {

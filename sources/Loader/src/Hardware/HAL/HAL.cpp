@@ -24,12 +24,6 @@ void HAL::Init()
 
     HAL_PIO::Init();
 
-    HAL_SPI2::Init();
-
-    HAL_UART4::Init();
-
-    HAL_USART2::Init();
-
     HAL_USART3::Init();
 
     HAL_TIM2::Init();

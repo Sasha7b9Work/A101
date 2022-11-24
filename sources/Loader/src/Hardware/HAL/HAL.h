@@ -152,9 +152,7 @@ extern "C" {
     void SVC_Handler();
     void DebugMon_Handler();
     void TIM3_IRQHandler();
-    void USART2_IRQHandler();
     void USART3_IRQHandler();
-    void UART4_IRQHandler();
 #ifdef __cplusplus
 }
 #endif

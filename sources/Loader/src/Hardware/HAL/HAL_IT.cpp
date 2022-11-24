@@ -2,8 +2,6 @@
 #include "defines.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Ampermeter/Ampermeter.h"
-#include "Nextion/Nextion.h"
 #include "stm_includes.h"
 
 
@@ -37,15 +35,8 @@ extern "C" {
 
     void HardFault_Handler()
     {
-        volatile int line = Debug::line[0];
-        volatile pchar file = Debug::file[0];
-
         while (1) //-V776
         {
-            line = line;
-            file = file;
-
-            line = line;
         }
     }
 
@@ -91,37 +82,17 @@ extern "C" {
     }
 
 
-    // Дисплей
-    void USART2_IRQHandler()
-    {
-        HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART2::handle);
-    }
-
     // USB
     void USART3_IRQHandler()
     {
         HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART3::handle);
     }
 
-    // RS232
-    void UART4_IRQHandler()
-    {
-        HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_UART4::handle);
-    }
-
     void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle) //-V2009
     {
-        if (handle == HAL_USART2::handle)
-        {
-            HAL_USART2::CallbackOnReceive();
-        }
-        else if (handle == HAL_USART3::handle)
+        if (handle == HAL_USART3::handle)
         {
             HAL_USART3::CallbackOnReceive();
-        }
-        else if (handle == HAL_UART4::handle)
-        {
-            HAL_UART4::CallbackOnReceive();
         }
     }
 

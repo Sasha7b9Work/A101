@@ -1,7 +1,6 @@
 // 2022/11/23 11:21:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Utils/Buffer.h"
-#include "Hardware/Communicator.h"
 #include "Utils/Buffer.h"
 #include "Utils/String.h"
 
@@ -12,7 +11,7 @@ namespace SCPI
     class Command
     {
     public:
-        virtual bool Execute(Direction::E);
+        virtual bool Execute();
         virtual ~Command() {}
     };
 
@@ -22,7 +21,7 @@ namespace SCPI
     public:
         CommandWithParameters(pchar _params) { params.SetFormat(_params); }
         virtual ~CommandWithParameters() override {}
-        virtual bool Execute(Direction::E) override;
+        virtual bool Execute() override;
     protected:
         String<> params;
     };
@@ -31,7 +30,7 @@ namespace SCPI
     class CommandIDN : public Command
     {
     public:
-        virtual bool Execute(Direction::E) override;
+        virtual bool Execute() override;
         virtual ~CommandIDN() override {}
     };
 
@@ -39,7 +38,7 @@ namespace SCPI
     class CommandRST : public Command
     {
     public:
-        virtual bool Execute(Direction::E) override;
+        virtual bool Execute() override;
         virtual ~CommandRST() override {}
     };
 
@@ -49,7 +48,7 @@ namespace SCPI
     public:
         CommandRANGE(pchar par) : CommandWithParameters(par) {}
         virtual ~CommandRANGE() override {}
-        virtual bool Execute(Direction::E) override;
+        virtual bool Execute() override;
     };
 
 
@@ -58,6 +57,6 @@ namespace SCPI
     public:
         CommandDATA(pchar par) : CommandWithParameters(par) {}
         virtual ~CommandDATA() override {}
-        virtual bool Execute(Direction::E) override;
+        virtual bool Execute() override;
     };
 }

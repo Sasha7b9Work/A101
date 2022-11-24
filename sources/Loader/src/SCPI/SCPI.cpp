@@ -2,8 +2,8 @@
 #include "defines.h"
 #include "SCPI/SCPI.h"
 #include "SCPI/Commands.h"
-#include "Hardware/Communicator.h"
 #include "Utils/String.h"
+#include "Hardware/HAL/HAL.h"
 #include <cctype>
 
 
@@ -12,29 +12,24 @@ namespace SCPI
     class InBuffer : public Buffer2048<uint8>
     {
     public:
-        InBuffer(Direction::E _dir) : dir(_dir) {}
+        InBuffer() {}
         void Update();
     private:
         Command *ParseCommand(Buffer<uint8, 1024> &);
         String<> FirstWord(Buffer<uint8, 1024> &);
         Command *ExtractCommand();
-        const Direction::E dir;
     };
 
-    void Send(Direction::E, pchar);
-
-    void Error(Direction::E, pchar);
+    void Send(pchar);
 
     // Входной буфер. Здесь находятся принимаемые символы
-    static InBuffer in_usb(Direction::USB);
-    static InBuffer in_rs232(Direction::RS232);
+    static InBuffer in_usb;
 }
 
 
 void SCPI::Update()
 {
     in_usb.Update();
-    in_rs232.Update();
 }
 
 
@@ -46,24 +41,16 @@ void SCPI::InBuffer::Update()
     {
         Command *command = ExtractCommand();
 
-        run = command->Execute(dir);
+        run = command->Execute();
 
         delete command;
     }
 }
 
 
-void SCPI::CallbackOnReceive(Direction::E dir, uint8 byte)
+void SCPI::CallbackOnReceive(uint8 byte)
 {
-    if (dir & Direction::USB)
-    {
-        in_usb.Append((uint8)std::toupper(byte));
-    }
-
-    if (dir & Direction::RS232)
-    {
-        in_rs232.Append((uint8)std::toupper(byte));
-    }
+    in_usb.Append((uint8)std::toupper(byte));
 }
 
 
@@ -125,8 +112,6 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
 
     String<1024> message((char *)symbols.Data());
 
-    SCPI::Error(dir, message.c_str());
-
     return new Command();
 }
 
@@ -158,14 +143,7 @@ String<> SCPI::InBuffer::FirstWord(Buffer<uint8, 1024> &symbols)
 }
 
 
-void SCPI::Send(Direction::E dir, pchar message)
+void SCPI::Send(pchar message)
 {
-    Communicator::SendWith0D0A(dir, message);
-}
-
-
-void SCPI::Error(Direction::E dir, pchar text)
-{
-    Communicator::Send(dir, "ERROR !!! Unknown sequence : ");
-    Communicator::SendWith0D0A(dir, text);
+    HAL_USART3::SendTextWith0D0A(message);
 }

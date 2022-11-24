@@ -1,7 +1,6 @@
 // 2022/03/30 08:25:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Utils/String.h"
-#include "Display/Display.h"
 #include <cstdarg>
 #include <cstring>
 #include <cstdio>
@@ -66,7 +65,6 @@ void String<capacity>::SetFormat(pchar format, ...)
 
     if(num_symbols < 0 || num_symbols > capacity - 1)
     {
-        LOG_ERROR_TRACE("Very small string buffer %d, need %d:", capacity, num_symbols);
     }
 }
 
@@ -81,7 +79,6 @@ String<capacity>::String(pchar format, ...)
 
     if(num_symbols < 0 || num_symbols > capacity - 1)
     {
-        LOG_ERROR_TRACE("Very small string buffer %d, need %d:", capacity, num_symbols);
     }
 }
 
@@ -93,8 +90,6 @@ void String<capacity>::Append(pchar str)
 
     if (need_size > capacity)
     {
-        LOG_ERROR_TRACE("Very small string buffer %d, need %d:", capacity, need_size);
-
         int pointer = Size();
 
         while (pointer < capacity)
@@ -103,8 +98,6 @@ void String<capacity>::Append(pchar str)
         }
 
         buffer[capacity - 1] = '\0';
-
-        LOG_WRITE(buffer);
     }
     else
     {
@@ -120,8 +113,6 @@ void String<capacity>::AppendBytes(const void *bytes, int num_bytes)
 
     if (need_size > capacity)
     {
-        LOG_ERROR_TRACE("Very small string buffer %d, need %d:", capacity, need_size);
-        LOG_WRITE(c_str());
     }
     else
     {
@@ -142,7 +133,6 @@ void String<capacity>::Append(char symbol)
     }
     else
     {
-        LOG_ERROR_TRACE("buffer is full");
     }
 }
 
