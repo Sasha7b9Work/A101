@@ -81,7 +81,7 @@ void HAL_USART3::Send0D0A()
 
 void HAL_USART3::CallbackOnReceive()
 {
-    SCPI::CallbackOnReceive(buffer);
+    SCPI::CallbackOnReceive(Direction::USB, buffer);
 
     HAL_UART_Receive_IT(&handleUSART3, (uint8_t *)&buffer, 1);
 }

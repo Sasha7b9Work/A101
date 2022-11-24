@@ -1,5 +1,6 @@
 // 2022/10/28 11:17:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Hardware/Communicator.h"
 
 
 /*
@@ -28,6 +29,6 @@ namespace Indicator
         void CnageRange();
 
         // Послать num измерений в Communicator
-        void SendDataToCommunicator(int num);
+        void SendDataToCommunicator(Direction::E, int num);
     }
 }

@@ -4,13 +4,29 @@
 #include "Hardware/HAL/HAL.h"
 
 
-void Communicator::SendWith0D0A(pchar message)
+void Communicator::SendWith0D0A(Direction::E dir, pchar message)
 {
-    HAL_USART3::SendTextWith0D0A(message);
+    if (dir & Direction::USB)
+    {
+        HAL_USART3::SendTextWith0D0A(message);
+    }
+
+    if (dir & Direction::RS232)
+    {
+        HAL_UART4::SendTextWith0D0A(message);
+    }
 }
 
 
-void Communicator::Send(pchar message)
+void Communicator::Send(Direction::E dir, pchar message)
 {
-    HAL_USART3::SendText(message);
+    if (dir & Direction::USB)
+    {
+        HAL_USART3::SendText(message);
+    }
+
+    if (dir & Direction::RS232)
+    {
+        HAL_UART4::SendText(message);
+    }
 }

@@ -94,6 +94,7 @@ struct HAlternate
     {
         AF7_USART2,
         AF7_USART3,
+        AF8_UART4,
         Count
     };
 };

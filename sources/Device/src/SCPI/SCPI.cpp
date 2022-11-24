@@ -1,6 +1,7 @@
 // 2022/11/02 15:18:05 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "SCPI/SCPI.h"
+#include "SCPI/Parser/Parser.h"
 #include "SCPI/Commands.h"
 #include "Hardware/Communicator.h"
 #include "Utils/String.h"
@@ -12,46 +13,58 @@ namespace SCPI
     class InBuffer : public Buffer2048<uint8>
     {
     public:
-        Command *ExtractCommand();
+        InBuffer(Direction::E _dir) : dir(_dir) {}
+        void Update();
     private:
         Command *ParseCommand(Buffer<uint8, 1024> &);
         String<> FirstWord(Buffer<uint8, 1024> &);
+        Command *ExtractCommand();
+        const Direction::E dir;
     };
 
-    void Send(pchar);
+    void Send(Direction::E, pchar);
 
-    void Error(pchar);
+    void Error(Direction::E, pchar);
 
     // Входной буфер. Здесь находятся принимаемые символы
-    static InBuffer in;
+    static InBuffer in_usb(Direction::USB);
+    static InBuffer in_rs232(Direction::RS232);
 }
 
 
 void SCPI::Update()
 {
-    static int counter = 0;
+    in_usb.Update();
+    in_rs232.Update();
+}
 
+
+void SCPI::InBuffer::Update()
+{
     bool run = true;
 
     while (run)
     {
-        Command *command = in.ExtractCommand();
+        Command *command = ExtractCommand();
 
-        run = command->Execute();
+        run = command->Execute(dir);
 
         delete command;
-    }
-
-    while (in.ExtractCommand()->Execute())
-    {
-        counter++;
     }
 }
 
 
-void SCPI::CallbackOnReceive(uint8 byte)
+void SCPI::CallbackOnReceive(Direction::E dir, uint8 byte)
 {
-    in.Append((uint8)std::toupper(byte));
+    if (dir & Direction::USB)
+    {
+        in_usb.Append((uint8)std::toupper(byte));
+    }
+
+    if (dir & Direction::RS232)
+    {
+        in_rs232.Append((uint8)std::toupper(byte));
+    }
 }
 
 
@@ -113,7 +126,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
 
     String<1024> message((char *)symbols.Data());
 
-    SCPI::Error(message.c_str());
+    SCPI::Error(dir, message.c_str());
 
     return new Command();
 }
@@ -146,14 +159,14 @@ String<> SCPI::InBuffer::FirstWord(Buffer<uint8, 1024> &symbols)
 }
 
 
-void SCPI::Send(pchar message)
+void SCPI::Send(Direction::E dir, pchar message)
 {
-    Communicator::SendWith0D0A(message);
+    Communicator::SendWith0D0A(dir, message);
 }
 
 
-void SCPI::Error(pchar text)
+void SCPI::Error(Direction::E dir, pchar text)
 {
-    Communicator::Send("ERROR !!! Unknown sequence : ");
-    Communicator::SendWith0D0A(text);
+    Communicator::Send(dir, "ERROR !!! Unknown sequence : ");
+    Communicator::SendWith0D0A(dir, text);
 }

@@ -44,7 +44,8 @@ static const uint speedes[HSpeed::Count] =
 static const uint alternates[HAlternate::Count] =
 {
     GPIO_AF7_USART2,
-    GPIO_AF7_USART3
+    GPIO_AF7_USART3,
+    GPIO_AF8_UART4
 };
 
 

@@ -1193,6 +1193,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>SCPI/Parser</GroupName>
+          <Files>
+            <File>
+              <FileName>Parser.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\Parser\Parser.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Parser.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\Parser\Parser.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Settings</GroupName>
           <Files>
             <File>
@@ -2495,6 +2510,21 @@
               <FileName>Commands.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\Commands.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>SCPI/Parser</GroupName>
+          <Files>
+            <File>
+              <FileName>Parser.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\Parser\Parser.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Parser.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\Parser\Parser.h</FilePath>
             </File>
           </Files>
         </Group>

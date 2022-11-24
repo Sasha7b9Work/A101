@@ -7,9 +7,20 @@
 */
 
 
+struct Direction
+{
+    enum E
+    {
+        USB = 1 << 0,
+        RS232 = 1 << 1,
+        ALL = USB | RS232
+    };
+};
+
+
 namespace Communicator
 {
-    void SendWith0D0A(pchar);
+    void SendWith0D0A(Direction::E, pchar);
 
-    void Send(pchar);
+    void Send(Direction::E, pchar);
 }

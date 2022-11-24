@@ -103,6 +103,12 @@ extern "C" {
         HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART3::handle);
     }
 
+    // RS232
+    void UART4_IRQHandler()
+    {
+        HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_UART4::handle);
+    }
+
     void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle) //-V2009
     {
         if (handle == HAL_USART2::handle)
@@ -112,6 +118,10 @@ extern "C" {
         else if (handle == HAL_USART3::handle)
         {
             HAL_USART3::CallbackOnReceive();
+        }
+        else if (handle == HAL_UART4::handle)
+        {
+            HAL_UART4::CallbackOnReceive();
         }
     }
 

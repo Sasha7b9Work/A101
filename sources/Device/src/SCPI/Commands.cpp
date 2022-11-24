@@ -8,39 +8,39 @@
 
 namespace SCPI
 {
-    void Send(pchar);
+    void Send(Direction::E, pchar);
 
-    void Error(pchar);
+    void Error(Direction::E, pchar);
 }
 
 
-bool SCPI::Command::Execute()
+bool SCPI::Command::Execute(Direction::E)
 {
     return false;
 }
 
 
-bool SCPI::CommandWithParameters::Execute()
+bool SCPI::CommandWithParameters::Execute(Direction::E)
 {
     return false;
 }
 
 
-bool SCPI::CommandIDN::Execute()
+bool SCPI::CommandIDN::Execute(Direction::E dir)
 {
-    Send("OAO MNIPI, A101");
+    Send(dir, "OAO MNIPI, A101");
     return true;
 }
 
 
-bool SCPI::CommandRST::Execute()
+bool SCPI::CommandRST::Execute(Direction::E)
 {
     Device::Reset();
     return true;
 }
 
 
-bool SCPI::CommandRANGE::Execute()
+bool SCPI::CommandRANGE::Execute(Direction::E dir)
 {
     String<> char_range = params.GetWord(0);
 
@@ -56,13 +56,13 @@ bool SCPI::CommandRANGE::Execute()
         }
     }
 
-    Error(params.c_str());
+    Error(dir, params.c_str());
 
     return true;
 }
 
 
-bool SCPI::CommandDATA::Execute()
+bool SCPI::CommandDATA::Execute(Direction::E dir)
 {
     String<> char_num = params.GetWord(0);
 
@@ -70,11 +70,11 @@ bool SCPI::CommandDATA::Execute()
 
     if (char_num.ToInt(&num))
     {
-        Indicator::OnEvent::SendDataToCommunicator(num);
+        Indicator::OnEvent::SendDataToCommunicator(dir, num);
     }
     else
     {
-        Error(params.c_str());
+        Error(dir, params.c_str());
     }
 
     return true;

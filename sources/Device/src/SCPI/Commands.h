@@ -12,7 +12,7 @@ namespace SCPI
     class Command
     {
     public:
-        virtual bool Execute();
+        virtual bool Execute(Direction::E);
         virtual ~Command() {}
     };
 
@@ -22,7 +22,7 @@ namespace SCPI
     public:
         CommandWithParameters(pchar _params) { params.SetFormat(_params); }
         virtual ~CommandWithParameters() override {}
-        virtual bool Execute() override;
+        virtual bool Execute(Direction::E) override;
     protected:
         String<> params;
     };
@@ -31,7 +31,7 @@ namespace SCPI
     class CommandIDN : public Command
     {
     public:
-        virtual bool Execute() override;
+        virtual bool Execute(Direction::E) override;
         virtual ~CommandIDN() override {}
     };
 
@@ -39,7 +39,7 @@ namespace SCPI
     class CommandRST : public Command
     {
     public:
-        virtual bool Execute() override;
+        virtual bool Execute(Direction::E) override;
         virtual ~CommandRST() override {}
     };
 
@@ -49,7 +49,7 @@ namespace SCPI
     public:
         CommandRANGE(pchar par) : CommandWithParameters(par) {}
         virtual ~CommandRANGE() override {}
-        virtual bool Execute() override;
+        virtual bool Execute(Direction::E) override;
     };
 
 
@@ -58,6 +58,6 @@ namespace SCPI
     public:
         CommandDATA(pchar par) : CommandWithParameters(par) {}
         virtual ~CommandDATA() override {}
-        virtual bool Execute() override;
+        virtual bool Execute(Direction::E) override;
     };
 }

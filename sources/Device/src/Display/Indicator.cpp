@@ -41,7 +41,8 @@ namespace Indicator
     static char measureDC[TextString::MAX_LEN] = { '\0' };
     static char measureAC[TextString::MAX_LEN] = { '\0' };
 
-    static int need_send = 0;                                       // —только раз нужно передавать данные наружу
+    static int need_sendUSB = 0;                                       // —только раз нужно передавать данные наружу
+    static int need_sendRS232 = 0;
 
     static void SetBig();
 
@@ -133,15 +134,26 @@ void Indicator::SetMeasures(float dc, float ac)
     ConvertDoubleToText(dc, measureDC, after[range], suffix);
     ConvertDoubleToText(ac, measureAC, after[range], suffix);
 
-    if (need_send)
+    if (need_sendUSB || need_sendRS232)
     {
-        need_send--;
+        String<> messageDC("DC:%s", measureDC);
+        String<> messageAC("AC:%s", measureAC + 1);
 
-        String<> message("DC:%s", measureDC);
-        Communicator::SendWith0D0A(message.c_str());
+        if (need_sendUSB)
+        {
+            need_sendUSB--;
 
-        message.SetFormat("AC:%s", measureAC + 1);
-        Communicator::SendWith0D0A(message.c_str());
+            Communicator::SendWith0D0A(Direction::USB, messageDC.c_str());
+            Communicator::SendWith0D0A(Direction::USB, messageAC.c_str());
+        }
+
+        if (need_sendRS232)
+        {
+            need_sendRS232--;
+
+            Communicator::SendWith0D0A(Direction::RS232, messageDC.c_str());
+            Communicator::SendWith0D0A(Direction::RS232, messageAC.c_str());
+        }
     }
 }
 
@@ -213,9 +225,17 @@ void Indicator::OnEvent::CnageRange()
 }
 
 
-void Indicator::OnEvent::SendDataToCommunicator(int num)
+void Indicator::OnEvent::SendDataToCommunicator(Direction::E dir, int num)
 {
-    need_send = num;
+    if (dir & Direction::USB)
+    {
+        need_sendUSB = num;
+    }
+
+    if (dir & Direction::RS232)
+    {
+        need_sendRS232 = num;
+    }
 }
 
 

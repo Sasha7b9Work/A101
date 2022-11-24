@@ -90,13 +90,6 @@ namespace HAL_SPI2
 }
 
 
-// RS232
-namespace HAL_UART4
-{
-    void Init();
-}
-
-
 // Дисплей
 namespace HAL_USART2
 {
@@ -108,6 +101,22 @@ namespace HAL_USART2
     void SendByte(uint8);
 
     extern void *handle;   // UART_HandleTypeDef
+
+    void CallbackOnReceive();
+}
+
+
+// RS232
+namespace HAL_UART4
+{
+    void Init();
+
+    void SendText(pchar);
+
+    // Послать с 0d0a в конце
+    void SendTextWith0D0A(pchar);
+
+    extern void *handle;    // UART_HandleTypeDef
 
     void CallbackOnReceive();
 }
@@ -145,7 +154,7 @@ extern "C" {
     void TIM3_IRQHandler();
     void USART2_IRQHandler();
     void USART3_IRQHandler();
-    
+    void UART4_IRQHandler();
 #ifdef __cplusplus
 }
 #endif
