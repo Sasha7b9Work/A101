@@ -240,25 +240,9 @@ void Indicator::OnEvent::SendDataToCommunicator(Direction::E dir, int num)
 }
 
 
-void Indicator::SetPeakADC(int
-#ifdef LOGGED
-    delta
-#endif
-)
+void Indicator::SetStatisticsADC(int peak, int ave)
 {
-#ifdef LOGGED
-    textPeakADC.SetText(String<>("peak: %d", delta).c_str());
-#endif
-}
+    textPeakADC.SetText(String<>("peak: %d", peak).c_str());
 
-
-void Indicator::SetAveADC(int
-#ifdef LOGGED
-    delta
-#endif
-)
-{
-#ifdef LOGGED
-    textAveADC.SetText(String<>("ave: %d", delta).c_str());
-#endif
+    textAveADC.SetText(String<>("ave: %d", ave).c_str());
 }

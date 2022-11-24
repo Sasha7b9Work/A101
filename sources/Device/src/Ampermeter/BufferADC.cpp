@@ -33,8 +33,8 @@ void BufferADC::CalculateLimits()
         if (value > max) { max = value; }
     }
 
-    Indicator::SetPeakADC((int)(max.Raw() - min.Raw()));
-    Indicator::SetAveADC((int)(sum / SIZE));
+    Indicator::SetStatisticsADC((int)(max.Raw() - min.Raw()),
+                                (int)(sum / SIZE));
 }
 
 
