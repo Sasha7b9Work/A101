@@ -9,7 +9,7 @@ include_directories(.)
 if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE")
-    
+
     # Older cmake versions don't support string(APPEND ...) provide a workaround
     macro(wx_string_append var str)
         set(${var} ${${var}}${str})

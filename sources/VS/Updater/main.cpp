@@ -20,7 +20,7 @@
     Поключённое устройство после подачи питания несколько секунд прослушивает порт и при получении запроса возвращает
     ответ "a101Y" и переходит в режим приёма прошивки.
     Прошивка происходт так :
-    1. update101.exe посылает 4 байта размера прошивки(без завершающего нуля) и переходит в режим прослушивания
+    1. update101.exe посылает размер прошивки в виде "163" с завершающим 0x0D и переходит в режим прослушивания
     2. устройство посылает запрос "?".Получив запрос, updater101.exe посылает 1024 байта прошивки.
     3. получив 1024 байта, устройство записывает их во флеш - память
     4. если получены не все байты, происходит переход к пункту 2.
@@ -32,6 +32,7 @@ using namespace std;
 
 
 static void WriteErrorMessage();
+static void Update(const ifstream &);
 
 
 static ComPort port;
@@ -61,14 +62,7 @@ int main(int argc, char *argv[])
 
     port.Open(argv[1]);
 
-    if (port.ConnectToDeivce())
-    {
-        cout << "Connect is OK" << endl;
-    }
-    else
-    {
-        cout << "Can not connect" << endl;
-    }
+    Update(file);
 
     getch();
 
@@ -80,4 +74,13 @@ static void WriteErrorMessage()
 {
     cout << "Invalid syntx. Usage:" << endl;
     cout << "\t update101.exe com1 a101.bin" << endl;
+}
+
+
+static void Update(const ifstream &file)
+{
+    while (true)
+    {
+
+    }
 }

@@ -23,14 +23,6 @@ void ComPort::Open(char *name_port)
             cout << "Can not open com port number " << port << endl;
         }
     }
-
-    connected = true;
-}
-
-
-bool ComPort::ConnectToDeivce()
-{
-    return connected;
 }
 
 
