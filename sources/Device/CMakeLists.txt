@@ -46,7 +46,6 @@ file(GLOB MENU             src/Menu/*.*)
 file(GLOB MENU_PAGES       src/Menu/Pages/*.*)
 file(GLOB NEXTION          src/Nextion/*.*)
 file(GLOB SCPI             src/SCPI/*.*)
-file(GLOB SCPI_PARSER      src/SCPI/Parser/*.*)
 file(GLOB SETTINGS         src/Settings/*.*)
 file(GLOB UTILS            src/Utils/*)
 
@@ -66,7 +65,6 @@ source_group(Menu                  FILES ${MENU})
 source_group(Menu/Pages            FILES ${MENU_PAGES})
 source_group(Nextion               FILES ${NEXTION})
 source_group(SCPI                  FILES ${SCPI})
-source_group(SCPI/Parser           FILES ${SCPI_PARSER})
 source_group(Settings              FILES ${SETTINGS})
 source_group(Utils                 FILES ${UTILS})
 
@@ -84,7 +82,6 @@ add_library(${PROJECT_NAME} ${LIBS_HAL}
                             ${MENU_PAGES}
                             ${NEXTION}
                             ${SCPI}
-                            ${SCPI_PARSER}
                             ${SETTINGS}
                             ${UTILS}
 )

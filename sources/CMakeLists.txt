@@ -22,3 +22,4 @@ set(CMAKE_UNITY_BUILD ON)
 set (TARGET_NAME A101)
 
 add_subdirectory(Device)
+add_subdirectory(Loader)
