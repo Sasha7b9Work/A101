@@ -34,8 +34,10 @@ namespace Indicator
     static TextString labelACsmall(small_x_label, small_y_1, small_width_label, small_height, 0, "AC:", Color::MeasureAC);
     static TextString textDCsmall(small_x_text, small_y_0, small_width_text, small_height, 0, "", Color::MeasureDC);
     static TextString textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "", Color::MeasureAC);
-    static TextString textPeakADC(10, 358, 200, 40, 2, "", Color::White);
-    static TextString textAveADC(250, 358, 200, 40, 2, "", Color::White);
+    static TextString textPeakADC(10, 358, 215, 40, 2, "", Color::White);
+    static TextString textAveADC(230, 358, 180, 40, 2, "", Color::White);
+    static TextString textMinADC(412, 358, 190, 40, 2, "", Color::White);
+    static TextString textMaxADC(605, 358, 190, 40, 2, "", Color::White);
 
     static bool is_big = true;
 
@@ -240,9 +242,13 @@ void Indicator::OnEvent::SendDataToCommunicator(Direction::E dir, int num)
 }
 
 
-void Indicator::SetStatisticsADC(int peak, int ave)
+void Indicator::SetStatisticsADC(int peak, int ave, int min, int max)
 {
-    textPeakADC.SetText(String<>("peak: %d", peak).c_str());
+    textPeakADC.SetText(String<>("peak %d", peak).c_str());
 
-    textAveADC.SetText(String<>("ave: %d", ave).c_str());
+    textAveADC.SetText(String<>("ave %d", ave).c_str());
+
+    textMinADC.SetText(String<>("mn %d", min).c_str());
+
+    textMaxADC.SetText(String<>("mx %d", max).c_str());
 }

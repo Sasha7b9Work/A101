@@ -34,7 +34,8 @@ void BufferADC::CalculateLimits()
     }
 
     Indicator::SetStatisticsADC((int)(max.Raw() - min.Raw()),
-                                (int)(sum / SIZE));
+                                (int)(sum / SIZE),
+                                min, max);
 }
 
 

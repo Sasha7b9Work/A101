@@ -23,7 +23,7 @@ namespace Indicator
     void SetOverflow();
 
     // Пиковое значение АЦП
-    void SetStatisticsADC(int peak, int ave);
+    void SetStatisticsADC(int peak, int ave, int min, int max);
 
     namespace OnEvent
     {
