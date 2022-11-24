@@ -10,11 +10,18 @@ using namespace std;
 
 void ComPort::Open(char *name_port)
 {
+    static uint time = GetTickCount();
+
     port = ExtractNumberPort(name_port);
 
     while (RS232_OpenComport(port - 1, 115200, "8n1", 0) != 0)
     {
-        cout << "Can not open com port number " << port << endl;
+        if (GetTickCount() - time > 1000)
+        {
+            time = GetTickCount();
+
+            cout << "Can not open com port number " << port << endl;
+        }
     }
 
     connected = true;

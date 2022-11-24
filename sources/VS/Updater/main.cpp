@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
         getch();
 
-//        return -1;
+        return -1;
     }
 
     port.Open(argv[1]);
