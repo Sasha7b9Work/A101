@@ -29,24 +29,3 @@
                            FLASH_FLAG_PGAERR |  /* programming alignment error flag   */   \
                            FLASH_FLAG_PGPERR |  /* programming parallelism error flag */   \
                            FLASH_FLAG_PGSERR)   /* programming sequence error flag    */
-
-
-void HAL_EEPROM::Save(CalibrationSettings *)
-{
-}
-
-
-bool HAL_EEPROM::Load(CalibrationSettings *)
-{
-    return false;
-}
-
-
-void HAL_EEPROM::Save(Settings *)
-{
-}
-
-bool HAL_EEPROM::Load(Settings *)
-{
-    return false;
-}

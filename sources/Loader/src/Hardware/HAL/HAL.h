@@ -2,10 +2,6 @@
 #pragma once
 
 
-struct CalibrationSettings;
-struct Settings;
-
-
 #define ERROR_HANDLER() HAL::ErrorHandler()
 
 
@@ -27,12 +23,6 @@ namespace HAL_CRC32
 
 namespace HAL_EEPROM
 {
-    void Save(CalibrationSettings *);
-    bool Load(CalibrationSettings *);
-
-    void Save(Settings *);
-    bool Load(Settings *);
-
 }
 
 
@@ -65,60 +55,6 @@ namespace HAL_TIM3
     void StartIT(uint period);
 
     void StopIT();
-}
-
-
-// Для чтения АЦП (по сигналу этого таймера нужно читать одну точку АЦП)
-namespace HAL_TIM4
-{
-    void Init();
-
-    // Запустить таймер с периодом срабатывания dUS микросекнуд
-    void StartPeriodicUS(uint dUS);
-
-    // Выход из этой функции происходит, когда срабатывает таймер. Одновременно запускаетя следующий счёт
-    void WaitEvent();
-
-    void Stop();
-}
-
-
-// АЦП AD7691BRMZ
-namespace HAL_SPI2
-{
-    void Init();
-}
-
-
-// Дисплей
-namespace HAL_USART2
-{
-    void Init();
-
-    // Посылает без завершаюшего нуля
-    void SendNZ(pchar);
-
-    void SendByte(uint8);
-
-    extern void *handle;   // UART_HandleTypeDef
-
-    void CallbackOnReceive();
-}
-
-
-// RS232
-namespace HAL_UART4
-{
-    void Init();
-
-    void SendText(pchar);
-
-    // Послать с 0d0a в конце
-    void SendTextWith0D0A(pchar);
-
-    extern void *handle;    // UART_HandleTypeDef
-
-    void CallbackOnReceive();
 }
 
 

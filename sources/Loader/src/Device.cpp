@@ -9,8 +9,6 @@
 void Device::Init()
 {
     HAL::Init();
-
-    HAL_TIM::Delay(500);
 }
 
 
