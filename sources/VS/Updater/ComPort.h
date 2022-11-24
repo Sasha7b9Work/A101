@@ -12,5 +12,4 @@ public:
 private:
     int port = -1;
     int ExtractNumberPort(char *name_port);
-    void (*func_callback)(char) = nullptr;
 };

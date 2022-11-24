@@ -4,11 +4,26 @@
 #include "rs232.h"
 #include <string>
 #include <iostream>
+#include <thread>
 
 using namespace std;
 
 
-void ComPort::Open(char *name_port, void (*_func_callback)(char))
+static void FuncThread(int num_port, void (*func_callback)(char))
+{
+    uint8 buffer = 0;
+
+    while (true)
+    {
+        if (RS232_PollComport(num_port, &buffer, 1) == 1)
+        {
+            func_callback((char)buffer);
+        }
+    }
+}
+
+
+void ComPort::Open(char *name_port, void (*func_callback)(char))
 {
     static uint time = GetTickCount();
 
@@ -24,7 +39,7 @@ void ComPort::Open(char *name_port, void (*_func_callback)(char))
         }
     }
 
-    func_callback = _func_callback;
+    thread t(FuncThread, port, func_callback);
 }
 
 
@@ -66,5 +81,5 @@ void ComPort::Send(pchar msg)
 
 void ComPort::SendBuffer(uint8 *buffer, int size)
 {
-
+    RS232_SendBuf(port, buffer, size);
 }

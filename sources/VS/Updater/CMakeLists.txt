@@ -2,7 +2,7 @@
 
 project (Updater)
 
-set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(.)
 
