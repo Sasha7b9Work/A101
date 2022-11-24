@@ -12,16 +12,18 @@ void ComPort::Open(char *name_port)
 {
     port = ExtractNumberPort(name_port);
 
-    while (RS232_OpenComport(port, 115200, "8n1", 0) != 0)
+    while (RS232_OpenComport(port - 1, 115200, "8n1", 0) != 0)
     {
         cout << "Can not open com port number " << port << endl;
     }
+
+    connected = true;
 }
 
 
 bool ComPort::ConnectToDeivce()
 {
-    return false;
+    return connected;
 }
 
 

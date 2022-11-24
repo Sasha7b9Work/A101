@@ -9,5 +9,6 @@ public:
     bool ConnectToDeivce();
 private:
     int port = -1;
+    bool connected = false;
     int ExtractNumberPort(char *name_port);
 };

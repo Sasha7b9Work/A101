@@ -45,7 +45,7 @@ if(WIN32)
 #    add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
 #    add_compile_options(/wd4625)    # 'derived class' : copy constructor was implicitly defined as deleted because a base class copy constructor is inaccessible or deleted
 #    add_compile_options(/wd4626)    # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
-#    add_compile_options(/wd4820)    # 'bytes' bytes padding added after construct 'member_name'
+    add_compile_options(/wd4820)    # 'bytes' bytes padding added after construct 'member_name'
     add_compile_options(/wd4996)    # Your code uses a function, class member, variable, or typedef that's marked deprecated
 #    add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
 #    add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
@@ -67,4 +67,4 @@ add_executable( ${PROJECT_NAME}
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "update101")
 
 set_target_properties(Updater PROPERTIES
-    VS_DEBUGGER_COMMAND_ARGUMENTS "com1 a101.bin")
+    VS_DEBUGGER_COMMAND_ARGUMENTS "com5 a101.bin")
