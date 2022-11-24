@@ -33,6 +33,7 @@ using namespace std;
 
 static void WriteErrorMessage();
 static void Update(const ifstream &);
+static void CallbackOnReceive(pchar);
 
 
 static ComPort port;
