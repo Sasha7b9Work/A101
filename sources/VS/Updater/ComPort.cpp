@@ -8,7 +8,7 @@
 using namespace std;
 
 
-void ComPort::Open(char *name_port)
+void ComPort::Open(char *name_port, void (*_func_callback)(char))
 {
     static uint time = GetTickCount();
 
@@ -23,6 +23,8 @@ void ComPort::Open(char *name_port)
             cout << "Can not open com port number " << port << endl;
         }
     }
+
+    func_callback = _func_callback;
 }
 
 

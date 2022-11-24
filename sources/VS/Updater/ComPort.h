@@ -5,9 +5,10 @@
 class ComPort
 {
 public:
-    void Open(char *name_port, void (*func_callback)(pchar));
+    void Open(char *name_port, void (*func_callback)(char));
 
 private:
     int port = -1;
     int ExtractNumberPort(char *name_port);
+    void (*func_callback)(char) = nullptr;
 };

@@ -2,7 +2,11 @@
 #pragma once
 
 
-struct TimerMeter
+struct TimeMeter
 {
-
+    TimeMeter();
+    uint ElapsedTime();
+    void Wait(uint timeMS);
+private:
+    uint time;
 };

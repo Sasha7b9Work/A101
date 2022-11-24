@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "rs232.h"
 #include "ComPort.h"
+#include "Timer.h"
 #pragma warning(push)
 #pragma warning(disable : 4668)
 #include <iostream>
@@ -33,10 +34,13 @@ using namespace std;
 
 static void WriteErrorMessage();
 static void Update(const ifstream &);
-static void CallbackOnReceive(pchar);
+static void CallbackOnReceive(char);
 
 
 static ComPort port;
+
+static bool a101_connected = false;     // true, если с при бором установлена связь
+static bool updated = false;            // true, если апдейт произведён
 
 
 int main(int argc, char *argv[])
@@ -61,7 +65,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    port.Open(argv[1]);
+    port.Open(argv[1], CallbackOnReceive);
 
     Update(file);
 
@@ -78,10 +82,19 @@ static void WriteErrorMessage()
 }
 
 
-static void Update(const ifstream &file)
+static void Update(const ifstream &)
 {
-    while (true)
+    while (!updated)
     {
-
+        if (!a101_connected)
+        {
+            TimeMeter().Wait(100);
+        }
     }
+}
+
+
+static void CallbackOnReceive(char)
+{
+
 }
