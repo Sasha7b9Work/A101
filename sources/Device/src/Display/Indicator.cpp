@@ -34,7 +34,7 @@ namespace Indicator
     static TextString labelACsmall(small_x_label, small_y_1, small_width_label, small_height, 0, "AC:", Color::MeasureAC);
     static TextString textDCsmall(small_x_text, small_y_0, small_width_text, small_height, 0, "", Color::MeasureDC);
     static TextString textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "", Color::MeasureAC);
-    static TextString textDeltaADC(7, 207, 150, 40, 2, "", Color::White);
+    static TextString textPeakADC(7, 207, 150, 40, 2, "", Color::White);
 
     static bool is_big = true;
 
@@ -239,12 +239,12 @@ void Indicator::OnEvent::SendDataToCommunicator(Direction::E dir, int num)
 }
 
 
-void Indicator::SetDeltaADC(int delta)
+void Indicator::SetPeakADC(int delta)
 {
     char buffer[32];
     std::sprintf(buffer, "%d", delta);
 
 #ifdef LOGGED
-    textDeltaADC.SetText(buffer);
+    textPeakADC.SetText(buffer);
 #endif
 }

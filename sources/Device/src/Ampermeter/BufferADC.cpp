@@ -29,7 +29,7 @@ void BufferADC::CalculateLimits()
         if (value > max) { max = value; }
     }
 
-    Indicator::SetDeltaADC((int)(max.Raw() - min.Raw()));
+    Indicator::SetPeakADC((int)(max.Raw() - min.Raw()));
 }
 
 

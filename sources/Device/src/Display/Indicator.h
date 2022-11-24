@@ -22,7 +22,11 @@ namespace Indicator
     // Установить признак переполнения
     void SetOverflow();
 
-    void SetDeltaADC(int);
+    // Пиковое значение АЦП
+    void SetPeakADC(int);
+
+    // Среднее значение АЦП
+    void SetAveADC();
 
     namespace OnEvent
     {
