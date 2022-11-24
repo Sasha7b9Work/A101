@@ -26,7 +26,7 @@ namespace Indicator
     void SetPeakADC(int);
 
     // Среднее значение АЦП
-    void SetAveADC();
+    void SetAveADC(int);
 
     namespace OnEvent
     {

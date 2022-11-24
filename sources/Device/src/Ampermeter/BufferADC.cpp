@@ -18,6 +18,8 @@ ValueADC   BufferADC::max;
 
 void BufferADC::CalculateLimits()
 {
+    int64 sum = 0;
+
     min = ValueADC::MAX;
     max = ValueADC::MIN;
 
@@ -25,11 +27,14 @@ void BufferADC::CalculateLimits()
     {
         ValueADC value = raw[i];
 
+        sum += value;
+
         if (value < min) { min = value; }
         if (value > max) { max = value; }
     }
 
     Indicator::SetPeakADC((int)(max.Raw() - min.Raw()));
+    Indicator::SetAveADC((int)(sum / SIZE));
 }
 
 
