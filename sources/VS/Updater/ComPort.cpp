@@ -52,3 +52,19 @@ int ComPort::ExtractNumberPort(char *name_port)
 
     return result;
 }
+
+
+void ComPort::Send(pchar msg)
+{
+    string message = msg;
+
+    message.append("\x0D");
+
+    RS232_SendBuf(port, (const unsigned char *)message.c_str(), (int)message.size());
+}
+
+
+void ComPort::SendBuffer(uint8 *buffer, int size)
+{
+
+}

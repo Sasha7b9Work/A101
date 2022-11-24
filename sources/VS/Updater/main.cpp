@@ -33,14 +33,17 @@ using namespace std;
 
 
 static void WriteErrorMessage();
-static void Update(const ifstream &);
+static void Update();
 static void CallbackOnReceive(char);
 
 
 static ComPort port;
 
+static ifstream file;
+
 static bool a101_connected = false;     // true, если с при бором установлена связь
 static bool updated = false;            // true, если апдейт произведён
+static uint sended_bytes = 0;           // переслано байт прошивки
 
 
 int main(int argc, char *argv[])
@@ -54,7 +57,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    ifstream file(argv[2], ifstream::in | ifstream::binary);
+    file.open(argv[2], ifstream::in | ifstream::binary);
 
     if (!file.is_open())
     {
@@ -67,7 +70,11 @@ int main(int argc, char *argv[])
 
     port.Open(argv[1], CallbackOnReceive);
 
-    Update(file);
+    Update();
+
+    cout << "Update succefull" << endl;
+
+    file.close();
 
     getch();
 
@@ -82,19 +89,54 @@ static void WriteErrorMessage()
 }
 
 
-static void Update(const ifstream &)
+static void Update()
 {
     while (!updated)
     {
         if (!a101_connected)
         {
             TimeMeter().Wait(100);
+
+            port.Send("a101?");
         }
     }
 }
 
 
-static void CallbackOnReceive(char)
+static void CallbackOnReceive(char symbol)
 {
+    static string received;
 
+    if (symbol == '\x0D')
+    {
+        if (received == "a101Y")
+        {
+            a101_connected = true;
+
+            file.seekg(0, ios_base::end);
+
+            port.Send(to_string(file.tellg()).c_str());
+
+            file.seekg(0, ios_base::beg);
+        }
+        else if (received == "?")
+        {
+            uint8 buffer[1024];
+
+            file.read((char *)buffer, 1024);
+
+            port.SendBuffer(buffer, (int)file.gcount());
+
+            if (file.eof())
+            {
+                updated = true;
+            }
+        }
+
+        received.clear();
+    }
+    else
+    {
+        received.push_back(symbol);
+    }
 }

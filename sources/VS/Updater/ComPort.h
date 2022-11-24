@@ -6,6 +6,8 @@ class ComPort
 {
 public:
     void Open(char *name_port, void (*func_callback)(char));
+    void Send(pchar);
+    void SendBuffer(uint8 *, int size);
 
 private:
     int port = -1;
