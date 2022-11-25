@@ -156,7 +156,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\arm_fir_example_f32.c</Filename>
+          <Filename>D:\Projects\A101\sources\Loader\arm_fir_example_f32.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\arm_fir_example\arm_fir_example_f32.c\230</Expression>
         </Bp>
@@ -172,7 +172,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\arm_fir_example_f32.c</Filename>
+          <Filename>D:\Projects\A101\sources\Loader\arm_fir_example_f32.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\arm_fir_example\arm_fir_example_f32.c\227</Expression>
         </Bp>
