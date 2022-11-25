@@ -31,7 +31,10 @@ namespace SCPI
 
 void SCPI::Update()
 {
-    in_usb.Update();
+    if (State::Current() == State::WaitUpdate)
+    {
+        in_usb.Update();
+    }
 }
 
 

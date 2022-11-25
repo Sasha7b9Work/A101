@@ -27,8 +27,6 @@ bool SCPI::CommandREQUEST::Execute()
 {
     Send("a101Y");
 
-    State::Set(State::InProcessUpdate);
-
     return true;
 }
 
@@ -42,6 +40,8 @@ bool SCPI::CommandSIZE::Execute()
     if (char_size.ToInt(&size))
     {
         Updater::SetSize(size);
+
+        State::Set(State::InProcessUpdate);
 
         Send("?");
     }

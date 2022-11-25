@@ -38,7 +38,7 @@ void Updater::AppendByte(uint8 byte)
     if (pointer == 1024 || bytes_left == 0)
     {
         HAL_EEPROM::Write(buffer, pointer);
-    }
 
-    pointer = 0;
+        pointer = 0;
+    }
 }

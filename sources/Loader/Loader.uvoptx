@@ -389,18 +389,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>87</LineNumber>
+          <LineNumber>40</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134233288</Address>
+          <Address>134236048</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_EEPROM.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Updater.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101\src/Hardware/HAL/HAL_EEPROM.cpp\87</Expression>
+          <Expression>\\A101\src/Updater.cpp\40</Expression>
         </Bp>
       </Breakpoint>
       <MemoryWindow1>
