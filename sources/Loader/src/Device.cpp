@@ -18,8 +18,6 @@ namespace Device
 
 void Device::Init()
 {
-    JumpToMainApplication();
-    
     HAL::Init();
 }
 

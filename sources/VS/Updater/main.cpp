@@ -98,6 +98,8 @@ static void Update()
             TimeMeter().Wait(100);
 
             port.Send("a101?");
+
+            cout << "Send request" << endl;
         }
     }
 }

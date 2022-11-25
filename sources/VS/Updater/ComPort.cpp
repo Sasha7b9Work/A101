@@ -27,9 +27,9 @@ void ComPort::Open(char *name_port, void (*func_callback)(char))
 {
     static uint time = GetTickCount();
 
-    port = ExtractNumberPort(name_port);
+    port = ExtractNumberPort(name_port) - 1;
 
-    while (RS232_OpenComport(port - 1, 115200, "8n1", 0) != 0)
+    while (RS232_OpenComport(port, 115200, "8n1", 0) != 0)
     {
         if (GetTickCount() - time > 1000)
         {
