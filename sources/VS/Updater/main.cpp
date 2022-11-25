@@ -131,7 +131,7 @@ static void CallbackOnReceive(char symbol)
 
             port.SendBuffer(buffer, (int)file.gcount());
 
-            cout << (float)size / (float)file.tellg() * 100.0f << "%%" << endl;
+            cout << (float)size / (float)file.tellg() * 100.0f << " %%" << endl;
 
             if (file.eof())
             {
