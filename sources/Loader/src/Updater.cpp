@@ -3,6 +3,7 @@
 #include "Updater.h"
 #include "Hardware/HAL/HAL.h"
 #include "SCPI/SCPI.h"
+#include "Device.h"
 
 
 namespace Updater
@@ -40,5 +41,10 @@ void Updater::AppendByte(uint8 byte)
         HAL_EEPROM::Write(buffer, pointer);
 
         pointer = 0;
+    }
+
+    if (bytes_left == 0)
+    {
+        State::Set(State::Completed);
     }
 }
