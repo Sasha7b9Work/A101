@@ -4,6 +4,8 @@
 #include "SCPI/Commands.h"
 #include "Utils/String.h"
 #include "Hardware/HAL/HAL.h"
+#include "Updater.h"
+#include "Device.h"
 #include <cctype>
 
 
@@ -50,7 +52,27 @@ void SCPI::InBuffer::Update()
 
 void SCPI::CallbackOnReceive(uint8 byte)
 {
-    in_usb.Append((uint8)std::toupper(byte));
+    if (Updater::BytesLeft())
+    {
+        Updater::AppendByte(byte);
+    }
+    else
+    {
+        in_usb.Append((uint8)std::toupper(byte));
+    }
+}
+
+
+void SCPI::OnEvent::WriteBuffer()
+{
+    if (Updater::BytesLeft())
+    {
+        Send("?");
+    }
+    else
+    {
+        State::Set(State::Completed);
+    }
 }
 
 
@@ -95,12 +117,10 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
 
     String<> first_word = FirstWord(symbols);
 
-    if (first_word == "RANGE")
+    if (first_word == "SIZE")
     {
-        return new CommandRANGE((pchar)(symbols.Data() + first_word.Size()));
+        return new CommandSIZE((pchar)(symbols.Data() + first_word.Size()));
     }
-
-    String<1024> message((char *)symbols.Data());
 
     return new Command();
 }

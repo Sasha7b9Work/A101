@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "SCPI/Commands.h"
 #include "Device.h"
+#include "Updater.h"
 
 
 namespace SCPI
@@ -25,22 +26,24 @@ bool SCPI::CommandWithParameters::Execute()
 bool SCPI::CommandREQUEST::Execute()
 {
     Send("a101Y");
+
+    State::Set(State::InProcessUpdate);
+
     return true;
 }
 
 
-bool SCPI::CommandRANGE::Execute()
+bool SCPI::CommandSIZE::Execute()
 {
-    String<> char_range = params.GetWord(0);
+    String<> char_size = params.GetWord(0);
 
-    static const pchar titles[6] = { "2MA", "20MA", "200MA", "2A", "20A", "50A" };
+    int size = 0;
 
-    for (int i = 0; i < 6; i++)
+    if (char_size.ToInt(&size))
     {
-        if (char_range == titles[i])
-        {
-            return true;
-        }
+        Updater::SetSize(size);
+
+        Send("?");
     }
 
     return true;

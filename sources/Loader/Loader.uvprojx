@@ -830,6 +830,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Device.h</FilePath>
             </File>
+            <File>
+              <FileName>Updater.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Updater.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Updater.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Updater.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1740,6 +1750,16 @@
               <FileName>Device.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Device.h</FilePath>
+            </File>
+            <File>
+              <FileName>Updater.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Updater.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Updater.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Updater.h</FilePath>
             </File>
           </Files>
         </Group>

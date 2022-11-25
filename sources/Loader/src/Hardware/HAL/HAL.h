@@ -23,6 +23,9 @@ namespace HAL_CRC32
 
 namespace HAL_EEPROM
 {
+    void Erase(int size);
+
+    void Write(uint8 *buffer, int size);
 }
 
 

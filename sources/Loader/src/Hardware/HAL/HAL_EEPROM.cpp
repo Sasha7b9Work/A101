@@ -5,12 +5,12 @@
 #include <cstring>
 
 
-#define ADDR_SECTOR_0   ((uint)0x08000000)  //  FLASH_SECTOR_0  16k Основная прошивка
+#define ADDR_SECTOR_0   ((uint)0x08000000)  //  FLASH_SECTOR_0  16k  Загрузчик
 #define ADDR_SECTOR_1   ((uint)0x08004000)  //  FLASH_SECTOR_1  16k
 #define ADDR_SECTOR_2   ((uint)0x08008000)  //  FLASH_SECTOR_2  16k
 #define ADDR_SECTOR_3   ((uint)0x0800c000)  //  FLASH_SECTOR_3  16k
 #define ADDR_SECTOR_4   ((uint)0x08010000)  //  FLASH_SECTOR_4  64k
-#define ADDR_SECTOR_5   ((uint)0x08020000)  //  FLASH_SECTOR_5  128k
+#define ADDR_SECTOR_5   ((uint)0x08020000)  //  FLASH_SECTOR_5  128k Основная прошивка
 #define ADDR_SECTOR_6   ((uint)0x08040000)  //  FLASH_SECTOR_6  128k
 #define ADDR_SECTOR_7   ((uint)0x08060000)  //  FLASH_SECTOR_7  128k
 #define ADDR_SECTOR_8   ((uint)0x08080000)  //  FLASH_SECTOR_8  128k
@@ -29,3 +29,45 @@
                            FLASH_FLAG_PGAERR |  /* programming alignment error flag   */   \
                            FLASH_FLAG_PGPERR |  /* programming parallelism error flag */   \
                            FLASH_FLAG_PGSERR)   /* programming sequence error flag    */
+
+
+namespace HAL_EEPROM
+{
+    // Осталось байт для записи
+    static int elapsed_bytes = 0;
+}
+
+void HAL_EEPROM::Erase(int size)
+{
+    elapsed_bytes = size;
+
+    int num_sectors = size / 1024 + 1;
+
+    if (num_sectors > 4)
+    {
+        num_sectors = 4;
+    }
+
+    CLEAR_FLASH_FLAGS;
+
+    HAL_FLASH_Unlock();
+
+    FLASH_EraseInitTypeDef is;
+
+    is.TypeErase = TYPEERASE_SECTORS;
+    is.Sector = 5;
+    is.NbSectors = num_sectors;
+    is.VoltageRange = VOLTAGE_RANGE_3;
+
+    uint error = 0;
+
+    HAL_FLASHEx_Erase(&is, &error);
+
+    HAL_FLASH_Lock();
+}
+
+
+void HAL_EEPROM::Write(uint8 *buffer, int size)
+{
+    CLEAR_FLASH_FLAGS
+}

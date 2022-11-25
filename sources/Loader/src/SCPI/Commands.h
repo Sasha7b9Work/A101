@@ -35,11 +35,11 @@ namespace SCPI
     };
 
 
-    class CommandRANGE : public CommandWithParameters
+    class CommandSIZE : public CommandWithParameters
     {
     public:
-        CommandRANGE(pchar par) : CommandWithParameters(par) {}
-        virtual ~CommandRANGE() override {}
+        CommandSIZE(pchar par) : CommandWithParameters(par) {}
+        virtual ~CommandSIZE() override {}
         virtual bool Execute() override;
     };
 }
