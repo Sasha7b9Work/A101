@@ -93,21 +93,11 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
         return new CommandREQUEST();
     }
 
-    if (std::strcmp((char *)symbols.Data(), "*RST") == 0)
-    {
-        return new CommandRST();
-    }
-
     String<> first_word = FirstWord(symbols);
 
     if (first_word == "RANGE")
     {
         return new CommandRANGE((pchar)(symbols.Data() + first_word.Size()));
-    }
-
-    if (first_word == "DATA?")
-    {
-        return new CommandDATA((pchar)(symbols.Data() + first_word.Size()));
     }
 
     String<1024> message((char *)symbols.Data());

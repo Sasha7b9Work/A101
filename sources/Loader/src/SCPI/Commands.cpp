@@ -29,12 +29,6 @@ bool SCPI::CommandREQUEST::Execute()
 }
 
 
-bool SCPI::CommandRST::Execute()
-{
-    return true;
-}
-
-
 bool SCPI::CommandRANGE::Execute()
 {
     String<> char_range = params.GetWord(0);
@@ -47,23 +41,6 @@ bool SCPI::CommandRANGE::Execute()
         {
             return true;
         }
-    }
-
-    return true;
-}
-
-
-bool SCPI::CommandDATA::Execute()
-{
-    String<> char_num = params.GetWord(0);
-
-    int num = 0;
-
-    if (char_num.ToInt(&num))
-    {
-    }
-    else
-    {
     }
 
     return true;
