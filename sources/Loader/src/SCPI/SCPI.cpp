@@ -55,7 +55,7 @@ void SCPI::InBuffer::Update()
 
 void SCPI::CallbackOnReceive(uint8 byte)
 {
-    if (Updater::BytesLeft())
+    if (Updater::BytesLeft() && in_usb.Size() == 0)
     {
         Updater::AppendByte(byte);
     }

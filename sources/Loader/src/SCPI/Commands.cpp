@@ -41,9 +41,9 @@ bool SCPI::CommandSIZE::Execute()
     {
         Updater::SetSize(size);
 
-        State::Set(State::InProcessUpdate);
-
         Send("?");
+
+        State::Set(State::InProcessUpdate);
     }
 
     return true;

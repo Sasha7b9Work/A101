@@ -37,14 +37,14 @@ namespace HAL_EEPROM
     // ќсталось байт дл€ записи
     static int elapsed_bytes = 0;
 
-    static uint address = 0x08020000;
+    static uint address = 0x0801FFFF;       // \todo “акой странный адрес первой записи, потому что первый лишний байт приходит
 }
 
 void HAL_EEPROM::Erase(int size)
 {
     elapsed_bytes = size;
 
-    address = 0x08020000;
+    address = 0x0801FFFF;
 
     int num_sectors = size / (1024 * 128) + 1;
 
