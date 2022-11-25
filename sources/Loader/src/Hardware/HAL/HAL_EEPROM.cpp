@@ -35,11 +35,15 @@ namespace HAL_EEPROM
 {
     // Осталось байт для записи
     static int elapsed_bytes = 0;
+
+    static uint address = 0x08020000;
 }
 
 void HAL_EEPROM::Erase(int size)
 {
     elapsed_bytes = size;
+
+    address = 0x08020000;
 
     int num_sectors = size / 1024 + 1;
 
@@ -56,7 +60,7 @@ void HAL_EEPROM::Erase(int size)
 
     is.TypeErase = TYPEERASE_SECTORS;
     is.Sector = 5;
-    is.NbSectors = num_sectors;
+    is.NbSectors = (uint)num_sectors;
     is.VoltageRange = VOLTAGE_RANGE_3;
 
     uint error = 0;
@@ -69,5 +73,21 @@ void HAL_EEPROM::Erase(int size)
 
 void HAL_EEPROM::Write(uint8 *buffer, int size)
 {
-    CLEAR_FLASH_FLAGS
+    if (elapsed_bytes <= 0)
+    {
+        return;
+    }
+
+    CLEAR_FLASH_FLAGS;
+
+    HAL_FLASH_Unlock();
+
+    for (uint i = 0; i < (uint)size; i++)
+    {
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, buffer[i]);
+    }
+
+    HAL_FLASH_Unlock();
+
+    elapsed_bytes -= size;
 }

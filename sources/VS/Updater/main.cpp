@@ -107,6 +107,8 @@ static void CallbackOnReceive(char symbol)
 {
     static string received;
 
+    static int size = 0;
+
     if (symbol == '\x0D')
     {
         if (received == "a101Y")
@@ -115,7 +117,9 @@ static void CallbackOnReceive(char symbol)
 
             file.seekg(0, ios_base::end);
 
-            port.Send(to_string(file.tellg()).c_str());
+            size = (int)file.tellg();
+
+            port.Send(to_string(size).c_str());
 
             file.seekg(0, ios_base::beg);
         }
@@ -126,6 +130,8 @@ static void CallbackOnReceive(char symbol)
             file.read((char *)buffer, 1024);
 
             port.SendBuffer(buffer, (int)file.gcount());
+
+            cout << (float)size / (float)file.tellg() * 100.0f << "%%" << endl;
 
             if (file.eof())
             {
