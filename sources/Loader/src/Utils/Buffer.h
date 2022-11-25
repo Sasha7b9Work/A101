@@ -78,19 +78,7 @@ public:
         }
     }
 
-    T &operator[](uint i)
-    {
-        if ((int)i >= 0 && (int)i < Size())
-        {
-            return buffer[i];
-        }
-
-        static T null(0);
-
-        return null;
-    }
-
-    T &operator[](int i)
+    const T &operator[](int i) const
     {
         if (i >= 0 && i < Size())
         {

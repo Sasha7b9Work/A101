@@ -12,11 +12,11 @@ namespace SCPI
     class InBuffer : public Buffer2048<uint8>
     {
     public:
-        InBuffer() {}
+        InBuffer() = default;
         void Update();
     private:
         Command *ParseCommand(Buffer<uint8, 1024> &);
-        String<> FirstWord(Buffer<uint8, 1024> &);
+        String<> FirstWord(const Buffer<uint8, 1024> &);
         Command *ExtractCommand();
     };
 
@@ -115,7 +115,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
     return new Command();
 }
 
-String<> SCPI::InBuffer::FirstWord(Buffer<uint8, 1024> &symbols)
+String<> SCPI::InBuffer::FirstWord(const Buffer<uint8, 1024> &symbols)
 {
     String<> result;
 
