@@ -21,6 +21,10 @@ void Display::Init()
     Indicator::Init();
 
     Indicator::AutoSize();
+
+#ifdef DEBUG
+    Nextion::DrawString(600, 5, 100, 40, 2, Color::Black, Color::Background, "Debug");
+#endif
 }
 
 

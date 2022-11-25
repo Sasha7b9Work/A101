@@ -11,6 +11,7 @@
 #include "Ampermeter/InputRelays.h"
 #include "Hardware/Communicator.h"
 #include "Utils/String.h"
+#include "Hardware/Timer.h"
 #include <cstdio>
 #include <cstring>
 #include <cmath>
@@ -133,6 +134,15 @@ void Indicator::Update()
 
 void Indicator::SetMeasures(float dc, float ac)
 {
+    static TimeMeterMS meter;
+
+    if (meter.ElapsedTime() < 500)
+    {
+        return;
+    }
+
+    meter.Reset();
+
     int range = Range::Current();
 
     static const int after[6]    = { 4, 3, 2, 4, 3, 3 };
@@ -248,6 +258,15 @@ void Indicator::OnEvent::SendDataToCommunicator(Direction::E dir, int num)
 
 void Indicator::SetStatisticsADC(int peak, int ave, int min, int max)
 {
+    static TimeMeterMS meter;
+
+    if (meter.ElapsedTime() < 500)
+    {
+        return;
+    }
+
+    meter.Reset();
+
     textPeakADC.SetText(String<>("peak %d", peak).c_str());
 
     textAveADC.SetText(String<>("ave %d", ave).c_str());
