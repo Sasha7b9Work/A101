@@ -85,10 +85,7 @@ void HAL_EEPROM::Write(uint8 *buffer, int size)
 
     for (uint i = 0; i < (uint)size; i++)
     {
-        if (HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, buffer[i]) != HAL_OK)
-        {
-            break;
-        }
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, buffer[i]);
     }
 
     HAL_FLASH_Lock();
