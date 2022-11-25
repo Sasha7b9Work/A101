@@ -40,6 +40,7 @@ void ComPort::Open(char *name_port, void (*func_callback)(char))
     }
 
     thread t(FuncThread, port, func_callback);
+    t.detach();
 }
 
 
