@@ -40,7 +40,7 @@ namespace HAL_USART3
 
     static uint8 buffer = 0;
 
-    static void Send0D0A();
+    static void Send0D();
 }
 
 
@@ -66,16 +66,16 @@ void HAL_USART3::SendText(pchar message)
 }
 
 
-void HAL_USART3::SendTextWith0D0A(pchar message)
+void HAL_USART3::SendTextWith0D(pchar message)
 {
     HAL_UART_Transmit(&handleUSART3, (const uint8 *)message, (uint16)std::strlen(message), 100);
-    Send0D0A();
+    Send0D();
 }
 
 
-void HAL_USART3::Send0D0A()
+void HAL_USART3::Send0D()
 {
-    HAL_UART_Transmit(&handleUSART3, (const uint8 *)"\x0D\x0A", 2, 100);
+    HAL_UART_Transmit(&handleUSART3, (const uint8 *)"\x0D", 1, 100);
 }
 
 

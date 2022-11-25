@@ -22,9 +22,9 @@ bool SCPI::CommandWithParameters::Execute()
 }
 
 
-bool SCPI::CommandIDN::Execute()
+bool SCPI::CommandREQUEST::Execute()
 {
-    Send("OAO MNIPI, A101");
+    Send("a101Y");
     return true;
 }
 

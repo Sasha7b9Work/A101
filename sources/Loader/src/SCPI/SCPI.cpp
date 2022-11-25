@@ -88,9 +88,9 @@ SCPI::Command *SCPI::InBuffer::ExtractCommand()
 
 SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
 {
-    if (std::strcmp((char *)symbols.Data(), "*IDN?") == 0)
+    if (std::strcmp((char *)symbols.Data(), "A101?") == 0)
     {
-        return new CommandIDN();
+        return new CommandREQUEST();
     }
 
     if (std::strcmp((char *)symbols.Data(), "*RST") == 0)
@@ -145,5 +145,5 @@ String<> SCPI::InBuffer::FirstWord(const Buffer<uint8, 1024> &symbols)
 
 void SCPI::Send(pchar message)
 {
-    HAL_USART3::SendTextWith0D0A(message);
+    HAL_USART3::SendTextWith0D(message);
 }

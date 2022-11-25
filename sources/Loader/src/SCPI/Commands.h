@@ -27,11 +27,11 @@ namespace SCPI
     };
 
 
-    class CommandIDN : public Command
+    class CommandREQUEST : public Command
     {
     public:
         virtual bool Execute() override;
-        virtual ~CommandIDN() override {}
+        virtual ~CommandREQUEST() override {}
     };
 
 
