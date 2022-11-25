@@ -7,7 +7,7 @@
 
 namespace Updater
 {
-    static int bytes_lef = 0;
+    static int bytes_left = 0;
 
     static uint8 buffer[1024];
     static int pointer = 0;
@@ -16,7 +16,8 @@ namespace Updater
 
 void Updater::SetSize(int size)
 {
-    bytes_lef = size;
+    bytes_left = size;
+    pointer = 0;
 
     HAL_EEPROM::Erase(size);
 }
@@ -24,7 +25,7 @@ void Updater::SetSize(int size)
 
 int Updater::BytesLeft()
 {
-    return bytes_lef;
+    return bytes_left;
 }
 
 
@@ -32,14 +33,12 @@ void Updater::AppendByte(uint8 byte)
 {
     buffer[pointer++] = byte;
 
-    bytes_lef--;
+    bytes_left--;
 
-    if (pointer == 1024 || bytes_lef == 0)
+    if (pointer == 1024 || bytes_left == 0)
     {
         HAL_EEPROM::Write(buffer, pointer);
     }
 
     pointer = 0;
-
-    SCPI::OnEvent::WriteBuffer();
 }

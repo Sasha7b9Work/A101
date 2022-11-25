@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "stm_includes.h"
+#include "SCPI/SCPI.h"
 #include <cstring>
 
 
@@ -45,7 +46,7 @@ void HAL_EEPROM::Erase(int size)
 
     address = 0x08020000;
 
-    int num_sectors = size / 1024 + 1;
+    int num_sectors = size / (1024 * 128) + 1;
 
     if (num_sectors > 4)
     {
@@ -84,10 +85,15 @@ void HAL_EEPROM::Write(uint8 *buffer, int size)
 
     for (uint i = 0; i < (uint)size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, buffer[i]);
+        if (HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, buffer[i]) != HAL_OK)
+        {
+            break;
+        }
     }
 
-    HAL_FLASH_Unlock();
+    HAL_FLASH_Lock();
 
     elapsed_bytes -= size;
+
+    SCPI::OnEvent::WriteBuffer();
 }

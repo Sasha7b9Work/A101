@@ -28,7 +28,7 @@ void Device::Update()
     {
     case State::WaitUpdate:
         SCPI::Update();
-        if (HAL_TIM::TimeMS() > 2000)
+        if (HAL_TIM::TimeMS() > 200000)
         {
             State::Set(State::Completed);
         }

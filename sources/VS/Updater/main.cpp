@@ -76,8 +76,6 @@ int main(int argc, char *argv[])
 
     file.close();
 
-    getch();
-
     return 0;
 }
 
@@ -121,7 +119,7 @@ static void CallbackOnReceive(char symbol)
 
             size = (int)file.tellg();
 
-            port.Send(to_string(size).c_str());
+            port.Send((string("size ") + to_string(size)).c_str());
 
             file.seekg(0, ios_base::beg);
         }
@@ -133,7 +131,7 @@ static void CallbackOnReceive(char symbol)
 
             port.SendBuffer(buffer, (int)file.gcount());
 
-            cout << (float)size / (float)file.tellg() * 100.0f << " %%" << endl;
+            cout << (int)((float)file.tellg() / (float)size * 100.0f) << " %" << endl;
 
             if (file.eof())
             {
