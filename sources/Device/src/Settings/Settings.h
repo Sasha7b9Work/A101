@@ -16,14 +16,17 @@ struct Settings
     void Save();
     void Load();
 
-    void Store() const;
-    void Restore();
-
     uint CalculateCRC32() const;
     bool IsEqual(const Settings *) const;
 
     const uint8 *PointerToFirstData() const;
     uint SizeData() const;
+
+    struct Storage
+    {
+        static void Store(const Settings &);
+        static void Restore(Settings &);
+    };
 };
 
 

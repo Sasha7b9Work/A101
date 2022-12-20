@@ -23,15 +23,15 @@ namespace NS_Settings
 Settings set = NS_Settings::set_def;
 
 
-void Settings::Store() const
+void Settings::Storage::Store(const Settings &settings)
 {
-    NS_Settings::stored = *this;
+    NS_Settings::stored = settings;
 }
 
 
-void Settings::Restore()
+void Settings::Storage::Restore(Settings &settings)
 {
-    *this = NS_Settings::stored;
+    settings = NS_Settings::stored;
 }
 
 

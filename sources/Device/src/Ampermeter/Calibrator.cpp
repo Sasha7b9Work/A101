@@ -74,7 +74,8 @@ void Calibrator::ExecuteCalibration()
 {
     in_process = true;
 
-    set.Store();
+    Settings::Storage::Store(set);
+    CalibrationSettings::Storage::Store(cal);
 
     set.firLPF = false;
     set.middle_of_3 = false;
@@ -93,7 +94,7 @@ void Calibrator::ExecuteCalibration()
         }
     }
 
-    set.Restore();
+    Settings::Storage::Restore(set);
 
     DrawParameters();
 
@@ -102,6 +103,10 @@ void Calibrator::ExecuteCalibration()
     if (event_ready)
     {
         cal.Save();
+    }
+    else
+    {
+        CalibrationSettings::Storage::Restore(cal);
     }
 
     Nextion::Page::Enable(0);
@@ -248,14 +253,18 @@ void Calibrator::CalibratorZero::Run()
 float Calibrator::CalibratorZero::CalculateDC(int zero)
 {
     cal.SetZero(range, zero);
+
     Ampermeter::ReadData();
     Calculator::AppendData();
+
     return Calculator::GetDC();
 }
 
 
 void Calibrator::CalibrateGain(int range)
 {
+    cal.SetGainK(range, 1.0f);
+
     Ampermeter::ReadData();
     Calculator::AppendData();
 

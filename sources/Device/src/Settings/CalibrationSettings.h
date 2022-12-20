@@ -27,6 +27,19 @@ struct CalibrationSettings
 
     const uint8 *PointerToFirstData() const;
     uint SizeData() const;
+
+    struct Storage
+    {
+        // Сохранить во внутреннем хранилище для последующего восстановления
+        static void Store(const CalibrationSettings &);
+
+        // Восстановить ранее сохранённые настройки
+        static void Restore(CalibrationSettings &);
+
+    private:
+
+        static CalibrationSettings stored;
+    };
 };
 
 

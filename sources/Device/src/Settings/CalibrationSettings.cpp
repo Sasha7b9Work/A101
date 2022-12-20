@@ -17,6 +17,9 @@ namespace NS_CalibrationSettings
 }
 
 
+CalibrationSettings CalibrationSettings::Storage::stored;
+
+
 CalibrationSettings cal = NS_CalibrationSettings::cal_def;
 
 
@@ -109,4 +112,16 @@ uint CalibrationSettings::SizeData() const
 const uint8 *CalibrationSettings::PointerToFirstData() const
 {
     return (const uint8 *)this + 2 * sizeof(size);
+}
+
+
+void CalibrationSettings::Storage::Store(const CalibrationSettings &settings)
+{
+    stored = settings;
+}
+
+
+void CalibrationSettings::Storage::Restore(CalibrationSettings &settings)
+{
+    settings = stored;
 }
