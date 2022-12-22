@@ -225,6 +225,21 @@ void Indicator::ConvertDoubleToText(float value, char out[TextString::MAX_LEN], 
         std::strcat(out, "0");
     }
 
+    // Отбрасываем цифры, которых нет на экране - во избежание бага, когда 10 превращеется в 1 (при 9.999999)
+    {
+        for (int i = 0; i < after; i++)
+        {
+            value *= 10.0f;
+        }
+
+        value = (float)((int)value);
+
+        for (int i = 0; i < after; i++)
+        {
+            value /= 10.0f;
+        }
+    }
+
     char buffer[TextString::MAX_LEN];
 
     char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0'};
