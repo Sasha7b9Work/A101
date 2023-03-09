@@ -1,5 +1,5 @@
 // Scintilla source code edit control
-/** @file LexR.cxx
+/** @file Lexr.cxx
  ** Lexer for R, S, SPlus Statistics Program (Heavily derived from CPP Lexer).
  **
  **/
@@ -24,7 +24,9 @@
 #include "CharacterSet.h"
 #include "LexerModule.h"
 
+#ifdef SCI_NAMESPACE
 using namespace Scintilla;
+#endif
 
 static inline bool IsAWordChar(const int ch) {
 	return (ch < 0x80) && (isalnum(ch) || ch == '.' || ch == '_');

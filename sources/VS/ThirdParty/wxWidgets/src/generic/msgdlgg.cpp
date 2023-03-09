@@ -53,7 +53,7 @@ public:
     }
 
 protected:
-    virtual wxWindow *OnCreateLine(const wxString& s) override
+    virtual wxWindow *OnCreateLine(const wxString& s) wxOVERRIDE
     {
         wxWindow * const win = wxTextSizerWrapper::OnCreateLine(s);
 
@@ -96,7 +96,7 @@ wxSizer *wxGenericMessageDialog::CreateMsgDlgButtonSizer()
     {
         wxStdDialogButtonSizer * const sizerStd = new wxStdDialogButtonSizer;
 
-        wxButton *btnDef = nullptr;
+        wxButton *btnDef = NULL;
 
         if ( m_dialogStyle & wxOK )
         {

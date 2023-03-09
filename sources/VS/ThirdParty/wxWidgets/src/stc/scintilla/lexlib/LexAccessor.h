@@ -8,9 +8,11 @@
 #ifndef LEXACCESSOR_H
 #define LEXACCESSOR_H
 
+#ifdef SCI_NAMESPACE
 namespace Scintilla {
+#endif
 
-enum class EncodingType { eightBit, unicode, dbcs };
+enum EncodingType { enc8bit, encUnicode, encDBCS };
 
 class LexAccessor {
 private:
@@ -25,7 +27,7 @@ private:
 	Sci_Position startPos;
 	Sci_Position endPos;
 	int codePage;
-	EncodingType encodingType;
+	enum EncodingType encodingType;
 	Sci_Position lenDoc;
 	char styleBuf[bufferSize];
 	Sci_Position validLen;
@@ -51,7 +53,7 @@ public:
 	explicit LexAccessor(IDocument *pAccess_) :
 		pAccess(pAccess_), startPos(extremePosition), endPos(0),
 		codePage(pAccess->CodePage()),
-		encodingType(EncodingType::eightBit),
+		encodingType(enc8bit),
 		lenDoc(pAccess->Length()),
 		validLen(0),
 		startSeg(0), startPosStyling(0),
@@ -61,14 +63,14 @@ public:
 		styleBuf[0] = 0;
 		switch (codePage) {
 		case 65001:
-			encodingType = EncodingType::unicode;
+			encodingType = encUnicode;
 			break;
 		case 932:
 		case 936:
 		case 949:
 		case 950:
 		case 1361:
-			encodingType = EncodingType::dbcs;
+			encodingType = encDBCS;
 		}
 	}
 	char operator[](Sci_Position position) {
@@ -77,7 +79,7 @@ public:
 		}
 		return buf[position - startPos];
 	}
-	IDocumentWithLineEnd *MultiByteAccess() const noexcept {
+	IDocumentWithLineEnd *MultiByteAccess() const {
 		if (documentVersion >= dvLineEnd) {
 			return static_cast<IDocumentWithLineEnd *>(pAccess);
 		}
@@ -97,7 +99,7 @@ public:
 	bool IsLeadByte(char ch) const {
 		return pAccess->IsDBCSLeadByte(ch);
 	}
-	EncodingType Encoding() const noexcept {
+	EncodingType Encoding() const {
 		return encodingType;
 	}
 	bool Match(Sci_Position pos, const char *s) {
@@ -109,7 +111,7 @@ public:
 		return true;
 	}
 	char StyleAt(Sci_Position position) const {
-		return pAccess->StyleAt(position);
+		return static_cast<char>(pAccess->StyleAt(position));
 	}
 	Sci_Position GetLine(Sci_Position position) const {
 		return pAccess->LineFromPosition(position);
@@ -123,7 +125,7 @@ public:
 		} else {
 			// Old interface means only '\r', '\n' and '\r\n' line ends.
 			Sci_Position startNext = pAccess->LineStart(line+1);
-			const char chLineEnd = SafeGetCharAt(startNext-1);
+			char chLineEnd = SafeGetCharAt(startNext-1);
 			if (chLineEnd == '\n' && (SafeGetCharAt(startNext-2)  == '\r'))
 				return startNext - 2;
 			else
@@ -170,14 +172,13 @@ public:
 
 			if (validLen + (pos - startSeg + 1) >= bufferSize)
 				Flush();
-			const char attr = static_cast<char>(chAttr);
 			if (validLen + (pos - startSeg + 1) >= bufferSize) {
 				// Too big for buffer so send directly
-				pAccess->SetStyleFor(pos - startSeg + 1, attr);
+				pAccess->SetStyleFor(pos - startSeg + 1, static_cast<char>(chAttr));
 			} else {
 				for (Sci_PositionU i = startSeg; i <= pos; i++) {
 					assert((startPosStyling + validLen) < Length());
-					styleBuf[validLen++] = attr;
+					styleBuf[validLen++] = static_cast<char>(chAttr);
 				}
 			}
 		}
@@ -196,13 +197,8 @@ public:
 	}
 };
 
-struct LexicalClass {
-	int value;
-	const char *name;
-	const char *tags;
-	const char *description;
-};
-
+#ifdef SCI_NAMESPACE
 }
+#endif
 
 #endif

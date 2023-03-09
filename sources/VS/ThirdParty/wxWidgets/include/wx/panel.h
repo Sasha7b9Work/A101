@@ -54,7 +54,7 @@ public:
     // implementation from now on
     // --------------------------
 
-    virtual void InitDialog() override;
+    virtual void InitDialog() wxOVERRIDE;
 
 private:
     wxDECLARE_NO_COPY_CLASS(wxPanelBase);

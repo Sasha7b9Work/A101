@@ -80,7 +80,7 @@ wxTextEntry *wxNumValidatorBase::GetTextEntry() const
         return combo;
 #endif // wxUSE_COMBOBOX
 
-    return nullptr;
+    return NULL;
 }
 
 void

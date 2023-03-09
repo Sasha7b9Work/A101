@@ -73,7 +73,7 @@ public:
 
 
     // return true if the object was initialized successfully
-    bool IsOk() const { return m_impl != nullptr; }
+    bool IsOk() const { return m_impl != NULL; }
 
     // get the full display size
     wxRect GetGeometry() const;

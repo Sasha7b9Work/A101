@@ -111,6 +111,12 @@ bool wxComboCtrl::Create(wxWindow *parent,
     if ( style & wxCC_STD_BUTTON )
         m_iFlags |= wxCC_POPUP_ON_MOUSE_UP;
 
+    // Prepare background for double-buffering or better background theme
+    // support, whichever is possible.
+    SetDoubleBuffered(true);
+    if ( !IsDoubleBuffered() )
+        SetBackgroundStyle( wxBG_STYLE_PAINT );
+
     // Create textctrl, if necessary
     CreateTextCtrl( wxNO_BORDER );
 
@@ -422,7 +428,7 @@ void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
 
         //
         // Draw parent's background, if necessary
-        RECT* rUseForTb = nullptr;
+        RECT* rUseForTb = NULL;
 
         if ( ::IsThemeBackgroundPartiallyTransparent( hTheme, comboBoxPart, bgState ) )
             rUseForTb = &rFull;
@@ -436,7 +442,7 @@ void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
         // Draw the control background (including the border)
         if ( m_widthCustomBorder > 0 )
         {
-            ::DrawThemeBackground( hTheme, hDc, comboBoxPart, bgState, rUseForBg, nullptr );
+            ::DrawThemeBackground( hTheme, hDc, comboBoxPart, bgState, rUseForBg, NULL );
         }
         else
         {
@@ -472,7 +478,7 @@ void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
                     butPart = CP_DROPDOWNBUTTONLEFT;
 
             }
-            ::DrawThemeBackground( hTheme, hDc, butPart, butState, &rButton, nullptr );
+            ::DrawThemeBackground( hTheme, hDc, butPart, butState, &rButton, NULL );
         }
         else if ( useVistaComboBox &&
                   (m_iFlags & wxCC_IFLAG_BUTTON_OUTSIDE) )
@@ -569,7 +575,7 @@ static wxUint32 GetUserPreferencesMask()
     if ( valueSet )
         return userPreferencesMask;
 
-    wxRegKey* pKey = nullptr;
+    wxRegKey* pKey = NULL;
     wxRegKey key1(wxRegKey::HKCU, wxT("Software\\Policies\\Microsoft\\Control Panel"));
     wxRegKey key2(wxRegKey::HKCU, wxT("Software\\Policies\\Microsoft\\Windows\\Control Panel"));
     wxRegKey key3(wxRegKey::HKCU, wxT("Control Panel\\Desktop"));

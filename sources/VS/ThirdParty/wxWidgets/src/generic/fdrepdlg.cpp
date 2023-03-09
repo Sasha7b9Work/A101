@@ -67,15 +67,15 @@ wxEND_EVENT_TABLE()
 
 void wxGenericFindReplaceDialog::Init()
 {
-    m_FindReplaceData = nullptr;
+    m_FindReplaceData = NULL;
 
     m_chkWord =
-    m_chkCase = nullptr;
+    m_chkCase = NULL;
 
-    m_radioDir = nullptr;
+    m_radioDir = NULL;
 
     m_textFind =
-    m_textRepl = nullptr;
+    m_textRepl = NULL;
 }
 
 bool wxGenericFindReplaceDialog::Create(wxWindow *parent,

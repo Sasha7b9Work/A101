@@ -205,10 +205,10 @@ bool MyApp::OnInit()
 
 // My frame constructor
 MyFrame::MyFrame(const wxString& title, int x, int y, int w, int h)
-       : wxFrame(nullptr, wxID_ANY, title, wxPoint(x, y), wxSize(w, h)),
-         m_treeCtrl(nullptr)
+       : wxFrame((wxFrame *)NULL, wxID_ANY, title, wxPoint(x, y), wxSize(w, h)),
+         m_treeCtrl(NULL)
 #if wxUSE_LOG
-         , m_textCtrl(nullptr)
+         , m_textCtrl(NULL)
 #endif // wxUSE_LOG
 {
     // This reduces flicker effects - even better would be to define
@@ -291,7 +291,7 @@ MyFrame::MyFrame(const wxString& title, int x, int y, int w, int h)
     tree_menu->Append(TreeTest_DecSpacing, "Reduce spacing by 5 points\tCtrl-R");
 
     item_menu->Append(TreeTest_Dump, "&Dump item children");
-    item_menu->Append(TreeTest_Rename, "&Rename item...");
+    item_menu->Append(TreeTest_Rename, "&Rename item...\tF2");
 
     item_menu->AppendSeparator();
     item_menu->Append(TreeTest_SetBold, "Make item &bold");
@@ -340,9 +340,15 @@ MyFrame::MyFrame(const wxString& title, int x, int y, int w, int h)
                                 wxDefaultPosition, wxDefaultSize,
                                 wxTE_MULTILINE | wxSUNKEN_BORDER);
 
+#ifdef __WXMOTIF__
+    // For some reason, we get a memcpy crash in wxLogStream::DoLogStream
+    // on gcc/wxMotif, if we use wxLogTextCtl. Maybe it's just gcc?
+    delete wxLog::SetActiveTarget(new wxLogStderr);
+#else
     // set our text control as the log target
     wxLogTextCtrl *logWindow = new wxLogTextCtrl(m_textCtrl);
     delete wxLog::SetActiveTarget(logWindow);
+#endif
 #endif // wxUSE_LOG
 
     CreateTreeWithDefStyle();
@@ -361,7 +367,7 @@ MyFrame::MyFrame(const wxString& title, int x, int y, int w, int h)
 MyFrame::~MyFrame()
 {
 #if wxUSE_LOG
-    delete wxLog::SetActiveTarget(nullptr);
+    delete wxLog::SetActiveTarget(NULL);
 #endif // wxUSE_LOG
 }
 
@@ -960,7 +966,7 @@ void MyTreeCtrl::CreateImages(int size)
 {
     if ( size == -1 )
     {
-        SetImageList(nullptr);
+        SetImageList(NULL);
         return;
     }
     if ( size == 0 )
@@ -1004,17 +1010,17 @@ void MyTreeCtrl::CreateImages(int size)
         {
         }
 
-        wxSize GetDefaultSize() const override
+        wxSize GetDefaultSize() const wxOVERRIDE
         {
             return m_sizeDef;
         }
 
-        wxSize GetPreferredBitmapSizeAtScale(double scale) const override
+        wxSize GetPreferredBitmapSizeAtScale(double scale) const wxOVERRIDE
         {
             return m_sizeDef*scale;
         }
 
-        wxBitmap GetBitmap(const wxSize& size) override
+        wxBitmap GetBitmap(const wxSize& size) wxOVERRIDE
         {
             wxBitmap bmp(m_icon);
             if ( size != bmp.GetSize() )
@@ -1040,7 +1046,7 @@ void MyTreeCtrl::CreateStateImageList(bool del)
 {
     if ( del )
     {
-        SetStateImageList(nullptr);
+        SetStateImageList(NULL);
         return;
     }
 
@@ -1089,7 +1095,7 @@ void MyTreeCtrl::CreateButtonsImageList(int size)
 #ifdef HAS_GENERIC_TREECTRL
     if ( size == -1 )
     {
-        SetButtonsImageList(nullptr);
+        SetButtonsImageList(NULL);
         return;
     }
 
@@ -1289,7 +1295,7 @@ void MyTreeCtrl::DoToggleState(const wxTreeItemId& item)
         int state = GetItemState(item);
         int nState;
 
-        srand (time(nullptr));
+        srand (time(NULL));
         do {
             nState = rand() % GetStateImageList()->GetImageCount();
         } while (nState == state);
@@ -1620,7 +1626,7 @@ void MyTreeCtrl::OnItemActivated(wxTreeEvent& event)
     wxTreeItemId itemId = event.GetItem();
     MyTreeItemData *item = (MyTreeItemData *)GetItemData(itemId);
 
-    if ( item != nullptr )
+    if ( item != NULL )
     {
         item->ShowInfo(this);
     }

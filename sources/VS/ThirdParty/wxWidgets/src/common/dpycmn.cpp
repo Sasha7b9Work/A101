@@ -46,7 +46,7 @@ const wxVideoMode wxDefaultVideoMode;
 // the factory object used by wxDisplay
 //
 // created on demand and destroyed by wxDisplayModule
-static wxDisplayFactory *gs_factory = nullptr;
+static wxDisplayFactory *gs_factory = NULL;
 
 // ----------------------------------------------------------------------------
 // wxDisplayModule is used to cleanup gs_factory
@@ -55,8 +55,8 @@ static wxDisplayFactory *gs_factory = nullptr;
 class wxDisplayModule : public wxModule
 {
 public:
-    virtual bool OnInit() override { return true; }
-    virtual void OnExit() override
+    virtual bool OnInit() wxOVERRIDE { return true; }
+    virtual void OnExit() wxOVERRIDE
     {
         wxDELETE(gs_factory);
     }
@@ -241,12 +241,12 @@ wxDisplayImpl* wxDisplayFactory::GetPrimaryDisplay()
 
     // This is not supposed to happen, but what else can we do if it
     // somehow does?
-    return nullptr;
+    return NULL;
 }
 
 int wxDisplayFactory::GetFromWindow(const wxWindow *window)
 {
-    wxCHECK_MSG( window, wxNOT_FOUND, "window can't be null" );
+    wxCHECK_MSG( window, wxNOT_FOUND, "window can't be NULL" );
 
     // Check if the window is created: we can't find its display before this is
     // done anyhow, as we simply don't know on which display will it appear,
@@ -267,7 +267,7 @@ int wxDisplayFactory::GetFromWindow(const wxWindow *window)
 wxDisplayImpl *wxDisplayFactorySingle::CreateDisplay(unsigned n)
 {
     // we recognize the main display only
-    return n != 0 ? nullptr : CreateSingleDisplay();
+    return n != 0 ? NULL : CreateSingleDisplay();
 }
 
 int wxDisplayFactorySingle::GetFromPoint(const wxPoint& pt)

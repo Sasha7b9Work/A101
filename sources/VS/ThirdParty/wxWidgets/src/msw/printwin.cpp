@@ -79,7 +79,7 @@ wxWindowsPrinter::wxWindowsPrinter(wxPrintDialogData *data)
 bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt)
 {
     sm_abortIt = false;
-    sm_abortWindow = nullptr;
+    sm_abortWindow = NULL;
 
     if (!printout)
     {
@@ -93,7 +93,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
         m_printDialogData.SetMaxPage(9999);
 
     // Create a suitable device context
-    wxPrinterDC *dc wxDUMMY_INITIALIZE(nullptr);
+    wxPrinterDC *dc wxDUMMY_INITIALIZE(NULL);
     if (prompt)
     {
         dc = wxDynamicCast(PrintDialog(parent), wxPrinterDC);
@@ -237,7 +237,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
 
 wxDC *wxWindowsPrinter::PrintDialog(wxWindow *parent)
 {
-    wxDC *dc = nullptr;
+    wxDC *dc = NULL;
 
     wxWindowsPrintDialog dialog(parent, & m_printDialogData);
     int ret = dialog.ShowModal();
@@ -246,7 +246,7 @@ wxDC *wxWindowsPrinter::PrintDialog(wxWindow *parent)
     {
         dc = dialog.GetPrintDC();
         m_printDialogData = dialog.GetPrintDialogData();
-        if (dc == nullptr)
+        if (dc == NULL)
             sm_lastError = wxPRINTER_ERROR;
         else
             sm_lastError = wxPRINTER_NO_ERROR;

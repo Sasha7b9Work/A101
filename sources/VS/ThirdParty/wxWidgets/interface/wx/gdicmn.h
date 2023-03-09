@@ -871,9 +871,6 @@ const wxPoint wxDefaultPosition;
     </td></tr>
     @endTable
 
-    See the "Database colours" page of the @ref page_samples_drawing to see how
-    all these colours look like.
-
     @library{wxcore}
     @category{gdi}
 
@@ -906,13 +903,6 @@ public:
         colour is not found in the database.
     */
     wxString FindName(const wxColour& colour) const;
-
-    /**
-        List all known colours by name.
-
-        @since 3.3.0
-    */
-    wxVector<wxString> GetAllNames() const;
 };
 
 
@@ -1130,13 +1120,9 @@ const wxSize wxDefaultSize;
 /**
     This macro loads a bitmap from either application resources (on the
     platforms for which they exist, i.e.\ Windows) or from an XPM file.
+    This can help to avoid using @ifdef_ when creating bitmaps.
 
-    You can use `wxHAS_IMAGES_IN_RESOURCES` to check if the XPM needs to be
-    included when using this macro.
-
-    See also wxBITMAP_PNG() if you want to use images with alpha channel.
-
-    @see @ref overview_bitmap_embedding, wxICON()
+    @see @ref overview_bitmap, wxICON()
 
     @header{wx/gdicmn.h}
 */
@@ -1180,7 +1166,7 @@ const wxSize wxDefaultSize;
     @endcode
     in your application startup code.
 
-    @see @ref overview_bitmap_embedding, wxBITMAP_PNG_FROM_DATA()
+    @see wxBITMAP_PNG_FROM_DATA()
 
     @header{wx/gdicmn.h}
 
@@ -1212,13 +1198,9 @@ const wxSize wxDefaultSize;
 /**
     This macro loads an icon from either application resources (on the
     platforms for which they exist, i.e.\ Windows) or from an XPM file.
+    This can help to avoid using @ifdef_ when creating icons.
 
-    You can use `wxHAS_IMAGES_IN_RESOURCES` to check if the XPM needs to be
-    included when using this macro.
-
-    See also wxBITMAP_PNG() if you want to use images with alpha channel.
-
-    @see @ref overview_bitmap_embedding, wxBITMAP()
+    @see @ref overview_bitmap, wxBITMAP()
 
     @header{wx/gdicmn.h}
 */

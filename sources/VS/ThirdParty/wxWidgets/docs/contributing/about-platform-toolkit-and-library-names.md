@@ -43,6 +43,7 @@ Where:
  - `msw`
  - `gtk`, `gtk2`, `gtk3`, `gtk4`
  - `osx_cocoa`, `osx_iphone`
+ - `motif`
  - `x11`
  - `dfb`
  - `qt`

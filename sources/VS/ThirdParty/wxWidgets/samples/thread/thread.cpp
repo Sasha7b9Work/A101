@@ -65,7 +65,7 @@ public:
     MyApp();
     virtual ~MyApp(){}
 
-    virtual bool OnInit() override;
+    virtual bool OnInit() wxOVERRIDE;
 
     // critical section protects access to all of the fields below
     wxCriticalSection m_critsect;
@@ -99,7 +99,7 @@ public:
 protected:
     virtual void DoLogRecord(wxLogLevel level,
                              const wxString& msg,
-                             const wxLogRecordInfo& info) override;
+                             const wxLogRecordInfo& info) wxOVERRIDE;
 
 private:
     // event handlers
@@ -195,7 +195,7 @@ enum
 
     THREAD_SHOWCPUS,
 
-    WORKER_EVENT = wxID_HIGHEST,   // this one gets sent from MyWorkerThread
+    WORKER_EVENT = wxID_HIGHEST+1,   // this one gets sent from MyWorkerThread
     GUITHREAD_EVENT                  // this one gets sent from MyGUIThread
 };
 
@@ -210,7 +210,7 @@ public:
     virtual ~MyThread();
 
     // thread execution starts here
-    virtual void *Entry() override;
+    virtual void *Entry() wxOVERRIDE;
 
 public:
     unsigned m_count;
@@ -226,11 +226,11 @@ public:
     MyWorkerThread(MyFrame *frame);
 
     // thread execution starts here
-    virtual void *Entry() override;
+    virtual void *Entry() wxOVERRIDE;
 
     // called when the thread exits - whether it terminates normally or is
     // stopped with Delete() (but not when it is Kill()ed!)
-    virtual void OnExit() override;
+    virtual void OnExit() wxOVERRIDE;
 
 public:
     MyFrame *m_frame;
@@ -253,7 +253,7 @@ public:
         m_dlg = dlg;
     }
 
-    virtual ExitCode Entry() override;
+    virtual ExitCode Entry() wxOVERRIDE;
 
 private:
     MyImageDialog *m_dlg;
@@ -343,7 +343,7 @@ wxEND_EVENT_TABLE()
 
 // My frame constructor
 MyFrame::MyFrame(const wxString& title)
-       : wxFrame(nullptr, wxID_ANY, title)
+       : wxFrame(NULL, wxID_ANY, title)
 {
     m_oldLogger = wxLog::GetActiveTarget();
 
@@ -381,7 +381,7 @@ MyFrame::MyFrame(const wxString& title)
 
     m_nRunning = m_nCount = 0;
 
-    m_dlgProgress = nullptr;
+    m_dlgProgress = NULL;
 
 #if wxUSE_STATUSBAR
     CreateStatusBar(2);
@@ -592,7 +592,7 @@ void MyFrame::OnStartThread(wxCommandEvent& WXUNUSED(event) )
 
 void MyFrame::OnStopThread(wxCommandEvent& WXUNUSED(event) )
 {
-    wxThread* toDelete = nullptr;
+    wxThread* toDelete = NULL;
     {
     wxCriticalSectionLocker enter(wxGetApp().m_critsect);
 
@@ -740,7 +740,7 @@ void MyFrame::OnClear(wxCommandEvent& WXUNUSED(event))
 
 void MyFrame::OnUpdateWorker(wxUpdateUIEvent& event)
 {
-    event.Enable( m_dlgProgress == nullptr );
+    event.Enable( m_dlgProgress == NULL );
 }
 
 void MyFrame::OnStartWorker(wxCommandEvent& WXUNUSED(event))
@@ -778,7 +778,7 @@ void MyFrame::OnWorkerEvent(wxThreadEvent& event)
     if ( n == -1 )
     {
         m_dlgProgress->Destroy();
-        m_dlgProgress = nullptr;
+        m_dlgProgress = (wxProgressDialog *)NULL;
 
         // the dialog is aborted because the event came from another thread, so
         // we may need to wake up the main event loop for the dialog to be
@@ -932,7 +932,7 @@ wxThread::ExitCode MyThread::Entry()
         {
             wxCriticalSectionLocker locker(wxGetApp().m_critsect);
             if ( wxGetApp().m_shuttingDown )
-                return nullptr;
+                return NULL;
         }
 
         // check if just this thread was asked to exit
@@ -947,7 +947,7 @@ wxThread::ExitCode MyThread::Entry()
 
     wxLogMessage("Thread finished.");
 
-    return nullptr;
+    return NULL;
 }
 
 
@@ -980,7 +980,7 @@ wxThread::ExitCode MyWorkerThread::Entry()
 
 #if TEST_YIELD_RACE_CONDITION
     if ( TestDestroy() )
-        return nullptr;
+        return NULL;
 
     wxThreadEvent event( wxEVT_THREAD, WORKER_EVENT );
 
@@ -1011,7 +1011,7 @@ wxThread::ExitCode MyWorkerThread::Entry()
     wxQueueEvent( m_frame, event.Clone() );
 #endif
 
-    return nullptr;
+    return NULL;
 }
 
 
@@ -1072,7 +1072,7 @@ wxThread::ExitCode MyGUIThread::Entry()
     }
 
     // now remove the thread-specific thread target
-    wxLog::SetThreadActiveTarget(nullptr);
+    wxLog::SetThreadActiveTarget(NULL);
 
     // so that this goes to the main window again
     wxLogMessage("GUI thread finished.");

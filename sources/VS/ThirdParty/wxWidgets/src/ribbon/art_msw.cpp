@@ -307,11 +307,11 @@ void wxRibbonMSWArtProvider::GetColourScheme(
                          wxColour* secondary,
                          wxColour* tertiary) const
 {
-    if(primary != nullptr)
+    if(primary != NULL)
         *primary = m_primary_scheme_colour;
-    if(secondary != nullptr)
+    if(secondary != NULL)
         *secondary = m_secondary_scheme_colour;
-    if(tertiary != nullptr)
+    if(tertiary != NULL)
         *tertiary = m_tertiary_scheme_colour;
 }
 
@@ -2249,7 +2249,7 @@ void wxRibbonMSWArtProvider::DrawMinimisedPanel(
     wxRect true_rect(rect);
     RemovePanelPadding(&true_rect);
 
-    if(wnd->GetExpandedPanel() != nullptr)
+    if(wnd->GetExpandedPanel() != NULL)
     {
         wxRect client_rect(true_rect);
         client_rect.x++;
@@ -2417,15 +2417,15 @@ void wxRibbonMSWArtProvider::DrawPartialPageBackground(
     // hovered panel somewhere between the window and the page, as it causes
     // the background to change.
     wxPoint offset(wnd->GetPosition());
-    wxRibbonPage* page = nullptr;
+    wxRibbonPage* page = NULL;
     wxWindow* parent = wnd->GetParent();
     wxRibbonPanel* panel = wxDynamicCast(wnd, wxRibbonPanel);
     bool hovered = false;
 
-    if(panel != nullptr)
+    if(panel != NULL)
     {
         hovered = allow_hovered && panel->IsHovered();
-        if(panel->GetExpandedDummy() != nullptr)
+        if(panel->GetExpandedDummy() != NULL)
         {
             offset = panel->GetExpandedDummy()->GetPosition();
             parent = panel->GetExpandedDummy()->GetParent();
@@ -2433,26 +2433,26 @@ void wxRibbonMSWArtProvider::DrawPartialPageBackground(
     }
     for(; parent; parent = parent->GetParent())
     {
-        if(panel == nullptr)
+        if(panel == NULL)
         {
             panel = wxDynamicCast(parent, wxRibbonPanel);
-            if(panel != nullptr)
+            if(panel != NULL)
             {
                 hovered = allow_hovered && panel->IsHovered();
-                if(panel->GetExpandedDummy() != nullptr)
+                if(panel->GetExpandedDummy() != NULL)
                 {
                     parent = panel->GetExpandedDummy();
                 }
             }
         }
         page = wxDynamicCast(parent, wxRibbonPage);
-        if(page != nullptr)
+        if(page != NULL)
         {
             break;
         }
         offset += parent->GetPosition();
     }
-    if(page != nullptr)
+    if(page != NULL)
     {
         DrawPartialPageBackground(dc, wnd, rect, page, offset, hovered);
         return;
@@ -2898,19 +2898,19 @@ void wxRibbonMSWArtProvider::GetBarTabWidth(
         min += bitmap.GetLogicalWidth();
     }
 
-    if(ideal != nullptr)
+    if(ideal != NULL)
     {
         *ideal = width + 30;
     }
-    if(small_begin_need_separator != nullptr)
+    if(small_begin_need_separator != NULL)
     {
         *small_begin_need_separator = width + 20;
     }
-    if(small_must_have_separator != nullptr)
+    if(small_must_have_separator != NULL)
     {
         *small_must_have_separator = width + 10;
     }
-    if(minimum != nullptr)
+    if(minimum != NULL)
     {
         *minimum = min;
     }
@@ -2975,7 +2975,7 @@ wxSize wxRibbonMSWArtProvider::GetPanelSize(
     else
         client_size.IncBy(6, 6);
 
-    if(client_offset != nullptr)
+    if(client_offset != NULL)
     {
         if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
             *client_offset = wxPoint(2, 3);
@@ -3001,7 +3001,7 @@ wxSize wxRibbonMSWArtProvider::GetPanelClientSize(
     else
         size.DecBy(6, 6);
 
-    if(client_offset != nullptr)
+    if(client_offset != NULL)
     {
         if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
             *client_offset = wxPoint(2, 3);
@@ -3076,13 +3076,13 @@ wxSize wxRibbonMSWArtProvider::GetGalleryClientSize(
         size.DecBy( 2, 1);
     }
 
-    if(client_offset != nullptr)
+    if(client_offset != NULL)
         *client_offset = wxPoint(2, 1);
-    if(scroll_up_button != nullptr)
+    if(scroll_up_button != NULL)
         *scroll_up_button = scroll_up;
-    if(scroll_down_button != nullptr)
+    if(scroll_down_button != NULL)
         *scroll_down_button = scroll_down;
-    if(extension_button != nullptr)
+    if(extension_button != NULL)
         *extension_button = extension;
 
     return size;
@@ -3305,11 +3305,11 @@ wxSize wxRibbonMSWArtProvider::GetMinimisedPanelMinimumSize(
                         wxSize* desired_bitmap_size,
                         wxDirection* expanded_panel_direction)
 {
-    if(desired_bitmap_size != nullptr)
+    if(desired_bitmap_size != NULL)
     {
         *desired_bitmap_size = wxSize(16, 16);
     }
-    if(expanded_panel_direction != nullptr)
+    if(expanded_panel_direction != NULL)
     {
         if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
             *expanded_panel_direction = wxEAST;

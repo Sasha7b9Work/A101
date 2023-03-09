@@ -179,7 +179,7 @@ void Game::DoMove(wxDC& dc, Pile* src, Pile* dest)
     if (HaveYouWon())
     {
         wxWindow *frame = wxTheApp->GetTopWindow();
-        wxWindow *canvas = nullptr;
+        wxWindow *canvas = (wxWindow *) NULL;
 
         if (frame)
         {

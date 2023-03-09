@@ -27,7 +27,7 @@ public:
     wxQtPushButton( wxWindow *parent, wxAnyButton *handler);
 
 private:
-    virtual bool event(QEvent* e) override;
+    virtual bool event(QEvent* e) wxOVERRIDE;
     void action(); // press, release
     void clicked(bool);
 };
@@ -78,7 +78,7 @@ bool wxQtPushButton::event(QEvent* e)
 }
 
 wxAnyButton::wxAnyButton() :
-    m_qtPushButton(nullptr)
+    m_qtPushButton(NULL)
 {
 }
 
@@ -101,7 +101,7 @@ void wxAnyButton::QtSetBitmap( const wxBitmapBundle &bitmapBundle )
 
     // load the bitmap and resize the button:
     QPixmap *pixmap = bitmap.GetHandle();
-    if ( pixmap != nullptr )
+    if ( pixmap != NULL )
     {
         m_qtPushButton->setIcon(QIcon(*pixmap));
         m_qtPushButton->setIconSize(pixmap->rect().size());

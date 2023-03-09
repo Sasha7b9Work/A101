@@ -122,6 +122,7 @@
 #include <wx/dynlib.h>
 #include <wx/dynload.h>
 #include <wx/editlbox.h>
+#include <wx/effects.h>
 #include <wx/encconv.h>
 #include <wx/encinfo.h>
 #include <wx/eventfilter.h>
@@ -216,7 +217,9 @@
 #include <wx/longlong.h>
 #include <wx/lzmastream.h>
 #include <wx/math.h>
+/* Intentionally excluded to avoid deprecation warnings.
 #include <wx/matrix.h>
+*/
 #include <wx/mdi.h>
 #include <wx/mediactrl.h>
 #include <wx/memconf.h>

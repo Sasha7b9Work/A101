@@ -42,7 +42,7 @@ enum wxTaskBarButtonState
 class WXDLLIMPEXP_CORE wxThumbBarButton : public wxObject
 {
 public:
-    wxThumbBarButton() : m_taskBarButtonParent(nullptr)
+    wxThumbBarButton() : m_taskBarButtonParent(NULL)
     { }
 
     wxThumbBarButton(int id,
@@ -106,7 +106,7 @@ private:
 class WXDLLIMPEXP_CORE wxTaskBarButton
 {
 public:
-    // Factory function, may return nullptr if task bar buttons are not supported
+    // Factory function, may return NULL if task bar buttons are not supported
     // by the current system.
     static wxTaskBarButton* New(wxWindow* parent);
 
@@ -148,7 +148,7 @@ enum wxTaskBarJumpListItemType
 class WXDLLIMPEXP_CORE wxTaskBarJumpListItem
 {
 public:
-    wxTaskBarJumpListItem(wxTaskBarJumpListCategory *parentCategory = nullptr,
+    wxTaskBarJumpListItem(wxTaskBarJumpListCategory *parentCategory = NULL,
         wxTaskBarJumpListItemType type = wxTASKBAR_JUMP_LIST_SEPARATOR,
         const wxString& title = wxEmptyString,
         const wxString& filePath = wxEmptyString,
@@ -192,7 +192,7 @@ typedef wxVector<wxTaskBarJumpListItem*> wxTaskBarJumpListItems;
 class WXDLLIMPEXP_CORE wxTaskBarJumpListCategory
 {
 public:
-    wxTaskBarJumpListCategory(wxTaskBarJumpList *parent = nullptr,
+    wxTaskBarJumpListCategory(wxTaskBarJumpList *parent = NULL,
                               const wxString& title = wxEmptyString);
     virtual ~wxTaskBarJumpListCategory();
 

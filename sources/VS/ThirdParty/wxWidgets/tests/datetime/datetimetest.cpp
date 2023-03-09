@@ -737,7 +737,7 @@ void DateTimeTestCase::TestTimeFormat()
                 // for those locales it's impossible to pass the test with %p...
                 wxString am, pm;
                 wxDateTime::GetAmPmStrings(&am, &pm);
-                if (am.empty() && pm.empty() && wxStrstr(fmt, "%p") != nullptr)
+                if (am.empty() && pm.empty() && wxStrstr(fmt, "%p") != NULL)
                     continue;
 
                 // what can we recover?
@@ -1436,6 +1436,15 @@ void DateTimeTestCase::TestDateTimeParse()
 
         {
             "2010-01-04 14:30",
+            {  4, wxDateTime::Jan, 2010, 14, 30,  0 },
+            true,
+            "",
+            false
+        },
+
+        {
+            // with 'T' separator
+            "2010-01-04T14:30",
             {  4, wxDateTime::Jan, 2010, 14, 30,  0 },
             true,
             "",

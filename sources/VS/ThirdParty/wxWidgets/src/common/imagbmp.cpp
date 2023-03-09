@@ -288,11 +288,11 @@ bool wxBMPHandler::SaveDib(wxImage *image,
             // fill the destination too, it gives much nicer 4bpp images
 #if wxUSE_PALETTE
             wxPalette* paletteTmp;
-            wxQuantize::Quantize( *image, *q_image, &paletteTmp, quantize, nullptr,
+            wxQuantize::Quantize( *image, *q_image, &paletteTmp, quantize, 0,
                                   wxQUANTIZE_FILL_DESTINATION_IMAGE );
             palette.reset(paletteTmp);
 #else // !wxUSE_PALETTE
-            wxQuantize::Quantize( *image, *q_image, nullptr, quantize, 0,
+            wxQuantize::Quantize( *image, *q_image, NULL, quantize, 0,
                                   wxQUANTIZE_FILL_DESTINATION_IMAGE );
 #endif // wxUSE_PALETTE/!wxUSE_PALETTE
         }
@@ -360,7 +360,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
     const unsigned char* const data = q_image && q_image->IsOk()
                                         ? q_image->GetData()
                                         : image->GetData();
-    const unsigned char* const alpha = saveAlpha ? image->GetAlpha() : nullptr;
+    const unsigned char* const alpha = saveAlpha ? image->GetAlpha() : NULL;
 
     wxScopedArray<wxUint8> buffer(row_width);
     memset(buffer.get(), 0, row_width);
@@ -533,7 +533,7 @@ bool LoadBMPData(wxImage * image, const BMPDesc& desc,
     wxUint16        aWord;
 
     BMPPalette cmapMono[2];
-    BMPPalette* cmap = nullptr;
+    BMPPalette* cmap = NULL;
 
     bool isUpsideDown = true;
 
@@ -575,7 +575,7 @@ bool LoadBMPData(wxImage * image, const BMPDesc& desc,
     }
     else // no alpha
     {
-        alpha = nullptr;
+        alpha = NULL;
     }
 
     // Reading the palette, if it exists:

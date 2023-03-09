@@ -77,7 +77,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxHtmlBookRecord, wxHtmlBookRecArray,
 
 struct WXDLLIMPEXP_HTML wxHtmlHelpDataItem
 {
-    wxHtmlHelpDataItem() : level(0), parent(nullptr), id(wxID_ANY), book(nullptr) {}
+    wxHtmlHelpDataItem() : level(0), parent(NULL), id(wxID_ANY), book(NULL) {}
 
     int level;
     wxHtmlHelpDataItem *parent;

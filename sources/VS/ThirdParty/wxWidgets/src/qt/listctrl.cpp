@@ -85,15 +85,15 @@ class wxQtStyledItemDelegate : public QStyledItemDelegate
 public:
     explicit wxQtStyledItemDelegate(wxWindow* parent)
         : m_parent(parent),
-        m_textCtrl(nullptr)
+        m_textCtrl(NULL)
     {
     }
 
     QWidget* createEditor(QWidget *parent,
                           const QStyleOptionViewItem &WXUNUSED(option),
-                          const QModelIndex &index) const override
+                          const QModelIndex &index) const wxOVERRIDE
     {
-        if (m_textCtrl != nullptr)
+        if (m_textCtrl != NULL)
             destroyEditor(m_textCtrl->GetHandle(), m_currentModelIndex);
 
         m_currentModelIndex = index;
@@ -103,19 +103,19 @@ public:
     }
 
     void destroyEditor(QWidget *WXUNUSED(editor),
-                       const QModelIndex &WXUNUSED(index)) const override
+                       const QModelIndex &WXUNUSED(index)) const wxOVERRIDE
     {
-        if (m_textCtrl != nullptr)
+        if (m_textCtrl != NULL)
         {
             m_currentModelIndex = QModelIndex(); // invalidate the index
             wxTheApp->ScheduleForDestruction(m_textCtrl);
-            m_textCtrl = nullptr;
+            m_textCtrl = NULL;
         }
     }
 
     void setModelData(QWidget *WXUNUSED(editor),
                       QAbstractItemModel *WXUNUSED(model),
-                      const QModelIndex &WXUNUSED(index)) const override
+                      const QModelIndex &WXUNUSED(index)) const wxOVERRIDE
     {
         // Don't set model data until wx has had a chance to send out events
     }
@@ -147,21 +147,21 @@ class wxQtListModel : public QAbstractTableModel
 {
 public:
     explicit wxQtListModel(wxListCtrl *listCtrl) :
-        m_view(nullptr),
+        m_view(NULL),
         m_listCtrl(listCtrl)
     {
     }
 
-    int rowCount(const QModelIndex& WXUNUSED(parent)) const override
+    int rowCount(const QModelIndex& WXUNUSED(parent)) const wxOVERRIDE
     {
         return static_cast<int>(m_rows.size());
     }
-    int columnCount(const QModelIndex& WXUNUSED(parent)) const override
+    int columnCount(const QModelIndex& WXUNUSED(parent)) const wxOVERRIDE
     {
         return static_cast<int>(m_headers.size());
     }
 
-    QVariant data(const QModelIndex &index, int role) const override
+    QVariant data(const QModelIndex &index, int role) const wxOVERRIDE
     {
         const int row = index.row();
         const int col = index.column();
@@ -187,7 +187,7 @@ public:
             case Qt::DecorationRole:
             {
                 wxImageList *imageList = GetImageList();
-                if ( imageList == nullptr )
+                if ( imageList == NULL )
                     return QVariant();
 
                 int imageIndex = -1;
@@ -238,7 +238,7 @@ public:
         const QModelIndex &index,
         const QVariant &value,
         int role
-    ) override
+    ) wxOVERRIDE
     {
         const int row = index.row();
         const int col = index.column();
@@ -282,7 +282,7 @@ public:
         int section,
         Qt::Orientation orientation,
         int role
-    ) const override
+    ) const wxOVERRIDE
     {
         if ( orientation == Qt::Vertical )
             return QVariant();
@@ -303,7 +303,7 @@ public:
         return QVariant();
     }
 
-    Qt::ItemFlags flags(const QModelIndex &index) const override
+    Qt::ItemFlags flags(const QModelIndex &index) const wxOVERRIDE
     {
         Qt::ItemFlags
             itemFlags = Qt::ItemIsSelectable | Qt::ItemNeverHasChildren;
@@ -317,7 +317,7 @@ public:
          return itemFlags | QAbstractTableModel::flags(index);
     }
 
-    bool removeRows(int row, int count, const QModelIndex &parent) override
+    bool removeRows(int row, int count, const QModelIndex &parent) wxOVERRIDE
     {
         if ( count == 0 )
             return true;
@@ -330,7 +330,7 @@ public:
 
     bool removeColumns(int column,
                        int count,
-                       const QModelIndex &parent) override
+                       const QModelIndex &parent) wxOVERRIDE
     {
         if ( count == 0 )
             return true;
@@ -428,7 +428,7 @@ public:
 
         QVector<int> roles;
 
-        if ( (info.m_mask & wxLIST_MASK_TEXT) && !info.GetText().empty() )
+        if ( (info.m_mask & wxLIST_MASK_TEXT) && !info.GetText().IsNull() )
         {
             columnItem.m_label =  wxQtConvertString(info.GetText());
             roles.push_back(Qt::DisplayRole);
@@ -782,14 +782,14 @@ private:
     struct RowItem
     {
         RowItem() :
-            m_data(nullptr),
+            m_data(NULL),
             m_checked(false)
         {
         }
 
         RowItem(int columnCount ) :
             m_columns(columnCount),
-            m_data(nullptr),
+            m_data(NULL),
             m_checked(false)
         {
         }
@@ -845,12 +845,12 @@ public:
     {
     }
 
-    int rowCount(const QModelIndex& WXUNUSED(parent)) const override
+    int rowCount(const QModelIndex& WXUNUSED(parent)) const wxOVERRIDE
     {
         return m_rowCount;
     }
 
-    QVariant data(const QModelIndex &index, int role) const override
+    QVariant data(const QModelIndex &index, int role) const wxOVERRIDE
     {
         wxListCtrl *listCtrl = GetListCtrl();
 
@@ -866,7 +866,7 @@ public:
         if ( role == Qt::DecorationRole )
         {
             wxImageList *imageList = GetImageList();
-            if ( imageList == nullptr )
+            if ( imageList == NULL )
                 return QVariant();
 
             const int imageIndex = listCtrl->OnGetItemColumnImage(row, col);
@@ -880,7 +880,7 @@ public:
         return QVariant();
     }
 
-    bool GetItem(wxListItem& info) override
+    bool GetItem(wxListItem& info) wxOVERRIDE
     {
         const int row = static_cast<int>(info.GetId());
         const int col = info.m_col;
@@ -893,12 +893,12 @@ public:
         return true;
     }
 
-    bool IsVirtual() const override
+    bool IsVirtual() const wxOVERRIDE
     {
         return true;
     }
 
-    void SetVirtualItemCount(long count) override
+    void SetVirtualItemCount(long count) wxOVERRIDE
     {
         beginResetModel();
         m_rowCount = static_cast<int>(count);
@@ -919,7 +919,7 @@ public:
     void closeEditor(
         QWidget *editor,
         QAbstractItemDelegate::EndEditHint hint
-    ) override
+    ) wxOVERRIDE
     {
         // Close process can re-signal closeEditor so we need to guard against
         // reentrant calls.
@@ -970,14 +970,14 @@ public:
         return m_itemDelegate.GetEditControl();
     }
 
-    virtual void paintEvent(QPaintEvent *event) override
+    virtual void paintEvent(QPaintEvent *event) wxOVERRIDE
     {
         QTreeView::paintEvent(event);
     }
 
     int GetHeaderHeight() const
     {
-        return header() != nullptr ? header()->height() : 0;
+        return header() != NULL ? header()->height() : 0;
     }
 
 private:
@@ -1082,13 +1082,13 @@ bool wxListCtrl::Create(wxWindow *parent,
 void wxListCtrl::Init()
 {
     m_hasCheckBoxes = false;
-    m_model = nullptr;
-    m_qtTreeWidget = nullptr;
+    m_model = NULL;
+    m_qtTreeWidget = NULL;
 }
 
 wxListCtrl::~wxListCtrl()
 {
-    m_qtTreeWidget->setModel(nullptr);
+    m_qtTreeWidget->setModel(NULL);
     m_model->deleteLater();
 }
 

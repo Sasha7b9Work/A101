@@ -129,7 +129,7 @@ void wxFileTypeInfo::DoVarArgInit(const wxString& mimeType,
 #endif
         if ( !ext )
         {
-            // nullptr terminates the list
+            // NULL terminates the list
             break;
         }
 
@@ -216,7 +216,7 @@ wxString wxFileType::ExpandCommand(const wxString& command,
                 case wxT('{'):
                     {
                         const wxChar *pEnd = wxStrchr(pc, wxT('}'));
-                        if ( pEnd == nullptr ) {
+                        if ( pEnd == NULL ) {
                             wxString mimetype;
                             wxLogWarning(_("Unmatched '{' in an entry for mime type %s."),
                                          params.GetMimeType().c_str());
@@ -276,12 +276,12 @@ wxString wxFileType::ExpandCommand(const wxString& command,
 wxFileType::wxFileType(const wxFileTypeInfo& info)
 {
     m_info = &info;
-    m_impl = nullptr;
+    m_impl = NULL;
 }
 
 wxFileType::wxFileType()
 {
-    m_info = nullptr;
+    m_info = NULL;
     m_impl = new wxFileTypeImpl;
 }
 
@@ -521,7 +521,7 @@ bool wxFileType::SetDefaultIcon(const wxString& cmd, int index)
 // wxMimeTypesManagerFactory
 // ----------------------------------------------------------------------------
 
-wxMimeTypesManagerFactory *wxMimeTypesManagerFactory::m_factory = nullptr;
+wxMimeTypesManagerFactory *wxMimeTypesManagerFactory::m_factory = NULL;
 
 /* static */
 void wxMimeTypesManagerFactory::Set(wxMimeTypesManagerFactory *factory)
@@ -580,7 +580,7 @@ bool wxMimeTypesManager::IsOfType(const wxString& mimeType,
 
 wxMimeTypesManager::wxMimeTypesManager()
 {
-    m_impl = nullptr;
+    m_impl = NULL;
 }
 
 wxMimeTypesManager::~wxMimeTypesManager()
@@ -610,7 +610,7 @@ wxMimeTypesManager::Associate(const wxFileTypeInfo& ftInfo)
 #else // other platforms
     wxUnusedVar(ftInfo);
     wxFAIL_MSG( wxT("not implemented") ); // TODO
-    return nullptr;
+    return NULL;
 #endif // platforms
 }
 
@@ -627,7 +627,7 @@ wxMimeTypesManager::GetFileTypeFromExtension(const wxString& ext)
     else
         extWithoutDot = ext;
 
-    wxCHECK_MSG( !ext.empty(), nullptr, wxT("extension can't be empty") );
+    wxCHECK_MSG( !ext.empty(), NULL, wxT("extension can't be empty") );
 
     wxFileType *ft = m_impl->GetFileTypeFromExtension(extWithoutDot);
 
@@ -737,12 +737,12 @@ class wxMimeTypeCmnModule: public wxModule
 public:
     wxMimeTypeCmnModule() : wxModule() { }
 
-    virtual bool OnInit() override { return true; }
-    virtual void OnExit() override
+    virtual bool OnInit() wxOVERRIDE { return true; }
+    virtual void OnExit() wxOVERRIDE
     {
-        wxMimeTypesManagerFactory::Set(nullptr);
+        wxMimeTypesManagerFactory::Set(NULL);
 
-        if ( gs_mimeTypesManager.m_impl != nullptr )
+        if ( gs_mimeTypesManager.m_impl != NULL )
         {
             wxDELETE(gs_mimeTypesManager.m_impl);
             gs_mimeTypesManager.m_fallbacks.Clear();

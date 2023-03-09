@@ -37,14 +37,14 @@ class WXDLLIMPEXP_CORE wxGenericColourDialog : public wxDialog
 public:
     wxGenericColourDialog();
     wxGenericColourDialog(wxWindow *parent,
-                          const wxColourData *data = nullptr);
+                          const wxColourData *data = NULL);
     virtual ~wxGenericColourDialog();
 
-    bool Create(wxWindow *parent, const wxColourData *data = nullptr);
+    bool Create(wxWindow *parent, const wxColourData *data = NULL);
 
     wxColourData &GetColourData() { return m_colourData; }
 
-    virtual int ShowModal() override;
+    virtual int ShowModal() wxOVERRIDE;
 
     // Internal functions
     void OnMouseEvent(wxMouseEvent& event);

@@ -38,7 +38,7 @@
 class WXDLLIMPEXP_CORE wxContextHelp : public wxObject
 {
 public:
-    wxContextHelp(wxWindow* win = nullptr, bool beginHelp = true);
+    wxContextHelp(wxWindow* win = NULL, bool beginHelp = true);
     virtual ~wxContextHelp();
 
     bool BeginContextHelp(wxWindow* win);
@@ -146,7 +146,7 @@ public:
                                  const wxPoint& pt,
                                  wxHelpEvent::Origin origin)
     {
-        wxCHECK_MSG( window, false, wxT("window must not be null") );
+        wxCHECK_MSG( window, false, wxT("window must not be NULL") );
 
         m_helptextAtPoint = pt;
         m_helptextOrigin = origin;
@@ -204,14 +204,14 @@ class WXDLLIMPEXP_CORE wxSimpleHelpProvider : public wxHelpProvider
 {
 public:
     // implement wxHelpProvider methods
-    virtual wxString GetHelp(const wxWindowBase *window) override;
+    virtual wxString GetHelp(const wxWindowBase *window) wxOVERRIDE;
 
     // override ShowHelp() and not ShowHelpAtPoint() as explained above
-    virtual bool ShowHelp(wxWindowBase *window) override;
+    virtual bool ShowHelp(wxWindowBase *window) wxOVERRIDE;
 
-    virtual void AddHelp(wxWindowBase *window, const wxString& text) override;
-    virtual void AddHelp(wxWindowID id, const wxString& text) override;
-    virtual void RemoveHelp(wxWindowBase* window) override;
+    virtual void AddHelp(wxWindowBase *window, const wxString& text) wxOVERRIDE;
+    virtual void AddHelp(wxWindowID id, const wxString& text) wxOVERRIDE;
+    virtual void RemoveHelp(wxWindowBase* window) wxOVERRIDE;
 
 protected:
     // we use 2 hashes for storing the help strings associated with windows
@@ -229,13 +229,13 @@ class WXDLLIMPEXP_CORE wxHelpControllerHelpProvider : public wxSimpleHelpProvide
 public:
     // Note that it doesn't own the help controller. The help controller
     // should be deleted separately.
-    wxHelpControllerHelpProvider(wxHelpControllerBase* hc = nullptr);
+    wxHelpControllerHelpProvider(wxHelpControllerBase* hc = NULL);
 
     // implement wxHelpProvider methods
 
     // again (see above): this should be ShowHelpAtPoint() but we need to
     // override ShowHelp() to avoid breaking existing code
-    virtual bool ShowHelp(wxWindowBase *window) override;
+    virtual bool ShowHelp(wxWindowBase *window) wxOVERRIDE;
 
     // Other accessors
     void SetHelpController(wxHelpControllerBase* hc) { m_helpController = hc; }

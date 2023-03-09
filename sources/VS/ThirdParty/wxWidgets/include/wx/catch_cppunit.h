@@ -9,7 +9,7 @@
 #ifndef _WX_CATCH_CPPUNIT_H_
 #define _WX_CATCH_CPPUNIT_H_
 
-#include "catch2/catch.hpp"
+#include "catch.hpp"
 
 // CppUnit-compatible macros.
 
@@ -31,16 +31,10 @@
 // line but this can happen if they're used inside another macro, so wrap it
 // inside a scope.
 #define CPPUNIT_ASSERT_MESSAGE(msg, cond) \
-    wxSTATEMENT_MACRO_BEGIN               \
-    INFO(msg);                            \
-    REQUIRE(cond);                        \
-    wxSTATEMENT_MACRO_END
+    do { INFO(msg); REQUIRE(cond); } while (Catch::alwaysFalse())
 
 #define CPPUNIT_ASSERT_EQUAL_MESSAGE(msg, x, y) \
-    wxSTATEMENT_MACRO_BEGIN                     \
-    INFO(msg);                                  \
-    REQUIRE(x == y);                            \
-    wxSTATEMENT_MACRO_END
+    do { INFO(msg); REQUIRE(x == y); } while (Catch::alwaysFalse())
 
 // CATCH Approx class uses the upper bound of "epsilon*(scale + max(|x|, |y|))"
 // for |x - y| which is not really compatible with our fixed delta, so we can't
@@ -163,7 +157,7 @@ public:
     void addTest(Test* test) { m_tests.push_back(test); }
     size_t getChildTestCount() const { return m_tests.size(); }
 
-    void runTest() override
+    void runTest() wxOVERRIDE
     {
         for ( size_t n = 0; n < m_tests.size(); ++n )
         {
@@ -232,7 +226,7 @@ inline std::string wxGetCurrentTestName()
 // below and there just doesn't seem to be any way around it.
 #define CPPUNIT_TEST_SUITE(testclass)   \
     public:                             \
-    void runTest() override           \
+    void runTest() wxOVERRIDE           \
     {                                   \
         using namespace wxPrivate;      \
         TempStringAssign setClass(wxTheCurrentTestClass, #testclass)

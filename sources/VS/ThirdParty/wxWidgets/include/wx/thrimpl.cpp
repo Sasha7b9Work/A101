@@ -21,7 +21,7 @@ wxMutex::wxMutex(wxMutexType mutexType)
     if ( !m_internal->IsOk() )
     {
         delete m_internal;
-        m_internal = nullptr;
+        m_internal = NULL;
     }
 }
 
@@ -32,7 +32,7 @@ wxMutex::~wxMutex()
 
 bool wxMutex::IsOk() const
 {
-    return m_internal != nullptr;
+    return m_internal != NULL;
 }
 
 wxMutexError wxMutex::Lock()
@@ -235,7 +235,7 @@ wxCondition::wxCondition(wxMutex& mutex)
     if ( !m_internal->IsOk() )
     {
         delete m_internal;
-        m_internal = nullptr;
+        m_internal = NULL;
     }
 }
 
@@ -246,7 +246,7 @@ wxCondition::~wxCondition()
 
 bool wxCondition::IsOk() const
 {
-    return m_internal != nullptr;
+    return m_internal != NULL;
 }
 
 wxCondError wxCondition::Wait()
@@ -291,7 +291,7 @@ wxSemaphore::wxSemaphore(int initialcount, int maxcount)
     if ( !m_internal->IsOk() )
     {
         delete m_internal;
-        m_internal = nullptr;
+        m_internal = NULL;
     }
 }
 
@@ -302,7 +302,7 @@ wxSemaphore::~wxSemaphore()
 
 bool wxSemaphore::IsOk() const
 {
-    return m_internal != nullptr;
+    return m_internal != NULL;
 }
 
 wxSemaError wxSemaphore::Wait()
@@ -346,4 +346,10 @@ wxSemaError wxSemaphore::Post()
 void wxThread::Sleep(unsigned long milliseconds)
 {
     wxMilliSleep(milliseconds);
+}
+
+// This function exists only for backwards compatibility, don't call it.
+void *wxThread::CallEntry()
+{
+    return Entry();
 }

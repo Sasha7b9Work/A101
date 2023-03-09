@@ -58,7 +58,7 @@ void wxInputConsumer::OnActivate(wxActivateEvent& event)
 wxInputHandler *
 wxInputConsumer::DoGetStdInputHandler(wxInputHandler * WXUNUSED(handlerDef))
 {
-    return nullptr;
+    return NULL;
 }
 
 void wxInputConsumer::CreateInputHandler(const wxString& inphandler)

@@ -31,6 +31,11 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TOOLBOOK_PAGE_CHANGING, wxBook
 // Use wxTB_HORZ_LAYOUT style for the controlling toolbar
 #define wxTBK_HORZ_LAYOUT          0x8000
 
+// deprecated synonym, don't use
+#if WXWIN_COMPATIBILITY_2_8
+    #define wxBK_BUTTONBAR wxTBK_BUTTONBAR
+#endif
+
 // ----------------------------------------------------------------------------
 // wxToolbook
 // ----------------------------------------------------------------------------
@@ -65,20 +70,20 @@ public:
 
 
     // implement base class virtuals
-    virtual bool SetPageText(size_t n, const wxString& strText) override;
-    virtual wxString GetPageText(size_t n) const override;
-    virtual int GetPageImage(size_t n) const override;
-    virtual bool SetPageImage(size_t n, int imageId) override;
+    virtual bool SetPageText(size_t n, const wxString& strText) wxOVERRIDE;
+    virtual wxString GetPageText(size_t n) const wxOVERRIDE;
+    virtual int GetPageImage(size_t n) const wxOVERRIDE;
+    virtual bool SetPageImage(size_t n, int imageId) wxOVERRIDE;
     virtual bool InsertPage(size_t n,
                             wxWindow *page,
                             const wxString& text,
                             bool bSelect = false,
-                            int imageId = NO_IMAGE) override;
-    virtual int SetSelection(size_t n) override { return DoSetSelection(n, SetSelection_SendEvent); }
-    virtual int ChangeSelection(size_t n) override { return DoSetSelection(n); }
+                            int imageId = NO_IMAGE) wxOVERRIDE;
+    virtual int SetSelection(size_t n) wxOVERRIDE { return DoSetSelection(n, SetSelection_SendEvent); }
+    virtual int ChangeSelection(size_t n) wxOVERRIDE { return DoSetSelection(n); }
 
-    virtual bool DeleteAllPages() override;
-    virtual int HitTest(const wxPoint& pt, long *flags = nullptr) const override;
+    virtual bool DeleteAllPages() wxOVERRIDE;
+    virtual int HitTest(const wxPoint& pt, long *flags = NULL) const wxOVERRIDE;
 
 
     // methods which are not part of base wxBookctrl API
@@ -95,17 +100,17 @@ public:
     void Realize();
 
 protected:
-    virtual wxWindow *DoRemovePage(size_t page) override;
+    virtual wxWindow *DoRemovePage(size_t page) wxOVERRIDE;
 
     // event handlers
     void OnToolSelected(wxCommandEvent& event);
     void OnSize(wxSizeEvent& event);
     void OnIdle(wxIdleEvent& event);
 
-    void UpdateSelectedPage(size_t newsel) override;
+    void UpdateSelectedPage(size_t newsel) wxOVERRIDE;
 
-    wxBookCtrlEvent* CreatePageChangingEvent() const override;
-    void MakeChangedEvent(wxBookCtrlEvent &event) override;
+    wxBookCtrlEvent* CreatePageChangingEvent() const wxOVERRIDE;
+    void MakeChangedEvent(wxBookCtrlEvent &event) wxOVERRIDE;
 
     // whether the toolbar needs to be realized
     bool m_needsRealizing;

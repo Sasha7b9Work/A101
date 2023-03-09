@@ -152,7 +152,7 @@ private:
 
 wxFontMapper::wxFontMapper()
 {
-    m_windowParent = nullptr;
+    m_windowParent = NULL;
 }
 
 wxFontMapper::~wxFontMapper()
@@ -168,7 +168,7 @@ wxFontMapper *wxFontMapper::Get()
 
     // Now return it anyway because there's a chance the GUI code might just
     // only want to call wxFontMapperBase functions and it's better than
-    // crashing by returning nullptr
+    // crashing by returning NULL
     return (wxFontMapper *)fontmapper;
 }
 
@@ -493,7 +493,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
                                      bool interactive)
 {
     wxCHECK_MSG( encodingAlt, false,
-                    wxT("wxFontEncoding::GetAltForEncoding(): null pointer") );
+                    wxT("wxFontEncoding::GetAltForEncoding(): NULL pointer") );
 
     wxNativeEncodingInfo info;
     if ( !GetAltForEncoding(encoding, &info, facename, interactive) )

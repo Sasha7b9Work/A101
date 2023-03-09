@@ -400,7 +400,7 @@ public:
 
     ~VariableNullerImpl() { wxPrivateOnScopeExit(*this); }
 
-    void Execute() { m_var = nullptr; }
+    void Execute() { m_var = NULL; }
 
 private:
     T& m_var;

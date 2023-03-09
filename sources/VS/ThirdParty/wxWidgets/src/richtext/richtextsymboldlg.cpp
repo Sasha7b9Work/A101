@@ -354,17 +354,17 @@ void wxSymbolPickerDialog::Init()
 {
 ////@begin wxSymbolPickerDialog member initialisation
     m_fromUnicode = true;
-    m_fontCtrl = nullptr;
+    m_fontCtrl = NULL;
 #if defined(__UNICODE__)
-    m_subsetCtrl = nullptr;
+    m_subsetCtrl = NULL;
 #endif
-    m_symbolsCtrl = nullptr;
-    m_symbolStaticCtrl = nullptr;
-    m_characterCodeCtrl = nullptr;
+    m_symbolsCtrl = NULL;
+    m_symbolStaticCtrl = NULL;
+    m_characterCodeCtrl = NULL;
 #if defined(__UNICODE__)
-    m_fromUnicodeCtrl = nullptr;
+    m_fromUnicodeCtrl = NULL;
 #endif
-    m_stdButtonSizer = nullptr;
+    m_stdButtonSizer = NULL;
 ////@end wxSymbolPickerDialog member initialisation
     m_dontUpdate = false;
 }
@@ -767,7 +767,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxSymbolListCtrl, wxVScrolledWindow);
 void wxSymbolListCtrl::Init()
 {
     m_current = wxNOT_FOUND;
-    m_doubleBuffer = nullptr;
+    m_doubleBuffer = NULL;
     m_cellSize = wxSize(40, 40);
     m_minSymbolValue = 0;
     m_maxSymbolValue = 255;

@@ -8,7 +8,9 @@
 #ifndef STYLECONTEXT_H
 #define STYLECONTEXT_H
 
+#ifdef SCI_NAMESPACE
 namespace Scintilla {
+#endif
 
 // All languages handled so far can treat all characters >= 0x80 as one class
 // which just continues the current token or starts an identifier if in default.
@@ -24,6 +26,8 @@ class StyleContext {
 	Sci_PositionU posRelative;
 	Sci_PositionU currentPosLastRelative;
 	Sci_Position offsetRelative;
+
+	StyleContext &operator=(const StyleContext &);
 
 	void GetNextChar() {
 		if (multiByteAccess) {
@@ -57,7 +61,7 @@ public:
 	StyleContext(Sci_PositionU startPos, Sci_PositionU length,
                         int initStyle, LexAccessor &styler_, char chMask='\377') :
 		styler(styler_),
-		multiByteAccess(nullptr),
+		multiByteAccess(0),
 		endPos(startPos + length),
 		posRelative(0),
 		currentPosLastRelative(0x7FFFFFFF),
@@ -72,7 +76,7 @@ public:
 		width(0),
 		chNext(0),
 		widthNext(1) {
-		if (styler.Encoding() != EncodingType::eightBit) {
+		if (styler.Encoding() != enc8bit) {
 			multiByteAccess = styler.MultiByteAccess();
 		}
 		styler.StartAt(startPos /*, chMask*/);
@@ -93,14 +97,11 @@ public:
 
 		GetNextChar();
 	}
-	// Deleted so StyleContext objects can not be copied.
-	StyleContext(const StyleContext &) = delete;
-	StyleContext &operator=(const StyleContext &) = delete;
 	void Complete() {
 		styler.ColourTo(currentPos - ((currentPos > lengthDocument) ? 2 : 1), state);
 		styler.Flush();
 	}
-	bool More() const noexcept {
+	bool More() const {
 		return currentPos < endPos;
 	}
 	void Forward() {
@@ -129,17 +130,12 @@ public:
 		}
 	}
 	void ForwardBytes(Sci_Position nb) {
-		const Sci_PositionU forwardPos = currentPos + nb;
+		Sci_PositionU forwardPos = currentPos + nb;
 		while (forwardPos > currentPos) {
-			const Sci_PositionU currentPosStart = currentPos;
 			Forward();
-			if (currentPos == currentPosStart) {
-				// Reached end
-				return;
-			}
 		}
 	}
-	void ChangeState(int state_) noexcept {
+	void ChangeState(int state_) {
 		state = state_;
 	}
 	void SetState(int state_) {
@@ -154,8 +150,8 @@ public:
 	Sci_Position LengthCurrent() const {
 		return currentPos - styler.GetStartSegment();
 	}
-	int GetRelative(Sci_Position n, char chDefault='\0') {
-		return static_cast<unsigned char>(styler.SafeGetCharAt(currentPos+n, chDefault));
+	int GetRelative(Sci_Position n) {
+		return static_cast<unsigned char>(styler.SafeGetCharAt(currentPos+n, 0));
 	}
 	int GetRelativeCharacter(Sci_Position n) {
 		if (n == 0)
@@ -167,9 +163,9 @@ public:
 				posRelative = currentPos;
 				offsetRelative = 0;
 			}
-			const Sci_Position diffRelative = n - offsetRelative;
-			const Sci_Position posNew = multiByteAccess->GetRelativePosition(posRelative, diffRelative);
-			const int chReturn = multiByteAccess->GetCharacterAndWidth(posNew, nullptr);
+			Sci_Position diffRelative = n - offsetRelative;
+			Sci_Position posNew = multiByteAccess->GetRelativePosition(posRelative, diffRelative);
+			int chReturn = multiByteAccess->GetCharacterAndWidth(posNew, 0);
 			posRelative = posNew;
 			currentPosLastRelative = currentPos;
 			offsetRelative = n;
@@ -207,6 +203,8 @@ public:
 	void GetCurrentLowered(char *s, Sci_PositionU len);
 };
 
+#ifdef SCI_NAMESPACE
 }
+#endif
 
 #endif

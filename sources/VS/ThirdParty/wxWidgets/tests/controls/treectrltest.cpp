@@ -35,8 +35,8 @@ class TreeCtrlTestCase : public CppUnit::TestCase
 public:
     TreeCtrlTestCase() { }
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    virtual void setUp() wxOVERRIDE;
+    virtual void tearDown() wxOVERRIDE;
 
 private:
     CPPUNIT_TEST_SUITE( TreeCtrlTestCase );
@@ -150,7 +150,7 @@ void TreeCtrlTestCase::setUp()
 void TreeCtrlTestCase::tearDown()
 {
     delete m_tree;
-    m_tree = nullptr;
+    m_tree = NULL;
 
     m_root =
     m_child1 =
@@ -344,7 +344,7 @@ void TreeCtrlTestCase::KeyDown()
 
 void TreeCtrlTestCase::CollapseExpandEvents()
 {
-#ifdef __WXGTK__
+#ifdef __WXGTK20__
     // Works locally, but not when run on Travis CI.
     if ( IsAutomaticTest() )
         return;

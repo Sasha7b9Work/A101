@@ -87,7 +87,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxColourDialog, wxDialog);
 
 wxColourDialog::wxColourDialog()
 {
-    m_dialogParent = nullptr;
+    m_dialogParent = NULL;
 }
 
 wxColourDialog::wxColourDialog(wxWindow *parent, const wxColourData *data)

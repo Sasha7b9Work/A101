@@ -14,8 +14,7 @@
 #include <assert.h>
 #include <ctype.h>
 
-#include <algorithm>
-
+#include "Platform.h"
 #include "ILexer.h"
 #include "Scintilla.h"
 #include "SciLexer.h"
@@ -27,7 +26,9 @@
 #include "CharacterSet.h"
 #include "LexerModule.h"
 
+#ifdef SCI_NAMESPACE
 using namespace Scintilla;
+#endif
 
 static bool IsSpaceEquiv(int state) {
 	return (state == SCE_COFFEESCRIPT_DEFAULT
@@ -426,7 +427,7 @@ static void FoldCoffeeScriptDoc(Sci_PositionU startPos, Sci_Position length, int
 		}
 
 		const int levelAfterComments = indentNext & SC_FOLDLEVELNUMBERMASK;
-		const int levelBeforeComments = std::max(indentCurrentLevel,levelAfterComments);
+		const int levelBeforeComments = Platform::Maximum(indentCurrentLevel,levelAfterComments);
 
 		// Now set all the indent levels on the lines we skipped
 		// Do this from end to start.  Once we encounter one line

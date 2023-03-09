@@ -66,7 +66,7 @@ static wxColour GetDefaultMaskColour();
 // Creates an image list
 bool wxImageList::Create(int width, int height, bool mask, int initial)
 {
-    wxASSERT_MSG( m_hImageList == nullptr, "Recreating existing wxImageList?" );
+    wxASSERT_MSG( m_hImageList == NULL, "Recreating existing wxImageList?" );
 
     // Prevent from storing negative dimensions
     m_size = wxSize(wxMax(width, 0), wxMax(height, 0));
@@ -142,7 +142,7 @@ bool wxImageList::GetSize(int WXUNUSED(index), int &width, int &height) const
 class wxImageList::wxMSWBitmaps
 {
 public:
-    wxMSWBitmaps() : hbmp(nullptr) { }
+    wxMSWBitmaps() : hbmp(NULL) { }
 
 #if wxUSE_WXDIB && wxUSE_IMAGE
     void InitFromImageWithAlpha(const wxImage& img)
@@ -247,7 +247,7 @@ wxImageList::GetImageListBitmaps(wxMSWBitmaps& bitmaps,
     {
         wxMask maskToUse;
 
-        HBITMAP hbmpMask = nullptr;
+        HBITMAP hbmpMask = NULL;
 
         // Always use mask if it is specified.
         if ( mask.IsOk() )

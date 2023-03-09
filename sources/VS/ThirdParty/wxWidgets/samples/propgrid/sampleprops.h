@@ -26,21 +26,21 @@ public:
                         const wxFontData& value = wxFontData() );
     virtual ~wxFontDataProperty ();
 
-    void OnSetValue() override;
+    void OnSetValue() wxOVERRIDE;
 
     // In order to have different value type in a derived property
     // class, we will override GetValue to return custom variant,
     // instead of changing the base m_value. This allows the methods
     // in base class to function properly.
-    virtual wxVariant DoGetValue() const override;
+    virtual wxVariant DoGetValue() const wxOVERRIDE;
 
     virtual wxVariant ChildChanged( wxVariant& thisValue,
                                     int childIndex,
-                                    wxVariant& childValue ) const override;
-    virtual void RefreshChildren() override;
+                                    wxVariant& childValue ) const wxOVERRIDE;
+    virtual void RefreshChildren() wxOVERRIDE;
 
 protected:
-    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) override;
+    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) wxOVERRIDE;
 
     // Value must be stored as variant - otherwise it will be
     // decreffed to oblivion on GetValue().
@@ -60,8 +60,8 @@ public:
 
     virtual wxVariant ChildChanged( wxVariant& thisValue,
                                     int childIndex,
-                                    wxVariant& childValue ) const override;
-    virtual void RefreshChildren() override;
+                                    wxVariant& childValue ) const wxOVERRIDE;
+    virtual void RefreshChildren() wxOVERRIDE;
 
 protected:
 
@@ -85,8 +85,8 @@ public:
 
     virtual wxVariant ChildChanged( wxVariant& thisValue,
                                     int childIndex,
-                                    wxVariant& childValue ) const override;
-    virtual void RefreshChildren() override;
+                                    wxVariant& childValue ) const wxOVERRIDE;
+    virtual void RefreshChildren() wxOVERRIDE;
 
 protected:
 
@@ -116,22 +116,22 @@ public:
 
     virtual ~wxArrayDoubleProperty ();
 
-    virtual void OnSetValue() override;
-    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
+    virtual void OnSetValue() wxOVERRIDE;
+    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const wxOVERRIDE;
     virtual bool StringToValue( wxVariant& variant,
                                 const wxString& text,
-                                int argFlags = 0 ) const override;
-    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) override;
+                                int argFlags = 0 ) const wxOVERRIDE;
+    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) wxOVERRIDE;
 
     // Generates cache for displayed text
     virtual void GenerateValueAsString ( wxString& target, int prec, bool removeZeroes ) const;
 
-    wxValidator* DoGetValidator() const override;
+    wxValidator* DoGetValidator() const wxOVERRIDE;
     bool ValidateValue(wxVariant& value,
-                       wxPGValidationInfo& validationInfo) const override;
+                       wxPGValidationInfo& validationInfo) const wxOVERRIDE;
 
 protected:
-    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) override;
+    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) wxOVERRIDE;
 
     wxString        m_display; // Stores cache for displayed text
     int             m_precision; // Used when formatting displayed string.

@@ -64,7 +64,7 @@ public:
                                   int WXUNUSED(flags) = 0,
                                   wxHeaderSortIconType WXUNUSED(sortArrow)
                                     = wxHDR_SORT_ICON_NONE,
-                                  wxHeaderButtonParams* params = nullptr) override
+                                  wxHeaderButtonParams* params = NULL) wxOVERRIDE
     {
         wxDCBrushChanger setBrush(dc, *wxBLUE_BRUSH);
         wxDCTextColourChanger setFgCol(dc, *wxWHITE);
@@ -85,7 +85,7 @@ public:
 // cases, but we show this here just for completeness)
 class MyTraits : public wxGUIAppTraits
 {
-    virtual wxRendererNative *CreateRenderer() override
+    virtual wxRendererNative *CreateRenderer() wxOVERRIDE
     {
         // it will be deleted on program shutdown by wxWidgets itself
         return new MyRenderer;
@@ -96,10 +96,10 @@ class MyTraits : public wxGUIAppTraits
 class MyApp : public wxApp
 {
 public:
-    virtual bool OnInit() override;
+    virtual bool OnInit() wxOVERRIDE;
 
     // if we want MyTraits to be used we must override CreateTraits()
-    virtual wxAppTraits *CreateTraits() override { return new MyTraits; }
+    virtual wxAppTraits *CreateTraits() wxOVERRIDE { return new MyTraits; }
 };
 
 // Define a new frame type: this is going to be our main frame
@@ -184,7 +184,7 @@ public:
         m_useBitmap =
         m_useGeneric = false;
 #if wxUSE_GRAPHICS_CONTEXT
-        m_renderer = nullptr;
+        m_renderer = NULL;
 #endif
     }
 
@@ -567,7 +567,7 @@ bool MyApp::OnInit()
 
 // frame constructor
 MyFrame::MyFrame()
-       : wxFrame(nullptr,
+       : wxFrame(NULL,
                  wxID_ANY,
                  "Render wxWidgets Sample")
 {
@@ -663,7 +663,7 @@ MyFrame::MyFrame()
 
 MyFrame::~MyFrame()
 {
-    delete wxRendererNative::Set(nullptr);
+    delete wxRendererNative::Set(NULL);
 }
 
 
@@ -744,7 +744,7 @@ void MyFrame::OnLoad(wxCommandEvent& WXUNUSED(event))
 
 void MyFrame::OnUnload(wxCommandEvent& WXUNUSED(event))
 {
-    wxRendererNative *renderer = wxRendererNative::Set(nullptr);
+    wxRendererNative *renderer = wxRendererNative::Set(NULL);
     if ( renderer )
     {
         delete renderer;
@@ -788,7 +788,7 @@ void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 #if wxUSE_GRAPHICS_CONTEXT
 void MyFrame::OnGraphicContextNone(wxCommandEvent& WXUNUSED(evt))
 {
-    m_panel->UseGraphicRenderer(nullptr);
+    m_panel->UseGraphicRenderer(NULL);
 }
 
 void MyFrame::OnGraphicContextDefault(wxCommandEvent& WXUNUSED(evt))

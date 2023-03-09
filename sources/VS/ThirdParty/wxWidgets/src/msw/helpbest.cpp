@@ -38,7 +38,7 @@ bool wxBestHelpController::Initialize( const wxString& filename )
     if( chm->Initialize( GetValidFilename( filename ) ) )
     {
         m_helpController = chm;
-        m_parentWindow = nullptr;
+        m_parentWindow = NULL;
         return true;
     }
 
@@ -53,7 +53,7 @@ bool wxBestHelpController::Initialize( const wxString& filename )
     if( html->Initialize( GetValidFilename( filename ) ) )
     {
         m_helpController = html;
-        m_parentWindow = nullptr;
+        m_parentWindow = NULL;
         return true;
     }
 

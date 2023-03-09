@@ -13,7 +13,7 @@
 #include <QtWidgets/QFrame>
 
 wxStaticLine::wxStaticLine() :
-    m_qtFrame(nullptr)
+    m_qtFrame(NULL)
 {
 }
 

@@ -21,7 +21,7 @@ class WXDLLIMPEXP_CORE wxColourButton : public wxButton,
                                         public wxColourPickerWidgetBase
 {
 public:
-    wxColourButton() : m_topParent(nullptr) {}
+    wxColourButton() : m_topParent(NULL) {}
     wxColourButton(wxWindow *parent,
                    wxWindowID id,
                    const wxColour& initial = *wxBLACK,
@@ -30,7 +30,7 @@ public:
                    long style = wxCLRBTN_DEFAULT_STYLE,
                    const wxValidator& validator = wxDefaultValidator,
                    const wxString& name = wxASCII_STR(wxColourPickerWidgetNameStr))
-        : m_topParent(nullptr)
+        : m_topParent(NULL)
     {
         Create(parent, id, initial, pos, size, style, validator, name);
     }
@@ -47,7 +47,7 @@ public:
     virtual ~wxColourButton();
 
 protected:
-    void UpdateColour() override;
+    void UpdateColour() wxOVERRIDE;
 
 public:     // used by the GTK callback only
 

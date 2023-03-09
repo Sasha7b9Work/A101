@@ -27,7 +27,7 @@ wxDEFINE_SCOPED_PTR_TYPE(wxInputStream)
 
 bool wxFilterFSHandler::CanOpen(const wxString& location)
 {
-    return wxFilterClassFactory::Find(GetProtocol(location)) != nullptr;
+    return wxFilterClassFactory::Find(GetProtocol(location)) != NULL;
 }
 
 wxFSFile* wxFilterFSHandler::OpenFile(
@@ -36,21 +36,21 @@ wxFSFile* wxFilterFSHandler::OpenFile(
 {
     wxString right = GetRightLocation(location);
     if (!right.empty())
-        return nullptr;
+        return NULL;
 
     wxString protocol = GetProtocol(location);
     const wxFilterClassFactory *factory = wxFilterClassFactory::Find(protocol);
     if (!factory)
-        return nullptr;
+        return NULL;
 
     wxString left = GetLeftLocation(location);
     wxFSFilePtr leftFile(fs.OpenFile(left));
     if (!leftFile.get())
-        return nullptr;
+        return NULL;
 
     wxInputStreamPtr leftStream(leftFile->DetachStream());
     if (!leftStream.get() || !leftStream->IsOk())
-        return nullptr;
+        return NULL;
 
     wxInputStreamPtr stream(factory->NewStream(leftStream.release()));
 

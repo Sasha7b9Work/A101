@@ -48,7 +48,7 @@ WX_PG_IMPLEMENT_PROPERTY_CLASS_PLAIN(NAME, T, EDITOR)
 //
 // These macros help creating DoGetValidator
 #define WX_PG_DOGETVALIDATOR_ENTRY() \
-    static wxValidator* s_ptr = nullptr; \
+    static wxValidator* s_ptr = NULL; \
     if ( s_ptr ) return s_ptr;
 
 // Common function exit
@@ -66,7 +66,7 @@ class WXDLLIMPEXP_PROPGRID wxPGInDialogValidator
 public:
     wxPGInDialogValidator()
     {
-        m_textCtrl = nullptr;
+        m_textCtrl = NULL;
     }
 
     ~wxPGInDialogValidator()
@@ -99,18 +99,18 @@ class WXDLLIMPEXP_PROPGRID wxStringProperty : public wxPGProperty
 public:
     wxStringProperty( const wxString& label = wxPG_LABEL,
                       const wxString& name = wxPG_LABEL,
-                      const wxString& value = wxString() );
+                      const wxString& value = wxEmptyString );
     virtual ~wxStringProperty();
 
-    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
+    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const wxOVERRIDE;
     virtual bool StringToValue( wxVariant& variant,
                                 const wxString& text,
-                                int argFlags = 0 ) const override;
+                                int argFlags = 0 ) const wxOVERRIDE;
 
-    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) override;
+    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) wxOVERRIDE;
 
     // This is updated so "<composed>" special value can be handled.
-    virtual void OnSetValue() override;
+    virtual void OnSetValue() wxOVERRIDE;
 
 protected:
 };
@@ -147,7 +147,7 @@ public:
 
     wxNumericPropertyValidator( NumericType numericType, int base = 10 );
     virtual ~wxNumericPropertyValidator() { }
-    virtual bool Validate(wxWindow* parent) override;
+    virtual bool Validate(wxWindow* parent) wxOVERRIDE;
 };
 
 #endif // wxUSE_VALIDATORS
@@ -160,7 +160,7 @@ class WXDLLIMPEXP_PROPGRID wxNumericProperty : public wxPGProperty
 public:
     virtual ~wxNumericProperty();
 
-    virtual bool DoSetAttribute(const wxString& name, wxVariant& value) override;
+    virtual bool DoSetAttribute(const wxString& name, wxVariant& value) wxOVERRIDE;
 
     virtual wxVariant AddSpinStepValue(long stepScale) const = 0;
 
@@ -197,18 +197,18 @@ public:
                    const wxString& name,
                    const wxLongLong& value );
 #endif
-    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
+    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const wxOVERRIDE;
     virtual bool StringToValue( wxVariant& variant,
                                 const wxString& text,
-                                int argFlags = 0 ) const override;
+                                int argFlags = 0 ) const wxOVERRIDE;
     virtual bool ValidateValue( wxVariant& value,
-                                wxPGValidationInfo& validationInfo ) const override;
+                                wxPGValidationInfo& validationInfo ) const wxOVERRIDE;
     virtual bool IntToValue( wxVariant& variant,
                              int number,
-                             int argFlags = 0 ) const override;
+                             int argFlags = 0 ) const wxOVERRIDE;
     static wxValidator* GetClassValidator();
-    virtual wxValidator* DoGetValidator() const override;
-    virtual wxVariant AddSpinStepValue(long stepScale) const override;
+    virtual wxValidator* DoGetValidator() const wxOVERRIDE;
+    virtual wxVariant AddSpinStepValue(long stepScale) const wxOVERRIDE;
 
 private:
     // Validation helpers.
@@ -251,18 +251,18 @@ public:
                     const wxString& name,
                     const wxULongLong& value );
 #endif
-    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
+    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const wxOVERRIDE;
     virtual bool StringToValue( wxVariant& variant,
                                 const wxString& text,
-                                int argFlags = 0 ) const override;
-    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) override;
+                                int argFlags = 0 ) const wxOVERRIDE;
+    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) wxOVERRIDE;
     virtual bool ValidateValue( wxVariant& value,
-                                wxPGValidationInfo& validationInfo ) const override;
-    virtual wxValidator* DoGetValidator () const override;
+                                wxPGValidationInfo& validationInfo ) const wxOVERRIDE;
+    virtual wxValidator* DoGetValidator () const wxOVERRIDE;
     virtual bool IntToValue( wxVariant& variant,
                              int number,
-                             int argFlags = 0 ) const override;
-    virtual wxVariant AddSpinStepValue(long stepScale) const override;
+                             int argFlags = 0 ) const wxOVERRIDE;
+    virtual wxVariant AddSpinStepValue(long stepScale) const wxOVERRIDE;
 
 protected:
     wxByte      m_base;
@@ -302,18 +302,18 @@ public:
                      double value = 0.0 );
     virtual ~wxFloatProperty();
 
-    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
+    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const wxOVERRIDE;
     virtual bool StringToValue( wxVariant& variant,
                                 const wxString& text,
-                                int argFlags = 0 ) const override;
-    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) override;
+                                int argFlags = 0 ) const wxOVERRIDE;
+    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) wxOVERRIDE;
 
     virtual bool ValidateValue( wxVariant& value,
-                                wxPGValidationInfo& validationInfo ) const override;
+                                wxPGValidationInfo& validationInfo ) const wxOVERRIDE;
 
     static wxValidator* GetClassValidator();
-    virtual wxValidator* DoGetValidator () const override;
-    virtual wxVariant AddSpinStepValue(long stepScale) const override;
+    virtual wxValidator* DoGetValidator () const wxOVERRIDE;
+    virtual wxVariant AddSpinStepValue(long stepScale) const wxOVERRIDE;
 
 protected:
     int m_precision;
@@ -338,19 +338,19 @@ public:
                     bool value = false );
     virtual ~wxBoolProperty();
 
-    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
+    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const wxOVERRIDE;
     virtual bool StringToValue( wxVariant& variant,
                                 const wxString& text,
-                                int argFlags = 0 ) const override;
+                                int argFlags = 0 ) const wxOVERRIDE;
     virtual bool IntToValue( wxVariant& variant,
-                             int number, int argFlags = 0 ) const override;
-    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) override;
+                             int number, int argFlags = 0 ) const wxOVERRIDE;
+    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) wxOVERRIDE;
 };
 
 // -----------------------------------------------------------------------
 
 // If set, then selection of choices is static and should not be
-// changed (i.e. returns nullptr in GetPropertyChoices).
+// changed (i.e. returns NULL in GetPropertyChoices).
 #define wxPG_PROP_STATIC_CHOICES    wxPG_PROP_CLASS_SPECIFIC_1
 
 // Represents a single selection from a list of choices
@@ -367,8 +367,8 @@ public:
 #ifndef SWIG
     wxEnumProperty( const wxString& label = wxPG_LABEL,
                     const wxString& name = wxPG_LABEL,
-                    const wxChar* const* labels = nullptr,
-                    const long* values = nullptr,
+                    const wxChar* const* labels = NULL,
+                    const long* values = NULL,
                     int value = 0 );
     wxEnumProperty( const wxString& label,
                     const wxString& name,
@@ -400,19 +400,19 @@ public:
 
     size_t GetItemCount() const { return m_choices.GetCount(); }
 
-    virtual void OnSetValue() override;
-    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
+    virtual void OnSetValue() wxOVERRIDE;
+    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const wxOVERRIDE;
     virtual bool StringToValue( wxVariant& variant,
                                 const wxString& text,
-                                int argFlags = 0 ) const override;
+                                int argFlags = 0 ) const wxOVERRIDE;
     virtual bool ValidateValue( wxVariant& value,
-                                wxPGValidationInfo& validationInfo ) const override;
+                                wxPGValidationInfo& validationInfo ) const wxOVERRIDE;
 
     // If wxPG_FULL_VALUE is not set in flags, then the value is interpreted
     // as index to choices list. Otherwise, it is actual value.
     virtual bool IntToValue( wxVariant& variant,
                              int number,
-                             int argFlags = 0 ) const override;
+                             int argFlags = 0 ) const wxOVERRIDE;
 
     //
     // Additional virtuals
@@ -423,7 +423,7 @@ public:
     // GetChoiceSelection needs to overridden since m_index is
     // the true index, and various property classes derived from
     // this take advantage of it.
-    virtual int GetChoiceSelection() const override { return m_index; }
+    virtual int GetChoiceSelection() const wxOVERRIDE { return m_index; }
 
 protected:
 
@@ -436,12 +436,12 @@ protected:
                            const wxString& text,
                            int argFlags ) const
     {
-        return ValueFromString_(value, nullptr, text, argFlags);
+        return ValueFromString_(value, NULL, text, argFlags);
     }
     wxDEPRECATED_MSG("use ValueFromInt_(wxVariant&, int*, int, int) function instead")
     bool ValueFromInt_( wxVariant& value, int intVal, int argFlags ) const
     {
-        return ValueFromInt_(value, nullptr, intVal, argFlags);
+        return ValueFromInt_(value, NULL, intVal, argFlags);
     }
     wxDEPRECATED_MSG("don't use ResetNextIndex() function")
     static void ResetNextIndex() { }
@@ -479,11 +479,11 @@ public:
                         const wxString& name = wxPG_LABEL,
                         const wxArrayString& labels = wxArrayString(),
                         const wxArrayInt& values = wxArrayInt(),
-                        const wxString& value = wxString() );
+                        const wxString& value = wxEmptyString );
     wxEditEnumProperty( const wxString& label,
                         const wxString& name,
                         wxPGChoices& choices,
-                        const wxString& value = wxString() );
+                        const wxString& value = wxEmptyString );
 
     // Special constructor for caching choices (used by derived class)
     wxEditEnumProperty( const wxString& label,
@@ -495,12 +495,12 @@ public:
 
     virtual ~wxEditEnumProperty();
 
-    void OnSetValue() override;
+    void OnSetValue() wxOVERRIDE;
     bool StringToValue(wxVariant& variant,
                        const wxString& text,
-                       int argFlags = 0) const override;
+                       int argFlags = 0) const wxOVERRIDE;
     bool ValidateValue(wxVariant& value,
-                       wxPGValidationInfo& validationInfo) const override;
+                       wxPGValidationInfo& validationInfo) const wxOVERRIDE;
 
 protected:
 };
@@ -523,7 +523,7 @@ public:
     wxFlagsProperty( const wxString& label,
                      const wxString& name,
                      const wxChar* const* labels,
-                     const long* values = nullptr,
+                     const long* values = NULL,
                      long value = 0 );
     wxFlagsProperty( const wxString& label,
                      const wxString& name,
@@ -537,20 +537,20 @@ public:
                      int value = 0 );
     virtual ~wxFlagsProperty ();
 
-    virtual void OnSetValue() override;
-    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
+    virtual void OnSetValue() wxOVERRIDE;
+    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const wxOVERRIDE;
     virtual bool StringToValue( wxVariant& variant,
                                 const wxString& text,
-                                int flags ) const override;
+                                int flags ) const wxOVERRIDE;
     virtual wxVariant ChildChanged( wxVariant& thisValue,
                                     int childIndex,
-                                    wxVariant& childValue ) const override;
-    virtual void RefreshChildren() override;
-    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) override;
+                                    wxVariant& childValue ) const wxOVERRIDE;
+    virtual void RefreshChildren() wxOVERRIDE;
+    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) wxOVERRIDE;
 
     // GetChoiceSelection needs to overridden since m_choices is
     // used and value is integer, but it is not index.
-    virtual int GetChoiceSelection() const override { return wxNOT_FOUND; }
+    virtual int GetChoiceSelection() const wxOVERRIDE { return wxNOT_FOUND; }
 
     // helpers
     size_t GetItemCount() const { return m_choices.GetCount(); }
@@ -580,8 +580,8 @@ class WXDLLIMPEXP_PROPGRID wxEditorDialogProperty : public wxPGProperty
 public:
     virtual ~wxEditorDialogProperty();
 
-    virtual wxPGEditorDialogAdapter* GetEditorDialog() const override;
-    virtual bool DoSetAttribute(const wxString& name, wxVariant& value) override;
+    virtual wxPGEditorDialogAdapter* GetEditorDialog() const wxOVERRIDE;
+    virtual bool DoSetAttribute(const wxString& name, wxVariant& value) wxOVERRIDE;
 
 protected:
     wxEditorDialogProperty(const wxString& label, const wxString& name);
@@ -605,24 +605,24 @@ public:
 
     wxFileProperty( const wxString& label = wxPG_LABEL,
                     const wxString& name = wxPG_LABEL,
-                    const wxString& value = wxString() );
+                    const wxString& value = wxEmptyString );
     virtual ~wxFileProperty ();
 
-    virtual void OnSetValue() override;
-    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
+    virtual void OnSetValue() wxOVERRIDE;
+    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const wxOVERRIDE;
     virtual bool StringToValue( wxVariant& variant,
                                 const wxString& text,
-                                int argFlags = 0 ) const override;
-    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) override;
+                                int argFlags = 0 ) const wxOVERRIDE;
+    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) wxOVERRIDE;
 
     static wxValidator* GetClassValidator();
-    virtual wxValidator* DoGetValidator() const override;
+    virtual wxValidator* DoGetValidator() const wxOVERRIDE;
 
     // Returns filename to file represented by current value.
     wxFileName GetFileName() const;
 
 protected:
-    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) override;
+    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) wxOVERRIDE;
 
     wxString    m_wildcard;
     wxString    m_basePath; // If set, then show path relative to it
@@ -645,16 +645,16 @@ public:
 
     wxLongStringProperty( const wxString& label = wxPG_LABEL,
                           const wxString& name = wxPG_LABEL,
-                          const wxString& value = wxString() );
+                          const wxString& value = wxEmptyString );
     virtual ~wxLongStringProperty();
 
-    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
+    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const wxOVERRIDE;
     virtual bool StringToValue( wxVariant& variant,
                                 const wxString& text,
-                                int argFlags = 0 ) const override;
+                                int argFlags = 0 ) const wxOVERRIDE;
 
 protected:
-    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) override;
+    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) wxOVERRIDE;
 };
 
 // -----------------------------------------------------------------------
@@ -667,19 +667,19 @@ class WXDLLIMPEXP_PROPGRID wxDirProperty : public wxEditorDialogProperty
 public:
     wxDirProperty( const wxString& label = wxPG_LABEL,
                    const wxString& name = wxPG_LABEL,
-                   const wxString& value = wxString() );
+                   const wxString& value = wxEmptyString );
     virtual ~wxDirProperty();
 
-    virtual wxString ValueToString(wxVariant& value, int argFlags = 0) const override;
+    virtual wxString ValueToString(wxVariant& value, int argFlags = 0) const wxOVERRIDE;
     virtual bool StringToValue(wxVariant& variant, const wxString& text,
-                               int argFlags = 0) const override;
+                               int argFlags = 0) const wxOVERRIDE;
 #if WXWIN_COMPATIBILITY_3_0
-    virtual bool DoSetAttribute(const wxString& name, wxVariant& value) override;
+    virtual bool DoSetAttribute(const wxString& name, wxVariant& value) wxOVERRIDE;
 #endif // WXWIN_COMPATIBILITY_3_0
-    virtual wxValidator* DoGetValidator() const override;
+    virtual wxValidator* DoGetValidator() const wxOVERRIDE;
 
 protected:
-    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) override;
+    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) wxOVERRIDE;
 };
 
 // -----------------------------------------------------------------------
@@ -702,12 +702,12 @@ public:
                            const wxArrayString& value = wxArrayString() );
     virtual ~wxArrayStringProperty();
 
-    virtual void OnSetValue() override;
-    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
+    virtual void OnSetValue() wxOVERRIDE;
+    virtual wxString ValueToString( wxVariant& value, int argFlags = 0 ) const wxOVERRIDE;
     virtual bool StringToValue( wxVariant& variant,
                                 const wxString& text,
-                                int argFlags = 0 ) const override;
-    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) override;
+                                int argFlags = 0 ) const wxOVERRIDE;
+    virtual bool DoSetAttribute( const wxString& name, wxVariant& value ) wxOVERRIDE;
 
     // Implement in derived class for custom array-to-string conversion.
 #if WXWIN_COMPATIBILITY_3_0
@@ -756,7 +756,7 @@ public:
                                         wxUniChar delimiter, int flags);
 
 protected:
-    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) override;
+    virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) wxOVERRIDE;
 
     // Previously this was to be implemented in derived class for array-to-
     // string conversion. Now you should implement ConvertValueToString()
@@ -780,8 +780,8 @@ public: \
               const wxString& name = wxPG_LABEL, \
               const wxArrayString& value = wxArrayString() ); \
     ~PROPNAME(); \
-    virtual bool OnCustomStringEdit( wxWindow* parent, wxString& value ) override; \
-    virtual wxValidator* DoGetValidator() const override; \
+    virtual bool OnCustomStringEdit( wxWindow* parent, wxString& value ) wxOVERRIDE; \
+    virtual wxValidator* DoGetValidator() const wxOVERRIDE; \
 };
 
 #define WX_PG_DECLARE_ARRAYSTRING_PROPERTY_WITH_VALIDATOR(PROPNAM) \
@@ -814,7 +814,7 @@ WX_PG_IMPLEMENT_ARRAYSTRING_PROPERTY_WITH_VALIDATOR(PROPNAME, \
                                                     DELIMCHAR, \
                                                     CUSTBUTTXT) \
 wxValidator* PROPNAME::DoGetValidator () const \
-{ return nullptr; }
+{ return NULL; }
 
 
 // -----------------------------------------------------------------------
@@ -878,7 +878,7 @@ public:
     // Note: Dialog frees the validator.
     virtual wxValidator* GetTextCtrlValidator() const
     {
-        return nullptr;
+        return NULL;
     }
 
     // Returns true if array was actually modified
@@ -943,12 +943,12 @@ public:
 
     void Init();
 
-    virtual void SetDialogValue( const wxVariant& value ) override
+    virtual void SetDialogValue( const wxVariant& value ) wxOVERRIDE
     {
         m_array = value.GetArrayString();
     }
 
-    virtual wxVariant GetDialogValue() const override
+    virtual wxVariant GetDialogValue() const wxOVERRIDE
     {
         return m_array;
     }
@@ -964,19 +964,19 @@ public:
         }
     }
 
-    virtual bool OnCustomNewAction(wxString* resString) override;
+    virtual bool OnCustomNewAction(wxString* resString) wxOVERRIDE;
 
 protected:
     wxArrayString   m_array;
 
     wxArrayStringProperty*     m_pCallingClass;
 
-    virtual wxString ArrayGet( size_t index ) override;
-    virtual size_t ArrayGetCount() override;
-    virtual bool ArrayInsert( const wxString& str, int index ) override;
-    virtual bool ArraySet( size_t index, const wxString& str ) override;
-    virtual void ArrayRemoveAt( int index ) override;
-    virtual void ArraySwap( size_t first, size_t second ) override;
+    virtual wxString ArrayGet( size_t index ) wxOVERRIDE;
+    virtual size_t ArrayGetCount() wxOVERRIDE;
+    virtual bool ArrayInsert( const wxString& str, int index ) wxOVERRIDE;
+    virtual bool ArraySet( size_t index, const wxString& str ) wxOVERRIDE;
+    virtual void ArrayRemoveAt( int index ) wxOVERRIDE;
+    virtual void ArraySwap( size_t first, size_t second ) wxOVERRIDE;
 
 private:
     wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxPGArrayStringEditorDialog);

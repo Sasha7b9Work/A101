@@ -38,7 +38,7 @@ public:
     wxTranslations();
 
     /**
-        Returns current translations object, may return @NULL.
+        Returns current translations object, may return NULL.
 
         You must either call this early in app initialization code, or let
         wxLocale do it for you.
@@ -313,7 +313,7 @@ public:
                              additional modifiers (e.g. "fr", "en_GB" or
                              "ca@valencia").
 
-        @return Loaded catalog or @NULL on failure.
+        @return Loaded catalog or NULL on failure.
      */
     virtual wxMsgCatalog *LoadCatalog(const wxString& domain,
                                       const wxString& lang) = 0;
@@ -368,15 +368,13 @@ public:
     Translations are stored in resources as compiled MO files, with type
     set to "MOFILE" (unless you override GetResourceType()) and name
     consisting of the domain, followed by underscore, followed by language
-    identification. Non-alphanumeric characters in language identification
-    should be replaced by '_'. For example, the relevant part of .rc file
-    would look like this:
+    identification. For example, the relevant part of .rc file would look
+    like this:
 
     @code
-    myapp_de        MOFILE  "catalogs/de/myapp.mo"
-    myapp_fr        MOFILE  "catalogs/fr/myapp.mo"
-    myapp_en_GB     MOFILE  "catalogs/en_GB/myapp.mo"
-    myapp_sr_latin  MOFILE  "catalogs/sr@latin/myapp.mo"
+    myapp_de     MOFILE   "catalogs/de/myapp.mo"
+    myapp_fr     MOFILE   "catalogs/fr/myapp.mo"
+    myapp_en_GB  MOFILE   "catalogs/en_GB/myapp.mo"
     @endcode
 
     This class is only available on Windows.
@@ -420,7 +418,7 @@ public:
         @param domain    Catalog's domain. This typically matches
                          the @a filename.
 
-        @return Successfully loaded catalog or @NULL on failure.
+        @return Successfully loaded catalog or NULL on failure.
      */
     static wxMsgCatalog *CreateFromFile(const wxString& filename,
                                         const wxString& domain);
@@ -432,7 +430,7 @@ public:
         @param domain    Catalog's domain. This typically matches
                          the @a filename.
 
-        @return Successfully loaded catalog or @NULL on failure.
+        @return Successfully loaded catalog or NULL on failure.
      */
     static wxMsgCatalog *CreateFromData(const wxScopedCharBuffer& data,
                                         const wxString& domain);

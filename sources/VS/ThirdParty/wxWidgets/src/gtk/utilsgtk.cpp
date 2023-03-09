@@ -42,7 +42,6 @@
     #if wxUSE_STACKWALKER
         #include "wx/stackwalk.h"
     #endif // wxUSE_STACKWALKER
-    #include "wx/gtk/private/gtk3-compat.h"
 #endif // wxDEBUG_LEVEL
 
 #include <stdarg.h>
@@ -67,7 +66,7 @@ GdkWindow* wxGetTopLevelGDK();
 
 void wxBell()
 {
-    gdk_display_beep(gdk_display_get_default());
+    gdk_beep();
 }
 
 // ----------------------------------------------------------------------------
@@ -83,7 +82,7 @@ void *wxGetDisplay()
 
 wxDisplayInfo wxGetDisplayInfo()
 {
-    wxDisplayInfo info = { nullptr, wxDisplayNone };
+    wxDisplayInfo info = { NULL, wxDisplayNone };
 #if defined(GDK_WINDOWING_WAYLAND) || defined(GDK_WINDOWING_X11)
     GdkDisplay *display = gdk_window_get_display(wxGetTopLevelGDK());
 #endif
@@ -162,7 +161,7 @@ wxConvertFromGTK(const wxString& s, wxFontEncoding enc)
 
 #endif // !wxUSE_UNICODE
 
-// Returns nullptr if version is certainly greater or equal than major.minor.micro
+// Returns NULL if version is certainly greater or equal than major.minor.micro
 // Returns string describing the error if version is lower than
 // major.minor.micro OR it cannot be determined and one should not rely on the
 // availability of pango version major.minor.micro, nor the non-availability
@@ -238,10 +237,10 @@ static wxString GetSM()
 
     char smerr[256];
     char *client_id;
-    SmcConn smc_conn = SmcOpenConnection(nullptr, nullptr,
+    SmcConn smc_conn = SmcOpenConnection(NULL, NULL,
                                          999, 999,
-                                         0 /* mask */, nullptr /* callbacks */,
-                                         nullptr, &client_id,
+                                         0 /* mask */, NULL /* callbacks */,
+                                         NULL, &client_id,
                                          WXSIZEOF(smerr), smerr);
 
     if ( !smc_conn )
@@ -258,7 +257,7 @@ static wxString GetSM()
     wxString ret = wxString::FromAscii( vendor );
     free(vendor);
 
-    SmcCloseConnection(smc_conn, 0, nullptr);
+    SmcCloseConnection(smc_conn, 0, NULL);
     free(client_id);
 
     return ret;
@@ -304,7 +303,7 @@ public:
     }
 
 protected:
-    virtual void OnStackFrame(const wxStackFrame& frame) override
+    virtual void OnStackFrame(const wxStackFrame& frame) wxOVERRIDE
     {
         const wxString name = frame.GetName();
         if ( name.StartsWith("wxOnAssert") )
@@ -369,9 +368,9 @@ bool wxGUIAppTraits::ShowAssertDialog(const wxString& msg)
 #ifdef __WXGTK4__
         gdk_seat_ungrab(gdk_display_get_default_seat(display));
 #elif defined(__WXGTK3__)
-        GdkDevice* const device = wx_get_gdk_device_from_display(display);
-
         wxGCC_WARNING_SUPPRESS(deprecated-declarations)
+        GdkDeviceManager* manager = gdk_display_get_device_manager(display);
+        GdkDevice* device = gdk_device_manager_get_client_pointer(manager);
         gdk_device_ungrab(device, unsigned(GDK_CURRENT_TIME));
         wxGCC_WARNING_RESTORE()
 #else

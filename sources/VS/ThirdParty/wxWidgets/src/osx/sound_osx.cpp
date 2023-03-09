@@ -88,7 +88,7 @@ wxSound::~wxSound()
 
 void wxSound::Init()
 {
-    m_data = nullptr;
+    m_data = NULL;
 }
 
 bool wxSound::DoPlay(unsigned flags) const

@@ -34,17 +34,17 @@ public:
         : wxToolBarToolBase(tbar, id, label, bitmap1, bitmap2, kind,
                             clientData, shortHelpString, longHelpString)
     {
-        m_qtToolButton = nullptr;
+        m_qtToolButton = NULL;
     }
 
     wxToolBarTool(wxToolBar *tbar, wxControl *control, const wxString& label)
         : wxToolBarToolBase(tbar, control, label)
     {
-        m_qtToolButton = nullptr;
+        m_qtToolButton = NULL;
     }
 
-    virtual void SetLabel( const wxString &label ) override;
-    virtual void SetDropdownMenu(wxMenu* menu) override;
+    virtual void SetLabel( const wxString &label ) wxOVERRIDE;
+    virtual void SetDropdownMenu(wxMenu* menu) wxOVERRIDE;
 
     void SetIcon();
     void ClearToolTip();
@@ -64,9 +64,9 @@ public:
     }
 
 private:
-    void mouseReleaseEvent( QMouseEvent *event ) override;
-    void mousePressEvent( QMouseEvent *event ) override;
-    void enterEvent( QEvent *event ) override;
+    void mouseReleaseEvent( QMouseEvent *event ) wxOVERRIDE;
+    void mousePressEvent( QMouseEvent *event ) wxOVERRIDE;
+    void enterEvent( QEvent *event ) wxOVERRIDE;
 };
 
 void wxQtToolButton::mouseReleaseEvent( QMouseEvent *event )
@@ -150,7 +150,7 @@ QWidget *wxToolBar::GetHandle() const
 
 void wxToolBar::Init()
 {
-    m_qtToolBar = nullptr;
+    m_qtToolBar = NULL;
 }
 
 wxToolBar::~wxToolBar()
@@ -179,7 +179,7 @@ wxToolBarToolBase *wxToolBar::FindToolForPosition(wxCoord WXUNUSED(x),
 {
 //    actionAt(x, y);
     wxFAIL_MSG( wxT("wxToolBar::FindToolForPosition() not implemented") );
-    return nullptr;
+    return NULL;
 }
 
 void wxToolBar::SetToolShortHelp( int id, const wxString& helpString )
@@ -267,12 +267,12 @@ bool wxToolBar::Realize()
 
 QActionGroup* wxToolBar::GetActionGroup(size_t pos)
 {
-    QActionGroup *actionGroup = nullptr;
+    QActionGroup *actionGroup = NULL;
     if (pos > 0)
         actionGroup = m_qtToolBar->actions().at(pos-1)->actionGroup();
-    if (actionGroup == nullptr && (int)pos < m_qtToolBar->actions().size() - 1)
+    if (actionGroup == NULL && (int)pos < m_qtToolBar->actions().size() - 1)
         actionGroup = m_qtToolBar->actions().at(pos+1)->actionGroup();
-    if (actionGroup == nullptr)
+    if (actionGroup == NULL)
         actionGroup = new QActionGroup(m_qtToolBar);
     return actionGroup;
 }
@@ -280,7 +280,7 @@ QActionGroup* wxToolBar::GetActionGroup(size_t pos)
 bool wxToolBar::DoInsertTool(size_t pos, wxToolBarToolBase *toolBase)
 {
     wxToolBarTool* tool = static_cast<wxToolBarTool*>(toolBase);
-    QAction *before = nullptr;
+    QAction *before = NULL;
     if (pos < (size_t)m_qtToolBar->actions().size())
         before = m_qtToolBar->actions().at(pos);
 
@@ -339,7 +339,7 @@ bool wxToolBar::DoDeleteTool(size_t /* pos */, wxToolBarToolBase *toolBase)
 {
     wxToolBarTool* tool = static_cast<wxToolBarTool*>(toolBase);
     delete tool->m_qtToolButton;
-    tool->m_qtToolButton = nullptr;
+    tool->m_qtToolButton = NULL;
 
     InvalidateBestSize();
     return true;

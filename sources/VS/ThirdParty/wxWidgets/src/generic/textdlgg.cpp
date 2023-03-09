@@ -178,6 +178,13 @@ void wxTextEntryDialog::ForceUpper()
 
 #if wxUSE_VALIDATORS
 
+#if WXWIN_COMPATIBILITY_2_8
+void wxTextEntryDialog::SetTextValidator( long style )
+{
+    SetTextValidator((wxTextValidatorStyle)style);
+}
+#endif
+
 void wxTextEntryDialog::SetTextValidator( wxTextValidatorStyle style )
 {
     SetTextValidator(wxTextValidator(style));

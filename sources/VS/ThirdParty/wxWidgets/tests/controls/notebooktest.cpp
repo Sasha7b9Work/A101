@@ -25,18 +25,18 @@
 class NotebookTestCase : public BookCtrlBaseTestCase, public CppUnit::TestCase
 {
 public:
-    NotebookTestCase() { m_notebook = nullptr; m_numPageChanges = 0; }
+    NotebookTestCase() { m_notebook = NULL; m_numPageChanges = 0; }
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    virtual void setUp() wxOVERRIDE;
+    virtual void tearDown() wxOVERRIDE;
 
 private:
-    virtual wxBookCtrlBase *GetBase() const override { return m_notebook; }
+    virtual wxBookCtrlBase *GetBase() const wxOVERRIDE { return m_notebook; }
 
-    virtual wxEventType GetChangedEvent() const override
+    virtual wxEventType GetChangedEvent() const wxOVERRIDE
     { return wxEVT_NOTEBOOK_PAGE_CHANGED; }
 
-    virtual wxEventType GetChangingEvent() const override
+    virtual wxEventType GetChangingEvent() const wxOVERRIDE
     { return wxEVT_NOTEBOOK_PAGE_CHANGING; }
 
 
@@ -114,7 +114,7 @@ void NotebookTestCase::NoEventsOnDestruction()
     // selected.
     m_notebook->ChangeSelection(1);
     m_notebook->Destroy();
-    m_notebook = nullptr;
+    m_notebook = NULL;
     CHECK( m_numPageChanges == 1 );
 }
 

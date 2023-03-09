@@ -370,7 +370,7 @@ bool MyApp::OnInit()
                             "Progress in progress",
                             "Please wait, starting...",
                             PROGRESS_COUNT,
-                            nullptr,
+                            NULL,
                             m_startupProgressStyle
                          );
         for ( int i = 0; i <= PROGRESS_COUNT; i++ )
@@ -693,17 +693,17 @@ bool MyApp::OnInit()
 
 // My frame constructor
 MyFrame::MyFrame(const wxString& title)
-       : wxFrame(nullptr, wxID_ANY, title), m_confirmExit(false)
+       : wxFrame(NULL, wxID_ANY, title), m_confirmExit(false)
 {
     SetIcon(wxICON(sample));
 
 #if USE_MODAL_PRESENTATION
-    m_dialog = nullptr;
+    m_dialog = (MyModelessDialog *)NULL;
 #endif // USE_MODAL_PRESENTATION
 
 #if wxUSE_FINDREPLDLG
     m_dlgFind =
-    m_dlgReplace = nullptr;
+    m_dlgReplace = NULL;
 #endif
 
 #if wxUSE_COLOURDLG
@@ -766,7 +766,7 @@ MyFrame::MyFrame(const wxString& title)
 #endif // wxUSE_INFOBAR
 
 #if wxUSE_TIPWINDOW
-    m_tipWindow = nullptr;
+    m_tipWindow = NULL;
 #endif // wxUSE_TIPWINDOW
 
 #ifdef __WXMSW__
@@ -1516,24 +1516,24 @@ void MyFrame::AddRemove(wxCommandEvent& WXUNUSED(event))
         {
         }
 
-        wxWindow* GetItemsCtrl() const override
+        wxWindow* GetItemsCtrl() const wxOVERRIDE
         {
             return m_lbox;
         }
 
-        bool CanAdd() const override
+        bool CanAdd() const wxOVERRIDE
         {
             // Restrict the maximal number of items to 10 just for testing.
             return m_lbox->GetCount() <= 10;
         }
 
-        bool CanRemove() const override
+        bool CanRemove() const wxOVERRIDE
         {
             // We must have a selected item in order to be able to delete it.
             return m_lbox->GetSelection() != wxNOT_FOUND;
         }
 
-        void OnAdd() override
+        void OnAdd() wxOVERRIDE
         {
             // A real program would use a wxDataViewCtrl or wxListCtrl and
             // allow editing the newly edited item in place, here we just use a
@@ -1542,7 +1542,7 @@ void MyFrame::AddRemove(wxCommandEvent& WXUNUSED(event))
             m_lbox->Append(wxString::Format("new item #%d", ++s_item));
         }
 
-        void OnRemove() override
+        void OnRemove() wxOVERRIDE
         {
             // Notice that we don't need to check if we have a valid selection,
             // we can be only called if CanRemove(), which already checks for
@@ -1733,7 +1733,7 @@ public:
     }
 
     // Override pure virtual base class method to add our custom controls.
-    virtual void AddCustomControls(wxFileDialogCustomize& customizer) override
+    virtual void AddCustomControls(wxFileDialogCustomize& customizer) wxOVERRIDE
     {
         // Note: all the pointers created here cease to be valid once
         // ShowModal() returns, TransferDataFromCustomControls() is the latest
@@ -1751,7 +1751,7 @@ public:
     }
 
     // Override another method called whenever something changes in the dialog.
-    virtual void UpdateCustomControls() override
+    virtual void UpdateCustomControls() wxOVERRIDE
     {
         // Enable the button if and only if the checkbox is checked.
         m_btn->Enable(m_cb->GetValue());
@@ -1768,7 +1768,7 @@ public:
     }
 
     // And another one called when the dialog is accepted.
-    virtual void TransferDataFromCustomControls() override
+    virtual void TransferDataFromCustomControls() wxOVERRIDE
     {
         m_info.Printf("paper=%s (%s), enabled=%d, text=\"%s\"",
                       GetFileDialogPaperSize(m_choiceSize->GetSelection()),
@@ -1919,12 +1919,16 @@ void MyFrame::FileOpen2(wxCommandEvent& WXUNUSED(event) )
 void MyFrame::FilesOpen(wxCommandEvent& WXUNUSED(event) )
 {
     wxString wildcards =
+#ifdef __WXMOTIF__
+                    "C++ files (*.cpp)|*.cpp";
+#else
                     wxString::Format
                     (
                         "All files (%s)|%s|C++ files (*.cpp;*.h)|*.cpp;*.h",
                         wxFileSelectorDefaultWildcardStr,
                         wxFileSelectorDefaultWildcardStr
                     );
+#endif
     wxFileDialog dialog(this, "Testing open multiple file dialog",
                         wxEmptyString, wxEmptyString, wildcards,
                         wxFD_OPEN|wxFD_MULTIPLE);
@@ -1958,12 +1962,16 @@ void MyFrame::FilesOpen(wxCommandEvent& WXUNUSED(event) )
 void MyFrame::FilesOpenWindowModal(wxCommandEvent& WXUNUSED(event) )
 {
     wxString wildcards =
+#ifdef __WXMOTIF__
+                    "C++ files (*.cpp)|*.cpp";
+#else
                     wxString::Format
                     (
                         "All files (%s)|%s|C++ files (*.cpp;*.h)|*.cpp;*.h",
                         wxFileSelectorDefaultWildcardStr,
                         wxFileSelectorDefaultWildcardStr
                     );
+#endif
     wxFileDialog* dialog = new wxFileDialog(this, "Testing open multiple file dialog",
                         wxEmptyString, wxEmptyString, wildcards,
                         wxFD_OPEN|wxFD_MULTIPLE);
@@ -2022,12 +2030,12 @@ void MyFrame::FileSave(wxCommandEvent& WXUNUSED(event) )
         {
         }
 
-        void AddCustomControls(wxFileDialogCustomize& customizer) override
+        void AddCustomControls(wxFileDialogCustomize& customizer) wxOVERRIDE
         {
             m_checkbox = customizer.AddCheckBox("Encrypt");
         }
 
-        void TransferDataFromCustomControls() override
+        void TransferDataFromCustomControls() wxOVERRIDE
         {
             m_encrypt = m_checkbox->GetValue();
         }
@@ -2294,12 +2302,12 @@ void MyFrame::ModelessDlg(wxCommandEvent& event)
     }
     else // hide
     {
-        // If m_dialog is null, then possibly the system
+        // If m_dialog is NULL, then possibly the system
         // didn't report the checked menu item status correctly.
         // It should be true just after the menu item was selected,
         // if there was no modeless dialog yet.
 
-        wxASSERT( m_dialog != nullptr );
+        wxASSERT( m_dialog != NULL );
         if (m_dialog)
             m_dialog->Hide();
     }
@@ -2359,7 +2367,7 @@ void MyFrame::ShowTip(wxCommandEvent& WXUNUSED(event))
 
     if ( s_index == (size_t)-1 )
     {
-        srand(time(nullptr));
+        srand(time(NULL));
 
         // this is completely bogus, we don't know how many lines are there
         // in the file, but who cares, it's a demo only...
@@ -2520,7 +2528,7 @@ public:
         sizerSettings->Add(m_handleEvents);
 
 #if defined(__WXMSW__) && wxUSE_TASKBARICON
-        m_taskbarIcon = nullptr;
+        m_taskbarIcon = NULL;
         m_useTaskbar = new wxCheckBox(this, wxID_ANY, "Use persistent &taskbar icon");
         m_useTaskbar->SetValue(false);
         sizerSettings->Add(m_useTaskbar);
@@ -2635,9 +2643,9 @@ private:
             else
             if ( m_taskbarIcon )
             {
-                wxNotificationMessage::UseTaskBarIcon(nullptr);
+                wxNotificationMessage::UseTaskBarIcon(NULL);
                 delete m_taskbarIcon;
-                m_taskbarIcon = nullptr;
+                m_taskbarIcon = NULL;
             }
 #endif
         }
@@ -2830,7 +2838,7 @@ void MyFrame::OnShowTip(wxCommandEvent& WXUNUSED(event))
 
 void MyFrame::OnUpdateShowTipUI(wxUpdateUIEvent& event)
 {
-    event.Check(m_tipWindow != nullptr);
+    event.Check(m_tipWindow != NULL);
 }
 
 #endif // wxUSE_TIPWINDOW
@@ -3187,14 +3195,14 @@ void MyFrame::OnModalHook(wxCommandEvent& event)
     class TestModalHook : public wxModalDialogHook
     {
     protected:
-        virtual int Enter(wxDialog* dialog) override
+        virtual int Enter(wxDialog* dialog) wxOVERRIDE
         {
             wxLogStatus("Showing %s modal dialog",
                         dialog->GetClassInfo()->GetClassName());
             return wxID_NONE;
         }
 
-        virtual void Exit(wxDialog* dialog) override
+        virtual void Exit(wxDialog* dialog) wxOVERRIDE
         {
             wxLogStatus("Leaving %s modal dialog",
                         dialog->GetClassInfo()->GetClassName());
@@ -3498,7 +3506,7 @@ public:
     }
 
     // add some custom controls
-    virtual void DoAddCustomControls() override
+    virtual void DoAddCustomControls() wxOVERRIDE
     {
         AddControl(new wxStaticLine(this), wxSizerFlags().Expand());
         AddText("Some custom text");
@@ -3566,7 +3574,7 @@ void MyFrame::ShowReplaceDialog( wxCommandEvent& WXUNUSED(event) )
     {
         m_dlgReplace->Destroy();
 
-        m_dlgReplace = nullptr;
+        m_dlgReplace = NULL;
     }
     else
     {
@@ -3588,7 +3596,7 @@ void MyFrame::ShowFindDialog( wxCommandEvent& WXUNUSED(event) )
     {
         m_dlgFind->Destroy();
 
-        m_dlgFind = nullptr;
+        m_dlgFind = NULL;
     }
     else
     {
@@ -3646,13 +3654,13 @@ void MyFrame::OnFindDialog(wxFindDialogEvent& event)
         {
             txt = "Find";
             idMenu = DIALOGS_FIND;
-            m_dlgFind = nullptr;
+            m_dlgFind = NULL;
         }
         else if ( dlg == m_dlgReplace )
         {
             txt = "Replace";
             idMenu = DIALOGS_REPLACE;
-            m_dlgReplace = nullptr;
+            m_dlgReplace = NULL;
         }
         else
         {
@@ -3794,7 +3802,7 @@ void MyModalDialog::OnButton(wxCommandEvent& event)
 StdButtonSizerDialog::StdButtonSizerDialog(wxWindow *parent)
     : wxDialog(parent, wxID_ANY, wxString("StdButtonSizer dialog"),
       wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER),
-      m_buttonsSizer(nullptr)
+      m_buttonsSizer(NULL)
 {
     wxBoxSizer *const sizerTop = new wxBoxSizer(wxVERTICAL);
 
@@ -3996,7 +4004,7 @@ SettingsDialog::SettingsDialog(wxWindow* win, SettingsData& settingsData, int di
             Add(wxArtProvider::GetIcon(wxART_ERROR, wxART_OTHER, imageSize));
     }
     else
-        m_imageList = nullptr;
+        m_imageList = NULL;
 
     Create(win, wxID_ANY, "Preferences", wxDefaultPosition, wxDefaultSize,
            wxDEFAULT_DIALOG_STYLE | resizeBorder);
@@ -4555,9 +4563,9 @@ class MyLogGui : public wxLogGui
 private:
     virtual void DoShowSingleLogMessage(const wxString& message,
                                         const wxString& title,
-                                        int style) override
+                                        int style) wxOVERRIDE
     {
-        wxMessageDialog dlg(nullptr, message, title,
+        wxMessageDialog dlg(NULL, message, title,
                             wxOK | wxCANCEL | wxCANCEL_DEFAULT | style);
         dlg.SetOKCancelLabels(wxID_COPY, wxID_OK);
         dlg.SetExtendedMessage("Note that this is a custom log dialog.");

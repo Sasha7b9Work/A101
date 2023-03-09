@@ -57,8 +57,6 @@ specialised tool. Examples of these include:
     can output C++, XRC or python.
 @li wxCrafter (free version) <http://www.codelite.org/wxcrafter/>, a C++-based
     form designer that can output C++ or XRC.
-@li wxUiEditor <https://github.com/KeyWorksRW/wxUiEditor>, a C++-based
-    form designer that can output C++ or XRC.
 
 There's a more complete list at <https://wiki.wxwidgets.org/Tools>
 
@@ -142,7 +140,7 @@ This is how you would use the above simple dialog in your code.
 void MyClass::ShowDialog()
 {
     wxDialog dlg;
-    if (wxXmlResource::Get()->LoadDialog(&dlg, nullptr, "SimpleDialog"))
+    if (wxXmlResource::Get()->LoadDialog(&dlg, NULL, "SimpleDialog"))
         dlg.ShowModal();
 }
 @endcode
@@ -165,7 +163,7 @@ the XRCCTRL macro to get a pointer to the child. To expand the previous code:
 void MyClass::ShowDialog()
 {
     wxDialog dlg;
-    if (!wxXmlResource::Get()->LoadDialog(&dlg, nullptr, "SimpleDialog"))
+    if (!wxXmlResource::Get()->LoadDialog(&dlg, NULL, "SimpleDialog"))
         return;
 
     wxTextCtrl* pText = XRCCTRL(dlg, "text", wxTextCtrl);
@@ -195,7 +193,7 @@ control to the XRCID macro:
 void MyClass::ShowDialog()
 {
     wxDialog dlg;
-    if (!wxXmlResource::Get()->LoadDialog(&dlg, nullptr, "SimpleDialog"))
+    if (!wxXmlResource::Get()->LoadDialog(&dlg, NULL, "SimpleDialog"))
         return;
 
     XRCCTRL(dlg, "text", wxTextCtrl)->Bind(wxEVT_TEXT,
@@ -367,7 +365,7 @@ protected:
 private:
     void InitWidgetsFromXRC()
     {
-        wxXmlResource::Get()->LoadObject(this, nullptr, "TestWnd", "wxFrame");
+        wxXmlResource::Get()->LoadObject(this, NULL, "TestWnd", "wxFrame");
         A = XRCCTRL(*this, "A", wxTextCtrl);
         B = XRCCTRL(*this, "B", wxButton);
     }

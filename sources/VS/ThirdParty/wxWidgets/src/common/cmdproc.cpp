@@ -58,7 +58,7 @@ wxCommandProcessor::wxCommandProcessor(int maxCommands)
 {
     m_maxNoCommands = maxCommands;
 #if wxUSE_MENUS
-    m_commandEditMenu = nullptr;
+    m_commandEditMenu = NULL;
 #endif // wxUSE_MENUS
 }
 
@@ -162,10 +162,10 @@ bool wxCommandProcessor::Undo()
 
 bool wxCommandProcessor::Redo()
 {
-    wxCommand *redoCommand = nullptr;
+    wxCommand *redoCommand = NULL;
     wxList::compatibility_iterator redoNode
 #if !wxUSE_STD_CONTAINERS
-        = nullptr          // just to avoid warnings
+        = NULL          // just to avoid warnings
 #endif // !wxUSE_STD_CONTAINERS
         ;
 
@@ -294,7 +294,7 @@ wxString wxCommandProcessor::GetRedoMenuLabel() const
         }
         else
         {
-            // currentCommand is null but there are commands: this means that
+            // currentCommand is NULL but there are commands: this means that
             // we've undone to the start of the list, but can redo the first.
             wxCommand *redoCommand = (wxCommand *)m_commands.GetFirst()->GetData();
             wxString redoCommandName(redoCommand->GetName());

@@ -29,7 +29,7 @@
 #include "wx/dynlib.h"
 
 #ifndef LOCALE_NAME_USER_DEFAULT
-    #define LOCALE_NAME_USER_DEFAULT nullptr
+    #define LOCALE_NAME_USER_DEFAULT NULL
 #endif
 
 #ifndef LOCALE_NAME_MAX_LENGTH
@@ -98,7 +98,7 @@ static void wxMSWSetThreadUILanguage(LANGID langid)
     {
         wxLoadedDLL dllKernel32(wxS("kernel32.dll"));
         typedef LANGID(WINAPI *SetThreadUILanguage_t)(LANGID);
-        SetThreadUILanguage_t pfnSetThreadUILanguage = nullptr;
+        SetThreadUILanguage_t pfnSetThreadUILanguage = NULL;
         wxDL_INIT_FUNC(pfn, SetThreadUILanguage, dllKernel32);
         if (pfnSetThreadUILanguage)
             pfnSetThreadUILanguage(langid);
@@ -160,7 +160,7 @@ class wxUILocaleImplStdC : public wxUILocaleImpl
 {
 public:
 
-    // Create object corresponding to the given locale, return nullptr if not
+    // Create object corresponding to the given locale, return NULL if not
     // supported.
     static wxUILocaleImplStdC* Create()
     {
@@ -168,30 +168,30 @@ public:
     }
 
 
-    ~wxUILocaleImplStdC() override
+    ~wxUILocaleImplStdC() wxOVERRIDE
     {
     }
 
-    void Use() override
+    void Use() wxOVERRIDE
     {
     }
 
-    wxString GetName() const override
+    wxString GetName() const wxOVERRIDE
     {
         return wxString("C");
     }
 
-    wxLocaleIdent GetLocaleId() const override
+    wxLocaleIdent GetLocaleId() const wxOVERRIDE
     {
         return wxLocaleIdent().Language("C");
     }
 
-    wxString GetInfo(wxLocaleInfo index, wxLocaleCategory cat) const override
+    wxString GetInfo(wxLocaleInfo index, wxLocaleCategory cat) const wxOVERRIDE
     {
         return wxGetStdCLocaleInfo(index, cat);
     }
 
-    wxString GetLocalizedName(wxLocaleName name, wxLocaleForm WXUNUSED(form)) const override
+    wxString GetLocalizedName(wxLocaleName name, wxLocaleForm WXUNUSED(form)) const wxOVERRIDE
     {
         wxString str;
         switch (name)
@@ -210,13 +210,13 @@ public:
         return str;
     }
 
-    wxLayoutDirection GetLayoutDirection() const override
+    wxLayoutDirection GetLayoutDirection() const wxOVERRIDE
     {
         return wxLayout_Default;
     }
 
     int CompareStrings(const wxString& lhs, const wxString& rhs,
-        int flags) const override
+        int flags) const wxOVERRIDE
     {
         const int rc = flags & wxCompare_CaseInsensitive ? lhs.CmpNoCase(rhs)
             : lhs.Cmp(rhs);
@@ -249,12 +249,12 @@ public:
     {
     }
 
-    void Use() override
+    void Use() wxOVERRIDE
     {
         wxUseLCID(m_lcid);
     }
 
-    wxString GetName() const override
+    wxString GetName() const wxOVERRIDE
     {
         wxString str;
 
@@ -274,17 +274,17 @@ public:
         return str;
     }
 
-    wxLocaleIdent GetLocaleId() const override
+    wxLocaleIdent GetLocaleId() const wxOVERRIDE
     {
         return wxLocaleIdent::FromTag(GetName());
     }
 
-    wxString GetInfo(wxLocaleInfo index, wxLocaleCategory cat) const override
+    wxString GetInfo(wxLocaleInfo index, wxLocaleCategory cat) const wxOVERRIDE
     {
         return wxGetInfoFromLCID(m_lcid, index, cat);
     }
 
-    wxString GetLocalizedName(wxLocaleName name, wxLocaleForm form) const override
+    wxString GetLocalizedName(wxLocaleName name, wxLocaleForm form) const wxOVERRIDE
     {
         wxString str;
         switch (name)
@@ -341,13 +341,13 @@ public:
         return str;
     }
 
-    wxLayoutDirection GetLayoutDirection() const override
+    wxLayoutDirection GetLayoutDirection() const wxOVERRIDE
     {
         return wxLayout_Default;
     }
 
     int CompareStrings(const wxString& lhs, const wxString& rhs,
-                       int flags) const override
+                       int flags) const wxOVERRIDE
     {
         // Can't be really implemented on the OS versions where this class is
         // used.
@@ -429,7 +429,7 @@ public:
             {
                 ULONG numberOfLanguages = 0;
                 ULONG bufferSize = 0;
-                if (ms_GetUserPreferredUILanguages(MUI_LANGUAGE_NAME, &numberOfLanguages, nullptr, &bufferSize))
+                if (ms_GetUserPreferredUILanguages(MUI_LANGUAGE_NAME, &numberOfLanguages, NULL, &bufferSize))
                 {
                     wxScopedArray<WCHAR> languages(bufferSize);
                     if (ms_GetUserPreferredUILanguages(MUI_LANGUAGE_NAME, &numberOfLanguages, languages.get(), &bufferSize))
@@ -501,14 +501,14 @@ public:
         return new wxUILocaleImplName(LOCALE_NAME_USER_DEFAULT);
     }
 
-    // Create object corresponding to the given locale, return nullptr if not
+    // Create object corresponding to the given locale, return NULL if not
     // supported.
     static wxUILocaleImplName* Create(const wchar_t* name)
     {
         // Getting the locale name seems to be the simplest way to see if it's
         // really supported: unknown locale result in an error here.
-        if ( !ms_GetLocaleInfoEx(name, LOCALE_SNAME, nullptr, 0) )
-            return nullptr;
+        if ( !ms_GetLocaleInfoEx(name, LOCALE_SNAME, NULL, 0) )
+            return NULL;
 
         // Unfortunately under Windows 10 the call above only fails if the given
         // locale name is not a valid BCP 47 identifier. For example,
@@ -538,19 +538,19 @@ public:
                     (LPWSTR)&isConstructed,
                     sizeof(int)
                  ) || isConstructed != 0)
-                return nullptr;
+                return NULL;
         }
 
         return new wxUILocaleImplName(name);
     }
 
 
-    ~wxUILocaleImplName() override
+    ~wxUILocaleImplName() wxOVERRIDE
     {
         free(const_cast<wchar_t*>(m_name));
     }
 
-    void Use() override
+    void Use() wxOVERRIDE
     {
         // Construct a double NUL-terminated buffer.
         wchar_t buf[256];
@@ -566,17 +566,17 @@ public:
             wxLogLastError(wxT("SetThreadPreferredUILanguages"));
     }
 
-    wxString GetName() const override
+    wxString GetName() const wxOVERRIDE
     {
         return DoGetInfo(LOCALE_SNAME);
     }
 
-    wxLocaleIdent GetLocaleId() const override
+    wxLocaleIdent GetLocaleId() const wxOVERRIDE
     {
         return wxLocaleIdent::FromTag(GetName());
     }
 
-    wxString GetInfo(wxLocaleInfo index, wxLocaleCategory cat) const override
+    wxString GetInfo(wxLocaleInfo index, wxLocaleCategory cat) const wxOVERRIDE
     {
         // TODO-XP: This duplicates code from in wxGetInfoFromLCID(), but
         // it's only temporary because we will drop all code using LCID soon.
@@ -620,7 +620,7 @@ public:
         return str;
     }
 
-    wxString GetLocalizedName(wxLocaleName name, wxLocaleForm form) const override
+    wxString GetLocalizedName(wxLocaleName name, wxLocaleForm form) const wxOVERRIDE
     {
         // TODO-XP: This duplicates code from in wxGetInfoFromLCID(), but
         // it's only temporary because we will drop all code using LCID soon.
@@ -691,7 +691,7 @@ public:
         return str;
     }
 
-    wxLayoutDirection GetLayoutDirection() const override
+    wxLayoutDirection GetLayoutDirection() const wxOVERRIDE
     {
         if (wxGetWinVersion() >= wxWinVersion_7)
         {
@@ -708,7 +708,7 @@ public:
     }
 
     int CompareStrings(const wxString& lhs, const wxString& rhs,
-                       int flags) const override
+                       int flags) const wxOVERRIDE
     {
         DWORD dwFlags = 0;
 
@@ -721,7 +721,7 @@ public:
                 dwFlags,
                 lhs.wc_str(), -1,
                 rhs.wc_str(), -1,
-                nullptr,               // [out] version information -- not needed
+                NULL,               // [out] version information -- not needed
                 wxRESERVED_PARAM,
                 wxRESERVED_PARAM
             );
@@ -769,9 +769,9 @@ private:
 
     // Ctor is private, use CreateDefault() or Create() instead.
     //
-    // Note that "name" can be null here (LOCALE_NAME_USER_DEFAULT).
+    // Note that "name" can be NULL here (LOCALE_NAME_USER_DEFAULT).
     explicit wxUILocaleImplName(const wchar_t* name)
-        : m_name(name ? wxStrdup(name) : nullptr)
+        : m_name(name ? wxStrdup(name) : NULL)
     {
     }
 
@@ -825,7 +825,7 @@ wxUILocaleImpl* wxUILocaleImpl::CreateForLanguage(const wxLanguageInfo& info)
         if (info.WinLang == 0)
         {
             wxLogWarning(wxS("Locale '%s' not supported by OS."), info.Description);
-            return nullptr;
+            return NULL;
         }
         return new wxUILocaleImplLCID(info.GetLCID());
     }
@@ -844,7 +844,7 @@ wxUILocaleImpl* wxUILocaleImpl::CreateForLocale(const wxLocaleIdent& locId)
         // will be dropped soon, so it just doesn't seem worth to do it (note
         // that LocaleNameToLCID() itself is not available in XP either, so we
         // can't just use it here).
-        return nullptr;
+        return NULL;
     }
 
     return wxUILocaleImplName::Create(locId.GetTag(wxLOCALE_TAGTYPE_WINDOWS).wc_str());

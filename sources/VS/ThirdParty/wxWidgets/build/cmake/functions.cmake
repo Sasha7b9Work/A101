@@ -129,8 +129,8 @@ function(wx_set_common_target_properties target_name)
             -Woverloaded-virtual
         )
 
-        if(WXOSX_COCOA)
-            # when building using Cocoa we currently get tons of deprecation
+        if(WXOSX_COCOA OR WXGTK3)
+            # when building using GTK+ 3 or Cocoa we currently get tons of deprecation
             # warnings from the standard headers -- disable them as we already know
             # that they're deprecated but we still have to use them to support older
             # toolkit versions and leaving this warning enabled prevents seeing any
@@ -214,7 +214,7 @@ function(wx_set_target_properties target_name)
     if(wxCOMPILER_PREFIX)
         wx_string_append(dll_suffix "_${wxCOMPILER_PREFIX}")
     endif()
-    if(wxBUILD_VENDOR AND wxVERSION_IS_DEV)
+    if(wxBUILD_VENDOR)
         wx_string_append(dll_suffix "_${wxBUILD_VENDOR}")
     endif()
 
@@ -812,7 +812,7 @@ function(wx_add name group)
         target_include_directories(${target_name} PRIVATE ${wxSOURCE_DIR}/samples)
     elseif(group STREQUAL Tests)
         target_include_directories(${target_name} PRIVATE ${wxSOURCE_DIR}/tests)
-        target_include_directories(${target_name} PRIVATE ${wxSOURCE_DIR}/3rdparty/catch/single_include)
+        target_include_directories(${target_name} PRIVATE ${wxSOURCE_DIR}/3rdparty/catch/include)
         target_include_directories(${target_name} PRIVATE ${wxTOOLKIT_INCLUDE_DIRS})
     endif()
 

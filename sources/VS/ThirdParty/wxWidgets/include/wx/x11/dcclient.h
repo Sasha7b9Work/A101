@@ -108,7 +108,7 @@ public:
 
     virtual void ComputeScaleAndOrigin();
 #if wxUSE_CAIRO
-    virtual void* GetCairoContext() const override;
+    virtual void* GetCairoContext() const wxOVERRIDE;
 #endif
 
 protected:
@@ -116,9 +116,9 @@ protected:
     // --------------
     virtual void DoGetTextExtent(const wxString& string,
         wxCoord *x, wxCoord *y,
-        wxCoord *descent = nullptr,
-        wxCoord *externalLeading = nullptr,
-        const wxFont *theFont = nullptr) const;
+        wxCoord *descent = NULL,
+        wxCoord *externalLeading = NULL,
+        const wxFont *theFont = NULL) const;
 
     void Init();
 

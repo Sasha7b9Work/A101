@@ -41,7 +41,7 @@
 
 wxFFile::wxFFile(const wxString& filename, const wxString& mode)
 {
-    m_fp = nullptr;
+    m_fp = NULL;
 
     (void)Open(filename, mode);
 }
@@ -75,7 +75,7 @@ bool wxFFile::Close()
             return false;
         }
 
-        m_fp = nullptr;
+        m_fp = NULL;
     }
 
     return true;
@@ -336,7 +336,7 @@ bool wxTempFFile::Open(const wxString& strName)
     mode_t mode;
 
     wxStructStat st;
-    if ( wxStat(m_strName, &st) == 0 )
+    if ( stat( (const char*) m_strName.fn_str(), &st) == 0 )
     {
         mode = st.st_mode;
     }

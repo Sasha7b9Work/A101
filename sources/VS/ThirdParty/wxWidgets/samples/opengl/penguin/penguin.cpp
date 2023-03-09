@@ -40,7 +40,7 @@ bool MyApp::OnInit()
         return false;
 
     // Create the main frame window
-    MyFrame *frame = new MyFrame(nullptr, "wxWidgets Penguin Sample",
+    MyFrame *frame = new MyFrame(NULL, "wxWidgets Penguin Sample",
         wxDefaultPosition, wxDefaultSize);
 
 #if wxUSE_ZLIB
@@ -143,7 +143,7 @@ TestGLCanvas::TestGLCanvas(wxWindow *parent,
                            const wxSize& size,
                            long style,
                            const wxString& name)
-    : wxGLCanvas(parent, id, nullptr, pos, size,
+    : wxGLCanvas(parent, id, NULL, pos, size,
                  style | wxFULL_REPAINT_ON_RESIZE, name)
 {
     // Explicitly create a new rendering context instance for this canvas.

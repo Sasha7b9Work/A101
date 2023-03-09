@@ -62,8 +62,8 @@ void wxRichTextTabsPage::Init()
     m_tabsPresent = false;
 
 ////@begin wxRichTextTabsPage member initialisation
-    m_tabEditCtrl = nullptr;
-    m_tabListCtrl = nullptr;
+    m_tabEditCtrl = NULL;
+    m_tabListCtrl = NULL;
 ////@end wxRichTextTabsPage member initialisation
 }
 

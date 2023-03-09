@@ -87,14 +87,14 @@ class ODComboboxWidgetsPage : public ItemContainerWidgetsPage
 public:
     ODComboboxWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_combobox; }
-    virtual wxTextEntryBase *GetTextEntry() const override
-        { return m_combobox ? m_combobox->GetTextCtrl() : nullptr; }
-    virtual wxItemContainer* GetContainer() const override { return m_combobox; }
-    virtual void RecreateWidget() override { CreateCombo(); }
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_combobox; }
+    virtual wxTextEntryBase *GetTextEntry() const wxOVERRIDE
+        { return m_combobox ? m_combobox->GetTextCtrl() : NULL; }
+    virtual wxItemContainer* GetContainer() const wxOVERRIDE { return m_combobox; }
+    virtual void RecreateWidget() wxOVERRIDE { CreateCombo(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
     // event handlers
@@ -239,7 +239,7 @@ public:
     virtual void OnDrawItem(wxDC& dc,
                             const wxRect& rect,
                             int item,
-                            int WXUNUSED(flags)) const override
+                            int WXUNUSED(flags)) const wxOVERRIDE
     {
         if ( item == wxNOT_FOUND )
             return;
@@ -265,7 +265,7 @@ public:
     }
 
     virtual void OnDrawBackground(wxDC& dc, const wxRect& rect,
-                                  int item, int flags ) const override
+                                  int item, int flags ) const wxOVERRIDE
     {
 
         // If item is selected or even, or we are painting the
@@ -284,12 +284,12 @@ public:
         dc.DrawRectangle(rect);
     }
 
-    virtual wxCoord OnMeasureItem(size_t WXUNUSED(item)) const override
+    virtual wxCoord OnMeasureItem(size_t WXUNUSED(item)) const wxOVERRIDE
     {
         return 48;
     }
 
-    virtual wxCoord OnMeasureItemWidth(size_t WXUNUSED(item)) const override
+    virtual wxCoord OnMeasureItemWidth(size_t WXUNUSED(item)) const wxOVERRIDE
     {
         return -1; // default - will be measured from text width
     }
@@ -307,10 +307,10 @@ ODComboboxWidgetsPage::ODComboboxWidgetsPage(WidgetsBookCtrl *book,
     // init everything
     m_chkSort =
     m_chkReadonly =
-    m_chkDclickcycles = nullptr;
+    m_chkDclickcycles = (wxCheckBox *)NULL;
 
-    m_combobox = nullptr;
-    m_sizerCombo = nullptr;
+    m_combobox = (wxOwnerDrawnComboBox *)NULL;
+    m_sizerCombo = (wxSizer *)NULL;
 }
 
 void ODComboboxWidgetsPage::CreateContent()
@@ -458,7 +458,7 @@ void ODComboboxWidgetsPage::CreateContent()
     m_combobox = new DemoODComboBox();
     m_combobox->Create(this, ODComboPage_Combo, wxEmptyString,
                        wxDefaultPosition, wxDefaultSize,
-                       0, nullptr,
+                       0, NULL,
                        0);
     sizerRight->Add(m_combobox, 0, wxGROW | wxALL, 5);
     sizerRight->SetMinSize(150, 0);
@@ -517,7 +517,7 @@ void ODComboboxWidgetsPage::CreateCombo()
     m_combobox = new DemoODComboBox();
     m_combobox->Create(this, ODComboPage_Combo, wxEmptyString,
                        wxDefaultPosition, wxDefaultSize,
-                       0, nullptr,
+                       0, NULL,
                        flags);
 
     unsigned int count = items.GetCount();

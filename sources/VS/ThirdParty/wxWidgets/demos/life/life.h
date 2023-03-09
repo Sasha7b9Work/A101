@@ -153,7 +153,7 @@ private:
 class LifeApp : public wxApp
 {
 public:
-    virtual bool OnInit() override;
+    virtual bool OnInit() wxOVERRIDE;
 };
 
 #endif  // _LIFE_APP_H_

@@ -61,11 +61,11 @@ class FontPickerWidgetsPage : public WidgetsPage
 public:
     FontPickerWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_fontPicker; }
-    virtual void RecreateWidget() override { RecreatePicker(); }
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_fontPicker; }
+    virtual void RecreateWidget() wxOVERRIDE { RecreatePicker(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
 
@@ -116,7 +116,7 @@ wxEND_EVENT_TABLE()
 // implementation
 // ============================================================================
 
-#if defined(__WXGTK__)
+#if defined(__WXGTK20__)
     #define FAMILY_CTRLS NATIVE_CTRLS
 #else
     #define FAMILY_CTRLS GENERIC_CTRLS
@@ -148,7 +148,7 @@ void FontPickerWidgetsPage::CreateContent()
     Reset();    // set checkboxes state
 
     // create pickers
-    m_fontPicker = nullptr;
+    m_fontPicker = NULL;
     CreatePicker();
 
     // right pane

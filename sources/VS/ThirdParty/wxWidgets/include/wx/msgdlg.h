@@ -105,8 +105,8 @@ public:
 
     // Title and caption are the same thing, GetCaption() mostly exists just
     // for compatibility.
-    virtual void SetTitle(const wxString& title) override { m_caption = title; }
-    virtual wxString GetTitle() const override { return m_caption; }
+    virtual void SetTitle(const wxString& title) wxOVERRIDE { m_caption = title; }
+    virtual wxString GetTitle() const wxOVERRIDE { return m_caption; }
 
 
     virtual void SetMessage(const wxString& message)
@@ -294,12 +294,16 @@ private:
 
 #include "wx/generic/msgdlgg.h"
 
-#if defined(__WX_COMPILING_MSGDLGG_CPP__) || defined(__WXUNIVERSAL__)
+#if defined(__WX_COMPILING_MSGDLGG_CPP__) || \
+    defined(__WXUNIVERSAL__) || defined(__WXGPE__) || \
+    (defined(__WXGTK__) && !defined(__WXGTK20__))
 
     #define wxMessageDialog wxGenericMessageDialog
 #elif defined(__WXMSW__)
     #include "wx/msw/msgdlg.h"
-#elif defined(__WXGTK__)
+#elif defined(__WXMOTIF__)
+    #include "wx/motif/msgdlg.h"
+#elif defined(__WXGTK20__)
     #include "wx/gtk/msgdlg.h"
 #elif defined(__WXMAC__)
     #include "wx/osx/msgdlg.h"
@@ -314,7 +318,7 @@ private:
 int WXDLLIMPEXP_CORE wxMessageBox(const wxString& message,
                              const wxString& caption = wxASCII_STR(wxMessageBoxCaptionStr),
                              long style = wxOK | wxCENTRE,
-                             wxWindow *parent = nullptr,
+                             wxWindow *parent = NULL,
                              int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 #endif // wxUSE_MSGDLG

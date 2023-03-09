@@ -28,7 +28,7 @@ public:
     wxPrinterDC(const wxPrintData& data);
 
     wxRect GetPaperRect() const;
-    int GetResolution() const override;
+    int GetResolution() const wxOVERRIDE;
 
 protected:
     wxPrinterDC(wxDCImpl *impl) : wxDC(impl) { }

@@ -49,7 +49,7 @@ protected:
 
     // By default custom controls don't generate any events, but some of them
     // override this function to allow connecting to the selected events.
-    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) override;
+    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) wxOVERRIDE;
 
 
     wxFileDialogCustomControlImpl* const m_impl;
@@ -65,7 +65,7 @@ public:
     explicit wxFileDialogButton(wxFileDialogButtonImpl* impl);
 
 protected:
-    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) override;
+    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) wxOVERRIDE;
 
 private:
     wxFileDialogButtonImpl* GetImpl() const;
@@ -84,7 +84,7 @@ public:
     explicit wxFileDialogCheckBox(wxFileDialogCheckBoxImpl* impl);
 
 protected:
-    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) override;
+    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) wxOVERRIDE;
 
 private:
     wxFileDialogCheckBoxImpl* GetImpl() const;
@@ -103,7 +103,7 @@ public:
     explicit wxFileDialogRadioButton(wxFileDialogRadioButtonImpl* impl);
 
 protected:
-    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) override;
+    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) wxOVERRIDE;
 
 private:
     wxFileDialogRadioButtonImpl* GetImpl() const;
@@ -122,7 +122,7 @@ public:
     explicit wxFileDialogChoice(wxFileDialogChoiceImpl* impl);
 
 protected:
-    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) override;
+    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) wxOVERRIDE;
 
 private:
     wxFileDialogChoiceImpl* GetImpl() const;

@@ -144,7 +144,7 @@ class wxLV_ITEM
 {
 public:
     // default ctor, use Init() later
-    wxLV_ITEM() { m_buf = nullptr; m_pItem = nullptr; }
+    wxLV_ITEM() { m_buf = NULL; m_pItem = NULL; }
 
     // init without conversion
     void Init(LV_ITEM_NATIVE& item)
@@ -175,10 +175,10 @@ public:
     }
 
     // ctor without conversion
-    wxLV_ITEM(LV_ITEM_NATIVE& item) : m_buf(nullptr), m_pItem(&item) { }
+    wxLV_ITEM(LV_ITEM_NATIVE& item) : m_buf(NULL), m_pItem(&item) { }
 
     // ctor with conversion
-    wxLV_ITEM(LV_ITEM_OTHER& item) : m_buf(nullptr)
+    wxLV_ITEM(LV_ITEM_OTHER& item) : m_buf(NULL)
     {
         Init(item);
     }
@@ -222,7 +222,7 @@ private:
 class wxMSWListItemData
 {
 public:
-   wxMSWListItemData() : attr(nullptr), lParam(0) {}
+   wxMSWListItemData() : attr(NULL), lParam(0) {}
    ~wxMSWListItemData() { delete attr; }
 
     wxItemAttr *attr;
@@ -244,14 +244,14 @@ public:
     wxItemAttr m_attr;
 
 private:
-    virtual bool HasCustomDrawnItems() const override
+    virtual bool HasCustomDrawnItems() const wxOVERRIDE
     {
         // We only exist if the header does need to be custom drawn.
         return true;
     }
 
     virtual const wxItemAttr*
-    GetItemAttr(DWORD_PTR WXUNUSED(dwItemSpec)) const override
+    GetItemAttr(DWORD_PTR WXUNUSED(dwItemSpec)) const wxOVERRIDE
     {
         // We use the same attribute for all items for now.
         return &m_attr;
@@ -276,14 +276,14 @@ wxEND_EVENT_TABLE()
 void wxListCtrl::Init()
 {
     m_colCount = 0;
-    m_textCtrl = nullptr;
+    m_textCtrl = NULL;
 
     m_sortAsc = true;
     m_sortCol = -1;
 
     m_hasAnyAttr = false;
 
-    m_headerCustomDraw = nullptr;
+    m_headerCustomDraw = NULL;
 }
 
 bool wxListCtrl::Create(wxWindow *parent,
@@ -299,12 +299,6 @@ bool wxListCtrl::Create(wxWindow *parent,
 
     if ( !MSWCreateControl(WC_LISTVIEW, wxEmptyString, pos, size) )
         return false;
-
-    // LISTVIEW doesn't redraw correctly when WS_EX_COMPOSITED is used by
-    // either the control itself (which never happens now, see our overridden
-    // SetDoubleBuffered()) or even by any of its parents, so we must reset
-    // this style for them.
-    MSWDisableComposited();
 
     EnableSystemThemeByDefault();
 
@@ -375,18 +369,6 @@ void wxListCtrl::MSWSetExListStyles()
     }
 
     ::SendMessage(GetHwnd(), LVM_SETEXTENDEDLISTVIEWSTYLE, 0, exStyle);
-}
-
-void wxListCtrl::MSWAfterReparent()
-{
-    // We did it for the original parent in our Create(), but we need to do it
-    // here for the new one.
-    MSWDisableComposited();
-
-    // Ideally we'd re-enable WS_EX_COMPOSITED for the old parent, but this is
-    // difficult to do correctly, as we'd need to track the number of list
-    // controls under it instead of just turning it on/off, so for now we don't
-    // do it.
 }
 
 WXDWORD wxListCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
@@ -507,7 +489,7 @@ void wxListCtrl::UpdateStyle()
     if ( GetHwnd() )
     {
         // The new window view style
-        DWORD dwStyleNew = MSWGetStyle(m_windowStyle, nullptr);
+        DWORD dwStyleNew = MSWGetStyle(m_windowStyle, NULL);
 
         // some styles are not returned by MSWGetStyle()
         if ( IsShown() )
@@ -679,7 +661,7 @@ bool wxListCtrl::SetHeaderAttr(const wxItemAttr& attr)
         fontChanged = m_headerCustomDraw->m_attr.HasFont();
 
         delete m_headerCustomDraw;
-        m_headerCustomDraw = nullptr;
+        m_headerCustomDraw = NULL;
     }
     else // We do have custom attributes.
     {
@@ -942,7 +924,7 @@ bool wxListCtrl::GetItem(wxListItem& info) const
     }
     else
     {
-        lvItem.pszText = nullptr;
+        lvItem.pszText = NULL;
     }
 
     if ( mask & wxLIST_MASK_DATA )
@@ -965,8 +947,8 @@ bool wxListCtrl::GetItem(wxListItem& info) const
     }
     else
     {
-        // give nullptr as hwnd as we already have everything we need
-        wxConvertFromMSWListItem(nullptr, info, lvItem);
+        // give NULL as hwnd as we already have everything we need
+        wxConvertFromMSWListItem(NULL, info, lvItem);
     }
 
     if (lvItem.pszText)
@@ -1221,7 +1203,7 @@ wxMSWListItemData *wxListCtrl::MSWGetItemData(long itemId) const
     it.iItem = itemId;
 
     if ( !ListView_GetItem(GetHwnd(), &it) )
-        return nullptr;
+        return NULL;
 
     return (wxMSWListItemData *) it.lParam;
 }
@@ -1770,7 +1752,7 @@ void wxListCtrl::InitEditControl(WXHWND hWnd)
 
 wxTextCtrl* wxListCtrl::EditLabel(long item, wxClassInfo* textControlClass)
 {
-    wxCHECK_MSG( textControlClass->IsKindOf(wxCLASSINFO(wxTextCtrl)), nullptr,
+    wxCHECK_MSG( textControlClass->IsKindOf(wxCLASSINFO(wxTextCtrl)), NULL,
                   "control used for label editing must be a wxTextCtrl" );
 
     // ListView_EditLabel requires that the list has focus.
@@ -1790,7 +1772,7 @@ wxTextCtrl* wxListCtrl::EditLabel(long item, wxClassInfo* textControlClass)
         // failed to start editing
         wxDELETE(m_textCtrl);
 
-        return nullptr;
+        return NULL;
     }
 
     // if GetEditControl() hasn't been called, we need to initialize the edit
@@ -2149,8 +2131,8 @@ int CALLBACK wxInternalDataCompareFunc(LPARAM lParam1, LPARAM lParam2,  LPARAM l
     wxMSWListItemData *data1 = (wxMSWListItemData *) lParam1;
     wxMSWListItemData *data2 = (wxMSWListItemData *) lParam2;
 
-    wxIntPtr d1 = (data1 == nullptr ? 0 : data1->lParam);
-    wxIntPtr d2 = (data2 == nullptr ? 0 : data2->lParam);
+    wxIntPtr d1 = (data1 == NULL ? 0 : data1->lParam);
+    wxIntPtr d2 = (data2 == NULL ? 0 : data2->lParam);
 
     return internalData->user_fn(d1, d2, internalData->data);
 
@@ -2471,7 +2453,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                     }
 
                     eventType = wxEVT_LIST_END_LABEL_EDIT;
-                    wxConvertFromMSWListItem(nullptr, event.m_item, item);
+                    wxConvertFromMSWListItem(NULL, event.m_item, item);
                     event.m_itemIndex = event.m_item.m_itemId;
                 }
                 break;
@@ -3240,7 +3222,7 @@ static WXLPARAM HandleItemPrepaint(wxListCtrl *listctrl,
     if ( listctrl->IsSystemThemeDisabled() &&
             pLVCD->clrTextBk == ::GetSysColor(COLOR_BTNFACE) )
     {
-        HandleItemPaint(pLVCD, nullptr);
+        HandleItemPaint(pLVCD, NULL);
         return CDRF_SKIPDEFAULT;
     }
 
@@ -3486,7 +3468,7 @@ wxItemAttr *wxListCtrl::DoGetItemColumnAttr(long item, long column) const
         return OnGetItemColumnAttr(item, column);
 
     wxMSWListItemData * const data = MSWGetItemData(item);
-    return data ? data->attr : nullptr;
+    return data ? data->attr : NULL;
 }
 
 void wxListCtrl::SetItemCount(long count)

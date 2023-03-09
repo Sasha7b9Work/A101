@@ -57,15 +57,15 @@ public:
     ActivityIndicatorWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist)
         : WidgetsPage(book, imaglist, activityindicator_xpm)
     {
-        m_indicator = nullptr;
-        m_sizerIndicator = nullptr;
+        m_indicator = NULL;
+        m_sizerIndicator = NULL;
     }
 
-    virtual wxWindow *GetWidget() const override { return m_indicator; }
-    virtual void RecreateWidget() override;
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_indicator; }
+    virtual void RecreateWidget() wxOVERRIDE;
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
     void OnButtonStart(wxCommandEvent&) { m_indicator->Start(); }

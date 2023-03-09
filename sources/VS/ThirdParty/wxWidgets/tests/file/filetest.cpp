@@ -162,7 +162,7 @@ TEST_CASE("wxFile::Special", "[file][linux][special-file]")
     CHECK( fileSys.IsOpened() );
     CHECK( fileSys.ReadAll(&s) );
     CHECK( !s.empty() );
-    CHECK( s.length() < static_cast<unsigned long>(pageSize) );
+    CHECK( s.length() < pageSize );
 }
 
 #endif // __LINUX__

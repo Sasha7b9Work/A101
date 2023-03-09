@@ -149,12 +149,12 @@ public:
     // ctor(s) and dtor
     TextWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_text; }
-    virtual wxTextEntryBase *GetTextEntry() const override { return m_text; }
-    virtual void RecreateWidget() override { CreateText(); }
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_text; }
+    virtual wxTextEntryBase *GetTextEntry() const wxOVERRIDE { return m_text; }
+    virtual void RecreateWidget() wxOVERRIDE { CreateText(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
     // create an info text contorl
@@ -164,7 +164,7 @@ protected:
     wxSizer *CreateTextWithLabelSizer(const wxString& label,
                                       wxTextCtrl *text,
                                       const wxString& label2 = wxEmptyString,
-                                      wxTextCtrl *text2 = nullptr);
+                                      wxTextCtrl *text2 = NULL);
 
     // event handlers
     void OnButtonReset(wxCommandEvent& event);
@@ -380,14 +380,14 @@ TextWidgetsPage::TextWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist)
 #endif // __WXMSW__
     m_radioWrap =
     m_radioAlign =
-    m_radioTextLines = nullptr;
+    m_radioTextLines = (wxRadioBox *)NULL;
 
     m_chkPassword =
     m_chkReadonly =
     m_chkProcessEnter =
     m_chkProcessTab =
     m_chkFilename =
-    m_chkNoVertScrollbar = nullptr;
+    m_chkNoVertScrollbar = (wxCheckBox *)NULL;
 
     m_text =
     m_textPosCur =
@@ -397,9 +397,9 @@ TextWidgetsPage::TextWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist)
     m_textLineLast =
     m_textSelFrom =
     m_textSelTo =
-    m_textRange = nullptr;
+    m_textRange = (wxTextCtrl *)NULL;
 
-    m_sizerText = nullptr;
+    m_sizerText = (wxSizer *)NULL;
 
     m_posCur =
     m_posLast =
@@ -628,7 +628,7 @@ wxTextCtrl *TextWidgetsPage::CreateInfoText()
     if ( !s_maxWidth )
     {
         // calc it once only
-        GetTextExtent("9999999", &s_maxWidth, nullptr);
+        GetTextExtent("9999999", &s_maxWidth, NULL);
     }
 
     wxTextCtrl *text = new wxTextCtrl(this, wxID_ANY, wxEmptyString,

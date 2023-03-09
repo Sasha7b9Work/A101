@@ -526,7 +526,7 @@ TEST_CASE("StdString::Substr", "[stdstring]")
 TEST_CASE("StdString::Conversion", "[stdstring]")
 {
     std::string strStd("std::string value");
-    std::wstring strStdWide(L"std::wstring value");
+    wxStdWideString strStdWide(L"std::wstring value");
 
     wxString s1(strStd);
     CHECK( s1 == "std::string value" );
@@ -553,19 +553,19 @@ TEST_CASE("StdString::Conversion", "[stdstring]")
     CHECK( s5 == "hello" );
 
 #if wxUSE_STL
-    std::wstring s6 = s4;
+    wxStdWideString s6 = s4;
 #else
-    std::wstring s6 = s4.ToStdWstring();
+    wxStdWideString s6 = s4.ToStdWstring();
 #endif
-    CHECK( s6 == L"hello" );
+    CHECK( s6 == "hello" );
 
 #if wxUSE_UNSAFE_WXSTRING_CONV
     std::string s7(s4);
     CHECK( s7 == "hello" );
 #endif
 
-    std::wstring s8(s4);
-    CHECK( s8 == L"hello" );
+    wxStdWideString s8(s4);
+    CHECK( s8 == "hello" );
 
 #if wxUSE_UNICODE
     std::string s9("\xF0\x9F\x90\xB1\0\xE7\x8C\xAB", 9); /* U+1F431 U+0000 U+732B */

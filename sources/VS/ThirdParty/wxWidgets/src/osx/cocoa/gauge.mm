@@ -50,19 +50,19 @@ public :
     {
     }
 
-    void SetMaximum(wxInt32 v) override
+    void SetMaximum(wxInt32 v) wxOVERRIDE
     {
         SetDeterminateMode();
         wxWidgetCocoaImpl::SetMaximum( v ) ;
     }
 
-    void SetValue(wxInt32 v) override
+    void SetValue(wxInt32 v) wxOVERRIDE
     {
         SetDeterminateMode();
         wxWidgetCocoaImpl::SetValue( v ) ;
     }
 
-    void PulseGauge() override
+    void PulseGauge() wxOVERRIDE
     {
         if ( ![(wxNSProgressIndicator*)m_osxView isIndeterminate] )
         {

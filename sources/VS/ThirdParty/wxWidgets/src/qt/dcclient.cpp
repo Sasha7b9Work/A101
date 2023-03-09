@@ -37,7 +37,7 @@ public:
 
     ~QtPictureSetter()
     {
-        m_window->QtSetPicture( nullptr );
+        m_window->QtSetPicture( NULL );
     }
 
 private:
@@ -53,7 +53,7 @@ wxIMPLEMENT_CLASS(wxWindowDCImpl,wxQtDCImpl);
 wxWindowDCImpl::wxWindowDCImpl( wxDC *owner )
     : wxQtDCImpl( owner )
 {
-    m_window = nullptr;
+    m_window = NULL;
     m_ok = false;
     m_qtPainter = new QPainter();
 }
@@ -64,7 +64,7 @@ wxWindowDCImpl::wxWindowDCImpl( wxDC *owner, wxWindow *win )
     m_window = win;
     m_qtPainter = m_window->QtGetPainter();
     // if we're not inside a Paint event, painter will invalid
-    m_ok = m_qtPainter != nullptr;
+    m_ok = m_qtPainter != NULL;
 }
 
 wxWindowDCImpl::~wxWindowDCImpl()
@@ -76,7 +76,7 @@ wxWindowDCImpl::~wxWindowDCImpl()
     if ( m_window )
     {
         // do not destroy in base class as it is owned by the window
-        m_qtPainter = nullptr;
+        m_qtPainter = NULL;
     }
 }
 
@@ -110,7 +110,7 @@ wxClientDCImpl::~wxClientDCImpl()
         m_qtPainter->end();
         m_ok = false;
 
-        if ( m_window != nullptr )
+        if ( m_window != NULL )
         {
             QtPictureSetter pictureSetter(m_window, m_pict.get());
 
@@ -133,11 +133,11 @@ wxClientDCImpl::~wxClientDCImpl()
             else
             {
                 // Not drawing anything, reset picture to avoid issues in handler
-                m_pict->setData( nullptr, 0 );
+                m_pict->setData( NULL, 0 );
             }
 
             // let destroy the m_qtPainter (see inherited classes destructors)
-            m_window = nullptr;
+            m_window = NULL;
         }
     }
 

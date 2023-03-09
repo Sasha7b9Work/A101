@@ -86,11 +86,11 @@ class ToggleWidgetsPage : public WidgetsPage
 public:
     ToggleWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_toggle; }
-    virtual void RecreateWidget() override { CreateToggle(); }
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_toggle; }
+    virtual void RecreateWidget() wxOVERRIDE { CreateToggle(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
     // event handlers
@@ -188,10 +188,10 @@ ToggleWidgetsPage::ToggleWidgetsPage(WidgetsBookCtrl *book,
                       :WidgetsPage(book, imaglist, toggle_xpm)
 {
     m_chkFit =
-    m_chkDisable = nullptr;
+    m_chkDisable = (wxCheckBox *)NULL;
 
 #if wxUSE_MARKUP
-    m_chkUseMarkup = nullptr;
+    m_chkUseMarkup = (wxCheckBox *)NULL;
 #endif // wxUSE_MARKUP
 
 #ifdef wxHAS_BITMAPTOGGLEBUTTON
@@ -202,17 +202,17 @@ ToggleWidgetsPage::ToggleWidgetsPage(WidgetsBookCtrl *book,
     m_chkUsePressed =
     m_chkUseFocused =
     m_chkUseCurrent =
-    m_chkUseDisabled = nullptr;
+    m_chkUseDisabled = (wxCheckBox *)NULL;
 
     m_radioImagePos =
     m_radioHAlign =
-    m_radioVAlign = nullptr;
+    m_radioVAlign = (wxRadioBox *)NULL;
 #endif // wxHAS_BITMAPTOGGLEBUTTON
 
-    m_textLabel = nullptr;
+    m_textLabel = (wxTextCtrl *)NULL;
 
-    m_toggle = nullptr;
-    m_sizerToggle = nullptr;
+    m_toggle = (wxToggleButton *)NULL;
+    m_sizerToggle = (wxSizer *)NULL;
 }
 
 void ToggleWidgetsPage::CreateContent()

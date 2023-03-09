@@ -148,7 +148,7 @@ public:
     */
     virtual wxColour GetColour( int index ) const;
 
-    wxColourPropertyValue GetVal( const wxVariant* pVariant = nullptr ) const;
+    wxColourPropertyValue GetVal( const wxVariant* pVariant = NULL ) const;
 
 protected:
 
@@ -240,7 +240,7 @@ public:
 
     wxImageFileProperty( const wxString& label= wxPG_LABEL,
                          const wxString& name = wxPG_LABEL,
-                         const wxString& value = wxString());
+                         const wxString& value = wxEmptyString);
     virtual ~wxImageFileProperty();
 
     virtual void OnSetValue();

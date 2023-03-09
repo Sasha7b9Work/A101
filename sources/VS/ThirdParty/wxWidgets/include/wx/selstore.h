@@ -70,7 +70,7 @@ public:
     // individually)
     bool SelectRange(unsigned itemFrom, unsigned itemTo,
                      bool select = true,
-                     wxArrayInt *itemsChanged = nullptr);
+                     wxArrayInt *itemsChanged = NULL);
 
     // return true if the given item is selected
     bool IsSelected(unsigned item) const;

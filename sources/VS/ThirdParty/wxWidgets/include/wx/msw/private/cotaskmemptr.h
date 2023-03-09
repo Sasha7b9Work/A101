@@ -24,7 +24,7 @@ public:
     typedef T element_type;
 
     wxCoTaskMemPtr()
-        : m_ptr(nullptr)
+        : m_ptr(NULL)
     {}
 
     explicit wxCoTaskMemPtr(T* ptr)
@@ -41,7 +41,7 @@ public:
         ::CoTaskMemFree(m_ptr);
     }
 
-    void reset(T* ptr = nullptr)
+    void reset(T* ptr = NULL)
     {
         if ( m_ptr != ptr )
         {
@@ -72,7 +72,7 @@ public:
     {
         T* ptr(m_ptr);
 
-        m_ptr = nullptr;
+        m_ptr = NULL;
         return ptr;
     }
 

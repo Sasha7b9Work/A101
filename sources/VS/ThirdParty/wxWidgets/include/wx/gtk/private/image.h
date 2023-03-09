@@ -27,7 +27,7 @@ public:
 
     static GType Type();
     static GtkWidget* New(BitmapProvider* provider);
-    static GtkWidget* New(wxWindow* win = nullptr);
+    static GtkWidget* New(wxWindow* win = NULL);
 
     // Use bitmaps from the given bundle, the logical bitmap size is the
     // default size of the bundle.

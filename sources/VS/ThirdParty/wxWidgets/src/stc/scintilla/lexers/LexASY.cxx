@@ -1,5 +1,4 @@
 // Scintilla source code edit control
-// @file LexASY.cxx
 //Author: instanton (email: soft_share<at>126<dot>com)
 // The License.txt file describes the conditions under which this software may be distributed.
 
@@ -20,7 +19,9 @@
 #include "CharacterSet.h"
 #include "LexerModule.h"
 
+#ifdef SCI_NAMESPACE
 using namespace Scintilla;
+#endif
 
 static void ColouriseAsyDoc(Sci_PositionU startPos, Sci_Position length, int initStyle,
 		WordList *keywordlists[], Accessor &styler) {

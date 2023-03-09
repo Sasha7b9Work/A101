@@ -14,7 +14,7 @@
 class wxPGWindowList
 {
 public:
-    wxPGWindowList(wxWindow* primary, wxWindow* secondary = nullptr);
+    wxPGWindowList(wxWindow* primary, wxWindow* secondary = NULL);
 
     void SetSecondary(wxWindow* secondary);
 

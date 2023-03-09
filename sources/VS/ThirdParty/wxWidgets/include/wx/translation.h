@@ -91,7 +91,7 @@ public:
 #endif
 
     // load the catalog from disk or from data; caller is responsible for
-    // deleting them if not null
+    // deleting them if not NULL
     static wxMsgCatalog *CreateFromFile(const wxString& filename,
                                         const wxString& domain);
 
@@ -101,19 +101,19 @@ public:
     // get name of the catalog
     wxString GetDomain() const { return m_domain; }
 
-    // get the translated string: returns nullptr if not found
+    // get the translated string: returns NULL if not found
     const wxString *GetString(const wxString& sz, unsigned n = UINT_MAX, const wxString& ct = wxEmptyString) const;
 
 protected:
     wxMsgCatalog(const wxString& domain)
-        : m_pNext(nullptr), m_domain(domain)
+        : m_pNext(NULL), m_domain(domain)
 #if !wxUSE_UNICODE
-        , m_conv(nullptr)
+        , m_conv(NULL)
 #endif
     {}
 
 private:
-    // variable pointing to the next element in a linked list (or nullptr)
+    // variable pointing to the next element in a linked list (or NULL)
     wxMsgCatalog *m_pNext;
     friend class wxTranslations;
 
@@ -140,9 +140,9 @@ public:
     wxTranslations();
     ~wxTranslations();
 
-    // returns current translations object, may return nullptr
+    // returns current translations object, may return NULL
     static wxTranslations *Get();
-    // sets current translations object (takes ownership; may be null)
+    // sets current translations object (takes ownership; may be NULL)
     static void Set(wxTranslations *t);
 
     // changes loader to non-default one; takes ownership of 'loader'
@@ -196,7 +196,7 @@ private:
     // perform loading of the catalog via m_loader
     bool LoadCatalog(const wxString& domain, const wxString& lang, const wxString& msgIdLang);
 
-    // find catalog by name in a linked list, return nullptr if !found
+    // find catalog by name in a linked list, return NULL if !found
     wxMsgCatalog *FindCatalog(const wxString& domain) const;
 
     // same as Set(), without taking ownership; only for wxLocale
@@ -239,9 +239,9 @@ public:
     static void AddCatalogLookupPathPrefix(const wxString& prefix);
 
     virtual wxMsgCatalog *LoadCatalog(const wxString& domain,
-                                      const wxString& lang) override;
+                                      const wxString& lang) wxOVERRIDE;
 
-    virtual wxArrayString GetAvailableTranslations(const wxString& domain) const override;
+    virtual wxArrayString GetAvailableTranslations(const wxString& domain) const wxOVERRIDE;
 };
 
 
@@ -252,16 +252,16 @@ class WXDLLIMPEXP_BASE wxResourceTranslationsLoader
 {
 public:
     virtual wxMsgCatalog *LoadCatalog(const wxString& domain,
-                                      const wxString& lang) override;
+                                      const wxString& lang) wxOVERRIDE;
 
-    virtual wxArrayString GetAvailableTranslations(const wxString& domain) const override;
+    virtual wxArrayString GetAvailableTranslations(const wxString& domain) const wxOVERRIDE;
 
 protected:
     // returns resource type to use for translations
     virtual wxString GetResourceType() const { return wxASCII_STR("MOFILE"); }
 
     // returns module to load resources from
-    virtual WXHINSTANCE GetModule() const { return nullptr; }
+    virtual WXHINSTANCE GetModule() const { return NULL; }
 };
 #endif // __WINDOWS__
 
@@ -277,7 +277,7 @@ inline const wxString& wxGetTranslation(const wxString& str,
 {
     wxTranslations *trans = wxTranslations::Get();
     const wxString *transStr = trans ? trans->GetTranslatedString(str, domain, context)
-                                     : nullptr;
+                                     : NULL;
     if ( transStr )
         return *transStr;
     else
@@ -294,7 +294,7 @@ inline const wxString& wxGetTranslation(const wxString& str1,
 {
     wxTranslations *trans = wxTranslations::Get();
     const wxString *transStr = trans ? trans->GetTranslatedString(str1, n, domain, context)
-                                     : nullptr;
+                                     : NULL;
     if ( transStr )
         return *transStr;
     else

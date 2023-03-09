@@ -264,10 +264,10 @@ void wxStackWalker::WalkFrom(const CONTEXT *pCtx, size_t skip, size_t maxDepth)
                                 ::GetCurrentThread(),
                                 &sf,
                                 &ctx,
-                                nullptr,       // read memory function (default)
+                                NULL,       // read memory function (default)
                                 wxDbgHelpDLL::SymFunctionTableAccess,
                                 wxDbgHelpDLL::SymGetModuleBase,
-                                nullptr        // address translator for 16 bit
+                                NULL        // address translator for 16 bit
                             ) )
         {
             if ( ::GetLastError() )

@@ -73,8 +73,8 @@ public:
     wxRichTextAttr* GetAttributes();
 
     /// Data transfer
-    virtual bool TransferDataToWindow() override;
-    virtual bool TransferDataFromWindow() override;
+    virtual bool TransferDataToWindow() wxOVERRIDE;
+    virtual bool TransferDataFromWindow() wxOVERRIDE;
 
     /// Updates the synchronization checkboxes to reflect the state of the attributes
     void UpdateSyncControls();

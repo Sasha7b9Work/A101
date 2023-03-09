@@ -109,7 +109,7 @@ int wxMessageDialog::ShowModal()
     }
 
 
-    wxNonOwnedWindow* parentWindow = nullptr;
+    wxNonOwnedWindow* parentWindow = NULL;
     int button = -1;
 
     if (GetParent())

@@ -67,11 +67,11 @@ public:
     FileCtrlWidgetsPage( WidgetsBookCtrl *book, wxImageList *imaglist );
     virtual ~FileCtrlWidgetsPage() {}
 
-    virtual wxWindow *GetWidget() const override { return m_fileCtrl; }
-    virtual void RecreateWidget() override { CreateFileCtrl(); }
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_fileCtrl; }
+    virtual void RecreateWidget() wxOVERRIDE { CreateFileCtrl(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
     // event handlers

@@ -23,7 +23,6 @@
 #include "wx/qt/dc.h"
 #include "wx/qt/private/converter.h"
 #include "wx/qt/private/utils.h"
-#include "wx/qt/private/compat.h"
 
 #include <QtGui/QScreen>
 #include <QtWidgets/QApplication>
@@ -47,8 +46,8 @@ wxIMPLEMENT_CLASS(wxQtDCImpl,wxDCImpl);
 wxQtDCImpl::wxQtDCImpl( wxDC *owner )
     : wxDCImpl( owner )
 {
-    m_qtPixmap = nullptr;
-    m_qtPainter = nullptr;
+    m_qtPixmap = NULL;
+    m_qtPainter = NULL;
     m_rasterColourOp = wxQtNONE;
     m_qtPenColor = new QColor;
     m_qtBrushColor = new QColor;
@@ -73,9 +72,9 @@ wxQtDCImpl::~wxQtDCImpl()
 void wxQtDCImpl::QtPreparePainter( )
 {
     //Do here all QPainter initialization (called after each begin())
-    if ( m_qtPainter == nullptr )
+    if ( m_qtPainter == NULL )
     {
-        wxLogDebug(wxT("wxQtDCImpl::QtPreparePainter is null!!!"));
+        wxLogDebug(wxT("wxQtDCImpl::QtPreparePainter is NULL!!!"));
     }
     else if ( m_qtPainter->isActive() )
     {
@@ -374,25 +373,25 @@ void wxQtDCImpl::DoGetTextExtent(const wxString& string,
                              const wxFont *theFont ) const
 {
     QFont f;
-    if (theFont != nullptr)
+    if (theFont != NULL)
         f = theFont->GetHandle();
     else
         f = m_font.GetHandle();
 
     QFontMetrics metrics(f);
-    if (x != nullptr || y != nullptr)
+    if (x != NULL || y != NULL)
     {
         // note that boundingRect doesn't return "advance width" for spaces
-        if (x != nullptr)
-            *x = wxQtGetWidthFromMetrics(metrics, wxQtConvertString(string));
-        if (y != nullptr)
+        if (x != NULL)
+            *x = metrics.width( wxQtConvertString(string) );
+        if (y != NULL)
             *y = metrics.height();
     }
 
-    if (descent != nullptr)
+    if (descent != NULL)
         *descent = metrics.descent();
 
-    if (externalLeading != nullptr)
+    if (externalLeading != NULL)
         *externalLeading = metrics.leading();
 }
 
@@ -525,7 +524,7 @@ bool wxQtDCImpl::DoGetPixel(wxCoord x, wxCoord y, wxColour *col) const
 
     if ( col )
     {
-        wxCHECK_MSG( m_qtPixmap != nullptr, false, "This DC doesn't support GetPixel()" );
+        wxCHECK_MSG( m_qtPixmap != NULL, false, "This DC doesn't support GetPixel()" );
         QPixmap pixmap1px = m_qtPixmap->copy( x, y, 1, 1 );
         QImage image = pixmap1px.toImage();
         QColor pixel = image.pixel( 0, 0 );

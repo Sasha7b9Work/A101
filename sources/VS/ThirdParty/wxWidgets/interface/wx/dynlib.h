@@ -232,7 +232,7 @@ public:
 
         @since 3.1.0
     */
-    static void* GetModuleFromAddress(const void* addr, wxString* path = nullptr);
+    static void* GetModuleFromAddress(const void* addr, wxString* path = NULL);
 
     /**
         Loads DLL with the given @a name into memory. The @a flags argument can

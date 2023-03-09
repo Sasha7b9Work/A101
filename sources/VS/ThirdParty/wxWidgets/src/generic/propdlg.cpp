@@ -79,8 +79,8 @@ bool wxPropertySheetDialog::Create(wxWindow* parent, wxWindowID id, const wxStri
 void wxPropertySheetDialog::Init()
 {
     m_sheetStyle = wxPROPSHEET_DEFAULT;
-    m_innerSizer = nullptr;
-    m_bookCtrl = nullptr;
+    m_innerSizer = NULL;
+    m_bookCtrl = NULL;
     m_sheetOuterBorder = 2;
     m_sheetInnerBorder = 5;
 }
@@ -109,7 +109,7 @@ wxBookCtrlBase* wxPropertySheetDialog::CreateBookCtrl()
 {
     int style = wxCLIP_CHILDREN | wxBK_DEFAULT;
 
-    wxBookCtrlBase* bookCtrl = nullptr;
+    wxBookCtrlBase* bookCtrl = NULL;
 
 #if wxUSE_NOTEBOOK
     if (GetSheetStyle() & wxPROPSHEET_NOTEBOOK)

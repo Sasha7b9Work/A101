@@ -45,22 +45,22 @@ public:
                 const wxString& name = wxASCII_STR(wxGaugeNameStr));
 
     // set gauge range/value
-    virtual void SetRange(int range) override;
-    virtual void SetValue(int pos) override;
+    virtual void SetRange(int range) wxOVERRIDE;
+    virtual void SetValue(int pos) wxOVERRIDE;
 
     // overridden base class virtuals
-    virtual bool SetForegroundColour(const wxColour& col) override;
-    virtual bool SetBackgroundColour(const wxColour& col) override;
+    virtual bool SetForegroundColour(const wxColour& col) wxOVERRIDE;
+    virtual bool SetBackgroundColour(const wxColour& col) wxOVERRIDE;
 
-    virtual void Pulse() override;
+    virtual void Pulse() wxOVERRIDE;
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const wxOVERRIDE;
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
+    virtual bool CanApplyThemeBorder() const wxOVERRIDE { return false; }
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
+    virtual wxSize DoGetBestSize() const wxOVERRIDE;
 
 private:
     // returns true if the control is currently in indeterminate (a.k.a.

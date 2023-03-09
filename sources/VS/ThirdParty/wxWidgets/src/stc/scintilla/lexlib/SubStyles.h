@@ -8,7 +8,9 @@
 #ifndef SUBSTYLES_H
 #define SUBSTYLES_H
 
+#ifdef SCI_NAMESPACE
 namespace Scintilla {
+#endif
 
 class WordClassifier {
 	int baseStyle;
@@ -27,23 +29,19 @@ public:
 		wordToStyle.clear();
 	}
 
-	int Base() const noexcept {
+	int Base() const {
 		return baseStyle;
 	}
 
-	int Start() const noexcept {
+	int Start() const {
 		return firstStyle;
 	}
 
-	int Last() const noexcept {
-		return firstStyle + lenStyles - 1;
-	}
-
-	int Length() const noexcept {
+	int Length() const {
 		return lenStyles;
 	}
 
-	void Clear() noexcept {
+	void Clear() {
 		firstStyle = 0;
 		lenStyles = 0;
 		wordToStyle.clear();
@@ -57,23 +55,11 @@ public:
 			return -1;
 	}
 
-	bool IncludesStyle(int style) const noexcept {
+	bool IncludesStyle(int style) const {
 		return (style >= firstStyle) && (style < (firstStyle + lenStyles));
 	}
 
-	void RemoveStyle(int style) {
-		std::map<std::string, int>::iterator it = wordToStyle.begin();
-		while (it != wordToStyle.end()) {
-			if (it->second == style) {
-				it = wordToStyle.erase(it);
-			} else {
-				++it;
-			}
-		}
-	}
-
 	void SetIdentifiers(int style, const char *identifiers) {
-		RemoveStyle(style);
 		while (*identifiers) {
 			const char *cpSpace = identifiers;
 			while (*cpSpace && !(*cpSpace == ' ' || *cpSpace == '\t' || *cpSpace == '\r' || *cpSpace == '\n'))
@@ -98,7 +84,7 @@ class SubStyles {
 	int allocated;
 	std::vector<WordClassifier> classifiers;
 
-	int BlockFromBaseStyle(int baseStyle) const noexcept {
+	int BlockFromBaseStyle(int baseStyle) const {
 		for (int b=0; b < classifications; b++) {
 			if (baseStyle == baseStyles[b])
 				return b;
@@ -132,11 +118,11 @@ public:
 	}
 
 	int Allocate(int styleBase, int numberStyles) {
-		const int block = BlockFromBaseStyle(styleBase);
+		int block = BlockFromBaseStyle(styleBase);
 		if (block >= 0) {
 			if ((allocated + numberStyles) > stylesAvailable)
 				return -1;
-			const int startBlock = styleFirst + allocated;
+			int startBlock = styleFirst + allocated;
 			allocated += numberStyles;
 			classifiers[block].Allocate(startBlock, numberStyles);
 			return startBlock;
@@ -145,48 +131,30 @@ public:
 		}
 	}
 
-	int Start(int styleBase) noexcept {
-		const int block = BlockFromBaseStyle(styleBase);
+	int Start(int styleBase) {
+		int block = BlockFromBaseStyle(styleBase);
 		return (block >= 0) ? classifiers[block].Start() : -1;
 	}
 
-	int Length(int styleBase) noexcept {
-		const int block = BlockFromBaseStyle(styleBase);
+	int Length(int styleBase) {
+		int block = BlockFromBaseStyle(styleBase);
 		return (block >= 0) ? classifiers[block].Length() : 0;
 	}
 
 	int BaseStyle(int subStyle) const {
-		const int block = BlockFromStyle(subStyle);
+		int block = BlockFromStyle(subStyle);
 		if (block >= 0)
 			return classifiers[block].Base();
 		else
 			return subStyle;
 	}
 
-	int DistanceToSecondaryStyles() const noexcept {
+	int DistanceToSecondaryStyles() const {
 		return secondaryDistance;
 	}
 
-	int FirstAllocated() const {
-		int start = 257;
-		for (std::vector<WordClassifier>::const_iterator it = classifiers.begin(); it != classifiers.end(); ++it) {
-			if (start > it->Start())
-				start = it->Start();
-		}
-		return (start < 256) ? start : -1;
-	}
-
-	int LastAllocated() const {
-		int last = -1;
-		for (std::vector<WordClassifier>::const_iterator it = classifiers.begin(); it != classifiers.end(); ++it) {
-			if (last < it->Last())
-				last = it->Last();
-		}
-		return last;
-	}
-
 	void SetIdentifiers(int style, const char *identifiers) {
-		const int block = BlockFromStyle(style);
+		int block = BlockFromStyle(style);
 		if (block >= 0)
 			classifiers[block].SetIdentifiers(style, identifiers);
 	}
@@ -197,12 +165,14 @@ public:
 			it->Clear();
 	}
 
-	const WordClassifier &Classifier(int baseStyle) const noexcept {
+	const WordClassifier &Classifier(int baseStyle) const {
 		const int block = BlockFromBaseStyle(baseStyle);
 		return classifiers[block >= 0 ? block : 0];
 	}
 };
 
+#ifdef SCI_NAMESPACE
 }
+#endif
 
 #endif

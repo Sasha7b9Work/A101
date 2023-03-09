@@ -45,10 +45,42 @@
 #include "wx/stdpaths.h"
 
 #if wxUSE_EXCEPTIONS
-    #include <exception>        // for std::current_exception()
-    #include <utility>          // for std::swap()
+    // Do we have a C++ compiler with enough C++11 support for
+    // std::exception_ptr and functions working with it?
+    #if __cplusplus >= 201103L
+        // Any conforming C++11 compiler should have it, but g++ implementation
+        // of exception handling depends on the availability of the atomic int
+        // operations apparently, so all known version of g++ with C++11 support
+        // (4.7..4.9) fail to provide exception_ptr if the symbol below is not
+        // set to 2 (meaning "always available"), which is notably the case for
+        // MinGW-w64 without -march=486 switch, see #16634.
+        #ifdef __GNUC__
+            // This symbol is always defined in the known g++ version, so
+            // assume that if it isn't defined, things changed for the better
+            // and optimistically suppose that exception_ptr is available.
+            #if !defined(__GCC_ATOMIC_INT_LOCK_FREE) \
+                    || __GCC_ATOMIC_INT_LOCK_FREE > 1
+                #define HAS_EXCEPTION_PTR
+            #endif
+        #else
+            #define HAS_EXCEPTION_PTR
+        #endif
+    #elif wxCHECK_VISUALC_VERSION(11)
+        // VC++ supports it since version 10, even though it doesn't define
+        // __cplusplus to C++11 value, but MSVC 2010 doesn't have a way to test
+        // whether exception_ptr is valid, so we'd need to use a separate bool
+        // flag for it if we wanted to make it work. For now just settle for
+        // only using exception_ptr for VC11 and later.
+        #define HAS_EXCEPTION_PTR
+    #endif
+
+    #ifdef HAS_EXCEPTION_PTR
+        #include <exception>        // for std::current_exception()
+        #include <utility>          // for std::swap()
+    #endif
 
     #if wxUSE_STL
+        #include <exception>
         #include <typeinfo>
     #endif
 #endif // wxUSE_EXCEPTIONS
@@ -97,7 +129,7 @@
                           const wxString& func,
                           const wxString& cond,
                           const wxString& msg,
-                          wxAppTraits *traits = nullptr);
+                          wxAppTraits *traits = NULL);
 #endif // wxDEBUG_LEVEL
 
 #ifdef __WXDEBUG__
@@ -109,11 +141,11 @@
 // global vars
 // ----------------------------------------------------------------------------
 
-wxAppConsole *wxAppConsoleBase::ms_appInstance = nullptr;
+wxAppConsole *wxAppConsoleBase::ms_appInstance = NULL;
 
-wxAppInitializerFunction wxAppConsoleBase::ms_appInitFn = nullptr;
+wxAppInitializerFunction wxAppConsoleBase::ms_appInitFn = NULL;
 
-wxSocketManager *wxAppTraitsBase::ms_manager = nullptr;
+wxSocketManager *wxAppTraitsBase::ms_manager = NULL;
 
 WXDLLIMPEXP_DATA_BASE(wxList) wxPendingDelete;
 
@@ -134,8 +166,8 @@ wxDEFINE_TIED_SCOPED_PTR_TYPE(wxEventLoopBase)
 
 wxAppConsoleBase::wxAppConsoleBase()
 {
-    m_traits = nullptr;
-    m_mainLoop = nullptr;
+    m_traits = NULL;
+    m_mainLoop = NULL;
     m_bDoPendingEventProcessing = true;
 
     ms_appInstance = reinterpret_cast<wxAppConsole *>(this);
@@ -159,7 +191,7 @@ wxAppConsoleBase::~wxAppConsoleBase()
 
     // we're being destroyed and using this object from now on may not work or
     // even crash so don't leave dangling pointers to it
-    ms_appInstance = nullptr;
+    ms_appInstance = NULL;
 
     delete m_traits;
 }
@@ -185,7 +217,7 @@ wxString wxAppConsoleBase::GetAppName() const
         if ( argv )
         {
             // the application name is, by default, the name of its executable file
-            wxFileName::SplitPath(argv[0], nullptr, &name, nullptr);
+            wxFileName::SplitPath(argv[0], NULL, &name, NULL);
         }
 #if wxUSE_STDPATHS
         else // fall back to the executable file name, if we can determine it
@@ -193,7 +225,7 @@ wxString wxAppConsoleBase::GetAppName() const
             const wxString pathExe = wxStandardPaths::Get().GetExecutablePath();
             if ( !pathExe.empty() )
             {
-                wxFileName::SplitPath(pathExe, nullptr, &name, nullptr);
+                wxFileName::SplitPath(pathExe, NULL, &name, NULL);
             }
         }
 #endif // wxUSE_STDPATHS
@@ -226,7 +258,7 @@ void wxAppConsoleBase::CleanUp()
 {
 #if wxUSE_CONFIG
     // Delete the global wxConfig object, if any, and reset it.
-    delete wxConfigBase::Set(nullptr);
+    delete wxConfigBase::Set(NULL);
 #endif // wxUSE_CONFIG
 
     wxDELETE(m_mainLoop);
@@ -291,7 +323,7 @@ int wxAppConsoleBase::OnExit()
 
 void wxAppConsoleBase::Exit()
 {
-    if (m_mainLoop != nullptr)
+    if (m_mainLoop != NULL)
         ExitMainLoop();
     else
         exit(-1);
@@ -323,7 +355,7 @@ wxAppTraits *wxAppConsoleBase::GetTraits()
 wxAppTraits *wxAppConsoleBase::GetTraitsIfExists()
 {
     wxAppConsole * const app = GetInstance();
-    return app ? app->GetTraits() : nullptr;
+    return app ? app->GetTraits() : NULL;
 }
 
 /* static */
@@ -418,7 +450,7 @@ bool wxAppConsoleBase::UsesEventLoop() const
 {
     // in console applications we don't know whether we're going to have an
     // event loop so assume we won't -- unless we already have one running
-    return wxEventLoopBase::GetActive() != nullptr;
+    return wxEventLoopBase::GetActive() != NULL;
 }
 
 // ----------------------------------------------------------------------------
@@ -430,7 +462,7 @@ bool wxAppConsoleBase::IsMainLoopRunning()
 {
     const wxAppConsole * const app = GetInstance();
 
-    return app && app->m_mainLoop != nullptr;
+    return app && app->m_mainLoop != NULL;
 }
 
 int wxAppConsoleBase::FilterEvent(wxEvent& WXUNUSED(event))
@@ -684,6 +716,7 @@ bool wxAppConsoleBase::OnExceptionInMainLoop()
     throw;
 }
 
+#ifdef HAS_EXCEPTION_PTR
 static std::exception_ptr gs_storedException;
 
 bool wxAppConsoleBase::StoreCurrentException()
@@ -713,6 +746,19 @@ void wxAppConsoleBase::RethrowStoredException()
     }
 }
 
+#else // !HAS_EXCEPTION_PTR
+
+bool wxAppConsoleBase::StoreCurrentException()
+{
+    return false;
+}
+
+void wxAppConsoleBase::RethrowStoredException()
+{
+}
+
+#endif // HAS_EXCEPTION_PTR/!HAS_EXCEPTION_PTR
+
 #endif // wxUSE_EXCEPTIONS
 
 // ----------------------------------------------------------------------------
@@ -740,7 +786,7 @@ void wxAppConsoleBase::OnInitCmdLine(wxCmdLineParser& parser)
 #if wxUSE_LOG
         {
             wxCMD_LINE_SWITCH,
-            nullptr,
+            NULL,
             OPTION_VERBOSE,
             gettext_noop("generate verbose log messages"),
             wxCMD_LINE_VAL_NONE,
@@ -839,7 +885,7 @@ void wxAppConsoleBase::OnAssert(const wxChar *file,
                                 const wxChar *cond,
                                 const wxChar *msg)
 {
-    OnAssertFailure(file, line, nullptr, cond, msg);
+    OnAssertFailure(file, line, NULL, cond, msg);
 }
 
 // ----------------------------------------------------------------------------
@@ -853,6 +899,9 @@ void wxAppConsoleBase::SetCLocale()
     // this format on input (especially important for decimal comma/dot).
     wxSetlocale(LC_ALL, "");
 }
+
+void* wxAppConsoleBase::WXReservedApp1(void*) { return NULL; }
+void* wxAppConsoleBase::WXReservedApp2(void*) { return NULL; }
 
 // ============================================================================
 // other classes implementations
@@ -888,7 +937,7 @@ wxFontMapper *wxConsoleAppTraitsBase::CreateFontMapper()
 wxRendererNative *wxConsoleAppTraitsBase::CreateRenderer()
 {
     // console applications don't use renderers
-    return nullptr;
+    return NULL;
 }
 
 bool wxConsoleAppTraitsBase::ShowAssertDialog(const wxString& msg)
@@ -987,7 +1036,7 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
         const wxString& GetStackTrace() const { return m_stackTrace; }
 
     protected:
-        virtual void OnStackFrame(const wxStackFrame& frame) override
+        virtual void OnStackFrame(const wxStackFrame& frame) wxOVERRIDE
         {
             // don't show more than maxLines or we could get a dialog too tall
             // to be shown on screen: 20 should be ok everywhere as even with
@@ -1046,6 +1095,8 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 }
 #endif // wxUSE_STACKWALKER
 
+void* wxAppTraitsBase::WXReservedAppTraits1(void*) { return NULL; }
+void* wxAppTraitsBase::WXReservedAppTraits2(void*) { return NULL; }
 
 // ============================================================================
 // global functions implementation
@@ -1175,7 +1226,7 @@ void wxOnAssert(const wxChar *file,
 {
     // this is the backwards-compatible version (unless we don't use Unicode)
     // so it could be called directly from the user code and this might happen
-    // even when wxTheAssertHandler is null
+    // even when wxTheAssertHandler is NULL
 #if wxUSE_UNICODE
     if ( wxTheAssertHandler )
 #endif // wxUSE_UNICODE
@@ -1269,7 +1320,7 @@ bool DoShowAssertDialog(const wxString& msg)
               wxT("You can also choose [Cancel] to suppress ")
               wxT("further warnings.");
 
-    switch ( ::MessageBox(nullptr, msgDlg.t_str(), wxT("wxWidgets Debug Alert"),
+    switch ( ::MessageBox(NULL, msgDlg.t_str(), wxT("wxWidgets Debug Alert"),
                           MB_YESNOCANCEL | MB_DEFBUTTON2 | MB_ICONSTOP ) )
     {
         case IDYES:

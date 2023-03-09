@@ -64,7 +64,7 @@ public:
 
     // override ProcessEvent() to confirm that it is called for all event
     // handlers in the chain
-    virtual bool ProcessEvent(wxEvent& event) override
+    virtual bool ProcessEvent(wxEvent& event) wxOVERRIDE
     {
         if ( event.GetEventType() == m_evtType )
             g_str += 'o'; // "o" == "overridden"
@@ -184,7 +184,7 @@ public:
         Update();
     }
 
-    virtual void OnDraw(wxDC& WXUNUSED(dc)) override
+    virtual void OnDraw(wxDC& WXUNUSED(dc)) wxOVERRIDE
     {
         g_str += 'D';   // draw
     }
@@ -228,8 +228,8 @@ class EventPropagationTestCase : public CppUnit::TestCase
 public:
     EventPropagationTestCase() {}
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    virtual void setUp() wxOVERRIDE;
+    virtual void tearDown() wxOVERRIDE;
 
 private:
     CPPUNIT_TEST_SUITE( EventPropagationTestCase );
@@ -289,8 +289,8 @@ void EventPropagationTestCase::setUp()
 
 void EventPropagationTestCase::tearDown()
 {
-    SetFilterEventFunc(nullptr);
-    SetProcessEventFunc(nullptr);
+    SetFilterEventFunc(NULL);
+    SetProcessEventFunc(NULL);
 }
 
 void EventPropagationTestCase::OneHandler()
@@ -360,7 +360,7 @@ void EventPropagationTestCase::ForwardEvent()
     public:
         ForwardEvtHandler(wxEvtHandler& h) : m_h(&h) { }
 
-        virtual bool ProcessEvent(wxEvent& event) override
+        virtual bool ProcessEvent(wxEvent& event) wxOVERRIDE
         {
             g_str += 'f';
 
@@ -465,7 +465,7 @@ void EventPropagationTestCase::MenuEvent()
 #if wxUSE_MENUBAR
     wxMenuBar* const mb = menu->GetMenuBar();
     wxScopedPtr<wxMenuBar> ensureMenuBarDestruction(mb);
-    wxON_BLOCK_EXIT_OBJ1( *frame, wxFrame::SetMenuBar, (wxMenuBar*)nullptr );
+    wxON_BLOCK_EXIT_OBJ1( *frame, wxFrame::SetMenuBar, (wxMenuBar*)NULL );
 #endif
     // Check that wxApp gets the event exactly once.
     ASSERT_MENU_EVENT_RESULT( menu, "aA" );
@@ -475,7 +475,7 @@ void EventPropagationTestCase::MenuEvent()
     TestMenuEvtHandler hm('m'); // 'm' for "menu"
     menu->SetNextHandler(&hm);
     wxON_BLOCK_EXIT_OBJ1( *menu,
-                          wxEvtHandler::SetNextHandler, (wxEvtHandler*)nullptr );
+                          wxEvtHandler::SetNextHandler, (wxEvtHandler*)NULL );
     ASSERT_MENU_EVENT_RESULT( menu, "aomA" );
 
 
@@ -487,7 +487,7 @@ void EventPropagationTestCase::MenuEvent()
     TestMenuEvtHandler hs('s'); // 's' for "submenu"
     submenu->SetNextHandler(&hs);
     wxON_BLOCK_EXIT_OBJ1( *submenu,
-                          wxEvtHandler::SetNextHandler, (wxEvtHandler*)nullptr );
+                          wxEvtHandler::SetNextHandler, (wxEvtHandler*)NULL );
     ASSERT_MENU_EVENT_RESULT_FOR( wxID_ABOUT, submenu, "aosomA" );
 
 #if wxUSE_MENUBAR
@@ -524,7 +524,7 @@ class EventTestView : public wxView
 public:
     EventTestView() { }
 
-    virtual void OnDraw(wxDC*) override { }
+    virtual void OnDraw(wxDC*) wxOVERRIDE { }
 
     wxDECLARE_DYNAMIC_CLASS(EventTestView);
 };
@@ -538,7 +538,7 @@ void EventPropagationTestCase::DocView()
     wxDocManager docManager;
 
     wxScopedPtr<wxDocMDIParentFrame>
-        parent(new wxDocMDIParentFrame(&docManager, nullptr, wxID_ANY, "Parent"));
+        parent(new wxDocMDIParentFrame(&docManager, NULL, wxID_ANY, "Parent"));
 
     wxMenu* const menu = CreateTestMenu(parent.get());
 
@@ -546,11 +546,11 @@ void EventPropagationTestCase::DocView()
     // Set up the event handlers.
     TestEvtSink sinkDM('m');
     docManager.Connect(wxEVT_MENU,
-                       wxEventHandler(TestEvtSink::Handle), nullptr, &sinkDM);
+                       wxEventHandler(TestEvtSink::Handle), NULL, &sinkDM);
 
     TestEvtSink sinkParent('p');
     parent->Connect(wxEVT_MENU,
-                    wxEventHandler(TestEvtSink::Handle), nullptr, &sinkParent);
+                    wxEventHandler(TestEvtSink::Handle), NULL, &sinkParent);
 
 
     // Check that wxDocManager and wxFrame get the event in order.
@@ -590,15 +590,15 @@ void EventPropagationTestCase::DocView()
 
     TestEvtSink sinkDoc('d');
     doc->Connect(wxEVT_MENU,
-                 wxEventHandler(TestEvtSink::Handle), nullptr, &sinkDoc);
+                 wxEventHandler(TestEvtSink::Handle), NULL, &sinkDoc);
 
     TestEvtSink sinkView('v');
     view->Connect(wxEVT_MENU,
-                  wxEventHandler(TestEvtSink::Handle), nullptr, &sinkView);
+                  wxEventHandler(TestEvtSink::Handle), NULL, &sinkView);
 
     TestEvtSink sinkChild('c');
     child->Connect(wxEVT_MENU,
-                   wxEventHandler(TestEvtSink::Handle), nullptr, &sinkChild);
+                   wxEventHandler(TestEvtSink::Handle), NULL, &sinkChild);
 
     // Check that wxDocument, wxView, wxDocManager, child frame and the parent
     // get the event in order.

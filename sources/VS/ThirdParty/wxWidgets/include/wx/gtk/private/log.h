@@ -30,7 +30,7 @@ class LogFilter
 public:
     LogFilter()
     {
-        m_next = nullptr;
+        m_next = NULL;
     }
 
     // Allow installing our own log writer function, we don't do it by default
@@ -95,7 +95,7 @@ public:
 protected:
     bool Filter(GLogLevelFlags log_level,
                 const GLogField* WXUNUSED(fields),
-                gsize WXUNUSED(n_fields)) const override
+                gsize WXUNUSED(n_fields)) const wxOVERRIDE
     {
         return log_level & m_logLevelToIgnore;
     }
@@ -129,7 +129,7 @@ public:
 protected:
     bool Filter(GLogLevelFlags WXUNUSED(log_level),
                 const GLogField* fields,
-                gsize n_fields) const override;
+                gsize n_fields) const wxOVERRIDE;
 
 private:
     const char* const m_message;

@@ -89,7 +89,7 @@ wxDataFormat& wxDataFormat::operator=(const wxDataFormat& rFormat)
 
 wxDataFormat::NativeFormat wxDataFormat::GetFormatForType(wxDataFormatId type)
 {
-    wxDataFormat::NativeFormat f = nullptr;
+    wxDataFormat::NativeFormat f = NULL;
     switch (type)
     {
         case wxDF_TEXT:
@@ -300,7 +300,7 @@ void wxDataObject::WriteToSink(wxOSXDataSink * datatransfer) const
     wxScopedArray<wxDataFormat> array(GetFormatCount());
     GetAllFormats( array.get() );
 
-    wxOSXDataSinkItem* sinkItem = nullptr;
+    wxOSXDataSinkItem* sinkItem = NULL;
 
     for (size_t i = 0; i < GetFormatCount(); i++)
     {
@@ -335,7 +335,7 @@ void wxDataObject::WriteToSink(wxOSXDataSink * datatransfer) const
         size_t sz = datasize + 4;
         wxMemoryBuffer databuf( datasize+4 );
         void* buf = databuf.GetWriteBuf(datasize+4);
-        if ( buf != nullptr )
+        if ( buf != NULL )
         {
             // empty the buffer because in some case GetDataHere does not fill buf
             memset( buf, 0, sz );
@@ -391,7 +391,7 @@ bool wxDataObject::ReadFromSource(wxDataObject * source)
             
             if (size == 0)
             {
-                SetData( format, 0, nullptr );
+                SetData( format, 0, 0 );
             }
             else
             {
@@ -468,10 +468,10 @@ bool wxDataObject::ReadFromSource(wxOSXDataSource * source)
                         {
                             // revert the translation and decomposition to arrive at a proper utf8 string again
                             
-                            wxCFRef<CFURLRef> url = CFURLCreateWithBytes(kCFAllocatorDefault, (UInt8*) buf, flavorDataSize, kCFStringEncodingUTF8, nullptr);
+                            wxCFRef<CFURLRef> url = CFURLCreateWithBytes(kCFAllocatorDefault, (UInt8*) buf, flavorDataSize, kCFStringEncodingUTF8, NULL);
                             wxCFStringRef cfString = CFURLCopyFileSystemPath(url, kCFURLPOSIXPathStyle);
                                 
-                            CFMutableStringRef cfMutableString = CFStringCreateMutableCopy(nullptr, 0, cfString);
+                            CFMutableStringRef cfMutableString = CFStringCreateMutableCopy(NULL, 0, cfString);
                             CFStringNormalize(cfMutableString, kCFStringNormalizationFormC);
                             // cfMutableString is released by the wxCFStringRef
                             wxString path = wxCFStringRef(cfMutableString).AsString();
@@ -614,7 +614,7 @@ void wxFileDataObject::GetFileNames( wxCharBuffer &buf ) const
 
 bool wxFileDataObject::GetDataHere( void *pBuf ) const
 {
-    if (pBuf == nullptr)
+    if (pBuf == NULL)
         return false;
 
     wxCharBuffer buf;
@@ -692,10 +692,10 @@ void wxBitmapDataObject::SetBitmap( const wxBitmap& rBitmap )
         CGImageRef cgImageRef = (CGImageRef) m_bitmap.CreateCGImage();
 
         CFMutableDataRef data = CFDataCreateMutable(kCFAllocatorDefault, 0);
-        CGImageDestinationRef destination = CGImageDestinationCreateWithData( data , kUTTypeTIFF , 1 , nullptr );
+        CGImageDestinationRef destination = CGImageDestinationCreateWithData( data , kUTTypeTIFF , 1 , NULL );
         if ( destination )
         {
-            CGImageDestinationAddImage( destination, cgImageRef, nullptr );
+            CGImageDestinationAddImage( destination, cgImageRef, NULL );
             CGImageDestinationFinalize( destination );
             CFRelease( destination );
         }
@@ -707,27 +707,27 @@ void wxBitmapDataObject::SetBitmap( const wxBitmap& rBitmap )
 
 void wxBitmapDataObject::Init()
 {
-    m_pictData = nullptr;
+    m_pictData = NULL;
 }
 
 void wxBitmapDataObject::Clear()
 {
-    if (m_pictData != nullptr)
+    if (m_pictData != NULL)
     {
         CFRelease( m_pictData );
-        m_pictData = nullptr;
+        m_pictData = NULL;
     }
 }
 
 bool wxBitmapDataObject::GetDataHere( void *pBuf ) const
 {
-    if (m_pictData == nullptr)
+    if (m_pictData == NULL)
     {
         wxFAIL_MSG( wxT("attempt to copy empty bitmap failed") );
         return false;
     }
 
-    if (pBuf == nullptr)
+    if (pBuf == NULL)
         return false;
 
     memcpy( pBuf, (const char *)CFDataGetBytePtr(m_pictData), CFDataGetLength(m_pictData) );
@@ -737,7 +737,7 @@ bool wxBitmapDataObject::GetDataHere( void *pBuf ) const
 
 size_t wxBitmapDataObject::GetDataSize() const
 {
-    if (m_pictData != nullptr)
+    if (m_pictData != NULL)
         return CFDataGetLength(m_pictData);
     else
         return 0;
@@ -747,16 +747,16 @@ bool wxBitmapDataObject::SetData( size_t nSize, const void *pBuf )
 {
     Clear();
 
-    if ((pBuf == nullptr) || (nSize == 0))
+    if ((pBuf == NULL) || (nSize == 0))
         return false;
 
-    CGImageRef cgImageRef = nullptr;
+    CGImageRef cgImageRef = NULL;
 
     CFDataRef data = CFDataCreate( kCFAllocatorDefault, (const UInt8*) pBuf, nSize);
-    CGImageSourceRef source = CGImageSourceCreateWithData( data, nullptr );
+    CGImageSourceRef source = CGImageSourceCreateWithData( data, NULL );
     if ( source )
     {
-        cgImageRef = CGImageSourceCreateImageAtIndex(source, 0, nullptr);
+        cgImageRef = CGImageSourceCreateImageAtIndex(source, 0, NULL);
         CFRelease( source );
     }
     m_pictData = data;
@@ -765,7 +765,7 @@ bool wxBitmapDataObject::SetData( size_t nSize, const void *pBuf )
     {
         m_bitmap.Create( cgImageRef );
         CGImageRelease(cgImageRef);
-        cgImageRef = nullptr;
+        cgImageRef = NULL;
     }
 
     return m_bitmap.IsOk();

@@ -42,7 +42,7 @@
 
 // defined in common/init.cpp
 extern int wxEntryReal(int& argc, wxChar **argv);
-extern int wxEntryCleanupReal(int& argc, wxChar **argv);
+extern void wxEntryCleanupReal();
 
 // ============================================================================
 // implementation: various entry points
@@ -60,7 +60,7 @@ extern int wxEntryCleanupReal(int& argc, wxChar **argv);
 
 // global pointer to exception information, only valid inside OnFatalException,
 // used by wxStackWalker and wxCrashReport
-extern EXCEPTION_POINTERS *wxGlobalSEInformation = nullptr;
+extern EXCEPTION_POINTERS *wxGlobalSEInformation = NULL;
 
 // flag telling us whether the application wants to handle exceptions at all
 static bool gs_handleExceptions = false;
@@ -85,7 +85,7 @@ unsigned long wxGlobalSEHandler(EXCEPTION_POINTERS *pExcPtrs)
         }
         wxSEH_IGNORE      // ignore any exceptions inside the exception handler
 
-        wxGlobalSEInformation = nullptr;
+        wxGlobalSEInformation = NULL;
 
         // this will execute our handler and terminate the process
         return EXCEPTION_EXECUTE_HANDLER;
@@ -192,9 +192,21 @@ int wxEntry(int& argc, wxChar **argv)
 // Windows-specific wxEntry
 // ----------------------------------------------------------------------------
 
+// Declare the functions used in wxCore to access the command line arguments
+// data in wxBase.
+WXDLLIMPEXP_BASE void wxMSWCommandLineInit();
+WXDLLIMPEXP_BASE void wxMSWCommandLineCleanup();
+WXDLLIMPEXP_BASE int& wxMSWCommandLineGetArgc();
+WXDLLIMPEXP_BASE wchar_t** wxMSWCommandLineGetArgv();
+
+#if wxUSE_BASE
+
+namespace
+{
+
 struct wxMSWCommandLineArguments
 {
-    wxMSWCommandLineArguments() { argc = 0; argv = nullptr; }
+    wxMSWCommandLineArguments() { argc = 0; argv = NULL; }
 
     // Initialize this object from the current process command line.
     //
@@ -207,10 +219,18 @@ struct wxMSWCommandLineArguments
         argv = ::CommandLineToArgvW(::GetCommandLineW(), &argc);
     }
 
-    ~wxMSWCommandLineArguments()
+    void Cleanup()
     {
         if ( argc )
+        {
             ::LocalFree(argv);
+            argc = 0;
+        }
+    }
+
+    ~wxMSWCommandLineArguments()
+    {
+        Cleanup();
     }
 #else // !wxUSE_UNICODE
     void Init()
@@ -225,15 +245,15 @@ struct wxMSWCommandLineArguments
 
         argc = args.size();
 
-        // +1 here for the terminating null pointer
+        // +1 here for the terminating NULL
         argv = new wxChar *[argc + 1];
         for ( int i = 0; i < argc; i++ )
         {
             argv[i] = wxStrdup(args[i].t_str());
         }
 
-        // argv[] must be null-terminated
-        argv[argc] = nullptr;
+        // argv[] must be NULL-terminated
+        argv[argc] = NULL;
     }
 
     ~wxMSWCommandLineArguments()
@@ -253,9 +273,35 @@ struct wxMSWCommandLineArguments
 
     int argc;
     wxChar **argv;
+
+    wxDECLARE_NO_COPY_CLASS(wxMSWCommandLineArguments);
 };
 
 static wxMSWCommandLineArguments wxArgs;
+
+} // anonymous namespace
+
+WXDLLIMPEXP_BASE void wxMSWCommandLineInit()
+{
+    wxArgs.Init();
+}
+
+WXDLLIMPEXP_BASE void wxMSWCommandLineCleanup()
+{
+    wxArgs.Cleanup();
+}
+
+WXDLLIMPEXP_BASE int& wxMSWCommandLineGetArgc()
+{
+    return wxArgs.argc;
+}
+
+WXDLLIMPEXP_BASE wchar_t** wxMSWCommandLineGetArgv()
+{
+    return wxArgs.argv;
+}
+
+#endif // wxUSE_BASE
 
 #if wxUSE_GUI
 
@@ -271,7 +317,7 @@ wxMSWEntryCommon(HINSTANCE hInstance, int nCmdShow)
     wxUnusedVar(nCmdShow);
 #endif
 
-    wxArgs.Init();
+    wxMSWCommandLineInit();
 
     return true;
 }
@@ -284,7 +330,7 @@ WXDLLEXPORT bool wxEntryStart(HINSTANCE hInstance,
     if ( !wxMSWEntryCommon(hInstance, nCmdShow) )
        return false;
 
-    return wxEntryStart(wxArgs.argc, wxArgs.argv);
+    return wxEntryStart(wxMSWCommandLineGetArgc(), wxMSWCommandLineGetArgv());
 }
 
 WXDLLEXPORT int wxEntry(HINSTANCE hInstance,
@@ -295,7 +341,7 @@ WXDLLEXPORT int wxEntry(HINSTANCE hInstance,
     if ( !wxMSWEntryCommon(hInstance, nCmdShow) )
         return -1;
 
-    return wxEntry(wxArgs.argc, wxArgs.argv);
+    return wxEntry(wxMSWCommandLineGetArgc(), wxMSWCommandLineGetArgv());
 }
 
 #endif // wxUSE_GUI
@@ -308,9 +354,16 @@ WXDLLEXPORT int wxEntry(HINSTANCE hInstance,
 
 int wxEntry()
 {
-    wxArgs.Init();
+    wxMSWCommandLineInit();
 
-    return wxEntry(wxArgs.argc, wxArgs.argv);
+    return wxEntry(wxMSWCommandLineGetArgc(), wxMSWCommandLineGetArgv());
+}
+
+void wxEntryCleanup()
+{
+    wxEntryCleanupReal();
+
+    wxMSWCommandLineCleanup();
 }
 
 HINSTANCE wxhInstance = 0;

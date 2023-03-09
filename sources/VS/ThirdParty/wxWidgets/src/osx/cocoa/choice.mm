@@ -73,22 +73,22 @@ public:
         delete m_popUpMenu;
     }
     
-    void InsertItem( size_t pos, int itemid, const wxString& text) override
+    void InsertItem( size_t pos, int itemid, const wxString& text) wxOVERRIDE
     {
         m_popUpMenu->Insert( pos, itemid, text );
     }
 
-    size_t GetNumberOfItems() const override
+    size_t GetNumberOfItems() const wxOVERRIDE
     {
         return m_popUpMenu->GetMenuItemCount();
     }
 
-    void RemoveItem( size_t pos ) override
+    void RemoveItem( size_t pos ) wxOVERRIDE
     {
         m_popUpMenu->Delete( m_popUpMenu->FindItemByPosition( pos ) );
     }
 
-    void SetItem(int pos, const wxString& s) override
+    void SetItem(int pos, const wxString& s) wxOVERRIDE
     {
         m_popUpMenu->FindItemByPosition( pos )->SetItemLabel( s ) ;
     }

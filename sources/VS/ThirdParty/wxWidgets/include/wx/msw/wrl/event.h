@@ -28,7 +28,7 @@ public:
             return S_OK;
         }
 
-        *ppvObj = nullptr;
+        *ppvObj = NULL;
         return E_NOINTERFACE;
     }
     ULONG STDMETHODCALLTYPE AddRef() override

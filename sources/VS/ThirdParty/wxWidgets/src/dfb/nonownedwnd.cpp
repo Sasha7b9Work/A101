@@ -132,7 +132,7 @@ bool wxNonOwnedWindow::Create(wxWindow *parent,
     if ( !m_dfbwin->SetOpacity(wxALPHA_TRANSPARENT) )
         return false;
 
-    if ( !wxWindow::Create(nullptr, id, pos, size, style, name) )
+    if ( !wxWindow::Create(NULL, id, pos, size, style, name) )
         return false;
 
     SetParent(parent);
@@ -346,7 +346,7 @@ void wxNonOwnedWindow::HandleQueuedPaintRequests()
 
     DFBRegion r = {paintedRect.GetLeft(), paintedRect.GetTop(),
                    paintedRect.GetRight(), paintedRect.GetBottom()};
-    DFBRegion *rptr = (winRect == paintedRect) ? nullptr : &r;
+    DFBRegion *rptr = (winRect == paintedRect) ? NULL : &r;
 
     GetDfbSurface()->FlipToFront(rptr);
 
@@ -387,18 +387,18 @@ void wxNonOwnedWindow::Update()
 namespace
 {
 
-static wxNonOwnedWindow *gs_insideDFBFocusHandlerOf = nullptr;
+static wxNonOwnedWindow *gs_insideDFBFocusHandlerOf = NULL;
 
 struct InsideDFBFocusHandlerSetter
 {
     InsideDFBFocusHandlerSetter(wxNonOwnedWindow *win)
     {
-        wxASSERT( gs_insideDFBFocusHandlerOf == nullptr );
+        wxASSERT( gs_insideDFBFocusHandlerOf == NULL );
         gs_insideDFBFocusHandlerOf = win;
     }
     ~InsideDFBFocusHandlerSetter()
     {
-        gs_insideDFBFocusHandlerOf = nullptr;
+        gs_insideDFBFocusHandlerOf = NULL;
     }
 };
 

@@ -435,7 +435,9 @@ public:
 
         This is a vararg constructor taking an arbitrary number of extensions
         after the first four required parameters. The list must be terminated
-        by @NULL.
+        by @c wxNullPtr, notice that @c NULL can't be used here in portable
+        code (C++0x @c nullptr can be used as well if your compiler supports
+        it).
      */
     wxFileTypeInfo(const wxString& mimeType,
                    const wxString& openCmd,

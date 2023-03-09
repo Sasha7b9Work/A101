@@ -22,7 +22,7 @@
 
 #include "sashtest.h"
 
-MyFrame *frame = nullptr;
+MyFrame *frame = NULL;
 wxList my_children;
 
 wxIMPLEMENT_APP(MyApp);
@@ -41,7 +41,7 @@ bool MyApp::OnInit(void)
 
   // Create the main frame window
 
-  frame = new MyFrame(nullptr, wxID_ANY, "Sash Demo", wxPoint(0, 0), wxSize(500, 400),
+  frame = new MyFrame(NULL, wxID_ANY, "Sash Demo", wxPoint(0, 0), wxSize(500, 400),
                       wxDEFAULT_FRAME_STYLE |
                       wxHSCROLL | wxVSCROLL);
 
@@ -346,7 +346,7 @@ wxEND_EVENT_TABLE()
 MyChild::MyChild(wxMDIParentFrame *parent, const wxString& title, const wxPoint& pos, const wxSize& size):
   wxMDIChildFrame(parent, wxID_ANY, title, pos, size)
 {
-  canvas = nullptr;
+  canvas = NULL;
   my_children.Append(this);
 }
 

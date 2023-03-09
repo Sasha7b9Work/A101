@@ -549,19 +549,19 @@ void wxRibbonAUIArtProvider::GetBarTabWidth(
         min += bitmap.GetLogicalWidth();
     }
 
-    if(ideal != nullptr)
+    if(ideal != NULL)
     {
         *ideal = width + 16;
     }
-    if(small_begin_need_separator != nullptr)
+    if(small_begin_need_separator != NULL)
     {
         *small_begin_need_separator = min;
     }
-    if(small_must_have_separator != nullptr)
+    if(small_must_have_separator != NULL)
     {
         *small_must_have_separator = min;
     }
-    if(minimum != nullptr)
+    if(minimum != NULL)
     {
         *minimum = min;
     }
@@ -897,12 +897,12 @@ void wxRibbonAUIArtProvider::DrawPartialPanelBackground(wxDC& dc,
 
     wxPoint offset(wnd->GetPosition());
     wxWindow* parent = wnd->GetParent();
-    wxRibbonPanel* panel = nullptr;
+    wxRibbonPanel* panel = NULL;
 
     for(; parent; parent = parent->GetParent())
     {
         panel = wxDynamicCast(parent, wxRibbonPanel);
-        if(panel != nullptr)
+        if(panel != NULL)
         {
             if(!panel->IsHovered())
                 return;
@@ -910,7 +910,7 @@ void wxRibbonAUIArtProvider::DrawPartialPanelBackground(wxDC& dc,
         }
         offset += parent->GetPosition();
     }
-    if(panel == nullptr)
+    if(panel == NULL)
         return;
 
     wxRect background(panel->GetSize());

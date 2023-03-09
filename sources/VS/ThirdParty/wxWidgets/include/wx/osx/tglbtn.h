@@ -37,15 +37,15 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxCheckBoxNameStr));
 
-    virtual void SetValue(bool value) override;
-    virtual bool GetValue() const override;
+    virtual void SetValue(bool value) wxOVERRIDE;
+    virtual bool GetValue() const wxOVERRIDE;
 
-    virtual bool OSXHandleClicked( double timestampsec ) override;
+    virtual bool OSXHandleClicked( double timestampsec ) wxOVERRIDE;
 
-    virtual void Command(wxCommandEvent& event) override;
+    virtual void Command(wxCommandEvent& event) wxOVERRIDE;
 
 protected:
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    virtual wxBorder GetDefaultBorder() const wxOVERRIDE { return wxBORDER_NONE; }
 
 private:
     wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxToggleButton);

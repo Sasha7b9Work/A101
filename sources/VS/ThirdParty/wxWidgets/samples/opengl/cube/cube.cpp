@@ -41,7 +41,7 @@
 // control ids
 enum
 {
-    SpinTimer = wxID_HIGHEST
+    SpinTimer = wxID_HIGHEST + 1
 };
 
 // ----------------------------------------------------------------------------
@@ -456,11 +456,11 @@ wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
 wxEND_EVENT_TABLE()
 
 MyFrame::MyFrame( bool stereoWindow )
-       : wxFrame(nullptr, wxID_ANY, "wxWidgets OpenGL Cube Sample")
+       : wxFrame(NULL, wxID_ANY, "wxWidgets OpenGL Cube Sample")
 {
     int stereoAttribList[] = { WX_GL_RGBA, WX_GL_DOUBLEBUFFER, WX_GL_STEREO, 0 };
 
-    new TestGLCanvas(this, stereoWindow ? stereoAttribList : nullptr);
+    new TestGLCanvas(this, stereoWindow ? stereoAttribList : NULL);
 
     SetIcon(wxICON(sample));
 

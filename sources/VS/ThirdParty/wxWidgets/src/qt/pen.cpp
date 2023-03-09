@@ -209,7 +209,7 @@ class wxPenRefData: public wxGDIRefData
         {
             m_qtPen.setCapStyle(Qt::RoundCap);
             m_qtPen.setJoinStyle(Qt::RoundJoin);
-            m_dashes = nullptr;
+            m_dashes = NULL;
             m_dashesSize = 0;
         }
 
@@ -340,7 +340,7 @@ wxColour wxPen::GetColour() const
 
 wxBitmap *wxPen::GetStipple() const
 {
-    return nullptr;
+    return NULL;
 }
 
 wxPenStyle wxPen::GetStyle() const

@@ -454,12 +454,12 @@ public:
             {
             }
 
-            wxSize GetDefaultSize() const override
+            wxSize GetDefaultSize() const wxOVERRIDE
             {
                 ... determine the minimum/default size for bitmap to use ...
             }
 
-            wxSize GetPreferredBitmapSizeAtScale(double scale) const override
+            wxSize GetPreferredBitmapSizeAtScale(double scale) const wxOVERRIDE
             {
                 // If it's ok to scale the bitmap, just use the standard size
                 // at the given scale:
@@ -470,7 +470,7 @@ public:
                     possibly by letting DoGetPreferredSize() choose it ...
             }
 
-            wxBitmap GetBitmap(const wxSize& size) override
+            wxBitmap GetBitmap(const wxSize& size) wxOVERRIDE
             {
                 ... get the bitmap of the requested size from somewhere and
                     cache it if necessary, i.e. if getting it is expensive ...
@@ -541,12 +541,12 @@ protected:
                 return wxSize(32, 32);
             }
 
-            wxSize GetPreferredBitmapSizeAtScale(double scale) const override
+            wxSize GetPreferredBitmapSizeAtScale(double scale) const wxOVERRIDE
             {
                 return DoGetPreferredSize(scale);
             }
 
-            wxBitmap GetBitmap(const wxSize& size) override
+            wxBitmap GetBitmap(const wxSize& size) wxOVERRIDE
             {
                 // For consistency with GetNextAvailableScale(), we must have
                 // bitmap variants for 32, 48 and 64px sizes.
@@ -566,7 +566,7 @@ protected:
             }
 
         protected:
-            double GetNextAvailableScale(size_t& i) const override
+            double GetNextAvailableScale(size_t& i) const wxOVERRIDE
             {
                 const double availableScales[] = { 1, 1.5, 2, 0 };
 

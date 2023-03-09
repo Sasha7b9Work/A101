@@ -66,7 +66,7 @@ void wxVListBox::Init()
 {
     m_current =
     m_anchor = wxNOT_FOUND;
-    m_selStore = nullptr;
+    m_selStore = NULL;
 }
 
 bool wxVListBox::Create(wxWindow *parent,

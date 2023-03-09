@@ -977,7 +977,7 @@ public:
             Will be filled with the iterator pointing to the location where the
             parsing stopped if the function returns @true. If the entire string
             was consumed, it is set to @c date.end(). Notice that this argument
-            must be non-null.
+            must be non-@NULL.
         @return
             @true if at least part of the string was parsed successfully,
             @false otherwise.

@@ -22,7 +22,7 @@ public:
 
 
 wxStaticBitmap::wxStaticBitmap() :
-    m_qtLabel(nullptr)
+    m_qtLabel(NULL)
 {
 }
 
@@ -53,7 +53,7 @@ bool wxStaticBitmap::Create( wxWindow *parent,
 
 static void SetPixmap( QLabel *label, const QPixmap *pixMap )
 {
-    if ( pixMap != nullptr )
+    if ( pixMap != NULL )
         label->setPixmap( *pixMap );
 }
 
@@ -65,7 +65,7 @@ void wxStaticBitmap::SetBitmap(const wxBitmapBundle& bitmap)
 wxBitmap wxStaticBitmap::GetBitmap() const
 {
     const QPixmap* pix = m_qtLabel->pixmap();
-    if ( pix != nullptr )
+    if ( pix != NULL )
         return wxBitmap( *pix );
     else
         return wxBitmap();

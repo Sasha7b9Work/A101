@@ -43,26 +43,26 @@ public:
 
 
     // accessors
-    virtual int GetValue() const override;
-    virtual void SetValue(int val) override;
-    virtual void SetRange(int minVal, int maxVal) override;
+    virtual int GetValue() const wxOVERRIDE;
+    virtual void SetValue(int val) wxOVERRIDE;
+    virtual void SetRange(int minVal, int maxVal) wxOVERRIDE;
 
     // implementation
-    virtual bool MSWCommand(WXUINT param, WXWORD id) override;
-    virtual bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
+    virtual bool MSWCommand(WXUINT param, WXWORD id) wxOVERRIDE;
+    virtual bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) wxOVERRIDE;
     virtual bool MSWOnScroll(int orientation, WXWORD wParam,
-                             WXWORD pos, WXHWND control) override;
+                             WXWORD pos, WXHWND control) wxOVERRIDE;
 
     // a wxSpinButton can't do anything useful with focus, only wxSpinCtrl can
-    virtual bool AcceptsFocus() const override { return false; }
+    virtual bool AcceptsFocus() const wxOVERRIDE { return false; }
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
-    virtual void SetIncrement(int value) override;
-    virtual int  GetIncrement() const override;
+    virtual bool CanApplyThemeBorder() const wxOVERRIDE { return false; }
+    virtual void SetIncrement(int value) wxOVERRIDE;
+    virtual int  GetIncrement() const wxOVERRIDE;
 
 protected:
-   virtual wxSize DoGetBestSize() const override;
+   virtual wxSize DoGetBestSize() const wxOVERRIDE;
 
    // ensure that the control displays a value in the current range
    virtual void NormalizeValue();

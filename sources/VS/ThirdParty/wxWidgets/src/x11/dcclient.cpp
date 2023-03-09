@@ -63,7 +63,7 @@
 #define IS_16_PIX_HATCH(s) ((s)!=wxBRUSHSTYLE_CROSSDIAG_HATCH && (s)!=wxBRUSHSTYLE_HORIZONTAL_HATCH && (s)!=wxBRUSHSTYLE_VERTICAL_HATCH)
 
 static Pixmap  hatches[num_hatches];
-static Pixmap *hatch_bitmap = nullptr;
+static Pixmap *hatch_bitmap = NULL;
 
 //-----------------------------------------------------------------------------
 // constants
@@ -130,7 +130,7 @@ static GC wxGetPoolGC( Window window, wxPoolGCType type )
     {
         if (!wxGCPool[i].m_gc)
         {
-            wxGCPool[i].m_gc = XCreateGC( wxGlobalDisplay(), window, 0, nullptr );
+            wxGCPool[i].m_gc = XCreateGC( wxGlobalDisplay(), window, 0, NULL );
             XSetGraphicsExposures( wxGlobalDisplay(), wxGCPool[i].m_gc, FALSE );
             wxGCPool[i].m_type = type;
             wxGCPool[i].m_used = false;
@@ -144,7 +144,7 @@ static GC wxGetPoolGC( Window window, wxPoolGCType type )
 
     wxFAIL_MSG( wxT("No GC available") );
 
-    return (GC) nullptr;
+    return (GC) NULL;
 }
 
 static void wxFreePoolGC( GC gc )
@@ -221,19 +221,19 @@ wxWindowDCImpl::~wxWindowDCImpl()
 
 void wxWindowDCImpl::Init()
 {
-    m_display = nullptr;
-    m_penGC = nullptr;
-    m_brushGC = nullptr;
-    m_textGC = nullptr;
-    m_bgGC = nullptr;
-    m_cmap = nullptr;
+    m_display = NULL;
+    m_penGC = NULL;
+    m_brushGC = NULL;
+    m_textGC = NULL;
+    m_bgGC = NULL;
+    m_cmap = NULL;
     m_isMemDC = false;
     m_isScreenDC = false;
-    m_x11window = nullptr;
+    m_x11window = NULL;
 
 #if wxUSE_UNICODE
     m_context = wxTheApp->GetPangoContext();
-    m_fontdesc = nullptr;
+    m_fontdesc = NULL;
 #endif
 }
 
@@ -1028,7 +1028,7 @@ void wxWindowDCImpl::DoDrawBitmap( const wxBitmap &bitmap,
 
     wxCHECK_RET( bitmap.IsOk(), wxT("invalid bitmap") );
 
-    bool is_mono = (bitmap.GetBitmap() != nullptr);
+    bool is_mono = (bitmap.GetBitmap() != NULL);
 
     /* scale/translate size and position */
     int xx = XLOG2DEV(x);
@@ -1072,7 +1072,7 @@ void wxWindowDCImpl::DoDrawBitmap( const wxBitmap &bitmap,
     }
 
     /* apply mask if any */
-    WXPixmap mask = nullptr;
+    WXPixmap mask = NULL;
     if (use_bitmap.GetMask())
         mask = use_bitmap.GetMask()->GetBitmap();
 
@@ -1146,7 +1146,7 @@ void wxWindowDCImpl::DoDrawBitmap( const wxBitmap &bitmap,
 
     wxCHECK_RET( bitmap.IsOk(), wxT("invalid bitmap") );
 
-    bool is_mono = (bitmap.GetBitmap() != nullptr);
+    bool is_mono = (bitmap.GetBitmap() != NULL);
 
     // scale/translate size and position
     int xx = XLOG2DEV(x);
@@ -1190,7 +1190,7 @@ void wxWindowDCImpl::DoDrawBitmap( const wxBitmap &bitmap,
     }
 
     // apply mask if any
-    WXPixmap mask = nullptr;
+    WXPixmap mask = NULL;
     if (use_bitmap.GetMask()) mask = use_bitmap.GetMask()->GetBitmap();
 
     bool setClipMask = false;
@@ -1209,7 +1209,7 @@ void wxWindowDCImpl::DoDrawBitmap( const wxBitmap &bitmap,
             Window xroot = RootWindow( xdisplay, xscreen );
 
             new_pixmap = XCreatePixmap( xdisplay, xroot, ww, hh, 1 );
-            GC gc = XCreateGC( xdisplay, new_pixmap, 0, nullptr );
+            GC gc = XCreateGC( xdisplay, new_pixmap, 0, NULL );
 
             XSetForeground( xdisplay, gc, BlackPixel(xdisplay,xscreen) );
 
@@ -1426,12 +1426,12 @@ bool wxWindowDCImpl::DoBlit( wxCoord xdest, wxCoord ydest, wxCoord width, wxCoor
         }
 
         // apply mask if any
-        WXPixmap mask = nullptr;
+        WXPixmap mask = NULL;
         if (use_bitmap.GetMask()) mask = use_bitmap.GetMask()->GetBitmap();
 
         if (useMask && mask)
         {
-            WXPixmap new_mask = nullptr;
+            WXPixmap new_mask = NULL;
 #if 0
             if (!m_currentClippingRegion.IsNull())
             {
@@ -1945,7 +1945,7 @@ void wxWindowDCImpl::SetPen( const wxPen &pen )
         default:
         {
             lineStyle = LineSolid;
-            req_dash = nullptr;
+            req_dash = NULL;
             req_nb_dash = 0;
             break;
         }
@@ -2337,13 +2337,13 @@ void wxWindowDCImpl::DestroyClippingRegion()
 void wxWindowDCImpl::Destroy()
 {
     if (m_penGC) wxFreePoolGC( (GC) m_penGC );
-    m_penGC = nullptr;
+    m_penGC = NULL;
     if (m_brushGC) wxFreePoolGC( (GC) m_brushGC );
-    m_brushGC = nullptr;
+    m_brushGC = NULL;
     if (m_textGC) wxFreePoolGC( (GC) m_textGC );
-    m_textGC = nullptr;
+    m_textGC = NULL;
     if (m_bgGC) wxFreePoolGC( (GC) m_bgGC );
-    m_bgGC = nullptr;
+    m_bgGC = NULL;
 }
 
 void wxWindowDCImpl::ComputeScaleAndOrigin()
@@ -2387,7 +2387,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxClientDCImpl, wxWindowDCImpl);
 wxClientDCImpl::wxClientDCImpl( wxDC *owner, wxWindow *window )
           : wxWindowDCImpl( owner, window )
 {
-    wxCHECK_RET( window, wxT("null window in wxClientDC::wxClientDC") );
+    wxCHECK_RET( window, wxT("NULL window in wxClientDC::wxClientDC") );
 
     m_x11window = (WXWindow*) window->GetClientAreaWindow();
 

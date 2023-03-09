@@ -21,22 +21,22 @@ class WXDLLIMPEXP_CORE wxColourDialog : public wxDialog
 {
 public:
     wxColourDialog() { Init(); }
-    wxColourDialog(wxWindow *parent, const wxColourData *data = nullptr)
+    wxColourDialog(wxWindow *parent, const wxColourData *data = NULL)
     {
         Init();
 
         Create(parent, data);
     }
 
-    bool Create(wxWindow *parent, const wxColourData *data = nullptr);
+    bool Create(wxWindow *parent, const wxColourData *data = NULL);
 
     wxColourData& GetColourData() { return m_colourData; }
 
     // override some base class virtuals
-    virtual void SetTitle(const wxString& title) override;
-    virtual wxString GetTitle() const override;
+    virtual void SetTitle(const wxString& title) wxOVERRIDE;
+    virtual wxString GetTitle() const wxOVERRIDE;
 
-    virtual int ShowModal() override;
+    virtual int ShowModal() wxOVERRIDE;
 
     // wxMSW-specific implementation from now on
     // -----------------------------------------
@@ -51,11 +51,11 @@ protected:
     // common part of all ctors
     void Init();
 
-    virtual void DoGetPosition( int *x, int *y ) const override;
-    virtual void DoGetSize(int *width, int *height) const override;
-    virtual void DoGetClientSize(int *width, int *height) const override;
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
-    virtual void DoCentre(int dir) override;
+    virtual void DoGetPosition( int *x, int *y ) const wxOVERRIDE;
+    virtual void DoGetSize(int *width, int *height) const wxOVERRIDE;
+    virtual void DoGetClientSize(int *width, int *height) const wxOVERRIDE;
+    virtual void DoMoveWindow(int x, int y, int width, int height) wxOVERRIDE;
+    virtual void DoCentre(int dir) wxOVERRIDE;
 
     wxColourData        m_colourData;
     wxString            m_title;

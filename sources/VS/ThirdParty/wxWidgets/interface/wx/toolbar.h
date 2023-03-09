@@ -80,13 +80,13 @@ enum
 class wxToolBarToolBase : public wxObject
 {
 public:
-    wxToolBarToolBase(wxToolBarBase *tbar = nullptr,
+    wxToolBarToolBase(wxToolBarBase *tbar = NULL,
                       int toolid = wxID_SEPARATOR,
                       const wxString& label = wxEmptyString,
                       const wxBitmapBundle& bmpNormal = wxNullBitmap,
                       const wxBitmapBundle& bmpDisabled = wxNullBitmap,
                       wxItemKind kind = wxITEM_NORMAL,
-                      wxObject *clientData = nullptr,
+                      wxObject *clientData = NULL,
                       const wxString& shortHelpString = wxEmptyString,
                       const wxString& longHelpString = wxEmptyString);
 
@@ -342,7 +342,7 @@ public:
                                     const wxBitmapBundle& bmpDisabled = wxNullBitmap,
                                     const wxString& shortHelp = wxEmptyString,
                                     const wxString& longHelp = wxEmptyString,
-                                    wxObject* clientData = nullptr);
+                                    wxObject* clientData = NULL);
 
     /**
         Adds any control to the toolbar, typically e.g.\ a wxComboBox.
@@ -378,7 +378,7 @@ public:
                                     const wxBitmapBundle& bmpDisabled = wxNullBitmap,
                                     const wxString& shortHelp = wxEmptyString,
                                     const wxString& longHelp = wxEmptyString,
-                                    wxObject* clientData = nullptr);
+                                    wxObject* clientData = NULL);
 
     /**
         Adds a separator for spacing groups of tools.
@@ -503,7 +503,7 @@ public:
                                wxItemKind kind = wxITEM_NORMAL,
                                const wxString& shortHelp = wxEmptyString,
                                const wxString& longHelp = wxEmptyString,
-                               wxObject* clientData = nullptr);
+                               wxObject* clientData = NULL);
     ///@}
 
     /**
@@ -593,6 +593,11 @@ public:
         of the bitmaps associated with the tools added to the toolbar, it is
         usually unnecessary to call either this function or
         SetToolBitmapSize() at all.
+
+        This function returns the size in logical pixels, for consistency with
+        SetToolBitmapSize() which takes size in logical pixels. See @ref
+        overview_high_dpi for more information about the different pixel types
+        and how to convert between them.
 
         @remarks Note that this is the size of the bitmap you pass to AddTool(),
             and not the eventual size of the tool button.
@@ -753,7 +758,7 @@ public:
                                     wxItemKind kind = wxITEM_NORMAL,
                                     const wxString& shortHelp = wxEmptyString,
                                     const wxString& longHelp = wxEmptyString,
-                                    wxObject *clientData = nullptr);
+                                    wxObject *clientData = NULL);
 
     wxToolBarToolBase* InsertTool(size_t pos,
                                   wxToolBarToolBase* tool);
@@ -1020,7 +1025,7 @@ public:
                                           const wxBitmapBundle& bmpNormal,
                                           const wxBitmapBundle& bmpDisabled = wxNullBitmap,
                                           wxItemKind kind = wxITEM_NORMAL,
-                                          wxObject *clientData = nullptr,
+                                          wxObject *clientData = NULL,
                                           const wxString& shortHelp = wxEmptyString,
                                           const wxString& longHelp = wxEmptyString);
     /**

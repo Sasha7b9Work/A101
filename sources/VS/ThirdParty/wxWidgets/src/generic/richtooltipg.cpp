@@ -267,14 +267,14 @@ public:
     }
 
 protected:
-    virtual void OnDismiss() override
+    virtual void OnDismiss() wxOVERRIDE
     {
         Destroy();
     }
 
 private:
 #ifdef HAVE_MSW_THEME
-    // Returns non-null theme only if we're using Win7-style tooltips.
+    // Returns non-NULL theme only if we're using Win7-style tooltips.
     static bool UseTooltipTheme()
     {
         // Even themed applications under XP still use "classic" tooltips.

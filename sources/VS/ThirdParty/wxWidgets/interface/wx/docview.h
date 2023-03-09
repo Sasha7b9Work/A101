@@ -433,7 +433,7 @@ public:
         changes.
 
         @param doc
-            The document to close, must be non-null.
+            The document to close, must be non-@NULL.
         @param force
             If @true, close the document even if wxDocument::Close() returns
             @false.
@@ -1239,12 +1239,12 @@ public:
         application-specific data.
 
         @param parent
-            Specifying a non-null parent document here makes this document a
+            Specifying a non-@c NULL parent document here makes this document a
             special <em>child document</em>, see their description in the class
             documentation. Notice that this parameter exists but is ignored in
             wxWidgets versions prior to 2.9.1.
     */
-    wxDocument(wxDocument* parent = nullptr);
+    wxDocument(wxDocument* parent = NULL);
 
     /**
         Destructor. Removes itself from the document manager.
@@ -1472,12 +1472,10 @@ public:
         case since wxWidgets 2.9.0.
 
         Returning @false from this function prevents the document from closing.
-        Note that there is no need to ask the user if the changes to the
-        document should be saved, as this was already checked by
-        OnSaveModified() by the time this function is called, if necessary, and
-        so, typically, this function should always return @true to allow the
-        document to be closed, as leaving it open after asking the user about
-        saving the changes would be confusing.
+        The default implementation does this if the document is modified and
+        the user didn't confirm discarding the modifications to it.
+
+        Return @true to allow the document to be closed.
     */
     virtual bool OnCloseDocument();
 
@@ -1543,19 +1541,6 @@ public:
         succeeds. If Cancel, the function fails.
     */
     virtual bool OnSaveModified();
-
-    /**
-        This function is called when a document is forced to close.
-
-        The default implementation asks the user whether to save the changes
-        but, unlike OnSaveModified(), does not allow to cancel closing.
-
-        The document is force closed when wxDocManager::CloseDocument() is
-        called with its @c force argument set to @true.
-
-        @since 3.3.0
-     */
-    virtual void OnSaveBeforeForceClose();
 
     /**
         Removes the view from the document's list of views.
@@ -1660,11 +1645,11 @@ public:
     void SetTitle(const wxString& title);
 
     /**
-        Updates all views. If @a sender is non-null, does not update this
+        Updates all views. If @a sender is non-@NULL, does not update this
         view. @a hint represents optional information to allow a view to
         optimize its update.
     */
-    virtual void UpdateAllViews(wxView* sender = nullptr, wxObject* hint = nullptr);
+    virtual void UpdateAllViews(wxView* sender = NULL, wxObject* hint = NULL);
 
 protected:
     /**

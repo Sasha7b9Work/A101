@@ -153,12 +153,12 @@ public:
     {
     }
 
-    virtual bool OnInit() override
+    virtual bool OnInit() wxOVERRIDE
     {
         return wxOleInitialize();
     }
 
-    virtual void OnExit() override
+    virtual void OnExit() wxOVERRIDE
     {
         wxOleUninitialize();
     }
@@ -564,7 +564,7 @@ bool wxConsoleStderr::Write(const wxString& text)
         return false;
     }
 
-    if ( !::WriteConsole(m_hStderr, text.t_str(), text.length(), &ret, nullptr) )
+    if ( !::WriteConsole(m_hStderr, text.t_str(), text.length(), &ret, NULL) )
     {
         wxLogLastError(wxT("WriteConsole"));
         return false;
@@ -606,7 +606,7 @@ bool wxGUIAppTraits::WriteToStderr(const wxString& WXUNUSED(text))
 WXHWND wxGUIAppTraits::GetMainHWND() const
 {
     const wxWindow* const w = wxApp::GetMainTopWindow();
-    return w ? w->GetHWND() : nullptr;
+    return w ? w->GetHWND() : NULL;
 }
 
 // ===========================================================================
@@ -635,7 +635,7 @@ public:
     wxCallBaseCleanup(wxApp *app) : m_app(app) { }
     ~wxCallBaseCleanup() { if ( m_app ) m_app->wxAppBase::CleanUp(); }
 
-    void Dismiss() { m_app = nullptr; }
+    void Dismiss() { m_app = NULL; }
 
 private:
     wxApp *m_app;
@@ -683,7 +683,7 @@ const wxChar *wxApp::GetRegisteredClassName(const wxChar *name,
 
     wndclass.lpfnWndProc   = (WNDPROC)wxWndProc;
     wndclass.hInstance     = wxGetInstance();
-    wndclass.hCursor       = ::LoadCursor(nullptr, IDC_ARROW);
+    wndclass.hCursor       = ::LoadCursor(NULL, IDC_ARROW);
     wndclass.hbrBackground = (HBRUSH)wxUIntToPtr(bgBrushCol + 1);
     wndclass.style         = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS | extraStyles;
 
@@ -696,7 +696,7 @@ const wxChar *wxApp::GetRegisteredClassName(const wxChar *name,
         {
             wxLogLastError(wxString::Format(wxT("RegisterClass(%s)"),
                            regClass.regname));
-            return nullptr;
+            return NULL;
         }
     }
 
@@ -707,7 +707,7 @@ const wxChar *wxApp::GetRegisteredClassName(const wxChar *name,
         wxLogLastError(wxString::Format(wxT("RegisterClass(%s)"),
                        regClass.regname));
         ::UnregisterClass(regClass.regname.c_str(), wxGetInstance());
-        return nullptr;
+        return NULL;
     }
 
     gs_regClassesInfo.push_back(regClass);
@@ -988,7 +988,7 @@ bool wxApp::OnExceptionInMainLoop()
     switch (
             ::MessageBox
               (
-                nullptr,
+                NULL,
                 wxT("An unhandled exception occurred. Press \"Abort\" to \
 terminate the program,\r\n\
 \"Retry\" to exit the program normally and \"Ignore\" to try to continue."),

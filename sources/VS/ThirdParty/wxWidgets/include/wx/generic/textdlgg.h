@@ -38,7 +38,7 @@ class WXDLLIMPEXP_CORE wxTextEntryDialog : public wxDialog
 public:
     wxTextEntryDialog()
     {
-        m_textctrl = nullptr;
+        m_textctrl = NULL;
         m_dialogStyle = 0;
     }
 
@@ -68,12 +68,15 @@ public:
 
 #if wxUSE_VALIDATORS
     void SetTextValidator( const wxTextValidator& validator );
+#if WXWIN_COMPATIBILITY_2_8
+    wxDEPRECATED( void SetTextValidator( long style ) );
+#endif
     void SetTextValidator( wxTextValidatorStyle style = wxFILTER_NONE );
     wxTextValidator* GetTextValidator() { return (wxTextValidator*)m_textctrl->GetValidator(); }
 #endif // wxUSE_VALIDATORS
 
-    virtual bool TransferDataToWindow() override;
-    virtual bool TransferDataFromWindow() override;
+    virtual bool TransferDataToWindow() wxOVERRIDE;
+    virtual bool TransferDataFromWindow() wxOVERRIDE;
 
     // implementation only
     void OnOK(wxCommandEvent& event);
@@ -128,7 +131,7 @@ WXDLLIMPEXP_CORE wxString
     wxGetTextFromUser(const wxString& message,
                     const wxString& caption = wxASCII_STR(wxGetTextFromUserPromptStr),
                     const wxString& default_value = wxEmptyString,
-                    wxWindow *parent = nullptr,
+                    wxWindow *parent = NULL,
                     wxCoord x = wxDefaultCoord,
                     wxCoord y = wxDefaultCoord,
                     bool centre = true);
@@ -137,7 +140,7 @@ WXDLLIMPEXP_CORE wxString
     wxGetPasswordFromUser(const wxString& message,
                         const wxString& caption = wxASCII_STR(wxGetPasswordFromUserPromptStr),
                         const wxString& default_value = wxEmptyString,
-                        wxWindow *parent = nullptr,
+                        wxWindow *parent = NULL,
                         wxCoord x = wxDefaultCoord,
                         wxCoord y = wxDefaultCoord,
                         bool centre = true);

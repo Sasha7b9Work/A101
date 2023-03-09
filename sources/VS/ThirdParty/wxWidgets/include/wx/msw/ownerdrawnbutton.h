@@ -24,7 +24,7 @@
 class WXDLLIMPEXP_CORE wxMSWOwnerDrawnButtonBase
 {
 protected:
-    // Ctor takes the back pointer to the real window, must be non-null.
+    // Ctor takes the back pointer to the real window, must be non-NULL.
     wxMSWOwnerDrawnButtonBase(wxWindow* win) :
         m_win(win)
     {
@@ -110,7 +110,7 @@ public:
     {
     }
 
-    virtual bool SetForegroundColour(const wxColour& colour) override
+    virtual bool SetForegroundColour(const wxColour& colour) wxOVERRIDE
     {
         if ( !Base::SetForegroundColour(colour) )
             return false;
@@ -120,7 +120,7 @@ public:
         return true;
     }
 
-    virtual bool MSWOnDraw(WXDRAWITEMSTRUCT *item) override
+    virtual bool MSWOnDraw(WXDRAWITEMSTRUCT *item) wxOVERRIDE
     {
         return MSWDrawButton(item) || Base::MSWOnDraw(item);
     }

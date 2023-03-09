@@ -21,6 +21,21 @@
 // NB: this is needed even if wxUSE_LOG == 0
 typedef unsigned long wxLogLevel;
 
+// the trace masks have been superseded by symbolic trace constants, they're
+// for compatibility only and will be removed soon - do NOT use them
+#if WXWIN_COMPATIBILITY_2_8
+    #define wxTraceMemAlloc 0x0001  // trace memory allocation (new/delete)
+    #define wxTraceMessages 0x0002  // trace window messages/X callbacks
+    #define wxTraceResAlloc 0x0004  // trace GDI resource allocation
+    #define wxTraceRefCount 0x0008  // trace various ref counting operations
+
+    #ifdef  __WINDOWS__
+        #define wxTraceOleCalls 0x0100  // OLE interface calls
+    #endif
+
+    typedef unsigned long wxTraceMask;
+#endif // WXWIN_COMPATIBILITY_2_8
+
 // ----------------------------------------------------------------------------
 // headers
 // ----------------------------------------------------------------------------
@@ -156,7 +171,7 @@ public:
         threadId = wxThread::GetCurrentId();
 #endif // wxUSE_THREADS
 
-        m_data = nullptr;
+        m_data = NULL;
     }
 
     // we need to define copy ctor and assignment operator because of m_data
@@ -184,15 +199,15 @@ public:
 
 
     // the file name and line number of the file where the log record was
-    // generated, if available or nullptr and 0 otherwise
+    // generated, if available or NULL and 0 otherwise
     const char *filename;
     int line;
 
-    // the name of the function where the log record was generated (may be null
+    // the name of the function where the log record was generated (may be NULL
     // if the compiler doesn't support __FUNCTION__)
     const char *func;
 
-    // the name of the component which generated this message, may be null if
+    // the name of the component which generated this message, may be NULL if
     // not set (i.e. wxLOG_COMPONENT not defined). It must be in ASCII.
     const char *component;
 
@@ -277,7 +292,7 @@ private:
         wxStringToStringHashMap strValues;
     };
 
-    // nullptr if not used
+    // NULL if not used
     ExtraData *m_data;
 };
 
@@ -432,7 +447,7 @@ public:
     // wxAppTraits::CreateLogTarget() to create one if none exists
     static wxLog *GetActiveTarget();
 
-    // change log target, logger may be null
+    // change log target, logger may be NULL
     static wxLog *SetActiveTarget(wxLog *logger);
 
 #if wxUSE_THREADS
@@ -450,7 +465,7 @@ public:
     static void Resume() { ms_suspendCount--; }
 
     // should GetActiveTarget() try to create a new log object if the
-    // current is null?
+    // current is NULL?
     static void DontCreateOnDemand();
 
     // Make GetActiveTarget() create a new log object again.
@@ -554,12 +569,22 @@ public:
     // a helper calling the above overload with current time
     static void OnLog(wxLogLevel level, const wxString& msg)
     {
-        OnLog(level, msg, time(nullptr));
+        OnLog(level, msg, time(NULL));
     }
 
 
     // this method exists for backwards compatibility only, don't use
     bool HasPendingMessages() const { return true; }
+
+    // don't use integer masks any more, use string trace masks instead
+#if WXWIN_COMPATIBILITY_2_8
+    wxDEPRECATED_INLINE( static void SetTraceMask(wxTraceMask ulMask),
+        ms_ulTraceMask = ulMask; )
+
+    // this one can't be marked deprecated as it's used in our own wxLogger
+    // below but it still is deprecated and shouldn't be used
+    static wxTraceMask GetTraceMask() { return ms_ulTraceMask; }
+#endif // WXWIN_COMPATIBILITY_2_8
 
 protected:
     // the logging functions that can be overridden: DoLogRecord() is called
@@ -583,6 +608,35 @@ protected:
     // but if you do not override them in your derived class you must override
     // this one as the default implementation of it simply asserts
     virtual void DoLogText(const wxString& msg);
+
+
+    // the rest of the functions are for backwards compatibility only, don't
+    // use them in new code; if you're updating your existing code you need to
+    // switch to overriding DoLogRecord/Text() above (although as long as these
+    // functions exist, log classes using them will continue to work)
+#if WXWIN_COMPATIBILITY_2_8
+    wxDEPRECATED_BUT_USED_INTERNALLY(
+        virtual void DoLog(wxLogLevel level, const char *szString, time_t t)
+    );
+
+    wxDEPRECATED_BUT_USED_INTERNALLY(
+        virtual void DoLog(wxLogLevel level, const wchar_t *wzString, time_t t)
+    );
+
+    // these shouldn't be used by new code
+    wxDEPRECATED_BUT_USED_INTERNALLY_INLINE(
+        virtual void DoLogString(const char *WXUNUSED(szString),
+                                 time_t WXUNUSED(t)),
+        wxEMPTY_PARAMETER_VALUE
+    )
+
+    wxDEPRECATED_BUT_USED_INTERNALLY_INLINE(
+        virtual void DoLogString(const wchar_t *WXUNUSED(wzString),
+                                 time_t WXUNUSED(t)),
+        wxEMPTY_PARAMETER_VALUE
+    )
+#endif // WXWIN_COMPATIBILITY_2_8
+
 
     // log a message indicating the number of times the previous message was
     // repeated if previous repetition counter is strictly positive, does
@@ -642,6 +696,10 @@ private:
     // disabled
     static wxString    ms_timestamp;
 
+#if WXWIN_COMPATIBILITY_2_8
+    static wxTraceMask ms_ulTraceMask;   // controls wxLogTrace behaviour
+#endif // WXWIN_COMPATIBILITY_2_8
+
     wxDECLARE_NO_COPY_CLASS(wxLog);
 };
 
@@ -661,10 +719,10 @@ public:
 
     // show the buffer contents to the user in the best possible way (this uses
     // wxMessageOutputMessageBox) and clear it
-    virtual void Flush() override;
+    virtual void Flush() wxOVERRIDE;
 
 protected:
-    virtual void DoLogTextAtLevel(wxLogLevel level, const wxString& msg) override;
+    virtual void DoLogTextAtLevel(wxLogLevel level, const wxString& msg) wxOVERRIDE;
 
 private:
     wxString m_str;
@@ -679,12 +737,12 @@ class WXDLLIMPEXP_BASE wxLogStderr : public wxLog,
 {
 public:
     // redirect log output to a FILE
-    wxLogStderr(FILE *fp = nullptr,
+    wxLogStderr(FILE *fp = NULL,
                 const wxMBConv &conv = wxConvWhateverWorks);
 
 protected:
     // implement sink function
-    virtual void DoLogText(const wxString& msg) override;
+    virtual void DoLogText(const wxString& msg) wxOVERRIDE;
 
     wxDECLARE_NO_COPY_CLASS(wxLogStderr);
 };
@@ -697,12 +755,12 @@ class WXDLLIMPEXP_BASE wxLogStream : public wxLog,
 {
 public:
     // redirect log output to an ostream
-    wxLogStream(wxSTD ostream *ostr = (wxSTD ostream *) nullptr,
+    wxLogStream(wxSTD ostream *ostr = (wxSTD ostream *) NULL,
                 const wxMBConv& conv = wxConvWhateverWorks);
 
 protected:
     // implement sink function
-    virtual void DoLogText(const wxString& msg) override;
+    virtual void DoLogText(const wxString& msg) wxOVERRIDE;
 
     // using ptr here to avoid including <iostream.h> from this file
     wxSTD ostream *m_ostr;
@@ -767,20 +825,20 @@ public:
     // are we passing the messages to the previous log target?
     bool IsPassingMessages() const { return m_bPassMessages; }
 
-    // return the previous log target (may be null)
+    // return the previous log target (may be NULL)
     wxLog *GetOldLog() const { return m_logOld; }
 
     // override base class version to flush the old logger as well
-    virtual void Flush() override;
+    virtual void Flush() wxOVERRIDE;
 
     // call to avoid destroying the old log target
-    void DetachOldLog() { m_logOld = nullptr; }
+    void DetachOldLog() { m_logOld = NULL; }
 
 protected:
     // pass the record to the old logger if needed
     virtual void DoLogRecord(wxLogLevel level,
                              const wxString& msg,
-                             const wxLogRecordInfo& info) override;
+                             const wxLogRecordInfo& info) wxOVERRIDE;
 
 private:
     // the current log target
@@ -969,6 +1027,15 @@ public:
         DoLogTrace, DoLogTraceUtf8
     )
 
+#if WXWIN_COMPATIBILITY_2_8
+    WX_DEFINE_VARARG_FUNC_VOID
+    (
+        LogTrace,
+        2, (wxTraceMask, const wxFormatString&),
+        DoLogTraceMask, DoLogTraceMaskUtf8
+    )
+#endif // WXWIN_COMPATIBILITY_2_8
+
 private:
 #if !wxUSE_UTF8_LOCALE_ONLY
     void DoLog(const wxChar *format, ...)
@@ -1022,6 +1089,21 @@ private:
         DoCallOnLog(format, argptr);
         va_end(argptr);
     }
+
+#if WXWIN_COMPATIBILITY_2_8
+    void DoLogTraceMask(wxTraceMask mask, const wxChar *format, ...)
+    {
+        if ( (wxLog::GetTraceMask() & mask) != mask )
+            return;
+
+        Store(wxLOG_KEY_TRACE_MASK, mask);
+
+        va_list argptr;
+        va_start(argptr, format);
+        DoCallOnLog(format, argptr);
+        va_end(argptr);
+    }
+#endif // WXWIN_COMPATIBILITY_2_8
 #endif // !wxUSE_UTF8_LOCALE_ONLY
 
 #if wxUSE_UNICODE_UTF8
@@ -1076,6 +1158,21 @@ private:
         DoCallOnLog(format, argptr);
         va_end(argptr);
     }
+
+#if WXWIN_COMPATIBILITY_2_8
+    void DoLogTraceMaskUtf8(wxTraceMask mask, const char *format, ...)
+    {
+        if ( (wxLog::GetTraceMask() & mask) != mask )
+            return;
+
+        Store(wxLOG_KEY_TRACE_MASK, mask);
+
+        va_list argptr;
+        va_start(argptr, format);
+        DoCallOnLog(format, argptr);
+        va_end(argptr);
+    }
+#endif // WXWIN_COMPATIBILITY_2_8
 #endif // wxUSE_UNICODE_UTF8
 
     void DoCallOnLog(wxLogLevel level, const wxString& format, va_list argptr)
@@ -1307,7 +1404,7 @@ public:
 
 // Dummy macros to replace some functions.
 #define wxSysErrorCode() (unsigned long)0
-#define wxSysErrorMsg( X ) (const wxChar*)nullptr
+#define wxSysErrorMsg( X ) (const wxChar*)NULL
 #define wxSysErrorMsgStr( X ) wxEmptyString
 
 // Fake symbolic trace masks... for those that are used frequently
@@ -1336,7 +1433,12 @@ inline void wxLogNop() { }
     #define wxVLogDebug(format, argptr) wxDO_LOGV(Debug, format, argptr)
 #else // !wxUSE_LOG_DEBUG
     #define wxVLogDebug(fmt, valist) wxLogNop()
-    #define wxLogDebug(fmt, ...) wxLogNop()
+
+    #ifdef HAVE_VARIADIC_MACROS
+        #define wxLogDebug(fmt, ...) wxLogNop()
+    #else // !HAVE_VARIADIC_MACROS
+        WX_DEFINE_VARARG_FUNC_NOP(wxLogDebug, 1, (const wxFormatString&))
+    #endif
 #endif // wxUSE_LOG_DEBUG/!wxUSE_LOG_DEBUG
 
 #if wxUSE_LOG_TRACE
@@ -1344,7 +1446,15 @@ inline void wxLogNop() { }
     #define wxVLogTrace wxDO_LOG_IF_ENABLED_WITH_FUNC(Trace, LogVTrace)
 #else  // !wxUSE_LOG_TRACE
     #define wxVLogTrace(mask, fmt, valist) wxLogNop()
-    #define wxLogTrace(mask, fmt, ...) wxLogNop()
+
+    #ifdef HAVE_VARIADIC_MACROS
+        #define wxLogTrace(mask, fmt, ...) wxLogNop()
+    #else // !HAVE_VARIADIC_MACROS
+        #if WXWIN_COMPATIBILITY_2_8
+        WX_DEFINE_VARARG_FUNC_NOP(wxLogTrace, 2, (wxTraceMask, const wxFormatString&))
+        #endif
+        WX_DEFINE_VARARG_FUNC_NOP(wxLogTrace, 2, (const wxString&, const wxFormatString&))
+    #endif // HAVE_VARIADIC_MACROS/!HAVE_VARIADIC_MACROS
 #endif // wxUSE_LOG_TRACE/!wxUSE_LOG_TRACE
 
 // wxLogFatalError helper: show the (fatal) error to the user in a safe way,

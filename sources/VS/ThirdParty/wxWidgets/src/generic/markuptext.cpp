@@ -63,7 +63,7 @@ public:
     const wxSize& GetSize() const { return m_size; }
 
 
-    virtual void OnText(const wxString& text) override
+    virtual void OnText(const wxString& text) wxOVERRIDE
     {
         // TODO-MULTILINE-MARKUP: Must use GetMultiLineTextExtent().
         const wxSize size = m_dc.GetTextExtent(text);
@@ -81,12 +81,12 @@ public:
         }
     }
 
-    virtual void OnAttrStart(const Attr& attr) override
+    virtual void OnAttrStart(const Attr& attr) wxOVERRIDE
     {
         m_dc.SetFont(attr.font);
     }
 
-    virtual void OnAttrEnd(const Attr& WXUNUSED(attr)) override
+    virtual void OnAttrEnd(const Attr& WXUNUSED(attr)) wxOVERRIDE
     {
         m_dc.SetFont(GetFont());
     }
@@ -96,7 +96,7 @@ private:
 
     // The values that we compute.
     wxSize m_size;
-    int * const m_visibleHeight;    // may be null
+    int * const m_visibleHeight;    // may be NULL
 
     wxDECLARE_NO_COPY_CLASS(wxMarkupParserMeasureOutput);
 };
@@ -134,7 +134,7 @@ public:
     {
     }
 
-    virtual void OnAttrStart(const Attr& attr) override
+    virtual void OnAttrStart(const Attr& attr) wxOVERRIDE
     {
         m_dc.SetFont(attr.font);
         if ( attr.foreground.IsOk() )
@@ -149,7 +149,7 @@ public:
         }
     }
 
-    virtual void OnAttrEnd(const Attr& attr) override
+    virtual void OnAttrEnd(const Attr& attr) wxOVERRIDE
     {
         // We always restore the font because we always change it...
         m_dc.SetFont(GetFont());
@@ -201,7 +201,7 @@ public:
     {
     }
 
-    virtual void OnText(const wxString& text_) override
+    virtual void OnText(const wxString& text_) wxOVERRIDE
     {
         wxString text;
         int indexAccel = wxControl::FindAccelIndex(text_, &text);
@@ -248,7 +248,7 @@ public:
         m_ellipsizeMode = ellipsizeMode == wxELLIPSIZE_NONE ? wxELLIPSIZE_NONE : wxELLIPSIZE_END;
     }
 
-    virtual void OnText(const wxString& text) override
+    virtual void OnText(const wxString& text) wxOVERRIDE
     {
         wxRect rect(m_rect);
         rect.x = m_pos;

@@ -39,7 +39,9 @@ public:
 private:
     CPPUNIT_TEST_SUITE( MiscTestCase );
         CPPUNIT_TEST( Assert );
+#ifdef HAVE_VARIADIC_MACROS
         CPPUNIT_TEST( CallForEach );
+#endif // HAVE_VARIADIC_MACROS
         CPPUNIT_TEST( Delete );
         CPPUNIT_TEST( StaticCast );
     CPPUNIT_TEST_SUITE_END();
@@ -76,11 +78,12 @@ void MiscTestCase::Assert()
     WX_ASSERT_FAILS_WITH_ASSERT(AssertIfOdd(1));
 
     // doesn't fail any more
-    wxAssertHandler_t oldHandler = wxSetAssertHandler(nullptr);
+    wxAssertHandler_t oldHandler = wxSetAssertHandler(NULL);
     AssertIfOdd(17);
     wxSetAssertHandler(oldHandler);
 }
 
+#ifdef HAVE_VARIADIC_MACROS
 void MiscTestCase::CallForEach()
 {
     #define MY_MACRO(pos, str) s += str;
@@ -92,28 +95,29 @@ void MiscTestCase::CallForEach()
 
     #undef MY_MACRO
 }
+#endif // HAVE_VARIADIC_MACROS
 
 void MiscTestCase::Delete()
 {
     // Allocate some arbitrary memory to get a valid pointer:
     long *pointer = new long;
-    CPPUNIT_ASSERT( pointer != nullptr );
+    CPPUNIT_ASSERT( pointer != NULL );
 
-    // Check that wxDELETE sets the pointer to nullptr:
+    // Check that wxDELETE sets the pointer to NULL:
     wxDELETE( pointer );
-    CPPUNIT_ASSERT( pointer == nullptr );
+    CPPUNIT_ASSERT( pointer == NULL );
 
     // Allocate some arbitrary array to get a valid pointer:
     long *array = new long[ 3 ];
-    CPPUNIT_ASSERT( array != nullptr );
+    CPPUNIT_ASSERT( array != NULL );
 
-    // Check that wxDELETEA sets the pointer to nullptr:
+    // Check that wxDELETEA sets the pointer to NULL:
     wxDELETEA( array );
-    CPPUNIT_ASSERT( array == nullptr );
+    CPPUNIT_ASSERT( array == NULL );
 
     // this results in compilation error, as it should
 #if 0
-    struct SomeUnknownStruct *p = nullptr;
+    struct SomeUnknownStruct *p = NULL;
     wxDELETE(p);
 #endif
 }
@@ -127,7 +131,7 @@ namespace
 // used in WX_ASSERT_FAILS_WITH_ASSERT() in StaticCast() below
 bool IsNull(void *p)
 {
-    return p == nullptr;
+    return p == NULL;
 }
 
 #endif // __WXDEBUG__

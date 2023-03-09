@@ -206,6 +206,8 @@ public:
             The default filename, or the empty string.
         @param wildcard
             A wildcard, such as "*.*" or "BMP files (*.bmp)|*.bmp|GIF files (*.gif)|*.gif".
+            Note that the native Motif dialog has some limitations with respect to
+            wildcards; see the Remarks section above.
         @param style
             A dialog style. See @c wxFD_* styles for more info.
         @param pos
@@ -266,7 +268,7 @@ public:
             because this functionality is not available on the current
             platform.
 
-        @since 3.3.0
+        @since 3.2.1
      */
     bool AddShortcut(const wxString& directory, int flags = 0);
 
@@ -462,6 +464,9 @@ public:
     /**
         Sets the wildcard, which can contain multiple file types, for example:
         "BMP files (*.bmp)|*.bmp|GIF files (*.gif)|*.gif".
+
+        Note that the native Motif dialog has some limitations with respect to
+        wildcards; see the Remarks section above.
     */
     virtual void SetWildcard(const wxString& wildCard);
 
@@ -527,7 +532,7 @@ wxString wxFileSelector(const wxString& message,
                         const wxString& default_extension = wxEmptyString,
                         const wxString& wildcard = wxFileSelectorDefaultWildcardStr,
                         int flags = 0,
-                        wxWindow* parent = nullptr,
+                        wxWindow* parent = NULL,
                         int x = wxDefaultCoord,
                         int y = wxDefaultCoord);
 
@@ -539,10 +544,10 @@ wxString wxFileSelector(const wxString& message,
 wxString wxFileSelectorEx(const wxString& message = wxFileSelectorPromptStr,
                           const wxString& default_path = wxEmptyString,
                           const wxString& default_filename = wxEmptyString,
-                          int *indexDefaultExtension = nullptr,
+                          int *indexDefaultExtension = NULL,
                           const wxString& wildcard = wxFileSelectorDefaultWildcardStr,
                           int flags = 0,
-                          wxWindow *parent = nullptr,
+                          wxWindow *parent = NULL,
                           int x = wxDefaultCoord,
                           int y = wxDefaultCoord);
 
@@ -556,7 +561,7 @@ wxString wxFileSelectorEx(const wxString& message = wxFileSelectorPromptStr,
 wxString wxLoadFileSelector(const wxString& what,
                             const wxString& extension,
                             const wxString& default_name = wxEmptyString,
-                            wxWindow *parent = nullptr);
+                            wxWindow *parent = NULL);
 
 /**
     Shows a file dialog asking the user for a file name for saving a file.
@@ -568,7 +573,7 @@ wxString wxLoadFileSelector(const wxString& what,
 wxString wxSaveFileSelector(const wxString& what,
                             const wxString& extension,
                             const wxString& default_name = wxEmptyString,
-                            wxWindow *parent = nullptr);
+                            wxWindow *parent = NULL);
 
 ///@}
 

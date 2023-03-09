@@ -29,7 +29,7 @@ public:
     wxQtMainWindow( wxWindow *parent, wxFrame *handler );
 
 private:
-    virtual bool focusNextPrevChild(bool) override { return false; }
+    virtual bool focusNextPrevChild(bool) wxOVERRIDE { return false; }
 };
 
 // Central widget helper (container to show scroll bars and receive events):
@@ -44,7 +44,7 @@ class wxQtCentralWidget : public wxQtEventSignalHandler< QScrollArea, wxFrame >
 wxFrame::~wxFrame()
 {
     // central widget should be deleted by qt when the main window is destroyed
-    QtStoreWindowPointer( GetQMainWindow()->centralWidget(), nullptr );
+    QtStoreWindowPointer( GetQMainWindow()->centralWidget(), NULL );
 }
 
 bool wxFrame::Create( wxWindow *parent, wxWindowID id, const wxString& title,
@@ -88,7 +88,7 @@ void wxFrame::SetStatusBar( wxStatusBar *statusBar )
 {
     // The current status bar could be deleted by Qt when dereferencing it
     // TODO: add a mechanism like Detach in menus to avoid issues
-    if ( statusBar != nullptr )
+    if ( statusBar != NULL )
     {
         GetQMainWindow()->setStatusBar( statusBar->GetQStatusBar() );
         // Update statusbar sizes now that it has a size
@@ -97,14 +97,14 @@ void wxFrame::SetStatusBar( wxStatusBar *statusBar )
     else
     {
         // Remove the current status bar
-        GetQMainWindow()->setStatusBar(nullptr);
+        GetQMainWindow()->setStatusBar(NULL);
     }
     wxFrameBase::SetStatusBar( statusBar );
 }
 
 void wxFrame::SetToolBar(wxToolBar *toolbar)
 {
-    if ( toolbar != nullptr )
+    if ( toolbar != NULL )
     {
         int area = 0;
         if      (toolbar->HasFlag(wxTB_LEFT))  { area = Qt::LeftToolBarArea;  }
@@ -119,10 +119,10 @@ void wxFrame::SetToolBar(wxToolBar *toolbar)
 
         GetQMainWindow()->addToolBar((Qt::ToolBarArea)area, m_qtToolBar);
     }
-    else if ( m_frameToolBar != nullptr )
+    else if ( m_frameToolBar != NULL )
     {
         GetQMainWindow()->removeToolBar(m_qtToolBar);
-        m_qtToolBar = nullptr;
+        m_qtToolBar = NULL;
     }
     wxFrameBase::SetToolBar( toolbar );
 }

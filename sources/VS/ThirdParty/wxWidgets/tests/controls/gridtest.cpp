@@ -28,14 +28,6 @@
 
 #include "waitforpaint.h"
 
-// To disable tests which work locally, but not when run on GitHub CI.
-#if defined(__WXGTK__) && !defined(__WXGTK3__)
-    #define wxSKIP_AUTOMATIC_TEST_IF_GTK2() \
-        if ( IsAutomaticTest() ) return
-#else
-    #define wxSKIP_AUTOMATIC_TEST_IF_GTK2()
-#endif
-
 namespace
 {
 
@@ -117,7 +109,7 @@ public:
         if ( attr )
             attr->DecRef();
 
-        return attr != nullptr;
+        return attr != NULL;
     }
 
     size_t GetCellAttrCount() const
@@ -160,9 +152,9 @@ class GridAttrMatcher : public Catch::MatcherBase<TestableGrid>
 public:
     GridAttrMatcher(const TestableGrid& grid);
 
-    bool match(const TestableGrid& other) const override;
+    bool match(const TestableGrid& other) const wxOVERRIDE;
 
-    std::string describe() const override;
+    std::string describe() const wxOVERRIDE;
 
 private:
     const TestableGrid* m_grid;
@@ -349,7 +341,7 @@ protected:
     wxDECLARE_NO_COPY_CLASS(GridTestCase);
 };
 
-GridTestCase::GridTestCase() : m_tempGrid(nullptr)
+GridTestCase::GridTestCase() : m_tempGrid(NULL)
 {
     m_grid = new TestableGrid(wxTheApp->GetTopWindow());
     m_grid->CreateGrid(10, 2);
@@ -617,13 +609,17 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SortClick", "[grid]")
 TEST_CASE_METHOD(GridTestCase, "Grid::Size", "[grid]")
 {
     // TODO on OSX resizing interactively works, but not automated
-    // Grid could not pass the test under OSX and Universal.
+    // Grid could not pass the test under GTK, OSX, and Universal.
     // So there may has bug in Grid implementation
 #if wxUSE_UIACTIONSIMULATOR && !defined(__WXOSX__) && !defined(__WXUNIVERSAL__)
     if ( !EnableUITests() )
         return;
 
-    wxSKIP_AUTOMATIC_TEST_IF_GTK2();
+#ifdef __WXGTK20__
+    // Works locally, but not when run on Travis CI.
+    if ( IsAutomaticTest() )
+        return;
+#endif
 
     EventCounter colsize(m_grid, wxEVT_GRID_COL_SIZE);
     EventCounter rowsize(m_grid, wxEVT_GRID_ROW_SIZE);
@@ -663,21 +659,6 @@ TEST_CASE_METHOD(GridTestCase, "Grid::RangeSelect", "[grid]")
     if ( !EnableUITests() )
         return;
 
-    wxSKIP_AUTOMATIC_TEST_IF_GTK2();
-
-#ifdef __WXGTK3__
-    // works locally, but not when run on GitHub CI.
-    if ( IsAutomaticTest() )
-    {
-        wxString useASAN;
-        if ( wxGetEnv("wxUSE_ASAN", &useASAN) && useASAN == "1" )
-        {
-            WARN("Skipping test failing for unknown reason");
-            return;
-        }
-    }
-#endif // __WXGTK3__
-
     EventCounter select(m_grid, wxEVT_GRID_RANGE_SELECTED);
 
     wxUIActionSimulator sim;
@@ -691,11 +672,6 @@ TEST_CASE_METHOD(GridTestCase, "Grid::RangeSelect", "[grid]")
     wxYield();
 
     sim.MouseDown();
-    wxYield();
-
-    // Move the mouse a bit while staying inside the first cell of the range
-    // so that the range selection really starts off by the next move.
-    sim.MouseMove(pt.x + 5, pt.y + 5);
     wxYield();
 
     sim.MouseMove(pt.x + 50, pt.y + 50);
@@ -849,6 +825,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SelectionRange", "[grid]")
     REQUIRE( sel.begin() != sel.end() );
     CHECK( *sel.begin() == wxGridBlockCoords(1, 0, 3, 1) );
 
+#if __cplusplus >= 201103L || wxCHECK_VISUALC_VERSION(11)
     m_grid->SelectBlock(4, 0, 7, 1, true);
     int index = 0;
     for ( const wxGridBlockCoords& block : m_grid->GetSelectedBlocks() )
@@ -867,6 +844,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SelectionRange", "[grid]")
         }
         ++index;
     }
+#endif
 }
 
 TEST_CASE_METHOD(GridTestCase, "Grid::SelectEmptyGrid", "[grid]")
@@ -1288,11 +1266,24 @@ TEST_CASE_METHOD(GridTestCase, "Grid::CellFormatting", "[grid]")
 
     CHECK(m_grid->GetCellTextColour(0, 0) == back);
 
+#if WXWIN_COMPATIBILITY_2_8
+    m_grid->SetCellAlignment(wxALIGN_CENTRE, 0, 0);
+    m_grid->GetCellAlignment(0, 0, &cellhoriz, &cellvert);
+
+    CHECK(cellhoriz == wxALIGN_CENTRE);
+    CHECK(cellvert == wxALIGN_CENTRE);
+#endif // WXWIN_COMPATIBILITY_2_8
+
     m_grid->SetCellAlignment(0, 0, wxALIGN_LEFT, wxALIGN_BOTTOM);
     m_grid->GetCellAlignment(0, 0, &cellhoriz, &cellvert);
 
     CHECK(cellhoriz == wxALIGN_LEFT);
     CHECK(cellvert == wxALIGN_BOTTOM);
+
+#if WXWIN_COMPATIBILITY_2_8
+    m_grid->SetCellTextColour(*wxRED, 0, 0);
+    CHECK(m_grid->GetCellTextColour(0, 0) == *wxRED);
+#endif // WXWIN_COMPATIBILITY_2_8
 
     m_grid->SetCellTextColour(0, 0, *wxGREEN);
     CHECK(m_grid->GetCellTextColour(0,0) == *wxGREEN);
@@ -1417,31 +1408,31 @@ TEST_CASE_METHOD(GridTestCase, "Grid::WindowAsEditorControl", "[grid]")
 
         void Create(wxWindow* parent,
                     wxWindowID id,
-                    wxEvtHandler* evtHandler) override
+                    wxEvtHandler* evtHandler) wxOVERRIDE
         {
             SetWindow(new wxWindow(parent, id));
             wxGridCellEditor::Create(parent, id, evtHandler);
         }
 
-        void BeginEdit(int, int, wxGrid*) override {}
+        void BeginEdit(int, int, wxGrid*) wxOVERRIDE {}
 
         bool EndEdit(int, int, wxGrid const*, wxString const&,
-                     wxString* newval) override
+                     wxString* newval) wxOVERRIDE
         {
             *newval = GetValue();
             return true;
         }
 
-        void ApplyEdit(int row, int col, wxGrid* grid) override
+        void ApplyEdit(int row, int col, wxGrid* grid) wxOVERRIDE
         {
             grid->GetTable()->SetValue(row, col, GetValue());
         }
 
-        void Reset() override {}
+        void Reset() wxOVERRIDE {}
 
-        wxGridCellEditor* Clone() const override { return new TestEditor(); }
+        wxGridCellEditor* Clone() const wxOVERRIDE { return new TestEditor(); }
 
-        wxString GetValue() const override { return "value"; }
+        wxString GetValue() const wxOVERRIDE { return "value"; }
     };
 
     wxGridCellAttr* attr = new wxGridCellAttr();
@@ -1467,12 +1458,16 @@ TEST_CASE_METHOD(GridTestCase, "Grid::WindowAsEditorControl", "[grid]")
 
 TEST_CASE_METHOD(GridTestCase, "Grid::ResizeScrolledHeader", "[grid]")
 {
-    // TODO this test currently works only under Windows and GTK unfortunately
+    // TODO this test currently works only under Windows unfortunately
 #if wxUSE_UIACTIONSIMULATOR && (defined(__WXMSW__) || defined(__WXGTK__))
     if ( !EnableUITests() )
         return;
 
-    wxSKIP_AUTOMATIC_TEST_IF_GTK2();
+#ifdef __WXGTK20__
+    // Works locally, but not when run on Travis CI.
+    if ( IsAutomaticTest() )
+        return;
+#endif
 
     SECTION("Default") {}
     SECTION("Native header") { m_grid->UseNativeColHeader(); }
@@ -1514,12 +1509,16 @@ TEST_CASE_METHOD(GridTestCase, "Grid::ResizeScrolledHeader", "[grid]")
 
 TEST_CASE_METHOD(GridTestCase, "Grid::ColumnMinWidth", "[grid]")
 {
-    // TODO this test currently works only under Windows and GTK unfortunately
+    // TODO this test currently works only under Windows unfortunately
 #if wxUSE_UIACTIONSIMULATOR && (defined(__WXMSW__) || defined(__WXGTK__))
     if ( !EnableUITests() )
         return;
 
-    wxSKIP_AUTOMATIC_TEST_IF_GTK2();
+#ifdef __WXGTK20__
+    // Works locally, but not when run on Travis CI.
+    if ( IsAutomaticTest() )
+        return;
+#endif
 
     SECTION("Default") {}
     SECTION("Native header")
@@ -1708,7 +1707,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::CellAttribute", "[attr][cell][grid]")
     {
         CHECK_ATTR_COUNT( 0 );
 
-        m_grid->SetAttr(0, 0, nullptr);
+        m_grid->SetAttr(0, 0, NULL);
         CHECK_ATTR_COUNT( 0 );
 
         SetCellAttr(0, 0);
@@ -1718,15 +1717,15 @@ TEST_CASE_METHOD(GridTestCase, "Grid::CellAttribute", "[attr][cell][grid]")
         SetCellAttr(0, 0);
         CHECK_ATTR_COUNT( 1 );
 
-        m_grid->SetAttr(0, 0, nullptr);
+        m_grid->SetAttr(0, 0, NULL);
         CHECK_ATTR_COUNT( 0 );
 
         SetCellAttr(0, 0);
         m_grid->SetCellBackgroundColour(0, 1, *wxGREEN);
         CHECK_ATTR_COUNT( 2 );
 
-        m_grid->SetAttr(0, 1, nullptr);
-        m_grid->SetAttr(0, 0, nullptr);
+        m_grid->SetAttr(0, 1, NULL);
+        m_grid->SetAttr(0, 0, NULL);
         CHECK_ATTR_COUNT( 0 );
     }
 
@@ -1841,7 +1840,7 @@ TEST_CASE_METHOD(GridTestCase,
     // repeat the same tests for both rows and columns as the code for
     // updating them works symmetrically.
 
-    GIVEN(multi.ToString())
+    GIVEN(Catch::toString(multi))
     {
         FitGridToMulticell(m_grid, multi);
         m_grid->SetMulticell(multi);
@@ -1876,7 +1875,7 @@ TEST_CASE_METHOD(GridTestCase,
 
     wxSwap(multi.rows, multi.cols);
 
-    GIVEN(multi.ToString())
+    GIVEN(Catch::toString(multi))
     {
         FitGridToMulticell(m_grid, multi);
         m_grid->SetMulticell(multi);
@@ -1958,7 +1957,7 @@ TEST_CASE_METHOD(GridTestCase,
 
     Multicell multi(1, 1, 5, 3);
 
-    GIVEN(multi.ToString())
+    GIVEN(Catch::toString(multi))
     {
         FitGridToMulticell(m_grid, multi);
         m_grid->SetMulticell(multi);
@@ -1993,7 +1992,7 @@ TEST_CASE_METHOD(GridTestCase,
 
     wxSwap(multi.rows, multi.cols);
 
-    GIVEN(multi.ToString())
+    GIVEN(Catch::toString(multi))
     {
         FitGridToMulticell(m_grid, multi);
         m_grid->SetMulticell(multi);

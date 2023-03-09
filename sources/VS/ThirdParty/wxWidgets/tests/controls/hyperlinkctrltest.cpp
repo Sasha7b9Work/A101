@@ -25,8 +25,8 @@ class HyperlinkCtrlTestCase : public CppUnit::TestCase
 public:
     HyperlinkCtrlTestCase() { }
 
-    void setUp() override;
-    void tearDown() override;
+    void setUp() wxOVERRIDE;
+    void tearDown() wxOVERRIDE;
 
 private:
     CPPUNIT_TEST_SUITE( HyperlinkCtrlTestCase );

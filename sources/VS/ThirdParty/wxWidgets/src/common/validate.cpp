@@ -30,7 +30,7 @@ bool wxValidator::ms_isSilent = false;
 
 wxValidator::wxValidator()
 {
-  m_validatorWindow = nullptr;
+  m_validatorWindow = NULL;
 }
 
 wxValidator::~wxValidator()

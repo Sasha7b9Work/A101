@@ -83,7 +83,7 @@ public:
     virtual const wxTypeInfo* GetTypeInfo() const = 0;
 
     // If it based on wxObject return the ClassInfo.
-    virtual wxClassInfo* GetValueClassInfo() { return nullptr; }
+    virtual wxClassInfo* GetValueClassInfo() { return NULL; }
 
     int GetRefCount() const
         { return m_count; }
@@ -132,7 +132,7 @@ public:
     //virtual wxVariantData* Clone() const { return new wxVariantDataT<T>( Get() ); }
 
     // returns the type info of the contentc
-    virtual const wxTypeInfo* GetTypeInfo() const { return wxGetTypeInfo( (T*) nullptr ); }
+    virtual const wxTypeInfo* GetTypeInfo() const { return wxGetTypeInfo( (T*) NULL ); }
 
 private:
     T m_data;
@@ -188,7 +188,7 @@ public:
     // destroy a reference
     void UnRef();
 
-    // Make null (i.e. delete the data)
+    // Make NULL (i.e. delete the data)
     void MakeNull();
 
     // write contents to a string (e.g. for debugging)
@@ -210,7 +210,7 @@ public:
     const wxTypeInfo* GetTypeInfo() const
     {
         if (!m_data)
-            return nullptr;
+            return NULL;
         return m_data->GetTypeInfo();
     }
 
@@ -238,14 +238,14 @@ public:
     {
         const wxVariantDataT<T> *dataptr =
             wx_dynamic_cast(const wxVariantDataT<T>*, m_data);
-        return dataptr != nullptr;
+        return dataptr != NULL;
     }
 
     // returns this value as string
     wxString GetAsString() const;
 
     // gets the stored data casted to a wxObject*,
-    // returning nullptr if cast is not possible
+    // returning NULL if cast is not possible
     wxObject* GetAsObject();
 
 protected:

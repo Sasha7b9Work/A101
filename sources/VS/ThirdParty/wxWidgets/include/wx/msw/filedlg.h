@@ -31,19 +31,21 @@ public:
                  const wxString& name = wxASCII_STR(wxFileDialogNameStr));
     virtual ~wxFileDialog();
 
-    virtual void GetPaths(wxArrayString& paths) const override;
-    virtual void GetFilenames(wxArrayString& files) const override;
-    virtual bool AddShortcut(const wxString& directory, int flags = 0) override;
-    virtual bool SupportsExtraControl() const override { return true; }
+    virtual void GetPaths(wxArrayString& paths) const wxOVERRIDE;
+    virtual void GetFilenames(wxArrayString& files) const wxOVERRIDE;
+#if wxABI_VERSION >= 30201
+    bool AddShortcut(const wxString& directory, int flags = 0);
+#endif // wxABI_VERSION >= 3.2.1
+    virtual bool SupportsExtraControl() const wxOVERRIDE { return true; }
 
-    virtual int ShowModal() override;
+    virtual int ShowModal() wxOVERRIDE;
 
 protected:
 
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
-    virtual void DoCentre(int dir) override;
-    virtual void DoGetSize( int *width, int *height ) const override;
-    virtual void DoGetPosition( int *x, int *y ) const override;
+    virtual void DoMoveWindow(int x, int y, int width, int height) wxOVERRIDE;
+    virtual void DoCentre(int dir) wxOVERRIDE;
+    virtual void DoGetSize( int *width, int *height ) const wxOVERRIDE;
+    virtual void DoGetPosition( int *x, int *y ) const wxOVERRIDE;
 
 private:
     // Allow it to call MSWOnXXX() functions below.

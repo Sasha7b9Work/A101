@@ -49,21 +49,21 @@ public:
         m_addrFrame = addrFrame;
     }
 
-    virtual size_t GetParamCount() const override
+    virtual size_t GetParamCount() const wxOVERRIDE
     {
         ConstCast()->OnGetParam();
         return DoGetParamCount();
     }
 
     virtual bool
-    GetParam(size_t n, wxString *type, wxString *name, wxString *value) const override;
+    GetParam(size_t n, wxString *type, wxString *name, wxString *value) const wxOVERRIDE;
 
     // callback used by OnGetParam(), don't call directly
     void OnParam(wxSYMBOL_INFO *pSymInfo);
 
 protected:
-    virtual void OnGetName() override;
-    virtual void OnGetLocation() override;
+    virtual void OnGetName() wxOVERRIDE;
+    virtual void OnGetLocation() wxOVERRIDE;
 
     void OnGetParam();
 
@@ -94,11 +94,11 @@ class WXDLLIMPEXP_BASE wxStackWalker : public wxStackWalkerBase
 public:
     // we don't use ctor argument, it is for compatibility with Unix version
     // only
-    wxStackWalker(const char * WXUNUSED(argv0) = nullptr) { }
+    wxStackWalker(const char * WXUNUSED(argv0) = NULL) { }
 
-    virtual void Walk(size_t skip = 1, size_t maxDepth = wxSTACKWALKER_MAX_DEPTH) override;
+    virtual void Walk(size_t skip = 1, size_t maxDepth = wxSTACKWALKER_MAX_DEPTH) wxOVERRIDE;
 #if wxUSE_ON_FATAL_EXCEPTION
-    virtual void WalkFromException(size_t maxDepth = wxSTACKWALKER_MAX_DEPTH) override;
+    virtual void WalkFromException(size_t maxDepth = wxSTACKWALKER_MAX_DEPTH) wxOVERRIDE;
 #endif // wxUSE_ON_FATAL_EXCEPTION
 
 

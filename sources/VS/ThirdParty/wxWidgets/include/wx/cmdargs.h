@@ -28,7 +28,7 @@
 class WXDLLIMPEXP_BASE wxCmdLineArgsArray
 {
 public:
-    wxCmdLineArgsArray() { m_argsA = nullptr; m_argsW = nullptr; }
+    wxCmdLineArgsArray() { m_argsA = NULL; m_argsW = NULL; }
 
     template <typename T>
     void Init(int argc, T **argv)
@@ -53,7 +53,7 @@ public:
             for ( size_t n = 0; n < count; n++ )
                 m_argsA[n] = wxStrdup(m_args[n].ToAscii());
 
-            m_argsA[count] = nullptr;
+            m_argsA[count] = NULL;
         }
 
         return m_argsA;
@@ -68,7 +68,7 @@ public:
             for ( size_t n = 0; n < count; n++ )
                 m_argsW[n] = wxStrdup(m_args[n].wc_str());
 
-            m_argsW[count] = nullptr;
+            m_argsW[count] = NULL;
         }
 
         return m_argsW;
@@ -125,7 +125,7 @@ private:
             free(args[n]);
 
         delete [] args;
-        args = nullptr;
+        args = NULL;
     }
 
     void FreeArgs()

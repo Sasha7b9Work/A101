@@ -29,15 +29,15 @@ public:
     ArchiveApp()
     {
         m_forceZip64 = false;
-        m_archiveClassFactory = nullptr;
-        m_filterClassFactory = nullptr;
+        m_archiveClassFactory = NULL;
+        m_filterClassFactory = NULL;
     }
 
-    virtual void OnInitCmdLine(wxCmdLineParser& parser) override;
+    virtual void OnInitCmdLine(wxCmdLineParser& parser) wxOVERRIDE;
 
-    virtual bool OnCmdLineParsed(wxCmdLineParser& parser) override;
+    virtual bool OnCmdLineParsed(wxCmdLineParser& parser) wxOVERRIDE;
 
-    virtual int OnRun() override;
+    virtual int OnRun() wxOVERRIDE;
 
 private:
     enum ArchiveCommandType
@@ -62,7 +62,7 @@ private:
     wxVector<wxString> m_fileNames;
     bool m_forceZip64;
 
-    // At most one of these pointers is non-null.
+    // At most one of these pointers is non-NULL.
     const wxArchiveClassFactory* m_archiveClassFactory;
     const wxFilterClassFactory* m_filterClassFactory;
 

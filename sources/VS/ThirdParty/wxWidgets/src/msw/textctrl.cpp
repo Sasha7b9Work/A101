@@ -137,7 +137,7 @@
 #if wxUSE_DRAG_AND_DROP && wxUSE_RICHEDIT
 
 // dummy value used for m_dropTarget, different from any valid pointer value
-// (which are all even under Windows) and nullptr
+// (which are all even under Windows) and NULL
 static wxDropTarget *
     wxRICHTEXT_DEFAULT_DROPTARGET = reinterpret_cast<wxDropTarget *>(1);
 
@@ -191,8 +191,8 @@ public:
         Version_Max
     };
 
-    virtual bool OnInit() override;
-    virtual void OnExit() override;
+    virtual bool OnInit() wxOVERRIDE;
+    virtual void OnExit() wxOVERRIDE;
 
     // load the richedit DLL for the specified version of rich edit
     static bool Load(Version version);
@@ -214,7 +214,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxRichEditModule);
 };
 
-HINSTANCE wxRichEditModule::ms_hRichEdit[Version_Max] = { nullptr, nullptr, nullptr };
+HINSTANCE wxRichEditModule::ms_hRichEdit[Version_Max] = { NULL, NULL, NULL };
 
 #if wxUSE_INKEDIT
 wxDynamicLibrary wxRichEditModule::ms_inkEditLib;
@@ -230,20 +230,20 @@ extern wxMenu *wxCurrentPopupMenu;
 class wxTextCtrlOleCallback : public IRichEditOleCallback
 {
 public:
-    wxTextCtrlOleCallback(wxTextCtrl *text) : m_textCtrl(text), m_menu(nullptr) {}
+    wxTextCtrlOleCallback(wxTextCtrl *text) : m_textCtrl(text), m_menu(NULL) {}
     virtual ~wxTextCtrlOleCallback() { DeleteContextMenuObject(); }
 
-    wxSTDMETHODIMP ContextSensitiveHelp(BOOL WXUNUSED(enterMode)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP DeleteObject(LPOLEOBJECT WXUNUSED(oleobj)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP GetClipboardData(CHARRANGE* WXUNUSED(chrg), DWORD WXUNUSED(reco), LPDATAOBJECT* WXUNUSED(dataobj)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP GetDragDropEffect(BOOL WXUNUSED(drag), DWORD WXUNUSED(grfKeyState), LPDWORD WXUNUSED(effect)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP GetInPlaceContext(LPOLEINPLACEFRAME* WXUNUSED(frame), LPOLEINPLACEUIWINDOW* WXUNUSED(doc), LPOLEINPLACEFRAMEINFO WXUNUSED(frameInfo)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP GetNewStorage(LPSTORAGE *WXUNUSED(stg)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP QueryAcceptData(LPDATAOBJECT WXUNUSED(dataobj), CLIPFORMAT* WXUNUSED(format), DWORD WXUNUSED(reco), BOOL WXUNUSED(really), HGLOBAL WXUNUSED(hMetaPict)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP QueryInsertObject(LPCLSID WXUNUSED(clsid), LPSTORAGE WXUNUSED(stg), LONG WXUNUSED(cp)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP ShowContainerUI(BOOL WXUNUSED(show)) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP ContextSensitiveHelp(BOOL WXUNUSED(enterMode)) wxOVERRIDE { return E_NOTIMPL; }
+    wxSTDMETHODIMP DeleteObject(LPOLEOBJECT WXUNUSED(oleobj)) wxOVERRIDE { return E_NOTIMPL; }
+    wxSTDMETHODIMP GetClipboardData(CHARRANGE* WXUNUSED(chrg), DWORD WXUNUSED(reco), LPDATAOBJECT* WXUNUSED(dataobj)) wxOVERRIDE { return E_NOTIMPL; }
+    wxSTDMETHODIMP GetDragDropEffect(BOOL WXUNUSED(drag), DWORD WXUNUSED(grfKeyState), LPDWORD WXUNUSED(effect)) wxOVERRIDE { return E_NOTIMPL; }
+    wxSTDMETHODIMP GetInPlaceContext(LPOLEINPLACEFRAME* WXUNUSED(frame), LPOLEINPLACEUIWINDOW* WXUNUSED(doc), LPOLEINPLACEFRAMEINFO WXUNUSED(frameInfo)) wxOVERRIDE { return E_NOTIMPL; }
+    wxSTDMETHODIMP GetNewStorage(LPSTORAGE *WXUNUSED(stg)) wxOVERRIDE { return E_NOTIMPL; }
+    wxSTDMETHODIMP QueryAcceptData(LPDATAOBJECT WXUNUSED(dataobj), CLIPFORMAT* WXUNUSED(format), DWORD WXUNUSED(reco), BOOL WXUNUSED(really), HGLOBAL WXUNUSED(hMetaPict)) wxOVERRIDE { return E_NOTIMPL; }
+    wxSTDMETHODIMP QueryInsertObject(LPCLSID WXUNUSED(clsid), LPSTORAGE WXUNUSED(stg), LONG WXUNUSED(cp)) wxOVERRIDE { return E_NOTIMPL; }
+    wxSTDMETHODIMP ShowContainerUI(BOOL WXUNUSED(show)) wxOVERRIDE { return E_NOTIMPL; }
 
-    wxSTDMETHODIMP GetContextMenu(WORD WXUNUSED(seltype), LPOLEOBJECT WXUNUSED(oleobj), CHARRANGE* WXUNUSED(chrg), HMENU *menu) override
+    wxSTDMETHODIMP GetContextMenu(WORD WXUNUSED(seltype), LPOLEOBJECT WXUNUSED(oleobj), CHARRANGE* WXUNUSED(chrg), HMENU *menu) wxOVERRIDE
     {
         // 'menu' will be shown and destroyed by the caller. We need to keep
         // its wx counterpart, the wxMenu instance, around until it is
@@ -270,7 +270,7 @@ private:
         {
             m_menu->MSWDetachHMENU();
             if ( wxCurrentPopupMenu == m_menu )
-                wxCurrentPopupMenu = nullptr;
+                wxCurrentPopupMenu = NULL;
             wxDELETE(m_menu);
         }
     }
@@ -388,7 +388,7 @@ void wxTextCtrl::Init()
     m_isInkEdit = 0;
 #endif
 
-    m_privateContextMenu = nullptr;
+    m_privateContextMenu = NULL;
     m_updatesCount = -1;
     m_isNativeCaretShown = true;
 }
@@ -418,7 +418,7 @@ wxTextCtrl::~wxTextCtrl()
     if ( m_dropTarget == wxRICHTEXT_DEFAULT_DROPTARGET )
     {
         // don't try to destroy this dummy pointer in the base class dtor
-        m_dropTarget = nullptr;
+        m_dropTarget = NULL;
     }
 #endif // wxUSE_DRAG_AND_DROP && wxUSE_RICHEDIT
 
@@ -710,7 +710,7 @@ bool wxTextCtrl::MSWCreateText(const wxString& value,
 
     // Without this, if we pass the size in the constructor and then don't change it,
     // the themed borders will be drawn incorrectly.
-    SetWindowPos(GetHwnd(), nullptr, 0, 0, 0, 0,
+    SetWindowPos(GetHwnd(), NULL, 0, 0, 0, 0,
                 SWP_NOZORDER|SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE|
                 SWP_FRAMECHANGED);
 
@@ -1218,7 +1218,7 @@ wxTextCtrl::StreamIn(const wxString& value,
 {
     wxCSConv conv(encoding);
 
-    const size_t len = conv.MB2WC(nullptr, value.mb_str(), value.length());
+    const size_t len = conv.MB2WC(NULL, value.mb_str(), value.length());
 
     if (len == wxCONV_FAILED)
         return false;
@@ -1297,7 +1297,7 @@ wxTextCtrl::StreamOut(wxFontEncoding encoding, bool selectionOnly) const
         // now convert to the given encoding (this is a possibly lossful
         // conversion but what else can we do)
         wxCSConv conv(encoding);
-        size_t lenNeeded = conv.WC2MB(nullptr, wchBuf, 0);
+        size_t lenNeeded = conv.WC2MB(NULL, wchBuf, 0);
 
         if ( lenNeeded != wxCONV_FAILED && lenNeeded++ )
         {
@@ -1417,7 +1417,7 @@ void wxTextCtrl::AppendText(const wxString& text)
     // don't do this if we're frozen, saves some time
     if ( !IsFrozen() && IsMultiLine() && GetRichVersion() > 1 )
     {
-        ::SendMessage(GetHwnd(), WM_VSCROLL, SB_BOTTOM, (LPARAM)nullptr);
+        ::SendMessage(GetHwnd(), WM_VSCROLL, SB_BOTTOM, (LPARAM)NULL);
     }
 #endif // wxUSE_RICHEDIT
 }
@@ -2108,9 +2108,9 @@ void wxTextCtrl::EmptyUndoBuffer()
                                        );
             if ( SUCCEEDED(hr) )
             {
-                hr = pDoc->Undo(tomFalse, nullptr);
+                hr = pDoc->Undo(tomFalse, NULL);
                 if ( SUCCEEDED(hr) )
-                    pDoc->Undo(tomTrue, nullptr);
+                    pDoc->Undo(tomTrue, NULL);
             }
         }
     }
@@ -2542,7 +2542,7 @@ wxTextCtrl::MSWHandleMessage(WXLRESULT *rc,
             if ( IsRich() )
             {
                 // wxCurrentPopupMenu stores the popup menu that will receive
-                // WM_COMMAND, but it may be non-null even when the underlying
+                // WM_COMMAND, but it may be non-NULL even when the underlying
                 // native menu is no longer shown. Use ::IsMenu() to check whether
                 // the menu still exists.
                 extern wxMenu *wxCurrentPopupMenu;
@@ -2757,7 +2757,7 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
     int cy;
     wxFont font = GetFont();
     font.WXAdjustToPPI(GetDPI());
-    wxGetCharSize(GetHWND(), nullptr, &cy, font);
+    wxGetCharSize(GetHWND(), NULL, &cy, font);
 
     DWORD wText = FromDIP(1);
     ::SystemParametersInfo(SPI_GETCARETWIDTH, 0, &wText, 0);
@@ -2801,10 +2801,9 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
         hText += EDIT_HEIGHT_FROM_CHAR_HEIGHT(cy) - cy;
     }
 
-    // Perhaps the user wants something different from CharHeight, or ylen
-    // is used as the height of a multiline text.
-    if ( ylen > 0 )
-        hText += ylen - GetCharHeight();
+    // We should always use at least the specified height if it's valid.
+    if ( ylen > hText )
+        hText = ylen;
 
     return wxSize(wText, hText);
 }
@@ -3113,7 +3112,7 @@ void wxTextCtrl::SetDropTarget(wxDropTarget *dropTarget)
     {
         // get rid of the built-in drop target
         ::RevokeDragDrop(GetHwnd());
-        m_dropTarget = nullptr;
+        m_dropTarget = NULL;
     }
 
     wxTextCtrlBase::SetDropTarget(dropTarget);
@@ -3729,7 +3728,7 @@ void wxRichEditModule::OnExit()
         if ( ms_hRichEdit[i] && ms_hRichEdit[i] != INVALID_HINSTANCE )
         {
             ::FreeLibrary(ms_hRichEdit[i]);
-            ms_hRichEdit[i] = nullptr;
+            ms_hRichEdit[i] = NULL;
         }
     }
 #if wxUSE_INKEDIT

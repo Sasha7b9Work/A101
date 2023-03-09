@@ -128,7 +128,7 @@ bool wxAnimationGenericImpl::Load(wxInputStream &stream, wxAnimationType type)
 
     handler = wxAnimation::FindHandler(type);
 
-    if (handler == nullptr)
+    if (handler == NULL)
     {
         wxLogWarning( _("No animation handler for type %ld defined."), type );
 
@@ -154,7 +154,7 @@ void wxAnimationGenericImpl::UnRef()
     if ( m_decoder )
     {
         m_decoder->DecRef();
-        m_decoder = nullptr;
+        m_decoder = NULL;
     }
 }
 
@@ -272,7 +272,7 @@ void wxGenericAnimationCtrl::SetInactiveBitmap(const wxBitmapBundle &bmp)
     // (which uses the bitmap's mask), our background colour would be used for
     // transparent areas - and that's not what we want (at least for
     // consistency with the GTK version)
-    if ( bmp.IsOk() && bmp.GetBitmapFor(this).GetMask() != nullptr && GetParent() != nullptr )
+    if ( bmp.IsOk() && bmp.GetBitmapFor(this).GetMask() != NULL && GetParent() != NULL )
         SetBackgroundColour(GetParent()->GetBackgroundColour());
 
     wxAnimationCtrlBase::SetInactiveBitmap(bmp);

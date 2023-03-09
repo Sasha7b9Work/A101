@@ -98,23 +98,23 @@ public:
         [v setDataSource:v];
     }
 
-    void InsertItem( size_t pos, int itemid, const wxString& text) override
+    void InsertItem( size_t pos, int itemid, const wxString& text) wxOVERRIDE
     {
         wxCFStringRef cftext(text);
         [((wxUIPickerView*)m_osxView).rows insertObject:cftext.AsNSString() atIndex:pos];
     }
 
-    size_t GetNumberOfItems() const override
+    size_t GetNumberOfItems() const wxOVERRIDE
     {
         return [((wxUIPickerView*)m_osxView).rows count];
     }
 
-    void RemoveItem( size_t pos ) override
+    void RemoveItem( size_t pos ) wxOVERRIDE
     {
         [((wxUIPickerView*)m_osxView).rows removeObjectAtIndex:pos];
     }
 
-    void SetItem(int pos, const wxString& text) override
+    void SetItem(int pos, const wxString& text) wxOVERRIDE
     {
         wxCFStringRef cftext(text);
         [((wxUIPickerView*)m_osxView).rows replaceObjectAtIndex:pos withObject:cftext.AsNSString()];

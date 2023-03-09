@@ -37,8 +37,8 @@ class MyApp: public wxApp
 {
 public:
   // implement base class virtuals
-  virtual bool OnInit() override;
-  virtual int OnExit() override;
+  virtual bool OnInit() wxOVERRIDE;
+  virtual int OnExit() wxOVERRIDE;
 };
 
 class MyFrame: public wxFrame
@@ -133,7 +133,7 @@ int MyApp::OnExit()
     // clean up: Set() returns the active config object as Get() does, but unlike
     // Get() it doesn't try to create one if there is none (definitely not what
     // we want here!)
-    delete wxConfigBase::Set(nullptr);
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
 
     return 0;
 }
@@ -144,7 +144,7 @@ int MyApp::OnExit()
 
 // main frame ctor
 MyFrame::MyFrame()
-       : wxFrame(nullptr, wxID_ANY, "wxConfig Demo")
+       : wxFrame((wxFrame *) NULL, wxID_ANY, "wxConfig Demo")
 {
     SetIcon(wxICON(sample));
 
@@ -229,7 +229,7 @@ void MyFrame::OnAbout(wxCommandEvent&)
 void MyFrame::OnDelete(wxCommandEvent&)
 {
     wxConfigBase *pConfig = wxConfigBase::Get();
-    if ( pConfig == nullptr )
+    if ( pConfig == NULL )
     {
         wxLogError("No config to delete!");
         return;
@@ -239,7 +239,7 @@ void MyFrame::OnDelete(wxCommandEvent&)
     {
         wxLogMessage("Config file/registry key successfully deleted.");
 
-        delete wxConfigBase::Set(nullptr);
+        delete wxConfigBase::Set(NULL);
         wxConfigBase::DontCreateOnDemand();
     }
     else
@@ -251,7 +251,7 @@ void MyFrame::OnDelete(wxCommandEvent&)
 MyFrame::~MyFrame()
 {
     wxConfigBase *pConfig = wxConfigBase::Get();
-    if ( pConfig == nullptr )
+    if ( pConfig == NULL )
         return;
 
     // save the control's values to the config

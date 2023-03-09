@@ -41,7 +41,7 @@ class BusyCursor
 public:
     BusyCursor()
     {
-        HCURSOR hcursorBusy = ::LoadCursor(nullptr, IDC_WAIT);
+        HCURSOR hcursorBusy = ::LoadCursor(NULL, IDC_WAIT);
         m_hcursorOld = ::SetCursor(hcursorBusy);
     }
 
@@ -113,10 +113,10 @@ wxCrashReportImpl::wxCrashReportImpl(const wxChar *filename)
                     filename,
                     GENERIC_WRITE,
                     0,                          // no sharing
-                    nullptr,                    // default security
+                    NULL,                       // default security
                     CREATE_ALWAYS,
                     FILE_FLAG_WRITE_THROUGH,
-                    nullptr                     // no template file
+                    NULL                        // no template file
                 );
 }
 
@@ -210,8 +210,8 @@ bool wxCrashReportImpl::Generate(int flags, EXCEPTION_POINTERS *ep)
                 m_hFile,                    // file to write to
                 dumpFlags,                  // kind of dump to craete
                 &minidumpExcInfo,
-                nullptr,                    // no extra user-defined data
-                nullptr                     // no callbacks
+                NULL,                       // no extra user-defined data
+                NULL                        // no callbacks
               ) )
         {
             Output(wxT("MiniDumpWriteDump() failed."));
@@ -269,7 +269,7 @@ bool wxCrashReport::GenerateNow(int flags)
 
     __try
     {
-        RaiseException(0x1976, 0, 0, nullptr);
+        RaiseException(0x1976, 0, 0, NULL);
     }
     __except( rc = Generate(flags, (EXCEPTION_POINTERS *)GetExceptionInformation()),
               EXCEPTION_CONTINUE_EXECUTION )

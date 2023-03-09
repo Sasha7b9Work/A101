@@ -293,7 +293,7 @@ bool HeightCache::GetLineAt(int y, unsigned int &row)
 void HeightCache::Put(unsigned int row, int height)
 {
     RowRanges *rowRanges = m_heightToRowRange[height];
-    if (rowRanges == nullptr)
+    if (rowRanges == NULL)
     {
         rowRanges = new RowRanges();
         m_heightToRowRange[height] = rowRanges;

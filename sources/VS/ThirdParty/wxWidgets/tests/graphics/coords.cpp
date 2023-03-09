@@ -36,7 +36,7 @@ public:
     CoordinatesDCTestCaseBase()
     {
         m_bmp.Create(s_dcSize);
-        m_dc = nullptr;
+        m_dc = NULL;
     }
 
     virtual ~CoordinatesDCTestCaseBase()
@@ -1055,7 +1055,7 @@ public:
     {
         wxGraphicsRenderer* rend = wxGraphicsRenderer::GetGDIPlusRenderer();
         wxGraphicsContext* ctx = rend->CreateContext(m_mdc);
-        REQUIRE(ctx != nullptr);
+        REQUIRE(ctx != NULL);
         m_gcdc->SetGraphicsContext(ctx);
     }
 
@@ -1185,7 +1185,7 @@ public:
     {
         wxGraphicsRenderer* rend = wxGraphicsRenderer::GetDirect2DRenderer();
         wxGraphicsContext* ctx = rend->CreateContext(m_mdc);
-        REQUIRE(ctx != nullptr);
+        REQUIRE(ctx != NULL);
         m_gcdc->SetGraphicsContext(ctx);
     }
 
@@ -1316,7 +1316,7 @@ public:
     {
         wxGraphicsRenderer* rend = wxGraphicsRenderer::GetCairoRenderer();
         wxGraphicsContext* ctx = rend->CreateContext(m_mdc);
-        REQUIRE(ctx != nullptr);
+        REQUIRE(ctx != NULL);
         m_gcdc->SetGraphicsContext(ctx);
     }
 

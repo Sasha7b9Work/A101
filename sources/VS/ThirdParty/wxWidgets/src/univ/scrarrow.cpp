@@ -41,10 +41,10 @@ struct wxScrollArrowCaptureData
     wxScrollArrowCaptureData()
     {
         m_arrowPressed = wxScrollArrows::Arrow_None;
-        m_window = nullptr;
+        m_window = NULL;
         m_btnCapture = -1;
 #if wxUSE_TIMER
-        m_timerScroll = nullptr;
+        m_timerScroll = NULL;
 #endif // wxUSE_TIMER
     }
 
@@ -114,7 +114,7 @@ protected:
 wxScrollArrows::wxScrollArrows(wxControlWithArrows *control)
 {
     m_control = control;
-    m_captureData = nullptr;
+    m_captureData = NULL;
 }
 
 wxScrollArrows::~wxScrollArrows()
@@ -284,7 +284,7 @@ bool wxScrollArrows::HandleMouse(const wxMouseEvent& event) const
         Arrow arrow = m_captureData->m_arrowPressed;
 
         delete m_captureData;
-        wxConstCast(this, wxScrollArrows)->m_captureData = nullptr;
+        wxConstCast(this, wxScrollArrows)->m_captureData = NULL;
 
         m_control->SetArrowFlag(arrow, wxCONTROL_PRESSED, false);
     }

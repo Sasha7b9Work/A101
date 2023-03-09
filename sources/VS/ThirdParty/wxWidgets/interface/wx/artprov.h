@@ -356,7 +356,7 @@ public:
 
         @since 2.9.0 (@a win parameter is available only since 3.1.6)
      */
-    static wxSize GetNativeSizeHint(const wxArtClient& client, wxWindow* win = nullptr);
+    static wxSize GetNativeSizeHint(const wxArtClient& client, wxWindow* win = NULL);
 
     /**
         Returns a suitable size hint for the given @e wxArtClient in DIPs.
@@ -378,7 +378,7 @@ public:
 
         Note that @a win parameter is only available since wxWidgets 3.1.6.
      */
-    static wxSize GetSizeHint(const wxArtClient& client, wxWindow* win = nullptr);
+    static wxSize GetSizeHint(const wxArtClient& client, wxWindow* win = NULL);
 
     /**
         Query registered providers for icon bundle with given ID.

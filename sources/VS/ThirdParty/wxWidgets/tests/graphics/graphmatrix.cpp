@@ -29,8 +29,8 @@ public:
     {
         m_bmp.Create(100, 100);
         m_dc.SelectObject(m_bmp);
-        m_rend = nullptr;
-        m_ctx = nullptr;
+        m_rend = NULL;
+        m_ctx = NULL;
     }
 
     ~GraphicsMatrixTestCaseBase()
@@ -39,16 +39,16 @@ public:
         m_bmp = wxNullBitmap;
     }
 
-    virtual void setUp() override
+    virtual void setUp() wxOVERRIDE
     {
         wxASSERT( m_rend );
         m_ctx = m_rend->CreateContext(m_dc);
     }
 
-    virtual void tearDown() override
+    virtual void tearDown() wxOVERRIDE
     {
         delete m_ctx;
-        m_ctx = nullptr;
+        m_ctx = NULL;
     }
 
 protected:

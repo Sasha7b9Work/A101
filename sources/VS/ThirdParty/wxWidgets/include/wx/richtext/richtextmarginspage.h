@@ -72,8 +72,8 @@ public:
     wxRichTextAttr* GetAttributes();
 
     /// Data transfer
-    virtual bool TransferDataToWindow() override;
-    virtual bool TransferDataFromWindow() override;
+    virtual bool TransferDataToWindow() wxOVERRIDE;
+    virtual bool TransferDataFromWindow() wxOVERRIDE;
 
 ////@begin wxRichTextMarginsPage event handler declarations
 

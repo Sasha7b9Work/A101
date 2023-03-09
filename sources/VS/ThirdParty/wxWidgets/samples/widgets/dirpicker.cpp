@@ -63,11 +63,11 @@ class DirPickerWidgetsPage : public WidgetsPage
 public:
     DirPickerWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_dirPicker; }
-    virtual void RecreateWidget() override { RecreatePicker(); }
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_dirPicker; }
+    virtual void RecreateWidget() wxOVERRIDE { RecreatePicker(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
 
@@ -124,7 +124,7 @@ wxEND_EVENT_TABLE()
 // implementation
 // ============================================================================
 
-#if defined(__WXGTK__)
+#if defined(__WXGTK20__)
     #define FAMILY_CTRLS NATIVE_CTRLS
 #else
     #define FAMILY_CTRLS GENERIC_CTRLS
@@ -167,7 +167,7 @@ void DirPickerWidgetsPage::CreateContent()
     Reset();    // set checkboxes state
 
     // create pickers
-    m_dirPicker = nullptr;
+    m_dirPicker = NULL;
     CreatePicker();
 
     // right pane

@@ -34,7 +34,7 @@ public:
         { m_n = n; Create(); }
 
     // thread execution starts here
-    virtual ExitCode Entry() override;
+    virtual ExitCode Entry() wxOVERRIDE;
 
 private:
     size_t m_n;
@@ -67,10 +67,10 @@ public:
     }
 
     // thread execution starts here
-    virtual ExitCode Entry() override;
+    virtual ExitCode Entry() wxOVERRIDE;
 
     // and stops here
-    virtual void OnExit() override;
+    virtual void OnExit() wxOVERRIDE;
 
 private:
     size_t m_n; // number of characters to write
@@ -104,7 +104,7 @@ wxThread::ExitCode MyDetachedThread::Entry()
         wxMilliSleep(100);
     }
 
-    return nullptr;
+    return 0;
 }
 
 void MyDetachedThread::OnExit()
@@ -127,7 +127,7 @@ public:
         Create();
     }
 
-    virtual ExitCode Entry() override
+    virtual ExitCode Entry() wxOVERRIDE
     {
         //wxPrintf(wxT("Thread %lu has started running.\n"), GetId());
         gs_cond.Post();
@@ -140,7 +140,7 @@ public:
 
         //wxPrintf(wxT("Thread %lu finished to wait, exiting.\n"), GetId());
 
-        return nullptr;
+        return 0;
     }
 
 private:
@@ -162,7 +162,7 @@ public:
         Create();
     }
 
-    virtual ExitCode Entry() override
+    virtual ExitCode Entry() wxOVERRIDE
     {
         wxUnusedVar(m_i);
 
@@ -181,7 +181,7 @@ public:
 
         m_sem->Post();
 
-        return nullptr;
+        return 0;
     }
 
 private:

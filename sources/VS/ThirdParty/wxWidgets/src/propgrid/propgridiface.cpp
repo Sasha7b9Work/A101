@@ -146,7 +146,7 @@ wxPGProperty* wxPropertyGridInterface::ReplaceProperty( wxPGPropArg id, wxPGProp
     wxPGProperty* replaced = p;
     wxCHECK_MSG( replaced && property,
                  wxNullProperty,
-                 wxS("null property") );
+                 wxS("NULL property") );
     wxCHECK_MSG( !replaced->IsCategory(),
                  wxNullProperty,
                  wxS("cannot replace this type of property") );
@@ -199,9 +199,9 @@ bool wxPropertyGridInterface::DoClearSelection( bool validation,
     {
         wxPropertyGrid* pg = state->GetGrid();
         if ( pg->GetState() == state )
-            return pg->DoSelectProperty(nullptr, selFlags);
+            return pg->DoSelectProperty(NULL, selFlags);
         else
-            state->DoSetSelection(nullptr);
+            state->DoSetSelection(NULL);
     }
 
     return true;
@@ -335,7 +335,7 @@ void wxPropertyGridInterface::ClearModifiedStatus()
     unsigned int pageIndex = 0;
 
     wxPropertyGridPageState* page;
-    while ( (page = GetPageState(pageIndex)) != nullptr )
+    while ( (page = GetPageState(pageIndex)) != NULL )
     {
         page->DoGetRoot()->SetFlagRecursively(wxPG_PROP_MODIFIED, false);
         page->m_anyModified = false;
@@ -373,7 +373,7 @@ void wxPGTypeOperationFailed( const wxPGProperty* p,
                               const wxString& typestr,
                               const wxString& op )
 {
-    wxASSERT( p != nullptr );
+    wxASSERT( p != NULL );
     wxLogError( _("Type operation \"%s\" failed: Property labeled \"%s\" is of type \"%s\", NOT \"%s\"."),
         op, p->GetLabel(), p->GetValue().GetType(), typestr );
 }
@@ -418,7 +418,7 @@ wxPGProperty* wxPropertyGridInterface::GetPropertyByNameA( const wxString& name 
 
 wxPGProperty* wxPropertyGridInterface::GetPropertyByLabel( const wxString& label ) const
 {
-    return m_pState->BaseGetPropertyByLabel(label, nullptr);
+    return m_pState->BaseGetPropertyByLabel(label, NULL);
 }
 
 // ----------------------------------------------------------------------------
@@ -445,7 +445,7 @@ void wxPropertyGridInterface::SetPropertyAttributeAll( const wxString& attrName,
     unsigned int pageIndex = 0;
 
     wxPropertyGridPageState* page;
-    while ( (page = GetPageState(pageIndex)) != nullptr )
+    while ( (page = GetPageState(pageIndex)) != NULL )
     {
         DoSetPropertyAttribute(page->DoGetRoot(), attrName, value, wxPG_RECURSE);
 
@@ -523,7 +523,7 @@ wxPGProperty* wxPropertyGridInterface::GetPropertyByName( const wxString& name )
     // Check if it is "Property.SubProperty" format
     int pos = name.Find(wxS('.'));
     if ( pos <= 0 )
-        return nullptr;
+        return NULL;
 
     return GetPropertyByName(name.substr(0,pos),
                              name.substr(pos+1,name.length()-pos-1));
@@ -587,7 +587,7 @@ void wxPropertyGridInterface::Sort( int flags )
     unsigned int pageIndex = 0;
 
     wxPropertyGridPageState* page;
-    while( (page = GetPageState(pageIndex)) != nullptr )
+    while( (page = GetPageState(pageIndex)) != NULL )
     {
         page->DoSort(flags);
         pageIndex++;
@@ -757,7 +757,7 @@ wxVariant wxPropertyGridInterface::GetPropertyValue(wxPGPropArg id)
 // String is different from others.
 wxString wxPropertyGridInterface::GetPropertyValueAsString( wxPGPropArg id ) const
 {
-    wxPG_PROP_ARG_CALL_PROLOG_RETVAL(wxString())
+    wxPG_PROP_ARG_CALL_PROLOG_RETVAL(wxEmptyString)
     return p->GetValueAsString(wxPG_FULL_VALUE);
 }
 
@@ -889,7 +889,7 @@ public:
         m_it.Init( state, flags );
     }
     virtual ~wxPGVIteratorBase_State() { }
-    virtual void Next() override { m_it.Next(); }
+    virtual void Next() wxOVERRIDE { m_it.Next(); }
 };
 
 wxPGVIterator wxPropertyGridInterface::GetVIterator( int flags ) const
@@ -930,7 +930,7 @@ wxString wxPropertyGridInterface::SaveEditableState( int includedStates ) const
     wxVector<wxPropertyGridPageState*> pageStates;
     unsigned int pageIndex = 0;
     wxPropertyGridPageState* page;
-    while ( (page = GetPageState(pageIndex)) != nullptr )
+    while ( (page = GetPageState(pageIndex)) != NULL )
     {
         pageStates.push_back(page);
         pageIndex++;
@@ -1021,7 +1021,7 @@ wxString wxPropertyGridInterface::SaveEditableState( int includedStates ) const
 bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int restoreStates )
 {
     wxPropertyGrid* pg = GetPropertyGrid();
-    wxPGProperty* newSelection = nullptr;
+    wxPGProperty* newSelection = NULL;
     size_t pageIndex;
     long vx = -1;
     long vy = -1;
@@ -1172,7 +1172,7 @@ bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int res
     // (may be needed on unclean source string).
     pageIndex = 0;
     wxPropertyGridPageState* pageState;
-    while ( (pageState = GetPageState(pageIndex)) != nullptr )
+    while ( (pageState = GetPageState(pageIndex)) != NULL )
     {
         pageState->VirtualHeightChanged();
         pageIndex++;

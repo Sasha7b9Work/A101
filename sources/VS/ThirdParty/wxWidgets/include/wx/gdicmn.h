@@ -218,6 +218,9 @@ enum wxEllipsizeMode
 #elif defined(__WXMAC__)
     // Initialize from an included XPM
     #define wxICON(X) wxIcon( X##_xpm )
+#elif defined(__WXMOTIF__)
+    // Initialize from an included XPM
+    #define wxICON(X) wxIcon( X##_xpm )
 #elif defined(__WXX11__)
     // Initialize from an included XPM
     #define wxICON(X) wxIcon( X##_xpm )
@@ -231,15 +234,19 @@ enum wxEllipsizeMode
 
 /* Another macro: this one is for portable creation of bitmaps. We assume that
    under Unix bitmaps live in XPMs and under Windows they're in resources.
-
-   This is a legacy macro, prefer using wxBITMAP_PNG() in the new code.
  */
 
 #if defined(__WINDOWS__) && wxUSE_WXDIB
     #define wxBITMAP(name) wxBitmap(wxT(#name), wxBITMAP_TYPE_BMP_RESOURCE)
-#else
+#elif defined(__WXGTK__)   || \
+      defined(__WXMOTIF__) || \
+      defined(__WXX11__)   || \
+      defined(__WXMAC__)   || \
+      defined(__WXDFB__)
     // Initialize from an included XPM
     #define wxBITMAP(name) wxBitmap(name##_xpm)
+#else // other platforms
+    #define wxBITMAP(name) wxBitmap(name##_xpm, wxBITMAP_TYPE_XPM)
 #endif // platform
 
 // Macro for creating wxBitmap from in-memory PNG data.
@@ -915,9 +922,6 @@ public:
     // find colour by name or name for the given colour
     wxColour Find(const wxString& name) const;
     wxString FindName(const wxColour& colour) const;
-
-    // list all known colours by name
-    wxVector<wxString> GetAllNames() const;
 
     // add a new colour to the database
     void AddColour(const wxString& name, const wxColour& colour);

@@ -83,7 +83,7 @@ void wxThreadSpecificInfo::ThreadCleanUp()
         if ( i->get() == wxTHIS_THREAD_INFO )
         {
             GetAllThreadInfos().erase(i);
-            wxTHIS_THREAD_INFO = nullptr;
+            wxTHIS_THREAD_INFO = NULL;
             break;
         }
     }

@@ -63,7 +63,7 @@ public:
 
     // implement this base class function for both console and GUI applications
     virtual bool SafeMessageBox(const wxString& text,
-                                const wxString& title) override;
+                                const wxString& title) wxOVERRIDE;
 
 protected:
 #if wxUSE_THREADS

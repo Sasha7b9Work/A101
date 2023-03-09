@@ -176,7 +176,7 @@ wxSize wxStaticBox::DoGetBestSize() const
     int hBox = EDIT_HEIGHT_FROM_CHAR_HEIGHT(cy);
 
     // If there is a sizer then the base best size is the sizer's minimum
-    if (GetSizer() != nullptr)
+    if (GetSizer() != NULL)
     {
         wxSize cm(GetSizer()->CalcMin());
         best = ClientToWindowSize(cm);
@@ -408,7 +408,7 @@ WXHRGN wxStaticBox::MSWGetRegionWithoutChildren()
 
         wxMSWWinStyleUpdater updateStyle(child);
         wxString str(wxGetWindowClass(child));
-        str.MakeUpper();
+        str.UpperCase();
         if ( str == wxT("BUTTON") && updateStyle.IsOn(BS_GROUPBOX) )
         {
             if ( child == GetHwnd() )
@@ -439,7 +439,7 @@ WXHRGN wxStaticBox::MSWGetRegionWithoutChildren()
                 // MSDN: "If you have changed certain window data using
                 // SetWindowLong, you must call SetWindowPos to have the
                 // changes take effect."
-                ::SetWindowPos(child, nullptr, 0, 0, 0, 0,
+                ::SetWindowPos(child, NULL, 0, 0, 0, 0,
                                SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER |
                                SWP_FRAMECHANGED);
             }
@@ -636,10 +636,10 @@ void wxStaticBox::OnPaint(wxPaintEvent& WXUNUSED(event))
                 labelRect.GetLeft() - gap - border,
                 borderTop,
                 &memdc, border, 0);
-        dc.Blit(labelRect.GetRight() + gap, 0,
-                rc.right - (labelRect.GetRight() + gap),
-                borderTop,
-                &memdc, border, 0);
+
+        const int xStart = labelRect.GetRight() + gap;
+        dc.Blit(xStart, 0, rc.right - xStart, borderTop,
+                &memdc, xStart, 0);
     }
     else
     {

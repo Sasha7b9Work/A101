@@ -70,11 +70,11 @@ class FilePickerWidgetsPage : public WidgetsPage
 public:
     FilePickerWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_filePicker; }
-    virtual void RecreateWidget() override { RecreatePicker(); }
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_filePicker; }
+    virtual void RecreateWidget() wxOVERRIDE { RecreatePicker(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
 
@@ -141,7 +141,7 @@ wxEND_EVENT_TABLE()
 // implementation
 // ============================================================================
 
-#if defined(__WXGTK__)
+#if defined(__WXGTK20__)
     #define FAMILY_CTRLS NATIVE_CTRLS
 #else
     #define FAMILY_CTRLS GENERIC_CTRLS
@@ -194,7 +194,7 @@ void FilePickerWidgetsPage::CreateContent()
     // create the picker and the static text displaying its current value
     m_labelPath = new wxStaticText(this, PickerPage_CurrentPath, "");
 
-    m_filePicker = nullptr;
+    m_filePicker = NULL;
     CreatePicker();
 
     // right pane

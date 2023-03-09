@@ -67,7 +67,7 @@ public :
     virtual void        SetControlSize( wxWindowVariant variant );
     virtual double      GetContentScaleFactor() const ;
 
-    virtual void        SetNeedsDisplay( const wxRect* where = nullptr );
+    virtual void        SetNeedsDisplay( const wxRect* where = NULL );
     virtual bool        GetNeedsDisplay() const;
 
     virtual bool        CanFocus() const;
@@ -109,7 +109,7 @@ public :
 
     void                SetFont(const wxFont & font);
 
-    void                InstallEventHandler( WXWidget control = nullptr );
+    void                InstallEventHandler( WXWidget control = NULL );
     bool                EnableTouchEvents(int WXUNUSED(eventsMask)) { return false; }
 
     virtual void        DoNotifyFocusEvent(bool receivedFocus, wxWidgetImpl* otherWindow);
@@ -184,9 +184,9 @@ public :
 
     virtual bool ShowFullScreen(bool show, long style);
 
-    virtual wxContentProtection GetContentProtection() const override
+    virtual wxContentProtection GetContentProtection() const wxOVERRIDE
         {  return wxCONTENT_PROTECTION_NONE; }
-    virtual bool SetContentProtection(wxContentProtection contentProtection) override
+    virtual bool SetContentProtection(wxContentProtection contentProtection) wxOVERRIDE
         { return false; }
 
     virtual void RequestUserAttention(int flags);

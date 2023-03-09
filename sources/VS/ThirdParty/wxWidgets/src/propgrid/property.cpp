@@ -36,6 +36,13 @@
 
 #define PWC_CHILD_SUMMARY_CHAR_LIMIT    64 // Character limit of summary field when not editing
 
+#if wxPG_COMPATIBILITY_1_4
+
+// Used to establish backwards compatibility
+const char* g_invalidStringContent = "@__TOTALLY_INVALID_STRING__@";
+
+#endif
+
 // -----------------------------------------------------------------------
 
 static void wxPGDrawFocusRect(wxWindow *win, wxDC& dc,
@@ -102,7 +109,7 @@ void wxPGCellRenderer::DrawEditorValue( wxDC& dc, const wxRect& rect,
 void wxPGCellRenderer::DrawCaptionSelectionRect(wxDC& dc,
                                                 int x, int y, int w, int h) const
 {
-    wxPGDrawFocusRect(nullptr, dc, x, y, w, h);
+    wxPGDrawFocusRect(NULL, dc, x, y, w, h);
 }
 #else
 void wxPGCellRenderer::DrawCaptionSelectionRect(wxWindow* win, wxDC& dc,
@@ -186,7 +193,7 @@ bool wxPGDefaultRenderer::Render( wxDC& dc, const wxRect& rect,
                                   const wxPropertyGrid* propertyGrid, wxPGProperty* property,
                                   int column, int item, int flags ) const
 {
-    const wxPGEditor* editor = nullptr;
+    const wxPGEditor* editor = NULL;
 
     wxString text;
     bool isUnspecified = property->IsValueUnspecified();
@@ -262,7 +269,7 @@ bool wxPGDefaultRenderer::Render( wxDC& dc, const wxRect& rect,
             // Add units string?
             if ( propertyGrid->GetColumnCount() <= 2 )
             {
-                wxString unitsString = property->GetAttribute(wxPG_ATTR_UNITS, wxString());
+                wxString unitsString = property->GetAttribute(wxPG_ATTR_UNITS, wxEmptyString);
                 if ( !unitsString.empty() )
                     text = wxString::Format(wxS("%s %s"), text, unitsString );
             }
@@ -279,9 +286,9 @@ bool wxPGDefaultRenderer::Render( wxDC& dc, const wxRect& rect,
                     propertyGrid->GetCellDisabledTextColour();
                 dc.SetTextForeground(hCol);
 
-                // Must make the editor nullptr to override its own rendering
+                // Must make the editor NULL to override its own rendering
                 // code.
-                editor = nullptr;
+                editor = NULL;
             }
         }
         else
@@ -453,22 +460,22 @@ void wxPGCell::SetEmptyData()
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxPGProperty, wxObject);
 
-wxString* wxPGProperty::sm_wxPG_LABEL = nullptr;
+wxString* wxPGProperty::sm_wxPG_LABEL = NULL;
 
 void wxPGProperty::Init()
 {
     m_commonValue = -1;
     m_arrIndex = 0xFFFF;
-    m_parent = nullptr;
+    m_parent = NULL;
 
-    m_parentState = nullptr;
+    m_parentState = NULL;
 
-    m_clientData = nullptr;
-    m_clientObject = nullptr;
+    m_clientData = NULL;
+    m_clientObject = NULL;
 
-    m_customEditor = nullptr;
+    m_customEditor = NULL;
 #if wxUSE_VALIDATORS
-    m_validator = nullptr;
+    m_validator = NULL;
 #endif
 
     m_maxLen = 0; // infinite maximum length
@@ -483,7 +490,7 @@ void wxPGProperty::Init()
 
 void wxPGProperty::Init( const wxString& label, const wxString& name )
 {
-    // wxPG_LABEL reference can be null if we are called before property
+    // wxPG_LABEL reference can be NULL if we are called before property
     // grid has been initialized
 
     if ( sm_wxPG_LABEL && label != wxPG_LABEL )
@@ -502,15 +509,16 @@ void wxPGProperty::InitAfterAdded( wxPropertyGridPageState* pageState,
 {
     //
     // Called after property has been added to grid or page
-    // (so propgrid can be null, too).
+    // (so propgrid can be NULL, too).
 
     wxPGProperty* parent = m_parent;
-    bool parentIsRoot = wxDynamicCast(parent, wxPGRootProperty) != nullptr;
+    bool parentIsRoot = wxDynamicCast(parent, wxPGRootProperty) != NULL;
 
     //
     // Convert invalid cells to default ones in this grid
-    for ( wxPGCell& cell : m_cells )
+    for ( unsigned int i=0; i<m_cells.size(); i++ )
     {
+        wxPGCell& cell = m_cells[i];
         if ( cell.IsInvalid() )
         {
             cell = IsCategory() ? propgrid->GetCategoryDefaultCell()
@@ -519,6 +527,13 @@ void wxPGProperty::InitAfterAdded( wxPropertyGridPageState* pageState,
     }
 
     m_parentState = pageState;
+
+#if wxPG_COMPATIBILITY_1_4
+    // Make sure deprecated virtual functions are not implemented
+    wxString s = GetValueAsString( 0xFFFF );
+    wxASSERT_MSG( s == g_invalidStringContent,
+                  wxS("Implement ValueToString() instead of GetValueAsString()") );
+#endif
 
     if ( !parentIsRoot && !parent->IsCategory() )
     {
@@ -642,8 +657,9 @@ void wxPGProperty::OnDetached(wxPropertyGridPageState* WXUNUSED(state),
         const wxPGCell& catDefCell = propgrid->GetCategoryDefaultCell();
 
         // Make default cells invalid
-        for ( wxPGCell& cell : m_cells )
+        for ( unsigned int i=0; i<m_cells.size(); i++ )
         {
+            wxPGCell& cell = m_cells[i];
             if ( cell.IsSameAs(propDefCell) ||
                  cell.IsSameAs(catDefCell) )
             {
@@ -673,12 +689,13 @@ wxPGProperty::~wxPGProperty()
 
     Empty();  // this deletes items
 
+//    delete m_valueBitmap;
 #if wxUSE_VALIDATORS
     delete m_validator;
 #endif
 
     // This makes it easier for us to detect dangling pointers
-    m_parent = nullptr;
+    m_parent = NULL;
 }
 
 
@@ -730,7 +747,7 @@ wxString wxPGProperty::GetName() const
 
 wxPropertyGrid* wxPGProperty::GetGrid() const
 {
-    return m_parentState ? m_parentState->GetGrid() : nullptr;
+    return m_parentState ? m_parentState->GetGrid() : NULL;
 }
 
 int wxPGProperty::Index( const wxPGProperty* p ) const
@@ -765,7 +782,7 @@ void wxPGProperty::GetDisplayInfo( unsigned int column,
     wxASSERT_MSG(!pCell || !(*pCell),
           wxS("Cell pointer is a dummy argument and shouldn't be used"));
     wxUnusedVar(pCell);
-    GetDisplayInfo(column, choiceIndex, flags, pString, (wxPGCell*)nullptr);
+    GetDisplayInfo(column, choiceIndex, flags, pString, (wxPGCell*)NULL);
 }
 #endif // WXWIN_COMPATIBILITY_3_0
 
@@ -811,7 +828,7 @@ void wxPGProperty::GetDisplayInfo( unsigned int column,
             else if ( column == 1 )
                 *pString = GetDisplayedString();
             else if ( column == 2 )
-                *pString = GetAttribute(wxPG_ATTR_UNITS, wxString());
+                *pString = GetAttribute(wxPG_ATTR_UNITS, wxEmptyString);
         }
     }
     else
@@ -858,7 +875,7 @@ wxString wxPGProperty::GetColumnText( unsigned int col, int choiceIndex ) const
             else if ( col == 1 )
                 return GetDisplayedString();
             else if ( col == 2 )
-                return GetAttribute(wxPG_ATTR_UNITS, wxString());
+                return GetAttribute(wxPG_ATTR_UNITS, wxEmptyString);
         }
     }
     else
@@ -867,7 +884,7 @@ wxString wxPGProperty::GetColumnText( unsigned int col, int choiceIndex ) const
         return m_choices.GetLabel(choiceIndex);
     }
 
-    return wxString();
+    return wxEmptyString;
 }
 */
 
@@ -994,7 +1011,7 @@ wxString wxPGProperty::ValueToString( wxVariant& WXUNUSED(value),
                                       int argFlags ) const
 {
     wxCHECK_MSG( GetChildCount() > 0,
-                 wxString(),
+                 wxEmptyString,
                  wxS("If user property does not have any children, it must ")
                  wxS("override GetValueAsString") );
 
@@ -1010,8 +1027,18 @@ wxString wxPGProperty::ValueToString( wxVariant& WXUNUSED(value),
 
 wxString wxPGProperty::GetValueAsString( int argFlags ) const
 {
+#if wxPG_COMPATIBILITY_1_4
+    // This is backwards compatibility test
+    // That is, to make sure this function is not overridden
+    // (instead, ValueToString() should be).
+    if ( argFlags == 0xFFFF )
+    {
+        // Do not override! (for backwards compliancy)
+        return g_invalidStringContent;
+    }
+#endif
     wxPropertyGrid* pg = GetGrid();
-    wxCHECK_MSG( pg, wxString(),
+    wxCHECK_MSG( pg, wxEmptyString,
                  wxS("Cannot get valid value for detached property") );
 
     if ( IsValueUnspecified() )
@@ -1040,6 +1067,13 @@ wxString wxPGProperty::GetValueAsString( int argFlags ) const
         return cv->GetLabel();
     }
 }
+
+#if wxPG_COMPATIBILITY_1_4
+wxString wxPGProperty::GetValueString( int argFlags ) const
+{
+    return GetValueAsString(argFlags);
+}
+#endif
 
 bool wxPGProperty::IntToValue( wxVariant& variant, int number, int WXUNUSED(argFlags) ) const
 {
@@ -1351,7 +1385,7 @@ bool wxPGProperty::OnEvent( wxPropertyGrid*, wxWindow*, wxEvent& )
 void wxPGProperty::SetValue( wxVariant value, wxVariant* pList, int flags )
 {
     // If auto unspecified values are not wanted (via window or property style),
-    // then get default value instead of null wxVariant.
+    // then get default value instead of wxNullVariant.
     if ( value.IsNull() && (flags & wxPG_SETVAL_BY_USER) &&
          !UsesAutoUnspecified() )
     {
@@ -1423,7 +1457,7 @@ void wxPGProperty::SetValue( wxVariant value, wxVariant* pList, int flags )
                         // For aggregate properties, we will trust RefreshChildren()
                         // to update child values.
                         if ( !HasFlag(wxPG_PROP_AGGREGATE) )
-                            child->SetValue(childValue, nullptr, flags|wxPG_SETVAL_FROM_PARENT);
+                            child->SetValue(childValue, NULL, flags|wxPG_SETVAL_FROM_PARENT);
                         if ( flags & wxPG_SETVAL_BY_USER )
                             child->SetFlag(wxPG_PROP_MODIFIED);
                     }
@@ -1466,7 +1500,7 @@ void wxPGProperty::SetValue( wxVariant value, wxVariant* pList, int flags )
         if ( AreChildrenComponents() )
         {
             for ( unsigned int i = 0; i < GetChildCount(); i++ )
-                Item(i)->SetValue(value, nullptr, flags|wxPG_SETVAL_FROM_PARENT);
+                Item(i)->SetValue(value, NULL, flags|wxPG_SETVAL_FROM_PARENT);
         }
     }
 
@@ -1795,7 +1829,7 @@ void wxPGProperty::SetDefaultColours(int flags)
 
 wxPGEditorDialogAdapter* wxPGProperty::GetEditorDialog() const
 {
-    return nullptr;
+    return NULL;
 }
 
 bool wxPGProperty::DoSetAttribute( const wxString& WXUNUSED(name), wxVariant& WXUNUSED(value) )
@@ -1838,28 +1872,40 @@ wxVariant wxPGProperty::DoGetAttribute( const wxString& WXUNUSED(name) ) const
 wxVariant wxPGProperty::GetAttribute( const wxString& name ) const
 {
     wxVariant value = DoGetAttribute(name);
-    return !value.IsNull() ? value : m_attributes.FindValue(name);
+    if ( !value.IsNull() )
+        return value;
+
+    return m_attributes.FindValue(name);
 }
 
 wxString wxPGProperty::GetAttribute( const wxString& name, const wxString& defVal ) const
 {
     wxVariant variant = m_attributes.FindValue(name);
 
-    return variant.IsNull() ? defVal : variant.GetString();
+    if ( !variant.IsNull() )
+        return variant.GetString();
+
+    return defVal;
 }
 
 long wxPGProperty::GetAttributeAsLong( const wxString& name, long defVal ) const
 {
     wxVariant variant = m_attributes.FindValue(name);
 
-    return variant.IsNull() ? defVal : variant.GetLong();
+    if ( variant.IsNull() )
+        return defVal;
+
+    return variant.GetLong();
 }
 
 double wxPGProperty::GetAttributeAsDouble( const wxString& name, double defVal ) const
 {
     wxVariant variant = m_attributes.FindValue(name);
 
-    return variant.IsNull() ? defVal : variant.GetDouble();
+    if ( variant.IsNull() )
+        return defVal;
+
+    return variant.GetDouble();
 }
 
 wxVariant wxPGProperty::GetAttributesAsList() const
@@ -1928,7 +1974,7 @@ void wxPGProperty::SetFlagsFromString( const wxString& str )
 
 wxValidator* wxPGProperty::DoGetValidator() const
 {
-    return nullptr;
+    return NULL;
 }
 
 int wxPGProperty::InsertChoice( const wxString& label, int index, int value )
@@ -2183,7 +2229,7 @@ bool wxPGProperty::IsVisible() const
     if ( HasFlag(wxPG_PROP_HIDDEN) )
         return false;
 
-    for (const wxPGProperty* parent = GetParent(); parent != nullptr; parent = parent->GetParent() )
+    for (const wxPGProperty* parent = GetParent(); parent != NULL; parent = parent->GetParent() )
     {
         if ( !parent->IsExpanded() || parent->HasFlag(wxPG_PROP_HIDDEN) )
             return false;
@@ -2196,10 +2242,13 @@ wxPropertyGrid* wxPGProperty::GetGridIfDisplayed() const
 {
     wxPropertyGridPageState* state = GetParentState();
     if ( !state )
-        return nullptr;
+        return NULL;
     wxPropertyGrid* propGrid = state->GetGrid();
-    return state == propGrid->GetState() ? propGrid : nullptr;
+    if ( state == propGrid->GetState() )
+        return propGrid;
+    return NULL;
 }
+
 
 int wxPGProperty::GetY2( int lh ) const
 {
@@ -2208,7 +2257,7 @@ int wxPGProperty::GetY2( int lh ) const
 
     int y = 0;
 
-    for ( parent = GetParent(); parent != nullptr; parent = child->GetParent() )
+    for ( parent = GetParent(); parent != NULL; parent = child->GetParent() )
     {
         if ( !parent->IsExpanded() )
             return parent->GetY2(lh);
@@ -2278,6 +2327,13 @@ void wxPGProperty::AddPrivateChild( wxPGProperty* prop )
 
     DoPreAddChild( m_children.size(), prop );
 }
+
+#if wxPG_COMPATIBILITY_1_4
+void wxPGProperty::AddChild( wxPGProperty* prop )
+{
+    AddPrivateChild(prop);
+}
+#endif
 
 wxPGProperty* wxPGProperty::InsertChild( int index,
                                          wxPGProperty* childProperty )
@@ -2383,7 +2439,7 @@ void wxPGProperty::FixIndicesOfChildren( unsigned int starthere )
 }
 
 
-// Returns (direct) child property with given name (or nullptr if not found)
+// Returns (direct) child property with given name (or NULL if not found)
 wxPGProperty* wxPGProperty::GetPropertyByName( const wxString& name ) const
 {
     for ( unsigned int i = 0; i < GetChildCount(); i++ )
@@ -2396,12 +2452,12 @@ wxPGProperty* wxPGProperty::GetPropertyByName( const wxString& name ) const
     // Does it have point, then?
     int pos = name.Find(wxS('.'));
     if ( pos <= 0 )
-        return nullptr;
+        return NULL;
 
     wxPGProperty* p = GetPropertyByName(name. substr(0,pos));
 
     if ( !p || !p->GetChildCount() )
-        return nullptr;
+        return NULL;
 
     return p->GetPropertyByName(name.substr(pos+1,name.length()-pos-1));
 }
@@ -2428,7 +2484,7 @@ wxPGProperty* wxPGProperty::GetPropertyByNameWH( const wxString& name, unsigned 
             i = 0;
     }
 
-    return nullptr;
+    return NULL;
 }
 
 int wxPGProperty::GetChildrenHeight( int lh, int iMax ) const
@@ -2472,8 +2528,8 @@ wxPGProperty* wxPGProperty::GetItemAtY( unsigned int y,
     // Linear search at the moment
     //
     // nextItemY = y of next visible property, final value will be written back.
-    wxPGProperty* result = nullptr;
-    wxPGProperty* current = nullptr;
+    wxPGProperty* result = NULL;
+    wxPGProperty* current = NULL;
     unsigned int iy = *nextItemY;
 
     for ( unsigned int i = 0; i < GetChildCount(); i++ )
@@ -2539,7 +2595,7 @@ void wxPGProperty::Empty()
 wxPGProperty* wxPGProperty::GetItemAtY( unsigned int y ) const
 {
     wxPropertyGrid *pg = GetGrid();
-    wxCHECK_MSG( pg, nullptr,
+    wxCHECK_MSG( pg, NULL,
                  wxS("Cannot obtain property item for detached property") );
 
     unsigned int nextItem = 0;
@@ -2585,12 +2641,12 @@ wxVariant wxPGProperty::ChildChanged( wxVariant& WXUNUSED(thisValue),
                                       int WXUNUSED(childIndex),
                                       wxVariant& WXUNUSED(childValue) ) const
 {
-    return wxVariant();
+    return wxNullVariant;
 }
 
 bool wxPGProperty::AreAllChildrenSpecified( const wxVariant* pendingList ) const
 {
-    const wxVariantList* pList = nullptr;
+    const wxVariantList* pList = NULL;
     wxVariantList::const_iterator node;
 
     if ( pendingList )
@@ -2602,7 +2658,7 @@ bool wxPGProperty::AreAllChildrenSpecified( const wxVariant* pendingList ) const
     for ( unsigned int i = 0; i < GetChildCount(); i++ )
     {
         wxPGProperty* child = Item(i);
-        const wxVariant* listValue = nullptr;
+        const wxVariant* listValue = NULL;
         wxVariant value;
 
         if ( pendingList )
@@ -2630,7 +2686,7 @@ bool wxPGProperty::AreAllChildrenSpecified( const wxVariant* pendingList ) const
         // Check recursively
         if ( child->GetChildCount() )
         {
-            const wxVariant* childList = nullptr;
+            const wxVariant* childList = NULL;
 
             if ( listValue && listValue->IsType(wxPG_VARIANT_TYPE_LIST) )
                 childList = listValue;
@@ -2688,7 +2744,7 @@ void wxPGProperty::SubPropsChanged( int oldSelInd )
         child->InitAfterAdded(state, grid);
     }
 
-    wxPGProperty* sel = nullptr;
+    wxPGProperty* sel = NULL;
     if ( oldSelInd >= (int)m_children.size() )
         oldSelInd = (int)m_children.size() - 1;
 
@@ -2710,7 +2766,16 @@ wxString wxPGProperty::GetHintText() const
 {
     wxVariant vHintText = GetAttribute(wxPG_ATTR_HINT);
 
-    return vHintText.IsNull() ? wxString() : vHintText.GetString();
+#if wxPG_COMPATIBILITY_1_4
+    // Try the old, deprecated "InlineHelp"
+    if ( vHintText.IsNull() )
+        vHintText = GetAttribute(wxPG_ATTR_INLINE_HELP);
+#endif
+
+    if ( !vHintText.IsNull() )
+        return vHintText.GetString();
+
+    return wxEmptyString;
 }
 
 int wxPGProperty::GetDisplayedCommonValueCount() const
@@ -2748,7 +2813,7 @@ bool wxPGProperty::SetMaxLength(int maxLen)
 wxBitmap* wxPGProperty::GetValueImage() const
 {
     if ( !m_valueBitmapBundle.IsOk() )
-        return nullptr;
+        return NULL;
 
     wxPropertyGrid* pg = GetGrid();
     if ( pg )
@@ -2816,25 +2881,43 @@ wxPropertyCategory::~wxPropertyCategory()
 wxString wxPropertyCategory::ValueToString( wxVariant& WXUNUSED(value),
                                             int WXUNUSED(argFlags) ) const
 {
-    return m_value.IsType(wxPG_VARIANT_TYPE_STRING) ? m_value.GetString() : wxString();
+    if ( m_value.IsType(wxPG_VARIANT_TYPE_STRING) )
+        return m_value.GetString();
+    return wxEmptyString;
 }
 
 wxString wxPropertyCategory::GetValueAsString( int argFlags ) const
 {
+#if wxPG_COMPATIBILITY_1_4
+    // This is backwards compatibility test
+    // That is, to make sure this function is not overridden
+    // (instead, ValueToString() should be).
+    if ( argFlags == 0xFFFF )
+    {
+        // Do not override! (for backwards compliancy)
+        return g_invalidStringContent;
+    }
+#endif
+
     // Unspecified value is always empty string
-    return IsValueUnspecified() ? wxString() : wxPGProperty::GetValueAsString(argFlags);
+    if ( IsValueUnspecified() )
+        return wxEmptyString;
+
+    return wxPGProperty::GetValueAsString(argFlags);
 }
 
 static int DoGetTextExtent(const wxWindow* wnd, const wxString& label, const wxFont& font)
 {
     int x = 0, y = 0;
-    wnd->GetTextExtent(label, &x, &y, nullptr, nullptr, &font);
+    wnd->GetTextExtent(label, &x, &y, NULL, NULL, &font);
     return x;
 }
 
 int wxPropertyCategory::GetTextExtent( const wxWindow* wnd, const wxFont& font ) const
 {
-    return (m_textExtent > 0) ? m_textExtent : DoGetTextExtent(wnd, m_label, font);
+    if ( m_textExtent > 0 )
+        return m_textExtent;
+    return DoGetTextExtent(wnd, m_label, font);
 }
 
 void wxPropertyCategory::CalculateTextExtent(const wxWindow* wnd, const wxFont& font)

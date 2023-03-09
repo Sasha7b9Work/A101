@@ -33,7 +33,7 @@ namespace wxMSWMessageDialog
 
         wxMSWTaskDialogConfig()
             : buttons(new TASKDIALOG_BUTTON[MAX_BUTTONS]),
-              parent(nullptr),
+              parent(NULL),
               iconId(0),
               style(0),
               useCustomLabels(false)

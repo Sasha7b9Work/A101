@@ -201,7 +201,7 @@ bool wxGetFullHostName(wxChar *buf, int maxSize)
 
                         struct hostent *pHostEnt = pfngethostbyname
                                                     ? pfngethostbyname(bufA)
-                                                    : nullptr;
+                                                    : NULL;
 
                         if ( pHostEnt )
                         {
@@ -211,7 +211,7 @@ bool wxGetFullHostName(wxChar *buf, int maxSize)
                             pHostEnt = pfngethostbyaddr
                                         ? pfngethostbyaddr(pHostEnt->h_addr,
                                                            4, AF_INET)
-                                        : nullptr;
+                                        : NULL;
                         }
 
                         if ( pHostEnt )
@@ -286,7 +286,7 @@ bool wxGetUserName(wxChar *buf, int maxSize)
             wszDomain, WXSIZEOF(wszDomain) );
 
     // Get the computer name of a DC for the domain.
-    if ( NetGetDCName( nullptr, wszDomain, &ComputerName ) != NERR_Success )
+    if ( NetGetDCName( NULL, wszDomain, &ComputerName ) != NERR_Success )
     {
         wxLogError(wxT("Cannot find domain controller"));
 
@@ -322,7 +322,7 @@ bool wxGetUserName(wxChar *buf, int maxSize)
 
     // Convert the Unicode full name to ANSI
     WideCharToMultiByte( CP_ACP, 0, ui2->usri2_full_name, -1,
-            buf, maxSize, nullptr, nullptr );
+            buf, maxSize, NULL, NULL );
 
     return true;
 
@@ -355,7 +355,7 @@ const wxChar* wxGetHomeDir(wxString *pstr)
     // first branch is for Cygwin
 #if defined(__UNIX__) && !defined(__WINE__)
     const wxChar *szHome = wxGetenv(wxT("HOME"));
-    if ( szHome == nullptr ) {
+    if ( szHome == NULL ) {
       // we're homeless...
       wxLogWarning(_("can't find user's HOME, using current directory."));
       strDir = wxT(".");
@@ -384,18 +384,18 @@ const wxChar* wxGetHomeDir(wxString *pstr)
     // have unix utilities on them, we should use that.
     const wxChar *szHome = wxGetenv(wxT("HOME"));
 
-    if ( szHome != nullptr )
+    if ( szHome != NULL )
     {
         strDir = szHome;
     }
     else // no HOME, try HOMEDRIVE/PATH
     {
         szHome = wxGetenv(wxT("HOMEDRIVE"));
-        if ( szHome != nullptr )
+        if ( szHome != NULL )
             strDir << szHome;
         szHome = wxGetenv(wxT("HOMEPATH"));
 
-        if ( szHome != nullptr )
+        if ( szHome != NULL )
         {
             strDir << szHome;
 
@@ -416,7 +416,7 @@ const wxChar* wxGetHomeDir(wxString *pstr)
         // Windows NT, 2000 and XP, we should use that as our home directory.
         szHome = wxGetenv(wxT("USERPROFILE"));
 
-        if ( szHome != nullptr )
+        if ( szHome != NULL )
             strDir = szHome;
     }
 
@@ -429,7 +429,7 @@ const wxChar* wxGetHomeDir(wxString *pstr)
     else // fall back to the program directory
     {
         // extract the directory component of the program file name
-        wxFileName::SplitPath(wxGetFullModuleName(), &strDir, nullptr, nullptr);
+        wxFileName::SplitPath(wxGetFullModuleName(), &strDir, NULL, NULL);
     }
 #endif  // UNIX/Win
 
@@ -459,7 +459,7 @@ bool wxGetDiskSpace(const wxString& path,
     if ( !::GetDiskFreeSpaceEx(path.t_str(),
                                &bytesFree,
                                &bytesTotal,
-                               nullptr) )
+                               NULL) )
     {
         wxLogLastError(wxT("GetDiskFreeSpaceEx"));
 
@@ -498,7 +498,7 @@ bool wxGetEnv(const wxString& var,
               wxString *value)
 {
     // first get the size of the buffer
-    DWORD dwRet = ::GetEnvironmentVariable(var.t_str(), nullptr, 0);
+    DWORD dwRet = ::GetEnvironmentVariable(var.t_str(), NULL, 0);
     if ( !dwRet )
     {
         // this means that there is no such variable
@@ -555,7 +555,7 @@ bool wxSetEnv(const wxString& variable, const wxString& value)
 
 bool wxUnsetEnv(const wxString& variable)
 {
-    return wxDoSetEnv(variable, nullptr);
+    return wxDoSetEnv(variable, NULL);
 }
 
 // ----------------------------------------------------------------------------
@@ -628,7 +628,7 @@ int wxKill(long pid, wxSignal sig, wxKillError *krc, int flags)
         dwAccess |= PROCESS_TERMINATE;
 
     HANDLE hProcess = ::OpenProcess(dwAccess, FALSE, (DWORD)pid);
-    if ( hProcess == nullptr )
+    if ( hProcess == NULL )
     {
         if ( krc )
         {
@@ -877,7 +877,7 @@ bool wxShutdown(int flags)
         TOKEN_PRIVILEGES tkp;
 
         // Get the LUID for the shutdown privilege.
-        bOK = ::LookupPrivilegeValue(nullptr, SE_SHUTDOWN_NAME,
+        bOK = ::LookupPrivilegeValue(NULL, SE_SHUTDOWN_NAME,
                                         &tkp.Privileges[0].Luid) != 0;
 
         if ( bOK )
@@ -887,7 +887,7 @@ bool wxShutdown(int flags)
 
             // Get the shutdown privilege for this process.
             ::AdjustTokenPrivileges(hToken, FALSE, &tkp, 0,
-                                    nullptr, 0);
+                                    (PTOKEN_PRIVILEGES)NULL, 0);
 
             // Cannot test the return value of AdjustTokenPrivileges.
             bOK = ::GetLastError() == ERROR_SUCCESS;
@@ -971,7 +971,7 @@ wxLoadUserResource(const void **outData,
                    const wxChar* resourceType,
                    WXHINSTANCE instance)
 {
-    wxCHECK_MSG( outData && outLen, false, "output pointers can't be null" );
+    wxCHECK_MSG( outData && outLen, false, "output pointers can't be NULL" );
 
     HRSRC hResource = ::FindResource(instance,
                                      resourceName.t_str(),
@@ -1011,7 +1011,7 @@ wxLoadUserResource(const wxString& resourceName,
     const void *data;
     size_t len;
     if ( !wxLoadUserResource(&data, &len, resourceName, resourceType, instance) )
-        return nullptr;
+        return NULL;
 
     char *s = new char[len + 1];
     memcpy(s, data, len);
@@ -1362,7 +1362,7 @@ wxString wxGetCpuArchitectureName()
     // Try to get the current active CPU architecture via IsWow64Process2()
     // first, fallback to GetNativeSystemInfo() otherwise
     USHORT machine;
-    if (wxIsWow64Process2(::GetCurrentProcess(), &machine, nullptr) &&
+    if (wxIsWow64Process2(::GetCurrentProcess(), &machine, NULL) &&
         machine != IMAGE_FILE_MACHINE_UNKNOWN)
         return wxGetCpuArchitecureNameFromImageType(machine);
 
@@ -1643,11 +1643,11 @@ extern long wxCharsetToCodepage(const char *name)
 extern "C" WXDLLIMPEXP_BASE HWND
 wxCreateHiddenWindow(LPCTSTR *pclassname, LPCTSTR classname, WNDPROC wndproc)
 {
-    wxCHECK_MSG( classname && pclassname && wndproc, nullptr,
-                    wxT("null parameter in wxCreateHiddenWindow") );
+    wxCHECK_MSG( classname && pclassname && wndproc, NULL,
+                    wxT("NULL parameter in wxCreateHiddenWindow") );
 
     // register the class fi we need to first
-    if ( *pclassname == nullptr )
+    if ( *pclassname == NULL )
     {
         WNDCLASS wndclass;
         wxZeroMemory(wndclass);
@@ -1660,7 +1660,7 @@ wxCreateHiddenWindow(LPCTSTR *pclassname, LPCTSTR classname, WNDPROC wndproc)
         {
             wxLogLastError(wxT("RegisterClass() in wxCreateHiddenWindow"));
 
-            return nullptr;
+            return NULL;
         }
 
         *pclassname = classname;
@@ -1670,13 +1670,13 @@ wxCreateHiddenWindow(LPCTSTR *pclassname, LPCTSTR classname, WNDPROC wndproc)
     HWND hwnd = ::CreateWindow
                   (
                     *pclassname,
-                    nullptr,
+                    NULL,
                     0, 0, 0, 0,
                     0,
-                    nullptr,
-                    nullptr,
+                    (HWND) NULL,
+                    (HMENU)NULL,
                     wxGetInstance(),
-                    nullptr
+                    (LPVOID) NULL
                   );
 
     if ( !hwnd )

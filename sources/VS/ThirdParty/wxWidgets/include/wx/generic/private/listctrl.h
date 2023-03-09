@@ -96,13 +96,13 @@ public:
     wxUIntPtr m_data;
 
     // the item coordinates are not used in report mode; instead this pointer is
-    // null and the owner window is used to retrieve the item position and size
+    // NULL and the owner window is used to retrieve the item position and size
     wxRect *m_rect;
 
     // the list ctrl we are in
     wxListMainWindow *m_owner;
 
-    // custom attributes or nullptr
+    // custom attributes or NULL
     wxItemAttr *m_attr;
 
 protected:
@@ -221,7 +221,7 @@ public:
         if ( inReportView )
         {
             delete m_gi;
-            m_gi = nullptr;
+            m_gi = NULL;
         }
         else
         {
@@ -365,7 +365,7 @@ public:
     virtual ~wxListHeaderWindow();
 
     // We never need focus as we don't have any keyboard interface.
-    virtual bool AcceptsFocus() const override { return false; }
+    virtual bool AcceptsFocus() const wxOVERRIDE { return false; }
 
     void DrawCurrent();
     void AdjustDC( wxDC& dc );
@@ -384,9 +384,9 @@ public:
     bool m_sortAsc;
     int m_sortCol;
 
-    virtual wxWindow *GetMainWindowOfCompositeControl() override { return GetParent(); }
+    virtual wxWindow *GetMainWindowOfCompositeControl() wxOVERRIDE { return GetParent(); }
 
-    virtual void OnInternalIdle() override;
+    virtual void OnInternalIdle() wxOVERRIDE;
 
 private:
     // common part of all ctors
@@ -410,7 +410,7 @@ private:
 
 public:
     wxListRenameTimer( wxListMainWindow *owner );
-    void Notify() override;
+    void Notify() wxOVERRIDE;
 };
 
 //-----------------------------------------------------------------------------
@@ -428,7 +428,7 @@ public:
     {
     }
 
-    virtual void Notify() override;
+    virtual void Notify() wxOVERRIDE;
 
 private:
     wxListMainWindow *m_owner;
@@ -602,13 +602,13 @@ public:
 
     wxTextCtrl *GetEditControl() const
     {
-        return m_textctrlWrapper ? m_textctrlWrapper->GetText() : nullptr;
+        return m_textctrlWrapper ? m_textctrlWrapper->GetText() : NULL;
     }
 
     void ResetTextControl(wxTextCtrl *text)
     {
         delete text;
-        m_textctrlWrapper = nullptr;
+        m_textctrlWrapper = NULL;
     }
 
     void OnRenameTimer();
@@ -734,7 +734,7 @@ public:
                      const wxPoint& point = wxDefaultPosition );
 
     // override base class virtual to reset m_lineHeight when the font changes
-    virtual bool SetFont(const wxFont& font) override
+    virtual bool SetFont(const wxFont& font) wxOVERRIDE
     {
         if ( !wxWindow::SetFont(font) )
             return false;
@@ -770,7 +770,7 @@ public:
         return m_hasFocus ? m_highlightBrush : m_highlightUnfocusedBrush;
     }
 
-    bool HasFocus() const override
+    bool HasFocus() const wxOVERRIDE
     {
         return m_hasFocus;
     }
@@ -846,7 +846,7 @@ protected:
     bool m_hasCheckBoxes;
 
 protected:
-    wxWindow *GetMainWindowOfCompositeControl() override { return GetParent(); }
+    wxWindow *GetMainWindowOfCompositeControl() wxOVERRIDE { return GetParent(); }
 
     // the total count of items selected in a non virtual list control with
     // multiple selections (always 0 otherwise)
@@ -948,7 +948,7 @@ private:
             *m_highlightUnfocusedBrush;
 
     // wrapper around the text control currently used for in place editing or
-    // nullptr if no item is being edited
+    // NULL if no item is being edited
     wxListTextCtrlWrapper *m_textctrlWrapper;
 
     // tells whether or not to paint empty rows with alternate colour and draw

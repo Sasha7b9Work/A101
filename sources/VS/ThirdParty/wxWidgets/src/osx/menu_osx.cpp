@@ -62,7 +62,7 @@ void wxMenu::Init()
     m_doBreak = false;
     m_allowRearrange = true;
     m_noEventsMode = false;
-    m_radioData = nullptr;
+    m_radioData = NULL;
 
     m_peer = wxMenuImpl::Create( this, wxStripMenuCodes(m_title, wxStrip_Menu) );
 
@@ -86,7 +86,7 @@ WXHMENU wxMenu::GetHMenu() const
 {
     if ( m_peer )
         return m_peer->GetHMenu();
-    return nullptr;
+    return NULL;
 }
 
 void wxMenu::SetAllowRearrange( bool allow )
@@ -108,13 +108,13 @@ bool wxMenu::OSXGetRadioGroupRange(int pos, int *start, int *end) const
 // append a new item or submenu to the menu
 bool wxMenu::DoInsertOrAppend(wxMenuItem *item, size_t pos)
 {
-    wxASSERT_MSG( item != nullptr, wxT("can't append nullptr item to the menu") );
+    wxASSERT_MSG( item != NULL, wxT("can't append NULL item to the menu") );
     GetPeer()->InsertOrAppend( item, pos );
 
     wxMenu *pSubMenu = item->GetSubMenu() ;
-    if ( pSubMenu != nullptr )
+    if ( pSubMenu != NULL )
     {
-        wxASSERT_MSG( pSubMenu->GetHMenu() != nullptr , wxT("invalid submenu added"));
+        wxASSERT_MSG( pSubMenu->GetHMenu() != NULL , wxT("invalid submenu added"));
         pSubMenu->m_menuParent = this ;
 
         pSubMenu->DoRearrange();
@@ -179,7 +179,7 @@ wxMenuItem* wxMenu::DoAppend(wxMenuItem *item)
     if (wxMenuBase::DoAppend(item) && DoInsertOrAppend(item) )
         return item;
 
-    return nullptr;
+    return NULL;
 }
 
 wxMenuItem* wxMenu::DoInsert(size_t pos, wxMenuItem *item)
@@ -187,7 +187,7 @@ wxMenuItem* wxMenu::DoInsert(size_t pos, wxMenuItem *item)
     if (wxMenuBase::DoInsert(pos, item) && DoInsertOrAppend(item, pos))
         return item;
 
-    return nullptr;
+    return NULL;
 }
 
 wxMenuItem *wxMenu::DoRemove(wxMenuItem *item)
@@ -217,7 +217,7 @@ wxMenuItem *wxMenu::DoRemove(wxMenuItem *item)
     }
 
     // DoRemove() (unlike Remove) can only be called for existing item!
-    wxCHECK_MSG( node, nullptr, wxT("bug in wxMenu::Remove logic") );
+    wxCHECK_MSG( node, NULL, wxT("bug in wxMenu::Remove logic") );
 
     wxOSXMenuRemoveItem(m_hMenu , pos );
     */
@@ -265,7 +265,7 @@ void wxMenu::DoRearrange()
     if ( !AllowRearrange() )
         return;
 
-    wxMenuItem* previousItem = nullptr ;
+    wxMenuItem* previousItem = NULL ;
     size_t pos ;
     wxMenuItemList::compatibility_iterator node;
     wxMenuItem *item;
@@ -295,9 +295,9 @@ void wxMenu::DoRearrange()
                 // separator at the menu start or end nor 2 consecutive
                 // separators
                 wxMenuItemList::compatibility_iterator nextNode = node->GetNext();
-                wxMenuItem *next = nextNode ? nextNode->GetData() : nullptr;
+                wxMenuItem *next = nextNode ? nextNode->GetData() : NULL;
 
-                wxMenuItem *sepToHide = nullptr;
+                wxMenuItem *sepToHide = 0;
                 if ( !previousItem && next && next->IsSeparator() )
                 {
                     // next (i.e. second as we must be first) item is
@@ -306,7 +306,7 @@ void wxMenu::DoRearrange()
                     sepToHide = next;
                 }
                 else if ( GetMenuItems().GetCount() == pos + 1 &&
-                            previousItem != nullptr &&
+                            previousItem != NULL &&
                                 previousItem->IsSeparator() )
                 {
                     // prev item is a trailing separator we want to hide
@@ -359,23 +359,28 @@ bool wxMenu::HandleCommandUpdateStatus( wxMenuItem* item )
 
 bool wxMenu::HandleCommandProcess( wxMenuItem* item )
 {
-    int menuid = item ? item->GetId() : 0;
+    wxCHECK_MSG( item, false, "must have a valid item" );
+
+    int menuid = item->GetId();
     bool processed = false;
     if (item->IsCheckable())
         item->Check( !item->IsChecked() ) ;
 
-    if ( SendEvent( menuid , item->IsCheckable() ? item->IsChecked() : -1 ) )
-        processed = true ;
-
-    if(!processed && item)
-    {
-        processed = item->GetPeer()->DoDefault();  
-    }
-    
+    // A bit counterintuitively, we call OSXAfterMenuEvent() _before_ calling
+    // the user defined handler. This is done to account for the case when this
+    // handler deletes the window, as it can possibly do.
     if (wxWindow* const w = GetInvokingWindow())
     {
         // Let the invoking window update itself if necessary.
         w->OSXAfterMenuEvent();
+    }
+
+    if ( SendEvent( menuid , item->IsCheckable() ? item->IsChecked() : -1 ) )
+        processed = true ;
+
+    if(!processed)
+    {
+        processed = item->GetPeer()->DoDefault();  
     }
 
     return processed;
@@ -390,7 +395,7 @@ void wxMenu::HandleMenuItemHighlighted( wxMenuItem* item )
 
 void wxMenu::DoHandleMenuOpenedOrClosed(wxEventType evtType)
 {
-    // Popup menu being currently shown or nullptr, defined in wincmn.cpp.
+    // Popup menu being currently shown or NULL, defined in wincmn.cpp.
     extern wxMenu *wxCurrentPopupMenu;
 
     // Set the id to allow wxMenuEvent::IsPopup() to work correctly.
@@ -468,10 +473,10 @@ auto-merge for MDI in case this will be necessary
 
 */
 
-wxMenuBar* wxMenuBar::s_macInstalledMenuBar = nullptr ;
-wxMenuBar* wxMenuBar::s_macCommonMenuBar = nullptr ;
+wxMenuBar* wxMenuBar::s_macInstalledMenuBar = NULL ;
+wxMenuBar* wxMenuBar::s_macCommonMenuBar = NULL ;
 bool     wxMenuBar::s_macAutoWindowMenu = true ;
-WXHMENU  wxMenuBar::s_macWindowMenuHandle = nullptr ;
+WXHMENU  wxMenuBar::s_macWindowMenuHandle = NULL ;
 
 
 const int firstMenuPos = 1; // to account for the 0th application menu on mac
@@ -543,7 +548,7 @@ void wxMenuBar::Init()
     }
     
     m_eventHandler = this;
-    m_menuBarFrame = nullptr;
+    m_menuBarFrame = NULL;
     m_rootMenu = new wxMenu();
     m_rootMenu->Attach(this);
 
@@ -577,12 +582,12 @@ wxMenuBar::wxMenuBar(size_t count, wxMenu *menus[], const wxString titles[], lon
 wxMenuBar::~wxMenuBar()
 {
     if (s_macCommonMenuBar == this)
-        s_macCommonMenuBar = nullptr;
+        s_macCommonMenuBar = NULL;
 
     MacUninstallMenuBar();
     wxDELETE( m_rootMenu );
     // apple menu is a submenu, therefore we don't have to delete it
-    m_appleMenu = nullptr;
+    m_appleMenu = NULL;
 
     // deleting the root menu also removes all its wxMenu* submenus, therefore
     // we must avoid double deleting them in the superclass destructor
@@ -599,7 +604,7 @@ void wxMenuBar::MacUninstallMenuBar()
   if (s_macInstalledMenuBar == this)
   {
     gs_emptyMenuBar->GetPeer()->MakeRoot();
-    s_macInstalledMenuBar = nullptr;
+    s_macInstalledMenuBar = NULL;
   }
 }
 
@@ -612,15 +617,15 @@ void wxMenuBar::MacInstallMenuBar()
     
     // hide items in the apple menu that don't exist in the wx menubar
     
-    wxMenuItem* appleItem = nullptr;
-    wxMenuItem* wxItem = nullptr;
+    wxMenuItem* appleItem = NULL;
+    wxMenuItem* wxItem = NULL;
 
     int menuid = wxApp::s_macAboutMenuItemId;
     appleItem = m_appleMenu->FindItem(menuid);
     wxItem = FindItem(menuid);
-    if ( appleItem != nullptr )
+    if ( appleItem != NULL )
     {
-        if ( wxItem == nullptr )
+        if ( wxItem == NULL )
             appleItem->GetPeer()->Hide();
         else 
             appleItem->SetItemLabel(wxItem->GetItemLabel());
@@ -629,9 +634,9 @@ void wxMenuBar::MacInstallMenuBar()
     menuid = wxApp::s_macPreferencesMenuItemId;
     appleItem = m_appleMenu->FindItem(menuid);
     wxItem = FindItem(menuid);
-    if ( appleItem != nullptr )
+    if ( appleItem != NULL )
     {
-        if ( wxItem == nullptr )
+        if ( wxItem == NULL )
             appleItem->GetPeer()->Hide();
         else 
             appleItem->SetItemLabel(wxItem->GetItemLabel());
@@ -709,7 +714,7 @@ wxMenu *wxMenuBar::Replace(size_t pos, wxMenu *menu, const wxString& title)
 {
     wxMenu *menuOld = wxMenuBarBase::Replace(pos, menu, title);
     if ( !menuOld )
-        return nullptr;
+        return NULL;
 
     wxMenuItem* item = m_rootMenu->FindItemByPosition(pos+firstMenuPos);
     m_rootMenu->Remove(item);
@@ -733,7 +738,7 @@ wxMenu *wxMenuBar::Remove(size_t pos)
 {
     wxMenu *menu = wxMenuBarBase::Remove(pos);
     if ( !menu )
-        return nullptr;
+        return NULL;
 
     wxMenuItem* item = m_rootMenu->FindItemByPosition(pos+firstMenuPos);
     m_rootMenu->Remove(item);
@@ -743,7 +748,7 @@ wxMenu *wxMenuBar::Remove(size_t pos)
 
 bool wxMenuBar::Append(wxMenu *menu, const wxString& title)
 {
-    WXHMENU submenu = menu ? menu->GetHMenu() : nullptr;
+    WXHMENU submenu = menu ? menu->GetHMenu() : 0;
         wxCHECK_MSG( submenu, false, wxT("can't append invalid menu to menubar") );
 
     if ( !wxMenuBarBase::Append(menu, title) )

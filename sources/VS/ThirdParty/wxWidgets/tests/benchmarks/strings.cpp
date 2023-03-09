@@ -424,7 +424,7 @@ BENCHMARK_FUNC(CharBuffer)
 class DummyParser : public wx28HtmlParser
 {
 public:
-    virtual wxObject* GetProduct() { return nullptr; }
+    virtual wxObject* GetProduct() { return NULL; }
     virtual void AddText(const wxChar*) {}
 };
 

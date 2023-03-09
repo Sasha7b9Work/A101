@@ -81,8 +81,8 @@ GIFImage::GIFImage()
     transparent = 0;
     disposal = wxANIM_DONOTREMOVE;
     delay = -1;
-    p = (unsigned char *) nullptr;
-    pal = (unsigned char *) nullptr;
+    p = (unsigned char *) NULL;
+    pal = (unsigned char *) NULL;
     ncolours = 0;
 }
 

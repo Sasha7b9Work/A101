@@ -119,7 +119,7 @@ wxTextEntry *wxTextValidator::GetTextEntry()
         "or wxComboCtrl"
     );
 
-    return nullptr;
+    return NULL;
 }
 
 // Called when the value in the window must be validated.

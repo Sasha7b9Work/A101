@@ -77,7 +77,7 @@ protected:
 //       same prototype for their constructor (and also explains why we use
 //       define instead of a typedef)
 // since GTK > 2.4, there is GtkColorButton
-#if defined(__WXGTK__) && !defined(__WXUNIVERSAL__)
+#if defined(__WXGTK20__) && !defined(__WXUNIVERSAL__)
     #include "wx/gtk/clrpicker.h"
     #define wxColourPickerWidget      wxColourButton
 #elif defined(__WXQT__) && !defined(__WXUNIVERSAL__)
@@ -137,16 +137,16 @@ public:         // public API
 public:        // internal functions
 
     // update the button colour to match the text control contents
-    void UpdatePickerFromTextCtrl() override;
+    void UpdatePickerFromTextCtrl() wxOVERRIDE;
 
     // update the text control to match the button's colour
-    void UpdateTextCtrlFromPicker() override;
+    void UpdateTextCtrlFromPicker() wxOVERRIDE;
 
     // event handler for our picker
     void OnColourChange(wxColourPickerEvent &);
 
 protected:
-    virtual long GetPickerStyle(long style) const override
+    virtual long GetPickerStyle(long style) const wxOVERRIDE
         { return (style & (wxCLRP_SHOW_LABEL | wxCLRP_SHOW_ALPHA)); }
 
 private:
@@ -178,7 +178,7 @@ public:
 
 
     // default copy ctor, assignment operator and dtor are ok
-    virtual wxEvent *Clone() const override { return new wxColourPickerEvent(*this); }
+    virtual wxEvent *Clone() const wxOVERRIDE { return new wxColourPickerEvent(*this); }
 
 private:
     wxColour m_colour;

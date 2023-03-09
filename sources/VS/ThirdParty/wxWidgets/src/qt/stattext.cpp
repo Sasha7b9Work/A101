@@ -23,7 +23,7 @@ public:
 
 
 wxStaticText::wxStaticText() :
-    m_qtLabel(nullptr)
+    m_qtLabel(NULL)
 {
 }
 

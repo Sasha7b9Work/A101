@@ -90,6 +90,11 @@ const wxTextCoord wxInvalidTextCoord    = -2;
 #define wxTE_WORDWRAP       0x0001  // wrap only at words boundaries
 #define wxTE_BESTWRAP       0x0000  // this is the default
 
+#if WXWIN_COMPATIBILITY_2_8
+    // this style is (or at least should be) on by default now, don't use it
+    #define wxTE_AUTO_SCROLL    0
+#endif // WXWIN_COMPATIBILITY_2_8
+
 // force using RichEdit version 2.0 or 3.0 instead of 1.0 (default) for
 // wxTE_RICH controls - can be used together with or instead of wxTE_RICH
 #define wxTE_RICH2          0x8000
@@ -510,9 +515,9 @@ public:
     }
 
     // Merges the given attributes. If compareWith
-    // is non-null, then it will be used to mask out those attributes that are the same in style
+    // is non-NULL, then it will be used to mask out those attributes that are the same in style
     // and compareWith, for situations where we don't want to explicitly set inherited attributes.
-    bool Apply(const wxTextAttr& style, const wxTextAttr* compareWith = nullptr);
+    bool Apply(const wxTextAttr& style, const wxTextAttr* compareWith = NULL);
 
     // merges the attributes of the base and the overlay objects and returns
     // the result; the parameter attributes take precedence
@@ -520,7 +525,7 @@ public:
     // WARNING: the order of arguments is the opposite of Combine()
     static wxTextAttr Merge(const wxTextAttr& base, const wxTextAttr& overlay)
     {
-        return Combine(overlay, base, nullptr);
+        return Combine(overlay, base, NULL);
     }
 
     // merges the attributes of this object and overlay
@@ -717,17 +722,17 @@ public:
     wxTextCtrlIface() { }
 
     // wxTextAreaBase overrides
-    virtual wxString GetValue() const override
+    virtual wxString GetValue() const wxOVERRIDE
     {
        return wxTextEntryBase::GetValue();
     }
-    virtual void SetValue(const wxString& value) override
+    virtual void SetValue(const wxString& value) wxOVERRIDE
     {
        wxTextEntryBase::SetValue(value);
     }
 
 protected:
-    virtual bool IsValidPosition(long pos) const override
+    virtual bool IsValidPosition(long pos) const wxOVERRIDE
     {
         return pos >= 0 && pos <= GetLastPosition();
     }
@@ -775,42 +780,42 @@ public:
 
 
     // do the window-specific processing after processing the update event
-    virtual void DoUpdateWindowUI(wxUpdateUIEvent& event) override;
+    virtual void DoUpdateWindowUI(wxUpdateUIEvent& event) wxOVERRIDE;
 
-    virtual bool ShouldInheritColours() const override { return false; }
+    virtual bool ShouldInheritColours() const wxOVERRIDE { return false; }
 
     // work around the problem with having HitTest() both in wxControl and
     // wxTextAreaBase base classes
-    virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt, long *pos) const override
+    virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt, long *pos) const wxOVERRIDE
     {
         return wxTextAreaBase::HitTest(pt, pos);
     }
 
     virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
                                             wxTextCoord *col,
-                                            wxTextCoord *row) const override
+                                            wxTextCoord *row) const wxOVERRIDE
     {
         return wxTextAreaBase::HitTest(pt, col, row);
     }
 
     // we provide stubs for these functions as not all platforms have styles
     // support, but we really should leave them pure virtual here
-    virtual bool SetStyle(long start, long end, const wxTextAttr& style) override;
-    virtual bool GetStyle(long position, wxTextAttr& style) override;
-    virtual bool SetDefaultStyle(const wxTextAttr& style) override;
+    virtual bool SetStyle(long start, long end, const wxTextAttr& style) wxOVERRIDE;
+    virtual bool GetStyle(long position, wxTextAttr& style) wxOVERRIDE;
+    virtual bool SetDefaultStyle(const wxTextAttr& style) wxOVERRIDE;
 
     // wxTextAreaBase overrides
-    virtual wxString GetValue() const override
+    virtual wxString GetValue() const wxOVERRIDE
     {
        return wxTextEntry::GetValue();
     }
-    virtual void SetValue(const wxString& value) override
+    virtual void SetValue(const wxString& value) wxOVERRIDE
     {
        wxTextEntry::SetValue(value);
     }
 
     // wxWindow overrides
-    virtual wxVisualAttributes GetDefaultAttributes() const override
+    virtual wxVisualAttributes GetDefaultAttributes() const wxOVERRIDE
     {
         return GetClassDefaultAttributes(GetWindowVariant());
     }
@@ -821,7 +826,7 @@ public:
         return GetCompositeControlsDefaultAttributes(variant);
     }
 
-    virtual const wxTextEntry* WXGetTextEntry() const override { return this; }
+    virtual const wxTextEntry* WXGetTextEntry() const wxOVERRIDE { return this; }
 
 #if wxUSE_SPELLCHECK
     // Use native spelling and grammar checking functions.
@@ -840,21 +845,21 @@ protected:
     // Override wxEvtHandler method to check for a common problem of binding
     // wxEVT_TEXT_ENTER to a control without wxTE_PROCESS_ENTER style, which is
     // never going to work.
-    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) override;
+    virtual bool OnDynamicBind(wxDynamicEventTableEntry& entry) wxOVERRIDE;
 
     // override streambuf method
 #if wxHAS_TEXT_WINDOW_STREAM
-    int overflow(int i) override;
+    int overflow(int i) wxOVERRIDE;
 #endif // wxHAS_TEXT_WINDOW_STREAM
 
     // Another wxTextAreaBase override.
-    virtual bool IsValidPosition(long pos) const override
+    virtual bool IsValidPosition(long pos) const wxOVERRIDE
     {
         return pos >= 0 && pos <= GetLastPosition();
     }
 
     // implement the wxTextEntry pure virtual method
-    virtual wxWindow *GetEditableWindow() override { return this; }
+    virtual wxWindow *GetEditableWindow() wxOVERRIDE { return this; }
 
     wxDECLARE_NO_COPY_CLASS(wxTextCtrlBase);
     wxDECLARE_ABSTRACT_CLASS(wxTextCtrlBase);
@@ -870,8 +875,12 @@ protected:
     #include "wx/univ/textctrl.h"
 #elif defined(__WXMSW__)
     #include "wx/msw/textctrl.h"
-#elif defined(__WXGTK__)
+#elif defined(__WXMOTIF__)
+    #include "wx/motif/textctrl.h"
+#elif defined(__WXGTK20__)
     #include "wx/gtk/textctrl.h"
+#elif defined(__WXGTK__)
+    #include "wx/gtk1/textctrl.h"
 #elif defined(__WXMAC__)
     #include "wx/osx/textctrl.h"
 #elif defined(__WXQT__)
@@ -912,7 +921,7 @@ public:
     // get the end of the URL
     long GetURLEnd() const { return m_end; }
 
-    virtual wxEvent *Clone() const override { return new wxTextUrlEvent(*this); }
+    virtual wxEvent *Clone() const wxOVERRIDE { return new wxTextUrlEvent(*this); }
 
 protected:
     // the corresponding mouse event

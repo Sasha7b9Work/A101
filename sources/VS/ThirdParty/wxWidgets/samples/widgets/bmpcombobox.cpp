@@ -100,12 +100,12 @@ class BitmapComboBoxWidgetsPage : public ItemContainerWidgetsPage
 public:
     BitmapComboBoxWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_combobox; }
-    virtual wxItemContainer* GetContainer() const override { return m_combobox; }
-    virtual void RecreateWidget() override { CreateCombo(); }
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_combobox; }
+    virtual wxItemContainer* GetContainer() const wxOVERRIDE { return m_combobox; }
+    virtual void RecreateWidget() wxOVERRIDE { CreateCombo(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
     // event handlers
@@ -252,15 +252,15 @@ BitmapComboBoxWidgetsPage::BitmapComboBoxWidgetsPage(WidgetsBookCtrl *book,
     // init everything
     m_chkSort =
     m_chkProcessEnter =
-    m_chkReadonly = nullptr;
+    m_chkReadonly = NULL;
 
-    m_combobox = nullptr;
-    m_sizerCombo = nullptr;
+    m_combobox = NULL;
+    m_sizerCombo = NULL;
 
     m_textInsert =
     m_textChangeHeight =
     m_textChange =
-    m_textDelete = nullptr;
+    m_textDelete = NULL;
 }
 
 // create a sizer containing a label and a small text ctrl
@@ -387,7 +387,7 @@ void BitmapComboBoxWidgetsPage::CreateContent()
     m_combobox = new wxBitmapComboBox();
     m_combobox->Create(this, BitmapComboBoxPage_Combo, wxEmptyString,
                        wxDefaultPosition, wxDefaultSize,
-                       0, nullptr,
+                       0, NULL,
                        // Flags correspond to the checkboxes state in Reset().
                        wxTE_PROCESS_ENTER);
 
@@ -470,7 +470,7 @@ void BitmapComboBoxWidgetsPage::CreateCombo()
     m_combobox = new wxBitmapComboBox();
     m_combobox->Create(this, BitmapComboBoxPage_Combo, wxEmptyString,
                        wxDefaultPosition, wxDefaultSize,
-                       0, nullptr,
+                       0, NULL,
                        flags);
 
 #if defined(wxGENERIC_BITMAPCOMBOBOX)
@@ -585,7 +585,7 @@ void BitmapComboBoxWidgetsPage::OnButtonLoadFromFile(wxCommandEvent& WXUNUSED(ev
 
 void BitmapComboBoxWidgetsPage::OnButtonSetFromFile(wxCommandEvent& WXUNUSED(event))
 {
-    wxBitmap bmp = QueryBitmap(nullptr);
+    wxBitmap bmp = QueryBitmap(NULL);
     if (bmp.IsOk())
         m_combobox->SetItemBitmap(m_combobox->GetSelection(), bmp);
 }

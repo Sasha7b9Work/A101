@@ -138,18 +138,18 @@ class wxMediaPlayerApp : public wxApp
 {
 public:
 #ifdef __WXMAC__
-    virtual void MacOpenFiles(const wxArrayString & fileNames ) override;
+    virtual void MacOpenFiles(const wxArrayString & fileNames ) wxOVERRIDE;
 #endif
 
 #if wxUSE_CMDLINE_PARSER
-    virtual void OnInitCmdLine(wxCmdLineParser& parser) override;
-    virtual bool OnCmdLineParsed(wxCmdLineParser& parser) override;
+    virtual void OnInitCmdLine(wxCmdLineParser& parser) wxOVERRIDE;
+    virtual bool OnCmdLineParsed(wxCmdLineParser& parser) wxOVERRIDE;
 
     // Files specified on the command line, if any.
     wxVector<wxString> m_params;
 #endif // wxUSE_CMDLINE_PARSER
 
-    virtual bool OnInit() override;
+    virtual bool OnInit() wxOVERRIDE;
 
 protected:
     class wxMediaPlayerFrame* m_frame;
@@ -282,7 +282,7 @@ public:
     wxMediaPlayerTimer(wxMediaPlayerFrame* frame) {m_frame = frame;}
 
     // Called each time the timer's timeout expires
-    void Notify() override;
+    void Notify() wxOVERRIDE;
 
     wxMediaPlayerFrame* m_frame;       // The wxMediaPlayerFrame
 };
@@ -348,7 +348,7 @@ public:
     wxPlayListDropTarget(wxMediaPlayerListCtrl& list) : m_list(list) {}
     ~wxPlayListDropTarget(){}
         virtual bool OnDropFiles(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
-                         const wxArrayString& files) override
+                         const wxArrayString& files) wxOVERRIDE
     {
         for (size_t i = 0; i < files.GetCount(); ++i)
         {
@@ -500,7 +500,7 @@ void wxMediaPlayerApp::MacOpenFiles(const wxArrayString & fileNames )
 // ----------------------------------------------------------------------------
 
 wxMediaPlayerFrame::wxMediaPlayerFrame(const wxString& title)
-       : wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(1366,768))
+       : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(1366,768))
 {
     SetIcon(wxICON(sample));
 

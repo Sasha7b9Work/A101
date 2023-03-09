@@ -92,10 +92,10 @@ public:
     // this one is called on application startup and is a good place for the app
     // initialization (doing it here and not in the ctor allows to have an error
     // return: if OnInit() returns false, the application terminates)
-    virtual bool OnInit() override;
+    virtual bool OnInit() wxOVERRIDE;
 
     // do some clean up here
-    virtual int OnExit() override;
+    virtual int OnExit() wxOVERRIDE;
 };
 
 // Define a new frame type: this is going to be our main frame
@@ -373,7 +373,7 @@ bool MyApp::OnInit()
 int MyApp::OnExit()
 {
     // clean up
-    delete wxHelpProvider::Set(nullptr);
+    delete wxHelpProvider::Set(NULL);
 
     return 0;
 }
@@ -384,7 +384,7 @@ int MyApp::OnExit()
 
 // frame constructor
 MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
-       : wxFrame(nullptr, 300, title, pos, size)
+       : wxFrame((wxFrame *)NULL, 300, title, pos, size)
 #if USE_HTML_HELP
     , m_embeddedHtmlHelp(wxHF_EMBEDDED|wxHF_DEFAULT_STYLE)
 #endif

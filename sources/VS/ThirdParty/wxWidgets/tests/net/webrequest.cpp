@@ -116,7 +116,7 @@ public:
         }
     }
 
-    void Notify() override
+    void Notify() wxOVERRIDE
     {
         WARN("Exiting loop on timeout");
         loop.Exit();

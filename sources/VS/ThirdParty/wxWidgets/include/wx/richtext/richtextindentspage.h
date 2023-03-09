@@ -66,8 +66,8 @@ public:
     void CreateControls();
 
     /// Transfer data from/to window
-    virtual bool TransferDataFromWindow() override;
-    virtual bool TransferDataToWindow() override;
+    virtual bool TransferDataFromWindow() wxOVERRIDE;
+    virtual bool TransferDataToWindow() wxOVERRIDE;
 
     /// Updates the paragraph preview
     void UpdatePreview();

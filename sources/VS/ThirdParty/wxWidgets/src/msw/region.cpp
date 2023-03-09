@@ -45,10 +45,10 @@ public:
 
     wxRegionRefData(const wxRegionRefData& data) : wxGDIRefData()
     {
-        DWORD noBytes = ::GetRegionData(data.m_region, 0, nullptr);
+        DWORD noBytes = ::GetRegionData(data.m_region, 0, NULL);
         RGNDATA *rgnData = (RGNDATA*) new char[noBytes];
         ::GetRegionData(data.m_region, noBytes, rgnData);
-        m_region = ::ExtCreateRegion(nullptr, noBytes, rgnData);
+        m_region = ::ExtCreateRegion(NULL, noBytes, rgnData);
         delete[] (char*) rgnData;
     }
 
@@ -82,7 +82,7 @@ private:
 
 wxRegion::wxRegion()
 {
-    m_refData = nullptr;
+    m_refData = NULL;
 }
 
 wxRegion::wxRegion(WXHRGN hRegion)
@@ -338,7 +338,7 @@ void wxRegionIterator::Init()
     m_current =
     m_numRects = 0;
 
-    m_rects = nullptr;
+    m_rects = NULL;
 }
 
 wxRegionIterator::~wxRegionIterator()
@@ -349,7 +349,7 @@ wxRegionIterator::~wxRegionIterator()
 // Initialize iterator for region
 wxRegionIterator::wxRegionIterator(const wxRegion& region)
 {
-    m_rects = nullptr;
+    m_rects = NULL;
 
     Reset(region);
 }
@@ -371,7 +371,7 @@ wxRegionIterator& wxRegionIterator::operator=(const wxRegionIterator& ri)
     }
     else
     {
-        m_rects = nullptr;
+        m_rects = NULL;
     }
 
     return *this;
@@ -393,7 +393,7 @@ void wxRegionIterator::Reset(const wxRegion& region)
         m_numRects = 0;
     else
     {
-        DWORD noBytes = ::GetRegionData(((wxRegionRefData*)region.m_refData)->m_region, 0, nullptr);
+        DWORD noBytes = ::GetRegionData(((wxRegionRefData*)region.m_refData)->m_region, 0, NULL);
         RGNDATA *rgnData = (RGNDATA*) new char[noBytes];
         ::GetRegionData(((wxRegionRefData*)region.m_refData)->m_region, noBytes, rgnData);
 

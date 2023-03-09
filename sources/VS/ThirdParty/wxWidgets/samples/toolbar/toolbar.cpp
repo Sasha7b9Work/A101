@@ -101,7 +101,7 @@ enum Positions
 class MyApp : public wxApp
 {
 public:
-    bool OnInit() override;
+    bool OnInit() wxOVERRIDE;
 };
 
 // Define a new frame
@@ -152,9 +152,9 @@ public:
     void OnUpdateCopyAndCut(wxUpdateUIEvent& event);
     void OnUpdateToggleHorzText(wxUpdateUIEvent& event);
     void OnUpdateNeedsToolbar(wxUpdateUIEvent& event)
-        { event.Enable( GetToolBar() != nullptr ); }
+        { event.Enable( GetToolBar() != NULL ); }
     void OnUpdateToggleRadioBtn(wxUpdateUIEvent& event)
-        { event.Enable( m_tbar != nullptr ); }
+        { event.Enable( m_tbar != NULL ); }
 
 private:
     void DoEnablePrint();
@@ -187,7 +187,7 @@ private:
     // the path to the custom bitmap for the test toolbar tool
     wxString            m_pathBmp;
 
-    // the search tool, initially nullptr
+    // the search tool, initially NULL
     wxToolBarToolBase *m_searchTool;
 
     wxDECLARE_EVENT_TABLE();
@@ -348,16 +348,16 @@ void MyFrame::RecreateToolbar()
     wxToolBarBase *toolBar = GetToolBar();
     long style = toolBar ? toolBar->GetWindowStyle() : TOOLBAR_STYLE;
 
-    if (toolBar && m_searchTool && m_searchTool->GetToolBar() == nullptr)
+    if (toolBar && m_searchTool && m_searchTool->GetToolBar() == NULL)
     {
         // see ~MyFrame()
         toolBar->AddTool(m_searchTool);
     }
-    m_searchTool = nullptr;
+    m_searchTool = NULL;
 
     delete toolBar;
 
-    SetToolBar(nullptr);
+    SetToolBar(NULL);
 
     style &= ~(wxTB_HORIZONTAL | wxTB_VERTICAL | wxTB_BOTTOM | wxTB_RIGHT | wxTB_HORZ_LAYOUT);
     switch( m_toolbarPosition )
@@ -529,19 +529,19 @@ void MyFrame::PopulateToolbar(wxToolBarBase* toolBar)
                 {
                 }
 
-                wxSize GetDefaultSize() const override
+                wxSize GetDefaultSize() const wxOVERRIDE
                 {
                     return m_sizeDef;
                 }
 
-                wxSize GetPreferredBitmapSizeAtScale(double scale) const override
+                wxSize GetPreferredBitmapSizeAtScale(double scale) const wxOVERRIDE
                 {
                     // We just scale the bitmap to fit the requested size, so
                     // we don't really have any preferences.
                     return m_sizeDef*scale;
                 }
 
-                wxBitmap GetBitmap(const wxSize& size) override
+                wxBitmap GetBitmap(const wxSize& size) wxOVERRIDE
                 {
                     // In this simple implementation we don't bother caching
                     // anything.
@@ -594,15 +594,15 @@ void MyFrame::PopulateToolbar(wxToolBarBase* toolBar)
 
 // Define my frame constructor
 MyFrame::MyFrame()
-       : wxFrame(nullptr, wxID_ANY, "wxToolBar Sample")
+       : wxFrame(NULL, wxID_ANY, "wxToolBar Sample")
 {
-    m_tbar = nullptr;
+    m_tbar = NULL;
 
     m_smallToolbar = true;
     m_horzText = false;
     m_useCustomDisabled = false;
     m_showTooltips = true;
-    m_searchTool = nullptr;
+    m_searchTool = NULL;
 
     m_rows = 1;
     m_nPrint = 0; // set to 1 in PopulateToolbar()
@@ -782,7 +782,7 @@ void MyFrame::OnToggleToolbar(wxCommandEvent& WXUNUSED(event))
     }
     else
     {
-        // notice that there is no need to call SetToolBar(nullptr) here (although
+        // notice that there is no need to call SetToolBar(NULL) here (although
         // this it is harmless to do and it must be called if you do not delete
         // the toolbar but keep it for later reuse), just delete the toolbar
         // directly and it will reset the associated frame toolbar pointer

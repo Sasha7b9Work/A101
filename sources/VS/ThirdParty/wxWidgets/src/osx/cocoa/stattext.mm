@@ -91,7 +91,7 @@ public:
         m_lineBreak = lineBreak;
     }
 
-    virtual void SetLabel(const wxString& title, wxFontEncoding encoding) override
+    virtual void SetLabel(const wxString& title, wxFontEncoding encoding) wxOVERRIDE
     {
         wxMacAutoreleasePool autoreleasepool;
 
@@ -104,7 +104,7 @@ public:
     }
 
 #if wxUSE_MARKUP
-    virtual void SetLabelMarkup( const wxString& markup) override
+    virtual void SetLabelMarkup( const wxString& markup) wxOVERRIDE
     {
         wxMarkupToAttrString toAttr(GetWXPeer()->GetFont(), markup);
 

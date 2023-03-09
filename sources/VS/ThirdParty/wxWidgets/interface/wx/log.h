@@ -659,7 +659,7 @@ protected:
 
     // don't delete logChain directly as this would leave a dangling
     // pointer as active log target, use SetActiveTarget() instead
-    delete wxLog::SetActiveTarget(...something else or nullptr...);
+    delete wxLog::SetActiveTarget(...something else or NULL...);
     @endcode
 
     @library{wxbase}
@@ -804,7 +804,7 @@ public:
             to the character set given by @a conv, that message will be
             silently ignored, i.e. it will not be written at all.
     */
-    wxLogStream(std::ostream *ostr = nullptr,
+    wxLogStream(std::ostream *ostr = NULL,
                 const wxMBConv &conv = wxConvWhateverWorks);
 };
 
@@ -846,7 +846,7 @@ public:
             to the character set given by @a conv, that message will be
             silently ignored, i.e. it will not be written at all.
     */
-    wxLogStderr(FILE *fp = nullptr,
+    wxLogStderr(FILE *fp = NULL,
                 const wxMBConv &conv = wxConvWhateverWorks);
 };
 

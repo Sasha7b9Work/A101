@@ -36,7 +36,7 @@
 // The platform-specific locale type
 // If wxXLocale_t is not defined, then only "C" locale support is provided
 #ifdef wxHAS_XLOCALE_SUPPORT
-    #if defined(__VISUALC__)
+    #if wxCHECK_VISUALC_VERSION(8)
         typedef _locale_t wxXLocale_t;
         #define wxXLOCALE_IDENT(name) _ ## name
     #elif defined(HAVE_LOCALE_T)
@@ -78,7 +78,7 @@ class WXDLLIMPEXP_BASE wxXLocale
 {
 public:
     // Construct an uninitialized locale
-    wxXLocale() { m_locale = nullptr; }
+    wxXLocale() { m_locale = NULL; }
 
 #if wxUSE_INTL
     // Construct from a symbolic language constant
@@ -97,7 +97,7 @@ public:
 
     // Check if the object represents a valid locale (notice that without
     // wxHAS_XLOCALE_SUPPORT the only valid locale is the "C" one)
-    bool IsOk() const { return m_locale != nullptr; }
+    bool IsOk() const { return m_locale != NULL; }
 
     // Get the type
     wxXLocale_t Get() const { return m_locale; }
@@ -113,11 +113,11 @@ private:
     // Create from the given language string (called from ctors)
     void Init(const char *loc);
 
-    // Free the locale if it's non-null
+    // Free the locale if it's non-NULL
     void Free();
 
 
-    // The corresponding locale handle, nullptr if invalid
+    // The corresponding locale handle, NULL if invalid
     wxXLocale_t m_locale;
 
 

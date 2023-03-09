@@ -35,7 +35,7 @@
 // Define a new application type
 class MyApp: public wxApp
 { public:
-    bool OnInit(void) override;
+    bool OnInit(void) wxOVERRIDE;
 };
 
 // Define a new frame type
@@ -56,7 +56,7 @@ bool MyApp::OnInit(void)
       return false;
 
   // Create the main frame window
-  MyFrame *frame = new MyFrame(nullptr);
+  MyFrame *frame = new MyFrame((wxFrame *) NULL);
 
   // Give it an icon
   frame->SetIcon(wxICON(sample));

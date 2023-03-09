@@ -54,7 +54,7 @@ public:
         return operator=(wxWindowPtr(win));
     }
 
-    void reset(T* ptr = nullptr)
+    void reset(T* ptr = NULL)
     {
         wxSharedPtr<T>::reset(ptr, wxPrivate::wxWindowDeleter());
     }

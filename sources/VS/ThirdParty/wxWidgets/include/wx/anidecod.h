@@ -36,26 +36,26 @@ public:
     ~wxANIDecoder();
 
 
-    virtual wxSize GetFrameSize(unsigned int frame) const override;
-    virtual wxPoint GetFramePosition(unsigned int frame) const override;
-    virtual wxAnimationDisposal GetDisposalMethod(unsigned int frame) const override;
-    virtual long GetDelay(unsigned int frame) const override;
-    virtual wxColour GetTransparentColour(unsigned int frame) const override;
+    virtual wxSize GetFrameSize(unsigned int frame) const wxOVERRIDE;
+    virtual wxPoint GetFramePosition(unsigned int frame) const wxOVERRIDE;
+    virtual wxAnimationDisposal GetDisposalMethod(unsigned int frame) const wxOVERRIDE;
+    virtual long GetDelay(unsigned int frame) const wxOVERRIDE;
+    virtual wxColour GetTransparentColour(unsigned int frame) const wxOVERRIDE;
 
     // implementation of wxAnimationDecoder's pure virtuals
 
-    virtual bool Load( wxInputStream& stream ) override;
+    virtual bool Load( wxInputStream& stream ) wxOVERRIDE;
 
-    bool ConvertToImage(unsigned int frame, wxImage *image) const override;
+    bool ConvertToImage(unsigned int frame, wxImage *image) const wxOVERRIDE;
 
-    wxAnimationDecoder *Clone() const override
+    wxAnimationDecoder *Clone() const wxOVERRIDE
         { return new wxANIDecoder; }
-    wxAnimationType GetType() const override
+    wxAnimationType GetType() const wxOVERRIDE
         { return wxANIMATION_TYPE_ANI; }
 
 protected:
     // wxAnimationDecoder pure virtual:
-    virtual bool DoCanRead( wxInputStream& stream ) const override;
+    virtual bool DoCanRead( wxInputStream& stream ) const wxOVERRIDE;
             // modifies current stream position (see wxAnimationDecoder::CanRead)
 
 private:

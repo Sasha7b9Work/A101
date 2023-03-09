@@ -54,7 +54,7 @@ namespace
         {
         }
 
-        virtual void SetLabel( const wxString& title, wxFontEncoding encoding ) override
+        virtual void SetLabel( const wxString& title, wxFontEncoding encoding ) wxOVERRIDE
         {
             if (title.empty())
                 [GetNSBox() setTitlePosition:NSNoTitle];

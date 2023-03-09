@@ -34,10 +34,10 @@ class TextFileTestCase : public CppUnit::TestCase
 public:
     TextFileTestCase()
     {
-        srand((unsigned)time(nullptr));
+        srand((unsigned)time(NULL));
     }
 
-    virtual void tearDown() override { unlink(GetTestFileName()); }
+    virtual void tearDown() wxOVERRIDE { unlink(GetTestFileName()); }
 
 private:
     CPPUNIT_TEST_SUITE( TextFileTestCase );

@@ -170,42 +170,26 @@ void ImageTestCase::LoadFromFile()
 
 void ImageTestCase::LoadFromSocketStream()
 {
-    if (!IsNetworkAvailable())      // implemented in test.cpp
-    {
-        WARN("No network connectivity; skipping the "
-             "ImageTestCase::LoadFromSocketStream test unit.");
+    // This test doesn't work any more even using the IP address below as the
+    // HTTP server now redirects everything to HTTPs, so skip it for now unless
+    // a test URL pointing to a PNG image is defined.
+    wxString urlStr;
+    if ( !wxGetEnv("WX_TEST_IMAGE_URL_PNG", &urlStr) )
         return;
-    }
 
-    // These URLs use the real IP address of www.wxwidgets.org.
-    struct {
-        const char* url;
-        wxBitmapType type;
-    } testData[] =
-    {
-        { "http://173.254.92.22/assets/img/header-logo.png", wxBITMAP_TYPE_PNG },
-        { "http://173.254.92.22/assets/ico/favicon-1.ico", wxBITMAP_TYPE_ICO }
-    };
+    wxURL url(urlStr);
+    REQUIRE( url.GetError() == wxURL_NOERR );
 
-    for (unsigned int i=0; i<WXSIZEOF(testData); i++)
-    {
-        SECTION(std::string("Testing URL ") + testData[i].url)
-        {
-            wxURL url(testData[i].url);
-            REQUIRE( url.GetError() == wxURL_NOERR );
+    wxScopedPtr<wxInputStream> in_stream(url.GetInputStream());
+    REQUIRE( in_stream );
+    REQUIRE( in_stream->IsOk() );
 
-            wxScopedPtr<wxInputStream> in_stream(url.GetInputStream());
-            REQUIRE( in_stream );
-            REQUIRE( in_stream->IsOk() );
+    wxImage img;
 
-            wxImage img;
-
-            // NOTE: it's important to inform wxImage about the type of the image being
-            //       loaded otherwise it will try to autodetect the format, but that
-            //       requires a seekable stream!
-            CHECK( img.LoadFile(*in_stream, testData[i].type) );
-        }
-    }
+    // NOTE: it's important to inform wxImage about the type of the image being
+    //       loaded otherwise it will try to autodetect the format, but that
+    //       requires a seekable stream!
+    CHECK( img.LoadFile(*in_stream, wxBITMAP_TYPE_PNG) );
 }
 
 void ImageTestCase::LoadFromZipStream()
@@ -908,7 +892,7 @@ enum
 
 static
 void CompareImage(const wxImageHandler& handler, const wxImage& image,
-    int properties = 0, const wxImage *compareTo = nullptr)
+    int properties = 0, const wxImage *compareTo = NULL)
 {
     wxBitmapType type = handler.GetType();
 
@@ -1107,7 +1091,7 @@ void ImageTestCase::SavePNG()
 
 #if wxUSE_LIBTIFF
 static void TestTIFFImage(const wxString& option, int value,
-    const wxImage *compareImage = nullptr)
+    const wxImage *compareImage = NULL)
 {
     wxImage image;
     if (compareImage)
@@ -1400,7 +1384,7 @@ FindMaxChannelDiff(const wxImage& i1, const wxImage& i2)
         const wxImage imageFromFile(file); \
         if ( imageFromFile.IsOk() ) \
         { \
-            INFO("Wrong scaled \"" << file << "\" " << Catch::StringMaker<wxImage>::convert(image)); \
+            INFO("Wrong scaled \"" << file << "\" " << Catch::toString(image)); \
             CHECK(FindMaxChannelDiff(imageFromFile, image) <= 1); \
         } \
         else \
@@ -1474,7 +1458,7 @@ void ImageTestCase::ScaleCompare()
 
 void ImageTestCase::CreateBitmapFromCursor()
 {
-#if !defined __WXOSX_IPHONE__ && !defined __WXDFB__ && !defined __WXX11__
+#if !defined __WXOSX_IPHONE__ && !defined __WXDFB__ && !defined __WXMOTIF__ && !defined __WXX11__
 
     wxImage image("image/wx.png");
     wxCursor cursor(image);
@@ -1648,12 +1632,8 @@ TEST_CASE("wxImage::Paste", "[image][paste]")
     };
 
     // Execute AddHandler() just once.
-    static bool s_registeredHandler = false;
-    if ( !s_registeredHandler )
-    {
-        wxImage::AddHandler(new wxPNGHandler());
-        s_registeredHandler = true;
-    }
+    static const bool
+        registeredHandler = (wxImage::AddHandler(new wxPNGHandler()), true);
 
     SECTION("Paste same size image")
     {

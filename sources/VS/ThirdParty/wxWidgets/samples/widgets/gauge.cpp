@@ -72,11 +72,11 @@ public:
     GaugeWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
     virtual ~GaugeWidgetsPage();
 
-    virtual wxWindow *GetWidget() const override { return m_gauge; }
-    virtual void RecreateWidget() override { CreateGauge(); }
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_gauge; }
+    virtual void RecreateWidget() wxOVERRIDE { CreateGauge(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
     // event handlers
@@ -181,14 +181,14 @@ GaugeWidgetsPage::GaugeWidgetsPage(WidgetsBookCtrl *book,
     // init everything
     m_range = 100;
 
-    m_timer = nullptr;
+    m_timer = (wxTimer *)NULL;
 
     m_chkVert =
     m_chkSmooth =
-    m_chkProgress = nullptr;
+    m_chkProgress = (wxCheckBox *)NULL;
 
-    m_gauge = nullptr;
-    m_sizerGauge = nullptr;
+    m_gauge = (wxGauge *)NULL;
+    m_sizerGauge = (wxSizer *)NULL;
 }
 
 void GaugeWidgetsPage::CreateContent()

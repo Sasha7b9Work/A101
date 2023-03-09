@@ -278,7 +278,7 @@ typedef unsigned char unsigned_char;
 typedef unsigned int unsigned_int;
 typedef unsigned long unsigned_long;
 
-wxBuiltInTypeInfo s_typeInfovoid( wxT_VOID, nullptr, nullptr, typeid(void).name());
+wxBuiltInTypeInfo s_typeInfovoid( wxT_VOID, NULL, NULL, typeid(void).name());
 wxBUILTIN_TYPE_INFO( wxT_BOOL,  bool);
 wxBUILTIN_TYPE_INFO( wxT_CHAR,  char);
 wxBUILTIN_TYPE_INFO( wxT_UCHAR, unsigned_char);
@@ -331,14 +331,14 @@ template<> void wxCollectionToVariantArray( wxArrayString const &theArray,
     wxArrayCollectionToVariantArray( theArray, value );
 }
 
-wxTypeInfoMap *wxTypeInfo::ms_typeTable = nullptr;
+wxTypeInfoMap *wxTypeInfo::ms_typeTable = NULL;
 
 wxTypeInfo *wxTypeInfo::FindType(const wxString& typeName)
 {
     wxTypeInfoMap::iterator iter = ms_typeTable->find(typeName);
 
     if (iter == ms_typeTable->end())
-        return nullptr;
+        return NULL;
 
     return (wxTypeInfo *)iter->second;
 }
@@ -376,7 +376,7 @@ wxEventSourceTypeInfo::wxEventSourceTypeInfo( int eventType, int lastEventType,
 
 void wxTypeInfo::Register()
 {
-    if ( ms_typeTable == nullptr )
+    if ( ms_typeTable == NULL )
         ms_typeTable = new wxTypeInfoMap();
 
     if( !m_name.empty() )
@@ -408,8 +408,8 @@ void wxSetStringToArray( const wxString &s, wxArrayString &array )
 
 void wxPropertyInfo::Insert(wxPropertyInfo* &iter)
 {
-    m_next = nullptr;
-    if ( iter == nullptr )
+    m_next = NULL;
+    if ( iter == NULL )
         iter = this;
     else
     {
@@ -450,8 +450,8 @@ void wxPropertyInfo::Remove()
 
 void wxHandlerInfo::Insert(wxHandlerInfo* &iter)
 {
-    m_next = nullptr;
-    if ( iter == nullptr )
+    m_next = NULL;
+    if ( iter == NULL )
         iter = this;
     else
     {
@@ -506,14 +506,14 @@ wxObject *wxClassInfo::ConstructObject(int ParamCount, wxAny *Params) const
 {
     if ( ParamCount != m_constructorPropertiesCount )
     {
-        // FIXME: shouldn't we just return nullptr and let the caller handle this case?
+        // FIXME: shouldn't we just return NULL and let the caller handle this case?
         wxLogError( _("Illegal Parameter Count for ConstructObject Method") );
-        return nullptr;
+        return NULL;
     }
 
-    wxObject *object = nullptr;
+    wxObject *object = NULL;
     if (!m_constructor->Create( object, Params ))
-        return nullptr;
+        return NULL;
     return object;
 }
 
@@ -540,7 +540,7 @@ const wxPropertyAccessor *wxClassInfo::FindAccessor(const wxChar *PropertyName) 
     if ( info )
         return info->GetAccessor();
 
-    return nullptr;
+    return NULL;
 }
 
 wxPropertyInfo *wxClassInfo::FindPropertyInfoInThisClass (const wxChar *PropertyName) const
@@ -566,7 +566,7 @@ const wxPropertyInfo *wxClassInfo::FindPropertyInfo (const wxChar *PropertyName)
     const wxClassInfo** parents = GetParents();
     for ( int i = 0; parents[i]; ++ i )
     {
-        if ( ( info = parents[i]->FindPropertyInfo( PropertyName ) ) != nullptr )
+        if ( ( info = parents[i]->FindPropertyInfo( PropertyName ) ) != NULL )
             return info;
     }
 
@@ -597,7 +597,7 @@ const wxHandlerInfo *wxClassInfo::FindHandlerInfo (const wxChar *PropertyName) c
     const wxClassInfo** parents = GetParents();
     for ( int i = 0; parents[i]; ++ i )
     {
-        if ( ( info = parents[i]->FindHandlerInfo( PropertyName ) ) != nullptr )
+        if ( ( info = parents[i]->FindHandlerInfo( PropertyName ) ) != NULL )
             return info;
     }
 
@@ -609,9 +609,9 @@ wxObjectStreamingCallback wxClassInfo::GetStreamingCallback() const
     if ( m_streamingCallback )
         return m_streamingCallback;
 
-    wxObjectStreamingCallback retval = nullptr;
+    wxObjectStreamingCallback retval = NULL;
     const wxClassInfo** parents = GetParents();
-    for ( int i = 0; parents[i] && retval == nullptr; ++ i )
+    for ( int i = 0; parents[i] && retval == NULL; ++ i )
     {
         retval = parents[i]->GetStreamingCallback();
     }
@@ -712,7 +712,7 @@ wxAny wxClassInfo::ObjectPtrToAny( wxObject* obj) const
 
 bool wxClassInfo::NeedsDirectConstruction() const
 {
-    return wx_dynamic_cast(wxObjectAllocator*, m_constructor) != nullptr;
+    return wx_dynamic_cast(wxObjectAllocator*, m_constructor) != NULL;
 }
 
 // ----------------------------------------------------------------------------
@@ -796,7 +796,7 @@ wxDynamicClassInfo::wxDynamicClassInfo( const wxChar *unitName,
     wxClassInfo( unitName, className, new const wxClassInfo*[2])
 {
     GetParents()[0] = superClass;
-    GetParents()[1] = nullptr;
+    GetParents()[1] = NULL;
     m_data = new wxDynamicClassInfoInternal;
 }
 
@@ -910,7 +910,7 @@ struct wxGenericPropertyAccessor::wxGenericPropertyAccessorInternal
 };
 
 wxGenericPropertyAccessor::wxGenericPropertyAccessor( const wxString& propertyName )
-: wxPropertyAccessor( nullptr, nullptr, nullptr, nullptr )
+: wxPropertyAccessor( NULL, NULL, NULL, NULL )
 {
     m_data = new wxGenericPropertyAccessorInternal;
     m_propertyName = propertyName;
@@ -945,7 +945,7 @@ wxString wxAnyGetAsString( const wxAny& data)
 {
     wxString s;
 
-    if ( data.IsNull() || data.GetTypeInfo()==nullptr )
+    if ( data.IsNull() || data.GetTypeInfo()==NULL )
         return s;
 
     data.GetTypeInfo()->ConvertToString(data,s);
@@ -960,7 +960,7 @@ const wxObject* wxAnyGetAsObjectPtr( const wxAny& data)
         if( ti )
             return ti->GetClassInfo()->AnyToObjectPtr(data);
     }
-    return nullptr;
+    return NULL;
 }
 
 wxObjectFunctor::~wxObjectFunctor()

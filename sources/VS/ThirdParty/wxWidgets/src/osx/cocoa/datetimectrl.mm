@@ -72,7 +72,7 @@ public:
     {
     }
 
-    virtual void SetDateTime(const wxDateTime& dt) override
+    virtual void SetDateTime(const wxDateTime& dt) wxOVERRIDE
     {
         wxDateTime dtFrom, dtTo;
         
@@ -82,12 +82,12 @@ public:
             [View() setDateValue: NSDateFromWX(dt)];
     }
 
-    virtual wxDateTime GetDateTime() const override
+    virtual wxDateTime GetDateTime() const wxOVERRIDE
     {
         return NSDateToWX([View() dateValue]);
     }
 
-    virtual void SetDateRange(const wxDateTime& dt1, const wxDateTime& dt2) override
+    virtual void SetDateRange(const wxDateTime& dt1, const wxDateTime& dt2) wxOVERRIDE
     {
         // Note that passing nil is ok here so we don't need to test for the
         // dates validity.
@@ -95,7 +95,7 @@ public:
         [View() setMaxDate: NSDateFromWX(dt2)];
     }
 
-    virtual bool GetDateRange(wxDateTime* dt1, wxDateTime* dt2) override
+    virtual bool GetDateRange(wxDateTime* dt1, wxDateTime* dt2) wxOVERRIDE
     {
         bool hasLimits = false;
         if ( dt1 )
@@ -115,7 +115,7 @@ public:
 
     virtual void controlAction(WXWidget WXUNUSED(slf),
                                void* WXUNUSED(cmd),
-                               void* WXUNUSED(sender)) override
+                               void* WXUNUSED(sender)) wxOVERRIDE
     {
         wxWindow* const wxpeer = GetWXPeer();
         if ( wxpeer )
@@ -125,7 +125,7 @@ public:
         }
     }
 
-    virtual void Enable(bool enable = true) override
+    virtual void Enable(bool enable = true) wxOVERRIDE
     {
         wxNSDatePicker* const nsdatePicker = View();
 

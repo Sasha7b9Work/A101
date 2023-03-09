@@ -72,7 +72,7 @@ bool wxControl::ProcessCommand( wxCommandEvent &event )
 
 void  wxControl::OnKeyDown( wxKeyEvent &WXUNUSED(event) )
 {
-    if ( GetPeer() == nullptr || !GetPeer()->IsOk() )
+    if ( GetPeer() == NULL || !GetPeer()->IsOk() )
         return;
 
     // TODO

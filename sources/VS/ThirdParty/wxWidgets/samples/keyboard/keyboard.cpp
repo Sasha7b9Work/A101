@@ -119,8 +119,6 @@ private:
 
     void OnPaintInputWin(wxPaintEvent& event);
 
-    void OnIdle(wxIdleEvent& event);
-
     void LogEvent(const wxString& name, wxKeyEvent& event);
 
     // Set m_inputWin to either a new window of the given kind:
@@ -145,7 +143,7 @@ class MyApp : public wxApp
 {
 public:
     // 'Main program' equivalent: the program execution "starts" here
-    virtual bool OnInit() override
+    virtual bool OnInit() wxOVERRIDE
     {
         // create the main application window
         new MyFrame("Keyboard wxWidgets App");
@@ -169,8 +167,8 @@ wxIMPLEMENT_APP(MyApp);
 
 // frame constructor
 MyFrame::MyFrame(const wxString& title)
-       : wxFrame(nullptr, wxID_ANY, title),
-         m_inputWin(nullptr),
+       : wxFrame(NULL, wxID_ANY, title),
+         m_inputWin(NULL),
          m_skipHook(true),
          m_skipDown(true)
 {
@@ -281,10 +279,8 @@ MyFrame::MyFrame(const wxString& title)
     // the usual key events this one is propagated upwards
     Bind(wxEVT_CHAR_HOOK, &MyFrame::OnCharHook, this);
 
-    Bind(wxEVT_IDLE, &MyFrame::OnIdle, this);
-
-    // second status bar field is used by OnIdle() to show the modifiers state
-    CreateStatusBar(2);
+    // status bar is useful for showing the menu items help strings
+    CreateStatusBar();
 
     // and show itself (the frames, unlike simple controls, are not shown when
     // created initially)
@@ -515,7 +511,7 @@ const char* GetVirtualKeyCodeName(int keycode)
 #undef WXK_
 
     default:
-        return nullptr;
+        return NULL;
     }
 }
 
@@ -582,15 +578,4 @@ void MyFrame::LogEvent(const wxString& name, wxKeyEvent& event)
     m_logText->AppendText(msg);
 }
 
-void MyFrame::OnIdle(wxIdleEvent& WXUNUSED(event))
-{
-    wxString state;
-    if ( wxGetKeyState(WXK_CONTROL) )
-        state += "CTRL ";
-    if ( wxGetKeyState(WXK_ALT) )
-        state += "ALT ";
-    if ( wxGetKeyState(WXK_SHIFT) )
-        state += "SHIFT ";
 
-    SetStatusText(state, 1);
-}

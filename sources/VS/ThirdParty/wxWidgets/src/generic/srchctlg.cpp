@@ -59,24 +59,24 @@ public:
         InvalidateBestSize();
     }
 
-    virtual wxWindow* GetMainWindowOfCompositeControl() override
+    virtual wxWindow* GetMainWindowOfCompositeControl() wxOVERRIDE
     {
         return m_search;
     }
 
     // provide access to the base class protected methods to wxSearchCtrl which
     // needs to forward to them
-    void DoSetValue(const wxString& value, int flags) override
+    void DoSetValue(const wxString& value, int flags) wxOVERRIDE
     {
         wxTextCtrl::DoSetValue(value, flags);
     }
 
-    bool DoLoadFile(const wxString& file, int fileType) override
+    bool DoLoadFile(const wxString& file, int fileType) wxOVERRIDE
     {
         return wxTextCtrl::DoLoadFile(file, fileType);
     }
 
-    bool DoSaveFile(const wxString& file, int fileType) override
+    bool DoSaveFile(const wxString& file, int fileType) wxOVERRIDE
     {
         return wxTextCtrl::DoSaveFile(file, fileType);
     }
@@ -116,7 +116,7 @@ protected:
     // to do this easily and as there is much in that code I don't understand
     // (notably what is the logic for buttons sizing?) I prefer to not touch it
     // at all.
-    virtual wxSize DoGetBestSize() const override
+    virtual wxSize DoGetBestSize() const wxOVERRIDE
     {
         const long flags = GetWindowStyleFlag();
         wxSearchTextCtrl* const self = const_cast<wxSearchTextCtrl*>(this);
@@ -178,15 +178,15 @@ public:
     // control and not give it to the button inside the same control. Besides,
     // the search button can be already activated by pressing "Enter" so there
     // is really no reason for it to be able to get focus from keyboard.
-    virtual bool AcceptsFocusFromKeyboard() const override { return false; }
+    virtual bool AcceptsFocusFromKeyboard() const wxOVERRIDE { return false; }
 
-    virtual wxWindow* GetMainWindowOfCompositeControl() override
+    virtual wxWindow* GetMainWindowOfCompositeControl() wxOVERRIDE
     {
         return m_search;
     }
 
 protected:
-    wxSize DoGetBestSize() const override
+    wxSize DoGetBestSize() const wxOVERRIDE
     {
         return wxSize(m_bmp.GetWidth(), m_bmp.GetHeight());
     }
@@ -282,11 +282,11 @@ wxSearchCtrl::wxSearchCtrl(wxWindow *parent, wxWindowID id,
 
 void wxSearchCtrl::Init()
 {
-    m_text = nullptr;
-    m_searchButton = nullptr;
-    m_cancelButton = nullptr;
+    m_text = NULL;
+    m_searchButton = NULL;
+    m_cancelButton = NULL;
 #if wxUSE_MENUS
-    m_menu = nullptr;
+    m_menu = NULL;
 #endif // wxUSE_MENUS
 
     m_searchBitmapUser = false;
@@ -347,7 +347,7 @@ void wxSearchCtrl::SetMenu( wxMenu* menu )
         // no change
         return;
     }
-    bool hadMenu = (m_menu != nullptr);
+    bool hadMenu = (m_menu != NULL);
     delete m_menu;
     m_menu = menu;
 

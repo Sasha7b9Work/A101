@@ -24,7 +24,7 @@ public:
 
 
 wxStaticBox::wxStaticBox() :
-    m_qtGroupBox(nullptr)
+    m_qtGroupBox(NULL)
 {
 }
 

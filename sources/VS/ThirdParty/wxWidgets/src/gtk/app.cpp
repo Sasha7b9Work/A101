@@ -21,13 +21,16 @@
 
 #include "wx/thread.h"
 
+#ifdef __WXGPE__
+    #include <gpe/init.h>
+#endif
+
 #include "wx/apptrait.h"
 #include "wx/fontmap.h"
 #include "wx/msgout.h"
 
 #include "wx/gtk/private.h"
 #include "wx/gtk/private/log.h"
-#include "wx/gtk/private/threads.h"
 
 #include "wx/gtk/mimetype.h"
 //-----------------------------------------------------------------------------
@@ -49,7 +52,7 @@ static gboolean
 wx_emission_hook(GSignalInvocationHint*, guint, const GValue*, gpointer data)
 {
     wxApp* app = wxTheApp;
-    if (app != nullptr)
+    if (app != NULL)
         app->WakeUpIdle();
     bool* hook_installed = (bool*)data;
     // record that hook is not installed
@@ -72,7 +75,7 @@ static void wx_add_idle_hooks()
                 sig_id = g_signal_lookup("event", GTK_TYPE_WIDGET);
             hook_installed = true;
             g_signal_add_emission_hook(
-                sig_id, 0, wx_emission_hook, &hook_installed, nullptr);
+                sig_id, 0, wx_emission_hook, &hook_installed, NULL);
         }
     }
     // "size_allocate" hook
@@ -87,7 +90,7 @@ static void wx_add_idle_hooks()
                 sig_id = g_signal_lookup("size_allocate", GTK_TYPE_WIDGET);
             hook_installed = true;
             g_signal_add_emission_hook(
-                sig_id, 0, wx_emission_hook, &hook_installed, nullptr);
+                sig_id, 0, wx_emission_hook, &hook_installed, NULL);
         }
     }
 }
@@ -139,7 +142,7 @@ bool wxApp::DoIdle()
     gdk_threads_enter();
 
     if (gs_focusChange) {
-        SetActive(gs_focusChange == 1, nullptr);
+        SetActive(gs_focusChange == 1, NULL);
         gs_focusChange = 0;
     }
 
@@ -183,7 +186,7 @@ namespace wxGTKImpl
 
 bool LogFilter::ms_allowed = false;
 bool LogFilter::ms_installed = false;
-LogFilter* LogFilter::ms_first = nullptr;
+LogFilter* LogFilter::ms_first = NULL;
 
 /* static */
 GLogWriterOutput
@@ -198,7 +201,7 @@ LogFilter::wx_log_writer(GLogLevelFlags   log_level,
             return G_LOG_WRITER_HANDLED;
     }
 
-    return g_log_writer_default(log_level, fields, n_fields, nullptr);
+    return g_log_writer_default(log_level, fields, n_fields, NULL);
 }
 
 bool LogFilter::Install()
@@ -208,13 +211,13 @@ bool LogFilter::Install()
 
     if ( !ms_installed )
     {
-        if ( glib_check_version(2, 50, 0) != nullptr )
+        if ( glib_check_version(2, 50, 0) != 0 )
         {
             // No runtime support for log callback, we can't do anything.
             return false;
         }
 
-        g_log_set_writer_func(LogFilter::wx_log_writer, nullptr, nullptr);
+        g_log_set_writer_func(LogFilter::wx_log_writer, NULL, NULL);
         ms_installed = true;
     }
 
@@ -407,7 +410,7 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
         // might still be needed in the older versions, which are the only ones
         // for which this code is going to be executed (as g_thread_supported()
         // is always TRUE in these recent glib versions anyhow).
-        g_thread_init(nullptr);
+        g_thread_init(NULL);
         gdk_threads_init();
     }
 #endif // wxUSE_THREADS
@@ -484,7 +487,7 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
         argvGTK[i] = wxStrdupA(wxConvUTF8.cWX2MB(argv_[i]));
     }
 
-    argvGTK[argc_] = nullptr;
+    argvGTK[argc_] = NULL;
 
     int argcGTK = argc_;
 
@@ -501,7 +504,10 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
         gtk_disable_setlocale();
     }
 
-#if defined(__WXGTK4__)
+#ifdef __WXGPE__
+    init_result = true;  // is there a _check() version of this?
+    gpe_application_init( &argcGTK, &argvGTK );
+#elif defined(__WXGTK4__)
     init_result = gtk_init_check() != 0;
 #else
     init_result = gtk_init_check( &argcGTK, &argvGTK ) != 0;
@@ -519,7 +525,7 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
         }
 
         argc_ = argcGTK;
-        argv_[argc_] = nullptr;
+        argv_[argc_] = NULL;
     }
     //else: gtk_init() didn't modify our parameters
 
@@ -568,10 +574,10 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
     // focus in/out hooks used for generating wxEVT_ACTIVATE_APP
     g_signal_add_emission_hook(
         g_signal_lookup("focus_in_event", widgetType),
-        0, wx_focus_event_hook, GINT_TO_POINTER(1), nullptr);
+        0, wx_focus_event_hook, GINT_TO_POINTER(1), NULL);
     g_signal_add_emission_hook(
         g_signal_lookup("focus_out_event", widgetType),
-        0, wx_focus_event_hook, GINT_TO_POINTER(2), nullptr);
+        0, wx_focus_event_hook, GINT_TO_POINTER(2), NULL);
 
     WakeUpIdle();
 
@@ -585,7 +591,7 @@ void wxApp::CleanUp()
 
     // release reference acquired by Initialize()
     gpointer gt = g_type_class_peek(GTK_TYPE_WIDGET);
-    if (gt != nullptr)
+    if (gt != NULL)
         g_type_class_unref(gt);
 
     gdk_threads_leave();
@@ -599,7 +605,7 @@ void wxApp::WakeUpIdle()
     wxMutexLocker lock(m_idleMutex);
 #endif
     if (m_idleSourceId == 0)
-        m_idleSourceId = g_idle_add_full(G_PRIORITY_LOW, wxapp_idle_callback, nullptr, nullptr);
+        m_idleSourceId = g_idle_add_full(G_PRIORITY_LOW, wxapp_idle_callback, NULL, NULL);
 }
 
 // Checking for pending events requires first removing our idle source,

@@ -19,23 +19,23 @@ class WXDLLIMPEXP_FWD_CORE wxMenu;
 class WXDLLIMPEXP_CORE wxMenuItem : public wxMenuItemBase
 {
 public:
-    wxMenuItem(wxMenu *parentMenu = nullptr,
+    wxMenuItem(wxMenu *parentMenu = NULL,
                int id = wxID_SEPARATOR,
                const wxString& text = wxEmptyString,
                const wxString& help = wxEmptyString,
                wxItemKind kind = wxITEM_NORMAL,
-               wxMenu *subMenu = nullptr);
+               wxMenu *subMenu = NULL);
 
-    virtual void SetItemLabel(const wxString& str) override;
-    virtual void SetCheckable(bool checkable) override;
+    virtual void SetItemLabel(const wxString& str) wxOVERRIDE;
+    virtual void SetCheckable(bool checkable) wxOVERRIDE;
 
-    virtual void Enable(bool enable = true) override;
-    virtual bool IsEnabled() const override;
+    virtual void Enable(bool enable = true) wxOVERRIDE;
+    virtual bool IsEnabled() const wxOVERRIDE;
 
-    virtual void Check(bool check = true) override;
-    virtual bool IsChecked() const override;
+    virtual void Check(bool check = true) wxOVERRIDE;
+    virtual bool IsChecked() const wxOVERRIDE;
 
-    virtual void SetBitmap(const wxBitmapBundle& bitmap) override;
+    virtual void SetBitmap(const wxBitmapBundle& bitmap) wxOVERRIDE;
 
     virtual QAction *GetHandle() const;
 

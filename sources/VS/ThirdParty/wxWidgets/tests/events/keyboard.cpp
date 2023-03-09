@@ -198,8 +198,8 @@ class KeyboardEventTestCase : public CppUnit::TestCase
 public:
     KeyboardEventTestCase() {}
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    virtual void setUp() wxOVERRIDE;
+    virtual void tearDown() wxOVERRIDE;
 
 private:
     CPPUNIT_TEST_SUITE( KeyboardEventTestCase );

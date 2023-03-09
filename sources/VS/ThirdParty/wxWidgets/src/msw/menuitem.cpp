@@ -26,6 +26,7 @@
 #include "wx/stockitem.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/dcclient.h"
     #include "wx/dcmemory.h"
     #include "wx/font.h"
     #include "wx/bitmap.h"
@@ -269,7 +270,7 @@ public:
     }
 
 
-    // get the theme engine or nullptr if themes
+    // get the theme engine or NULL if themes
     // are not available or not supported on menu
     static bool IsUxThemeActive()
     {
@@ -310,7 +311,7 @@ private:
     static MenuDrawData* ms_instance;
 };
 
-MenuDrawData* MenuDrawData::ms_instance = nullptr;
+MenuDrawData* MenuDrawData::ms_instance = NULL;
 
 void MenuDrawData::Init(wxWindow const* window)
 {
@@ -319,33 +320,33 @@ void MenuDrawData::Init(wxWindow const* window)
     {
         wxUxThemeHandle hTheme(window, L"MENU");
 
-        ::GetThemeMargins(hTheme, nullptr, MENU_POPUPITEM, 0,
-                               TMT_CONTENTMARGINS, nullptr,
+        ::GetThemeMargins(hTheme, NULL, MENU_POPUPITEM, 0,
+                               TMT_CONTENTMARGINS, NULL,
                                &ItemMargin);
 
-        ::GetThemeMargins(hTheme, nullptr, MENU_POPUPCHECK, 0,
-                               TMT_CONTENTMARGINS, nullptr,
+        ::GetThemeMargins(hTheme, NULL, MENU_POPUPCHECK, 0,
+                               TMT_CONTENTMARGINS, NULL,
                                &CheckMargin);
-        ::GetThemeMargins(hTheme, nullptr, MENU_POPUPCHECKBACKGROUND, 0,
-                               TMT_CONTENTMARGINS, nullptr,
+        ::GetThemeMargins(hTheme, NULL, MENU_POPUPCHECKBACKGROUND, 0,
+                               TMT_CONTENTMARGINS, NULL,
                                &CheckBgMargin);
 
-        ::GetThemeMargins(hTheme, nullptr, MENU_POPUPSUBMENU, 0,
-                               TMT_CONTENTMARGINS, nullptr,
+        ::GetThemeMargins(hTheme, NULL, MENU_POPUPSUBMENU, 0,
+                               TMT_CONTENTMARGINS, NULL,
                                &ArrowMargin);
 
-        ::GetThemeMargins(hTheme, nullptr, MENU_POPUPSEPARATOR, 0,
-                               TMT_SIZINGMARGINS, nullptr,
+        ::GetThemeMargins(hTheme, NULL, MENU_POPUPSEPARATOR, 0,
+                               TMT_SIZINGMARGINS, NULL,
                                &SeparatorMargin);
 
-        ::GetThemePartSize(hTheme, nullptr, MENU_POPUPCHECK, 0,
-                                nullptr, TS_TRUE, &CheckSize);
+        ::GetThemePartSize(hTheme, NULL, MENU_POPUPCHECK, 0,
+                                NULL, TS_TRUE, &CheckSize);
 
-        ::GetThemePartSize(hTheme, nullptr, MENU_POPUPSUBMENU, 0,
-                                nullptr, TS_TRUE, &ArrowSize);
+        ::GetThemePartSize(hTheme, NULL, MENU_POPUPSUBMENU, 0,
+                                NULL, TS_TRUE, &ArrowSize);
 
-        ::GetThemePartSize(hTheme, nullptr, MENU_POPUPSEPARATOR, 0,
-                                nullptr, TS_TRUE, &SeparatorSize);
+        ::GetThemePartSize(hTheme, NULL, MENU_POPUPSEPARATOR, 0,
+                                NULL, TS_TRUE, &SeparatorSize);
 
         ::GetThemeInt(hTheme, MENU_POPUPBACKGROUND, 0, TMT_BORDERSIZE, &TextBorder);
 
@@ -356,8 +357,8 @@ void MenuDrawData::Init(wxWindow const* window)
 
         wxUxThemeFont themeFont;
         ::GetThemeSysFont(hTheme, TMT_MENUFONT, themeFont.GetPtr());
-        // Use null window for wxNativeFontInfo, height it is already at the correct ppi
-        Font = wxFont(wxNativeFontInfo(themeFont.GetLOGFONT(), nullptr));
+        // Use NULL window for wxNativeFontInfo, height it is already at the correct ppi
+        Font = wxFont(wxNativeFontInfo(themeFont.GetLOGFONT(), NULL));
 
         Theme = true;
 
@@ -437,6 +438,20 @@ wxMenuItem::wxMenuItem(wxMenu *pParentMenu,
 {
     Init();
 }
+
+#if WXWIN_COMPATIBILITY_2_8
+wxMenuItem::wxMenuItem(wxMenu *parentMenu,
+                       int id,
+                       const wxString& text,
+                       const wxString& help,
+                       bool isCheckable,
+                       wxMenu *subMenu)
+          : wxMenuItemBase(parentMenu, id, text, help,
+                           isCheckable ? wxITEM_CHECK : wxITEM_NORMAL, subMenu)
+{
+    Init();
+}
+#endif
 
 void wxMenuItem::Init()
 {
@@ -778,19 +793,28 @@ void wxMenuItem::SetupBitmaps()
 
 #if wxUSE_OWNER_DRAWN
 
-int wxMenuItem::MeasureAccelWidth() const
+wxSize wxMenuItem::GetMenuTextExtent(const wxString& text) const
 {
-    wxString accel = GetItemLabel().AfterFirst(wxT('\t'));
+    // We need to use the window that this menu is associated with to use the
+    // correct DPI.
+    //
+    // Note that we must have both a valid menu and a valid window by the time
+    // we can be called -- and GetFontToUse() already assumes this, so there is
+    // no need to check that they're both non-null here.
+    wxClientDC dc(GetMenu()->GetWindow());
 
-    wxMemoryDC dc;
     wxFont font;
     GetFontToUse(font);
     dc.SetFont(font);
 
-    wxCoord w;
-    dc.GetTextExtent(accel, &w, nullptr);
+    return dc.GetTextExtent(text);
+}
 
-    return w;
+int wxMenuItem::MeasureAccelWidth() const
+{
+    wxString accel = GetItemLabel().AfterFirst(wxT('\t'));
+
+    return GetMenuTextExtent(accel).x;
 }
 
 wxString wxMenuItem::GetName() const
@@ -816,20 +840,12 @@ bool wxMenuItem::OnMeasureItem(size_t *width, size_t *height)
             return true;
         }
 
-        wxString str = GetName();
+        const wxSize extent = GetMenuTextExtent(GetName());
 
-        wxMemoryDC dc;
-        wxFont font;
-        GetFontToUse(font);
-        dc.SetFont(font);
+        *width = data->TextBorder + extent.x + data->AccelBorder;
+        *height = extent.y;
 
-        wxCoord w, h;
-        dc.GetTextExtent(str, &w, &h);
-
-        *width = data->TextBorder + w + data->AccelBorder;
-        *height = h;
-
-        w = m_parentMenu->GetMaxAccelWidth();
+        int w = m_parentMenu->GetMaxAccelWidth();
         if ( w > 0 )
             *width += w + data->ArrowBorder;
 
@@ -964,22 +980,22 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
             {
                 ::DrawThemeBackground(hTheme, hdc,
                                            MENU_POPUPBACKGROUND,
-                                           0, &rect, nullptr);
+                                           0, &rect, NULL);
             }
 
             ::DrawThemeBackground(hTheme, hdc, MENU_POPUPGUTTER,
-                                       0, &rcGutter, nullptr);
+                                       0, &rcGutter, NULL);
 
             if ( IsSeparator() )
             {
                 rcSeparator.left = rcGutter.right;
                 ::DrawThemeBackground(hTheme, hdc, MENU_POPUPSEPARATOR,
-                                           0, &rcSeparator, nullptr);
+                                           0, &rcSeparator, NULL);
                 return true;
             }
 
             ::DrawThemeBackground(hTheme, hdc, MENU_POPUPITEM,
-                                       state, &rcSelection, nullptr);
+                                       state, &rcSelection, NULL);
 
         }
         else
@@ -1028,7 +1044,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
         int x = rcText.left;
         int y = rcText.top + (rcText.bottom - rcText.top - textSize.cy) / 2;
 
-        ::DrawState(hdc, nullptr, nullptr, wxMSW_CONV_LPARAM(text),
+        ::DrawState(hdc, NULL, NULL, wxMSW_CONV_LPARAM(text),
                     text.length(), x, y, 0, 0, flags);
 
         // ::SetTextAlign(hdc, TA_RIGHT) doesn't work with DSS_DISABLED or DSS_MONO
@@ -1058,7 +1074,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
             y = rcText.top + (rcText.bottom - rcText.top - accelSize.cy) / 2;
 
-            ::DrawState(hdc, nullptr, nullptr, wxMSW_CONV_LPARAM(accel),
+            ::DrawState(hdc, NULL, NULL, wxMSW_CONV_LPARAM(accel),
                         accel.length(), x, y, 0, 0, flags);
         }
     }
@@ -1197,7 +1213,7 @@ void wxMenuItem::DrawStdCheckMark(WXHDC hdc_, const RECT* rc, wxODStatus stat)
                                                     : MCB_NORMAL;
 
         ::DrawThemeBackground(hTheme, hdc, MENU_POPUPCHECKBACKGROUND,
-                                   stateCheckBg, &rcBg, nullptr);
+                                   stateCheckBg, &rcBg, NULL);
 
         POPUPCHECKSTATES stateCheck;
         if ( GetKind() == wxITEM_CHECK )
@@ -1212,7 +1228,7 @@ void wxMenuItem::DrawStdCheckMark(WXHDC hdc_, const RECT* rc, wxODStatus stat)
         }
 
         ::DrawThemeBackground(hTheme, hdc, MENU_POPUPCHECK,
-                                   stateCheck, rc, nullptr);
+                                   stateCheck, rc, NULL);
     }
     else
 #endif // wxUSE_UXTHEME
@@ -1313,7 +1329,7 @@ bool wxMenuItem::MSWMustUseOwnerDrawn()
         const wxBitmap& bmpUnchecked = GetBitmap(false),
                         bmpChecked   = GetBitmap(true);
 
-        const wxWindow* win = m_parentMenu ? m_parentMenu->GetWindow() : nullptr;
+        const wxWindow* win = m_parentMenu ? m_parentMenu->GetWindow() : NULL;
         if ( (bmpUnchecked.IsOk() && IsGreaterThanStdSize(bmpUnchecked, win)) ||
                 (bmpChecked.IsOk()   && IsGreaterThanStdSize(bmpChecked, win)) ||
                 (bmpChecked.IsOk() && IsCheckable()) )
@@ -1339,7 +1355,7 @@ HBITMAP wxMenuItem::GetHBitmapForMenu(BitmapKind kind) const
     //
     // So we prefer to instead draw it ourselves in MSWOnDrawItem() by using
     // HBMMENU_CALLBACK for normal menu items when inserting it. And use
-    // nullptr for checkable menu items as hbmpChecked/hBmpUnchecked does not
+    // NULL for checkable menu items as hbmpChecked/hBmpUnchecked does not
     // support HBMMENU_CALLBACK.
     //
     // However under Vista using HBMMENU_CALLBACK causes the entire menu to be
@@ -1359,11 +1375,11 @@ HBITMAP wxMenuItem::GetHBitmapForMenu(BitmapKind kind) const
             return GetHbitmapOf(bmp);
         }
         //else: bitmap is not set
-        return nullptr;
+        return NULL;
     }
 #endif // wxUSE_IMAGE
 
-    return (kind == Normal) ? HBMMENU_CALLBACK : nullptr;
+    return (kind == Normal) ? HBMMENU_CALLBACK : NULL;
 }
 
 int wxMenuItem::MSGetMenuItemPos() const

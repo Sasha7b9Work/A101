@@ -91,7 +91,7 @@ private:
     
     void Init()
     {
-        m_toolbarItem = nullptr;
+        m_toolbarItem = NULL;
         m_index = -1;
     }
     
@@ -206,7 +206,7 @@ void wxToolBar::Init()
     m_maxWidth = -1;
     m_maxHeight = -1;
     
-    m_macToolbar = nullptr;
+    m_macToolbar = NULL;
 }
 
 // also for the toolbar we have the dual implementation:
@@ -256,7 +256,7 @@ bool wxToolBar::Create(
 
 wxToolBar::~wxToolBar()
 {
-    m_macToolbar = nullptr;
+    m_macToolbar = NULL;
 }
 
 bool wxToolBar::Realize()
@@ -325,13 +325,13 @@ void wxToolBar::SetToolDisabledBitmap( int id, const wxBitmapBundle& bitmap )
 
 wxToolBarToolBase *wxToolBar::FindToolForPosition(wxCoord x, wxCoord y) const
 {
-    return nullptr;
+    return NULL;
 }
 
 void wxToolBar::DoEnableTool(wxToolBarToolBase *t, bool enable)
 {
     /*
-    if ( t != nullptr )
+    if ( t != NULL )
         ((wxToolBarTool*)t)->DoEnable( enable );
      */
 }
@@ -340,7 +340,7 @@ void wxToolBar::DoToggleTool(wxToolBarToolBase *t, bool toggle)
 {
     /*
     wxToolBarTool *tool = (wxToolBarTool *)t;
-    if ( ( tool != nullptr ) && tool->IsButton() )
+    if ( ( tool != NULL ) && tool->IsButton() )
         tool->UpdateToggleImage( toggle );
      */
 }
@@ -348,7 +348,7 @@ void wxToolBar::DoToggleTool(wxToolBarToolBase *t, bool toggle)
 bool wxToolBar::DoInsertTool(size_t pos, wxToolBarToolBase *toolBase)
 {
     wxToolBarTool *tool = static_cast< wxToolBarTool*>(toolBase );
-    if (tool == nullptr)
+    if (tool == NULL)
         return false;
     
     wxSize toolSize = GetToolSize();

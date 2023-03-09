@@ -67,12 +67,12 @@ class SearchCtrlWidgetsPage : public WidgetsPage
 public:
     SearchCtrlWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_srchCtrl; }
-    virtual wxTextEntryBase *GetTextEntry() const override { return m_srchCtrl; }
-    virtual void RecreateWidget() override;
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_srchCtrl; }
+    virtual wxTextEntryBase *GetTextEntry() const wxOVERRIDE { return m_srchCtrl; }
+    virtual void RecreateWidget() wxOVERRIDE;
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
 
@@ -127,7 +127,7 @@ wxEND_EVENT_TABLE()
 // implementation
 // ============================================================================
 
-#if defined(__WXMAC__) || defined(__WXGTK__)
+#if defined(__WXMAC__) || defined(__WXGTK20__)
     #define FAMILY_CTRLS NATIVE_CTRLS
 #else
     #define FAMILY_CTRLS GENERIC_CTRLS
@@ -144,7 +144,7 @@ SearchCtrlWidgetsPage::SearchCtrlWidgetsPage(WidgetsBookCtrl *book,
 
 void SearchCtrlWidgetsPage::CreateContent()
 {
-    m_srchCtrl = nullptr;
+    m_srchCtrl = NULL;
 
     CreateControl();
 
@@ -225,7 +225,7 @@ void SearchCtrlWidgetsPage::OnToggleSearchMenu(wxCommandEvent&)
     if ( m_menuBtnCheck->GetValue() )
         m_srchCtrl->SetMenu( CreateTestMenu() );
     else
-        m_srchCtrl->SetMenu(nullptr);
+        m_srchCtrl->SetMenu(NULL);
 }
 
 void SearchCtrlWidgetsPage::OnText(wxCommandEvent& event)

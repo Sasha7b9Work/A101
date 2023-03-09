@@ -150,7 +150,7 @@ static const struct langData_t
 tabLangData[] =
 {
 %s
-    { 0, nullptr, nullptr, nullptr, 0, 0, wxLayout_Default, nullptr, nullptr }
+    { 0, NULL, NULL, NULL, 0, 0, wxLayout_Default, NULL, NULL }
 };
 
 // Data table for known language scripts
@@ -162,7 +162,7 @@ static const struct scriptData_t
 tabScriptData[] =
 {
 %s
-    { nullptr, nullptr }
+    { NULL, NULL }
 };
 
 void wxUILocale::InitLanguagesDB()

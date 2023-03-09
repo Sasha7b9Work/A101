@@ -130,8 +130,9 @@ enum wxDialogLayoutAdaptationMode
            look. This is an extra style.
     @endStyleTable
 
-    Under Unix a window manager recognizing the WM hints should be running for
-    any of these styles to have an effect.
+    Under Unix or Linux, MWM (the Motif Window Manager) or other window
+    managers recognizing the MHM hints should be running for any of these
+    styles to have an effect.
 
 
     @beginEventEmissionTable{wxCloseEvent}
@@ -177,8 +178,8 @@ public:
         @param style
             The window style.
         @param name
-            Used to associate a name with the window. This is @a not the same
-            as the title of the window.
+            Used to associate a name with the window, allowing the application
+            user to set Motif resource values for individual dialog boxes.
 
         @see Create()
     */
@@ -273,7 +274,7 @@ public:
 
         @since 2.9.2
 
-        @param sizer The sizer to wrap, must be non-null.
+        @param sizer The sizer to wrap, must be non-@NULL.
         @return The sizer wrapping the input one or possibly the input sizer
             itself if no wrapping is necessary.
      */
@@ -426,8 +427,11 @@ public:
             If @true, iconizes the dialog box; if @false, shows and restores it.
 
         @remarks Note that in Windows, iconization has no effect since dialog
-                 boxes cannot be iconized. However calling Iconize(@false) will
-                 bring the window to the front, as does Show(@true).
+                 boxes cannot be iconized. However, applications may need to
+                 explicitly restore dialog boxes under Motif which have
+                 user-iconizable frames, and under Windows calling
+                 Iconize(@false) will bring the window to the front, as does
+                 Show(@true).
     */
     virtual void Iconize(bool iconize = true);
 
@@ -630,7 +634,7 @@ public:
         passed as the argument upon completion, instead of generating the
         wxEVT_WINDOW_MODAL_DIALOG_CLOSED event.
 
-        This form is particularly useful in combination with lambdas,
+        This form is particularly useful in combination with C++11 lambdas,
         when it allows writing window-modal very similarly to how ShowModal()
         is used (with the notable exception of not being able to create
         the dialog on stack):

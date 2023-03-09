@@ -39,7 +39,7 @@ wxOSXDataSinkItem::~wxOSXDataSinkItem()
 void wxOSXDataSinkItem::SetFilename(const wxString& filename)
 {
     wxCFRef<CFURLRef> url(wxOSXCreateURLFromFileSystemPath(filename));
-    wxCFRef<CFDataRef> data(CFURLCreateData(nullptr,url,kCFStringEncodingUTF8,true));
+    wxCFRef<CFDataRef> data(CFURLCreateData(NULL,url,kCFStringEncodingUTF8,true));
     DoSetData( kUTTypeFileURL, data);
 }
 
@@ -144,10 +144,10 @@ public:
             wxString tempdir = wxFileName::GetTempDir() + wxFILE_SEP_PATH + "wxtemp.XXXXXX";
             char* result = mkdtemp((char*)tempdir.fn_str().data());
 
-            wxCFRef<CFURLRef> dest(CFURLCreateFromFileSystemRepresentation(nullptr, (const UInt8*)result, strlen(result), true));
-            PasteboardRef pboardRef = nullptr;
+            wxCFRef<CFURLRef> dest(CFURLCreateFromFileSystemRepresentation(NULL, (const UInt8*)result, strlen(result), true));
+            PasteboardRef pboardRef = NULL;
             PasteboardCreate((CFStringRef)[m_pasteboard name], &pboardRef);
-            if (pboardRef != nullptr) {
+            if (pboardRef != NULL) {
                 PasteboardSynchronize(pboardRef);
                 PasteboardSetPasteLocation(pboardRef, (CFURLRef)dest);
                 CFRelease(pboardRef);
@@ -244,7 +244,7 @@ size_t wxOSXPasteboard::GetItemCount() const
 
 #if wxUSE_DRAG_AND_DROP
 
-wxDropSource* gCurrentSource = nullptr;
+wxDropSource* gCurrentSource = NULL;
 
 wxDragResult NSDragOperationToWxDragResult(NSDragOperation code)
 {
@@ -294,7 +294,7 @@ wxDragResult NSDragOperationToWxDragResult(NSDragOperation code)
     {
         dragFinished = NO;
         resultCode = NSDragOperationNone;
-        impl = nullptr;
+        impl = 0;
         m_dragFlags = wxDrag_CopyOnly;
     }
     return self;
@@ -456,7 +456,7 @@ typedef NSString* NSPasteboardType;
 
 - (void) clearDataObject
 {
-    m_data = nullptr;
+    m_data = NULL;
 }
 - (nullable id)pasteboardPropertyListForType:(nonnull NSPasteboardType)type
 {
@@ -488,7 +488,7 @@ wxDragResult wxDropSource::DoDragDrop(int flags)
     wxASSERT_MSG( m_data, wxT("Drop source: no data") );
 
     wxDragResult result = wxDragNone;
-    if ((m_data == nullptr) || (m_data->GetFormatCount() == 0))
+    if ((m_data == NULL) || (m_data->GetFormatCount() == 0))
         return result;
 
     NSView* view = m_window->GetPeer()->GetWXWidget();
@@ -539,12 +539,12 @@ wxDragResult wxDropSource::DoDragDrop(int flags)
 
         wxWindow* mouseUpTarget = wxWindow::GetCapture();
 
-        if ( mouseUpTarget == nullptr )
+        if ( mouseUpTarget == NULL )
         {
             mouseUpTarget = m_window;
         }
 
-        if ( mouseUpTarget != nullptr )
+        if ( mouseUpTarget != NULL )
         {
             wxMouseEvent wxevent(wxEVT_LEFT_DOWN);
             ((wxWidgetCocoaImpl*)mouseUpTarget->GetPeer())->SetupMouseEvent(wxevent , theEvent) ;
@@ -553,7 +553,7 @@ wxDragResult wxDropSource::DoDragDrop(int flags)
             mouseUpTarget->HandleWindowEvent(wxevent);
         }
 
-        gCurrentSource = nullptr;
+        gCurrentSource = NULL;
     }
 
 

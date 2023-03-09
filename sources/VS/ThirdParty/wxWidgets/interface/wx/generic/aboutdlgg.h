@@ -34,7 +34,7 @@
         aboutInfo.SetName("MyApp");
         aboutInfo.SetVersion(MY_APP_VERSION_STRING);
         aboutInfo.SetDescription(_("My wxWidgets-based application!"));
-        aboutInfo.SetCopyright("(C) 1992-2022");
+        aboutInfo.SetCopyright("(C) 1992-2023");
         aboutInfo.SetWebSite("http://myapp.org");
         aboutInfo.AddDeveloper("My Self");
 
@@ -59,12 +59,12 @@ public:
     /**
         Creates the dialog and initializes it with the given information.
     */
-    wxGenericAboutDialog(const wxAboutDialogInfo& info, wxWindow* parent = nullptr);
+    wxGenericAboutDialog(const wxAboutDialogInfo& info, wxWindow* parent = NULL);
 
     /**
         Initializes the dialog created using the default constructor.
     */
-    bool Create(const wxAboutDialogInfo& info, wxWindow* parent = nullptr);
+    bool Create(const wxAboutDialogInfo& info, wxWindow* parent = NULL);
 
 protected:
     /**
@@ -114,4 +114,4 @@ protected:
     This function does the same thing as wxAboutBox() except that it always
     uses the generic wxWidgets version of the dialog instead of the native one.
 */
-void wxGenericAboutBox(const wxAboutDialogInfo& info, wxWindow* parent = nullptr);
+void wxGenericAboutBox(const wxAboutDialogInfo& info, wxWindow* parent = NULL);

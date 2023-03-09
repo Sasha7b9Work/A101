@@ -126,7 +126,7 @@
 
 /* Almost all compilers have strdup(), but VC++ and MinGW call it _strdup().
    And we need to declare it manually for MinGW in strict ANSI mode. */
-#if defined(__VISUALC__)
+#if (defined(__VISUALC__) && __VISUALC__ >= 1400)
     #define wxCRT_StrdupA _strdup
 #elif defined(__MINGW32__)
     wxDECL_FOR_STRICT_MINGW32(char*, _strdup, (const char *))
@@ -179,19 +179,34 @@ extern unsigned long android_wcstoul(const wchar_t *nptr, wchar_t **endptr, int 
     #define wxCRT_StrtollW   _wcstoi64
     #define wxCRT_StrtoullW  _wcstoui64
 #else
-    wxDECL_FOR_STRICT_MINGW32(long long, strtoll, (const char*, char**, int))
-    wxDECL_FOR_STRICT_MINGW32(unsigned long long, strtoull, (const char*, char**, int))
+    /* Both of these functions are implemented in C++11 compilers */
+    #if wxCHECK_CXX_STD(201103L)
+        #ifndef HAVE_STRTOULL
+            #define HAVE_STRTOULL
+        #endif
+        #ifndef HAVE_WCSTOULL
+            #define HAVE_WCSTOULL
+        #endif
+    #endif
 
-    #define wxCRT_StrtollA   strtoll
-    #define wxCRT_StrtoullA  strtoull
-    #define wxCRT_StrtollW   wcstoll
-    #define wxCRT_StrtoullW  wcstoull
+    #ifdef HAVE_STRTOULL
+        wxDECL_FOR_STRICT_MINGW32(long long, strtoll, (const char*, char**, int))
+        wxDECL_FOR_STRICT_MINGW32(unsigned long long, strtoull, (const char*, char**, int))
+
+        #define wxCRT_StrtollA   strtoll
+        #define wxCRT_StrtoullA  strtoull
+    #endif /* HAVE_STRTOULL */
+    #ifdef HAVE_WCSTOULL
+        /* assume that we have wcstoull(), which is also C99, too */
+        #define wxCRT_StrtollW   wcstoll
+        #define wxCRT_StrtoullW  wcstoull
+    #endif /* HAVE_WCSTOULL */
 #endif
 
 /*
-    Only MSVC provides strnlen() and wcsnlen() functions under Windows.
+    Only VC8 and later provide strnlen() and wcsnlen() functions under Windows.
  */
-#ifdef __VISUALC__
+#if wxCHECK_VISUALC_VERSION(8)
     #ifndef HAVE_STRNLEN
         #define HAVE_STRNLEN
     #endif
@@ -512,9 +527,9 @@ WXDLLIMPEXP_BASE wchar_t * wxCRT_GetenvW(const wchar_t *name);
     /* _wtof doesn't exist */
 #else
 #ifndef __VMS
-    #define wxCRT_AtofW(s)         wcstod(s, nullptr)
+    #define wxCRT_AtofW(s)         wcstod(s, NULL)
 #endif
-    #define wxCRT_AtolW(s)         wcstol(s, nullptr, 10)
+    #define wxCRT_AtolW(s)         wcstol(s, NULL, 10)
     /* wcstoi doesn't exist */
 #endif
 
@@ -630,7 +645,7 @@ WXDLLIMPEXP_BASE size_t wxCRT_StrftimeW(wchar_t *s, size_t max,
  *     for buffer.h and stringimpl.h (both of which must be included before
  *     string.h, which is required by wxcrt.h) to have them here: */
 
-/* safe version of strlen() (returns 0 if passed null pointer) */
+/* safe version of strlen() (returns 0 if passed NULL pointer) */
 inline size_t wxStrlen(const char *s) { return s ? wxCRT_StrlenA(s) : 0; }
 inline size_t wxStrlen(const wchar_t *s) { return s ? wxCRT_StrlenW(s) : 0; }
 #ifndef wxWCHAR_T_IS_WXCHAR16

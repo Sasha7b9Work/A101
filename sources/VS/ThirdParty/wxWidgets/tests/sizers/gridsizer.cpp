@@ -57,9 +57,9 @@ GridSizerTestCase::GridSizerTestCase()
 GridSizerTestCase::~GridSizerTestCase()
 {
     delete m_win;
-    m_win = nullptr;
+    m_win = NULL;
 
-    m_sizer = nullptr;
+    m_sizer = NULL;
 }
 
 // ----------------------------------------------------------------------------

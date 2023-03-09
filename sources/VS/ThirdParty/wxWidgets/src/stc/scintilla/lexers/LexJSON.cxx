@@ -27,9 +27,10 @@
 #include "CharacterSet.h"
 #include "LexerModule.h"
 #include "OptionSet.h"
-#include "DefaultLexer.h"
 
+#ifdef SCI_NAMESPACE
 using namespace Scintilla;
+#endif
 
 static const char *const JSONWordListDesc[] = {
 	"JSON Keywords",
@@ -127,7 +128,7 @@ struct OptionSetJSON : public OptionSet<OptionsJSON> {
 	}
 };
 
-class LexerJSON : public DefaultLexer {
+class LexerJSON : public ILexer {
 	OptionsJSON options;
 	OptionSetJSON optSetJSON;
 	EscapeSequence escapeSeq;
@@ -201,38 +202,34 @@ class LexerJSON : public DefaultLexer {
 
 	public:
 	LexerJSON() :
-		DefaultLexer("json", SCLEX_JSON),
 		setOperators(CharacterSet::setNone, "[{}]:,"),
 		setURL(CharacterSet::setAlphaNum, "-._~:/?#[]@!$&'()*+,),="),
 		setKeywordJSONLD(CharacterSet::setAlpha, ":@"),
 		setKeywordJSON(CharacterSet::setAlpha, "$_") {
 	}
 	virtual ~LexerJSON() {}
-	int SCI_METHOD Version() const override {
-		return lvIdentity;
+	virtual int SCI_METHOD Version() const {
+		return lvOriginal;
 	}
-	void SCI_METHOD Release() override {
+	virtual void SCI_METHOD Release() {
 		delete this;
 	}
-	const char *SCI_METHOD PropertyNames() override {
+	virtual const char *SCI_METHOD PropertyNames() {
 		return optSetJSON.PropertyNames();
 	}
-	int SCI_METHOD PropertyType(const char *name) override {
+	virtual int SCI_METHOD PropertyType(const char *name) {
 		return optSetJSON.PropertyType(name);
 	}
-	const char *SCI_METHOD DescribeProperty(const char *name) override {
+	virtual const char *SCI_METHOD DescribeProperty(const char *name) {
 		return optSetJSON.DescribeProperty(name);
 	}
-	Sci_Position SCI_METHOD PropertySet(const char *key, const char *val) override {
+	virtual Sci_Position SCI_METHOD PropertySet(const char *key, const char *val) {
 		if (optSetJSON.PropertySet(&options, key, val)) {
 			return 0;
 		}
 		return -1;
 	}
-	const char * SCI_METHOD PropertyGet(const char *key) override {
-		return optSetJSON.PropertyGet(key);
-	}
-	Sci_Position SCI_METHOD WordListSet(int n, const char *wl) override {
+	virtual Sci_Position SCI_METHOD WordListSet(int n, const char *wl) {
 		WordList *wordListN = 0;
 		switch (n) {
 			case 0:
@@ -253,23 +250,23 @@ class LexerJSON : public DefaultLexer {
 		}
 		return firstModification;
 	}
-	void *SCI_METHOD PrivateCall(int, void *) override {
+	virtual void *SCI_METHOD PrivateCall(int, void *) {
 		return 0;
 	}
 	static ILexer *LexerFactoryJSON() {
 		return new LexerJSON;
 	}
-	const char *SCI_METHOD DescribeWordListSets() override {
+	virtual const char *SCI_METHOD DescribeWordListSets() {
 		return optSetJSON.DescribeWordListSets();
 	}
-	void SCI_METHOD Lex(Sci_PositionU startPos,
+	virtual void SCI_METHOD Lex(Sci_PositionU startPos,
 								Sci_Position length,
 								int initStyle,
-								IDocument *pAccess) override;
-	void SCI_METHOD Fold(Sci_PositionU startPos,
+								IDocument *pAccess);
+	virtual void SCI_METHOD Fold(Sci_PositionU startPos,
 								 Sci_Position length,
 								 int initStyle,
-								 IDocument *pAccess) override;
+								 IDocument *pAccess);
 };
 
 void SCI_METHOD LexerJSON::Lex(Sci_PositionU startPos,

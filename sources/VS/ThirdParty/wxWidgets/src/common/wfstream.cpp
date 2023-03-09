@@ -41,7 +41,7 @@ wxFileInputStream::wxFileInputStream()
   : wxInputStream()
 {
     m_file_destroy = false;
-    m_file = nullptr;
+    m_file = NULL;
 }
 
 wxFileInputStream::wxFileInputStream(wxFile& file)
@@ -131,7 +131,7 @@ wxFileOutputStream::wxFileOutputStream()
                   : wxOutputStream()
 {
     m_file_destroy = false;
-    m_file = nullptr;
+    m_file = NULL;
 }
 
 wxFileOutputStream::wxFileOutputStream(int fd)
@@ -282,7 +282,7 @@ wxFFileInputStream::wxFFileInputStream(const wxString& fileName,
 wxFFileInputStream::wxFFileInputStream()
                   : wxInputStream()
 {
-    m_file = nullptr;
+    m_file = NULL;
     m_file_destroy = false;
 }
 
@@ -370,7 +370,7 @@ wxFFileOutputStream::wxFFileOutputStream(wxFFile& file)
 wxFFileOutputStream::wxFFileOutputStream()
                    : wxOutputStream()
 {
-    m_file = nullptr;
+    m_file = NULL;
     m_file_destroy = false;
 }
 

@@ -61,7 +61,7 @@
 
 wxDllType wxDynamicLibrary::GetProgramHandle()
 {
-   return dlopen(nullptr, RTLD_LAZY);
+   return dlopen(0, RTLD_LAZY);
 }
 
 /* static */
@@ -177,8 +177,8 @@ wxDynamicLibraryDetailsArray wxDynamicLibrary::ListLoaded()
     {
         // details of the module currently being parsed
         wxString pathCur;
-        void *startCur = nullptr,
-             *endCur = nullptr;
+        void *startCur = NULL,
+             *endCur = NULL;
 
         char path[1024];
         char buf[1024];
@@ -246,7 +246,7 @@ void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
 
     // At least under Solaris dladdr() takes non-const void*.
     if ( dladdr(const_cast<void*>(addr), &di) == 0 )
-        return nullptr;
+        return NULL;
 
     if ( path )
         *path = di.dli_fname;
@@ -257,7 +257,7 @@ void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
     wxUnusedVar(path);
 #endif // HAVE_DLADDR
 
-    return nullptr;
+    return NULL;
 }
 
 

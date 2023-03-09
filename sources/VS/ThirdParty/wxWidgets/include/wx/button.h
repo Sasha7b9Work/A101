@@ -36,12 +36,12 @@ public:
 
     // make this button the default button in its top level window
     //
-    // returns the old default item (possibly null)
+    // returns the old default item (possibly NULL)
     virtual wxWindow *SetDefault();
 
     // returns the default button size for this platform, and optionally for a
     // specific window when the platform supports per-monitor DPI
-    static wxSize GetDefaultSize(wxWindow* win = nullptr);
+    static wxSize GetDefaultSize(wxWindow* win = NULL);
 
 protected:
     wxDECLARE_NO_COPY_CLASS(wxButtonBase);
@@ -51,8 +51,12 @@ protected:
     #include "wx/univ/button.h"
 #elif defined(__WXMSW__)
     #include "wx/msw/button.h"
-#elif defined(__WXGTK__)
+#elif defined(__WXMOTIF__)
+    #include "wx/motif/button.h"
+#elif defined(__WXGTK20__)
     #include "wx/gtk/button.h"
+#elif defined(__WXGTK__)
+    #include "wx/gtk1/button.h"
 #elif defined(__WXMAC__)
     #include "wx/osx/button.h"
 #elif defined(__WXQT__)

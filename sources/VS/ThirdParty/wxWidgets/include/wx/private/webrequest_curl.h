@@ -32,7 +32,7 @@ public:
     wxWebAuthChallengeCURL(wxWebAuthChallenge::Source source,
                            wxWebRequestCURL& request);
 
-    void SetCredentials(const wxWebCredentials& cred) override;
+    void SetCredentials(const wxWebCredentials& cred) wxOVERRIDE;
 
 private:
     wxWebRequestCURL& m_request;
@@ -51,21 +51,21 @@ public:
 
     ~wxWebRequestCURL();
 
-    void Start() override;
+    void Start() wxOVERRIDE;
 
-    wxWebResponseImplPtr GetResponse() const override
+    wxWebResponseImplPtr GetResponse() const wxOVERRIDE
         { return m_response; }
 
-    wxWebAuthChallengeImplPtr GetAuthChallenge() const override
+    wxWebAuthChallengeImplPtr GetAuthChallenge() const wxOVERRIDE
         { return m_authChallenge; }
 
-    wxFileOffset GetBytesSent() const override;
+    wxFileOffset GetBytesSent() const wxOVERRIDE;
 
-    wxFileOffset GetBytesExpectedToSend() const override;
+    wxFileOffset GetBytesExpectedToSend() const wxOVERRIDE;
 
     CURL* GetHandle() const { return m_handle; }
 
-    wxWebRequestHandle GetNativeHandle() const override
+    wxWebRequestHandle GetNativeHandle() const wxOVERRIDE
     {
         return (wxWebRequestHandle)GetHandle();
     }
@@ -80,7 +80,7 @@ public:
     size_t CURLOnRead(char* buffer, size_t size);
 
 private:
-    void DoCancel() override;
+    void DoCancel() wxOVERRIDE;
 
     wxWebSessionCURL& m_sessionImpl;
 
@@ -101,15 +101,15 @@ class wxWebResponseCURL : public wxWebResponseImpl
 public:
     explicit wxWebResponseCURL(wxWebRequestCURL& request);
 
-    wxFileOffset GetContentLength() const override;
+    wxFileOffset GetContentLength() const wxOVERRIDE;
 
-    wxString GetURL() const override;
+    wxString GetURL() const wxOVERRIDE;
 
-    wxString GetHeader(const wxString& name) const override;
+    wxString GetHeader(const wxString& name) const wxOVERRIDE;
 
-    int GetStatus() const override;
+    int GetStatus() const wxOVERRIDE;
 
-    wxString GetStatusText() const override { return m_statusText; }
+    wxString GetStatusText() const wxOVERRIDE { return m_statusText; }
 
 
     // Methods called from libcurl callbacks
@@ -139,11 +139,11 @@ public:
     CreateRequest(wxWebSession& session,
                   wxEvtHandler* handler,
                   const wxString& url,
-                  int id = wxID_ANY) override;
+                  int id = wxID_ANY) wxOVERRIDE;
 
-    wxVersionInfo GetLibraryVersionInfo() override;
+    wxVersionInfo GetLibraryVersionInfo() wxOVERRIDE;
 
-    wxWebSessionHandle GetNativeHandle() const override
+    wxWebSessionHandle GetNativeHandle() const wxOVERRIDE
     {
         return (wxWebSessionHandle)m_handle;
     }
@@ -193,7 +193,7 @@ private:
 class wxWebSessionFactoryCURL : public wxWebSessionFactory
 {
 public:
-    wxWebSessionImpl* Create() override
+    wxWebSessionImpl* Create() wxOVERRIDE
     { return new wxWebSessionCURL(); }
 };
 

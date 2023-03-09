@@ -107,5 +107,5 @@ wxObjectRefData *wxAcceleratorTable::CloneRefData(const wxObjectRefData *data) c
 
 bool wxAcceleratorTable::IsOk() const
 {
-    return (m_refData != nullptr);
+    return (m_refData != NULL);
 }

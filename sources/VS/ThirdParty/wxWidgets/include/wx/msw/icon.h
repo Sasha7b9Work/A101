@@ -29,7 +29,7 @@ public:
     wxIconRefData() { }
     virtual ~wxIconRefData() { Free(); }
 
-    virtual void Free() override;
+    virtual void Free() wxOVERRIDE;
 };
 
 // ---------------------------------------------------------------------------
@@ -79,12 +79,12 @@ public:
     void CopyFromBitmap(const wxBitmap& bmp);
 
 protected:
-    virtual wxGDIImageRefData *CreateData() const override
+    virtual wxGDIImageRefData *CreateData() const wxOVERRIDE
     {
         return new wxIconRefData;
     }
 
-    virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const override;
+    virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const wxOVERRIDE;
 
     // create from XPM data
     void CreateIconFromXpm(const char* const* data);

@@ -96,29 +96,29 @@ public:
     wxCmdLineParamType type;
 
     // from wxCmdLineArg
-    virtual wxCmdLineEntryType GetKind() const override { return kind; }
-    virtual wxString GetShortName() const override {
+    virtual wxCmdLineEntryType GetKind() const wxOVERRIDE { return kind; }
+    virtual wxString GetShortName() const wxOVERRIDE {
         wxASSERT_MSG( kind == wxCMD_LINE_OPTION || kind == wxCMD_LINE_SWITCH,
                       wxT("kind mismatch in wxCmdLineArg") );
         return shortName;
     }
-    virtual wxString GetLongName() const override {
+    virtual wxString GetLongName() const wxOVERRIDE {
         wxASSERT_MSG( kind == wxCMD_LINE_OPTION || kind == wxCMD_LINE_SWITCH,
                       wxT("kind mismatch in wxCmdLineArg") );
         return longName;
     }
-    virtual wxCmdLineParamType GetType() const override {
+    virtual wxCmdLineParamType GetType() const wxOVERRIDE {
         wxASSERT_MSG( kind == wxCMD_LINE_OPTION,
                       wxT("kind mismatch in wxCmdLineArg") );
         return type;
     }
-    double GetDoubleVal() const override;
-    long GetLongVal() const override;
-    const wxString& GetStrVal() const override;
+    double GetDoubleVal() const wxOVERRIDE;
+    long GetLongVal() const wxOVERRIDE;
+    const wxString& GetStrVal() const wxOVERRIDE;
 #if wxUSE_DATETIME
-    const wxDateTime& GetDateVal() const override;
+    const wxDateTime& GetDateVal() const wxOVERRIDE;
 #endif // wxUSE_DATETIME
-    bool IsNegated() const override {
+    bool IsNegated() const wxOVERRIDE {
         wxASSERT_MSG( kind == wxCMD_LINE_SWITCH,
                       wxT("kind mismatch in wxCmdLineArg") );
         return m_isNegated;
@@ -217,7 +217,7 @@ struct wxCmdLineParserData
 
     // Find the option by either its short or long name.
     //
-    // Asserts and returns nullptr if option with this name is not found.
+    // Asserts and returns NULL if option with this name is not found.
     const wxCmdLineOption* FindOptionByAnyName(const wxString& name);
 };
 
@@ -425,7 +425,7 @@ void wxCmdLineParserData::SetArguments(int argc, char **argv)
     // temporarily change the locale here. The only drawback is that changing
     // the locale is thread-unsafe but precisely because we're called so early
     // it's hopefully safe to assume that no other threads had been created yet.
-    const wxCharBuffer locOld(SetAllLocaleFacets(nullptr));
+    const wxCharBuffer locOld(SetAllLocaleFacets(NULL));
     SetAllLocaleFacets("");
     wxON_BLOCK_EXIT1( SetAllLocaleFacets, locOld.data() );
 
@@ -521,7 +521,7 @@ wxCmdLineParserData::FindOptionByAnyName(const wxString& name)
         if ( i == wxNOT_FOUND )
         {
             wxFAIL_MSG( wxS("Unknown option ") + name );
-            return nullptr;
+            return NULL;
         }
     }
 
@@ -728,7 +728,7 @@ bool wxCmdLineParser::Found(const wxString& name, wxString *value) const
     if ( !opt || !opt->HasValue() )
         return false;
 
-    wxCHECK_MSG( value, false, wxT("null pointer in wxCmdLineOption::Found") );
+    wxCHECK_MSG( value, false, wxT("NULL pointer in wxCmdLineOption::Found") );
 
     *value = opt->GetStrVal();
 
@@ -742,7 +742,7 @@ bool wxCmdLineParser::Found(const wxString& name, long *value) const
     if ( !opt || !opt->HasValue() )
         return false;
 
-    wxCHECK_MSG( value, false, wxT("null pointer in wxCmdLineOption::Found") );
+    wxCHECK_MSG( value, false, wxT("NULL pointer in wxCmdLineOption::Found") );
 
     *value = opt->GetLongVal();
 
@@ -756,7 +756,7 @@ bool wxCmdLineParser::Found(const wxString& name, double *value) const
     if ( !opt || !opt->HasValue() )
         return false;
 
-    wxCHECK_MSG( value, false, wxT("null pointer in wxCmdLineOption::Found") );
+    wxCHECK_MSG( value, false, wxT("NULL pointer in wxCmdLineOption::Found") );
 
     *value = opt->GetDoubleVal();
 
@@ -771,7 +771,7 @@ bool wxCmdLineParser::Found(const wxString& name, wxDateTime *value) const
     if ( !opt || !opt->HasValue() )
         return false;
 
-    wxCHECK_MSG( value, false, wxT("null pointer in wxCmdLineOption::Found") );
+    wxCHECK_MSG( value, false, wxT("NULL pointer in wxCmdLineOption::Found") );
 
     *value = opt->GetDateVal();
 

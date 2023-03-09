@@ -21,12 +21,12 @@ public:
                     const wxPoint& WXUNUSED(pos) = wxDefaultPosition)
         : wxMessageDialogBase(parent, message, caption, style)
     {
-        m_hook = nullptr;
+        m_hook = NULL;
     }
 
-    virtual int ShowModal() override;
+    virtual int ShowModal() wxOVERRIDE;
 
-    virtual long GetEffectiveIcon() const override;
+    virtual long GetEffectiveIcon() const wxOVERRIDE;
 
     // implementation-specific
 
@@ -35,7 +35,7 @@ public:
 
 protected:
     // Override this as task dialogs are always centered on parent.
-    virtual void DoCentre(int dir) override;
+    virtual void DoCentre(int dir) wxOVERRIDE;
 
 private:
     // hook procedure used to adjust the message box beyond what the standard

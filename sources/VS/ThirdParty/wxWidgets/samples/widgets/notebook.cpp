@@ -85,11 +85,11 @@ public:
     BookWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist, const char *const icon[]);
     virtual ~BookWidgetsPage();
 
-    virtual wxWindow *GetWidget() const override { return m_book; }
-    virtual void RecreateWidget() override { RecreateBook(); }
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_book; }
+    virtual void RecreateWidget() wxOVERRIDE { RecreateBook(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
     // event handlers
@@ -188,12 +188,12 @@ BookWidgetsPage::BookWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist, c
                 :WidgetsPage(book, imaglist, icon)
 {
     // init everything
-    m_chkImages = nullptr;
-    m_imageList = nullptr;
+    m_chkImages = NULL;
+    m_imageList = NULL;
 
-    m_book = nullptr;
-    m_radioOrient = nullptr;
-    m_sizerBook = nullptr;
+    m_book = NULL;
+    m_radioOrient = NULL;
+    m_sizerBook = (wxSizer *)NULL;
 }
 
 void BookWidgetsPage::CreateContent()
@@ -323,7 +323,7 @@ void BookWidgetsPage::CreateImageList()
         wxDELETE(m_imageList);
     }
 
-    // because of the bug in wxMSW we can't use SetImageList(nullptr) - although
+    // because of the bug in wxMSW we can't use SetImageList(NULL) - although
     // it would be logical if this removed the image list from book, under
     // MSW it crashes instead - FIXME
 }
@@ -541,7 +541,7 @@ protected:
     void OnPageChanged(wxNotebookEvent& event);
 
     // (re)create book
-    virtual wxBookCtrlBase *CreateBook(long flags) override
+    virtual wxBookCtrlBase *CreateBook(long flags) wxOVERRIDE
     {
         return new wxNotebook(this, BookPage_Book,
                               wxDefaultPosition, wxDefaultSize,
@@ -564,6 +564,8 @@ wxEND_EVENT_TABLE()
 
 #if defined(__WXUNIVERSAL__)
     #define FAMILY_CTRLS UNIVERSAL_CTRLS
+#elif defined(__WXMOTIF__)
+    #define FAMILY_CTRLS GENERIC_CTRLS
 #else
     #define FAMILY_CTRLS NATIVE_CTRLS
 #endif
@@ -620,7 +622,7 @@ protected:
     void OnPageChanged(wxListbookEvent& event);
 
     // (re)create book
-    virtual wxBookCtrlBase *CreateBook(long flags) override
+    virtual wxBookCtrlBase *CreateBook(long flags) wxOVERRIDE
     {
         return new wxListbook(this, BookPage_Book,
                               wxDefaultPosition, wxDefaultSize,
@@ -693,7 +695,7 @@ protected:
     void OnPageChanged(wxChoicebookEvent& event);
 
     // (re)create book
-    virtual wxBookCtrlBase *CreateBook(long flags) override
+    virtual wxBookCtrlBase *CreateBook(long flags) wxOVERRIDE
     {
         return new wxChoicebook(this, BookPage_Book,
                                 wxDefaultPosition, wxDefaultSize,

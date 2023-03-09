@@ -556,7 +556,7 @@ wxFileOffset wxWebRequest::GetBytesExpectedToReceive() const
 
 wxWebRequestHandle wxWebRequest::GetNativeHandle() const
 {
-    return m_impl ? m_impl->GetNativeHandle() : nullptr;
+    return m_impl ? m_impl->GetNativeHandle() : NULL;
 }
 
 void wxWebRequest::DisablePeerVerify(bool disable)
@@ -641,7 +641,7 @@ void wxWebResponseImpl::Init()
         {
             // Check available disk space
             wxLongLong freeSpace;
-            if ( wxGetDiskSpace(tmpPrefix.GetFullPath(), nullptr, &freeSpace) &&
+            if ( wxGetDiskSpace(tmpPrefix.GetFullPath(), NULL, &freeSpace) &&
                 GetContentLength() > freeSpace )
             {
                 m_request.SetState(wxWebRequest::State_Failed, _("Not enough free disk space for download."));
@@ -853,7 +853,7 @@ wxString wxWebResponse::GetStatusText() const
 
 wxInputStream* wxWebResponse::GetStream() const
 {
-    wxCHECK_IMPL( nullptr );
+    wxCHECK_IMPL( NULL );
 
     return m_impl->GetStream();
 }
@@ -985,7 +985,7 @@ wxWebSession::RegisterFactory(const wxString& backend,
     if ( !factory->Initialize() )
     {
         delete factory;
-        factory = nullptr;
+        factory = NULL;
         return;
     }
 
@@ -1058,17 +1058,17 @@ wxString wxWebSession::GetTempDir() const
 
 bool wxWebSession::IsOpened() const
 {
-    return m_impl.get() != nullptr;
+    return m_impl.get() != NULL;
 }
 
 void wxWebSession::Close()
 {
-    m_impl.reset(nullptr);
+    m_impl.reset(NULL);
 }
 
 wxWebSessionHandle wxWebSession::GetNativeHandle() const
 {
-    return m_impl ? m_impl->GetNativeHandle() : nullptr;
+    return m_impl ? m_impl->GetNativeHandle() : NULL;
 }
 
 // ----------------------------------------------------------------------------
@@ -1082,12 +1082,12 @@ public:
     {
     }
 
-    virtual bool OnInit() override
+    virtual bool OnInit() wxOVERRIDE
     {
         return true;
     }
 
-    virtual void OnExit() override
+    virtual void OnExit() wxOVERRIDE
     {
         for ( wxStringWebSessionFactoryMap::iterator it = gs_factoryMap.begin();
               it != gs_factoryMap.end();

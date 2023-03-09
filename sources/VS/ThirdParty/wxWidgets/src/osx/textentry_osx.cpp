@@ -46,7 +46,7 @@
 
 wxTextEntry::wxTextEntry()
 {
-    m_completer = nullptr;
+    m_completer = NULL;
     m_editable = true;
     m_maxLength = 0;
 }
@@ -297,7 +297,7 @@ wxTextWidgetImpl * wxTextEntry::GetTextPeer() const
 {
     wxWindow * const win = const_cast<wxTextEntry *>(this)->GetEditableWindow();
 
-    return win ? dynamic_cast<wxTextWidgetImpl *>(win->GetPeer()) : nullptr;
+    return win ? dynamic_cast<wxTextWidgetImpl *>(win->GetPeer()) : NULL;
 }
 
 bool wxTextEntry::SetHint(const wxString& hint)

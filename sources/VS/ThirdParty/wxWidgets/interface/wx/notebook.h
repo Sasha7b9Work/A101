@@ -125,7 +125,7 @@ public:
         window style.
 
         @param parent
-            The parent window. Must be non-null.
+            The parent window. Must be non-@NULL.
         @param id
             The window identifier.
         @param pos

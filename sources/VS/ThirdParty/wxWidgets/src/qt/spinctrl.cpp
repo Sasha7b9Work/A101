@@ -19,7 +19,7 @@
 
 template< typename T, typename Widget >
 wxSpinCtrlQt< T, Widget >::wxSpinCtrlQt() :
-    m_qtSpinBox(nullptr)
+    m_qtSpinBox(NULL)
 {
 }
 
@@ -243,7 +243,7 @@ void wxSpinCtrl::SetValue( const wxString &value )
 {
     // valueFromText can be called if m_qtSpinBox is an instance of the helper class
     wxQtSpinBox * qtSpinBox = dynamic_cast<wxQtSpinBox *> ((QSpinBox *) m_qtSpinBox);
-    if (qtSpinBox != nullptr)
+    if (qtSpinBox != NULL)
         qtSpinBox->setValue( qtSpinBox->valueFromText( wxQtConvertString( value )));
 }
 
@@ -292,7 +292,7 @@ void wxSpinCtrlDouble::SetValue( const wxString &value )
 {
     // valueFromText can be called if m_qtSpinBox is an instance of the helper class
     wxQtDoubleSpinBox * qtSpinBox = dynamic_cast<wxQtDoubleSpinBox *> ((QDoubleSpinBox *) m_qtSpinBox);
-    if (qtSpinBox != nullptr)
+    if (qtSpinBox != NULL)
         qtSpinBox->setValue( qtSpinBox->valueFromText( wxQtConvertString( value )));
 }
 

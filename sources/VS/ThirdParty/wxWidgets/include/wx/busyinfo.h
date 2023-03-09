@@ -31,7 +31,7 @@ class wxBusyInfoFlags
 public:
     wxBusyInfoFlags()
     {
-        m_parent = nullptr;
+        m_parent = NULL;
         m_alpha = wxALPHA_OPAQUE;
     }
 

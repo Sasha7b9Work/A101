@@ -218,7 +218,7 @@ class WXDLLIMPEXP_HTML wxHtmlTagHandler : public wxObject
     wxDECLARE_ABSTRACT_CLASS(wxHtmlTagHandler);
 
 public:
-    wxHtmlTagHandler() : wxObject () { m_Parser = nullptr; }
+    wxHtmlTagHandler() : wxObject () { m_Parser = NULL; }
 
     // Sets the parser.
     // NOTE : each _instance_ of handler is guaranteed to be called

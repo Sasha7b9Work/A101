@@ -322,12 +322,12 @@ public:
     {
     }
 
-    virtual void Show(bool show) override
+    virtual void Show(bool show) wxOVERRIDE
     {
         m_win->Show(show);
     }
 
-    virtual void Enable(bool enable) override
+    virtual void Enable(bool enable) wxOVERRIDE
     {
         m_win->Enable(enable);
     }
@@ -359,10 +359,10 @@ public:
             new wxButton(parent, wxID_ANY, label)
           )
     {
-        m_handler = nullptr;
+        m_handler = NULL;
     }
 
-    virtual bool DoBind(wxEvtHandler* handler) override
+    virtual bool DoBind(wxEvtHandler* handler) wxOVERRIDE
     {
         if ( !m_handler )
         {
@@ -401,20 +401,20 @@ public:
             new wxCheckBox(parent, wxID_ANY, label)
           )
     {
-        m_handler = nullptr;
+        m_handler = NULL;
     }
 
-    virtual bool GetValue() override
+    virtual bool GetValue() wxOVERRIDE
     {
         return GetCheckBox()->GetValue();
     }
 
-    virtual void SetValue(bool value) override
+    virtual void SetValue(bool value) wxOVERRIDE
     {
         GetCheckBox()->SetValue(value);
     }
 
-    virtual bool DoBind(wxEvtHandler* handler) override
+    virtual bool DoBind(wxEvtHandler* handler) wxOVERRIDE
     {
         if ( !m_handler )
         {
@@ -453,20 +453,20 @@ public:
             new wxRadioButton(parent, wxID_ANY, label)
           )
     {
-        m_handler = nullptr;
+        m_handler = NULL;
     }
 
-    virtual bool GetValue() override
+    virtual bool GetValue() wxOVERRIDE
     {
         return GetRadioButton()->GetValue();
     }
 
-    virtual void SetValue(bool value) override
+    virtual void SetValue(bool value) wxOVERRIDE
     {
         GetRadioButton()->SetValue(value);
     }
 
-    virtual bool DoBind(wxEvtHandler* handler) override
+    virtual bool DoBind(wxEvtHandler* handler) wxOVERRIDE
     {
         if ( !m_handler )
         {
@@ -507,20 +507,20 @@ public:
                          n, strings)
           )
     {
-        m_handler = nullptr;
+        m_handler = NULL;
     }
 
-    virtual int GetSelection() override
+    virtual int GetSelection() wxOVERRIDE
     {
         return GetChoice()->GetSelection();
     }
 
-    virtual void SetSelection(int selection) override
+    virtual void SetSelection(int selection) wxOVERRIDE
     {
         GetChoice()->SetSelection(selection);
     }
 
-    virtual bool DoBind(wxEvtHandler* handler) override
+    virtual bool DoBind(wxEvtHandler* handler) wxOVERRIDE
     {
         if ( !m_handler )
         {
@@ -563,12 +563,12 @@ public:
     {
     }
 
-    virtual wxString GetValue() override
+    virtual wxString GetValue() wxOVERRIDE
     {
         return GetText()->GetValue();
     }
 
-    virtual void SetValue(const wxString& value) override
+    virtual void SetValue(const wxString& value) wxOVERRIDE
     {
         // Don't use SetValue(), we don't need any extra events here.
         return GetText()->ChangeValue(value);
@@ -592,7 +592,7 @@ public:
     {
     }
 
-    virtual void SetLabelText(const wxString& text) override
+    virtual void SetLabelText(const wxString& text) wxOVERRIDE
     {
         GetStaticText()->SetLabelText(text);
 
@@ -636,21 +636,21 @@ public:
 
 
     // Implement wxFileDialogCustomizeImpl pure virtual methods.
-    wxFileDialogButtonImpl* AddButton(const wxString& label) override
+    wxFileDialogButtonImpl* AddButton(const wxString& label) wxOVERRIDE
     {
         m_lastWasRadio = false;
 
         return AddToLayoutAndReturn<ButtonImpl>(label);
     }
 
-    wxFileDialogCheckBoxImpl* AddCheckBox(const wxString& label) override
+    wxFileDialogCheckBoxImpl* AddCheckBox(const wxString& label) wxOVERRIDE
     {
         m_lastWasRadio = false;
 
         return AddToLayoutAndReturn<CheckBoxImpl>(label);
     }
 
-    wxFileDialogRadioButtonImpl* AddRadioButton(const wxString& label) override
+    wxFileDialogRadioButtonImpl* AddRadioButton(const wxString& label) wxOVERRIDE
     {
         RadioButtonImpl* const impl = AddToLayoutAndReturn<RadioButtonImpl>(label);
         if ( !m_lastWasRadio )
@@ -664,7 +664,7 @@ public:
         return impl;
     }
 
-    wxFileDialogChoiceImpl* AddChoice(size_t n, const wxString* strings) override
+    wxFileDialogChoiceImpl* AddChoice(size_t n, const wxString* strings) wxOVERRIDE
     {
         m_lastWasRadio = false;
 
@@ -678,7 +678,7 @@ public:
     }
 
 
-    wxFileDialogTextCtrlImpl* AddTextCtrl(const wxString& label) override
+    wxFileDialogTextCtrlImpl* AddTextCtrl(const wxString& label) wxOVERRIDE
     {
         m_lastWasRadio = false;
 
@@ -690,7 +690,7 @@ public:
         return AddToLayoutAndReturn<TextCtrlImpl>();
     }
 
-    wxFileDialogStaticTextImpl* AddStaticText(const wxString& label) override
+    wxFileDialogStaticTextImpl* AddStaticText(const wxString& label) wxOVERRIDE
     {
         m_lastWasRadio = false;
 
@@ -732,9 +732,9 @@ void wxFileDialogBase::Init()
     m_filterIndex = 0;
     m_currentlySelectedFilterIndex = wxNOT_FOUND;
     m_windowStyle = 0;
-    m_customizeHook = nullptr;
-    m_extraControl = nullptr;
-    m_extraControlCreator = nullptr;
+    m_customizeHook = NULL;
+    m_extraControl = NULL;
+    m_extraControlCreator = NULL;
 }
 
 bool wxFileDialogBase::Create(wxWindow *parent,
@@ -851,12 +851,16 @@ wxString wxFileDialogBase::AppendExtension(const wxString &filePath,
     return filePath + ext;
 }
 
+#if defined(__WXUNIVERSAL__) || !(defined(__WXMSW__) || defined(__WXGTK20__))
+
 bool wxFileDialogBase::AddShortcut(const wxString& WXUNUSED(directory),
                                    int WXUNUSED(flags))
 {
     // Not implemented by default.
     return false;
 }
+
+#endif // Platforms without native implementation.
 
 bool wxFileDialogBase::SetCustomizeHook(wxFileDialogCustomizeHook& customizeHook)
 {
@@ -889,7 +893,7 @@ wxWindow* wxFileDialogBase::CreateExtraControlWithParent(wxWindow* parent) const
 
     // It's not an error to call this function if there are no extra controls
     // to create, just do nothing in this case.
-    return nullptr;
+    return NULL;
 }
 
 bool wxFileDialogBase::CreateExtraControl()
@@ -899,7 +903,7 @@ bool wxFileDialogBase::CreateExtraControl()
     if ( !m_extraControl )
         m_extraControl = CreateExtraControlWithParent(this);
 
-    return m_extraControl != nullptr;
+    return m_extraControl != NULL;
 }
 
 void wxFileDialogBase::DestroyExtraControl()
@@ -907,7 +911,7 @@ void wxFileDialogBase::DestroyExtraControl()
     if ( m_extraControl )
     {
         m_extraControl->Destroy();
-        m_extraControl = nullptr;
+        m_extraControl = NULL;
     }
 }
 
@@ -975,6 +979,9 @@ void wxFileDialogBase::SetFilterIndexFromExt(const wxString& ext)
             SetFilterIndex(filterIndex);
     }
 }
+
+void* wxFileDialogBase::WXReservedFileDialog1(void*) { return NULL; }
+void* wxFileDialogBase::WXReservedFileDialog2(void*) { return NULL; }
 
 //----------------------------------------------------------------------------
 // wxFileDialog convenience functions

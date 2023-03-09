@@ -107,7 +107,7 @@ public:
     */
     bool AttachUnknownControl(const wxString& name,
                               wxWindow* control,
-                              wxWindow* parent = nullptr);
+                              wxWindow* parent = NULL);
 
     /**
         Removes all handlers and deletes them (this means that any handlers
@@ -527,7 +527,7 @@ public:
         (usually window, dialog or panel) that is often necessary to
         create the resource.
 
-        If @b instance is non-null it should not create a new instance via
+        If @b instance is non-@NULL it should not create a new instance via
         'new' but should rather use this one, and call its Create method.
     */
     wxObject* CreateResource(wxXmlNode* node, wxObject* parent,
@@ -578,13 +578,13 @@ protected:
         Helper function.
     */
     void CreateChildrenPrivately(wxObject* parent,
-                                 wxXmlNode* rootnode = nullptr);
+                                 wxXmlNode* rootnode = NULL);
 
     /**
         Creates a resource from a node.
     */
     wxObject* CreateResFromNode(wxXmlNode* node, wxObject* parent,
-                                wxObject* instance = nullptr);
+                                wxObject* instance = NULL);
 
     /**
         Creates an animation (see wxAnimation) from the filename specified in @a param.
@@ -596,7 +596,7 @@ protected:
         implementation is created.
     */
     wxAnimation* GetAnimation(const wxString& param = "animation",
-                              wxAnimationCtrlBase* ctrl = nullptr);
+                              wxAnimationCtrlBase* ctrl = NULL);
 
     /**
         Gets a bitmap.

@@ -13,7 +13,7 @@ class MyApp : public wxApp
 {
 public:
     MyApp(void) {}
-    bool OnInit(void) override;
+    bool OnInit(void) wxOVERRIDE;
 };
 
 class MyFrame : public wxFrame

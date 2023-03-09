@@ -48,11 +48,11 @@ public:
 
     // returning true from here ensures that we act as a container window for
     // our children
-    virtual bool IsStaticBox() const override { return true; }
+    virtual bool IsStaticBox() const wxOVERRIDE { return true; }
 
 protected:
     // draw the control
-    virtual void DoDraw(wxControlRenderer *renderer) override;
+    virtual void DoDraw(wxControlRenderer *renderer) wxOVERRIDE;
 
     // get the size of the border
     wxRect GetBorderGeometry() const;

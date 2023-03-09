@@ -75,7 +75,7 @@ public:
     // this one is called on application startup and is a good place for the app
     // initialization (doing it here and not in the ctor allows to have an error
     // return: if OnInit() returns false, the application terminates)
-    virtual bool OnInit() override;
+    virtual bool OnInit() wxOVERRIDE;
 
 private:
     wxLocale m_locale;
@@ -349,7 +349,7 @@ wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
 
 
     EVT_UPDATE_UI(Calendar_Cal_SeqMonth, MyFrame::OnUpdateUIGenericOnly)
-#ifdef __WXGTK__
+#ifdef __WXGTK20__
     EVT_UPDATE_UI(Calendar_Cal_AutoWeekday, MyFrame::OnUpdateUIGenericOnly)
     EVT_UPDATE_UI(Calendar_Cal_Sunday, MyFrame::OnUpdateUIGenericOnly)
     EVT_UPDATE_UI(Calendar_Cal_Monday, MyFrame::OnUpdateUIGenericOnly)
@@ -414,7 +414,7 @@ bool MyApp::OnInit()
 
 // frame constructor
 MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
-       : wxFrame(nullptr, wxID_ANY, title, pos, size)
+       : wxFrame((wxFrame *)NULL, wxID_ANY, title, pos, size)
 {
     // set the frame icon
     SetIcon(wxICON(sample));
@@ -953,11 +953,11 @@ wxEND_EVENT_TABLE()
 MyDateDialog::MyDateDialog(wxWindow *parent, const wxDateTime& dt, int dtpStyle)
         : wxDialog(parent, wxID_ANY, wxString("Calendar: Choose a date"))
 {
-    wxWindow* datePickerWindow = nullptr;
+    wxWindow* datePickerWindow = NULL;
 
 #if wxUSE_DATEPICKCTRL_GENERIC
-    m_datePickerGeneric = nullptr;
-    m_datePicker = nullptr;
+    m_datePickerGeneric = NULL;
+    m_datePicker = NULL;
 
     wxFrame *frame = (wxFrame *)wxGetTopLevelParent(parent);
     if ( frame && frame->GetMenuBar()->IsChecked(Calendar_DatePicker_Generic) )
@@ -1027,11 +1027,11 @@ wxEND_EVENT_TABLE()
 MyTimeDialog::MyTimeDialog(wxWindow *parent)
         : wxDialog(parent, wxID_ANY, wxString("Calendar: Choose time"))
 {
-    wxWindow* timePickerWindow = nullptr;
+    wxWindow* timePickerWindow = NULL;
 
 #if wxUSE_TIMEPICKCTRL_GENERIC
-    m_timePickerGeneric = nullptr;
-    m_timePicker = nullptr;
+    m_timePickerGeneric = NULL;
+    m_timePicker = NULL;
 
     wxFrame *frame = (wxFrame *)wxGetTopLevelParent(parent);
     if ( frame && frame->GetMenuBar()->IsChecked(Calendar_TimePicker_Generic) )

@@ -184,7 +184,7 @@ public:
         differences between the timestamps and not their absolute values usually make sense).
 
         @warning
-        wxWidgets returns a valid timestamp only for mouse and key events
+        wxWidgets returns a non-NULL timestamp only for mouse and key events
         (see wxMouseEvent and wxKeyEvent).
     */
     long GetTimestamp() const;
@@ -458,7 +458,7 @@ public:
 
         @param event
             A heap-allocated event to be queued, QueueEvent() takes ownership
-            of it. This parameter shouldn't be @NULL.
+            of it. This parameter shouldn't be @c NULL.
      */
     virtual void QueueEvent(wxEvent *event);
 
@@ -550,7 +550,7 @@ public:
          threads, but that the method will be always called in the main, GUI,
          thread context.
 
-         This overload is particularly useful in combination with lambdas:
+         This overload is particularly useful in combination with C++11 lambdas:
          @code
          wxGetApp().CallAfter([]{
              wxBell();
@@ -771,8 +771,8 @@ public:
     */
     void Connect(int id, int lastId, wxEventType eventType,
                  wxObjectEventFunction function,
-                 wxObject* userData = nullptr,
-                 wxEvtHandler* eventSink = nullptr);
+                 wxObject* userData = NULL,
+                 wxEvtHandler* eventSink = NULL);
 
     /**
         See the Connect(int, int, wxEventType, wxObjectEventFunction, wxObject*, wxEvtHandler*)
@@ -793,8 +793,8 @@ public:
     */
     void Connect(int id, wxEventType eventType,
                  wxObjectEventFunction function,
-                 wxObject* userData = nullptr,
-                 wxEvtHandler* eventSink = nullptr);
+                 wxObject* userData = NULL,
+                 wxEvtHandler* eventSink = NULL);
 
     /**
         See the Connect(int, int, wxEventType, wxObjectEventFunction, wxObject*, wxEvtHandler*)
@@ -809,8 +809,8 @@ public:
     */
     void Connect(wxEventType eventType,
                  wxObjectEventFunction function,
-                 wxObject* userData = nullptr,
-                 wxEvtHandler* eventSink = nullptr);
+                 wxObject* userData = NULL,
+                 wxEvtHandler* eventSink = NULL);
 
     /**
         Disconnects the given function dynamically from the event handler, using the
@@ -836,8 +836,8 @@ public:
     */
     bool Disconnect(wxEventType eventType,
                     wxObjectEventFunction function,
-                    wxObject* userData = nullptr,
-                    wxEvtHandler* eventSink = nullptr);
+                    wxObject* userData = NULL,
+                    wxEvtHandler* eventSink = NULL);
 
     /**
         See the Disconnect(wxEventType, wxObjectEventFunction, wxObject*, wxEvtHandler*)
@@ -851,9 +851,9 @@ public:
     */
     bool Disconnect(int id = wxID_ANY,
                     wxEventType eventType = wxEVT_NULL,
-                    wxObjectEventFunction function = nullptr,
-                    wxObject* userData = nullptr,
-                    wxEvtHandler* eventSink = nullptr);
+                    wxObjectEventFunction function = NULL,
+                    wxObject* userData = NULL,
+                    wxEvtHandler* eventSink = NULL);
 
     /**
         See the Disconnect(wxEventType, wxObjectEventFunction, wxObject*, wxEvtHandler*)
@@ -868,9 +868,9 @@ public:
     */
     bool Disconnect(int id, int lastId,
                     wxEventType eventType,
-                    wxObjectEventFunction function = nullptr,
-                    wxObject* userData = nullptr,
-                    wxEvtHandler* eventSink = nullptr);
+                    wxObjectEventFunction function = NULL,
+                    wxObject* userData = NULL,
+                    wxEvtHandler* eventSink = NULL);
     ///@}
 
 
@@ -919,7 +919,7 @@ public:
               Functor functor,
               int id = wxID_ANY,
               int lastId = wxID_ANY,
-              wxObject *userData = nullptr);
+              wxObject *userData = NULL);
 
     /**
         See the Bind<>(const EventTag&, Functor, int, int, wxObject*) overload for
@@ -959,7 +959,7 @@ public:
               EventHandler *handler,
               int id = wxID_ANY,
               int lastId = wxID_ANY,
-              wxObject *userData = nullptr);
+              wxObject *userData = NULL);
     /**
         Unbinds the given function, functor or method dynamically from the
         event handler, using the specified parameters as search criteria and
@@ -998,7 +998,7 @@ public:
                 Functor functor,
                 int id = wxID_ANY,
                 int lastId = wxID_ANY,
-                wxObject *userData = nullptr);
+                wxObject *userData = NULL);
 
     /**
         See the Unbind<>(const EventTag&, Functor, int, int, wxObject*)
@@ -1031,7 +1031,7 @@ public:
                 EventHandler *handler,
                 int id = wxID_ANY,
                 int lastId = wxID_ANY,
-                wxObject *userData = nullptr );
+                wxObject *userData = NULL );
     ///@}
     /**
         @name User-supplied data
@@ -1902,7 +1902,7 @@ public:
 
     This class is used for system colour change events, which are generated
     when the user changes the colour settings or when the system theme changes
-    (e.g. automatic dark mode switching on macOS).
+    (e.g.\ automatic dark mode switching on macOS).
 
     Event handlers for this event can access the new system colour settings through
     wxSystemSettings::GetColour().
@@ -2158,7 +2158,7 @@ public:
     /**
         Constructor.
     */
-    wxWindowCreateEvent(wxWindow* win = nullptr);
+    wxWindowCreateEvent(wxWindow* win = NULL);
 
     /// Return the window being created.
     wxWindow *GetWindow() const;
@@ -3052,7 +3052,7 @@ public:
         Constructor.
     */
     wxDropFilesEvent(wxEventType id = 0, int noFiles = 0,
-                     wxString* files = nullptr);
+                     wxString* files = NULL);
 
     /**
         Returns an array of filenames.
@@ -3242,7 +3242,7 @@ public:
     /**
         Constructor.
     */
-    wxEraseEvent(int id = 0, wxDC* dc = nullptr);
+    wxEraseEvent(int id = 0, wxDC* dc = NULL);
 
     /**
         Returns the device context associated with the erase event to draw on.
@@ -3336,7 +3336,7 @@ public:
             The direct child which is (or which contains the window which is) receiving
             the focus.
     */
-    wxChildFocusEvent(wxWindow* win = nullptr);
+    wxChildFocusEvent(wxWindow* win = NULL);
 
     /**
         Returns the direct child which receives the focus, or a (grand-)parent of the
@@ -4322,7 +4322,7 @@ public:
     /**
         Constructor.
     */
-    wxWindowDestroyEvent(wxWindow* win = nullptr);
+    wxWindowDestroyEvent(wxWindow* win = NULL);
 
     /// Return the window being destroyed.
     wxWindow *GetWindow() const;
@@ -4449,7 +4449,7 @@ public:
         Constructor.
     */
     wxMouseCaptureChangedEvent(wxWindowID windowId = 0,
-                               wxWindow* gainedCapture = nullptr);
+                               wxWindow* gainedCapture = NULL);
 
     /**
         Returns the window that gained the capture, or @NULL if it was a
@@ -4633,7 +4633,7 @@ public:
     /**
         Constructor.
     */
-    wxMenuEvent(wxEventType type = wxEVT_NULL, int id = 0, wxMenu* menu = nullptr);
+    wxMenuEvent(wxEventType type = wxEVT_NULL, int id = 0, wxMenu* menu = NULL);
 
     /**
         Returns the menu which is being opened or closed, or the menu containing
@@ -4928,7 +4928,7 @@ public:
 
     The values of this type should only be created using wxNewEventType().
 
-    See the macro wxDEFINE_EVENT_TYPE() for more information.
+    See the macro wxDEFINE_EVENT() for more information.
 
     @see @ref overview_events
 */
@@ -5119,9 +5119,9 @@ void wxPostEvent(wxEvtHandler* dest, const wxEvent& event);
     @header{wx/event.h}
 
     @param dest
-        The object to queue the event on, can't be @NULL.
+        The object to queue the event on, can't be @c NULL.
     @param event
-        The heap-allocated and non-null event to queue, the function takes
+        The heap-allocated and non-@c NULL event to queue, the function takes
         ownership of it.
  */
 void wxQueueEvent(wxEvtHandler* dest, wxEvent *event);

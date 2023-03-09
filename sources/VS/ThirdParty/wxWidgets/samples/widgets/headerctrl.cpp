@@ -53,15 +53,15 @@ public:
     HeaderCtrlWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist)
         : WidgetsPage(book, imaglist, header_xpm)
     {
-        m_header = nullptr;
-        m_sizerHeader = nullptr;
+        m_header = NULL;
+        m_sizerHeader = NULL;
     }
 
-    virtual wxWindow *GetWidget() const override { return m_header; }
-    virtual void RecreateWidget() override;
+    virtual wxWindow *GetWidget() const wxOVERRIDE { return m_header; }
+    virtual void RecreateWidget() wxOVERRIDE;
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    virtual void CreateContent() wxOVERRIDE;
 
 protected:
     // event handlers

@@ -19,7 +19,7 @@ class wxLocaleSetter
 {
 public:
     wxLocaleSetter(const char *loc)
-        : m_locOld(wxStrdupA(setlocale(LC_ALL, nullptr)))
+        : m_locOld(wxStrdupA(setlocale(LC_ALL, NULL)))
     {
         setlocale(LC_ALL, loc);
     }

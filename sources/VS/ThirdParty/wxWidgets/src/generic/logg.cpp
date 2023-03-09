@@ -175,7 +175,7 @@ wxEND_EVENT_TABLE()
 // filename and try to open it, returns true on success (file was opened),
 // false if file couldn't be opened/created and -1 if the file selection
 // dialog was cancelled
-static int OpenLogFile(wxFile& file, wxString *filename = nullptr, wxWindow *parent = nullptr);
+static int OpenLogFile(wxFile& file, wxString *filename = NULL, wxWindow *parent = NULL);
 
 #endif // CAN_SAVE_FILES
 
@@ -252,7 +252,7 @@ wxLogGui::DoShowMultipleLogMessages(const wxArrayString& messages,
                                     int style)
 {
 #if wxUSE_LOG_DIALOG
-    wxLogDialog dlg(nullptr,
+    wxLogDialog dlg(NULL,
                     messages, severities, times,
                     title, style);
 
@@ -350,7 +350,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
         case wxLOG_Status:
 #if wxUSE_STATUSBAR
             {
-                wxFrame *pFrame = nullptr;
+                wxFrame *pFrame = NULL;
 
                 // check if the frame was passed to us explicitly
                 wxUIntPtr ptr = 0;
@@ -360,7 +360,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
                 }
 
                 // find the top window and set it's status text if it has any
-                if ( pFrame == nullptr ) {
+                if ( pFrame == NULL ) {
                     wxWindow *pWin = wxTheApp->GetTopWindow();
                     if ( wxDynamicCast(pWin, wxFrame) ) {
                         pFrame = (wxFrame *)pWin;
@@ -439,7 +439,7 @@ public:
     virtual ~wxLogFrame();
 
     // Don't prevent the application from exiting if just this frame remains.
-    virtual bool ShouldPreventAppExit() const override { return false; }
+    virtual bool ShouldPreventAppExit() const wxOVERRIDE { return false; }
 
     // menu callbacks
     void OnClose(wxCommandEvent& event);
@@ -596,10 +596,10 @@ wxLogWindow::wxLogWindow(wxWindow *pParent,
                          bool bShow,
                          bool bDoPass)
 {
-    // Initialize it to nullptr to ensure that we don't crash if any log messages
+    // Initialize it to NULL to ensure that we don't crash if any log messages
     // are generated before the frame is fully created (while this doesn't
     // happen normally, it might, in principle).
-    m_pLogFrame = nullptr;
+    m_pLogFrame = NULL;
 
     PassMessages(bDoPass);
 
@@ -643,12 +643,12 @@ bool wxLogWindow::OnFrameClose(wxFrame * WXUNUSED(frame))
 
 void wxLogWindow::OnFrameDelete(wxFrame * WXUNUSED(frame))
 {
-    m_pLogFrame = nullptr;
+    m_pLogFrame = NULL;
 }
 
 wxLogWindow::~wxLogWindow()
 {
-    // may be null if log frame already auto destroyed itself
+    // may be NULL if log frame already auto destroyed itself
     delete m_pLogFrame;
 }
 
@@ -700,7 +700,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
         m_times.Add(times[n]);
     }
 
-    m_listctrl = nullptr;
+    m_listctrl = NULL;
 
     bool isPda = (wxSystemSettings::GetScreenType() <= wxSYS_SCREEN_PDA);
 
@@ -964,7 +964,7 @@ void wxLogDialog::OnCopy(wxCommandEvent& WXUNUSED(event))
 void wxLogDialog::OnSave(wxCommandEvent& WXUNUSED(event))
 {
     wxFile file;
-    int rc = OpenLogFile(file, nullptr, this);
+    int rc = OpenLogFile(file, NULL, this);
     if ( rc == -1 )
     {
         // cancelled

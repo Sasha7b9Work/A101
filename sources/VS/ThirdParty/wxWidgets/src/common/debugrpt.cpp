@@ -74,7 +74,7 @@ public:
     bool IsOk() const { return m_isOk; }
 
 protected:
-    virtual void OnStackFrame(const wxStackFrame& frame) override;
+    virtual void OnStackFrame(const wxStackFrame& frame) wxOVERRIDE;
 
     wxXmlNode *m_nodeStack;
     bool m_isOk;
@@ -380,7 +380,7 @@ bool wxDebugReport::DoAddLoadedModules(wxXmlNode *nodeModules)
         if ( !path.empty() )
             nodeModule->AddAttribute(wxT("path"), path);
 
-        void *addr = nullptr;
+        void *addr = NULL;
         size_t len = 0;
         if ( info.GetAddress(&addr, &len) )
         {

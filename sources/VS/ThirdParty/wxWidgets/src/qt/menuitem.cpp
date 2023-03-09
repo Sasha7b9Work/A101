@@ -147,7 +147,7 @@ wxQtAction::wxQtAction( wxMenu *parent, int id, const wxString &text, const wxSt
 {
     setStatusTip( wxQtConvertString( help ));
 
-    if ( subMenu != nullptr )
+    if ( subMenu != NULL )
         setMenu( subMenu->GetHandle() );
 
     if ( id == wxID_SEPARATOR )

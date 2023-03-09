@@ -67,10 +67,10 @@ public:
     {
     }
 
-    virtual bool OnInit() override;
+    virtual bool OnInit() wxOVERRIDE;
 
 #if wxUSE_CMDLINE_PARSER
-    virtual void OnInitCmdLine(wxCmdLineParser& parser) override
+    virtual void OnInitCmdLine(wxCmdLineParser& parser) wxOVERRIDE
     {
         wxApp::OnInitCmdLine(parser);
 
@@ -79,7 +79,7 @@ public:
                         wxCMD_LINE_PARAM_OPTIONAL);
     }
 
-    virtual bool OnCmdLineParsed(wxCmdLineParser& parser) override
+    virtual bool OnCmdLineParsed(wxCmdLineParser& parser) wxOVERRIDE
     {
         if ( !wxApp::OnCmdLineParsed(parser) )
             return false;
@@ -164,7 +164,6 @@ public:
     void OnSelectAll(wxCommandEvent& evt);
     void OnLoadScheme(wxCommandEvent& evt);
     void OnUseMemoryFS(wxCommandEvent& evt);
-    void OnLoadAdvancedHandler(wxCommandEvent& evt);
     void OnFind(wxCommandEvent& evt);
     void OnFindDone(wxCommandEvent& evt);
     void OnFindText(wxCommandEvent& evt);
@@ -258,40 +257,6 @@ public:
     SourceViewDialog(wxWindow* parent, wxString source);
 };
 
-// AdvancedWebViewHandler is a sample handler used by handler_advanced.html
-// to show a sample implementation of wxWebViewHandler::StartRequest().
-// see the documentation for additional details.
-class AdvancedWebViewHandler: public wxWebViewHandler
-{
-public:
-    AdvancedWebViewHandler():
-        wxWebViewHandler("wxpost")
-    { }
-
-    virtual void StartRequest(const wxWebViewHandlerRequest& request,
-                              wxSharedPtr<wxWebViewHandlerResponse> response) override
-    {
-        response->SetHeader("Access-Control-Allow-Origin", "*");
-        response->SetHeader("Access-Control-Allow-Headers", "*");
-
-        // Handle options request
-        if (request.GetMethod().IsSameAs("options", false))
-        {
-            response->Finish("");
-            return;
-        }
-
-        response->SetContentType("application/json");
-        response->Finish(
-            wxString::Format(
-                "{\n  contentType: \"%s\",\n  method: \"%s\",\n  data: \"%s\"\n}",
-                request.GetHeader("Content-Type"),
-                request.GetMethod(),
-                request.GetDataString()
-        ));
-    }
-};
-
 wxIMPLEMENT_APP(WebApp);
 
 // ============================================================================
@@ -331,7 +296,7 @@ bool WebApp::OnInit()
 }
 
 WebFrame::WebFrame(const wxString& url) :
-    wxFrame(nullptr, wxID_ANY, "wxWebView Sample")
+    wxFrame(NULL, wxID_ANY, "wxWebView Sample")
 {
     // set the frame icon
     SetIcon(wxICON(sample));
@@ -418,7 +383,6 @@ WebFrame::WebFrame(const wxString& url) :
     // With WKWebView handlers need to be registered before creation
     m_browser->RegisterHandler(wxSharedPtr<wxWebViewHandler>(new wxWebViewArchiveHandler("wxfs")));
     m_browser->RegisterHandler(wxSharedPtr<wxWebViewHandler>(new wxWebViewFSHandler("memory")));
-    m_browser->RegisterHandler(wxSharedPtr<wxWebViewHandler>(new AdvancedWebViewHandler()));
 #endif
     m_browser->Create(this, wxID_ANY, url, wxDefaultPosition, wxDefaultSize);
     topsizer->Add(m_browser, wxSizerFlags().Expand().Proportion(1));
@@ -433,7 +397,6 @@ WebFrame::WebFrame(const wxString& url) :
     m_browser->RegisterHandler(wxSharedPtr<wxWebViewHandler>(new wxWebViewArchiveHandler("wxfs")));
     //And the memory: file system
     m_browser->RegisterHandler(wxSharedPtr<wxWebViewHandler>(new wxWebViewFSHandler("memory")));
-    m_browser->RegisterHandler(wxSharedPtr<wxWebViewHandler>(new AdvancedWebViewHandler()));
 #endif
     if (!m_browser->AddScriptMessageHandler("wx"))
         wxLogError("Could not add script message handler");
@@ -529,11 +492,8 @@ WebFrame::WebFrame(const wxString& url) :
 
     editmenu->AppendSubMenu(selection, "Selection");
 
-    wxMenu* handlers = new wxMenu();
-    wxMenuItem* loadscheme =  handlers->Append(wxID_ANY, _("Custom Scheme"));
-    wxMenuItem* usememoryfs =  handlers->Append(wxID_ANY, _("Memory File System"));
-    wxMenuItem* advancedHandler =  handlers->Append(wxID_ANY, _("Advanced Handler"));
-    m_tools_menu->AppendSubMenu(handlers, _("Handler Examples"));
+    wxMenuItem* loadscheme =  m_tools_menu->Append(wxID_ANY, _("Custom Scheme Example"));
+    wxMenuItem* usememoryfs =  m_tools_menu->Append(wxID_ANY, _("Memory File System Example"));
 
     m_context_menu = m_tools_menu->AppendCheckItem(wxID_ANY, _("Enable Context Menu"));
     m_dev_tools = m_tools_menu->AppendCheckItem(wxID_ANY, _("Enable Dev Tools"));
@@ -631,7 +591,6 @@ WebFrame::WebFrame(const wxString& url) :
     Bind(wxEVT_MENU, &WebFrame::OnSelectAll, this, selectall->GetId());
     Bind(wxEVT_MENU, &WebFrame::OnLoadScheme, this, loadscheme->GetId());
     Bind(wxEVT_MENU, &WebFrame::OnUseMemoryFS, this, usememoryfs->GetId());
-    Bind(wxEVT_MENU, &WebFrame::OnLoadAdvancedHandler, this, advancedHandler->GetId());
     Bind(wxEVT_MENU, &WebFrame::OnFind, this, m_find->GetId());
     Bind(wxEVT_MENU, &WebFrame::OnEnableContextMenu, this, m_context_menu->GetId());
     Bind(wxEVT_MENU, &WebFrame::OnEnableDevTools, this, m_dev_tools->GetId());
@@ -787,17 +746,6 @@ void WebFrame::OnLoadScheme(wxCommandEvent& WXUNUSED(evt))
 void WebFrame::OnUseMemoryFS(wxCommandEvent& WXUNUSED(evt))
 {
     m_browser->LoadURL("memory:page1.htm");
-}
-
-void WebFrame::OnLoadAdvancedHandler(wxCommandEvent& WXUNUSED(evt))
-{
-    wxPathList pathlist;
-    pathlist.Add(".");
-    pathlist.Add("..");
-
-    wxString path = wxFileName(pathlist.FindValidPath("handler_advanced.html")).GetAbsolutePath();
-    path = "file://" + path;
-    m_browser->LoadURL(path);
 }
 
 void WebFrame::OnEnableContextMenu(wxCommandEvent& evt)

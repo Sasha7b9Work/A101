@@ -17,7 +17,7 @@ class FortyApp: public wxApp
 public:
     FortyApp(){}
     virtual ~FortyApp();
-    bool OnInit() override;
+    bool OnInit() wxOVERRIDE;
 
     static const wxColour& BackgroundColour();
     static const wxColour& TextColour();

@@ -140,12 +140,12 @@ public:
     wxBitmapBundleImplRC(const ResourceInfos& resourceInfos,
                          const wxBitmap& bitmap);
 
-    virtual wxSize GetDefaultSize() const override;
-    virtual wxSize GetPreferredBitmapSizeAtScale(double scale) const override;
-    virtual wxBitmap GetBitmap(const wxSize& size) override;
+    virtual wxSize GetDefaultSize() const wxOVERRIDE;
+    virtual wxSize GetPreferredBitmapSizeAtScale(double scale) const wxOVERRIDE;
+    virtual wxBitmap GetBitmap(const wxSize& size) wxOVERRIDE;
 
 protected:
-    virtual double GetNextAvailableScale(size_t& i) const override;
+    virtual double GetNextAvailableScale(size_t& i) const wxOVERRIDE;
 
 private:
     // Load the bitmap from the given resource and add it m_bitmaps, after
@@ -302,7 +302,7 @@ wxBitmapBundle wxBitmapBundle::FromResources(const wxString& name)
     // First of all, find all resources starting with this name.
     RCEnumCallbackData data(name);
 
-    if ( !::EnumResourceNames(nullptr, // this HMODULE
+    if ( !::EnumResourceNames(NULL, // this HMODULE
                               RT_RCDATA,
                               EnumRCBitmaps,
                               reinterpret_cast<LONG_PTR>(&data)) )
@@ -341,7 +341,7 @@ wxBitmapBundle wxBitmapBundle::FromSVGResource(const wxString& name, const wxSiz
     // used for the embedded images. We could allow specifying the type as part
     // of the name in the future (e.g. "type:name" or something like this) if
     // really needed.
-    wxCharBuffer svgData = wxCharBuffer::CreateOwned(wxLoadUserResource(name, RT_RCDATA, nullptr, wxGetInstance()));
+    wxCharBuffer svgData = wxCharBuffer::CreateOwned(wxLoadUserResource(name, RT_RCDATA, NULL, wxGetInstance()));
 
     if ( !svgData.data() )
     {

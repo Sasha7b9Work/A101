@@ -115,7 +115,7 @@ wxRibbonBar* wxRibbonControl::GetAncestorRibbonBar()const
             return bar;
     }
 
-    return nullptr;
+    return NULL;
 }
 
 #endif // wxUSE_RIBBON

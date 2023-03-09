@@ -35,7 +35,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindowBase;
 #endif
 
 // Many MSW functions have parameters which are "reserved". Passing them this
-// constant is more clear than just using "0" or "nullptr".
+// constant is more clear than just using "0" or "NULL".
 #define wxRESERVED_PARAM    0
 
 // ---------------------------------------------------------------------------
@@ -426,8 +426,8 @@ private:
 class ScreenHDC
 {
 public:
-    ScreenHDC() { m_hdc = ::GetDC(nullptr);    }
-   ~ScreenHDC() { ::ReleaseDC(nullptr, m_hdc); }
+    ScreenHDC() { m_hdc = ::GetDC(NULL);    }
+   ~ScreenHDC() { ::ReleaseDC(NULL, m_hdc); }
 
     operator HDC() const { return m_hdc; }
 
@@ -437,12 +437,12 @@ private:
     wxDECLARE_NO_COPY_CLASS(ScreenHDC);
 };
 
-// the same as ScreenHDC but for window DCs (and if HWND is null, then exactly
+// the same as ScreenHDC but for window DCs (and if HWND is NULL, then exactly
 // the same as it)
 class WindowHDC
 {
 public:
-    WindowHDC() : m_hwnd(nullptr), m_hdc(nullptr) { }
+    WindowHDC() : m_hwnd(NULL), m_hdc(NULL) { }
     WindowHDC(HWND hwnd) { m_hdc = ::GetDC(m_hwnd = hwnd); }
    ~WindowHDC() { if ( m_hdc ) { ::ReleaseDC(m_hwnd, m_hdc); } }
 
@@ -460,7 +460,7 @@ private:
 class MemoryHDC
 {
 public:
-    MemoryHDC(HDC hdc = nullptr) { m_hdc = ::CreateCompatibleDC(hdc); }
+    MemoryHDC(HDC hdc = NULL) { m_hdc = ::CreateCompatibleDC(hdc); }
    ~MemoryHDC() { ::DeleteDC(m_hdc); }
 
     operator HDC() const { return m_hdc; }
@@ -486,7 +486,7 @@ private:
     void DoInit(HGDIOBJ hgdiobj) { m_hgdiobj = ::SelectObject(m_hdc, hgdiobj); }
 
 public:
-    SelectInHDC() : m_hdc(nullptr), m_hgdiobj(nullptr) { }
+    SelectInHDC() : m_hdc(NULL), m_hgdiobj(NULL) { }
     SelectInHDC(HDC hdc, HGDIOBJ hgdiobj) : m_hdc(hdc) { DoInit(hgdiobj); }
 
     void Init(HDC hdc, HGDIOBJ hgdiobj)
@@ -501,7 +501,7 @@ public:
     ~SelectInHDC() { if ( m_hdc ) ::SelectObject(m_hdc, m_hgdiobj); }
 
     // return true if the object was successfully selected
-    operator bool() const { return m_hgdiobj != nullptr; }
+    operator bool() const { return m_hgdiobj != NULL; }
 
 private:
     HDC m_hdc;
@@ -514,7 +514,7 @@ private:
 class AutoGDIObject
 {
 protected:
-    AutoGDIObject() { m_gdiobj = nullptr; }
+    AutoGDIObject() { m_gdiobj = NULL; }
     AutoGDIObject(HGDIOBJ gdiobj) : m_gdiobj(gdiobj) { }
     ~AutoGDIObject() { if ( m_gdiobj ) ::DeleteObject(m_gdiobj); }
 
@@ -596,7 +596,7 @@ class MonoBitmap : public AutoHBITMAP
 {
 public:
     MonoBitmap(int w, int h)
-        : AutoHBITMAP(::CreateBitmap(w, h, 1, 1, nullptr))
+        : AutoHBITMAP(::CreateBitmap(w, h, 1, 1, NULL))
     {
     }
 };
@@ -652,7 +652,7 @@ public:
 
     ~HDCClipper()
     {
-        ::SelectClipRgn(m_hdc, nullptr);
+        ::SelectClipRgn(m_hdc, NULL);
     }
 
 private:
@@ -698,7 +698,7 @@ public:
     // default ctor, call Init() later
     GlobalPtr()
     {
-        m_hGlobal = nullptr;
+        m_hGlobal = NULL;
     }
 
     // allocates a block of given size
@@ -728,7 +728,7 @@ public:
     HGLOBAL Release()
     {
         HGLOBAL h = m_hGlobal;
-        m_hGlobal = nullptr;
+        m_hGlobal = NULL;
         return h;
     }
 
@@ -748,15 +748,15 @@ class GlobalPtrLock
 {
 public:
     // default ctor, use Init() later -- should only be used if the HGLOBAL can
-    // be null (in which case Init() shouldn't be called)
+    // be NULL (in which case Init() shouldn't be called)
     GlobalPtrLock()
     {
-        m_hGlobal = nullptr;
-        m_ptr = nullptr;
+        m_hGlobal = NULL;
+        m_ptr = NULL;
     }
 
     // initialize the object, may be only called if we were created using the
-    // default ctor; HGLOBAL must not be null
+    // default ctor; HGLOBAL must not be NULL
     void Init(HGLOBAL hGlobal)
     {
         m_hGlobal = hGlobal;
@@ -770,7 +770,7 @@ public:
         }
     }
 
-    // initialize the object, HGLOBAL must not be null
+    // initialize the object, HGLOBAL must not be NULL
     GlobalPtrLock(HGLOBAL hGlobal)
     {
         Init(hGlobal);
@@ -1042,7 +1042,7 @@ extern WXDLLIMPEXP_CORE int wxGetWindowId(WXHWND hWnd);
 //
 // wndProc parameter is unused and only kept for compatibility
 extern WXDLLIMPEXP_CORE
-bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC wndProc = nullptr);
+bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC wndProc = NULL);
 
 // Does this window style specify any border?
 inline bool wxStyleHasBorder(long style)
@@ -1134,14 +1134,14 @@ inline wxLayoutDirection wxGetEditLayoutDirection(WXHWND hWnd)
 // ----------------------------------------------------------------------------
 
 // this function simply checks whether the given hwnd corresponds to a wxWindow
-// and returns either that window if it does or nullptr otherwise
+// and returns either that window if it does or NULL otherwise
 extern WXDLLIMPEXP_CORE wxWindow* wxFindWinFromHandle(HWND hwnd);
 
 // find the window for HWND which is part of some wxWindow, i.e. unlike
 // wxFindWinFromHandle() above it will also work for "sub controls" of a
 // wxWindow.
 //
-// returns the wxWindow corresponding to the given HWND or nullptr.
+// returns the wxWindow corresponding to the given HWND or NULL.
 extern WXDLLIMPEXP_CORE wxWindow *wxGetWindowFromHWND(WXHWND hwnd);
 
 // Get the size of an icon

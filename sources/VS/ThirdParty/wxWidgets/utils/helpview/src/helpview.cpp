@@ -40,12 +40,16 @@ wxIMPLEMENT_APP(hvApp);
 hvApp::hvApp()
 {
 #if wxUSE_IPC
-    m_server = nullptr;
+    m_server = NULL;
 #endif
 }
 
 bool hvApp::OnInit()
 {
+#ifdef __WXMOTIF__
+    delete wxLog::SetActiveTarget(new wxLogStderr); // So dialog boxes aren't used
+#endif
+
     wxArtProvider::Push(new AlternateArtProvider);
 
     int istyle = wxHF_DEFAULT_STYLE;
@@ -59,7 +63,7 @@ bool hvApp::OnInit()
     bool createServer = false;
 
 #if wxUSE_IPC
-    m_server = nullptr;
+    m_server = NULL;
 #endif
 
     // Help books are recognized by extension ".hhp" ".htb" or ".zip".
@@ -139,7 +143,7 @@ bool hvApp::OnInit()
             wxEmptyString,
             wxT("Help books (*.htb)|*.htb|Help books (*.zip)|*.zip|HTML Help Project (*.hhp)|*.hhp"),
             wxFD_OPEN | wxFD_FILE_MUST_EXIST,
-            nullptr);
+            NULL);
 
         if (!s.empty())
         {
@@ -205,6 +209,10 @@ bool hvApp::OnInit()
         m_helpController->AddBook(fileName);
     }
 
+#ifdef __WXMOTIF__
+    delete wxLog::SetActiveTarget(new wxLogGui);
+#endif
+
     m_helpController->DisplayContents();
 
     return true;
@@ -228,12 +236,12 @@ int hvApp::OnExit()
     if (m_server)
     {
         delete m_server;
-        m_server = nullptr;
+        m_server = NULL;
     }
 #endif
 
     delete m_helpController;
-    delete wxConfig::Set(nullptr);
+    delete wxConfig::Set(NULL);
 
     return 0;
 }
@@ -248,7 +256,7 @@ bool hvApp::OpenBook(wxHtmlHelpController* controller)
         "Help books (*.htb)|*.htb|Help books (*.zip)|*.zip|\
         HTML Help Project (*.hhp)|*.hhp"),
         wxFD_OPEN | wxFD_FILE_MUST_EXIST,
-        nullptr);
+        NULL);
 
     if ( !s.empty() )
     {
@@ -295,7 +303,7 @@ if ( id == artId ) return wxBitmap(xpmRc##_xpm);
 // wxIcon ctor. This depends on the platform:
 #if defined(__WXUNIVERSAL__)
 #define CREATE_STD_ICON(iconId, xpmRc) return wxNullBitmap;
-#elif defined(__WXGTK__)
+#elif defined(__WXGTK__) || defined(__WXMOTIF__)
 #define CREATE_STD_ICON(iconId, xpmRc) return wxBitmap(xpmRc##_xpm);
 #else
 #define CREATE_STD_ICON(iconId, xpmRc) \
@@ -377,7 +385,7 @@ wxConnectionBase *hvServer::OnAcceptConnection(const wxString& topic)
     if (topic == wxT("HELP"))
         return new hvConnection();
     else
-        return nullptr;
+        return NULL;
 }
 
 // ----------------------------------------------------------------------------

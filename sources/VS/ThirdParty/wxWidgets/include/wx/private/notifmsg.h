@@ -41,7 +41,7 @@ public:
     virtual void Detach()
     {
         if (m_active)
-            m_notification = nullptr;
+            m_notification = NULL;
         else
             delete this;
     }
