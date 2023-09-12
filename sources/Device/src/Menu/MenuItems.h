@@ -8,8 +8,8 @@ struct Button
 public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
-    Button(pchar _name_button, pchar _text, bool _highlight, void (*_funcOnPress)(Button *), void (*_funcOnInit)(Button *) = EmptyFuncInit) :
-        name(_name_button), text(_text), highlight(_highlight), funcOnPress(_funcOnPress), funcOnInit(_funcOnInit)
+    Button(bool _highlight, void (*_funcOnPress)(Button *), void (*_funcOnInit)(Button *) = EmptyFuncInit) :
+        highlight(_highlight), funcOnPress(_funcOnPress), funcOnInit(_funcOnInit)
     {
     }
 
@@ -17,32 +17,13 @@ public:
 
     void Press();
 
-    void SetText();
-
-    void SendHighlightState();
-
-    void SetHighlight(bool);
-
     void ToggleHighlight();
 
     // Возвращает true, если кнопка находится в выделенном состоянии
     bool IsHightlight() const { return highlight; }
 
-    void Enable();
-
-    void Disable();
-
-    // Установка пустой строки выключает кнопку
-    void SetText(pchar text);
-
-    pchar GetText() const { return text; }
-
-    bool IsExist() const { return text[0] != '\0'; }
-
 private:
 
-    pchar name;
-    pchar text;                         // Если равно нулю, то кнопки не существует
     bool highlight;
     void (*funcOnPress)(Button *);
     void (*funcOnInit)(Button *);

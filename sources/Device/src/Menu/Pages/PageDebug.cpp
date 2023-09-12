@@ -7,7 +7,7 @@
 
 namespace PageDebug
 {
-    static Button buttonZero("button0", "Zero", false, [](Button *button)
+    static Button buttonZero(false, [](Button *button)
         {
             button->ToggleHighlight();
 
@@ -21,77 +21,15 @@ namespace PageDebug
             }
         });
 
-    static Button buttonMiddleOf3("button1", "Middle", false,
-        [](Button *button)
-        {
-            button->ToggleHighlight();
+    static Button button4(false, [](Button *) {});
 
-            set.middle_of_3 = button->IsHightlight();
-        },
-        [](Button *button)
-        {
-            if (button->IsHightlight())
-            {
-                if (!set.middle_of_3)
-                {
-                    button->SetHighlight(false);
-                }
-            }
-            else
-            {
-                if (set.middle_of_3)
-                {
-                    button->SetHighlight(true);
-                }
-            }
-        });
-
-    static Button buttonSmooth("button2", "Smooth", false,
-        [](Button *button)
-        {
-            button->ToggleHighlight();
-
-            set.smooth = button->IsHightlight();
-        },
-        [](Button *button)
-        {
-            if (button->IsHightlight())
-            {
-                if (!set.smooth)
-                {
-                    button->SetHighlight(false);
-                }
-            }
-            else
-            {
-                if (set.smooth)
-                {
-                    button->SetHighlight(true);
-                }
-            }
-        });
-
-    static Button buttonFIR("button3", "LPF", false,
-        [](Button *button)
-        {
-            button->ToggleHighlight();
-
-            set.firLPF = button->IsHightlight();
-        },
-        [](Button *button)
-        {
-            button->SetHighlight(set.firLPF);
-        });
-
-    static Button button4("button4", "", false, [](Button *) {});
-
-    static Button buttonResetCal("button5", "Res cal", false,
+    static Button buttonResetCal(false,
         [](Button *)
         {
             cal.Reset();
         });
 
-    static Page pageDebug(&buttonZero, &buttonMiddleOf3, &buttonSmooth, &buttonFIR, &button4, &buttonResetCal);
+    static Page pageDebug(&buttonZero, &button4, &button4, &button4, &button4, &buttonResetCal);
 
     Page *self = &pageDebug;
 }

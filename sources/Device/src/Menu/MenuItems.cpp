@@ -14,66 +14,6 @@ using namespace std;
 Page *Page::current = PageMain::self;
 
 
-//Button Page::btnMenu("btMenu", ">>", false, [](Button *btn)
-//    {
-//        if (strcmp(btn->GetText(), ">>") == 0)
-//        {
-//            btn->SetText("<<");
-//
-//            PageTwo::self->SetAsCurrent();
-//        }
-//        else
-//        {
-//            if (Page::Current() == PageDebug::self)
-//            {
-//                PageTwo::self->SetAsCurrent();
-//            }
-//            else if (Page::Current() == PageCalibration::self)
-//            {
-//                PageTwo::self->SetAsCurrent();
-//            }
-//            else
-//            {
-//                btn->SetText(">>");
-//
-//                PageMain::self->SetAsCurrent();
-//            }
-//        }
-//    });
-
-
-void Button::SetText()
-{
-    Nextion::Button::SetText(name, text);
-}
-
-
-void Button::SetText(pchar _text)
-{
-    text = _text;
-
-    SetText();
-}
-
-
-void Button::Enable()
-{
-    Nextion::Button::Enable(name);
-}
-
-
-void Button::Disable()
-{
-    Nextion::Button::Disable(name);
-}
-
-
-void Button::SendHighlightState()
-{
-    Nextion::Button::Highligth(name, highlight);
-}
-
-
 void Button::SetHighlight(bool _higthligth)
 {
     highlight = _higthligth;
