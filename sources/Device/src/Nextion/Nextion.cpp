@@ -76,6 +76,7 @@ namespace Nextion
         bool mutex_uart = false;    // Если true, то буфер занят прерыванием
     };
 
+    // Это приходит от дисплея
     struct Command
     {
         Command() : size(0) {} //-V730
@@ -91,11 +92,11 @@ namespace Nextion
     };
 
 
-    // Команда дисплея
-    struct CommandZ : public Command
+    // Нажатие кнопки
+    struct CommandButton : public Command
     {
-        CommandZ(const uint8 *_bytes, int _size) : Command(_bytes, _size) {}
-        virtual ~CommandZ() override {}
+        CommandButton(const uint8 *_bytes, int _size) : Command(_bytes, _size) {}
+        virtual ~CommandButton() override {}
 
         virtual bool Execute() override;
     };
@@ -180,7 +181,7 @@ Nextion::Command::Command(const uint8 *bytes, int _size) : size(_size)
 }
 
 
-bool Nextion::CommandZ::Execute()
+bool Nextion::CommandButton::Execute()
 {
     if (IsEmpty())
     {
@@ -253,7 +254,7 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
     {
         if (buffer[i] == (uint8)'Z')
         {
-            CommandZ *result = new CommandZ(buffer, i);
+            CommandButton *result = new CommandButton(buffer, i);
 
             RemoveFromStart(i + 1);
 

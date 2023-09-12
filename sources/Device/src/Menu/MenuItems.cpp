@@ -14,32 +14,32 @@ using namespace std;
 Page *Page::current = PageMain::self;
 
 
-Button Page::btnMenu("btMenu", ">>", false, [](Button *btn)
-    {
-        if (strcmp(btn->GetText(), ">>") == 0)
-        {
-            btn->SetText("<<");
-
-            PageTwo::self->SetAsCurrent();
-        }
-        else
-        {
-            if (Page::Current() == PageDebug::self)
-            {
-                PageTwo::self->SetAsCurrent();
-            }
-            else if (Page::Current() == PageCalibration::self)
-            {
-                PageTwo::self->SetAsCurrent();
-            }
-            else
-            {
-                btn->SetText(">>");
-
-                PageMain::self->SetAsCurrent();
-            }
-        }
-    });
+//Button Page::btnMenu("btMenu", ">>", false, [](Button *btn)
+//    {
+//        if (strcmp(btn->GetText(), ">>") == 0)
+//        {
+//            btn->SetText("<<");
+//
+//            PageTwo::self->SetAsCurrent();
+//        }
+//        else
+//        {
+//            if (Page::Current() == PageDebug::self)
+//            {
+//                PageTwo::self->SetAsCurrent();
+//            }
+//            else if (Page::Current() == PageCalibration::self)
+//            {
+//                PageTwo::self->SetAsCurrent();
+//            }
+//            else
+//            {
+//                btn->SetText(">>");
+//
+//                PageMain::self->SetAsCurrent();
+//            }
+//        }
+//    });
 
 
 void Button::SetText()
@@ -104,22 +104,13 @@ Page::Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4,
     buttons[3] = btn3;
     buttons[4] = btn4;
     buttons[5] = btn5;
-    buttons[6] = &btnMenu;
+//    buttons[6] = &btnMenu;
 }
 
 
 Button *Page::GetButton(int index)
 {
-    if (index >= 0 && index < 6)
-    {
-        return buttons[index];
-    }
-    else if (index == 6)
-    {
-        return &btnMenu;
-    }
-
-    return buttons[0];
+    return buttons[index];
 }
 
 
@@ -149,6 +140,4 @@ void Page::SetAsCurrent()
             button->Disable();
         }
     }
-
-    btnMenu.SetText();
 }

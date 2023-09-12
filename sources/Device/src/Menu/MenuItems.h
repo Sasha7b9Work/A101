@@ -66,9 +66,7 @@ struct Page
 
 private:
 
-    Button *buttons[7];
+    Button *buttons[20];
 
     static Page *current;
-
-    static Button btnMenu;
 };
