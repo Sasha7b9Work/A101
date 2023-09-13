@@ -19,6 +19,7 @@ public:
 
 private:
 
+    pchar ugo = nullptr;
     void (*funcOnPress)(Button *);
     void (*funcOnInit)(Button *);
 
