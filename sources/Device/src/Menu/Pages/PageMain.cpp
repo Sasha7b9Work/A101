@@ -21,17 +21,17 @@ namespace PageMain
         return 0;
     }
 
-    static Button button2mA(false, [](Button *btn) { });
+    static Button button2mA(false, [](Button *) { });
 
-    static Button button20mA(false, [](Button *btn) { });
+    static Button button20mA(false, [](Button *) { });
 
-    static Button button200mA(false, [](Button *btn) { });
+    static Button button200mA(false, [](Button *) { });
 
-    static Button button2A(true, [](Button *btn) { });
+    static Button button2A(true, [](Button *) { });
 
-    static Button button20A(false, [](Button *btn) { });
+    static Button button20A(false, [](Button *) { });
 
-    static Button button50A(false, [](Button *btn) { });
+    static Button button50A(false, [](Button *) { });
 
 
     static Page pageMain(&button2mA, &button20mA, &button200mA, &button2A, &button20A, &button50A);

@@ -7,18 +7,8 @@
 
 namespace PageDebug
 {
-    static Button buttonZero(false, [](Button *button)
+    static Button buttonZero(false, [](Button *)
         {
-            button->ToggleHighlight();
-
-            if (button->IsHightlight())
-            {
-                InputRelays::EnableZero();
-            }
-            else
-            {
-                InputRelays::DisableZero();
-            }
         });
 
     static Button button4(false, [](Button *) {});

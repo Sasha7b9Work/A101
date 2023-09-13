@@ -17,11 +17,6 @@ public:
 
     void Press();
 
-    void ToggleHighlight();
-
-    // Возвращает true, если кнопка находится в выделенном состоянии
-    bool IsHightlight() const { return highlight; }
-
 private:
 
     bool highlight;

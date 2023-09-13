@@ -14,24 +14,8 @@ using namespace std;
 Page *Page::current = PageMain::self;
 
 
-void Button::SetHighlight(bool _higthligth)
-{
-    highlight = _higthligth;
-
-    SendHighlightState();
-}
-
-
-void Button::ToggleHighlight()
-{
-    SetHighlight(!highlight);
-}
-
-
 void Button::Press()
 {
-//    LOG_WRITE("Press button %s", text);
-
     funcOnPress(this);
 }
 
@@ -68,16 +52,6 @@ void Page::SetAsCurrent()
     {
         Button *button = GetButton(i);
 
-        if (button->IsExist())
-        {
-            button->Init();
-            button->Enable();
-            button->SetText();
-            button->SendHighlightState();
-        }
-        else
-        {
-            button->Disable();
-        }
+        button->Init();
     }
 }

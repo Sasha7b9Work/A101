@@ -9,12 +9,8 @@
 
 namespace PageTwo
 {
-    static Button buttonInput(false, [](Button *button)
+    static Button buttonInput(false, [](Button *)
         {
-            button->ToggleHighlight();
-
-            DiagramInput::Enable(button->IsHightlight());
-
             Indicator::AutoSize();
 
             DiagramInput::Draw();
@@ -23,12 +19,8 @@ namespace PageTwo
         });
 
 
-    static Button buttonFFT(false, [](Button *button)
+    static Button buttonFFT(false, [](Button *)
         {
-            button->ToggleHighlight();
-
-            DiagramFFT::Enable(button->IsHightlight());
-
             Indicator::AutoSize();
 
             DiagramInput::Draw();
