@@ -8,8 +8,8 @@ struct Button
 public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
-    Button(bool _highlight, void (*_funcOnPress)(Button *), void (*_funcOnInit)(Button *) = EmptyFuncInit) :
-        highlight(_highlight), funcOnPress(_funcOnPress), funcOnInit(_funcOnInit)
+    Button(void (*_funcOnPress)(Button *), void (*_funcOnInit)(Button *) = EmptyFuncInit) :
+        funcOnPress(_funcOnPress), funcOnInit(_funcOnInit)
     {
     }
 
@@ -19,7 +19,6 @@ public:
 
 private:
 
-    bool highlight;
     void (*funcOnPress)(Button *);
     void (*funcOnInit)(Button *);
 

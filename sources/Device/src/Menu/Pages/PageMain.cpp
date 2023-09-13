@@ -6,32 +6,17 @@
 
 namespace PageMain
 {
-    static int GetIndex(const Button *button)
-    {
-        for (int i = 0; i < 6; i++)
-        {
-            if (PageMain::self->GetButton(i) == button)
-            {
-                return i;
-            }
-        }
+    static Button button2mA([](Button *) { });
 
-        LOG_WRITE("Invalid index page");
+    static Button button20mA([](Button *) { });
 
-        return 0;
-    }
+    static Button button200mA([](Button *) { });
 
-    static Button button2mA(false, [](Button *) { });
+    static Button button2A([](Button *) { });
 
-    static Button button20mA(false, [](Button *) { });
+    static Button button20A([](Button *) { });
 
-    static Button button200mA(false, [](Button *) { });
-
-    static Button button2A(true, [](Button *) { });
-
-    static Button button20A(false, [](Button *) { });
-
-    static Button button50A(false, [](Button *) { });
+    static Button button50A([](Button *) { });
 
 
     static Page pageMain(&button2mA, &button20mA, &button200mA, &button2A, &button20A, &button50A);
