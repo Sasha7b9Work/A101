@@ -9,7 +9,7 @@
 
 namespace PageGraph
 {
-    static Button buttonInput([](Button *)
+    static Button buttonInput("", [](Button *)
         {
             Indicator::AutoSize();
 
@@ -19,7 +19,7 @@ namespace PageGraph
         });
 
 
-    static Button buttonFFT([](Button *)
+    static Button buttonFFT("", [](Button *)
         {
             Indicator::AutoSize();
 
@@ -29,25 +29,25 @@ namespace PageGraph
         });
 
 
-    static Button button2([](Button *) {});
+    static Button button2("", [](Button *) {});
 
 
-    static Button button3([](Button *) {});
+    static Button button3("", [](Button *) {});
 
 
-    static Button button4([](Button *) {});
+    static Button button4("", [](Button *) {});
 
 
-    static Button button5([](Button *) {});
+    static Button button5("", [](Button *) {});
 
 
-    static Button buttonDebug([](Button *)
+    static Button buttonDebug("", [](Button *)
         {
             PageDebug::self->SetAsCurrent();
         });
 
 
-    static Button buttonCalibration([](Button *)
+    static Button buttonCalibration("", [](Button *)
         {
             Calibrator::ExecuteCalibration();
         });

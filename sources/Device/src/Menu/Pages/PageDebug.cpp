@@ -7,13 +7,13 @@
 
 namespace PageDebug
 {
-    static Button buttonZero([](Button *)
+    static Button buttonZero("debugZero", [](Button *)
         {
         });
 
-    static Button button4([](Button *) {});
+    static Button button4("", [](Button *) {});
 
-    static Button buttonResetCal(
+    static Button buttonResetCal("",
         [](Button *)
         {
             cal.Reset();
