@@ -9,7 +9,7 @@ namespace PageMain
 }
 
 
-namespace PageTwo
+namespace PageGraph
 {
     extern Page *self;
 

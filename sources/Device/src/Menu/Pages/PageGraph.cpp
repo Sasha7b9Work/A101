@@ -7,7 +7,7 @@
 #include "Ampermeter/Calibrator.h"
 
 
-namespace PageTwo
+namespace PageGraph
 {
     static Button buttonInput(false, [](Button *)
         {

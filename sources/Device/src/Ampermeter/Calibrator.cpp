@@ -111,7 +111,7 @@ void Calibrator::ExecuteCalibration()
 
     Nextion::Page::Enable(0);
 
-    PageTwo::self->SetAsCurrent();
+    PageGraph::self->SetAsCurrent();
 
     Indicator::OnEvent::CnageRange();
 

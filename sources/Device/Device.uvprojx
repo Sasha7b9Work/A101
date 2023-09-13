@@ -1121,14 +1121,9 @@
           <GroupName>Menu/Pages</GroupName>
           <Files>
             <File>
-              <FileName>PageMain.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageMain.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageTwo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageTwo.cpp</FilePath>
+              <FileName>Pages.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\Pages.h</FilePath>
             </File>
             <File>
               <FileName>PageCalibration.cpp</FileName>
@@ -1139,6 +1134,16 @@
               <FileName>PageDebug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageGraph.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageGraph.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageMain.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMain.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2427,14 +2432,9 @@
           <GroupName>Menu/Pages</GroupName>
           <Files>
             <File>
-              <FileName>PageMain.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageMain.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageTwo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageTwo.cpp</FilePath>
+              <FileName>Pages.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\Pages.h</FilePath>
             </File>
             <File>
               <FileName>PageCalibration.cpp</FileName>
@@ -2445,6 +2445,16 @@
               <FileName>PageDebug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageGraph.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageGraph.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageMain.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMain.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -25,7 +25,7 @@ void PasswordResolver::AppendByte(uint8 byte)
 
     if (pointer == NUM_BYTES)
     {
-        PageTwo::EnableCalibration();
-        PageTwo::EnableDebug();
+        PageGraph::EnableCalibration();
+        PageGraph::EnableDebug();
     }
 }
