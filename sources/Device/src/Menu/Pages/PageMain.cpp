@@ -6,28 +6,59 @@
 
 namespace PageMain
 {
-    static Button button2mA("01P", [](Button *) {});
+    static Button btn2mA("01P", [](Button *) {});
 
-    static Button button20mA("02P", [](Button *) {});
+    static Button btn20mA("02P", [](Button *) {});
 
-    static Button button200mA("03P", [](Button *) {});
+    static Button btn200mA("03P", [](Button *) {});
 
-    static Button button2A("04P", [](Button *) {});
+    static Button btn2A("04P", [](Button *) {});
 
-    static Button button20A("05P", [](Button *) {});
+    static Button btn20A("05P", [](Button *) {});
 
-    static Button button50A("06P", [](Button *) {});
+    static Button btn50A("06P", [](Button *) {});
 
-    static Button buttonDC("0DC", [](Button *) {});
+    static Button btnDC("0DC", [](Button *) {});
+
+    static Button btnAC("0AC", [](Button *) {});
+
+    static Button btnAC_DC("0AD", [](Button *) {});
+
+    static Button btnCalibration("0C", [](Button *) {});
+
+    static Button btnZeroDC("0DZ", [](Button *) {});
+
+    static Button btnZeroAC("0AZ", [](Button *) {});
+
+    static Button btnSignal("0S", [](Button *) {});
+
+    static Button btnMAX("01I", [](Button *) {});
+
+    static Button btnAMP("04I", [](Button *) {});
+
+    static Button btnMIN("02I", [](Button *) {});
+
+    static Button btnPEAK("03I", [](Button *) {});
 
     static Button *buttons[] =
     {
-        &button2mA,
-        &button20mA,
-        &button200mA,
-        &button2A,
-        &button20A,
-        &button50A,
+        &btn2mA,
+        &btn20mA,
+        &btn200mA,
+        &btn2A,
+        &btn20A,
+        &btn50A,
+        &btnDC,
+        &btnAC,
+        &btnAC_DC,
+        &btnCalibration,
+        &btnZeroDC,
+        &btnZeroAC,
+        &btnSignal,
+        &btnMAX,
+        &btnAMP,
+        &btnMIN,
+        &btnPEAK,
         nullptr
     };
 
