@@ -252,7 +252,7 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
 {
     for (int i = 0; i < pointer; i++)
     {
-        if (buffer[i] == (uint8)'Z')
+        if (buffer[i] == (uint8)'_')
         {
             CommandButton *result = new CommandButton(buffer, i);
 
