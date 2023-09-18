@@ -18,7 +18,18 @@ namespace PageCalibration
 
     static Button button5("", [](Button *) {});
 
-    static Page pageCalibration(&button0, &button1, &button2, &button3, &button4, &button5);
+    static Button *buttons[] =
+    {
+        &button0,
+        &button1,
+        &button2,
+        &button3,
+        &button4,
+        &button5,
+        nullptr
+    };
+
+    static Page pageCalibration(buttons);
 
     Page *self = &pageCalibration;
 }

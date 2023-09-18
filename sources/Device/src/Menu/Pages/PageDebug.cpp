@@ -11,15 +11,20 @@ namespace PageDebug
         {
         });
 
-    static Button button4("debug4", [](Button *) {});
-
     static Button buttonResetCal("debugReset",
         [](Button *)
         {
             cal.Reset();
         });
 
-    static Page pageDebug(&buttonZero, &button4, &button4, &button4, &button4, &buttonResetCal);
+    static Button *buttons[] =
+    {
+        &buttonZero,
+        &buttonResetCal,
+        nullptr
+    };
+
+    static Page pageDebug(buttons);
 
     Page *self = &pageDebug;
 }

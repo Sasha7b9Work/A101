@@ -29,18 +29,6 @@ namespace PageGraph
         });
 
 
-    static Button button2("button2", [](Button *) {});
-
-
-    static Button button3("button3", [](Button *) {});
-
-
-    static Button button4("button4", [](Button *) {});
-
-
-    static Button button5("button5", [](Button *) {});
-
-
     static Button buttonDebug("debug", [](Button *)
         {
             PageDebug::self->SetAsCurrent();
@@ -53,7 +41,15 @@ namespace PageGraph
         });
 
 
-    static Page pageTwo(&buttonInput, &buttonFFT, &button2, &button3, &buttonDebug, &buttonCalibration);
+    static Button *buttons[] =
+    {
+        &buttonInput,
+        &buttonFFT,
+        &buttonDebug,
+        nullptr
+    };
+
+    static Page pageTwo(buttons);
 
     Page *self = &pageTwo;
 

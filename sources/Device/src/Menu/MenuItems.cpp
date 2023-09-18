@@ -20,18 +20,6 @@ void Button::Press()
 }
 
 
-Page::Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5)
-{
-    buttons[0] = btn0;
-    buttons[1] = btn1;
-    buttons[2] = btn2;
-    buttons[3] = btn3;
-    buttons[4] = btn4;
-    buttons[5] = btn5;
-//    buttons[6] = &btnMenu;
-}
-
-
 Button *Page::GetButton(int index)
 {
     return buttons[index];

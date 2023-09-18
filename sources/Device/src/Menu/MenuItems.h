@@ -29,7 +29,10 @@ private:
 
 struct Page
 {
-    Page(Button *btn0, Button *btn1, Button *btn2, Button *btn3, Button *btn4, Button *btn5);
+    Page(Button **_buttons)
+    {
+        buttons = _buttons;
+    }
 
     static Page *Current() { return current; }
 
@@ -42,7 +45,7 @@ struct Page
 
 private:
 
-    Button *buttons[20];
+    Button **buttons;
 
     static Page *current;
 };

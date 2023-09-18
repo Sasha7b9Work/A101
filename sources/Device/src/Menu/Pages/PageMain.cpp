@@ -18,8 +18,20 @@ namespace PageMain
 
     static Button button50A("06P", [](Button *) {});
 
+    static Button buttonDC("0DC", [](Button *) {});
 
-    static Page pageMain(&button2mA, &button20mA, &button200mA, &button2A, &button20A, &button50A);
+    static Button *buttons[] =
+    {
+        &button2mA,
+        &button20mA,
+        &button200mA,
+        &button2A,
+        &button20A,
+        &button50A,
+        nullptr
+    };
+
+    static Page pageMain(buttons);
 
     Page *self = &pageMain;
 }
