@@ -9,7 +9,7 @@
 
 namespace PageGraph
 {
-    static Button buttonInput("input", [](Button *)
+    static Button btnWave("3WP", [](Button *)
         {
             Indicator::AutoSize();
 
@@ -19,7 +19,7 @@ namespace PageGraph
         });
 
 
-    static Button buttonFFT("fft", [](Button *)
+    static Button btnSpectr("3SP", [](Button *)
         {
             Indicator::AutoSize();
 
@@ -28,14 +28,15 @@ namespace PageGraph
             DiagramFFT::Draw();
         });
 
+    static Button btnBack("3B0", [](Button *) {});
 
-    static Button buttonDebug("debug", [](Button *)
+    static Button btnDebug("debug", [](Button *)
         {
             PageDebug::self->SetAsCurrent();
         });
 
 
-    static Button buttonCalibration("calib", [](Button *)
+    static Button btnCalibration("calib", [](Button *)
         {
             Calibrator::ExecuteCalibration();
         });
@@ -43,9 +44,9 @@ namespace PageGraph
 
     static Button *buttons[] =
     {
-        &buttonInput,
-        &buttonFFT,
-        &buttonDebug,
+        &btnWave,
+        &btnSpectr,
+        &btnBack,
         nullptr
     };
 
@@ -55,12 +56,12 @@ namespace PageGraph
 
     void EnableDebug()
     {
-        pageTwo.SetButton(4, &buttonDebug);
+        pageTwo.SetButton(4, &btnDebug);
     }
 
 
     void EnableCalibration()
     {
-        pageTwo.SetButton(5, &buttonCalibration);
+        pageTwo.SetButton(5, &btnCalibration);
     }
 }
