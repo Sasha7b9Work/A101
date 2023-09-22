@@ -3,6 +3,7 @@
 #include "Display/Controls/WindowsMeasures.h"
 #include "Ampermeter/InputRelays.h"
 #include "Nextion/Nextion.h"
+#include <cstring>
 
 
 void WindowMeasure::Clear()
@@ -27,7 +28,30 @@ void WindowMeasureDC::Clear()
 }
 
 
-void WindowMeasure::SetMeasure(pchar)
+void WindowMeasure::SetMeasure(pchar measure)
 {
+    if (measure[0])
+    {
+        if (cntrlSign[0])
+        {
+            char sign[2] = { measure[0], '\0' };
+            Nextion::Text::SetText(cntrlSign, sign);
+        }
 
+        char buffer[7];
+
+        std::memcpy(buffer, measure + 1, 6);
+        buffer[6] = '\0';
+
+        Nextion::Text::SetText(cntrlDigits, buffer);
+
+        if (measure[std::strlen(measure) - 2] == ' ')
+        {
+            Nextion::Text::SetText(cntrlUnits, "A");
+        }
+        else
+        {
+            Nextion::Text::SetText(cntrlUnits, "mA");
+        }
+    }
 }
