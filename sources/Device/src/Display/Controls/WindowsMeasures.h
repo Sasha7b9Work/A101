@@ -12,6 +12,7 @@ public:
     {}
     void Clear();
     void SetMeasure(pchar);
+    void SetMeasure(float);
 protected:
     CntrlText cntrlType;        // DC или AC
     CntrlText cntrlSign;        // —юда выводим знак
@@ -35,4 +36,12 @@ public:
     WindowMeasureDC() : WindowMeasure("t2", "t19", "t0", "t18") {}
     void Clear();
 private:
+};
+
+
+class WindowMeasureMAX : public WindowMeasure
+{
+public:
+    WindowMeasureMAX() : WindowMeasure("t21", "", "t7", "t24") {}
+    void Clear();
 };

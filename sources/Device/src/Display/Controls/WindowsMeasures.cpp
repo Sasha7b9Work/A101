@@ -4,6 +4,7 @@
 #include "Ampermeter/InputRelays.h"
 #include "Nextion/Nextion.h"
 #include <cstring>
+#include <cstdio>
 
 
 void WindowMeasure::Clear()
@@ -25,6 +26,25 @@ void WindowMeasureDC::Clear()
 {
     WindowMeasure::Clear();
     cntrlType.SetLabel("DC:");
+}
+
+
+void WindowMeasureMAX::Clear()
+{
+    WindowMeasure::Clear();
+    cntrlType.SetLabel("Imax:");
+}
+
+
+void WindowMeasure::SetMeasure(float value)
+{
+    char buffer[30];
+
+    buffer[0] = (value >= 0.0f) ? '+' : '-';
+
+    std::sprintf(buffer + 1, "%5f", (double)value);
+
+    SetMeasure(buffer);
 }
 
 

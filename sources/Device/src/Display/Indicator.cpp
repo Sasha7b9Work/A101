@@ -34,7 +34,7 @@ namespace Indicator
     static TextString textPeakADC(10, 358, 215, 40, 2, "", Color::White);
     static TextString textAveADC(230, 358, 180, 40, 2, "", Color::White);
     static TextString textMinADC(412, 358, 190, 40, 2, "", Color::White);
-    static TextString textMaxADC(605, 358, 190, 40, 2, "", Color::White);
+    static WindowMeasureMAX windowMAX;
     static TextString textAvePicADC(10, 10, 250, 40, 2, "", Color::White);
 
     static bool is_big = true;
@@ -261,7 +261,7 @@ void Indicator::SetStatisticsADC(int peak, int ave, int min, int max)
 
     textMinADC.SetText(String<>("mn %d", min).c_str());
 
-    textMaxADC.SetText(String<>("mx %d", max).c_str());
+    windowMAX.SetMeasure((float)max);
 
     textAvePicADC.SetText(String<>("ave peak %d", (min + max) / 2).c_str());
 }
