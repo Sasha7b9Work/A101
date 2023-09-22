@@ -7,11 +7,25 @@
 
 void WindowMeasure::Clear()
 {
-    Nextion::Text::SetText(cntrlType, "");
     Nextion::Text::SetText(cntrlSign, "");
-    Nextion::Text::SetText(cntrlDigits, "");
+    Nextion::Text::SetText(cntrlDigits, "*.****");
     Nextion::Text::SetText(cntrlUnits, "");
 }
+
+
+void WindowMeasureAC::Clear()
+{
+    WindowMeasure::Clear();
+    Nextion::Text::SetText(cntrlType, "AC:");
+}
+
+
+void WindowMeasureDC::Clear()
+{
+    WindowMeasure::Clear();
+    Nextion::Text::SetText(cntrlType, "DC:");
+}
+
 
 void WindowMeasure::SetMeasure(pchar)
 {

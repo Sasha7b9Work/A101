@@ -11,7 +11,7 @@ public:
     {}
     void Clear();
     void SetMeasure(pchar);
-private:
+protected:
     pchar cntrlType;        // DC или AC
     pchar cntrlSign;        // —юда выводим знак
     pchar cntrlDigits;      // —юда выводим числовое значение
@@ -23,6 +23,7 @@ class WindowMeasureAC : public WindowMeasure
 {
 public:
     WindowMeasureAC() : WindowMeasure("t3", "", "t1", "t17") {}
+    void Clear();
 private:
 };
 
@@ -31,5 +32,6 @@ class WindowMeasureDC : public WindowMeasure
 {
 public:
     WindowMeasureDC() : WindowMeasure("t2", "t19", "t0", "t18") {}
+    void Clear();
 private:
 };
