@@ -61,3 +61,11 @@ public:
     WindowMeasurePEAK() : WindowMeasure("t20", "", "t9", "t26") {}
     void Clear();
 };
+
+
+class WindowMeasureAMPL : public WindowMeasure
+{
+public:
+    WindowMeasureAMPL() : WindowMeasure("t23", "", "t10", "t27") {}
+    void Clear();
+};

@@ -50,6 +50,13 @@ void WindowMeasurePEAK::Clear()
 }
 
 
+void WindowMeasureAMPL::Clear()
+{
+    WindowMeasure::Clear();
+    cntrlType.SetLabel("Iamp:");
+}
+
+
 void WindowMeasure::SetMeasure(float value)
 {
     char buffer[30];
