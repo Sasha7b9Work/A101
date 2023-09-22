@@ -31,9 +31,9 @@ namespace Indicator
     static WindowMeasureDC windowDC;
     static WindowMeasureAC windowAC;
 
-    static TextString textPeakADC(10, 358, 215, 40, 2, "", Color::White);
     static TextString textAveADC(230, 358, 180, 40, 2, "", Color::White);
-    static TextString textMinADC(412, 358, 190, 40, 2, "", Color::White);
+    static WindowMeasurePEAK windowPEAK;
+    static WindowMeasureMIN windowMIN;
     static WindowMeasureMAX windowMAX;
     static TextString textAvePicADC(10, 10, 250, 40, 2, "", Color::White);
 
@@ -255,11 +255,11 @@ void Indicator::SetStatisticsADC(int peak, int ave, int min, int max)
 
     meter.Reset();
 
-    textPeakADC.SetText(String<>("peak %d", peak).c_str());
+    windowPEAK.SetMeasure((float)peak);
 
     textAveADC.SetText(String<>("ave %d", ave).c_str());
 
-    textMinADC.SetText(String<>("mn %d", min).c_str());
+    windowMIN.SetMeasure((float)min);
 
     windowMAX.SetMeasure((float)max);
 

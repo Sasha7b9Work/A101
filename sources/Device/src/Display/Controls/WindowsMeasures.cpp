@@ -36,6 +36,20 @@ void WindowMeasureMAX::Clear()
 }
 
 
+void WindowMeasureMIN::Clear()
+{
+    WindowMeasure::Clear();
+    cntrlType.SetLabel("Imin:");
+}
+
+
+void WindowMeasurePEAK::Clear()
+{
+    WindowMeasure::Clear();
+    cntrlType.SetLabel("Ipp:");
+}
+
+
 void WindowMeasure::SetMeasure(float value)
 {
     char buffer[30];

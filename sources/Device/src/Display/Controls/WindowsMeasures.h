@@ -45,3 +45,19 @@ public:
     WindowMeasureMAX() : WindowMeasure("t21", "", "t7", "t24") {}
     void Clear();
 };
+
+
+class WindowMeasureMIN : public WindowMeasure
+{
+public:
+    WindowMeasureMIN() : WindowMeasure("t22", "", "t8", "t25") {}
+    void Clear();
+};
+
+
+class WindowMeasurePEAK : public WindowMeasure
+{
+public:
+    WindowMeasurePEAK() : WindowMeasure("t20", "", "t9", "t26") {}
+    void Clear();
+};
