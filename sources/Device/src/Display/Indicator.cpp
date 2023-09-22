@@ -28,8 +28,8 @@ namespace Indicator
     static const int small_x_text = 361;
     static const int small_width_text = 300;
 
-    static WindowMeasureDC windowDC(38, 74, 5);
-    static WindowMeasureAC windowAC(38, 236, 5);
+    static WindowMeasureDC windowDC;
+    static WindowMeasureAC windowAC;
 
     static TextString labelDCsmall(small_x_label, small_y_0, small_width_label, small_height, 0, "DC:", Color::MeasureDC);
     static TextString labelACsmall(small_x_label, small_y_1, small_width_label, small_height, 0, "AC:", Color::MeasureAC);
@@ -65,8 +65,6 @@ namespace Indicator
 
 void Indicator::Init()
 {
-    windowDC.Init();
-    windowAC.Init();
 }
 
 
@@ -92,9 +90,6 @@ void Indicator::SetBig()
     textDCsmall.Disable();
     textACsmall.Disable();
 
-    windowDC.Enable();
-    windowAC.Enable();
-
     windowDC.SetMeasure(measureDC);
     windowAC.SetMeasure(measureAC);
 }
@@ -103,9 +98,6 @@ void Indicator::SetBig()
 void Indicator::SetSmall()
 {
     is_big = false;
-
-    windowDC.Disable();
-    windowAC.Disable();
 
     labelDCsmall.Enable();
     labelACsmall.Enable();
@@ -252,8 +244,6 @@ void Indicator::ConvertDoubleToText(float value, char out[TextString::MAX_LEN], 
 
 void Indicator::OnEvent::CnageRange()
 {
-    windowAC.OnEventChangeRange();
-    windowDC.OnEventChangeRange();
 }
 
 

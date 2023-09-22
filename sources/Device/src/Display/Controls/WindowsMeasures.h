@@ -6,47 +6,22 @@
 class WindowMeasure
 {
 public:
-    WindowMeasure(int x, int y, bool is_signed, int font, pchar _title, const Color &back = Color::Count);
-    void Init();
-    void Enable();
-    void Disable();
-    void SetMeasure(const char [TextString::MAX_LEN]);
-    void OnEventChangeRange();
+    WindowMeasure(pchar nameType, pchar nameSign, pchar nameDigits, pchar nameUnits) :
+        cntrlType(nameType), cntrlSign(nameSign), cntrlDigits(nameDigits), cntrlUnits(nameUnits)
+    {}
+    void SetMeasure(pchar);
 private:
-#ifdef WIN32
-    static const int HEIGHT = 92;
-    static const int WIDTH = 620;
-    static const int WIDTH_DIGIT = 40;
-#else
-    static const int HEIGHT = 92;
-    static const int WIDTH = 720;
-    static const int WIDTH_DIGIT = 55;
-#endif
-
-    TextString title;
-
-    TextString point;
-    TextString digit1;
-    TextString digit2;
-    TextString digit3;
-    TextString digit4;
-    TextString digit5;
-
-    TextString sign;
-    TextString units;
-
-    TextString *digits[5];
-
-    Color colorBack;
-
-    bool is_signed;
+    pchar cntrlType;        // DC или AC
+    pchar cntrlSign;        // —юда выводим знак
+    pchar cntrlDigits;      // —юда выводим числовое значение
+    pchar cntrlUnits;       // «десь единицы измерени€
 };
 
 
 class WindowMeasureAC : public WindowMeasure
 {
 public:
-    WindowMeasureAC(int x, int y, int font) : WindowMeasure(x, y, false, font, "AC:") {}
+    WindowMeasureAC() : WindowMeasure("t3", "", "t1", "t17") {}
 private:
 };
 
@@ -54,6 +29,6 @@ private:
 class WindowMeasureDC : public WindowMeasure
 {
 public:
-    WindowMeasureDC(int x, int y, int font) : WindowMeasure(x, y, true, font, "DC:") {}
+    WindowMeasureDC() : WindowMeasure("t2", "t19", "t0", "t18") {}
 private:
 };
