@@ -9,6 +9,7 @@ public:
     WindowMeasure(pchar nameType, pchar nameSign, pchar nameDigits, pchar nameUnits) :
         cntrlType(nameType), cntrlSign(nameSign), cntrlDigits(nameDigits), cntrlUnits(nameUnits)
     {}
+    void Clear();
     void SetMeasure(pchar);
 private:
     pchar cntrlType;        // DC или AC

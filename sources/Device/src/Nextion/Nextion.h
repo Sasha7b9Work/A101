@@ -70,6 +70,11 @@ namespace Nextion
         void Enable(int number);
     }
 
+    namespace Text
+    {
+        void SetText(pchar name, pchar text);
+    }
+
     namespace WaveInput
     {
         void Draw(uint8 *points, int num_points);

@@ -131,6 +131,12 @@ void Nextion::Button::SetText(pchar name_button, pchar _text)
 }
 
 
+void Nextion::Text::SetText(pchar name, pchar _text)
+{
+    Nextion::SendCommandFormat("%s.txt=\"%s\"", name, _text);
+}
+
+
 void Nextion::Button::Highligth(pchar name_button, bool val)
 {
     uint color_val = val ? Color::ButtonPress.ToRaw() : Color::Background.ToRaw();

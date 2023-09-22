@@ -5,6 +5,15 @@
 #include "Nextion/Nextion.h"
 
 
+void WindowMeasure::Clear()
+{
+    Nextion::Text::SetText(cntrlType, "");
+    Nextion::Text::SetText(cntrlSign, "");
+    Nextion::Text::SetText(cntrlDigits, "");
+    Nextion::Text::SetText(cntrlUnits, "");
+}
+
 void WindowMeasure::SetMeasure(pchar)
 {
+
 }

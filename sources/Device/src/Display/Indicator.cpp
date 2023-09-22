@@ -31,10 +31,6 @@ namespace Indicator
     static WindowMeasureDC windowDC;
     static WindowMeasureAC windowAC;
 
-    static TextString labelDCsmall(small_x_label, small_y_0, small_width_label, small_height, 0, "DC:", Color::MeasureDC);
-    static TextString labelACsmall(small_x_label, small_y_1, small_width_label, small_height, 0, "AC:", Color::MeasureAC);
-    static TextString textDCsmall(small_x_text, small_y_0, small_width_text, small_height, 0, "", Color::MeasureDC);
-    static TextString textACsmall(small_x_text, small_y_1, small_width_text, small_height, 0, "", Color::MeasureAC);
     static TextString textPeakADC(10, 358, 215, 40, 2, "", Color::White);
     static TextString textAveADC(230, 358, 180, 40, 2, "", Color::White);
     static TextString textMinADC(412, 358, 190, 40, 2, "", Color::White);
@@ -65,6 +61,8 @@ namespace Indicator
 
 void Indicator::Init()
 {
+    windowAC.Clear();
+    windowDC.Clear();
 }
 
 
@@ -85,11 +83,6 @@ void Indicator::SetBig()
 {
     is_big = true;
 
-    labelDCsmall.Disable();
-    labelACsmall.Disable();
-    textDCsmall.Disable();
-    textACsmall.Disable();
-
     windowDC.SetMeasure(measureDC);
     windowAC.SetMeasure(measureAC);
 }
@@ -98,14 +91,6 @@ void Indicator::SetBig()
 void Indicator::SetSmall()
 {
     is_big = false;
-
-    labelDCsmall.Enable();
-    labelACsmall.Enable();
-    textDCsmall.Enable();
-    textACsmall.Enable();
-
-    textDCsmall.SetText(measureDC);
-    textACsmall.SetText(measureAC);
 }
 
 
@@ -186,8 +171,6 @@ void Indicator::WriteMeasures()
     }
     else
     {
-        textDCsmall.SetText(measureDC);
-        textACsmall.SetText(measureAC);
     }
 }
 
