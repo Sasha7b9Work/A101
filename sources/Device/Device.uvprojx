@@ -1065,16 +1065,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Display\Controls\WindowsMeasures.cpp</FilePath>
             </File>
-            <File>
-              <FileName>CntrlText.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Controls\CntrlText.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CntrlText.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Controls\CntrlText.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1174,6 +1164,21 @@
               <FileName>Nextion_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Nextion\Nextion_stm.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Nextion/Controls</GroupName>
+          <Files>
+            <File>
+              <FileName>CntrlText.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Nextion\Controls\CntrlText.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CntrlText.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Nextion\Controls\CntrlText.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2386,16 +2391,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Display\Controls\WindowsMeasures.cpp</FilePath>
             </File>
-            <File>
-              <FileName>CntrlText.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Controls\CntrlText.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CntrlText.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Controls\CntrlText.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2495,6 +2490,21 @@
               <FileName>Nextion_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Nextion\Nextion_stm.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Nextion/Controls</GroupName>
+          <Files>
+            <File>
+              <FileName>CntrlText.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Nextion\Controls\CntrlText.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CntrlText.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Nextion\Controls\CntrlText.h</FilePath>
             </File>
           </Files>
         </Group>
