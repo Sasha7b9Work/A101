@@ -1,6 +1,7 @@
 // 2022/11/10 22:26:12 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "TextString.h"
+#include "Display/Controls/CntrlText.h"
 
 
 class WindowMeasure
@@ -12,10 +13,10 @@ public:
     void Clear();
     void SetMeasure(pchar);
 protected:
-    pchar cntrlType;        // DC или AC
-    pchar cntrlSign;        // —юда выводим знак
-    pchar cntrlDigits;      // —юда выводим числовое значение
-    pchar cntrlUnits;       // «десь единицы измерени€
+    CntrlText cntrlType;        // DC или AC
+    CntrlText cntrlSign;        // —юда выводим знак
+    CntrlText cntrlDigits;      // —юда выводим числовое значение
+    CntrlText cntrlUnits;       // «десь единицы измерени€
 };
 
 

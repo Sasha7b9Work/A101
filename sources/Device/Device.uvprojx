@@ -1065,6 +1065,16 @@
               <FileType>8</FileType>
               <FilePath>.\src\Display\Controls\WindowsMeasures.cpp</FilePath>
             </File>
+            <File>
+              <FileName>CntrlText.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Controls\CntrlText.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CntrlText.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Controls\CntrlText.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2375,6 +2385,16 @@
               <FileName>WindowsMeasures.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Controls\WindowsMeasures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CntrlText.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Controls\CntrlText.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CntrlText.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Controls\CntrlText.h</FilePath>
             </File>
           </Files>
         </Group>

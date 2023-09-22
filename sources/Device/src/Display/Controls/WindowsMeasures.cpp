@@ -8,23 +8,23 @@
 
 void WindowMeasure::Clear()
 {
-    Nextion::Text::SetText(cntrlSign, "");
-    Nextion::Text::SetText(cntrlDigits, "*.****");
-    Nextion::Text::SetText(cntrlUnits, "");
+    cntrlSign.SetLabel("");
+    cntrlDigits.SetLabel("*.****");
+    cntrlUnits.SetLabel("");
 }
 
 
 void WindowMeasureAC::Clear()
 {
     WindowMeasure::Clear();
-    Nextion::Text::SetText(cntrlType, "AC:");
+    cntrlType.SetLabel("AC:");
 }
 
 
 void WindowMeasureDC::Clear()
 {
     WindowMeasure::Clear();
-    Nextion::Text::SetText(cntrlType, "DC:");
+    cntrlType.SetLabel("DC:");
 }
 
 
@@ -32,10 +32,10 @@ void WindowMeasure::SetMeasure(pchar measure)
 {
     if (measure[0])
     {
-        if (cntrlSign[0])
+        if (cntrlSign.IsExist())
         {
             char sign[2] = { measure[0], '\0' };
-            Nextion::Text::SetText(cntrlSign, sign);
+            cntrlSign.SetLabel(sign);
         }
 
         char buffer[7];
@@ -43,15 +43,15 @@ void WindowMeasure::SetMeasure(pchar measure)
         std::memcpy(buffer, measure + 1, 6);
         buffer[6] = '\0';
 
-        Nextion::Text::SetText(cntrlDigits, buffer);
+        cntrlDigits.SetLabel(buffer);
 
         if (measure[std::strlen(measure) - 2] == ' ')
         {
-            Nextion::Text::SetText(cntrlUnits, "A");
+            cntrlUnits.SetLabel("A");
         }
         else
         {
-            Nextion::Text::SetText(cntrlUnits, "mA");
+            cntrlUnits.SetLabel("mA");
         }
     }
 }

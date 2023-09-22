@@ -2,6 +2,9 @@
 #pragma once
 #include "Display/Colors.h"
 
+/*
+*   Отрисовка прямо на поверхности страницы
+*/
 
 struct TextString
 {
