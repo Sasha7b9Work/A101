@@ -63,16 +63,13 @@ namespace Nextion
     // h_align - горизонтальное выравнивание. 0 - лево, 1 - центр
     void DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar, int h_align = 0);
 
+    void SendCommandFormat(const char *, ...);
+
     namespace Page
     {
         // 0 - основная страница
         // 1 - страница калибровки
         void Enable(int number);
-    }
-
-    namespace Text
-    {
-        void SetText(pchar name, pchar text);
     }
 
     namespace WaveInput

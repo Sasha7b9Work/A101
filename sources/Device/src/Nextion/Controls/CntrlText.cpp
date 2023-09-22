@@ -6,5 +6,5 @@
 
 void CntrlText::SetLabel(pchar label)
 {
-    Nextion::Text::SetText(name, label);
+    Nextion::SendCommandFormat("%s.txt=\"%s\"", name, label);
 }

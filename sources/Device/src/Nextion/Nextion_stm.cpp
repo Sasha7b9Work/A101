@@ -15,8 +15,6 @@ namespace Nextion
 {
     static void SendByte(uint8);
 
-    static void SendCommandFormat(const char *, ...);
-
     // Без ожидания ответа
     static void SendCommandFormatWithoutWaiting(const char *, ...);
 
@@ -128,12 +126,6 @@ void Nextion::WaveFFT::Disable(int size)
 void Nextion::Button::SetText(pchar name_button, pchar _text)
 {
     Nextion::SendCommandFormat("%s.txt=\"%s\"", name_button, _text);
-}
-
-
-void Nextion::Text::SetText(pchar name, pchar _text)
-{
-    Nextion::SendCommandFormat("%s.txt=\"%s\"", name, _text);
 }
 
 
