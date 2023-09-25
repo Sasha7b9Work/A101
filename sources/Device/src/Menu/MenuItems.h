@@ -41,6 +41,8 @@ struct Page
 
     void Draw() { funcDraw(); }
 
+    Button *GetButton(pchar name);
+
 private:
 
     Button **buttons;
