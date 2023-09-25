@@ -9,3 +9,9 @@ void Menu::Init()
 {
     PageMain::self->SetAsCurrent();
 }
+
+
+void Menu::Update(pchar button)
+{
+    button = button;
+}

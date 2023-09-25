@@ -6,4 +6,6 @@
 namespace Menu
 {
     void Init();
+
+    void Update(pchar button);
 }

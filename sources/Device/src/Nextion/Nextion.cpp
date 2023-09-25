@@ -8,6 +8,7 @@
 #include "Utils/Profiler.h"
 #include "Menu/PasswordResolver.h"
 #include "Ampermeter/Calibrator.h"
+#include "Menu/Menu.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -173,6 +174,7 @@ void Nextion::CallbackOnReceive(char byte)
 Nextion::Command::Command(const char *bytes, int _size) : size(_size)
 {
     std::memcpy(buffer, bytes, (uint)size);
+    buffer[size] = '\0';
 }
 
 
@@ -182,33 +184,8 @@ bool Nextion::CommandButton::Execute()
     {
         return false;
     }
-    else if (size == 1)
-    {
-        char byte1 = buffer[0];
 
-        if (byte1 >= '0' && byte1 <= '6')
-        {
-            int button = (byte1 & 0x0F);
-
-            ::Page::Current()->GetButton(button)->Press();
-
-            PasswordResolver::AppendByte(byte1);
-
-            return true;
-        }
-        else if (byte1 == '7')
-        {
-            Calibrator::OnEvent::ButtonSkip();
-
-            return true;
-        }
-        else if (byte1 == '8')
-        {
-            Calibrator::OnEvent::ButtonReady();
-
-            return true;
-        }
-    }
+    Menu::Update(buffer);
 
     return true;
 }
