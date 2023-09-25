@@ -2,7 +2,7 @@
 project (Device)
 
 
-set(CMAKE_UNITY_BUILD ON) 
+#set(CMAKE_UNITY_BUILD OFF) 
 
 
 include_directories(src
@@ -36,6 +36,7 @@ file(GLOB LIBS_HAL         ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Dri
 file(GLOB SRC              src/*.*)
 file(GLOB DISPLAY          src/Display/*.*)
 file(GLOB DISPLAY_CONTROLS src/Display/Controls/*.*)
+file(GLOB DISPLAY_PAGES    src/Display/Pages/*.*)
 file(GLOB GENERATOR        src/Generator/*.*)
 file(GLOB HARDWARE         src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS   src/Hardware/CMSIS/*.*)
@@ -55,6 +56,7 @@ set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
 source_group(src                   FILES ${SRC})
 source_group(Display               FILES ${DISPLAY})
 source_group(Display/Controls      FILES ${DISPLAY_CONTROLS})
+source_group(Display/Pages         FILES ${DISPLAY_PAGES})
 source_group(Generator             FILES ${GENERATOR})
 source_group(libs/HAL              FILES ${LIBS_HAL})
 source_group(Hardware              FILES ${HARDWARE})
@@ -74,6 +76,7 @@ add_library(${PROJECT_NAME} ${LIBS_HAL}
                             ${SRC}
                             ${DISPLAY}
                             ${DISPLAY_CONTROLS}
+                            ${DISPLAY_PAGES}
                             ${GENERATOR}
                             ${HARDWARE}
                             ${HARDWARE_CMSIS}
