@@ -6,6 +6,12 @@
 
 namespace PageMain
 {
+    static void FuncDraw()
+    {
+
+    }
+
+
     static Button btn2mA("01P", [](Button *) {});
 
     static Button btn20mA("02P", [](Button *) {});
@@ -62,7 +68,7 @@ namespace PageMain
         nullptr
     };
 
-    static Page pageMain(buttons);
+    static Page pageMain(buttons, FuncDraw);
 
     Page *self = &pageMain;
 }

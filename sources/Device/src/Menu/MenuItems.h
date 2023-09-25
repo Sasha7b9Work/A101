@@ -15,6 +15,8 @@ public:
 
     void Press();
 
+    pchar Name() const { return name; }
+
 private:
 
     pchar name;
@@ -24,9 +26,8 @@ private:
 
 struct Page
 {
-    Page(Button **_buttons)
+    Page(Button **_buttons, void (*_funcDraw)()) : buttons(_buttons), funcDraw(_funcDraw)
     {
-        buttons = _buttons;
     }
 
     static Page *Current() { return current; }
@@ -38,9 +39,13 @@ struct Page
 
     void SetButton(int index, Button *);
 
+    void Draw() { funcDraw(); }
+
 private:
 
     Button **buttons;
+
+    void (*funcDraw)();
 
     static Page *current;
 };

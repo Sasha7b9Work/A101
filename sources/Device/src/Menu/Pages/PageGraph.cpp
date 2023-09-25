@@ -9,6 +9,12 @@
 
 namespace PageGraph
 {
+    static void FuncDraw()
+    {
+
+    }
+
+
     static Button btnWave("3WP", [](Button *)
         {
             Indicator::AutoSize();
@@ -50,7 +56,7 @@ namespace PageGraph
         nullptr
     };
 
-    static Page pageTwo(buttons);
+    static Page pageTwo(buttons, FuncDraw);
 
     Page *self = &pageTwo;
 

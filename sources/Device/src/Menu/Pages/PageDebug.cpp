@@ -7,6 +7,11 @@
 
 namespace PageDebug
 {
+    static void FuncDraw()
+    {
+
+    }
+
     static Button buttonZero("debugZero", [](Button *)
         {
         });
@@ -24,7 +29,7 @@ namespace PageDebug
         nullptr
     };
 
-    static Page pageDebug(buttons);
+    static Page pageDebug(buttons, FuncDraw);
 
     Page *self = &pageDebug;
 }

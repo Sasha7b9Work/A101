@@ -6,6 +6,12 @@
 
 namespace PageCalibration
 {
+    static void FuncDraw()
+    {
+
+    }
+
+
     static Button btnBack("2B0", [](Button *) {});
 
     static Button btnSave("2SV", [](Button *) {});
@@ -80,7 +86,7 @@ namespace PageCalibration
         nullptr
     };
 
-    static Page pageCalibration(buttons);
+    static Page pageCalibration(buttons, FuncDraw);
 
     Page *self = &pageCalibration;
 }
