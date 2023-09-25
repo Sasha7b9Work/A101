@@ -1068,21 +1068,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Display/Pages</GroupName>
-          <Files>
-            <File>
-              <FileName>Page.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Pages\Page.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Page.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Pages\Page.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Generator</GroupName>
           <Files>
             <File>
@@ -2405,21 +2390,6 @@
               <FileName>WindowsMeasures.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Controls\WindowsMeasures.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Display/Pages</GroupName>
-          <Files>
-            <File>
-              <FileName>Page.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Pages\Page.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Page.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Pages\Page.h</FilePath>
             </File>
           </Files>
         </Group>
