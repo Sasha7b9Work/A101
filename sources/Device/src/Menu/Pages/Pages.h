@@ -6,12 +6,16 @@
 namespace PageMain
 {
     extern Page *self;
+
+    void Draw();
 }
 
 
 namespace PageGraph
 {
     extern Page *self;
+
+    void Draw();
 
     // ¬ключить страницу отладки
     void EnableDebug();
@@ -24,10 +28,14 @@ namespace PageGraph
 namespace PageCalibration
 {
     extern Page *self;
+
+    void Draw();
 }
 
 
 namespace PageDebug
 {
     extern Page *self;
+
+    void Draw();
 }

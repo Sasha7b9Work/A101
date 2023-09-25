@@ -35,11 +35,4 @@ void Page::SetButton(int index, Button *button)
 void Page::SetAsCurrent()
 {
     current = this;
-
-    for (int i = 0; i < 6; i++)
-    {
-        Button *button = GetButton(i);
-
-        button->Init();
-    }
 }
