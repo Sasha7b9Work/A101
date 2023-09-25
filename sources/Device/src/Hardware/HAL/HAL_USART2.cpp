@@ -44,7 +44,7 @@ namespace HAL_USART2
 
     void *handle = (void *)&handleUSART2;
 
-    static uint8 buffer = 0;
+    static char buffer = 0;
 }
 
 

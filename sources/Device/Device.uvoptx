@@ -75,7 +75,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>0</IsCurrentTarget>
+        <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>
@@ -154,7 +154,7 @@
           <Type>0</Type>
           <LineNumber>72</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134383490</Address>
+          <Address>134383638</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -168,9 +168,25 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>257</LineNumber>
+          <LineNumber>110</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134387784</Address>
+          <Address>8</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Display\DiagramInput.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\A101_D\src/Display/DiagramInput.cpp\110</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>187</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134388588</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -179,39 +195,55 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;1&gt;.\src\Nextion\Nextion.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\src/Nextion/Nextion.cpp\257</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>39</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134378514</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Display\Controls\WindowsMeasures.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Display/Controls/WindowsMeasures.cpp\39</Expression>
+          <Expression>\\A101_D\src/Nextion/Nextion.cpp\187</Expression>
         </Bp>
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>34</LineNumber>
+          <LineNumber>181</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134378484</Address>
+          <Address>134388560</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Display\Controls\WindowsMeasures.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Nextion\Nextion.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Display/Controls/WindowsMeasures.cpp\34</Expression>
+          <Expression>\\A101_D\src/Nextion/Nextion.cpp\181</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>158</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134389028</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Nextion\Nextion.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\A101_D\src/Nextion/Nextion.cpp\158</Expression>
+        </Bp>
+        <Bp>
+          <Number>5</Number>
+          <Type>0</Type>
+          <LineNumber>257</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Nextion\Nextion.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -245,7 +277,7 @@
         <Mm>
           <WinNumber>1</WinNumber>
           <SubType>264</SubType>
-          <ItemText>measure</ItemText>
+          <ItemText>buffer</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
@@ -371,7 +403,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>1</IsCurrentTarget>
+        <IsCurrentTarget>0</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>
@@ -1790,7 +1822,7 @@
 
   <Group>
     <GroupName>Nextioin</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

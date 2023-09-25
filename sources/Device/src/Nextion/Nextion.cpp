@@ -66,11 +66,11 @@ namespace Nextion
 {
     struct BufferUART //-V730
     {
-        void Push(uint8);
-        bool Pop(uint8 *);
+        void Push(char);
+        bool Pop(char *);
     private:
         static const int SIZE = 128;
-        uint8 buffer[SIZE];
+        char buffer[SIZE];
         int in_p = 0;               // Сюда будет записываться байт из UART (Push)
         int out_p = 0;              // Этот байт нужно забирать
         bool mutex_uart = false;    // Если true, то буфер занят прерыванием
@@ -80,14 +80,14 @@ namespace Nextion
     struct Command
     {
         Command() : size(0) {} //-V730
-        Command(const uint8 *bytes, int _size);
+        Command(const char *bytes, int _size);
         virtual ~Command() {}
 
         bool IsEmpty() const { return (size == 0); }
         virtual bool Execute() { return false; }
     protected:
         static const int MAX_LEN = 32;
-        uint8 buffer[MAX_LEN];
+        char buffer[MAX_LEN];
         int size;
     };
 
@@ -95,7 +95,7 @@ namespace Nextion
     // Нажатие кнопки
     struct CommandButton : public Command
     {
-        CommandButton(const uint8 *_bytes, int _size) : Command(_bytes, _size) {}
+        CommandButton(const char *_bytes, int _size) : Command(_bytes, _size) {}
         virtual ~CommandButton() override {}
 
         virtual bool Execute() override;
@@ -105,7 +105,7 @@ namespace Nextion
     // Служебный ответ дисплея
     struct AnswerFF : public Command
     {
-        AnswerFF(const uint8 *_bytes, int _size) : Command(_bytes, _size) {}
+        AnswerFF(const char *_bytes, int _size) : Command(_bytes, _size) {}
         virtual ~AnswerFF() override {}
 
         virtual bool Execute() override;
@@ -116,13 +116,13 @@ namespace Nextion
     {
         BufferData() : pointer(0) {} //-V730
 
-        void Push(uint8 byte);
+        void Push(char byte);
         Command *ExtractCommand();
         int NumBytes() const { return pointer; }
-        uint8 operator[](int i) { return buffer[i]; }
+        char operator[](int i) { return buffer[i]; }
     private:
         static const int SIZE = 128;
-        uint8 buffer[SIZE];
+        char buffer[SIZE];
         int pointer;
         void RemoveFromStart(int num_bytes);
     };
@@ -144,7 +144,7 @@ namespace Nextion
 
 void Nextion::Update()
 {
-    uint8 byte = 0;
+    char byte = 0;
 
     while (bufferUART.Pop(&byte))
     {
@@ -161,21 +161,16 @@ void Nextion::Update()
 
         delete command;
     }
-
-    if (data.NumBytes())
-    {
-//        LOG_WRITE("After %s in buffer %d received bytes : %2Xh", __FUNCTION__, data.NumBytes(), data[0]);
-    }
 }
 
 
-void Nextion::CallbackOnReceive(uint8 byte)
+void Nextion::CallbackOnReceive(char byte)
 {
     bufferUART.Push(byte);
 }
 
 
-Nextion::Command::Command(const uint8 *bytes, int _size) : size(_size)
+Nextion::Command::Command(const char *bytes, int _size) : size(_size)
 {
     std::memcpy(buffer, bytes, (uint)size);
 }
@@ -189,7 +184,7 @@ bool Nextion::CommandButton::Execute()
     }
     else if (size == 1)
     {
-        uint8 byte1 = buffer[0];
+        char byte1 = buffer[0];
 
         if (byte1 >= '0' && byte1 <= '6')
         {
@@ -237,7 +232,7 @@ bool Nextion::AnswerFF::Execute()
 }
 
 
-void Nextion::BufferData::Push(uint8 byte)
+void Nextion::BufferData::Push(char byte)
 {
     if (pointer == SIZE)
     {
@@ -295,7 +290,7 @@ void Nextion::BufferData::RemoveFromStart(int num_bytes)
 }
 
 
-void Nextion::BufferUART::Push(uint8 byte)
+void Nextion::BufferUART::Push(char byte)
 {
     mutex_uart = true;
 
@@ -315,7 +310,7 @@ void Nextion::BufferUART::Push(uint8 byte)
 }
 
 
-bool Nextion::BufferUART::Pop(uint8 *byte)
+bool Nextion::BufferUART::Pop(char *byte)
 {
     if (mutex_uart || in_p == out_p)
     {

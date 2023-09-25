@@ -7,12 +7,12 @@
 namespace PasswordResolver
 {
     static const int NUM_BYTES = 6;
-    static const uint8 bytes[NUM_BYTES] = { 0, 1, 2, 3, 4, 5 };
+    static const char bytes[NUM_BYTES] = { 0, 1, 2, 3, 4, 5 };
     static int pointer = 0;
 }
 
 
-void PasswordResolver::AppendByte(uint8 byte)
+void PasswordResolver::AppendByte(char byte)
 {
     if (bytes[pointer] == (byte & 0x0F))
     {

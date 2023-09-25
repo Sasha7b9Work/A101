@@ -4,5 +4,5 @@
 
 namespace PasswordResolver
 {
-    void AppendByte(uint8);
+    void AppendByte(char);
 }

@@ -42,7 +42,7 @@ namespace Nextion
     void Update();
 
     // Эта функция вызвается по приходу байта с дисплея
-    void CallbackOnReceive(uint8);
+    void CallbackOnReceive(char);
 
     namespace LastCode
     {
