@@ -2,13 +2,14 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
+#include "Display/Indicator.h"
 
 
 namespace PageMain
 {
     static void FuncDraw()
     {
-
+        Indicator::Update();
     }
 
 

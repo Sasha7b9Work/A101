@@ -11,7 +11,7 @@ namespace PageGraph
 {
     static void FuncDraw()
     {
-
+        DiagramInput::Draw();
     }
 
 

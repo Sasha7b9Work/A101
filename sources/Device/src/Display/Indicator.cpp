@@ -19,15 +19,6 @@
 
 namespace Indicator
 {
-    static const int small_x_label = 146;
-    static const int small_y_0 = 220;
-    static const int small_y_1 = 294;
-    static const int small_width_label = 150;
-    static const int small_height = 57;
-
-    static const int small_x_text = 361;
-    static const int small_width_text = 300;
-
     static WindowMeasureDC windowDC;
     static WindowMeasureAC windowAC;
 

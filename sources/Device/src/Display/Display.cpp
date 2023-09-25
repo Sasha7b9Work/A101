@@ -5,6 +5,7 @@
 #include "Display/DiagramInput.h"
 #include "Nextion/Nextion.h"
 #include "Display/Indicator.h"
+#include "Menu/MenuItems.h"
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
@@ -30,7 +31,5 @@ void Display::Init()
 
 void Display::Update()
 {
-    DiagramInput::Draw();
-
-    Indicator::Update();
+    Page::Current()->Draw();
 }
