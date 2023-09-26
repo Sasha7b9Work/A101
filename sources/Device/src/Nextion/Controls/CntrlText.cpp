@@ -2,9 +2,17 @@
 #include "defines.h"
 #include "Nextion/Controls/CntrlText.h"
 #include "Nextion/Nextion.h"
+#include <cstring>
 
 
 void CntrlText::SetLabel(pchar label)
 {
-    Nextion::SendCommandFormat("%s.txt=\"%s\"", name, label);
+    if (std::strcmp(label, prev_label) != 0)
+    {
+        std::strcpy(prev_label, label);
+
+        Nextion::SendCommandFormat("%s.txt=\"%s\"", name, label);
+
+        LOG_WRITE_TRACE("Set label %s", label);
+    }
 }
