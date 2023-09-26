@@ -13,17 +13,35 @@ namespace PageMain
     }
 
 
-    static Button btn2mA("01P", [](Button *) {});
+    static Button btn2mA("01P", [](Button *)
+        {
+            Range::Set(0);
+        });
 
-    static Button btn20mA("02P", [](Button *) {});
+    static Button btn20mA("02P", [](Button *)
+        {
+            Range::Set(1);
+        });
 
-    static Button btn200mA("03P", [](Button *) {});
+    static Button btn200mA("03P", [](Button *)
+        {
+            Range::Set(2);
+        });
 
-    static Button btn2A("04P", [](Button *) {});
+    static Button btn2A("04P", [](Button *)
+        {
+            Range::Set(3);
+        });
 
-    static Button btn20A("05P", [](Button *) {});
+    static Button btn20A("05P", [](Button *)
+        {
+            Range::Set(4);
+        });
 
-    static Button btn50A("06P", [](Button *) {});
+    static Button btn50A("06P", [](Button *)
+        {
+            Range::Set(5);
+        });
 
     static Button btnDC("0DC", [](Button *) {});
 
