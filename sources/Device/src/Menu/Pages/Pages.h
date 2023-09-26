@@ -6,16 +6,12 @@
 namespace PageMain
 {
     extern Page *self;
-
-    void Draw();
 }
 
 
 namespace PageGraph
 {
     extern Page *self;
-
-    void Draw();
 
     // Включить страницу отладки
     void EnableDebug();
@@ -29,13 +25,12 @@ namespace PageCalibration
 {
     extern Page *self;
 
-    void Draw();
+    // Установить видимость для всех элементов кроме кнопок
+    void SetVisibleExceptButtons(bool visible);
 }
 
 
 namespace PageDebug
 {
     extern Page *self;
-
-    void Draw();
 }

@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
+#include "Nextion/Nextion.h"
 
 
 namespace PageCalibration
@@ -9,6 +10,31 @@ namespace PageCalibration
     static void FuncDraw()
     {
 
+    }
+
+
+    void SetVisibleExceptButtons(bool visible)
+    {
+        Nextion::Visible("b12", visible);
+        Nextion::Visible("b13", visible);
+        Nextion::Visible("t2", visible);
+
+        Nextion::Visible("bt17", visible);
+        Nextion::Visible("bt16", visible);
+        Nextion::Visible("bt15", visible);
+        Nextion::Visible("bt14", visible);
+        Nextion::Visible("bt13", visible);
+        Nextion::Visible("bt12", visible);
+
+        Nextion::Visible("bt22", visible);
+        Nextion::Visible("bt21", visible);
+
+        Nextion::Visible("t5", visible);
+        Nextion::Visible("t0", visible);
+        Nextion::Visible("t3", visible);
+        Nextion::Visible("t6", visible);
+        Nextion::Visible("t1", visible);
+        Nextion::Visible("t4", visible);
     }
 
 

@@ -68,6 +68,8 @@ namespace PageMain
     static Button btnCalibration("0C", [](Button *)
         {
             PageCalibration::self->SetAsCurrent();
+
+            PageCalibration::SetVisibleExceptButtons(false);
         });
 
     static Button btnZeroDC("0DZ", [](Button *) {});
