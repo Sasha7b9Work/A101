@@ -24,6 +24,8 @@ void Device::Init()
 
 void Device::Update()
 {
+    JumpToMainApplication();
+
     switch (State::Current())
     {
     case State::WaitUpdate:
