@@ -202,7 +202,7 @@ bool Nextion::AnswerFF::Execute()
 
     if(size > 1)
     {
-        LOG_WRITE("Size return code %d", size);
+//        LOG_WRITE("Size return code %d", size);
     }
 
     return true;

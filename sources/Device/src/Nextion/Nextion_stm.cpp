@@ -18,11 +18,10 @@ namespace Nextion
     // Без ожидания ответа
     static void SendCommandFormatWithoutWaiting(const char *, ...);
 
-    // Если wait == true, то ждать ответа
-    static void SendCommandRAW(pchar, bool wait);
+    static void SendCommandRAW(pchar);
 
     // Функция заверашется при получении кода
-    static void WaitResponse(pchar, ResponseCode::E);
+    void WaitResponse(pchar, ResponseCode::E);
 }
 
 
@@ -169,7 +168,7 @@ void Nextion::SendCommandFormat(const char *format, ...)
     std::vsprintf(message, format, args);
     va_end(args);
 
-    SendCommandRAW(message, true);
+    SendCommandRAW(message);
 }
 
 
@@ -182,11 +181,11 @@ void Nextion::SendCommandFormatWithoutWaiting(const char *format, ...)
     std::vsprintf(message, format, args);
     va_end(args);
 
-    SendCommandRAW(message, false);
+    SendCommandRAW(message);
 }
 
 
-void Nextion::SendCommandRAW(pchar command, bool wait)
+void Nextion::SendCommandRAW(pchar command)
 {
     LastCode::Set(ResponseCode::None);
 
@@ -195,11 +194,6 @@ void Nextion::SendCommandRAW(pchar command, bool wait)
     HAL_USART2::SendNZ("\xFF\xFF\xFF");
 
     Profiler::AddCommand();
-
-    if (wait)
-    {
-        WaitResponse(command, ResponseCode::InstructionSuccessful);
-    }
 }
 
 
