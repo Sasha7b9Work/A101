@@ -39,13 +39,13 @@ void Page::SetAsCurrent()
 
 Button *Page::GetButton(pchar name)
 {
-    Button *button = buttons[0];
+    Button **button = &buttons[0];
 
-    while (button)
+    while (*button)
     {
-        if (std::strcmp(button->Name(), name) == 0)
+        if (std::strcmp((*button)->Name(), name) == 0)
         {
-            return button;
+            return *button;
         }
 
         button++;
