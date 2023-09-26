@@ -40,6 +40,8 @@ extern "C" {
         volatile int line = Debug::line[0];
         volatile pchar file = Debug::file[0];
 
+        LOG_TRACE();
+
         while (1) //-V776
         {
             line = line;

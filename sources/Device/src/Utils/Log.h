@@ -10,6 +10,7 @@
     #define LOG_WRITE(...)       Log::Write(__VA_ARGS__)
     #define LOG_ERROR(...)       Log::Write(__VA_ARGS__)
     #define LOG_WRITE_TRACE(...) Log::Write(__FILE__, __LINE__, __VA_ARGS__)
+    #define LOG_TRACE() LOG_WRITE_TRACE("")
     #define LOG_ERROR_TRACE(...) Log::Write(__FILE__, __LINE__, __VA_ARGS__)
     //#define LOG_TRACE()     Log::Write(__FILE__, __LINE__, "")
 #else
