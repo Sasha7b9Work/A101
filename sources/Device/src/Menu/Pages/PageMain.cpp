@@ -65,7 +65,10 @@ namespace PageMain
 
     static Button btnAC_DC("0AD", [](Button *) {});
 
-    static Button btnCalibration("0C", [](Button *) {});
+    static Button btnCalibration("0C", [](Button *)
+        {
+            PageCalibration::self->SetAsCurrent();
+        });
 
     static Button btnZeroDC("0DZ", [](Button *) {});
 

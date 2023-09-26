@@ -12,7 +12,10 @@ namespace PageCalibration
     }
 
 
-    static Button btnBack("2B0", [](Button *) {});
+    static Button btnBack("2B0", [](Button *)
+        {
+            PageMain::self->SetAsCurrent();
+        });
 
     static Button btnSave("2SV", [](Button *) {});
 
