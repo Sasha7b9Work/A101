@@ -83,6 +83,11 @@ namespace Nextion
         void Disable(int size);
     }
 
+    namespace Text
+    {
+        void SetLabel(pchar name, pchar label);
+    }
+
     namespace WaveFFT
     {
         // 0 - маленький, 1 - большой

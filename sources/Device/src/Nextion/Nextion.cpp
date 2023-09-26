@@ -324,6 +324,12 @@ void Nextion::LastCode::Set(ResponseCode::E _code)
 }
 
 
+void Nextion::Text::SetLabel(pchar name, pchar label)
+{
+    SendCommandFormat("%s.txt=\"%s\"", name, label);
+}
+
+
 #ifndef WIN32
 #pragma clang diagnostic pop
 #endif

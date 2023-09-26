@@ -3,6 +3,9 @@
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
 #include "Display/Indicator.h"
+#include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
+#include "Nextion/Nextion.h"
 
 
 namespace PageMain
@@ -10,6 +13,19 @@ namespace PageMain
     static void FuncDraw()
     {
         Indicator::Update();
+
+        uint secs = TIME_MS / 1000;
+
+        static bool is_enabled = false;
+
+        bool enabled = (secs % 2) != 0;
+
+        if (enabled != is_enabled)
+        {
+            Nextion::SendCommandFormat("vis t4,%d", enabled ? 1 : 0);
+
+            is_enabled = enabled;
+        }
     }
 
 
