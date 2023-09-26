@@ -22,7 +22,7 @@ namespace PageMain
 
         if (enabled != is_enabled)
         {
-            Nextion::SendCommandFormat("vis t4,%d", enabled ? 1 : 0);
+            Nextion::Visible("t4", enabled);
 
             is_enabled = enabled;
         }

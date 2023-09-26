@@ -65,6 +65,8 @@ namespace Nextion
 
     void SendCommandFormat(const char *, ...);
 
+    void Visible(pchar name, bool);
+
     namespace Page
     {
         // 0 - основная страница

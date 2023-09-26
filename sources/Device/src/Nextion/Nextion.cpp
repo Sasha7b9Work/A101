@@ -330,6 +330,12 @@ void Nextion::Text::SetLabel(pchar name, pchar label)
 }
 
 
+void Nextion::Visible(pchar name, bool visible)
+{
+    SendCommandFormat("vis %s,%d", name, visible ? 1 : 0);
+}
+
+
 #ifndef WIN32
 #pragma clang diagnostic pop
 #endif
