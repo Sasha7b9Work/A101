@@ -9,7 +9,7 @@ namespace PageCalibration
 {
     static void FuncDraw()
     {
-
+        Nextion::DrawString(10, 10, 100, 100, 0, Color::White, Color::Black, "Test string");
     }
 
 
