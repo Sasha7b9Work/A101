@@ -22,6 +22,9 @@ public:
 
     void ChangeVisible(bool) const;
 
+    // 1 - "нажать", 0 - "отпустить"
+    void SetValue(int) const;
+
 private:
 
     pchar name;                     // Имя кнопки в редакторе

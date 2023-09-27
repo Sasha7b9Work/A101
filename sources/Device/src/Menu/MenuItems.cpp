@@ -32,6 +32,12 @@ void Button::ChangeVisible(bool visible) const
 }
 
 
+void Button::SetValue(int value) const
+{
+    Nextion::SendCommandFormat("%s.val=%d", name, value);
+}
+
+
 Button *Page::GetButton(int index)
 {
     return buttons[index];

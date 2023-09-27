@@ -91,11 +91,11 @@ namespace PageCalibration
 
     static Button btnSave("b12", "2SV", [](Button *) {});
 
-    static Button btnOK("b13", "2OK", [](Button *) {});
+    static Button btnCalib("b13", "2OK", [](Button *) {});
 
-    static Button btnDot1("bt22", "2D1", [](Button *) {});
+    static Button btnMin("bt22", "2D1", [](Button *) {});
 
-    static Button btnDot2("bt21", "2D2", [](Button *) {});
+    static Button btnMax("bt21", "2D2", [](Button *) {});
 
     static Button btn2mA("bt17", "21P", [](Button *) {});
 
@@ -173,9 +173,9 @@ namespace PageCalibration
     {
         &btnBack,
         &btnSave,
-        &btnOK,
-        &btnDot1,
-        &btnDot2,
+        &btnCalib,
+        &btnMin,
+        &btnMax,
         &btn2mA,
         &btn20mA,
         &btn200mA,
@@ -197,6 +197,26 @@ namespace PageCalibration
         nullptr
     };
 
+    static void EnableRange(const Button &button)
+    {
+        btn2mA.SetValue(0);
+        btn20mA.SetValue(0);
+        btn200mA.SetValue(0);
+        btn2A.SetValue(0);
+        btn20A.SetValue(0);
+        btn50A.SetValue(0);
+
+        button.SetValue(1);
+    }
+
+    static void EnableDot(const Button &button)
+    {
+        btnMin.SetValue(0);
+        btnMax.SetValue(0);
+
+        button.SetValue(1);
+    }
+
     void SetVisibleDigits(bool visible)
     {
         btn0.ChangeVisible(visible);
@@ -215,11 +235,11 @@ namespace PageCalibration
 
     void SetVisibleExceptButtons(bool visible)
     {
-        btnDot1.ChangeVisible(visible);
-        btnDot2.ChangeVisible(visible);
+        btnMin.ChangeVisible(visible);
+        btnMax.ChangeVisible(visible);
         btnBack.ChangeVisible(visible);
         btnSave.ChangeVisible(visible);
-        btnOK.ChangeVisible(visible);
+        btnCalib.ChangeVisible(visible);
         btn2mA.ChangeVisible(visible);
         btn20mA.ChangeVisible(visible);
         btn200mA.ChangeVisible(visible);
@@ -239,11 +259,16 @@ namespace PageCalibration
     {
         LabelPassword::Reset();
 
-        btnDot1.SetText("Min");
-        btnDot2.SetText("Max");
-        btnOK.SetText("Calib");
+        btnMin.SetText("Min");
+        btnMax.SetText("Max");
+        btnCalib.SetText("Calib");
+
+        EnableDot(btnMin);
+        EnableRange(btn50A);
 
         SetVisibleExceptButtons(false);
+
+        SetVisibleDigits(true);
     }
 
     static Page pageCalibration(buttons, FuncOnEnable, FuncDraw);
