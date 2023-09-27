@@ -151,21 +151,21 @@ namespace PageCalibration
 
     namespace ButtonsRange
     {
-        static Button buttons[6] =
+        static Button *buttons[6] =
         {
-            btn2mA,
-            btn20mA,
-            btn200mA,
-            btn2A,
-            btn20A,
-            btn50A
+            &btn2mA,
+            &btn20mA,
+            &btn200mA,
+            &btn2A,
+            &btn20A,
+            &btn50A
         };
 
         static void SetAllValue(int value)
         {
             for (int i = 0; i < 6; i++)
             {
-                buttons[i].SetValue(value);
+                buttons[i]->SetValue(value);
             }
         }
 
@@ -173,7 +173,7 @@ namespace PageCalibration
         {
             SetAllValue(0);
 
-            buttons[range].SetValue(1);
+            buttons[range]->SetValue(1);
 
             ShowCalibrationValue();
         }
@@ -182,7 +182,7 @@ namespace PageCalibration
         {
             for (int i = 0; i < 6; i++)
             {
-                if (buttons[i].GetValue())
+                if (buttons[i]->GetValue())
                 {
                     return i;
                 }
@@ -199,7 +199,7 @@ namespace PageCalibration
 
         int range = ButtonsRange::GetRange();
 
-        Nextion::Text::SetLabel("t4", range >= 4 ? "A" : "mA");
+        Nextion::Text::SetLabel("t4", range >= 3 ? "A" : "mA");
 
         if (btnMin.GetValue() == 1)
         {
@@ -223,18 +223,18 @@ namespace PageCalibration
 
     static void ChooseDot(int dot)
     {
-        static Button btns[2] =
+        static Button *btns[2] =
         {
-            btnMin,
-            btnMax
+            &btnMin,
+            &btnMax
         };
 
         for (int i = 0; i < 2; i++)
         {
-            btns[i].SetValue(0);
+            btns[i]->SetValue(0);
         }
 
-        btns[dot].SetValue(1);
+        btns[dot]->SetValue(1);
 
         ShowCalibrationValue();
     }
