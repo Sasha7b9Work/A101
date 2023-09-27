@@ -23,13 +23,17 @@ public:
     void ChangeVisible(bool) const;
 
     // 1 - "нажать", 0 - "отпустить"
-    void SetValue(int) const;
+    void SetValue(int);
+
+    int GetValue() const { return value; }
 
 private:
 
     pchar name;                     // Имя кнопки в редакторе
     pchar signal;                   // Такой сигнал присылает кнопка при нажатии
     void (*funcOnPress)(Button *);
+
+    int value = 0;
 };
 
 

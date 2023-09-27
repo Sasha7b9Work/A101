@@ -197,7 +197,7 @@ namespace PageCalibration
         nullptr
     };
 
-    static void EnableRange(const Button &button)
+    static void EnableRange(Button &button)
     {
         btn2mA.SetValue(0);
         btn20mA.SetValue(0);
@@ -209,7 +209,7 @@ namespace PageCalibration
         button.SetValue(1);
     }
 
-    static void EnableDot(const Button &button)
+    static void EnableDot(Button &button)
     {
         btnMin.SetValue(0);
         btnMax.SetValue(0);

@@ -32,8 +32,10 @@ void Button::ChangeVisible(bool visible) const
 }
 
 
-void Button::SetValue(int value) const
+void Button::SetValue(int _value)
 {
+    value = _value;
+
     Nextion::SendCommandFormat("%s.val=%d", name, value);
 }
 
