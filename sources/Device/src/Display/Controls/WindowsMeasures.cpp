@@ -3,6 +3,7 @@
 #include "Display/Controls/WindowsMeasures.h"
 #include "Ampermeter/InputRelays.h"
 #include "Nextion/Nextion.h"
+#include "Menu/Pages/Pages.h"
 #include <cstring>
 #include <cstdio>
 
@@ -59,6 +60,11 @@ void WindowMeasureAMPL::Clear()
 
 void WindowMeasure::SetMeasure(float value)
 {
+    if (Page::Current() != PageMain::self)
+    {
+        return;
+    }
+
     char buffer[30];
 
     buffer[0] = (value >= 0.0f) ? '+' : '-';

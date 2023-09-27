@@ -63,8 +63,6 @@ void Page::SetAsCurrent()
 
 Button *Page::GetButton(pchar signal)
 {
-    LOG_WRITE("signal %s")
-
     Button **button = &buttons[0];
 
     while (*button)

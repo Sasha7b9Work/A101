@@ -115,15 +115,15 @@ extern "C" {
     {
         if (handle == HAL_USART2::handle)
         {
-            HAL_USART2::CallbackOnReceive();
+            HAL_USART2::CallbackOnReceive();        // Дисплей
         }
         else if (handle == HAL_USART3::handle)
         {
-            HAL_USART3::CallbackOnReceive();
+            HAL_USART3::CallbackOnReceive();        // USB FT232RL
         }
         else if (handle == HAL_UART4::handle)
         {
-            HAL_UART4::CallbackOnReceive();
+            HAL_UART4::CallbackOnReceive();         // RS232
         }
     }
 

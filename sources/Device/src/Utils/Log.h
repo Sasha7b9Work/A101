@@ -6,6 +6,7 @@
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
 #endif
 
+
 #ifdef LOGGED
     #define LOG_WRITE(...)       Log::Write(__VA_ARGS__)
     #define LOG_ERROR(...)       Log::Write(__VA_ARGS__)
@@ -16,6 +17,8 @@
     #define LOG_WRITE(...)
     #define LOG_ERROR(...)
     #define LOG_WRITE_TRACE(...)
+    #define LOG_TRACE()
+    #define LOG_ERROR_TRACE(...)
 #endif
 
 #ifndef WIN32

@@ -226,6 +226,11 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
     {
         if (buffer[i] == (uint8)'_')
         {
+            for (int j = 0; j <= i; j++)
+            {
+                HAL_USART3::SendChar((char)buffer[j]);
+            }
+
             CommandButton *result = new CommandButton(buffer, i);
 
             RemoveFromStart(i + 1);
@@ -241,6 +246,11 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
             if (std::memcmp(&buffer[i], "\xFF\xFF\xFF", 3) == 0)
             {
                 AnswerFF *result = new AnswerFF(buffer, i);
+
+                for (int j = 0; j < i + 3; j++)
+                {
+                    HAL_USART3::SendChar((char)buffer[j]);
+                }
 
                 RemoveFromStart(i + 3);
 
