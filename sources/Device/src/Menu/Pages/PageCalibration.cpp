@@ -12,7 +12,6 @@ namespace PageCalibration
     // 0 - min, 1 - max
     static void ChooseDot(int);
 
-    // ¬ыбор диапазона калибровки
     static void ChooseRange(int);
 
     // ¬ывести значение, которое будем калиброватьс€
@@ -103,84 +102,45 @@ namespace PageCalibration
 
     static Button btnCalib("b13", "2OK", [](Button *) {});
 
-    static Button btnMin("bt22", "2D1", [](Button *)
-        {
-            ChooseDot(0);
-        });
+    static Button btnMin("bt22", "2D1", [](Button *) { ChooseDot(0); });
 
-    static Button btnMax("bt21", "2D2", [](Button *) {});
+    static Button btnMax("bt21", "2D2", [](Button *) { ChooseDot(1); });
 
-    static Button btn2mA("bt17", "21P", [](Button *) {});
+    static Button btn2mA("bt17", "21P", [](Button *) { ChooseRange(0); });
 
-    static Button btn20mA("bt16", "22P", [](Button *) {});
+    static Button btn20mA("bt16", "22P", [](Button *) { ChooseRange(1); });
 
-    static Button btn200mA("bt15", "23P", [](Button *) {});
+    static Button btn200mA("bt15", "23P", [](Button *) { ChooseRange(2); });
 
-    static Button btn2A("bt14", "24P", [](Button *) {});
+    static Button btn2A("bt14", "24P", [](Button *) { ChooseRange(3); });
 
-    static Button btn20A("bt13", "25P", [](Button *) {});
+    static Button btn20A("bt13", "25P", [](Button *) { ChooseRange(4); });
 
-    static Button btn50A("bt12", "26P", [](Button *) {});
+    static Button btn50A("bt12", "26P", [](Button *) { ChooseRange(5); });
 
-    static Button btn0("b0", "KB0", [](Button *)
-        {
-            PressDigit('0');
-        });
+    static Button btn0("b0", "KB0", [](Button *) { PressDigit('0'); });
 
-    static Button btn1("b1", "KB1", [](Button *)
-        {
-            PressDigit('1');
-        });
+    static Button btn1("b1", "KB1", [](Button *) { PressDigit('1'); });
 
-    static Button btn2("b2", "KB2", [](Button *)
-        {
-            PressDigit('2');
-        });
+    static Button btn2("b2", "KB2", [](Button *) { PressDigit('2'); });
 
-    static Button btn3("b3", "KB3", [](Button *)
-        {
-            PressDigit('3');
-        });
+    static Button btn3("b3", "KB3", [](Button *) { PressDigit('3'); });
 
-    static Button btn4("b4", "KB4", [](Button *)
-        {
-            PressDigit('4');
-        });
+    static Button btn4("b4", "KB4", [](Button *) { PressDigit('4'); });
 
-    static Button btn5("b5", "KB5", [](Button *)
-        {
-            PressDigit('5');
-        });
+    static Button btn5("b5", "KB5", [](Button *) { PressDigit('5'); });
 
-    static Button btn6("b6", "KB6", [](Button *)
-        {
-            PressDigit('6');
-        });
+    static Button btn6("b6", "KB6", [](Button *) { PressDigit('6'); });
 
-    static Button btn7("b7", "KB7", [](Button *)
-        {
-            PressDigit('7');
-        });
+    static Button btn7("b7", "KB7", [](Button *) { PressDigit('7'); });
 
-    static Button btn8("b8", "KB8", [](Button *)
-        {
-            PressDigit('8');
-        });
+    static Button btn8("b8", "KB8", [](Button *) { PressDigit('8'); });
 
-    static Button btn9("b9", "KB9", [](Button *)
-        {
-            PressDigit('9');
-        });
+    static Button btn9("b9", "KB9", [](Button *) { PressDigit('9'); });
 
-    static Button btnDot("b10", "KBD", [](Button *)
-        {
-            PressDigit('.');
-        });
+    static Button btnDot("b10", "KBD", [](Button *) { PressDigit('.'); });
 
-    static Button btnSign("b11", "KBS", [](Button *)
-        {
-            PressDigit('-');
-        });
+    static Button btnSign("b11", "KBS", [](Button *) { PressDigit('-'); });
 
     static Button *buttons[] =
     {
@@ -210,14 +170,9 @@ namespace PageCalibration
         nullptr
     };
 
-    static void ShowCalibrationValue()
+    namespace ButtonsRange
     {
-
-    }
-
-    static void ChooseRange(int range)
-    {
-        static Button btns[6] =
+        static Button buttons[6] =
         {
             btn2mA,
             btn20mA,
@@ -227,14 +182,64 @@ namespace PageCalibration
             btn50A
         };
 
-        for (int i = 0; i < 6; i++)
+        static void SetAllValue(int value)
         {
-            btns[i].SetValue(0);
+            for (int i = 0; i < 6; i++)
+            {
+                buttons[i].SetValue(value);
+            }
         }
 
-        btns[range].SetValue(1);
+        static void SetRange(int range)
+        {
+            SetAllValue(0);
 
-        ShowCalibrationValue();
+            buttons[range].SetValue(1);
+
+            ShowCalibrationValue();
+        }
+
+        static int GetRange()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (buttons[i].GetValue())
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+    }
+
+
+    static void ShowCalibrationValue()
+    {
+        Nextion::Text::SetLabel("t6", "");
+
+        int range = ButtonsRange::GetRange();
+
+        Nextion::Text::SetLabel("t4", range >= 4 ? "A" : "mA");
+
+        if (btnMin.GetValue())
+        {
+            Nextion::Text::SetLabel("t1", "0");
+        }
+        else
+        {
+            static const pchar labels[] =
+            {
+                "2.0000",
+                "20.000",
+                "200.00",
+                "2.0000",
+                "20.000",
+                "50.000"
+            };
+
+            Nextion::Text::SetLabel("t1", labels[range]);
+        }
     }
 
     static void ChooseDot(int dot)
@@ -253,6 +258,11 @@ namespace PageCalibration
         btns[dot].SetValue(1);
 
         ShowCalibrationValue();
+    }
+
+    static void ChooseRange(int range)
+    {
+        ButtonsRange::SetRange(range);
     }
 
     void SetVisibleDigits(bool visible)
@@ -301,7 +311,7 @@ namespace PageCalibration
         btnCalib.SetText("Calib");
 
         ChooseDot(0);
-        ChooseRange(5);
+        ButtonsRange::SetRange(5);
 
         SetVisibleExceptButtons(false);
 
