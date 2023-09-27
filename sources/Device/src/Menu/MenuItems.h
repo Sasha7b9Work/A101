@@ -20,6 +20,8 @@ public:
 
     void SetText(pchar) const;
 
+    void ChangeVisible(bool) const;
+
 private:
 
     pchar name;                     // Имя кнопки в редакторе

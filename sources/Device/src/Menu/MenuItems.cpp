@@ -26,6 +26,12 @@ void Button::SetText(pchar text) const
 }
 
 
+void Button::ChangeVisible(bool visible) const
+{
+    Nextion::Visible(name, visible);
+}
+
+
 Button *Page::GetButton(int index)
 {
     return buttons[index];

@@ -61,6 +61,9 @@ namespace PageCalibration
     // Установить видимость для всех элементов кроме кнопок
     static void SetVisibleExceptButtons(bool visible);
 
+    // Установить видимость для цифровых кнопок
+    static void SetVisibleDigits(bool visible);
+
     static void FuncDraw()
     {
         LabelPassword::Draw();
@@ -71,37 +74,14 @@ namespace PageCalibration
     {
         LabelPassword::Append(symbol);
 
-        if (std::strcmp(LabelPassword::buffer, PASSWORD) == 0)
+        if (LabelPassword::PasswordCorrect())
         {
             LabelPassword::Draw();
 
             SetVisibleExceptButtons(true);
+
+            SetVisibleDigits(false);
         }
-    }
-
-
-    void SetVisibleExceptButtons(bool visible)
-    {
-        Nextion::Visible("b12", visible);
-        Nextion::Visible("b13", visible);
-        Nextion::Visible("t2", visible);
-
-        Nextion::Visible("bt17", visible);
-        Nextion::Visible("bt16", visible);
-        Nextion::Visible("bt15", visible);
-        Nextion::Visible("bt14", visible);
-        Nextion::Visible("bt13", visible);
-        Nextion::Visible("bt12", visible);
-
-        Nextion::Visible("bt22", visible);
-        Nextion::Visible("bt21", visible);
-
-        Nextion::Visible("t5", visible);
-        Nextion::Visible("t0", visible);
-        Nextion::Visible("t3", visible);
-        Nextion::Visible("t6", visible);
-        Nextion::Visible("t1", visible);
-        Nextion::Visible("t4", visible);
     }
 
     static Button btnBack("bt18", "2B0", [](Button *)
@@ -109,7 +89,7 @@ namespace PageCalibration
             PageMain::self->SetAsCurrent();
         });
 
-    static Button btnSave("bt12", "2SV", [](Button *) {});
+    static Button btnSave("b12", "2SV", [](Button *) {});
 
     static Button btnOK("b13", "2OK", [](Button *) {});
 
@@ -217,12 +197,51 @@ namespace PageCalibration
         nullptr
     };
 
+    void SetVisibleDigits(bool visible)
+    {
+        btn0.ChangeVisible(visible);
+        btn1.ChangeVisible(visible);
+        btn2.ChangeVisible(visible);
+        btn3.ChangeVisible(visible);
+        btn4.ChangeVisible(visible);
+        btn5.ChangeVisible(visible);
+        btn6.ChangeVisible(visible);
+        btn7.ChangeVisible(visible);
+        btn8.ChangeVisible(visible);
+        btn9.ChangeVisible(visible);
+        btnSign.ChangeVisible(visible);
+        btnDot.ChangeVisible(visible);
+    }
+
+    void SetVisibleExceptButtons(bool visible)
+    {
+        btnDot1.ChangeVisible(visible);
+        btnDot2.ChangeVisible(visible);
+        btnBack.ChangeVisible(visible);
+        btnSave.ChangeVisible(visible);
+        btnOK.ChangeVisible(visible);
+        btn2mA.ChangeVisible(visible);
+        btn20mA.ChangeVisible(visible);
+        btn200mA.ChangeVisible(visible);
+        btn2A.ChangeVisible(visible);
+        btn20A.ChangeVisible(visible);
+        btn50A.ChangeVisible(visible);
+
+        Nextion::Visible("t5", visible);
+        Nextion::Visible("t0", visible);
+        Nextion::Visible("t3", visible);
+        Nextion::Visible("t6", visible);
+        Nextion::Visible("t1", visible);
+        Nextion::Visible("t4", visible);
+    }
+
     static void FuncOnEnable(bool)
     {
         LabelPassword::Reset();
 
         btnDot1.SetText("Min");
         btnDot2.SetText("Max");
+        btnOK.SetText("Calib");
 
         SetVisibleExceptButtons(false);
     }
