@@ -144,30 +144,9 @@ namespace PageCalibration
 
     static Button *buttons[] =
     {
-        &btnBack,
-        &btnSave,
-        &btnCalib,
-        &btnMin,
-        &btnMax,
-        &btn2mA,
-        &btn20mA,
-        &btn200mA,
-        &btn2A,
-        &btn20A,
-        &btn50A,
-        &btn0,
-        &btn1,
-        &btn2,
-        &btn3,
-        &btn4,
-        &btn5,
-        &btn6,
-        &btn7,
-        &btn8,
-        &btn9,
-        &btnDot,
-        &btnSign,
-        nullptr
+        &btnBack, &btnSave, &btnCalib, &btnMin, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
+        &btn2A,   &btn20A,  &btn50A,   &btn0,   &btn1,    &btn2,   &btn3,    &btn4,
+        &btn5,    &btn6,    &btn7,     &btn8,   &btn9,    &btnDot, &btnSign, nullptr
     };
 
     namespace ButtonsRange
