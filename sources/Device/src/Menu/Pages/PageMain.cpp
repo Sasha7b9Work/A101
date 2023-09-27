@@ -10,6 +10,11 @@
 
 namespace PageMain
 {
+    static void FuncOnEnable(bool)
+    {
+
+    }
+
     static void FuncDraw()
     {
         Indicator::Update();
@@ -68,8 +73,6 @@ namespace PageMain
     static Button btnCalibration("0C", [](Button *)
         {
             PageCalibration::self->SetAsCurrent();
-
-            PageCalibration::SetVisibleExceptButtons(false);
         });
 
     static Button btnZeroDC("0DZ", [](Button *) {});
@@ -108,7 +111,7 @@ namespace PageMain
         nullptr
     };
 
-    static Page pageMain(buttons, FuncDraw);
+    static Page pageMain(buttons, FuncOnEnable, FuncDraw);
 
     Page *self = &pageMain;
 }

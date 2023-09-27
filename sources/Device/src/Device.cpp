@@ -41,9 +41,9 @@ void Device::Update()
 {
     Ampermeter::Update();
 
-    Display::Update();
-
     Nextion::Update();
+
+    Display::Update();
 
     Profiler::Update();
 

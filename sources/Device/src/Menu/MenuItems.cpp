@@ -34,7 +34,11 @@ void Page::SetButton(int index, Button *button)
 
 void Page::SetAsCurrent()
 {
+    current->funcOnEnable(false);
+
     current = this;
+
+    current->funcOnEnable(true);
 }
 
 Button *Page::GetButton(pchar name)

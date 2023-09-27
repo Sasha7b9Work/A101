@@ -26,7 +26,8 @@ private:
 
 struct Page
 {
-    Page(Button **_buttons, void (*_funcDraw)()) : buttons(_buttons), funcDraw(_funcDraw)
+    Page(Button **_buttons, void (*_funcOnEnable)(bool), void (*_funcOnDraw)()) :
+        buttons(_buttons), funcOnEnable(_funcOnEnable), funcOnDraw(_funcOnDraw)
     {
     }
 
@@ -39,7 +40,7 @@ struct Page
 
     void SetButton(int index, Button *);
 
-    void Draw() { funcDraw(); }
+    void Draw() { funcOnDraw(); }
 
     Button *GetButton(pchar name);
 
@@ -47,7 +48,10 @@ private:
 
     Button **buttons;
 
-    void (*funcDraw)();
+    // Вызывается при появлении на экране
+    void (*funcOnEnable)(bool);
+
+    void (*funcOnDraw)();
 
     static Page *current;
 };

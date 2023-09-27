@@ -9,6 +9,11 @@
 
 namespace PageGraph
 {
+    static void FuncOnEnable(bool)
+    {
+
+    }
+
     static void FuncDraw()
     {
         DiagramInput::Draw();
@@ -56,7 +61,7 @@ namespace PageGraph
         nullptr
     };
 
-    static Page pageTwo(buttons, FuncDraw);
+    static Page pageTwo(buttons, FuncOnEnable, FuncDraw);
 
     Page *self = &pageTwo;
 

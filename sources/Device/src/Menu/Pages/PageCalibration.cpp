@@ -3,13 +3,78 @@
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
 #include "Nextion/Nextion.h"
+#include <cstring>
 
 
 namespace PageCalibration
 {
+    static const pchar PASSWORD = "123";
+
+    namespace LabelPassword
+    {
+        static const int SIZE_BUFFER = 32;
+        static int size_password = 0;
+        static char buffer[SIZE_BUFFER] = { '\0' };
+        static bool is_changed = true;
+
+        static void Reset()
+        {
+            size_password = 0;
+            buffer[0] = '\0';
+            is_changed = true;
+        }
+
+        static void Append(char symbol)
+        {
+            if (size_password < SIZE_BUFFER - 1)
+            {
+                buffer[size_password++] = symbol;
+                buffer[size_password] = '\0';
+                is_changed = true;
+            }
+        }
+
+        static bool IsChanged()
+        {
+            return is_changed;
+        }
+
+        static void Draw()
+        {
+            Nextion::DrawString(50, 100, 300, 50, 4, Color::White, Color::Black, LabelPassword::buffer);
+
+            is_changed = false;
+        }
+    }
+
+    // Установить видимость для всех элементов кроме кнопок
+    static void SetVisibleExceptButtons(bool visible);
+
+
+    static void FuncOnEnable(bool)
+    {
+        LabelPassword::Reset();
+
+        SetVisibleExceptButtons(false);
+    }
+
     static void FuncDraw()
     {
-        Nextion::DrawString(10, 10, 100, 100, 0, Color::White, Color::Black, "Test string");
+        if (LabelPassword::IsChanged())
+        {
+            LabelPassword::Draw();
+        }
+    }
+
+    // Нажатие кнопки на цифровой клавиатуре
+    static void PressDigit(char symbol)
+    {
+        LabelPassword::Append(symbol);
+
+        if (std::strcmp(LabelPassword::buffer, PASSWORD) == 0)
+        {
+            SetVisibleExceptButtons(true);
+        }
     }
 
 
@@ -63,29 +128,65 @@ namespace PageCalibration
 
     static Button btn50A("26P", [](Button *) {});
 
-    static Button btn0("KB0", [](Button *) {});
+    static Button btn0("KB0", [](Button *)
+        {
+            PressDigit('0');
+        });
 
-    static Button btn1("KB1", [](Button *) {});
+    static Button btn1("KB1", [](Button *)
+        {
+            PressDigit('1');
+        });
 
-    static Button btn2("KB2", [](Button *) {});
+    static Button btn2("KB2", [](Button *)
+        {
+            PressDigit('2');
+        });
 
-    static Button btn3("KB3", [](Button *) {});
+    static Button btn3("KB3", [](Button *)
+        {
+            PressDigit('3');
+        });
 
-    static Button btn4("KB4", [](Button *) {});
+    static Button btn4("KB4", [](Button *)
+        {
+            PressDigit('4');
+        });
 
-    static Button btn5("KB5", [](Button *) {});
+    static Button btn5("KB5", [](Button *)
+        {
+            PressDigit('5');
+        });
 
-    static Button btn6("KB6", [](Button *) {});
+    static Button btn6("KB6", [](Button *)
+        {
+            PressDigit('6');
+        });
 
-    static Button btn7("KB7", [](Button *) {});
+    static Button btn7("KB7", [](Button *)
+        {
+            PressDigit('7');
+        });
 
-    static Button btn8("KB8", [](Button *) {});
+    static Button btn8("KB8", [](Button *)
+        {
+            PressDigit('8');
+        });
 
-    static Button btn9("KB9", [](Button *) {});
+    static Button btn9("KB9", [](Button *)
+        {
+            PressDigit('9');
+        });
 
-    static Button btnDot("KBD", [](Button *) {});
+    static Button btnDot("KBD", [](Button *)
+        {
+            PressDigit('.');
+        });
 
-    static Button btnSign("KBS", [](Button *) {});
+    static Button btnSign("KBS", [](Button *)
+        {
+            PressDigit('-');
+        });
 
     static Button *buttons[] =
     {
@@ -115,7 +216,7 @@ namespace PageCalibration
         nullptr
     };
 
-    static Page pageCalibration(buttons, FuncDraw);
+    static Page pageCalibration(buttons, FuncOnEnable, FuncDraw);
 
     Page *self = &pageCalibration;
 }

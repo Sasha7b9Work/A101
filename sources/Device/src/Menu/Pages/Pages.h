@@ -24,9 +24,6 @@ namespace PageGraph
 namespace PageCalibration
 {
     extern Page *self;
-
-    // Установить видимость для всех элементов кроме кнопок
-    void SetVisibleExceptButtons(bool visible);
 }
 
 
