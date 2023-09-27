@@ -15,9 +15,6 @@ namespace Nextion
 {
     static void SendByte(uint8);
 
-    // Без ожидания ответа
-    static void SendCommandFormatWithoutWaiting(const char *, ...);
-
     static void SendCommandRAW(pchar);
 
     // Функция заверашется при получении кода
@@ -71,7 +68,7 @@ void Nextion::WaveInput::Draw(uint8 *points, int num_points)
 
     int id = (DiagramFFT::IsEnabled() && DiagramInput::IsEnabled()) ? 9 : 7;
 
-    SendCommandFormatWithoutWaiting("addt %d,0,%d", id, num_points);
+    SendCommandFormat("addt %d,0,%d", id, num_points);
 
     WaitResponse(ResponseCode::TransparentDataReady);
 
@@ -160,19 +157,6 @@ void Nextion::SendByte(uint8 byte)
 
 
 void Nextion::SendCommandFormat(const char *format, ...)
-{
-    char message[256];
-
-    std::va_list args;
-    va_start(args, format);
-    std::vsprintf(message, format, args);
-    va_end(args);
-
-    SendCommandRAW(message);
-}
-
-
-void Nextion::SendCommandFormatWithoutWaiting(const char *format, ...)
 {
     char message[256];
 
