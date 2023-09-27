@@ -201,7 +201,7 @@ namespace PageCalibration
 
         Nextion::Text::SetLabel("t4", range >= 4 ? "A" : "mA");
 
-        if (btnMin.GetValue())
+        if (btnMin.GetValue() == 1)
         {
             Nextion::Text::SetLabel("t1", "0");
         }
