@@ -17,6 +17,7 @@ struct Color
     void SetAsCurrent() const;
 
     static uint16 MakeColor(float r, float g, float b);
+    static uint16 MakeColor(uint16 v) { return v; }
     static Color Current() { return current; }
     static pchar CurrentValue();
 

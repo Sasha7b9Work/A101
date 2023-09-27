@@ -20,6 +20,12 @@ void Button::Press()
 }
 
 
+void Button::SetText(pchar text) const
+{
+    Nextion::Button::SetText(name, text);
+}
+
+
 Button *Page::GetButton(int index)
 {
     return buttons[index];
@@ -41,13 +47,13 @@ void Page::SetAsCurrent()
     current->funcOnEnable(true);
 }
 
-Button *Page::GetButton(pchar name)
+Button *Page::GetButton(pchar signal)
 {
     Button **button = &buttons[0];
 
     while (*button)
     {
-        if (std::strcmp((*button)->Name(), name) == 0)
+        if (std::strcmp((*button)->Signal(), signal) == 0)
         {
             return *button;
         }

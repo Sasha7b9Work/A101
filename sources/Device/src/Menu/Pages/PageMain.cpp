@@ -34,60 +34,56 @@ namespace PageMain
     }
 
 
-    static Button btn2mA("01P", [](Button *)
+    static Button btn2mA("bt0", "01P", [](Button *)
         {
             Range::Set(0);
         });
 
-    static Button btn20mA("02P", [](Button *)
+    static Button btn20mA("bt1", "02P", [](Button *)
         {
             Range::Set(1);
         });
 
-    static Button btn200mA("03P", [](Button *)
+    static Button btn200mA("bt2", "03P", [](Button *)
         {
             Range::Set(2);
         });
 
-    static Button btn2A("04P", [](Button *)
+    static Button btn2A("bt3", "04P", [](Button *)
         {
             Range::Set(3);
         });
 
-    static Button btn20A("05P", [](Button *)
+    static Button btn20A("bt4", "05P", [](Button *)
         {
             Range::Set(4);
         });
 
-    static Button btn50A("06P", [](Button *)
+    static Button btn50A("bt5", "06P", [](Button *)
         {
             Range::Set(5);
         });
 
-    static Button btnDC("0DC", [](Button *) {});
+    static Button btnAC_DC("b0", "0AD", [](Button *) {});
 
-    static Button btnAC("0AC", [](Button *) {});
-
-    static Button btnAC_DC("0AD", [](Button *) {});
-
-    static Button btnCalibration("0C", [](Button *)
+    static Button btnCalibration("bt13", "0C", [](Button *)
         {
             PageCalibration::self->SetAsCurrent();
         });
 
-    static Button btnZeroDC("0DZ", [](Button *) {});
+    static Button btnZeroDC("bt11", "0DZ", [](Button *) {});
 
-    static Button btnZeroAC("0AZ", [](Button *) {});
+    static Button btnZeroAC("bt10", "0AZ", [](Button *) {});
 
-    static Button btnSignal("0S", [](Button *) {});
+    static Button btnSignal("bt12", "0S", [](Button *) {});
 
-    static Button btnMAX("01I", [](Button *) {});
+    static Button btnMAX("bt15", "01I", [](Button *) {});
 
-    static Button btnAMP("04I", [](Button *) {});
+    static Button btnAMP("bt19", "04I", [](Button *) {});
 
-    static Button btnMIN("02I", [](Button *) {});
+    static Button btnMIN("bt18", "02I", [](Button *) {});
 
-    static Button btnPEAK("03I", [](Button *) {});
+    static Button btnPEAK("bt17", "03I", [](Button *) {});
 
     static Button *buttons[] =
     {
@@ -97,8 +93,6 @@ namespace PageMain
         &btn2A,
         &btn20A,
         &btn50A,
-        &btnDC,
-        &btnAC,
         &btnAC_DC,
         &btnCalibration,
         &btnZeroDC,

@@ -20,7 +20,7 @@ namespace PageGraph
     }
 
 
-    static Button btnWave("3WP", [](Button *)
+    static Button btnWave("bt0", "3WP", [](Button *)
         {
             Indicator::AutoSize();
 
@@ -30,7 +30,7 @@ namespace PageGraph
         });
 
 
-    static Button btnSpectr("3SP", [](Button *)
+    static Button btnSpectr("bt1", "3SP", [](Button *)
         {
             Indicator::AutoSize();
 
@@ -39,15 +39,15 @@ namespace PageGraph
             DiagramFFT::Draw();
         });
 
-    static Button btnBack("3B0", [](Button *) {});
+    static Button btnBack("bt6", "3B0", [](Button *) {});
 
-    static Button btnDebug("debug", [](Button *)
+    static Button btnDebug("", "debug", [](Button *)
         {
             PageDebug::self->SetAsCurrent();
         });
 
 
-    static Button btnCalibration("calib", [](Button *)
+    static Button btnCalibration("", "calib", [](Button *)
         {
             Calibrator::ExecuteCalibration();
         });
