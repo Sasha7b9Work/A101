@@ -10,15 +10,8 @@
 
 namespace PageMain
 {
-    static void FuncOnEnable()
+    static void DrawLabelStart()
     {
-
-    }
-
-    static void FuncDraw()
-    {
-        Indicator::Update();
-
         uint secs = TIME_MS / 1000;
 
         static bool is_enabled = false;
@@ -31,6 +24,18 @@ namespace PageMain
 
             is_enabled = enabled;
         }
+    }
+
+    static void FuncOnEnable()
+    {
+
+    }
+
+    static void FuncDraw()
+    {
+        Indicator::Update();
+
+        DrawLabelStart();
     }
 
 

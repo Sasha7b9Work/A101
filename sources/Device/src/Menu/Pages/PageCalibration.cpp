@@ -3,11 +3,29 @@
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
 #include "Nextion/Nextion.h"
+#include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
 #include <cstring>
 
 
 namespace PageCalibration
 {
+    static void DrawLabelStar()
+    {
+        uint secs = TIME_MS / 1000;
+
+        static bool is_enabled = false;
+
+        bool enabled = (secs % 2) != 0;
+
+        if (enabled != is_enabled)
+        {
+            Nextion::Visible("t2", enabled);
+
+            is_enabled = enabled;
+        }
+    }
+
     // Выбор точки калибровки
     // 0 - min, 1 - max
     static void ChooseDot(int);
@@ -76,6 +94,8 @@ namespace PageCalibration
     static void FuncDraw()
     {
         LabelPassword::Draw();
+
+        DrawLabelStar();
     }
 
     // Нажатие кнопки на цифровой клавиатуре
