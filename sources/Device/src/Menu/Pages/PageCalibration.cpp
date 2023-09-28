@@ -36,9 +36,6 @@ namespace PageCalibration
 
     static void ChooseRange(int);
 
-    // Вывести значение, которое будем калиброваться
-    static void ShowCalibrationValue();
-
     static const pchar PASSWORD = "123";
 
     namespace LabelPassword
@@ -94,13 +91,6 @@ namespace PageCalibration
 
     // Установить видимость для цифровых кнопок
     static void SetVisibleDigits(bool visible);
-
-    static void FuncDraw()
-    {
-        LabelPassword::Draw();
-
-        DrawLabelStar();
-    }
 
     // Нажатие кнопки на цифровой клавиатуре
     static void PressDigit(char symbol)
@@ -198,8 +188,6 @@ namespace PageCalibration
             SetAllValue(0);
 
             buttons[range]->SetValue(1);
-
-            ShowCalibrationValue();
         }
 
         static int GetRange()
@@ -217,34 +205,6 @@ namespace PageCalibration
     }
 
 
-    static void ShowCalibrationValue()
-    {
-        Nextion::Text::SetLabel("t6", "");
-
-        int range = ButtonsRange::GetRange();
-
-        Nextion::Text::SetLabel("t4", range >= 3 ? "A" : "mA");
-
-        if (btnMin.GetValue() == 1)
-        {
-            Nextion::Text::SetLabel("t1", "0");
-        }
-        else
-        {
-            static const pchar labels[] =
-            {
-                "2.0000",
-                "20.000",
-                "200.00",
-                "2.0000",
-                "20.000",
-                "50.000"
-            };
-
-            Nextion::Text::SetLabel("t1", labels[range]);
-        }
-    }
-
     static void ChooseDot(int dot)
     {
         static Button *btns[2] =
@@ -259,8 +219,6 @@ namespace PageCalibration
         }
 
         btns[dot]->SetValue(1);
-
-        ShowCalibrationValue();
     }
 
     static void ChooseRange(int range)
@@ -319,6 +277,38 @@ namespace PageCalibration
         SetVisibleExceptButtons(false);
 
         SetVisibleDigits(true);
+    }
+
+    static void FuncDraw()
+    {
+        LabelPassword::Draw();
+
+        DrawLabelStar();
+
+        Nextion::Text::SetLabel("t6", "");
+
+        int range = ButtonsRange::GetRange();
+
+        Nextion::Text::SetLabel("t4", range >= 3 ? "A" : "mA");
+
+        if (btnMin.GetValue() == 1)
+        {
+            wndGiven.Draw({ 0.0f, false }, ButtonsRange::GetRange());
+        }
+        else
+        {
+            static const pchar labels[] =
+            {
+                "2.0000",
+                "20.000",
+                "200.00",
+                "2.0000",
+                "20.000",
+                "50.000"
+            };
+
+            Nextion::Text::SetLabel("t1", labels[range]);
+        }
     }
 
     static Page pageCalibration(buttons, FuncOnEnable, FuncDraw);
