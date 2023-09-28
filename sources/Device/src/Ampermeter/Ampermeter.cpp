@@ -61,6 +61,9 @@ namespace Ampermeter
             return (a <= b) ? a : b;
         }
     };
+
+    // —читанные значени€ выход€т за пределы диапазона
+    static bool OutOfRange();
 }
 
 
@@ -93,8 +96,10 @@ void Ampermeter::Update()
 }
 
 
-float Ampermeter::GetDC()
+float Ampermeter::GetDC(bool *out_of_range)
 {
+    *out_of_range = OutOfRange();
+
     return Calculator::GetDC();
 }
 

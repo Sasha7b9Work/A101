@@ -10,8 +10,6 @@ namespace Ampermeter
 
     void ReadData();
 
-    // Считанные значения выходят за пределы диапазона
-    bool OutOfRange();
-
-    float GetDC();
+    // если out_of_range == true - выход за границы диапазона
+    float GetDC(bool *out_of_range);
 }

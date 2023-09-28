@@ -48,9 +48,11 @@ namespace PageMain
         static const int after[6] = { 4, 3, 2, 4, 3, 3 };
         const pchar suffix = (range < 3) ? "mA" : "A";
 
-        Indicator::ConvertDoubleToText(Ampermeter::GetDC(), measureDC, after[range], suffix);
+        bool out_of_range = true;
 
-        if (Ampermeter::OutOfRange())
+        Indicator::ConvertDoubleToText(Ampermeter::GetDC(&out_of_range), measureDC, after[range], suffix);
+
+        if (out_of_range)
         {
             for (int i = 0; (i < TextString::MAX_LEN) && (measureDC[i] != '\0'); i++)
             {
