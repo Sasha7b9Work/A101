@@ -71,10 +71,8 @@ void WindowMeasure::SetMeasure(pchar measure)
 }
 
 
-void WindowMeasure::Draw(const Measure &measure)
+void WindowMeasure::Draw(const Measure &measure, int range)
 {
-    int range = Range::Current();
-
     static const int after[6] = { 4, 3, 2, 4, 3, 3 };
     const pchar suffix = (range < 3) ? "mA" : "A";
 

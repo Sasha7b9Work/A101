@@ -27,7 +27,7 @@ public:
     {
         Clear();
     }
-    void Draw(const Measure &);
+    void Draw(const Measure &, int range);
 protected:
     CntrlText cntrlType;        // DC или AC
     CntrlText cntrlSign;        // —юда выводим знак
