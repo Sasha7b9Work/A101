@@ -47,14 +47,14 @@ namespace PageMain
 
         DrawLabelStart();
 
-        wndDC.Draw();
+        wndDC.Draw(Ampermeter::GetDC());
 
-        wndAC.Draw();
+        wndAC.Draw(Ampermeter::GetAC());
 
-        wndAMPL.Draw();
-        wndPEAK.Draw();
-        wndMIN.Draw();
-        wndMAX.Draw();
+        wndAMPL.Draw(Ampermeter::GetAmpl());
+        wndPEAK.Draw(Ampermeter::GetPeak());
+        wndMIN.Draw(Ampermeter::GetMin());
+        wndMAX.Draw(Ampermeter::GetMax());
     }
 
 

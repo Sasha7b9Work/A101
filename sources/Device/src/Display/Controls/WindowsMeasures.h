@@ -2,6 +2,7 @@
 #pragma once
 #include "TextString.h"
 #include "Nextion/Controls/CntrlText.h"
+#include "Ampermeter/Ampermeter.h"
 
 
 struct TypeMeasure
@@ -26,7 +27,7 @@ public:
     {
         Clear();
     }
-    void Draw();
+    void Draw(const Measure &);
 protected:
     CntrlText cntrlType;        // DC или AC
     CntrlText cntrlSign;        // —юда выводим знак

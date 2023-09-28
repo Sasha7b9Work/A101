@@ -2,6 +2,13 @@
 #pragma once
 
 
+struct Measure
+{
+    float value = 0.0f;
+    bool out_of_range = false;
+};
+
+
 namespace Ampermeter
 {
     void Init();
@@ -11,10 +18,10 @@ namespace Ampermeter
     void ReadData();
 
     // если out_of_range == true - выход за границы диапазона
-    float GetDC(bool *out_of_range);
-    float GetAC(bool *out_of_range);
-    float GetAmpl(bool *out_of_range);
-    float GetPeak(bool *out_of_range);
-    float GetMin(bool *out_of_range);
-    float GetMax(bool *out_of_range);
+    Measure GetDC();
+    Measure GetAC();
+    Measure GetAmpl();
+    Measure GetPeak();
+    Measure GetMin();
+    Measure GetMax();
 }

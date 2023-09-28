@@ -93,51 +93,39 @@ void Ampermeter::Update()
 }
 
 
-float Ampermeter::GetDC(bool *out_of_range)
+Measure Ampermeter::GetDC()
 {
-    *out_of_range = OutOfRange();
-
-    return Calculator::GetDC();
+    return { Calculator::GetDC(), OutOfRange() };
 }
 
 
-float Ampermeter::GetAC(bool *out_of_range)
+Measure Ampermeter::GetAC()
 {
-    *out_of_range = OutOfRange();
-
-    return Calculator::GetAC();
+    return { Calculator::GetAC(), OutOfRange() };
 }
 
 
-float Ampermeter::GetAmpl(bool *out_of_range)
+Measure Ampermeter::GetAmpl()
 {
-    *out_of_range = true;
-
-    return 0.0f;
+    return { 0.0f, true };
 }
 
 
-float Ampermeter::GetPeak(bool *out_of_range)
+Measure Ampermeter::GetPeak()
 {
-    *out_of_range = false;
-
-    return 0.0f;
+    return { 0.0f, false };
 }
 
 
-float Ampermeter::GetMax(bool *out_of_range)
+Measure Ampermeter::GetMax()
 {
-    *out_of_range = true;
-
-    return 0.0f;
+    return { 0.0f, true };
 }
 
 
-float Ampermeter::GetMin(bool *out_of_range)
+Measure Ampermeter::GetMin()
 {
-    *out_of_range = false;
-
-    return 0.0f;
+    return { 0.0f, false };
 }
 
 

@@ -72,30 +72,16 @@ void WindowMeasure::SetMeasure(pchar measure)
 }
 
 
-void WindowMeasure::Draw()
+void WindowMeasure::Draw(const Measure &measure)
 {
     int range = Range::Current();
 
     static const int after[6] = { 4, 3, 2, 4, 3, 3 };
     const pchar suffix = (range < 3) ? "mA" : "A";
 
-    bool out_of_range = true;
+    ConvertDoubleToText(measure.value, buf_measure, after[range], suffix);
 
-    float value = 0.0f;
-
-    switch (type)
-    {
-    case TypeMeasure::DC:   value = Ampermeter::GetDC(&out_of_range);   break;
-    case TypeMeasure::AC:   value = Ampermeter::GetAC(&out_of_range);   break;
-    case TypeMeasure::Ampl: value = Ampermeter::GetAmpl(&out_of_range); break;
-    case TypeMeasure::Peak: value = Ampermeter::GetPeak(&out_of_range); break;
-    case TypeMeasure::Min:  value = Ampermeter::GetMin(&out_of_range);  break;
-    case TypeMeasure::Max:  value = Ampermeter::GetMax(&out_of_range);  break;
-    }
-
-    ConvertDoubleToText(value, buf_measure, after[range], suffix);
-
-    if (out_of_range)
+    if (measure.out_of_range)
     {
         for (int i = 0; (i < TextString::MAX_LEN) && (buf_measure[i] != '\0'); i++)
         {
