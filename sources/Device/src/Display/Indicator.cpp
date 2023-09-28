@@ -36,7 +36,7 @@ namespace Indicator
 
     static void SetSmall();
 
-    // before - количество цифр (без учёта знака) перед запятой, after - количество цифр после запятой
+    // after - количество цифр после запятой
     static void ConvertDoubleToText(float value, char buffer[TextString::MAX_LEN], int after, pchar suffix);
 
     static void WriteMeasures();
