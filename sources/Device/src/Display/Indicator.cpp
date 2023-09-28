@@ -22,10 +22,10 @@ namespace Indicator
     static WindowMeasure   wndDC("t2", "t19", "t0", "t18", "DC:");
     static WindowMeasure   wndAC("t3", "", "t1", "t17", "AC:");
 
-    static WindowMeasureAMPL windowAMPL;
-    static WindowMeasurePEAK windowPEAK;
-    static WindowMeasureMIN windowMIN;
-    static WindowMeasureMAX windowMAX;
+    static WindowMeasure   windowAMPL("t23", "", "t10", "t27", "Iamp:");
+    static WindowMeasure   windowPEAK("t20", "", "t9", "t26", "Ipp:");
+    static WindowMeasure   windowMIN("t22", "", "t8", "t25", "Imin:");
+    static WindowMeasure   windowMAX("t21", "", "t7", "t24", "Imax:");
 
     static bool is_big = true;
 

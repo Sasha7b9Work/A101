@@ -21,34 +21,6 @@ void WindowMeasure::Clear()
 }
 
 
-void WindowMeasureMAX::Clear()
-{
-    WindowMeasure::Clear();
-    cntrlType.SetLabel("Imax:");
-}
-
-
-void WindowMeasureMIN::Clear()
-{
-    WindowMeasure::Clear();
-    cntrlType.SetLabel("Imin:");
-}
-
-
-void WindowMeasurePEAK::Clear()
-{
-    WindowMeasure::Clear();
-    cntrlType.SetLabel("Ipp:");
-}
-
-
-void WindowMeasureAMPL::Clear()
-{
-    WindowMeasure::Clear();
-    cntrlType.SetLabel("Iamp:");
-}
-
-
 void WindowMeasure::SetMeasure(float value)
 {
     if (Page::Current() != PageMain::self)
