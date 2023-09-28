@@ -19,7 +19,7 @@ void Display::Init()
     Nextion::WaveFFT::Disable(0);
 
 #ifdef DEBUG
-    Nextion::DrawString(600, 5, 100, 40, 2, Color::Black, Color::Background, "Debug");
+    Nextion::DrawString(10, 350, 100, 40, 2, Color::Black, Color::Background, "Debug");
 #endif
 }
 
