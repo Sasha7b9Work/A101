@@ -19,10 +19,10 @@
 
 namespace Indicator
 {
-    static WindowMeasure   windowAMPL("t23", "", "t10", "t27", "Iamp:");
-    static WindowMeasure   windowPEAK("t20", "", "t9", "t26", "Ipp:");
-    static WindowMeasure   windowMIN("t22", "", "t8", "t25", "Imin:");
-    static WindowMeasure   windowMAX("t21", "", "t7", "t24", "Imax:");
+    static WindowMeasure   windowAMPL(TypeMeasure::Ampl, "t23", "", "t10", "t27", "Iamp:");
+    static WindowMeasure   windowPEAK(TypeMeasure::Peak, "t20", "", "t9", "t26", "Ipp:");
+    static WindowMeasure   windowMIN(TypeMeasure::Min, "t22", "", "t8", "t25", "Imin:");
+    static WindowMeasure   windowMAX(TypeMeasure::Max, "t21", "", "t7", "t24", "Imax:");
 
     static bool is_big = true;
 
