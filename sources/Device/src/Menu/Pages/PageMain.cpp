@@ -12,8 +12,6 @@
 
 namespace PageMain
 {
-    static char measureAC[TextString::MAX_LEN] = { '\0' };
-
     static WindowMeasure wndDC(TypeMeasure::DC, "t2", "t19", "t0", "t18", "DC:");
     static WindowMeasure wndAC(TypeMeasure::AC, "t3", "", "t1", "t17", "AC:");
 
@@ -47,28 +45,7 @@ namespace PageMain
 
         wndDC.Draw();
 
-        {
-            int range = Range::Current();
-
-            static const int after[6] = { 4, 3, 2, 4, 3, 3 };
-            const pchar suffix = (range < 3) ? "mA" : "A";
-
-            bool out_of_range_ac = true;
-
-            Indicator::ConvertDoubleToText(Ampermeter::GetAC(&out_of_range_ac), measureAC, after[range], suffix);
-
-            if (out_of_range_ac)
-            {
-                for (int i = 0; (i < TextString::MAX_LEN) && (measureAC[i] != '\0'); i++)
-                {
-                    if (measureAC[i] != '.') { measureAC[i] = '^'; }
-                }
-            }
-            else
-            {
-                wndAC.SetMeasure(measureAC);
-            }
-        }
+        wndAC.Draw();
     }
 
 
