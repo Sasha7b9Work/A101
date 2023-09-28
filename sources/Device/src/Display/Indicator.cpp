@@ -19,7 +19,6 @@
 
 namespace Indicator
 {
-    static WindowMeasure   wndDC("t2", "t19", "t0", "t18", "DC:");
     static WindowMeasure   wndAC("t3", "", "t1", "t17", "AC:");
 
     static WindowMeasure   windowAMPL("t23", "", "t10", "t27", "Iamp:");
@@ -29,7 +28,6 @@ namespace Indicator
 
     static bool is_big = true;
 
-    static char measureDC[TextString::MAX_LEN] = { '\0' };
     static char measureAC[TextString::MAX_LEN] = { '\0' };
 
     static void SetBig();
@@ -37,7 +35,7 @@ namespace Indicator
     static void SetSmall();
 
     // after - количество цифр после запятой
-    static void ConvertDoubleToText(float value, char buffer[TextString::MAX_LEN], int after, pchar suffix);
+    void ConvertDoubleToText(float value, char buffer[TextString::MAX_LEN], int after, pchar suffix);
 
     static void WriteMeasures();
 
@@ -52,7 +50,6 @@ namespace Indicator
 void Indicator::Init()
 {
     wndAC.Clear();
-    wndDC.Clear();
 }
 
 
@@ -73,7 +70,6 @@ void Indicator::SetBig()
 {
     is_big = true;
 
-    wndDC.SetMeasure(measureDC);
     wndAC.SetMeasure(measureAC);
 }
 
@@ -99,7 +95,7 @@ void Indicator::Update()
 }
 
 
-void Indicator::SetMeasures(float dc, float ac)
+void Indicator::SetMeasures(float ac)
 {
     static TimeMeterMS meter;
 
@@ -115,19 +111,16 @@ void Indicator::SetMeasures(float dc, float ac)
     static const int after[6]    = { 4, 3, 2, 4, 3, 3 };
     const pchar suffix = (range < 3) ? "mA" : "A";
 
-    ConvertDoubleToText(dc, measureDC, after[range], suffix);
     ConvertDoubleToText(ac, measureAC, after[range], suffix);
 
     if (NeedSend::USB || NeedSend::RS232)
     {
-        String<> messageDC("DC:%s", measureDC);
         String<> messageAC("AC:%s", measureAC + 1);
 
         if (NeedSend::USB)
         {
             NeedSend::USB--;
 
-            Communicator::SendWith0D0A(Direction::USB, messageDC.c_str());
             Communicator::SendWith0D0A(Direction::USB, messageAC.c_str());
         }
 
@@ -135,7 +128,6 @@ void Indicator::SetMeasures(float dc, float ac)
         {
             NeedSend::RS232--;
 
-            Communicator::SendWith0D0A(Direction::RS232, messageDC.c_str());
             Communicator::SendWith0D0A(Direction::RS232, messageAC.c_str());
         }
     }
@@ -144,9 +136,8 @@ void Indicator::SetMeasures(float dc, float ac)
 
 void Indicator::SetOverflow()
 {
-    for (int i = 0; (i < TextString::MAX_LEN) && (measureDC[i] != '\0'); i++)
+    for (int i = 0; (i < TextString::MAX_LEN) && (measureAC[i] != '\0'); i++)
     {
-        if (measureDC[i] != '.') { measureDC[i] = '^'; }
         if (measureAC[i] != '.') { measureAC[i] = '^'; }
     }
 }
@@ -156,7 +147,6 @@ void Indicator::WriteMeasures()
 {
     if (is_big)
     {
-        wndDC.SetMeasure(measureDC);
         wndAC.SetMeasure(measureAC);
     }
     else

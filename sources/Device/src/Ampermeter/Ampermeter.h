@@ -9,4 +9,7 @@ namespace Ampermeter
     void Update();
 
     void ReadData();
+
+    // —читанные значени€ выход€т за пределы диапазона
+    bool OutOfRange();
 }

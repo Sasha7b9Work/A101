@@ -17,6 +17,7 @@
 #include "Settings/Settings.h"
 #include "Ampermeter/FIR.h"
 #include "stm_includes.h"
+#include "Menu/Pages/Pages.h"
 #include <cmath>
 
 
@@ -60,9 +61,6 @@ namespace Ampermeter
             return (a <= b) ? a : b;
         }
     };
-
-    // —читанные значени€ выход€т за пределы диапазона
-    static bool OutOfRange();
 }
 
 
@@ -88,7 +86,9 @@ void Ampermeter::Update()
     }
     else
     {
-        Indicator::SetMeasures(Calculator::GetDC(), Calculator::GetAC());
+        Indicator::SetMeasures(Calculator::GetAC());
+
+        PageMain::SetMeasureDC(Calculator::GetDC());
 
         DiagramInput::SetData();
     }

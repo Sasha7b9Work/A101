@@ -9,7 +9,9 @@ class WindowMeasure
 public:
     WindowMeasure(pchar nameType, pchar nameSign, pchar nameDigits, pchar nameUnits, pchar _label_type = "") :
         cntrlType(nameType), cntrlSign(nameSign), cntrlDigits(nameDigits), cntrlUnits(nameUnits), label_type(_label_type)
-    {}
+    {
+        Clear();
+    }
     void Clear();
     void SetMeasure(pchar);
     void SetMeasure(float);
