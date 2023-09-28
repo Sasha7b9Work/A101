@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Display/DiagramInput.h"
 #include "Display/DiagramFFT.h"
-#include "Display/Indicator.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/Calibrator.h"
 
@@ -22,8 +21,6 @@ namespace PageGraph
 
     static Button btnWave("bt0", "3WP", []()
         {
-            Indicator::AutoSize();
-
             DiagramInput::Draw();
 
             DiagramFFT::Draw();
@@ -32,8 +29,6 @@ namespace PageGraph
 
     static Button btnSpectr("bt1", "3SP", []()
         {
-            Indicator::AutoSize();
-
             DiagramInput::Draw();
 
             DiagramFFT::Draw();

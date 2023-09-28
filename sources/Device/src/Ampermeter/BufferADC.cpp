@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Ampermeter/BufferADC.h"
 #include "Nextion/Nextion.h"
-#include "Display/Indicator.h"
 #include "Hardware/HAL/HAL.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include <limits>

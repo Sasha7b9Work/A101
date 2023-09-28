@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
-#include "Display/Indicator.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Nextion/Nextion.h"
@@ -43,8 +42,6 @@ namespace PageMain
 
     static void FuncDraw()
     {
-        Indicator::Update();
-
         DrawLabelStart();
 
         wndDC.Draw(Ampermeter::GetDC());

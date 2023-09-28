@@ -3,7 +3,6 @@
 #include "SCPI/Commands.h"
 #include "Device.h"
 #include "Menu/Pages/Pages.h"
-#include "Display/Indicator.h"
 
 
 namespace SCPI
@@ -70,7 +69,6 @@ bool SCPI::CommandDATA::Execute(Direction::E dir)
 
     if (char_num.ToInt(&num))
     {
-        Indicator::OnEvent::SendDataToCommunicator(dir, num);
     }
     else
     {

@@ -4,7 +4,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Display/DiagramInput.h"
 #include "Nextion/Nextion.h"
-#include "Display/Indicator.h"
 #include "Menu/MenuItems.h"
 #include <cstring>
 #include <cstdio>
@@ -18,8 +17,6 @@ void Display::Init()
     Nextion::WaveInput::Disable(0);
     Nextion::WaveInput::Disable(1);
     Nextion::WaveFFT::Disable(0);
-
-    Indicator::AutoSize();
 
 #ifdef DEBUG
     Nextion::DrawString(600, 5, 100, 40, 2, Color::Black, Color::Background, "Debug");

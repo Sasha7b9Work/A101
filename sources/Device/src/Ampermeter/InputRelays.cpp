@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Ampermeter/InputRelays.h"
 #include "Hardware/HAL/HAL_PIO.h"
-#include "Display/Indicator.h"
 #include "Ampermeter/Calculator/Calculator.h"
 #include "Ampermeter/Calibrator.h"
 #include "Settings/Settings.h"
@@ -22,18 +21,8 @@ float Range::Max(int range)
 
 void Range::Set(int _range)
 {
-    bool need_event = (current != _range);
-
     prev = current;
     current = _range;
-
-    if (need_event)
-    {
-        if (!Calibrator::InProcess())
-        {
-            Indicator::OnEvent::CnageRange();
-        }
-    }
 
     static int states[6][7] =
     {

@@ -8,7 +8,6 @@
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/MenuItems.h"
-#include "Display/Indicator.h"
 #include "Ampermeter/InputRelays.h"
 #include "Ampermeter/Calibrator.h"
 #include "Hardware/Timer.h"
@@ -72,8 +71,6 @@ void Ampermeter::Init()
     HAL_TIM4::Init();
 
     AD7691::Init();
-
-    Indicator::OnEvent::CnageRange();
 }
 
 

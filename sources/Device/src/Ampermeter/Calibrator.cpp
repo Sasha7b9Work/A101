@@ -4,7 +4,6 @@
 #include "Nextion/Nextion.h"
 #include "Hardware/Timer.h"
 #include "Menu/Pages/Pages.h"
-#include "Display/Indicator.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "Ampermeter/Ampermeter.h"
@@ -112,8 +111,6 @@ void Calibrator::ExecuteCalibration()
     Nextion::Page::Enable(0);
 
     PageGraph::self->SetAsCurrent();
-
-    Indicator::OnEvent::CnageRange();
 
     in_process = false;
 }

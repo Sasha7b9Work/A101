@@ -5,7 +5,6 @@
 #include "Nextion/Nextion.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/Ampermeter.h"
-#include "Display/Indicator.h"
 #include <cstring>
 #include <cstdio>
 #include <cmath>
