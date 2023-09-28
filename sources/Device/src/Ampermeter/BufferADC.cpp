@@ -32,10 +32,6 @@ void BufferADC::CalculateLimits()
         if (value < min) { min = value; }
         if (value > max) { max = value; }
     }
-
-    Indicator::SetStatisticsADC((int)(max.Raw() - min.Raw()),
-                                (int)(sum / SIZE),
-                                min, max);
 }
 
 

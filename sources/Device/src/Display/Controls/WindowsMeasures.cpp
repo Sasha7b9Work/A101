@@ -79,16 +79,18 @@ void WindowMeasure::Draw()
     static const int after[6] = { 4, 3, 2, 4, 3, 3 };
     const pchar suffix = (range < 3) ? "mA" : "A";
 
-    float value = 0.0f;
     bool out_of_range = true;
 
-    if (type == TypeMeasure::DC)
+    float value = 0.0f;
+
+    switch (type)
     {
-        value = Ampermeter::GetDC(&out_of_range);
-    }
-    else if (type == TypeMeasure::AC)
-    {
-        value = Ampermeter::GetAC(&out_of_range);
+    case TypeMeasure::DC:   value = Ampermeter::GetDC(&out_of_range);   break;
+    case TypeMeasure::AC:   value = Ampermeter::GetAC(&out_of_range);   break;
+    case TypeMeasure::Ampl: value = Ampermeter::GetAmpl(&out_of_range); break;
+    case TypeMeasure::Peak: value = Ampermeter::GetPeak(&out_of_range); break;
+    case TypeMeasure::Min:  value = Ampermeter::GetMin(&out_of_range);  break;
+    case TypeMeasure::Max:  value = Ampermeter::GetMax(&out_of_range);  break;
     }
 
     ConvertDoubleToText(value, buf_measure, after[range], suffix);

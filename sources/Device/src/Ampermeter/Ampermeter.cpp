@@ -109,6 +109,38 @@ float Ampermeter::GetAC(bool *out_of_range)
 }
 
 
+float Ampermeter::GetAmpl(bool *out_of_range)
+{
+    *out_of_range = true;
+
+    return 0.0f;
+}
+
+
+float Ampermeter::GetPeak(bool *out_of_range)
+{
+    *out_of_range = false;
+
+    return 0.0f;
+}
+
+
+float Ampermeter::GetMax(bool *out_of_range)
+{
+    *out_of_range = true;
+
+    return 0.0f;
+}
+
+
+float Ampermeter::GetMin(bool *out_of_range)
+{
+    *out_of_range = false;
+
+    return 0.0f;
+}
+
+
 void Ampermeter::ReadData()
 {
     TimeMeterMS meter;

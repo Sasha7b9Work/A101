@@ -13,4 +13,8 @@ namespace Ampermeter
     // если out_of_range == true - выход за границы диапазона
     float GetDC(bool *out_of_range);
     float GetAC(bool *out_of_range);
+    float GetAmpl(bool *out_of_range);
+    float GetPeak(bool *out_of_range);
+    float GetMin(bool *out_of_range);
+    float GetMax(bool *out_of_range);
 }

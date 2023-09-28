@@ -15,6 +15,10 @@ namespace PageMain
     static WindowMeasure wndDC(TypeMeasure::DC, "t2", "t19", "t0", "t18", "DC:");
     static WindowMeasure wndAC(TypeMeasure::AC, "t3", "", "t1", "t17", "AC:");
 
+    static WindowMeasure wndAMPL(TypeMeasure::Ampl, "t23", "", "t10", "t27", "Iamp:");
+    static WindowMeasure wndPEAK(TypeMeasure::Peak, "t20", "", "t9", "t26", "Ipp:");
+    static WindowMeasure wndMIN(TypeMeasure::Min, "t22", "", "t8", "t25", "Imin:");
+    static WindowMeasure wndMAX(TypeMeasure::Max, "t21", "", "t7", "t24", "Imax:");
 
     static void DrawLabelStart()
     {
@@ -46,6 +50,11 @@ namespace PageMain
         wndDC.Draw();
 
         wndAC.Draw();
+
+        wndAMPL.Draw();
+        wndPEAK.Draw();
+        wndMIN.Draw();
+        wndMAX.Draw();
     }
 
 

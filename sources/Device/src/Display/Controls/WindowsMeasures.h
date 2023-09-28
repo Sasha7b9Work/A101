@@ -26,9 +26,6 @@ public:
     {
         Clear();
     }
-    void Clear();
-    void SetMeasure(pchar);
-    void SetMeasure(float);
     void Draw();
 protected:
     CntrlText cntrlType;        // DC или AC
@@ -40,6 +37,9 @@ protected:
 
     char buf_measure[TextString::MAX_LEN];
 
+    void Clear();
+    void SetMeasure(pchar);
+    void SetMeasure(float);
     // after - количество цифр после запятой
     void ConvertDoubleToText(float value, char buffer[TextString::MAX_LEN], int after, pchar suffix);
 };

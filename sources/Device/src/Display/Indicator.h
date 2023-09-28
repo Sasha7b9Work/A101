@@ -16,9 +16,6 @@ namespace Indicator
     // Вызов этой функции устанавливает размер автоматически в зависимости от установленных режимов
     void AutoSize();
 
-    // Пиковое значение АЦП
-    void SetStatisticsADC(int peak, int ave, int min, int max);
-
     namespace OnEvent
     {
         void CnageRange();

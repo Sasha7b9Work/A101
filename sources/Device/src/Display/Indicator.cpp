@@ -19,11 +19,6 @@
 
 namespace Indicator
 {
-    static WindowMeasure   windowAMPL(TypeMeasure::Ampl, "t23", "", "t10", "t27", "Iamp:");
-    static WindowMeasure   windowPEAK(TypeMeasure::Peak, "t20", "", "t9", "t26", "Ipp:");
-    static WindowMeasure   windowMIN(TypeMeasure::Min, "t22", "", "t8", "t25", "Imin:");
-    static WindowMeasure   windowMAX(TypeMeasure::Max, "t21", "", "t7", "t24", "Imax:");
-
     static bool is_big = true;
 
     static void SetSmall();
@@ -83,25 +78,4 @@ void Indicator::OnEvent::SendDataToCommunicator(Direction::E dir, int num)
     {
         NeedSend::RS232 = num;
     }
-}
-
-
-void Indicator::SetStatisticsADC(int peak, int ave, int min, int max)
-{
-    static TimeMeterMS meter;
-
-    if (meter.ElapsedTime() < 500)
-    {
-        return;
-    }
-
-    meter.Reset();
-
-    windowPEAK.SetMeasure((float)peak);
-
-    windowAMPL.SetMeasure((float)ave);
-
-    windowMIN.SetMeasure((float)min);
-
-    windowMAX.SetMeasure((float)max);
 }
