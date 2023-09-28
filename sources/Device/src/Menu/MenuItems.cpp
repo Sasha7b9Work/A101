@@ -4,6 +4,7 @@
 #include "Menu/Menu.h"
 #include "Nextion/Nextion.h"
 #include "Menu/Pages/Pages.h"
+#include "Hardware/Timer.h"
 #include <cstring>
 #include <cstdio>
 
@@ -16,7 +17,7 @@ Page *Page::current = PageMain::self;
 
 void Button::Press()
 {
-    funcOnPress(this);
+    funcOnPress();
 }
 
 
@@ -54,11 +55,11 @@ void Page::SetButton(int index, Button *button)
 
 void Page::SetAsCurrent()
 {
-    current->funcOnEnable(false);
-
     current = this;
 
-    current->funcOnEnable(true);
+    Timer::Delay(10);           // Эта задержка нужна для того, чтобы дисплей успел переключиться на новую страницу.
+                                // Иначе сообщения элементам управления будут посылаться на старую страницу
+    current->funcOnEnable();
 }
 
 Button *Page::GetButton(pchar signal)

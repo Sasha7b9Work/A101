@@ -8,7 +8,7 @@ struct Button
 public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
-    Button(pchar _name, pchar _signal, void (*_funcOnPress)(Button *)) :
+    Button(pchar _name, pchar _signal, void (*_funcOnPress)()) :
         name(_name), signal(_signal), funcOnPress(_funcOnPress)
     {
     }
@@ -31,7 +31,7 @@ private:
 
     pchar name;                     // Имя кнопки в редакторе
     pchar signal;                   // Такой сигнал присылает кнопка при нажатии
-    void (*funcOnPress)(Button *);
+    void (*funcOnPress)();
 
     int value = 0;
 };
@@ -39,7 +39,7 @@ private:
 
 struct Page
 {
-    Page(Button **_buttons, void (*_funcOnEnable)(bool), void (*_funcOnDraw)()) :
+    Page(Button **_buttons, void (*_funcOnEnable)(), void (*_funcOnDraw)()) :
         buttons(_buttons), funcOnEnable(_funcOnEnable), funcOnDraw(_funcOnDraw)
     {
     }
@@ -62,7 +62,7 @@ private:
     Button **buttons;
 
     // Вызывается при появлении на экране
-    void (*funcOnEnable)(bool);
+    void (*funcOnEnable)();
 
     void (*funcOnDraw)();
 

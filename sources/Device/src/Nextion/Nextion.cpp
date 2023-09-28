@@ -185,7 +185,7 @@ bool Nextion::CommandButton::Execute()
         return false;
     }
 
-    Menu::Update(buffer);
+    Menu::_Update(buffer);
 
     return true;
 }

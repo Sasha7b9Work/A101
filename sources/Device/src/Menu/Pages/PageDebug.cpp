@@ -7,7 +7,7 @@
 
 namespace PageDebug
 {
-    static void FuncOnEnable(bool)
+    static void FuncOnEnable()
     {
 
     }
@@ -17,12 +17,12 @@ namespace PageDebug
 
     }
 
-    static Button buttonZero("bt1", "debugZero", [](Button *)
+    static Button buttonZero("bt1", "debugZero", []()
         {
         });
 
     static Button buttonResetCal("bt2", "debugReset",
-        [](Button *)
+        []()
         {
             cal.Reset();
         });

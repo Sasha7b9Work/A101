@@ -10,7 +10,7 @@
 
 namespace PageMain
 {
-    static void FuncOnEnable(bool)
+    static void FuncOnEnable()
     {
 
     }
@@ -34,56 +34,56 @@ namespace PageMain
     }
 
 
-    static Button btn2mA("bt0", "01P", [](Button *)
+    static Button btn2mA("bt0", "01P", []()
         {
             Range::Set(0);
         });
 
-    static Button btn20mA("bt1", "02P", [](Button *)
+    static Button btn20mA("bt1", "02P", []()
         {
             Range::Set(1);
         });
 
-    static Button btn200mA("bt2", "03P", [](Button *)
+    static Button btn200mA("bt2", "03P", []()
         {
             Range::Set(2);
         });
 
-    static Button btn2A("bt3", "04P", [](Button *)
+    static Button btn2A("bt3", "04P", []()
         {
             Range::Set(3);
         });
 
-    static Button btn20A("bt4", "05P", [](Button *)
+    static Button btn20A("bt4", "05P", []()
         {
             Range::Set(4);
         });
 
-    static Button btn50A("bt5", "06P", [](Button *)
+    static Button btn50A("bt5", "06P", []()
         {
             Range::Set(5);
         });
 
-    static Button btnAC_DC("b0", "0AD", [](Button *) {});
+    static Button btnAC_DC("b0", "0AD", []() {});
 
-    static Button btnCalibration("bt13", "0C", [](Button *)
+    static Button btnCalibration("bt13", "0C", []()
         {
             PageCalibration::self->SetAsCurrent();
         });
 
-    static Button btnZeroDC("bt11", "0DZ", [](Button *) {});
+    static Button btnZeroDC("bt11", "0DZ", []() {});
 
-    static Button btnZeroAC("bt10", "0AZ", [](Button *) {});
+    static Button btnZeroAC("bt10", "0AZ", []() {});
 
-    static Button btnSignal("bt12", "0S", [](Button *) {});
+    static Button btnSignal("bt12", "0S", []() {});
 
-    static Button btnMAX("bt15", "01I", [](Button *) {});
+    static Button btnMAX("bt15", "01I", []() {});
 
-    static Button btnAMP("bt19", "04I", [](Button *) {});
+    static Button btnAMP("bt19", "04I", []() {});
 
-    static Button btnMIN("bt18", "02I", [](Button *) {});
+    static Button btnMIN("bt18", "02I", []() {});
 
-    static Button btnPEAK("bt17", "03I", [](Button *) {});
+    static Button btnPEAK("bt17", "03I", []() {});
 
     static Button *buttons[] =
     {

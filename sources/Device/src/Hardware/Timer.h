@@ -57,6 +57,8 @@ namespace Timer
 
     void PauseOnTicks(uint numTicks);
 
+    void Delay(uint ms);
+
     // Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки
     void StartLogging();
 

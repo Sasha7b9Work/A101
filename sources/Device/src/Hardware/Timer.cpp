@@ -199,6 +199,16 @@ void Timer::PauseOnTicks(uint numTicks)
 }
 
 
+void Timer::Delay(uint ms)
+{
+    uint time_end = TIME_MS + ms;
+
+    while (TIME_MS < time_end)
+    {
+    }
+}
+
+
 void Timer::StartLogging()
 {
     timeStartLogging = TIME_TICKS;

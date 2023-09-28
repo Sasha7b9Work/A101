@@ -93,54 +93,54 @@ namespace PageCalibration
         }
     }
 
-    static Button btnBack("bt18", "2B0", [](Button *)
+    static Button btnBack("bt18", "2B0", []()
         {
             PageMain::self->SetAsCurrent();
         });
 
-    static Button btnSave("b12", "2SV", [](Button *) {});
+    static Button btnSave("b12", "2SV", []() {});
 
-    static Button btnCalib("b13", "2OK", [](Button *) {});
+    static Button btnCalib("b13", "2OK", []() {});
 
-    static Button btnMin("bt22", "2D1", [](Button *) { ChooseDot(0); });
+    static Button btnMin("bt22", "2D1", []() { ChooseDot(0); });
 
-    static Button btnMax("bt21", "2D2", [](Button *) { ChooseDot(1); });
+    static Button btnMax("bt21", "2D2", []() { ChooseDot(1); });
 
-    static Button btn2mA("bt17", "21P", [](Button *) { ChooseRange(0); });
+    static Button btn2mA("bt17", "21P", []() { ChooseRange(0); });
 
-    static Button btn20mA("bt16", "22P", [](Button *) { ChooseRange(1); });
+    static Button btn20mA("bt16", "22P", []() { ChooseRange(1); });
 
-    static Button btn200mA("bt15", "23P", [](Button *) { ChooseRange(2); });
+    static Button btn200mA("bt15", "23P", []() { ChooseRange(2); });
 
-    static Button btn2A("bt14", "24P", [](Button *) { ChooseRange(3); });
+    static Button btn2A("bt14", "24P", []() { ChooseRange(3); });
 
-    static Button btn20A("bt13", "25P", [](Button *) { ChooseRange(4); });
+    static Button btn20A("bt13", "25P", []() { ChooseRange(4); });
 
-    static Button btn50A("bt12", "26P", [](Button *) { ChooseRange(5); });
+    static Button btn50A("bt12", "26P", []() { ChooseRange(5); });
 
-    static Button btn0("b0", "KB0", [](Button *) { PressDigit('0'); });
+    static Button btn0("b0", "KB0", []() { PressDigit('0'); });
 
-    static Button btn1("b1", "KB1", [](Button *) { PressDigit('1'); });
+    static Button btn1("b1", "KB1", []() { PressDigit('1'); });
 
-    static Button btn2("b2", "KB2", [](Button *) { PressDigit('2'); });
+    static Button btn2("b2", "KB2", []() { PressDigit('2'); });
 
-    static Button btn3("b3", "KB3", [](Button *) { PressDigit('3'); });
+    static Button btn3("b3", "KB3", []() { PressDigit('3'); });
 
-    static Button btn4("b4", "KB4", [](Button *) { PressDigit('4'); });
+    static Button btn4("b4", "KB4", []() { PressDigit('4'); });
 
-    static Button btn5("b5", "KB5", [](Button *) { PressDigit('5'); });
+    static Button btn5("b5", "KB5", []() { PressDigit('5'); });
 
-    static Button btn6("b6", "KB6", [](Button *) { PressDigit('6'); });
+    static Button btn6("b6", "KB6", []() { PressDigit('6'); });
 
-    static Button btn7("b7", "KB7", [](Button *) { PressDigit('7'); });
+    static Button btn7("b7", "KB7", []() { PressDigit('7'); });
 
-    static Button btn8("b8", "KB8", [](Button *) { PressDigit('8'); });
+    static Button btn8("b8", "KB8", []() { PressDigit('8'); });
 
-    static Button btn9("b9", "KB9", [](Button *) { PressDigit('9'); });
+    static Button btn9("b9", "KB9", []() { PressDigit('9'); });
 
-    static Button btnDot("b10", "KBD", [](Button *) { PressDigit('.'); });
+    static Button btnDot("b10", "KBD", []() { PressDigit('.'); });
 
-    static Button btnSign("b11", "KBS", [](Button *) { PressDigit('-'); });
+    static Button btnSign("b11", "KBS", []() { PressDigit('-'); });
 
     static Button *buttons[] =
     {
@@ -281,7 +281,7 @@ namespace PageCalibration
         Nextion::Visible("t4", visible);
     }
 
-    static void FuncOnEnable(bool)
+    static void FuncOnEnable()
     {
         LabelPassword::Reset();
 
