@@ -88,10 +88,14 @@ void Ampermeter::Update()
     {
         Indicator::SetMeasures(Calculator::GetAC());
 
-        PageMain::SetMeasureDC(Calculator::GetDC());
-
         DiagramInput::SetData();
     }
+}
+
+
+float Ampermeter::GetDC()
+{
+    return Calculator::GetDC();
 }
 
 

@@ -16,16 +16,6 @@ namespace PageMain
 
     static WindowMeasure wndDC("t2", "t19", "t0", "t18", "DC:");
 
-    void SetMeasureDC(float dc)
-    {
-        int range = Range::Current();
-
-        static const int after[6] = { 4, 3, 2, 4, 3, 3 };
-        const pchar suffix = (range < 3) ? "mA" : "A";
-
-        Indicator::ConvertDoubleToText(dc, measureDC, after[range], suffix);
-    }
-
     static void DrawLabelStart()
     {
         uint secs = TIME_MS / 1000;
@@ -52,6 +42,13 @@ namespace PageMain
         Indicator::Update();
 
         DrawLabelStart();
+
+        int range = Range::Current();
+
+        static const int after[6] = { 4, 3, 2, 4, 3, 3 };
+        const pchar suffix = (range < 3) ? "mA" : "A";
+
+        Indicator::ConvertDoubleToText(Ampermeter::GetDC(), measureDC, after[range], suffix);
 
         if (Ampermeter::OutOfRange())
         {

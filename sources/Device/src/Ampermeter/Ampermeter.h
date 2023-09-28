@@ -12,4 +12,6 @@ namespace Ampermeter
 
     // —читанные значени€ выход€т за пределы диапазона
     bool OutOfRange();
+
+    float GetDC();
 }

@@ -6,8 +6,6 @@
 namespace PageMain
 {
     extern Page *self;
-
-    void SetMeasureDC(float);
 }
 
 
