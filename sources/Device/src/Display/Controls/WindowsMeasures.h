@@ -22,15 +22,6 @@ protected:
 };
 
 
-class WindowMeasureDC : public WindowMeasure
-{
-public:
-    WindowMeasureDC() : WindowMeasure("t2", "t19", "t0", "t18") {}
-    void Clear();
-private:
-};
-
-
 class WindowMeasureMAX : public WindowMeasure
 {
 public:

@@ -21,13 +21,6 @@ void WindowMeasure::Clear()
 }
 
 
-void WindowMeasureDC::Clear()
-{
-    WindowMeasure::Clear();
-    cntrlType.SetLabel("DC:");
-}
-
-
 void WindowMeasureMAX::Clear()
 {
     WindowMeasure::Clear();
