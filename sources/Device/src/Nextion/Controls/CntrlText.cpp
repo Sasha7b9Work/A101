@@ -7,12 +7,15 @@
 
 void CntrlText::SetLabel(pchar label)
 {
-    if (std::strcmp(label, prev_label) != 0)
+    if (name[0])
     {
-        std::strcpy(prev_label, label);
+        if (std::strcmp(label, prev_label) != 0)
+        {
+            std::strcpy(prev_label, label);
 
-        Nextion::SendCommandFormat("%s.txt=\"%s\"", name, label);
+            Nextion::SendCommandFormat("%s.txt=\"%s\"", name, label);
 
-        LOG_WRITE_TRACE("Set label %s", label);
+            LOG_WRITE_TRACE("Set label %s", label);
+        }
     }
 }

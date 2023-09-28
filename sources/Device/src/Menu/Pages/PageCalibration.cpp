@@ -5,11 +5,15 @@
 #include "Nextion/Nextion.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
+#include "Display/Controls/WindowsMeasures.h"
 #include <cstring>
 
 
 namespace PageCalibration
 {
+    static WindowMeasure wndCurrent(TypeMeasure::DC, "", "t5", "t0", "t3", "");     // Текущее значение напряжения
+    static WindowMeasure wndGiven(TypeMeasure::DC, "", "t6", "t1", "t4", "");       // Заданное значение напряжения
+
     static void DrawLabelStar()
     {
         uint secs = TIME_MS / 1000;
