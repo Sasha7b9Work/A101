@@ -285,29 +285,25 @@ namespace PageCalibration
 
         DrawLabelStar();
 
-        Nextion::Text::SetLabel("t6", "");
-
         int range = ButtonsRange::GetRange();
-
-        Nextion::Text::SetLabel("t4", range >= 3 ? "A" : "mA");
 
         if (btnMin.GetValue() == 1)
         {
-            wndGiven.Draw({ 0.0f, false }, ButtonsRange::GetRange());
+            wndGiven.Draw({ 0.0f, false }, range);
         }
         else
         {
-            static const pchar labels[] =
+            static const float values[] =
             {
-                "2.0000",
-                "20.000",
-                "200.00",
-                "2.0000",
-                "20.000",
-                "50.000"
+                2.0f,
+                20.0f,
+                200.0f,
+                2.0f,
+                20.0f,
+                50.0f
             };
 
-            Nextion::Text::SetLabel("t1", labels[range]);
+            wndGiven.Draw({ values[range], false }, range);
         }
     }
 
