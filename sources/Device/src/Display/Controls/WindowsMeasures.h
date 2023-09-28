@@ -7,8 +7,8 @@
 class WindowMeasure
 {
 public:
-    WindowMeasure(pchar nameType, pchar nameSign, pchar nameDigits, pchar nameUnits) :
-        cntrlType(nameType), cntrlSign(nameSign), cntrlDigits(nameDigits), cntrlUnits(nameUnits)
+    WindowMeasure(pchar nameType, pchar nameSign, pchar nameDigits, pchar nameUnits, pchar _label_type = "") :
+        cntrlType(nameType), cntrlSign(nameSign), cntrlDigits(nameDigits), cntrlUnits(nameUnits), label_type(_label_type)
     {}
     void Clear();
     void SetMeasure(pchar);
@@ -18,15 +18,7 @@ protected:
     CntrlText cntrlSign;        // —юда выводим знак
     CntrlText cntrlDigits;      // —юда выводим числовое значение
     CntrlText cntrlUnits;       // «десь единицы измерени€
-};
-
-
-class WindowMeasureAC : public WindowMeasure
-{
-public:
-    WindowMeasureAC() : WindowMeasure("t3", "", "t1", "t17") {}
-    void Clear();
-private:
+    pchar label_type = "";
 };
 
 

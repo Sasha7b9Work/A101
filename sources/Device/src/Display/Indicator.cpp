@@ -20,7 +20,7 @@
 namespace Indicator
 {
     static WindowMeasureDC windowDC;
-    static WindowMeasureAC windowAC;
+    static WindowMeasure   wndAC("t3", "", "t1", "t17", "AC:");
 
     static WindowMeasureAMPL windowAMPL;
     static WindowMeasurePEAK windowPEAK;
@@ -51,7 +51,7 @@ namespace Indicator
 
 void Indicator::Init()
 {
-    windowAC.Clear();
+    wndAC.Clear();
     windowDC.Clear();
 }
 
@@ -74,7 +74,7 @@ void Indicator::SetBig()
     is_big = true;
 
     windowDC.SetMeasure(measureDC);
-    windowAC.SetMeasure(measureAC);
+    wndAC.SetMeasure(measureAC);
 }
 
 
@@ -157,7 +157,7 @@ void Indicator::WriteMeasures()
     if (is_big)
     {
         windowDC.SetMeasure(measureDC);
-        windowAC.SetMeasure(measureAC);
+        wndAC.SetMeasure(measureAC);
     }
     else
     {

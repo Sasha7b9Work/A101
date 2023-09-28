@@ -13,13 +13,11 @@ void WindowMeasure::Clear()
     cntrlSign.SetLabel("");
     cntrlDigits.SetLabel("*.****");
     cntrlUnits.SetLabel("");
-}
 
-
-void WindowMeasureAC::Clear()
-{
-    WindowMeasure::Clear();
-    cntrlType.SetLabel("AC:");
+    if (label_type[0] != '\0')
+    {
+        cntrlType.SetLabel(label_type);
+    }
 }
 
 
