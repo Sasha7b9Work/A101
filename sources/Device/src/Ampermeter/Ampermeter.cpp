@@ -85,12 +85,9 @@ void Ampermeter::Update()
 
     if (OutOfRange())
     {
-        Indicator::SetOverflow();
     }
     else
     {
-        Indicator::SetMeasures(Calculator::GetAC());
-
         DiagramInput::SetData();
     }
 }
@@ -101,6 +98,14 @@ float Ampermeter::GetDC(bool *out_of_range)
     *out_of_range = OutOfRange();
 
     return Calculator::GetDC();
+}
+
+
+float Ampermeter::GetAC(bool *out_of_range)
+{
+    *out_of_range = OutOfRange();
+
+    return Calculator::GetAC();
 }
 
 

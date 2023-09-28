@@ -11,17 +11,10 @@
 
 namespace Indicator
 {
-    void Init();
-
     void Update();
 
     // Вызов этой функции устанавливает размер автоматически в зависимости от установленных режимов
     void AutoSize();
-
-    void SetMeasures(float ac);
-
-    // Установить признак переполнения
-    void SetOverflow();
 
     // Пиковое значение АЦП
     void SetStatisticsADC(int peak, int ave, int min, int max);

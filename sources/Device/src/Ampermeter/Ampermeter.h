@@ -12,4 +12,5 @@ namespace Ampermeter
 
     // если out_of_range == true - выход за границы диапазона
     float GetDC(bool *out_of_range);
+    float GetAC(bool *out_of_range);
 }

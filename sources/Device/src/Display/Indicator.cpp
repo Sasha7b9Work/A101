@@ -19,8 +19,6 @@
 
 namespace Indicator
 {
-    static WindowMeasure   wndAC("t3", "", "t1", "t17", "AC:");
-
     static WindowMeasure   windowAMPL("t23", "", "t10", "t27", "Iamp:");
     static WindowMeasure   windowPEAK("t20", "", "t9", "t26", "Ipp:");
     static WindowMeasure   windowMIN("t22", "", "t8", "t25", "Imin:");
@@ -28,28 +26,16 @@ namespace Indicator
 
     static bool is_big = true;
 
-    static char measureAC[TextString::MAX_LEN] = { '\0' };
-
-    static void SetBig();
-
     static void SetSmall();
 
     // after - количество цифр после запятой
     void ConvertDoubleToText(float value, char buffer[TextString::MAX_LEN], int after, pchar suffix);
-
-    static void WriteMeasures();
 
     namespace NeedSend
     {
         static int USB = 0;     // Столько раз нужно передавать данные наружу
         static int RS232 = 0;
     }
-}
-
-
-void Indicator::Init()
-{
-    wndAC.Clear();
 }
 
 
@@ -61,16 +47,7 @@ void Indicator::AutoSize()
     }
     else
     {
-        SetBig();
     }
-}
-
-
-void Indicator::SetBig()
-{
-    is_big = true;
-
-    wndAC.SetMeasure(measureAC);
 }
 
 
@@ -90,68 +67,6 @@ void Indicator::Update()
     }
 
     next_time += 500;
-
-    WriteMeasures();
-}
-
-
-void Indicator::SetMeasures(float ac)
-{
-    static TimeMeterMS meter;
-
-    if (meter.ElapsedTime() < 500)
-    {
-        return;
-    }
-
-    meter.Reset();
-
-    int range = Range::Current();
-
-    static const int after[6]    = { 4, 3, 2, 4, 3, 3 };
-    const pchar suffix = (range < 3) ? "mA" : "A";
-
-    ConvertDoubleToText(ac, measureAC, after[range], suffix);
-
-    if (NeedSend::USB || NeedSend::RS232)
-    {
-        String<> messageAC("AC:%s", measureAC + 1);
-
-        if (NeedSend::USB)
-        {
-            NeedSend::USB--;
-
-            Communicator::SendWith0D0A(Direction::USB, messageAC.c_str());
-        }
-
-        if (NeedSend::RS232)
-        {
-            NeedSend::RS232--;
-
-            Communicator::SendWith0D0A(Direction::RS232, messageAC.c_str());
-        }
-    }
-}
-
-
-void Indicator::SetOverflow()
-{
-    for (int i = 0; (i < TextString::MAX_LEN) && (measureAC[i] != '\0'); i++)
-    {
-        if (measureAC[i] != '.') { measureAC[i] = '^'; }
-    }
-}
-
-
-void Indicator::WriteMeasures()
-{
-    if (is_big)
-    {
-        wndAC.SetMeasure(measureAC);
-    }
-    else
-    {
-    }
 }
 
 
