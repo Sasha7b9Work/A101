@@ -39,4 +39,7 @@ protected:
     TypeMeasure::E type;
 
     char buf_measure[TextString::MAX_LEN];
+
+    // after - количество цифр после запятой
+    void ConvertDoubleToText(float value, char buffer[TextString::MAX_LEN], int after, pchar suffix);
 };

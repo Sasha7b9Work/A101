@@ -19,8 +19,6 @@ namespace Indicator
     // Пиковое значение АЦП
     void SetStatisticsADC(int peak, int ave, int min, int max);
 
-    void ConvertDoubleToText(float value, char buffer[TextString::MAX_LEN], int after, pchar suffix);
-
     namespace OnEvent
     {
         void CnageRange();

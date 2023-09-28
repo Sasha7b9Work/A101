@@ -8,6 +8,7 @@
 #include "Display/Indicator.h"
 #include <cstring>
 #include <cstdio>
+#include <cmath>
 
 
 void WindowMeasure::Clear()
@@ -90,7 +91,7 @@ void WindowMeasure::Draw()
         value = Ampermeter::GetAC(&out_of_range);
     }
 
-    Indicator::ConvertDoubleToText(value, buf_measure, after[range], suffix);
+    ConvertDoubleToText(value, buf_measure, after[range], suffix);
 
     if (out_of_range)
     {
@@ -104,3 +105,54 @@ void WindowMeasure::Draw()
         SetMeasure(buf_measure);
     }
 }
+
+
+void WindowMeasure::ConvertDoubleToText(float value, char out[TextString::MAX_LEN], int after, pchar suffix)
+{
+    std::strcpy(out, value < 0.0f ? "-" : "+");
+
+    value = std::fabs(value);
+
+    int before = 5 - after;
+
+    if (before == 3)
+    {
+        if (value < 10.0f)
+        {
+            std::strcat(out, "00");
+        }
+        else if (value < 100.0f)
+        {
+            std::strcat(out, "0");
+        }
+    }
+
+    if (before == 2 && value < 10.0f)
+    {
+        std::strcat(out, "0");
+    }
+
+    // Отбрасываем цифры, которых нет на экране - во избежание бага, когда 10 превращеется в 1 (при 9.999999)
+    {
+        for (int i = 0; i < after; i++)
+        {
+            value *= 10.0f;
+        }
+
+        value = (float)((int)value);
+
+        for (int i = 0; i < after; i++)
+        {
+            value /= 10.0f;
+        }
+    }
+
+    char buffer[TextString::MAX_LEN];
+
+    char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0' };
+
+    std::sprintf(buffer, format, (double)value, suffix);
+
+    std::strcat(out, buffer);
+}
+
