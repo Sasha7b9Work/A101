@@ -990,11 +990,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calibrator\Calibrator.h</FilePath>
             </File>
-            <File>
-              <FileName>Calibrator.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calibrator\Calibrator.txt</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2315,11 +2310,6 @@
               <FileName>Calibrator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calibrator\Calibrator.h</FilePath>
-            </File>
-            <File>
-              <FileName>Calibrator.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calibrator\Calibrator.txt</FilePath>
             </File>
           </Files>
         </Group>
