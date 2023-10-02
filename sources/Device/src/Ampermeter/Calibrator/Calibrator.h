@@ -4,14 +4,9 @@
 
 namespace Calibrator
 {
-    // Запустить процедуру калибровки
-    void ExecuteCalibration();
+    void Update();
 
-    // true означает, что находимся в процессе калибровки
-    bool InProcess();
+    void PressButtonRun();
 
-    namespace OnEvent
-    {
-        void ButtonReady();
-    }
+    void PressButtonSave();
 }

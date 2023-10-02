@@ -42,9 +42,7 @@ namespace Calibrator
 
     static TimeLine timeLine;
 
-    static bool event_ready = false;
-
-    static bool in_process = false;
+    static bool event_run = false;
 
     // level - 0: 0mA, 1 - верхний уровень
     static void DrawPromt(int range, int level);
@@ -58,20 +56,12 @@ namespace Calibrator
 
     static void DrawParameters();
 
-    static void WaitButton();
-}
-
-
-bool Calibrator::InProcess()
-{
-    return in_process;
+    void ExecuteCalibration();
 }
 
 
 void Calibrator::ExecuteCalibration()
 {
-    in_process = true;
-
     Settings::Storage::Store(set);
     CalibrationSettings::Storage::Store(cal);
 
@@ -96,9 +86,7 @@ void Calibrator::ExecuteCalibration()
 
     DrawParameters();
 
-    WaitButton();
-
-    if (event_ready)
+    if (event_run)
     {
         cal.Save();
     }
@@ -110,8 +98,6 @@ void Calibrator::ExecuteCalibration()
     Nextion::Page::Enable(0);
 
     PageGraph::self->SetAsCurrent();
-
-    in_process = false;
 }
 
 
@@ -148,9 +134,7 @@ void Calibrator::ProcedureCalibrate(int range, int level)
 {
     DrawPromt(range, level);
 
-    WaitButton();
-
-    if (event_ready)
+    if (event_run)
     {
         Nextion::Button::Disable("buttonOk");
         Nextion::Button::Disable("buttonCancel");
@@ -159,17 +143,6 @@ void Calibrator::ProcedureCalibrate(int range, int level)
 
         Nextion::Button::Enable("buttonOk");
         Nextion::Button::Enable("buttonCancel");
-    }
-}
-
-
-void Calibrator::WaitButton()
-{
-    event_ready = false;
-
-    while (!event_ready)
-    {
-        Nextion::Update();
     }
 }
 
@@ -300,12 +273,6 @@ void Calibrator::TimeLine::Draw()
 
         color = (color.value == Color::White.value) ? Color::Background : Color::White;
     }
-}
-
-
-void Calibrator::OnEvent::ButtonReady()
-{
-    event_ready = true;
 }
 
 
