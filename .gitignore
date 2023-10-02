@@ -6,6 +6,8 @@ archiv.zip
 
 .vs/*
 
+old/*
+
 sources/generated/*
 
 sources/Device/Objects/*
