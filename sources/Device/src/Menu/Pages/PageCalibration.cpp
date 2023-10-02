@@ -273,7 +273,7 @@ namespace PageCalibration
         btnCalib.SetText("Calib");
 
         ChooseDot(0);
-        ButtonsRange::SetRange(5);
+        ChooseRange(5);
 
         SetVisibleExceptButtons(false);
 
