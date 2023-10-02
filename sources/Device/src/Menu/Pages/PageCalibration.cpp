@@ -36,7 +36,7 @@ namespace PageCalibration
 
     static void ChooseRange(int);
 
-    static const pchar PASSWORD = "123";
+    static const pchar PASSWORD = "1";
 
     namespace LabelPassword
     {
