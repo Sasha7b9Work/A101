@@ -224,6 +224,7 @@ namespace PageCalibration
     static void ChooseRange(int range)
     {
         ButtonsRange::SetRange(range);
+        Range::Set(range);
     }
 
     void SetVisibleDigits(bool visible)
@@ -281,6 +282,8 @@ namespace PageCalibration
 
     static void FuncDraw()
     {
+        wndCurrent.Draw(Ampermeter::GetDC(), Range::Current());
+
         LabelPassword::Draw();
 
         DrawLabelStar();
