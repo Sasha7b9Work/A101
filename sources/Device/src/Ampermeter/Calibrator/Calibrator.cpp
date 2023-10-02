@@ -42,7 +42,6 @@ namespace Calibrator
 
     static TimeLine timeLine;
 
-    static bool event_skip = false;
     static bool event_ready = false;
 
     static bool in_process = false;
@@ -167,9 +166,8 @@ void Calibrator::ProcedureCalibrate(int range, int level)
 void Calibrator::WaitButton()
 {
     event_ready = false;
-    event_skip = false;
 
-    while (!event_ready && !event_skip)
+    while (!event_ready)
     {
         Nextion::Update();
     }
@@ -308,12 +306,6 @@ void Calibrator::TimeLine::Draw()
 void Calibrator::OnEvent::ButtonReady()
 {
     event_ready = true;
-}
-
-
-void Calibrator::OnEvent::ButtonSkip()
-{
-    event_skip = true;
 }
 
 

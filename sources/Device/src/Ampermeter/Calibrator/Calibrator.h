@@ -12,8 +12,6 @@ namespace Calibrator
 
     namespace OnEvent
     {
-        void ButtonSkip();
-
         void ButtonReady();
     }
 }
