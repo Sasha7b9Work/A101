@@ -42,12 +42,6 @@ namespace PageGraph
         });
 
 
-    static Button btnCalibration("", "calib", []()
-        {
-            Calibrator::ExecuteCalibration();
-        });
-
-
     static Button *buttons[] =
     {
         &btnWave,
@@ -63,11 +57,5 @@ namespace PageGraph
     void EnableDebug()
     {
         pageTwo.SetButton(4, &btnDebug);
-    }
-
-
-    void EnableCalibration()
-    {
-        pageTwo.SetButton(5, &btnCalibration);
     }
 }

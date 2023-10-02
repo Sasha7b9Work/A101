@@ -15,9 +15,6 @@ namespace PageGraph
 
     // ¬ключить страницу отладки
     void EnableDebug();
-
-    // ¬ключить страницу калибровки
-    void EnableCalibration();
 }
 
 

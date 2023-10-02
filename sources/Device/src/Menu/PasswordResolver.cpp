@@ -25,7 +25,6 @@ void PasswordResolver::AppendByte(char byte)
 
     if (pointer == NUM_BYTES)
     {
-        PageGraph::EnableCalibration();
         PageGraph::EnableDebug();
     }
 }
