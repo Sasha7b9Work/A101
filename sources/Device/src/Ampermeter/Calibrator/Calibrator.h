@@ -6,6 +6,9 @@ namespace Calibrator
 {
     void Update();
 
+    // Отрабатывает алгоритм
+    bool InProgress();
+
     void PressButtonRun();
 
     void PressButtonSave();

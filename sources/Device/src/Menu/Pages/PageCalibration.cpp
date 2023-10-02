@@ -6,6 +6,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Display/Controls/WindowsMeasures.h"
+#include "Ampermeter/Calibrator/Calibrator.h"
 #include <cstring>
 
 
@@ -115,9 +116,13 @@ namespace PageCalibration
             PageMain::self->SetAsCurrent();
         });
 
-    static Button btnSave("b12", "2SV", []() {});
+    static Button btn Save("b12", "2SV", []()
+        {
+        });
 
-    static Button btnCalib("b13", "2OK", []() {});
+    static Button btn Calib("b13", "2OK", []()
+        {
+        });
 
     static Button btnMin("bt22", "2D1", []() { ChooseDot(0); });
 
@@ -285,6 +290,8 @@ namespace PageCalibration
 
     static void FuncDraw()
     {
+        Calibrator::Update();
+
         wndCurrent.Draw(Ampermeter::GetDC(), Range::Current());
 
         LabelPassword::Draw();

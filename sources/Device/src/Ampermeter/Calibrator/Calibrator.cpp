@@ -16,6 +16,10 @@
 
 namespace Calibrator
 {
+    static bool in_progress = false;
+
+    static uint time_start = 0;
+
     struct TimeLine
     {
         void Reset();
@@ -306,4 +310,34 @@ void Calibrator::DrawPromt(int range, int level)
     y += delta;
 
     Nextion::DrawString(x, y, width, height, 2, Color::White, Color::Background, "и нажмите кнопку <Готово>.");
+}
+
+
+void Calibrator::Update()
+{
+    if (in_progress)
+    {
+        if (TIME_MS >= time_start + 5000)
+        {
+            in_progress = false;
+        }
+    }
+}
+
+
+bool Calibrator::InProgress()
+{
+    return in_progress;
+}
+
+
+void Calibrator::PressButtonRun()
+{
+    time_start = TIME_MS;
+}
+
+
+void Calibrator::PressButtonSave()
+{
+
 }
