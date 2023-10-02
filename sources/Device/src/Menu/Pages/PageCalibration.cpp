@@ -287,23 +287,26 @@ namespace PageCalibration
 
         int range = ButtonsRange::GetRange();
 
-        if (btnMin.GetValue() == 1)
+        if (range >= 0)
         {
-            wndGiven.Draw({ 0.0f, false }, range);
-        }
-        else
-        {
-            static const float values[] =
+            if (btnMin.GetValue() == 1)
             {
-                2.0f,
-                20.0f,
-                200.0f,
-                2.0f,
-                20.0f,
-                50.0f
-            };
+                wndGiven.Draw({ 0.0f, false }, range);
+            }
+            else
+            {
+                static const float values[] =
+                {
+                    2.0f,
+                    20.0f,
+                    200.0f,
+                    2.0f,
+                    20.0f,
+                    50.0f
+                };
 
-            wndGiven.Draw({ values[range], false }, range);
+                wndGiven.Draw({ values[range], false }, range);
+            }
         }
     }
 

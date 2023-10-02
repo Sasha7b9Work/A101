@@ -9,7 +9,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Menu/MenuItems.h"
 #include "Ampermeter/InputRelays.h"
-#include "Ampermeter/Calibrator.h"
 #include "Hardware/Timer.h"
 #include "Display/DiagramInput.h"
 #include "Ampermeter/Calculator/Averager.h"

@@ -3,7 +3,7 @@
 #include "Display/DiagramInput.h"
 #include "Display/DiagramFFT.h"
 #include "Menu/Pages/Pages.h"
-#include "Ampermeter/Calibrator.h"
+#include "Ampermeter/Calibrator/Calibrator.h"
 
 
 namespace PageGraph

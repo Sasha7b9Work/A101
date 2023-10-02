@@ -906,16 +906,6 @@
               <FilePath>.\src\Ampermeter\InputRelays.h</FilePath>
             </File>
             <File>
-              <FileName>Calibrator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calibrator.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Calibrator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calibrator.h</FilePath>
-            </File>
-            <File>
               <FileName>FIR.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\FIR.cpp</FilePath>
@@ -984,6 +974,26 @@
               <FileName>ResolverAC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\ResolverAC.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Ampermeter/Calibrator</GroupName>
+          <Files>
+            <File>
+              <FileName>Calibrator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calibrator\Calibrator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calibrator\Calibrator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrator.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calibrator\Calibrator.txt</FilePath>
             </File>
           </Files>
         </Group>
@@ -2222,16 +2232,6 @@
               <FilePath>.\src\Ampermeter\InputRelays.h</FilePath>
             </File>
             <File>
-              <FileName>Calibrator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calibrator.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Calibrator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calibrator.h</FilePath>
-            </File>
-            <File>
               <FileName>FIR.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\FIR.cpp</FilePath>
@@ -2300,6 +2300,26 @@
               <FileName>ResolverAC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ampermeter\Calculator\ResolverAC.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Ampermeter/Calibrator</GroupName>
+          <Files>
+            <File>
+              <FileName>Calibrator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calibrator\Calibrator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calibrator\Calibrator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrator.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calibrator\Calibrator.txt</FilePath>
             </File>
           </Files>
         </Group>

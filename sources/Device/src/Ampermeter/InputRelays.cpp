@@ -3,7 +3,6 @@
 #include "Ampermeter/InputRelays.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Ampermeter/Calculator/Calculator.h"
-#include "Ampermeter/Calibrator.h"
 #include "Settings/Settings.h"
 
 
