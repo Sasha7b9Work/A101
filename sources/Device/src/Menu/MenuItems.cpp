@@ -59,7 +59,7 @@ void Page::SetAsCurrent()
 
     Timer::Delay(10);           // Эта задержка нужна для того, чтобы дисплей успел переключиться на новую страницу.
                                 // Иначе сообщения элементам управления будут посылаться на старую страницу
-    current->funcOnEnable();
+    current->funcOnEnter();
 }
 
 Button *Page::GetButton(pchar signal)

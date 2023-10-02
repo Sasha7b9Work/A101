@@ -35,7 +35,7 @@ namespace PageMain
         }
     }
 
-    static void FuncOnEnable()
+    static void FuncOnEnter()
     {
 
     }
@@ -126,7 +126,7 @@ namespace PageMain
         nullptr
     };
 
-    static Page pageMain(buttons, FuncOnEnable, FuncDraw);
+    static Page pageMain(buttons, FuncOnEnter, FuncDraw);
 
     Page *self = &pageMain;
 }

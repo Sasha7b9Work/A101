@@ -264,7 +264,7 @@ namespace PageCalibration
         Nextion::Visible("t4", visible);
     }
 
-    static void FuncOnEnable()
+    static void FuncOnEnter()
     {
         LabelPassword::Reset();
 
@@ -313,7 +313,7 @@ namespace PageCalibration
         }
     }
 
-    static Page pageCalibration(buttons, FuncOnEnable, FuncDraw);
+    static Page pageCalibration(buttons, FuncOnEnter, FuncDraw);
 
     Page *self = &pageCalibration;
 }

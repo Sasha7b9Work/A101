@@ -8,7 +8,7 @@
 
 namespace PageGraph
 {
-    static void FuncOnEnable()
+    static void FuncOnEnter()
     {
 
     }
@@ -50,7 +50,7 @@ namespace PageGraph
         nullptr
     };
 
-    static Page pageTwo(buttons, FuncOnEnable, FuncDraw);
+    static Page pageTwo(buttons, FuncOnEnter, FuncDraw);
 
     Page *self = &pageTwo;
 

@@ -7,7 +7,7 @@
 
 namespace PageDebug
 {
-    static void FuncOnEnable()
+    static void FuncOnEnter()
     {
 
     }
@@ -34,7 +34,7 @@ namespace PageDebug
         nullptr
     };
 
-    static Page pageDebug(buttons, FuncOnEnable, FuncDraw);
+    static Page pageDebug(buttons, FuncOnEnter, FuncDraw);
 
     Page *self = &pageDebug;
 }
