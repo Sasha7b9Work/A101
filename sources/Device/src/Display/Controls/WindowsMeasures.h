@@ -28,6 +28,8 @@ public:
         Clear();
     }
     void Draw(const Measure &, int range);
+    // Нанести надпись, даже если такая надпись уже нанесена
+    void Flash();
 protected:
     CntrlText cntrlType;        // DC или AC
     CntrlText cntrlSign;        // Сюда выводим знак

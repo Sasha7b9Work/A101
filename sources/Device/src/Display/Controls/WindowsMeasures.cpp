@@ -71,6 +71,12 @@ void WindowMeasure::SetMeasure(pchar measure)
 }
 
 
+void WindowMeasure::Flash()
+{
+    cntrlDigits.Flash();
+}
+
+
 void WindowMeasure::Draw(const Measure &measure, int range)
 {
     static const int after[6] = { 4, 3, 2, 4, 3, 3 };

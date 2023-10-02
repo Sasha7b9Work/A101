@@ -101,6 +101,9 @@ namespace PageCalibration
         {
             LabelPassword::Draw();
 
+            ChooseDot(0);
+            ChooseRange(5);
+
             SetVisibleExceptButtons(true);
 
             SetVisibleDigits(false);
@@ -266,18 +269,18 @@ namespace PageCalibration
 
     static void FuncOnEnter()
     {
+        wndCurrent.Flash();
+        wndGiven.Flash();
+
+        SetVisibleExceptButtons(false);
+
+        SetVisibleDigits(true);
+
         LabelPassword::Reset();
 
         btnMin.SetText("Min");
         btnMax.SetText("Max");
         btnCalib.SetText("Calib");
-
-        ChooseDot(0);
-        ChooseRange(5);
-
-        SetVisibleExceptButtons(false);
-
-        SetVisibleDigits(true);
     }
 
     static void FuncDraw()

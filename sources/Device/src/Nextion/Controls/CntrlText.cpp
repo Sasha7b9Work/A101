@@ -5,11 +5,11 @@
 #include <cstring>
 
 
-void CntrlText::SetLabel(pchar label)
+void CntrlText::SetLabel(pchar label, bool if_different)
 {
     if (name[0])
     {
-        if (std::strcmp(label, prev_label) != 0)
+        if (std::strcmp(label, prev_label) != 0 || !if_different)
         {
             std::strcpy(prev_label, label);
 
@@ -18,4 +18,10 @@ void CntrlText::SetLabel(pchar label)
             LOG_WRITE_TRACE("Set label %s", label);
         }
     }
+}
+
+
+void CntrlText::Flash()
+{
+    SetLabel(prev_label, false);
 }
