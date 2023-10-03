@@ -128,9 +128,8 @@ namespace PageCalibration
 
     static Button btnCalib("b13", "2OK", []()
         {
-            Calibrator::SetCallbackUpdate(FuncDraw);
             btnSave.ChangeVisible(false);
-            Calibrator::Run(Range::Current(), btnMax.GetValue());
+            Calibrator::Run(Range::Current(), btnMax.GetValue(), FuncDraw);
             btnSave.ChangeVisible(true);
         });
 

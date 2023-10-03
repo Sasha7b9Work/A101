@@ -32,14 +32,10 @@ namespace Calibrator
 }
 
 
-void Calibrator::SetCallbackUpdate(void (*callback)())
+void Calibrator::Run(int range, int level, void (*callback)())
 {
     callbackUpdate = callback;
-}
 
-
-void Calibrator::Run(int range, int level)
-{
     Range::Set(range);
 
     TimeMeterMS().Wait(1000);

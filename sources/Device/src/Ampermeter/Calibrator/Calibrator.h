@@ -4,10 +4,7 @@
 
 namespace Calibrator
 {
-    void Run(int range, int level);
+    void Run(int range, int level, void (*callbackUpdate)());
 
     void PressButtonSave();
-
-    // Эта функция будет вызываться периодически во время калибровки
-    void SetCallbackUpdate(void (*)());
 }
