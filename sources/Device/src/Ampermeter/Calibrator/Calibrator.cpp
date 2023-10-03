@@ -16,10 +16,6 @@
 
 namespace Calibrator
 {
-    static bool in_progress = false;
-
-    static uint time_start = 0;
-
     struct CalibratorZero
     {
         CalibratorZero(int _range) : range(_range) {}
@@ -44,10 +40,6 @@ void Calibrator::SetCallbackUpdate(void (*callback)())
 
 void Calibrator::Run(int range, int level)
 {
-    in_progress = true;
-
-    time_start = TIME_MS;
-
     Range::Set(range);
 
     TimeMeterMS().Wait(1000);
