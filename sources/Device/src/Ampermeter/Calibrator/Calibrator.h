@@ -10,7 +10,4 @@ namespace Calibrator
 
     // Эта функция будет вызываться периодически во время калибровки
     void SetCallbackUpdate(void (*)());
-
-    // Устанавливает функцию, вызываемую после отработки PressButtonRun()
-    void SetCallbackOnComplete(void (*)());
 }

@@ -129,9 +129,9 @@ namespace PageCalibration
     static Button btnCalib("b13", "2OK", []()
         {
             Calibrator::SetCallbackUpdate(FuncDraw);
-            Calibrator::SetCallbackOnComplete([]() { btnSave.ChangeVisible(true); });
             btnSave.ChangeVisible(false);
             Calibrator::Run(Range::Current(), btnZero.GetValue() == 1 ? 0 : 1);
+            btnSave.ChangeVisible(true);
         });
 
     static Button btn2mA("bt17", "21P", []() { ChooseRange(0); });

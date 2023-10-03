@@ -31,17 +31,8 @@ namespace Calibrator
 
     static void (*callbackUpdate)() = nullptr;
 
-    // Эта функция будет вызываться после отработки калибровки
-    static void (*callbackOnComplete)() = nullptr;
-
     // Откалибровать усиление
     static void CalibrateGain(int range);
-}
-
-
-void Calibrator::SetCallbackOnComplete(void (*callback)())
-{
-    callbackOnComplete = callback;
 }
 
 
