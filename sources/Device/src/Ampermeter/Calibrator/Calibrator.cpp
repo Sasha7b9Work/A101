@@ -20,21 +20,6 @@ namespace Calibrator
 
     static uint time_start = 0;
 
-    struct TimeLine
-    {
-        void Reset();
-        void Draw();
-    private:
-        static const int x = 175;
-        static const int y = 220;
-        static const int width = 450;
-        static const int height = 50;
-
-        int last = 0;                   // Последняя закрашенная линия
-
-        Color color = Color::White;
-    };
-
     struct CalibratorZero
     {
         CalibratorZero(int _range) : range(_range) {}
@@ -46,8 +31,6 @@ namespace Calibrator
 
     // Эта функция будет вызываться после отработки калибровки
     static void (*funcAfterRun)() = nullptr;
-
-    static TimeLine timeLine;
 
     // Откалибровать усиление
     static void CalibrateGain(int range);
@@ -66,10 +49,6 @@ void Calibrator::Run(int range, int level)
 
     time_start = TIME_MS;
 
-    timeLine.Reset();
-
-    Nextion::FillRect(100, 90, 600, 200, Color::Background);
-
     Range::Set(range);
 
     TimeMeterMS().Wait(1000);
@@ -82,8 +61,6 @@ void Calibrator::Run(int range, int level)
     {
         CalibrateGain(range);
     }
-
-    Nextion::FillRect(100, 90, 600, 200, Color::Background);
 }
 
 
@@ -106,8 +83,6 @@ void Calibrator::CalibratorZero::Run()
 
             while (std::fabsf(sign - Math::Sign(dc)) < 1e-3f)
             {
-                timeLine.Draw();
-
                 dc = CalculateDC(z);
 
                 if (std::fabsf(dc) < 1e-10f)
@@ -165,31 +140,6 @@ void Calibrator::CalibrateGain(int range)
     cal.SetGainK(range, k);
 
     LOG_WRITE("range = %d, dc = %f, k = %f", range, (double)dc, (double)k);
-}
-
-
-void Calibrator::TimeLine::Reset()
-{
-    Nextion::DrawRect(x, y, width, height, Color::White);
-
-    last = x;
-
-    color = Color::White;
-}
-
-
-void Calibrator::TimeLine::Draw()
-{
-    last++;
-
-    Nextion::DrawLineV(last, y + 1, y + height - 1, color);
-
-    if (last == x + width - 1)
-    {
-        last = x;
-
-        color = (color.value == Color::White.value) ? Color::Background : Color::White;
-    }
 }
 
 
