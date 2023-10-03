@@ -49,57 +49,16 @@ namespace Calibrator
 
     static TimeLine timeLine;
 
-    static bool event_run = false;
-
     static void CalibrateHardware(int range, int level);
 
     // Откалибровать усиление
     static void CalibrateGain(int range);
-
-    void ExecuteCalibration();
 }
 
 
 void Calibrator::SetCallbackAfterRun(void (*callback)())
 {
     funcAfterRun = callback;
-}
-
-
-void Calibrator::ExecuteCalibration()
-{
-    Settings::Storage::Store(set);
-    CalibrationSettings::Storage::Store(cal);
-
-    set.firLPF = false;
-    set.middle_of_3 = false;
-    set.smooth = false;
-    set.enabled_zero = false;
-
-    Nextion::Page::Enable(1);
-
-    for (int range = 0; range < 6; range++)
-    {
-        for (int level = 0; level < 2; level++)
-        {
-            Range::Set(3);
-        }
-    }
-
-    Settings::Storage::Restore(set);
-
-    if (event_run)
-    {
-        cal.Save();
-    }
-    else
-    {
-        CalibrationSettings::Storage::Restore(cal);
-    }
-
-    Nextion::Page::Enable(0);
-
-    PageGraph::self->SetAsCurrent();
 }
 
 
