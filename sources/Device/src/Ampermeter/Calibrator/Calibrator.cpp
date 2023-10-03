@@ -49,8 +49,6 @@ namespace Calibrator
 
     static TimeLine timeLine;
 
-    static void CalibrateHardware(int range, int level);
-
     // Откалибровать усиление
     static void CalibrateGain(int range);
 }
@@ -62,8 +60,12 @@ void Calibrator::SetCallbackAfterRun(void (*callback)())
 }
 
 
-void Calibrator::CalibrateHardware(int range, int level)
+void Calibrator::Run(int range, int level)
 {
+    in_progress = true;
+
+    time_start = TIME_MS;
+
     timeLine.Reset();
 
     Nextion::FillRect(100, 90, 600, 200, Color::Background);
@@ -205,14 +207,6 @@ void Calibrator::Update()
             }
         }
     }
-}
-
-
-void Calibrator::PressButtonRun()
-{
-    in_progress = true;
-
-    time_start = TIME_MS;
 }
 
 

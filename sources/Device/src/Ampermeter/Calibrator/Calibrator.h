@@ -6,7 +6,7 @@ namespace Calibrator
 {
     void Update();
 
-    void PressButtonRun();
+    void Run(int range, int level);
 
     void PressButtonSave();
 

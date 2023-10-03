@@ -116,6 +116,10 @@ namespace PageCalibration
             PageMain::self->SetAsCurrent();
         });
 
+    static Button btnZero("bt22", "2D1", []() { ChooseDot(0); });
+
+    static Button btnMax("bt21", "2D2", []() { ChooseDot(1); });
+
     static Button btnSave("b12", "2SV", []()
         {
         });
@@ -124,12 +128,8 @@ namespace PageCalibration
         {
             Calibrator::SetCallbackAfterRun([]() { btnSave.ChangeVisible(true); });
             btnSave.ChangeVisible(false);
-            Calibrator::PressButtonRun();
+            Calibrator::Run(Range::Current(), btnZero.GetValue() == 1 ? 0 : 1);
         });
-
-    static Button btnMin("bt22", "2D1", []() { ChooseDot(0); });
-
-    static Button btnMax("bt21", "2D2", []() { ChooseDot(1); });
 
     static Button btn2mA("bt17", "21P", []() { ChooseRange(0); });
 
@@ -169,9 +169,9 @@ namespace PageCalibration
 
     static Button *buttons[] =
     {
-        &btnBack, &btnSave, &btnCalib, &btnMin, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
-        &btn2A,   &btn20A,  &btn50A,   &btn0,   &btn1,    &btn2,   &btn3,    &btn4,
-        &btn5,    &btn6,    &btn7,     &btn8,   &btn9,    &btnDot, &btnSign, nullptr
+        &btnBack, &btnSave, &btnCalib, &btnZero, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
+        &btn2A,   &btn20A,  &btn50A,   &btn0,    &btn1,    &btn2,   &btn3,    &btn4,
+        &btn5,    &btn6,    &btn7,     &btn8,    &btn9,    &btnDot, &btnSign, nullptr
     };
 
     namespace ButtonsRange
@@ -220,7 +220,7 @@ namespace PageCalibration
     {
         static Button *btns[2] =
         {
-            &btnMin,
+            &btnZero,
             &btnMax
         };
 
@@ -256,7 +256,7 @@ namespace PageCalibration
 
     void SetVisibleExceptButtons(bool visible)
     {
-        btnMin.ChangeVisible(visible);
+        btnZero.ChangeVisible(visible);
         btnMax.ChangeVisible(visible);
         btnSave.ChangeVisible(visible);
         btnCalib.ChangeVisible(visible);
@@ -286,7 +286,7 @@ namespace PageCalibration
 
         LabelPassword::Reset();
 
-        btnMin.SetText("Min");
+        btnZero.SetText("Min");
         btnMax.SetText("Max");
         btnCalib.SetText("Calib");
     }
@@ -305,7 +305,7 @@ namespace PageCalibration
 
         if (range >= 0)
         {
-            if (btnMin.GetValue() == 1)
+            if (btnZero.GetValue() == 1)
             {
                 wndGiven.Draw({ 0.0f, false }, range);
             }
