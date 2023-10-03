@@ -58,8 +58,6 @@ namespace Calibrator
     // Откалибровать усиление
     static void CalibrateGain(int range);
 
-    static void DrawParameters();
-
     void ExecuteCalibration();
 }
 
@@ -94,8 +92,6 @@ void Calibrator::ExecuteCalibration()
 
     Settings::Storage::Restore(set);
 
-    DrawParameters();
-
     if (event_run)
     {
         cal.Save();
@@ -108,35 +104,6 @@ void Calibrator::ExecuteCalibration()
     Nextion::Page::Enable(0);
 
     PageGraph::self->SetAsCurrent();
-}
-
-
-void Calibrator::DrawParameters()
-{
-    Nextion::FillRect(1, 1, 795, 350, Color::Background);
-
-    static const pchar units[6] = { "2 mA", "20 mA", "200 mA", "2 A", "20 A", "50 A" };
-
-    for (int range = 0; range < 6; range++)
-    {
-        int width = 140;
-        int height = 40;
-        int x0 = 150;
-        int dY = 50;
-        int y0 = 30;
-        int y = y0 + range * dY;
-
-        Nextion::DrawString(x0, y, width, height, 2, Color::White, Color::Background, units[range]);
-
-        char buffer[30];
-        std::sprintf(buffer, "%d", cal.GetZero(range));
-
-        Nextion::DrawString(x0 + width, y, width, height, 2, Color::White, Color::Background, buffer);
-
-        std::sprintf(buffer, "%.10f", (double)cal.GetGainK(range));
-
-        Nextion::DrawString(x0 + width * 2, y, width * 2, height, 2, Color::White, Color::Background, buffer);
-    }
 }
 
 
