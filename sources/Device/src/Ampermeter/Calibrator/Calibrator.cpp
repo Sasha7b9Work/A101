@@ -44,6 +44,9 @@ namespace Calibrator
         float CalculateDC(int zero);
     };
 
+    // Эта функция будет вызываться после отработки калибровки
+    static void (*funcAfterRun)() = nullptr;
+
     static TimeLine timeLine;
 
     static bool event_run = false;

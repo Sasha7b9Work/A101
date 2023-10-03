@@ -116,11 +116,11 @@ namespace PageCalibration
             PageMain::self->SetAsCurrent();
         });
 
-    static Button btn Save("b12", "2SV", []()
+    static Button btnSave("b12", "2SV", []()
         {
         });
 
-    static Button btn Calib("b13", "2OK", []()
+    static Button btnCalib("b13", "2OK", []()
         {
         });
 

@@ -6,10 +6,10 @@ namespace Calibrator
 {
     void Update();
 
-    // Отрабатывает алгоритм
-    bool InProgress();
-
     void PressButtonRun();
 
     void PressButtonSave();
+
+    // Устанавливает функцию, вызываемую после отработки PressButtonRun()
+    void SetCallbackAfterRun(void (*callback)());
 }
