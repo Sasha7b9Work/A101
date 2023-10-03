@@ -51,8 +51,6 @@ namespace Calibrator
 
     static bool event_run = false;
 
-    static void ProcedureCalibrate(int range, int level);
-
     static void CalibrateHardware(int range, int level);
 
     // Откалибровать усиление
@@ -85,8 +83,6 @@ void Calibrator::ExecuteCalibration()
         for (int level = 0; level < 2; level++)
         {
             Range::Set(3);
-
-            ProcedureCalibrate(range, level);
         }
     }
 
@@ -104,21 +100,6 @@ void Calibrator::ExecuteCalibration()
     Nextion::Page::Enable(0);
 
     PageGraph::self->SetAsCurrent();
-}
-
-
-void Calibrator::ProcedureCalibrate(int range, int level)
-{
-    if (event_run)
-    {
-        Nextion::Button::Disable("buttonOk");
-        Nextion::Button::Disable("buttonCancel");
-
-        CalibrateHardware(range, level);
-
-        Nextion::Button::Enable("buttonOk");
-        Nextion::Button::Enable("buttonCancel");
-    }
 }
 
 
