@@ -130,7 +130,7 @@ namespace PageCalibration
         {
             Calibrator::SetCallbackUpdate(FuncDraw);
             btnSave.ChangeVisible(false);
-            Calibrator::Run(Range::Current(), btnZero.GetValue() == 1 ? 0 : 1);
+            Calibrator::Run(Range::Current(), btnMax.GetValue());
             btnSave.ChangeVisible(true);
         });
 
