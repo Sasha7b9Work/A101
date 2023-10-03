@@ -29,17 +29,25 @@ namespace Calibrator
         float CalculateDC(int zero);
     };
 
+    static void (*callbackUpdate)() = nullptr;
+
     // Эта функция будет вызываться после отработки калибровки
-    static void (*funcAfterRun)() = nullptr;
+    static void (*callbackOnComplete)() = nullptr;
 
     // Откалибровать усиление
     static void CalibrateGain(int range);
 }
 
 
-void Calibrator::SetCallbackAfterRun(void (*callback)())
+void Calibrator::SetCallbackOnComplete(void (*callback)())
 {
-    funcAfterRun = callback;
+    callbackOnComplete = callback;
+}
+
+
+void Calibrator::SetCallbackUpdate(void (*callback)())
+{
+    callbackUpdate = callback;
 }
 
 
@@ -140,23 +148,6 @@ void Calibrator::CalibrateGain(int range)
     cal.SetGainK(range, k);
 
     LOG_WRITE("range = %d, dc = %f, k = %f", range, (double)dc, (double)k);
-}
-
-
-void Calibrator::Update()
-{
-    if (in_progress)
-    {
-        if (TIME_MS >= time_start + 5000)
-        {
-            in_progress = false;
-
-            if (funcAfterRun)
-            {
-                funcAfterRun();
-            }
-        }
-    }
 }
 
 

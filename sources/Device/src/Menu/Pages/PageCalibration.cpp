@@ -12,6 +12,8 @@
 
 namespace PageCalibration
 {
+    static void FuncDraw();
+
     static WindowMeasure wndCurrent(TypeMeasure::DC, "", "t5", "t0", "t3", "");     // Текущее значение напряжения
     static WindowMeasure wndGiven(TypeMeasure::DC, "", "t6", "t1", "t4", "");       // Заданное значение напряжения
 
@@ -126,7 +128,8 @@ namespace PageCalibration
 
     static Button btnCalib("b13", "2OK", []()
         {
-            Calibrator::SetCallbackAfterRun([]() { btnSave.ChangeVisible(true); });
+            Calibrator::SetCallbackUpdate(FuncDraw);
+            Calibrator::SetCallbackOnComplete([]() { btnSave.ChangeVisible(true); });
             btnSave.ChangeVisible(false);
             Calibrator::Run(Range::Current(), btnZero.GetValue() == 1 ? 0 : 1);
         });
@@ -293,8 +296,6 @@ namespace PageCalibration
 
     static void FuncDraw()
     {
-        Calibrator::Update();
-
         wndCurrent.Draw(Ampermeter::GetDC(), Range::Current());
 
         LabelPassword::Draw();
