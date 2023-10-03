@@ -67,6 +67,12 @@ namespace Calibrator
 }
 
 
+void Calibrator::SetCallbackAfterRun(void (*callback)())
+{
+    funcAfterRun = callback;
+}
+
+
 void Calibrator::ExecuteCalibration()
 {
     Settings::Storage::Store(set);
@@ -323,19 +329,20 @@ void Calibrator::Update()
         if (TIME_MS >= time_start + 5000)
         {
             in_progress = false;
+
+            if (funcAfterRun)
+            {
+                funcAfterRun();
+            }
         }
     }
 }
 
 
-bool Calibrator::InProgress()
-{
-    return in_progress;
-}
-
-
 void Calibrator::PressButtonRun()
 {
+    in_progress = true;
+
     time_start = TIME_MS;
 }
 

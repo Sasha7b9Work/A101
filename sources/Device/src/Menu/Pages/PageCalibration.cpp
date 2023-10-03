@@ -122,6 +122,9 @@ namespace PageCalibration
 
     static Button btnCalib("b13", "2OK", []()
         {
+            Calibrator::SetCallbackAfterRun([]() { btnSave.ChangeVisible(true); });
+            btnSave.ChangeVisible(false);
+            Calibrator::PressButtonRun();
         });
 
     static Button btnMin("bt22", "2D1", []() { ChooseDot(0); });
