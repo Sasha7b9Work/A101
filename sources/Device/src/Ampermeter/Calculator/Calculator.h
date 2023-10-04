@@ -8,7 +8,9 @@ namespace Calculator
     // Функция возвращает частоту дискретизации для следующего сбора данных
     SampleRate AppendData();
 
-    float GetAC();
+    void Reset();
 
-    float GetDC();
+    float GetAC(bool *correct);
+
+    float GetDC(bool *correct);
 }

@@ -19,6 +19,13 @@ namespace Calculator
 }
 
 
+void Calculator::Reset()
+{
+    dc.Reset();
+    ac.Reset();
+}
+
+
 SampleRate Calculator::AppendData()
 {
     Period period = ResolverPeriodSamples().GetResult();
@@ -35,13 +42,17 @@ SampleRate Calculator::AppendData()
 }
 
 
-float Calculator::GetAC()
+float Calculator::GetAC(bool *correct)
 {
-    return ac.Get();
+    *correct = (ac.NumElements() > 0);
+
+    return ac.NumElements() ? ac.Get() : 0.0f;
 }
 
 
-float Calculator::GetDC()
+float Calculator::GetDC(bool *correct)
 {
-    return dc.Get();
+    *correct = (dc.NumElements() > 0);
+
+    return dc.NumElements() ? dc.Get() : 0.0f;
 }

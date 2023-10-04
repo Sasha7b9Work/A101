@@ -312,7 +312,7 @@ namespace PageCalibration
         {
             if (btnZero.GetValue() == 1)
             {
-                wndGiven.Draw({ 0.0f, false }, range);
+                wndGiven.Draw({ 0.0f, false, true }, range);
             }
             else
             {
@@ -326,7 +326,7 @@ namespace PageCalibration
                     50.0f
                 };
 
-                wndGiven.Draw({ values[range], false }, range);
+                wndGiven.Draw({ values[range], false, true }, range);
             }
         }
     }

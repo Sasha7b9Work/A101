@@ -4,8 +4,16 @@
 
 struct Measure
 {
+    Measure(float _value, bool _out_of_range, bool _correct) :
+        value(_value),
+        out_of_range(_out_of_range),
+        correct(_correct)
+    {
+    }
+
     float value = 0.0f;
     bool out_of_range = false;
+    bool correct = false;
 };
 
 
@@ -15,7 +23,10 @@ namespace Ampermeter
 
     void Update();
 
-    void ReadData();
+    // ѕолный цикл измерений - чтение данных и получение результата
+    void MeasurementCycle();
+
+    void OnEventChangeRange();
 
     // если out_of_range == true - выход за границы диапазона
     Measure GetDC();

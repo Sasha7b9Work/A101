@@ -84,7 +84,9 @@ void Calibrator::CalibratorZero::Run()
         }
     }
 
-    LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(), (double)dc);
+    bool correct_ac = false;
+
+    LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(&correct_ac), (double)dc);
 
     if (Math::Abs(z) < 10000)
     {
@@ -101,10 +103,12 @@ float Calibrator::CalibratorZero::CalculateDC(int zero)
 {
     cal.SetZero(range, zero);
 
-    Ampermeter::ReadData();
+    Ampermeter::MeasurementCycle();
     Calculator::AppendData();
 
-    return Calculator::GetDC();
+    bool correct_dc = false;
+
+    return Calculator::GetDC(&correct_dc);
 }
 
 
@@ -112,10 +116,12 @@ void Calibrator::CalibrateGain(int range)
 {
     cal.SetGainK(range, 1.0f);
 
-    Ampermeter::ReadData();
+    Ampermeter::MeasurementCycle();
     Calculator::AppendData();
 
-    float dc = std::fabsf(Calculator::GetDC());
+    bool correct_dc = false;
+
+    float dc = std::fabsf(Calculator::GetDC(&correct_dc));
 
     float k = Range::Max(range) / dc;
 

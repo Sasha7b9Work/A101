@@ -5,6 +5,7 @@
 #include "Ampermeter/Calculator/Calculator.h"
 #include "Settings/Settings.h"
 #include "Menu/Pages/Pages.h"
+#include "Ampermeter/Ampermeter.h"
 
 
 int Range::current = 3;
@@ -55,6 +56,7 @@ void Range::Set(int _range)
     }
 
     PageMain::OnEventChangeRange();
+    Ampermeter::OnEventChangeRange();
 }
 
 

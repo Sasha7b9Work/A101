@@ -75,7 +75,7 @@ void Ampermeter::Init()
 
 void Ampermeter::Update()
 {
-    ReadData();
+    MeasurementCycle();
 
     SampleRate::Current::Set(Calculator::AppendData());
 
@@ -91,41 +91,49 @@ void Ampermeter::Update()
 
 Measure Ampermeter::GetDC()
 {
-    return { Calculator::GetDC(), OutOfRange() };
+    bool correct = false;
+
+    float dc = Calculator::GetDC(&correct);
+
+    return Measure(dc, OutOfRange(), correct);
 }
 
 
 Measure Ampermeter::GetAC()
 {
-    return { Calculator::GetAC(), OutOfRange() };
+    bool correct = false;
+
+    float ac = Calculator::GetAC(&correct);
+
+    return Measure(ac, OutOfRange(), correct);
 }
 
 
 Measure Ampermeter::GetAmpl()
 {
-    return { 0.0f, true };
+    return Measure(0.0f, false, true);
 }
 
 
 Measure Ampermeter::GetPeak()
 {
-    return { 0.0f, false };
+    return Measure(0.0f, false, true);
 }
 
 
 Measure Ampermeter::GetMax()
 {
-    return { 0.0f, true };
+    return Measure(0.0f, false, true);
 }
 
 
 Measure Ampermeter::GetMin()
 {
-    return { 0.0f, false };
+    return Measure(0.0f, false, true);
 }
 
 
-void Ampermeter::ReadData()
+void Ampermeter::MeasurementCycle()
 {
     TimeMeterMS meter;
 
@@ -164,8 +172,6 @@ void Ampermeter::ReadData()
         }
     }
 
-    //    LOG_WRITE("time measure %d ms, time point %f us", meter.ElapsedTime(), (meter.ElapsedTime() / (double)BufferADC::SIZE) * 1e3);
-
     HAL_TIM4::Stop();
 
     if (set.middle_of_3)
@@ -188,14 +194,26 @@ bool Ampermeter::OutOfRange()
 
     float max = maxs[Range::Current()] * 1.1f * 1e3f;
 
-    float value = std::fabsf(Calculator::GetDC()) + Calculator::GetAC();
+    bool correct_dc = false;
+    bool correct_ac = false;
+
+    float dc = Calculator::GetDC(&correct_dc);
+    float ac = Calculator::GetAC(&correct_ac);
+
+    float value = std::fabsf(dc) + ac;
 
     if (value > max)
     {
-        LOG_WRITE("out range dc = %f, ac = %f", (double)Calculator::GetDC(), (double)Calculator::GetAC());
+        LOG_WRITE("out range dc = %f, ac = %f", (double)dc, (double)ac);
 
         return true;
     }
 
     return false;
+}
+
+
+void Ampermeter::OnEventChangeRange()
+{
+    Calculator::Reset();
 }

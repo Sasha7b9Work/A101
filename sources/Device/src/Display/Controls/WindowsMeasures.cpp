@@ -30,6 +30,13 @@ void WindowMeasure::Reset()
     cntrlUnits.SetLabel(range < 3 ? "mA" : "A");
 
     cntrlSign.SetLabel("");
+
+    if (label_type[0] != '\0')
+    {
+        cntrlType.SetLabel(label_type);
+    }
+
+    buf_measure[0] = '\0';
 }
 
 
