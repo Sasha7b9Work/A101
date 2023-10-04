@@ -30,6 +30,7 @@ public:
     void Draw(const Measure &, int range);
     // Нанести надпись, даже если такая надпись уже нанесена
     void Flash();
+    void Reset();
 protected:
     CntrlText cntrlType;        // DC или AC
     CntrlText cntrlSign;        // Сюда выводим знак

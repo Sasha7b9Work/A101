@@ -25,6 +25,12 @@ void WindowMeasure::Clear()
 }
 
 
+void WindowMeasure::Reset()
+{
+    cntrlDigits.SetLabel("*.****");
+}
+
+
 void WindowMeasure::SetMeasure(float value)
 {
     if (Page::Current() != PageMain::self)

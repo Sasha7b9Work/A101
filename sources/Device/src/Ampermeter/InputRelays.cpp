@@ -4,6 +4,7 @@
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Ampermeter/Calculator/Calculator.h"
 #include "Settings/Settings.h"
+#include "Menu/Pages/Pages.h"
 
 
 int Range::current = 3;
@@ -20,6 +21,10 @@ float Range::Max(int range)
 
 void Range::Set(int _range)
 {
+    PageMain::OnEventChangeRange();
+
+    PageCalibration::OnEventChangeRange();
+
     prev = current;
     current = _range;
 

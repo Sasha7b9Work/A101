@@ -6,6 +6,8 @@
 namespace PageMain
 {
     extern Page *self;
+
+    void OnEventChangeRange();
 }
 
 
@@ -21,6 +23,8 @@ namespace PageGraph
 namespace PageCalibration
 {
     extern Page *self;
+
+    void OnEventChangeRange();
 }
 
 
