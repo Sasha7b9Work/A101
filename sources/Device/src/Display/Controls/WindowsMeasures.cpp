@@ -94,21 +94,28 @@ void WindowMeasure::Flash()
 
 void WindowMeasure::Draw(const Measure &measure, int range)
 {
-    static const int after[6] = { 4, 3, 2, 4, 3, 3 };
-    const pchar suffix = (range < 3) ? "mA" : "A";
-
-    ConvertDoubleToText(measure.value, buf_measure, after[range], suffix);
-
-    if (measure.out_of_range)
+    if (!measure.correct)
     {
-        for (int i = 0; (i < TextString::MAX_LEN) && (buf_measure[i] != '\0'); i++)
-        {
-            if (buf_measure[i] != '.') { buf_measure[i] = '^'; }
-        }
+        Reset();
     }
     else
     {
-        SetMeasure(buf_measure);
+        static const int after[6] = { 4, 3, 2, 4, 3, 3 };
+        const pchar suffix = (range < 3) ? "mA" : "A";
+
+        ConvertDoubleToText(measure.value, buf_measure, after[range], suffix);
+
+        if (measure.out_of_range)
+        {
+            for (int i = 0; (i < TextString::MAX_LEN) && (buf_measure[i] != '\0'); i++)
+            {
+                if (buf_measure[i] != '.') { buf_measure[i] = '^'; }
+            }
+        }
+        else
+        {
+            SetMeasure(buf_measure);
+        }
     }
 }
 
