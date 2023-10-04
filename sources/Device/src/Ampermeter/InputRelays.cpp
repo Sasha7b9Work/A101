@@ -21,8 +21,6 @@ float Range::Max(int range)
 
 void Range::Set(int _range)
 {
-    PageMain::OnEventChangeRange();
-
     PageCalibration::OnEventChangeRange();
 
     prev = current;
@@ -55,6 +53,8 @@ void Range::Set(int _range)
         HAL_PIO::Write(PIN_US7, states[current][5] == 1);
         HAL_PIO::Write(PIN_US8, states[current][6] == 1);
     }
+
+    PageMain::OnEventChangeRange();
 }
 
 

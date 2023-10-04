@@ -10,24 +10,26 @@
 #include <cmath>
 
 
-void WindowMeasure::Clear()
-{
-    cntrlSign.SetLabel("");
-    cntrlDigits.SetLabel("*.****");
-    cntrlUnits.SetLabel("");
-
-    if (label_type[0] != '\0')
-    {
-        cntrlType.SetLabel(label_type);
-    }
-
-    buf_measure[0] = '\0';
-}
-
-
 void WindowMeasure::Reset()
 {
-    cntrlDigits.SetLabel("*.****");
+    int range = Range::Current();
+
+    if (range == 0 || range == 3)
+    {
+        cntrlDigits.SetLabel("*.****");
+    }
+    else if (range == 1 || range == 4 || range == 5)
+    {
+        cntrlDigits.SetLabel("**.***");
+    }
+    else if (range == 2)
+    {
+        cntrlDigits.SetLabel("***.**");
+    }
+
+    cntrlUnits.SetLabel(range < 3 ? "mA" : "A");
+
+    cntrlSign.SetLabel("");
 }
 
 
