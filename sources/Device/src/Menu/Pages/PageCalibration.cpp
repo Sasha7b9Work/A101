@@ -129,6 +129,7 @@ namespace PageCalibration
 
     static Button btnSave("b12", "2SV", []()
         {
+            Calibrator::PressButtonSave();
         });
 
     static Button btnCalib("b13", "2OK", []()

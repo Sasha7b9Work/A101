@@ -140,5 +140,5 @@ void Calibrator::CalibrateGain(int range)
 
 void Calibrator::PressButtonSave()
 {
-
+    cal.Save();
 }
