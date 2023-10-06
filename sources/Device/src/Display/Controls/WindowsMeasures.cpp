@@ -1,4 +1,4 @@
-// 2022/11/10 22:25:51 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+ï»¿// 2022/11/10 22:25:51 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Controls/WindowsMeasures.h"
 #include "Ampermeter/InputRelays.h"
@@ -100,11 +100,6 @@ void WindowMeasure::Draw(const Measure &measure, int range)
     }
     else
     {
-        static const int after[6] = { 4, 3, 2, 4, 3, 3 };
-        const pchar suffix = (range < 3) ? "mA" : "A";
-
-        ConvertDoubleToText(measure.value, buf_measure, after[range], suffix);
-
         if (measure.out_of_range)
         {
             for (int i = 0; (i < TextString::MAX_LEN) && (buf_measure[i] != '\0'); i++)
@@ -114,8 +109,13 @@ void WindowMeasure::Draw(const Measure &measure, int range)
         }
         else
         {
-            SetMeasure(buf_measure);
+            static const int after[6] = { 4, 3, 2, 4, 3, 3 };
+            const pchar suffix = (range < 3) ? "mA" : "A";
+
+            ConvertDoubleToText(measure.value, buf_measure, after[range], suffix);
         }
+
+        SetMeasure(buf_measure);
     }
 }
 
@@ -145,7 +145,7 @@ void WindowMeasure::ConvertDoubleToText(float value, char out[TextString::MAX_LE
         std::strcat(out, "0");
     }
 
-    // Îòáðàñûâàåì öèôðû, êîòîðûõ íåò íà ýêðàíå - âî èçáåæàíèå áàãà, êîãäà 10 ïðåâðàùååòñÿ â 1 (ïðè 9.999999)
+    // ÐžÑ‚Ð±Ñ€Ð°ÑÑ‹Ð²Ð°ÐµÐ¼ Ñ†Ð¸Ñ„Ñ€Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… Ð½ÐµÑ‚ Ð½Ð° ÑÐºÑ€Ð°Ð½Ðµ - Ð²Ð¾ Ð¸Ð·Ð±ÐµÐ¶Ð°Ð½Ð¸Ðµ Ð±Ð°Ð³Ð°, ÐºÐ¾Ð³Ð´Ð° 10 Ð¿Ñ€ÐµÐ²Ñ€Ð°Ñ‰ÐµÐµÑ‚ÑÑ Ð² 1 (Ð¿Ñ€Ð¸ 9.999999)
     {
         for (int i = 0; i < after; i++)
         {
