@@ -70,6 +70,8 @@ void Calibrator::CalibratorZero::Run()
 
             while (std::fabsf(sign - Math::Sign(dc)) < 1e-3f)
             {
+                callbackUpdate();
+
                 dc = CalculateDC(z);
 
                 if (std::fabsf(dc) < 1e-10f)
