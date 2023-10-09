@@ -12,6 +12,9 @@
 
 namespace PageCalibration
 {
+    extern Button btnSave;
+    extern Button btnCalib;
+
     static void FuncDraw();
 
     static WindowMeasure wndCurrent(TypeMeasure::DC, "", "t5", "t0", "t3", "");     // Текущее значение напряжения
@@ -100,6 +103,22 @@ namespace PageCalibration
     // Установить видимость для цифровых кнопок
     static void SetVisibleDigits(bool visible);
 
+    static Button btnBack("bt18", "2B0", []()
+        {
+            PageMain::self->SetAsCurrent();
+        });
+
+    static Button btnMin("bt22", "2D1", []() { ChooseDot(0); });
+
+    static Button btnMax("bt21", "2D2", []() { ChooseDot(1); });
+
+    Button btnSave("b12", "2SV", []()
+        {
+            Calibrator::PressButtonSave();
+            btnMax.SetVisible(false);
+            btnSave.SetVisible(false);
+        });
+
     // Нажатие кнопки на цифровой клавиатуре
     static void PressDigit(char symbol)
     {
@@ -115,28 +134,23 @@ namespace PageCalibration
             SetVisibleExceptButtons(true);
 
             SetVisibleDigits(false);
+
+            btnMax.SetVisible(false);
+            btnSave.SetVisible(false);
         }
     }
 
-    static Button btnBack("bt18", "2B0", []()
+    Button btnCalib("b13", "2OK", []()
         {
-            PageMain::self->SetAsCurrent();
-        });
-
-    static Button btnZero("bt22", "2D1", []() { ChooseDot(0); });
-
-    static Button btnMax("bt21", "2D2", []() { ChooseDot(1); });
-
-    static Button btnSave("b12", "2SV", []()
-        {
-            Calibrator::PressButtonSave();
-        });
-
-    static Button btnCalib("b13", "2OK", []()
-        {
-            btnSave.ChangeVisible(false);
-            Calibrator::Run(Range::Current(), btnMax.GetValue(), FuncDraw);
-            btnSave.ChangeVisible(true);
+            btnSave.SetVisible(false);
+            btnCalib.SetValue(0);
+            btnCalib.SetVisible(false);
+            if (Calibrator::Run(Range::Current(), btnMax.GetValue(), FuncDraw))
+            {
+                btnSave.SetVisible(true);
+                btnMax.SetVisible(true);
+            }
+            btnCalib.SetVisible(true);
         });
 
     static Button btn2mA("bt17", "21P", []() { ChooseRange(0); });
@@ -177,9 +191,9 @@ namespace PageCalibration
 
     static Button *buttons[] =
     {
-        &btnBack, &btnSave, &btnCalib, &btnZero, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
-        &btn2A,   &btn20A,  &btn50A,   &btn0,    &btn1,    &btn2,   &btn3,    &btn4,
-        &btn5,    &btn6,    &btn7,     &btn8,    &btn9,    &btnDot, &btnSign, nullptr
+        &btnBack, &btnSave, &btnCalib, &btnMin, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
+        &btn2A,   &btn20A,  &btn50A,   &btn0,   &btn1,    &btn2,   &btn3,    &btn4,
+        &btn5,    &btn6,    &btn7,     &btn8,   &btn9,    &btnDot, &btnSign, nullptr
     };
 
     namespace ButtonsRange
@@ -228,7 +242,7 @@ namespace PageCalibration
     {
         static Button *btns[2] =
         {
-            &btnZero,
+            &btnMin,
             &btnMax
         };
 
@@ -244,36 +258,40 @@ namespace PageCalibration
     {
         ButtonsRange::SetRange(range);
         Range::Set(range);
+
+        ChooseDot(0);
+        btnMax.SetVisible(false);
+        btnSave.SetVisible(false);
     }
 
     void SetVisibleDigits(bool visible)
     {
-        btn0.ChangeVisible(visible);
-        btn1.ChangeVisible(visible);
-        btn2.ChangeVisible(visible);
-        btn3.ChangeVisible(visible);
-        btn4.ChangeVisible(visible);
-        btn5.ChangeVisible(visible);
-        btn6.ChangeVisible(visible);
-        btn7.ChangeVisible(visible);
-        btn8.ChangeVisible(visible);
-        btn9.ChangeVisible(visible);
-        btnSign.ChangeVisible(visible);
-        btnDot.ChangeVisible(visible);
+        btn0.SetVisible(visible);
+        btn1.SetVisible(visible);
+        btn2.SetVisible(visible);
+        btn3.SetVisible(visible);
+        btn4.SetVisible(visible);
+        btn5.SetVisible(visible);
+        btn6.SetVisible(visible);
+        btn7.SetVisible(visible);
+        btn8.SetVisible(visible);
+        btn9.SetVisible(visible);
+        btnSign.SetVisible(visible);
+        btnDot.SetVisible(visible);
     }
 
     void SetVisibleExceptButtons(bool visible)
     {
-        btnZero.ChangeVisible(visible);
-        btnMax.ChangeVisible(visible);
-        btnSave.ChangeVisible(visible);
-        btnCalib.ChangeVisible(visible);
-        btn2mA.ChangeVisible(visible);
-        btn20mA.ChangeVisible(visible);
-        btn200mA.ChangeVisible(visible);
-        btn2A.ChangeVisible(visible);
-        btn20A.ChangeVisible(visible);
-        btn50A.ChangeVisible(visible);
+        btnMin.SetVisible(visible);
+        btnMax.SetVisible(visible);
+        btnSave.SetVisible(visible);
+        btnCalib.SetVisible(visible);
+        btn2mA.SetVisible(visible);
+        btn20mA.SetVisible(visible);
+        btn200mA.SetVisible(visible);
+        btn2A.SetVisible(visible);
+        btn20A.SetVisible(visible);
+        btn50A.SetVisible(visible);
 
         Nextion::Visible("t5", visible);
         Nextion::Visible("t0", visible);
@@ -285,6 +303,10 @@ namespace PageCalibration
 
     static void FuncOnEnter()
     {
+        btnMin.SetText("Min");
+        btnMax.SetText("Max");
+        btnCalib.SetText("Calib");
+
         wndCurrent.Flash();
         wndGiven.Flash();
 
@@ -293,10 +315,6 @@ namespace PageCalibration
         SetVisibleDigits(true);
 
         LabelPassword::Reset();
-
-        btnZero.SetText("Min");
-        btnMax.SetText("Max");
-        btnCalib.SetText("Calib");
     }
 
     static void FuncDraw()
@@ -311,7 +329,7 @@ namespace PageCalibration
 
         if (range >= 0)
         {
-            if (btnZero.GetValue() == 1)
+            if (btnMin.GetValue() == 1)
             {
                 wndGiven.Draw({ 0.0f, false, true }, range);
             }

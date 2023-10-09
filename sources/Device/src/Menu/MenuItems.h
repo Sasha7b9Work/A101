@@ -20,7 +20,7 @@ public:
 
     void SetText(pchar) const;
 
-    void ChangeVisible(bool) const;
+    void SetVisible(bool) const;
 
     // 1 - "нажать", 0 - "отпустить"
     void SetValue(int);

@@ -4,7 +4,7 @@
 
 namespace Calibrator
 {
-    void Run(int range, int level, void (*callbackUpdate)());
+    bool Run(int range, int level, void (*callbackUpdate)());
 
     void PressButtonSave();
 }

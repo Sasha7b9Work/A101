@@ -173,9 +173,17 @@ void Nextion::SendCommandRAW(pchar command)
 {
     LastCode::Set(ResponseCode::None);
 
+    static TimeMeterMS meter;
+
+    while (meter.ElapsedTime() < 1)
+    {
+    }
+
     HAL_USART2::SendNZ(command);
 
     HAL_USART2::SendNZ("\xFF\xFF\xFF");
+
+    meter.Reset();
 
     Profiler::AddCommand();
 }

@@ -19,7 +19,7 @@ namespace Calibrator
     struct CalibratorZero
     {
         CalibratorZero(int _range) : range(_range) {}
-        void Run();
+        bool Run();
     private:
         int range;
         float CalculateDC(int zero);
@@ -28,11 +28,11 @@ namespace Calibrator
     static void (*callbackUpdate)() = nullptr;
 
     // Откалибровать усиление
-    static void CalibrateGain(int range);
+    static bool CalibrateGain(int range);
 }
 
 
-void Calibrator::Run(int range, int level, void (*callback)())
+bool Calibrator::Run(int range, int level, void (*callback)())
 {
     callbackUpdate = callback;
 
@@ -40,18 +40,22 @@ void Calibrator::Run(int range, int level, void (*callback)())
 
     TimeMeterMS().Wait(1000);
 
+    bool result = false;
+
     if (level == 0)
     {
-        CalibratorZero(range).Run();
+        result = CalibratorZero(range).Run();
     }
     else if (level == 1)
     {
-        CalibrateGain(range);
+        result = CalibrateGain(range);
     }
+
+    return result;
 }
 
 
-void Calibrator::CalibratorZero::Run()
+bool Calibrator::CalibratorZero::Run()
 {
     const int zero = cal.GetZero(range);
 
@@ -90,14 +94,20 @@ void Calibrator::CalibratorZero::Run()
 
     LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(&correct_ac), (double)dc);
 
+    bool result = false;
+
     if (Math::Abs(z) < 10000)
     {
         cal.SetZero(range, z);
+
+        result = true;
     }
     else
     {
         cal.SetZero(range, zero);
     }
+
+    return result;
 }
 
 
@@ -114,7 +124,7 @@ float Calibrator::CalibratorZero::CalculateDC(int zero)
 }
 
 
-void Calibrator::CalibrateGain(int range)
+bool Calibrator::CalibrateGain(int range)
 {
     cal.SetGainK(range, 1.0f);
 
@@ -135,6 +145,8 @@ void Calibrator::CalibrateGain(int range)
     cal.SetGainK(range, k);
 
     LOG_WRITE("range = %d, dc = %f, k = %f", range, (double)dc, (double)k);
+
+    return true;
 }
 
 
