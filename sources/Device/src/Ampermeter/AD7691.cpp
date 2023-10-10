@@ -1,7 +1,6 @@
 // 2022/10/18 16:57:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Ampermeter/AD7691.h"
-#include "Generator/Generator.h"
 #include "Ampermeter/InputRelays.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include "Settings/Settings.h"
@@ -84,10 +83,6 @@ namespace AD7691
     static PinIN pinIN(GPIOC, GPIO_PIN_2);      // 17
     static PinOUT pinCLK(GPIOB, GPIO_PIN_10);   // 47
     static PinOUT pinCNV(GPIOB, GPIO_PIN_12);   // 51
-
-    static ValueADC ReadReal();
-
-    static ValueADC (*funcRead)() = ReadReal;
 }
 
 
@@ -103,12 +98,6 @@ void AD7691::Init()
 
 
 ValueADC AD7691::ReadValue()
-{
-    return funcRead();
-}
-
-
-ValueADC AD7691::ReadReal()
 {
     int result = 0;
 
@@ -164,10 +153,4 @@ ValueADC::ValueADC(int reading)
     }
 
     value -= cal.GetZero(Range::Current());
-}
-
-
-void AD7691::OnEvent::GeneratorChanged()
-{
-    funcRead = Generator::IsEanbled() ? Generator::ReadValue : ReadReal;
 }

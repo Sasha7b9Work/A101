@@ -39,7 +39,6 @@ file(GLOB AMPERMETER_CALC       src/Ampermeter/Calculator/*.*)
 file(GLOB AMPERMETER_CALIBRATOR src/Ampermeter/Calibrator/*.*)
 file(GLOB DISPLAY               src/Display/*.*)
 file(GLOB DISPLAY_CONTROLS      src/Display/Controls/*.*)
-file(GLOB GENERATOR             src/Generator/*.*)
 file(GLOB HARDWARE              src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS        src/Hardware/CMSIS/*.*)
 file(GLOB HARDWARE_HAL          src/Hardware/HAL/*.*)
@@ -59,7 +58,6 @@ source_group(Ampermeter/Calculator FILES ${AMPERMETER_CALC})
 source_group(Ampermeter/Calibrator FILES ${AMPERMETER_CALIBRATOR})
 source_group(Display               FILES ${DISPLAY})
 source_group(Display/Controls      FILES ${DISPLAY_CONTROLS})
-source_group(Generator             FILES ${GENERATOR})
 source_group(libs/HAL              FILES ${LIBS_HAL})
 source_group(Hardware              FILES ${HARDWARE})
 source_group(Hardware/CMSIS        FILES ${HARDWARE_CMSIS})
@@ -79,7 +77,6 @@ add_library(${PROJECT_NAME} ${LIBS_HAL}
                             ${AMPERMETER_CALIBRATOR}
                             ${DISPLAY}
                             ${DISPLAY_CONTROLS}
-                            ${GENERATOR}
                             ${HARDWARE}
                             ${HARDWARE_CMSIS}
                             ${HARDWARE_HAL}

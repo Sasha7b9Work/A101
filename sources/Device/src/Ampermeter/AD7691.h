@@ -43,10 +43,4 @@ namespace AD7691
     void Init();
 
     ValueADC ReadValue();
-
-    namespace OnEvent
-    {
-        // При вкл/откл генератора нужно вызывать эту функцию
-        void GeneratorChanged();
-    }
 }

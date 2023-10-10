@@ -1063,21 +1063,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Generator</GroupName>
-          <Files>
-            <File>
-              <FileName>Generator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Generator.h</FilePath>
-            </File>
-            <File>
-              <FileName>Generator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Generator.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Menu</GroupName>
           <Files>
             <File>
@@ -2380,21 +2365,6 @@
               <FileName>WindowsMeasures.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Controls\WindowsMeasures.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Generator</GroupName>
-          <Files>
-            <File>
-              <FileName>Generator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Generator.h</FilePath>
-            </File>
-            <File>
-              <FileName>Generator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Generator.cpp</FilePath>
             </File>
           </Files>
         </Group>

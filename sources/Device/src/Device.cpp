@@ -7,7 +7,6 @@
 #include "Ampermeter/Ampermeter.h"
 #include "Menu/Menu.h"
 #include "Utils/Profiler.h"
-#include "Generator/Generator.h"
 #include "Hardware/Timer.h"
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
@@ -28,12 +27,6 @@ void Device::Init()
     Display::Init();
 
     Menu::Init();
-
-    Generator::SetPicAC(1);
-
-    Generator::SetFrequency(1.0);
-
-    Generator::Disable();
 }
 
 
