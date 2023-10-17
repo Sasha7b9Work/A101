@@ -4,6 +4,7 @@
 #include "Ampermeter/InputRelays.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include "Settings/Settings.h"
+#include "Ampermeter/BufferADC.h"
 #include "stm_includes.h"
 
 
@@ -153,4 +154,17 @@ ValueADC::ValueADC(int reading)
     }
 
     value -= cal.zero[Range::Current()].GetFull();
+}
+
+
+int AD7691::GetAverageValue()
+{
+    int64 sum = 0;
+
+    for (int i = 0; i < BufferADC::SIZE; i++)
+    {
+        sum += AD7691::ReadValue();
+    }
+
+    return (int)((float)sum / (float)BufferADC::SIZE + 0.5f);
 }

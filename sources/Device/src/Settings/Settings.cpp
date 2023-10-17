@@ -13,7 +13,6 @@ namespace NS_Settings
         0,
         false,      // middle_of_3
         false,      // smooth
-        false,      // enabled_zero
         false       // firLPF
     };
 

@@ -26,19 +26,6 @@ namespace Calibrator
         float CalculateDC(int zero);
     };
 
-    // Возвращает среднее значение АЦП
-    static int GetValueADC()
-    {
-        int64 sum = 0;
-
-        for (int i = 0; i < BufferADC::SIZE; i++)
-        {
-            sum += AD7691::ReadValue();
-        }
-
-        return (int)((float)sum / (float)BufferADC::SIZE + 0.5f);
-    }
-
     static void (*callbackUpdate)() = nullptr;
 
     // Откалибровать усиление
@@ -114,7 +101,7 @@ bool Calibrator::CalibratorZero::Run()
     {
         InputRelays::EnableZero();
 
-        int valueADC = GetValueADC();
+        int valueADC = AD7691::GetAverageValue();
 
         InputRelays::DisableZero();
 

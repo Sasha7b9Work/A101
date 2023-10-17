@@ -62,6 +62,9 @@ namespace Ampermeter
 
     // Считанные значения выходят за пределы диапазона
     static bool OutOfRange();
+
+    // Подстрока нуля
+    static void AdjustmentZero();
 }
 
 
@@ -75,6 +78,8 @@ void Ampermeter::Init()
 
 void Ampermeter::Update()
 {
+    AdjustmentZero();
+
     MeasurementCycle();
 
     SampleRate::Current::Set(Calculator::AppendData());
@@ -216,4 +221,21 @@ bool Ampermeter::OutOfRange()
 void Ampermeter::OnEventChangeRange()
 {
     Calculator::Reset();
+}
+
+
+void Ampermeter::AdjustmentZero()
+{
+    static uint next_time = TIME_MS + 10000;
+
+    if (TIME_MS < next_time)
+    {
+        return;
+    }
+
+    InputRelays::EnableZero();
+
+    cal.zero[Range::Current()].SetVar(AD7691::GetAverageValue());
+
+    InputRelays::DisableZero();
 }

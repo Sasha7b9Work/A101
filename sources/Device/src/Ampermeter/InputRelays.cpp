@@ -12,6 +12,12 @@ int Range::current = 3;
 int Range::prev = 0;
 
 
+namespace InputRelays
+{
+    static bool zero_enabled = false;
+}
+
+
 float Range::Max(int range)
 {
     static const float max[6] = { 2e-3f, 20e-3f, 200e-3f, 2.0f, 20.0f, 50.0f };
@@ -42,7 +48,7 @@ void Range::Set(int _range)
     HAL_PIO::Write(PIN_US3, states[current][2] == 1);
     HAL_PIO::Write(PIN_US4, states[current][3] == 1);
 
-    if (set.enabled_zero)
+    if (InputRelays::ZeroIsEanbled())
     {
         HAL_PIO::Write(PIN_US6, false);
         HAL_PIO::Write(PIN_US7, false);
@@ -62,21 +68,21 @@ void Range::Set(int _range)
 
 void InputRelays::DisableZero()
 {
-    set.enabled_zero = false;
+    zero_enabled = false;
     Range::Load();
 }
 
 
 void InputRelays::EnableZero()
 {
-    set.enabled_zero = true;
+    zero_enabled = true;
     Range::Load();
 }
 
 
-bool InputRelays::IsEnabledZero()
+bool InputRelays::ZeroIsEanbled()
 {
-    return set.enabled_zero;
+    return zero_enabled;
 }
 
 
