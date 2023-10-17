@@ -95,6 +95,12 @@ bool Calibrator::CalibratorZero::Run()
 
                 LOG_WRITE("z = %d, dc = %f", z, (double)dc);
 
+                if (std::fabsf(dc) < 1e-6f)
+                {
+                    i = 5;
+                    break;
+                }
+
                 callbackUpdate();
 
                 z += delta;
@@ -106,7 +112,9 @@ bool Calibrator::CalibratorZero::Run()
 
     bool correct_ac = false;
 
+    LOG_WRITE("z - 1 = %d, dc = %f", z - 1, (double)CalculateDC(z - 1));
     LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(&correct_ac), (double)dc);
+    LOG_WRITE("z + 1 = %d, dc = %f", z + 1, (double)CalculateDC(z + 1));
 
     bool result = false;
 
