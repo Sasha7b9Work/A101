@@ -237,6 +237,8 @@ void Ampermeter::AdjustmentZero()
 
     InputRelays::EnableZero();
 
+    cal.zero[Range::Current()].SetVar(0);
+
     cal.zero[Range::Current()].SetVar(AD7691::GetAverageValue());
 
     InputRelays::DisableZero();
