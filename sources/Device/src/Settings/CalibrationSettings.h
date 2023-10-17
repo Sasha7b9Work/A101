@@ -19,7 +19,7 @@ struct CalibrationSettings
         Zero(int _value = 0) : value(_value), var(0)  { }
         void SetConst(int v) { value = v; }
         void SetVar(int v) { var = v; }
-        int Get() const { return value + var; }
+        int GetFull() const { return value + var; }
     private:
         int value;      // ѕосто€нное смещение, получаетс€ при калибровке
         int var;        // ѕлавающее смещение, измер€етс€ каждый 10 секунд

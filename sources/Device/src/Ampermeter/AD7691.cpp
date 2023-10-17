@@ -152,5 +152,5 @@ ValueADC::ValueADC(int reading)
         value -= 1 << 18;
     }
 
-    value -= cal.zero[Range::Current()].Get();
+    value -= cal.zero[Range::Current()].GetFull();
 }

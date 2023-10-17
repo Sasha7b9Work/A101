@@ -10,6 +10,7 @@
 #include "Ampermeter/InputRelays.h"
 #include "Utils/Math.h"
 #include "Ampermeter/Calibrator/Calibrator.h"
+#include "Ampermeter/AD7691.h"
 #include <cstdio>
 #include <cmath>
 
@@ -24,6 +25,19 @@ namespace Calibrator
         int range;
         float CalculateDC(int zero);
     };
+
+    // Возвращает среднее значение АЦП
+    static int GetValueADC()
+    {
+        int64 sum = 0;
+
+        for (int i = 0; i < BufferADC::SIZE; i++)
+        {
+            sum += AD7691::ReadValue();
+        }
+
+        return (int)((float)sum / (float)BufferADC::SIZE + 0.5f);
+    }
 
     static void (*callbackUpdate)() = nullptr;
 
@@ -57,7 +71,7 @@ bool Calibrator::Run(int range, Type::E type, void (*callback)())
 
 bool Calibrator::CalibratorZero::Run()
 {
-    const int zero = cal.zero[range].Get();
+    const int zero = cal.zero[range].GetFull();
 
     float dc = CalculateDC(0);
 
@@ -98,7 +112,15 @@ bool Calibrator::CalibratorZero::Run()
 
     if (Math::Abs(z) < 10000)
     {
-        cal.zero[range].SetConst(z);
+        InputRelays::EnableZero();
+
+        int valueADC = GetValueADC();
+
+        InputRelays::DisableZero();
+
+        cal.zero[range].SetVar(valueADC);
+
+        cal.zero[range].SetConst(z - valueADC);
 
         result = true;
     }
@@ -114,6 +136,7 @@ bool Calibrator::CalibratorZero::Run()
 float Calibrator::CalibratorZero::CalculateDC(int zero)
 {
     cal.zero[range].SetConst(zero);
+    cal.zero[range].SetVar(0);
 
     Ampermeter::MeasurementCycle();
     Calculator::AppendData();
