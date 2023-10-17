@@ -115,7 +115,6 @@ namespace PageCalibration
     Button btnSave("b12", "2SV", []()
         {
             Calibrator::PressButtonSave();
-            btnMax.SetVisible(false);
             btnSave.SetVisible(false);
         });
 
@@ -135,7 +134,6 @@ namespace PageCalibration
 
             SetVisibleDigits(false);
 
-            btnMax.SetVisible(false);
             btnSave.SetVisible(false);
         }
     }
@@ -148,7 +146,6 @@ namespace PageCalibration
             if (Calibrator::Run(Range::Current(), btnMax.GetValue(), FuncDraw))
             {
                 btnSave.SetVisible(true);
-                btnMax.SetVisible(true);
             }
             btnCalib.SetVisible(true);
         });
@@ -260,7 +257,6 @@ namespace PageCalibration
         Range::Set(range);
 
         ChooseDot(0);
-        btnMax.SetVisible(false);
         btnSave.SetVisible(false);
     }
 
