@@ -58,6 +58,14 @@ bool Calibrator::Run(int range, Type::E type, void (*callback)())
 
 bool Calibrator::CalibratorZero::Run()
 {
+    InputRelays::EnableZero();
+
+    cal.zero[range].SetVar(0);
+
+    cal.zero[range].SetVar(AD7691::GetAverageValue());
+
+    InputRelays::DisableZero();
+
     const int zero = cal.zero[range].GetFull();
 
     float dc = CalculateDC(0);
@@ -99,17 +107,7 @@ bool Calibrator::CalibratorZero::Run()
 
     if (Math::Abs(z) < 10000)
     {
-        InputRelays::EnableZero();
-
-        cal.zero[range].SetVar(0);
-
-        int valueADC = AD7691::GetAverageValue();
-
-        InputRelays::DisableZero();
-
-        cal.zero[range].SetVar(valueADC);
-
-        cal.zero[range].SetConst(z - valueADC);
+        cal.zero[range].SetConst(z);
 
         result = true;
     }
@@ -125,7 +123,6 @@ bool Calibrator::CalibratorZero::Run()
 float Calibrator::CalibratorZero::CalculateDC(int zero)
 {
     cal.zero[range].SetConst(zero);
-    cal.zero[range].SetVar(0);
 
     Ampermeter::MeasurementCycle();
     Calculator::AppendData();
