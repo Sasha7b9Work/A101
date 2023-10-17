@@ -31,18 +31,6 @@ float CalibrationSettings::Gain::Get() const
 }
 
 
-int CalibrationSettings::GetZero(int range)
-{
-    return zero[range];
-}
-
-
-void CalibrationSettings::SetZero(int range, int value)
-{
-    zero[range] = value;
-}
-
-
 void CalibrationSettings::Save()
 {
     size = sizeof(*this);

@@ -57,7 +57,7 @@ bool Calibrator::Run(int range, int level, void (*callback)())
 
 bool Calibrator::CalibratorZero::Run()
 {
-    const int zero = cal.GetZero(range);
+    const int zero = cal.zero[range].Get();
 
     float dc = CalculateDC(0);
 
@@ -98,13 +98,13 @@ bool Calibrator::CalibratorZero::Run()
 
     if (Math::Abs(z) < 10000)
     {
-        cal.SetZero(range, z);
+        cal.zero[range].Set(z);
 
         result = true;
     }
     else
     {
-        cal.SetZero(range, zero);
+        cal.zero[range].Set(zero);
     }
 
     return result;
@@ -113,7 +113,7 @@ bool Calibrator::CalibratorZero::Run()
 
 float Calibrator::CalibratorZero::CalculateDC(int zero)
 {
-    cal.SetZero(range, zero);
+    cal.zero[range].Set(zero);
 
     Ampermeter::MeasurementCycle();
     Calculator::AppendData();

@@ -14,14 +14,20 @@ struct CalibrationSettings
         float value;
     };
 
+    struct Zero
+    {
+        Zero(int _value = 0) : value(_value) { }
+        void Set(int v) { value = v; }
+        int Get() const { return value; }
+    private:
+        int value;
+    };
+
     uint size;                      // Здесь размер настроек - для проверки того, что версии соответствуют
     uint crc32;                     // Здесь контрольная сумма - для проверки правильности сохранения
 
     Gain gain[6];
-
-    int zero[6];
-    int GetZero(int range);
-    void SetZero(int range, int);
+    Zero zero[6];
 
     void Reset();
 
