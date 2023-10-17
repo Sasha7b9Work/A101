@@ -65,7 +65,9 @@ bool Calibrator::CalibratorZero::Run()
     InputRelays::EnableZero();
     zero.SetVar(0);
     zero.SetConst(0);
-    zero.SetVar(AD7691::GetAverageValue());
+    int average = AD7691::GetAverageValue();
+    LOG_WRITE("average = %d", average);
+    zero.SetVar(average);
     InputRelays::DisableZero();
 
     zero.SetConst(const_val);
@@ -74,25 +76,26 @@ bool Calibrator::CalibratorZero::Run()
 
     float dc1000 = CalculateDC(1000);
 
+    LOG_WRITE("dc = %f, dc1000 = %f", (double)dc, (double)dc1000);
+
     int z = 0;
 
-    int delta = (dc1000 > dc) ? 1000 : -1000;                              // На эту величину будем увеличивать ноль в каждой итерации
+    int delta = (dc < 0.0f) ? 1000 : -1000;
 
     {
         for (int i = 0; i < 4; i++)
         {
-            float sign = Math::Sign(dc);
+            float prev_dc = dc;
 
-            while (std::fabsf(sign - Math::Sign(dc)) < 1e-3f)
+            while ((int)Math::Sign(prev_dc) == (int)Math::Sign(dc))
             {
-                callbackUpdate();
+                prev_dc = dc;
 
                 dc = CalculateDC(z);
 
-                if (std::fabsf(dc) < 1e-10f)
-                {
-                    break;
-                }
+                LOG_WRITE("z = %d, dc = %f", z, (double)dc);
+
+                callbackUpdate();
 
                 z += delta;
             }
