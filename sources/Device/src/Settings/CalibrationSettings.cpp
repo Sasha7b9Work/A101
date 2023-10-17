@@ -31,12 +31,6 @@ float CalibrationSettings::GetGain(int range)
 }
 
 
-void CalibrationSettings::SetGainK(int range, float value)
-{
-    gain[range] = value;
-}
-
-
 int CalibrationSettings::GetZero(int range)
 {
     return zero[range];

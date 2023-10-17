@@ -126,7 +126,7 @@ float Calibrator::CalibratorZero::CalculateDC(int zero)
 
 bool Calibrator::CalibrateGain(int range)
 {
-    cal.SetGainK(range, 1.0f);
+    cal.gain[range].Set(1.0f);
 
     Ampermeter::MeasurementCycle();
     Calculator::AppendData();
@@ -142,7 +142,7 @@ bool Calibrator::CalibrateGain(int range)
         k *= 1e3f;
     }
 
-    cal.SetGainK(range, k);
+    cal.gain[range].Set(k);
 
     LOG_WRITE("range = %d, dc = %f, k = %f", range, (double)dc, (double)k);
 
