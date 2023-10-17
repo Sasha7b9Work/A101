@@ -27,19 +27,13 @@ float CalibrationSettings::GetGain(int range)
 {
     static const float k[6] = { 61.53e-2f, 61.53e-1f, 61.53e0f, 61.53e-2f, 61.53e0f, 61.53e-1f };
 
-    return gain[range] * k[range];
+    return gain[range].Get() * k[range];
 }
 
 
 void CalibrationSettings::SetGainK(int range, float value)
 {
     gain[range] = value;
-}
-
-
-float CalibrationSettings::GetGainK(int range)
-{
-    return gain[range];
 }
 
 
