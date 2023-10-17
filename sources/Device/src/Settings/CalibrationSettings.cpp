@@ -25,7 +25,7 @@ CalibrationSettings cal = NS_CalibrationSettings::cal_def;
 
 float CalibrationSettings::Gain::Get() const
 {
-    static const float k[6] = { 61.53e-2f, 61.53e-1f, 61.53e0f, 61.53e-2f, 61.53e0f, 61.53e-1f };
+    static const float k[6] = { 61.53e-2f, 61.53e-1f, 61.53e0f, 61.53e-2f, 61.53e-1f, 61.53e0f };
 
     return value * k[range];
 }

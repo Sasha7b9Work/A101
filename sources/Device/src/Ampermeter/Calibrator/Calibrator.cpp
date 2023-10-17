@@ -32,7 +32,7 @@ namespace Calibrator
 }
 
 
-bool Calibrator::Run(int range, int level, void (*callback)())
+bool Calibrator::Run(int range, Type::E type, void (*callback)())
 {
     callbackUpdate = callback;
 
@@ -42,11 +42,11 @@ bool Calibrator::Run(int range, int level, void (*callback)())
 
     bool result = false;
 
-    if (level == 0)
+    if (type == Type::DC)
     {
         result = CalibratorZero(range).Run();
     }
-    else if (level == 1)
+    else if (type == Type::AC)
     {
         result = CalibrateGain(range);
     }
@@ -98,13 +98,13 @@ bool Calibrator::CalibratorZero::Run()
 
     if (Math::Abs(z) < 10000)
     {
-        cal.zero[range].Set(z);
+        cal.zero[range].SetConst(z);
 
         result = true;
     }
     else
     {
-        cal.zero[range].Set(zero);
+        cal.zero[range].SetConst(zero);
     }
 
     return result;
@@ -113,7 +113,7 @@ bool Calibrator::CalibratorZero::Run()
 
 float Calibrator::CalibratorZero::CalculateDC(int zero)
 {
-    cal.zero[range].Set(zero);
+    cal.zero[range].SetConst(zero);
 
     Ampermeter::MeasurementCycle();
     Calculator::AppendData();

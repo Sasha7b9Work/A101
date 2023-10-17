@@ -143,7 +143,7 @@ namespace PageCalibration
             btnSave.SetVisible(false);
             btnCalib.SetValue(0);
             btnCalib.SetVisible(false);
-            if (Calibrator::Run(Range::Current(), btnMax.GetValue(), FuncDraw))
+            if (Calibrator::Run(Range::Current(), (btnMax.GetValue() == 0) ? Calibrator::Type::DC : Calibrator::Type::AC, FuncDraw))
             {
                 btnSave.SetVisible(true);
             }
@@ -256,7 +256,6 @@ namespace PageCalibration
         ButtonsRange::SetRange(range);
         Range::Set(range);
 
-        ChooseDot(0);
         btnSave.SetVisible(false);
     }
 
@@ -311,6 +310,8 @@ namespace PageCalibration
         SetVisibleDigits(true);
 
         LabelPassword::Reset();
+
+        ChooseDot(0);
     }
 
     static void FuncDraw()

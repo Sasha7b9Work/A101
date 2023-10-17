@@ -16,18 +16,20 @@ struct CalibrationSettings
 
     struct Zero
     {
-        Zero(int _value = 0) : value(_value) { }
-        void Set(int v) { value = v; }
-        int Get() const { return value; }
+        Zero(int _value = 0) : value(_value), var(0)  { }
+        void SetConst(int v) { value = v; }
+        void SetVar(int v) { var = v; }
+        int Get() const { return value + var; }
     private:
-        int value;
+        int value;      // Постоянное смещение, получается при калибровке
+        int var;        // Плавающее смещение, измеряется каждый 10 секунд
     };
 
     uint size;                      // Здесь размер настроек - для проверки того, что версии соответствуют
     uint crc32;                     // Здесь контрольная сумма - для проверки правильности сохранения
 
-    Gain gain[6];
-    Zero zero[6];
+    Gain gain[6];                   // Растяжка
+    Zero zero[6];                   // Смещения нуля
 
     void Reset();
 

@@ -4,7 +4,16 @@
 
 namespace Calibrator
 {
-    bool Run(int range, int level, void (*callbackUpdate)());
+    struct Type
+    {
+        enum E
+        {
+            DC,
+            AC
+        };
+    };
+
+    bool Run(int range, Type::E, void (*callbackUpdate)());
 
     void PressButtonSave();
 }
