@@ -235,11 +235,16 @@ void Ampermeter::AdjustmentZero()
 
     next_time = TIME_MS + 10000;
 
+    CalibrationSettings::Zero &zero = cal.zero[Range::Current()];
+    const int const_val = zero.GetConst();
+
     InputRelays::EnableZero();
 
-    cal.zero[Range::Current()].SetVar(0);
-
-    cal.zero[Range::Current()].SetVar(AD7691::GetAverageValue());
+    zero.SetConst(0);
+    zero.SetVar(0);
+    zero.SetVar(AD7691::GetAverageValue());
 
     InputRelays::DisableZero();
+
+    zero.SetConst(const_val);
 }

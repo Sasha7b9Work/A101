@@ -16,13 +16,17 @@ struct CalibrationSettings
 
     struct Zero
     {
-        Zero(int _value = 0) : value(_value), var(0)  { }
-        void SetConst(int v) { value = v; }
-        void SetVar(int v) { var = v; }
-        int GetFull() const { return value + var; }
+        Zero(int _value = 0) : const_val(_value), var_val(0)  { }
+        void SetConst(int v) { const_val = v; }
+        void SetVar(int v) { var_val = v; }
+        int GetFull() const { return const_val + var_val; }
+
+        int GetConst() const { return const_val; }
+        int GetVar() const { return var_val; }
+
     private:
-        int value;      // ѕосто€нное смещение, получаетс€ при калибровке
-        int var;        // ѕлавающее смещение, измер€етс€ каждый 10 секунд
+        int const_val;      // ѕосто€нное смещение, получаетс€ при калибровке
+        int var_val;        // ѕлавающее смещение, измер€етс€ каждый 10 секунд
     };
 
     uint size;                      // «десь размер настроек - дл€ проверки того, что версии соответствуют

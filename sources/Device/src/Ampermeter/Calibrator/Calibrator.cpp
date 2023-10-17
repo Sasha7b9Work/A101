@@ -58,15 +58,17 @@ bool Calibrator::Run(int range, Type::E type, void (*callback)())
 
 bool Calibrator::CalibratorZero::Run()
 {
+    CalibrationSettings::Zero &zero = cal.zero[Range::Current()];
+
+    const int const_val = zero.GetFull();
+
     InputRelays::EnableZero();
-
-    cal.zero[range].SetVar(0);
-
-    cal.zero[range].SetVar(AD7691::GetAverageValue());
-
+    zero.SetVar(0);
+    zero.SetConst(0);
+    zero.SetVar(AD7691::GetAverageValue());
     InputRelays::DisableZero();
 
-    const int zero = cal.zero[range].GetFull();
+    zero.SetConst(const_val);
 
     float dc = CalculateDC(0);
 
@@ -113,7 +115,7 @@ bool Calibrator::CalibratorZero::Run()
     }
     else
     {
-        cal.zero[range].SetConst(zero);
+        cal.zero[range].SetConst(const_val);
     }
 
     return result;
