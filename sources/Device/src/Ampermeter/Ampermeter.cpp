@@ -233,9 +233,15 @@ void Ampermeter::AdjustmentZero()
         return;
     }
 
+    next_time = TIME_MS + 10000;
+
     InputRelays::EnableZero();
 
-    cal.zero[Range::Current()].SetVar(AD7691::GetAverageValue());
+    cal.zero[Range::Current()].SetVar(0);
+
+    int zero_var = AD7691::GetAverageValue();
+
+    cal.zero[Range::Current()].SetVar(zero_var);
 
     InputRelays::DisableZero();
 }

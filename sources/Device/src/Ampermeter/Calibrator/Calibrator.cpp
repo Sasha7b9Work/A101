@@ -101,6 +101,8 @@ bool Calibrator::CalibratorZero::Run()
     {
         InputRelays::EnableZero();
 
+        cal.zero[range].SetVar(0);
+
         int valueADC = AD7691::GetAverageValue();
 
         InputRelays::DisableZero();
