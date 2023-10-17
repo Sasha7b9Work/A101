@@ -90,9 +90,3 @@ int Range::Current()
 {
     return current;
 }
-
-
-int Range::Prev()
-{
-    return prev;
-}

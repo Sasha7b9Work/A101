@@ -9,9 +9,6 @@ struct Range
     // Текущее значение
     static int Current();
 
-    // Предыдущее значение
-    static int Prev();
-
     static void Load() { Set(current); }
 
     static float Max(int);
