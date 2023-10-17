@@ -6,10 +6,11 @@ struct CalibrationSettings
 {
     struct Gain
     {
-        Gain(float v = 1.0f) : value(v) { }
+        Gain(int _range = -1, float _value = 1.0f) : range(_range), value(_value) { }
         void Set(float v) { value = v; }
-        float Get() const { return value; }
+        float Get() const;
     private:
+        int range;
         float value;
     };
 
@@ -17,7 +18,6 @@ struct CalibrationSettings
     uint crc32;                     // Здесь контрольная сумма - для проверки правильности сохранения
 
     Gain gain[6];
-    float GetGain(int range);       // Коэффициент усиления
 
     int zero[6];
     int GetZero(int range);
