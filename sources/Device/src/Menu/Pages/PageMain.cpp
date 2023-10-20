@@ -102,9 +102,25 @@ namespace PageMain
             PageCalibration::self->SetAsCurrent();
         });
 
-    static Button btnZeroDC("bt11", "0DZ", []() {});
+    static Button btnZeroDC_EN("bt11", "0DZ1", []()         // Включение режима "Zero DC"
+        {
+            Ampermeter::Set::ZeroDC::Enable();
+        });
 
-    static Button btnZeroAC("bt10", "0AZ", []() {});
+    static Button btnZeroDC_DIS("bt11", "0DZ0", []()        // Выключение режима "Zero DC"
+        {
+            Ampermeter::Set::ZeroDC::Disable();
+        });
+
+    static Button btnZeroAC_EN("bt10", "0AZ1", []()         // Включение режима "Zero AC"
+        {
+            Ampermeter::Set::ZeroAC::Enable();
+        });
+
+    static Button btnZeroAC_DIS("bt10", "0AZ0", []()        // Выключение режима "Zero AC"
+        {
+            Ampermeter::Set::ZeroAC::Disable();
+        });
 
     static Button btnSignal("bt12", "0S", []() {});
 
@@ -126,8 +142,10 @@ namespace PageMain
         &btn50A,
         &btnAC_DC,
         &btnCalibration,
-        &btnZeroDC,
-        &btnZeroAC,
+        &btnZeroDC_EN,
+        &btnZeroDC_DIS,
+        &btnZeroAC_EN,
+        &btnZeroAC_DIS,
         &btnSignal,
         &btnMAX,
         &btnAMP,

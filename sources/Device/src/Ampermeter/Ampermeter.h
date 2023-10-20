@@ -11,6 +11,11 @@ struct Measure
     {
     }
 
+    bool IsValid() const
+    {
+        return !out_of_range && correct;
+    }
+
     float value = 0.0f;
     bool out_of_range = false;
     bool correct = false;
@@ -35,4 +40,25 @@ namespace Ampermeter
     Measure GetPeak();
     Measure GetMin();
     Measure GetMax();
+
+    namespace Set
+    {
+        namespace ZeroDC
+        {
+            void Enable();
+
+            void Disable();
+
+            float Level();
+        }
+
+        namespace ZeroAC
+        {
+            void Enable();
+
+            void Disable();
+
+            float Level();
+        }
+    }
 }
