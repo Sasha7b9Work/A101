@@ -65,7 +65,9 @@ namespace Nextion
 
     void SendCommandFormat(const char *, ...);
 
-    void Visible(pchar name, bool);
+    void SetVisible(pchar name, bool);
+
+    void SetValue(pchar name, int);
 
     namespace Page
     {

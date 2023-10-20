@@ -339,9 +339,15 @@ void Nextion::Text::SetLabel(pchar name, pchar label)
 }
 
 
-void Nextion::Visible(pchar name, bool visible)
+void Nextion::SetVisible(pchar name, bool visible)
 {
     SendCommandFormat("vis %s,%d", name, visible ? 1 : 0);
+}
+
+
+void Nextion::SetValue(pchar name, int value)
+{
+    SendCommandFormat("%s.val=%d", name, value);
 }
 
 

@@ -35,7 +35,7 @@ namespace PageCalibration
 
         if (enabled != is_enabled)
         {
-            Nextion::Visible("t2", enabled);
+            Nextion::SetVisible("t2", enabled);
 
             is_enabled = enabled;
         }
@@ -288,12 +288,12 @@ namespace PageCalibration
         btn20A.SetVisible(visible);
         btn50A.SetVisible(visible);
 
-        Nextion::Visible("t5", visible);
-        Nextion::Visible("t0", visible);
-        Nextion::Visible("t3", visible);
-        Nextion::Visible("t6", visible);
-        Nextion::Visible("t1", visible);
-        Nextion::Visible("t4", visible);
+        Nextion::SetVisible("t5", visible);
+        Nextion::SetVisible("t0", visible);
+        Nextion::SetVisible("t3", visible);
+        Nextion::SetVisible("t6", visible);
+        Nextion::SetVisible("t1", visible);
+        Nextion::SetVisible("t4", visible);
     }
 
     static void FuncOnEnter()

@@ -221,6 +221,9 @@ bool Ampermeter::OutOfRange()
 void Ampermeter::OnEventChangeRange()
 {
     Calculator::Reset();
+
+    Set::ZeroDC::Disable();
+    Set::ZeroAC::Disable();
 }
 
 

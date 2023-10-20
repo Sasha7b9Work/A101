@@ -29,7 +29,7 @@ void Button::SetText(pchar text) const
 
 void Button::SetVisible(bool visible) const
 {
-    Nextion::Visible(name, visible);
+    Nextion::SetVisible(name, visible);
 }
 
 

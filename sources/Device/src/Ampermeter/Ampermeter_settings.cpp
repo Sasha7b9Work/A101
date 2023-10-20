@@ -1,6 +1,7 @@
 // 2023/10/20 14:27:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Ampermeter/Ampermeter.h"
+#include "Nextion/Nextion.h"
 
 
 namespace Ampermeter
@@ -31,6 +32,10 @@ void Ampermeter::Set::ZeroDC::Enable()
 void Ampermeter::Set::ZeroDC::Disable()
 {
     value = 0.0f;
+
+    Nextion::SetVisible("t5", false);
+
+    Nextion::SetValue("bt11", 0);
 }
 
 
@@ -51,6 +56,10 @@ void Ampermeter::Set::ZeroAC::Enable()
 void Ampermeter::Set::ZeroAC::Disable()
 {
     value = 0.0f;
+
+    Nextion::SetVisible("t6", false);
+
+    Nextion::SetValue("bt10", 0);
 }
 
 

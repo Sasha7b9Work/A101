@@ -39,7 +39,7 @@ namespace PageMain
 
         if (enabled != is_enabled)
         {
-            Nextion::Visible("t4", enabled);
+            Nextion::SetVisible("t4", enabled);
 
             is_enabled = enabled;
         }
