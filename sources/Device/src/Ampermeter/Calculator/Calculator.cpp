@@ -36,7 +36,11 @@ SampleRate Calculator::AppendData()
 
     ac.Push(value_ac * k);
 
-    dc.Push(-period.dc.Real() * k);
+    float value_dc = -period.dc.Real();
+
+    LOG_WRITE_TRACE("value_dc = %f %f %d", (double)value_dc, (double)(value_dc * k), sizeof(double));
+
+    dc.Push(value_dc * k);
 
     return SampleRate::Current::Get();
 }

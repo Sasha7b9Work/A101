@@ -11,8 +11,8 @@ namespace NS_CalibrationSettings
     {
         sizeof(CalibrationSettings),
         0,
-        { {0, 1.0f}, {1, 1.0f}, {2, 1.0f}, {3, 1.0f}, {4, 1.0f}, {5, 1.0f} },
-        {  3245,      3245,      3245,      3251,      3245,      3242 }
+        { {0, 1.0}, {1, 1.0}, {2, 1.0}, {3, 1.0f}, {4, 1.0f}, {5, 1.0f} },
+        {  3245,     3245,     3245,     3251,      3245,      3242 }
     };
 }
 
@@ -23,9 +23,9 @@ CalibrationSettings CalibrationSettings::Storage::stored;
 CalibrationSettings cal = NS_CalibrationSettings::cal_def;
 
 
-float CalibrationSettings::Gain::Get() const
+double CalibrationSettings::Gain::Get() const
 {
-    static const float k[6] = { 61.53e-2f, 61.53e-1f, 61.53e0f, 61.53e-2f, 61.53e-1f, 61.53e0f };
+    static const double k[6] = { 61.53e-2f, 61.53e-1f, 61.53e0f, 61.53e-2f, 61.53e-1f, 61.53e0f };
 
     return value * k[range];
 }
