@@ -98,7 +98,7 @@ Measure Ampermeter::GetDC()
 {
     bool correct = false;
 
-    float dc = Calculator::GetDC(&correct);
+    float dc = Calculator::GetDC(&correct) - Set::ZeroDC::Level();
 
     return Measure(dc, OutOfRange(), correct);
 }
@@ -108,7 +108,7 @@ Measure Ampermeter::GetAC()
 {
     bool correct = false;
 
-    float ac = Calculator::GetAC(&correct);
+    float ac = Calculator::GetAC(&correct) - Set::ZeroAC::Level();
 
     return Measure(ac, OutOfRange(), correct);
 }

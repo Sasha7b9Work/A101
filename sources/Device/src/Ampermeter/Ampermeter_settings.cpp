@@ -23,6 +23,8 @@ namespace Ampermeter
 
 void Ampermeter::Set::ZeroDC::Enable()
 {
+    value = 0.0f;
+
     Measure measure = Ampermeter::GetDC();
 
     value = measure.IsValid() ? measure.value : 0.0f;
@@ -47,6 +49,8 @@ float Ampermeter::Set::ZeroDC::Level()
 
 void Ampermeter::Set::ZeroAC::Enable()
 {
+    value = 0.0f;
+
     Measure measure = Ampermeter::GetAC();
 
     value = measure.IsValid() ? measure.value : 0.0f;
