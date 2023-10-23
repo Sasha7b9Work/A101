@@ -328,18 +328,18 @@ namespace PageCalibration
         {
             if (btnMin.GetValue() == 1)
             {
-                wndGiven.Draw({ 0.0f, false, true }, range);
+                wndGiven.Draw({ 0.0, false, true }, range);
             }
             else
             {
-                static const float values[] =
+                static const double values[] =
                 {
-                    2.0f,
-                    20.0f,
-                    200.0f,
-                    2.0f,
-                    20.0f,
-                    50.0f
+                    2.0,
+                    20.0,
+                    200.0,
+                    2.0,
+                    20.0,
+                    50.0
                 };
 
                 wndGiven.Draw({ values[range], false, true }, range);

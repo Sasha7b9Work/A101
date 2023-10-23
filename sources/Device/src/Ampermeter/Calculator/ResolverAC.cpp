@@ -7,22 +7,22 @@
 
 ResolverAC::ResolverAC(const Period &period)
 {
-    float min_value = 1.0f;
+    double min_value = 1.0;
     int num_min = 0;
 
-    float sum = 0.0f;
-    float dc = period.dc.Real();
+    double sum = 0.0;
+    double dc = period.dc.Real();
 
     for (int i = period.first.first; i < period.last.first; i++)
     {
-        float value = BufferADC::At(i).Real() - dc;
+        double value = BufferADC::At(i).Real() - dc;
 
-        if (std::fabsf(value) < min_value)
+        if (std::fabs(value) < min_value)
         {
-            min_value = std::fabsf(value);
+            min_value = std::fabs(value);
         }
 
-        if (std::fabsf(value) < 1e-4f)
+        if (std::fabs(value) < 1e-4)
         {
             num_min++;
         }
@@ -30,5 +30,5 @@ ResolverAC::ResolverAC(const Period &period)
         sum += value * value;
     }
 
-    result = (float)std::sqrtf(sum / (period.last.first - period.first.first));
+    result = (double)std::sqrt(sum / (period.last.first - period.first.first));
 }

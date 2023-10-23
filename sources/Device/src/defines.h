@@ -67,6 +67,22 @@ typedef void(*pFuncVI)(int);
 #define HEX_FROM_2(hex1, hex0) ((uint)(0x##hex1) << 16 | (uint)0x##hex0)
 
 
+union BitSet32
+{
+    BitSet32(uint _word = 0) : word(_word) { }
+    BitSet32(uint8 byte0, uint8 byte1, uint8 byte2, uint8 byte3)
+    {
+        bytes[0] = byte0;
+        bytes[1] = byte1;
+        bytes[2] = byte2;
+        bytes[3] = byte3;
+    }
+    uint   word;
+    uint16 half_word[2];
+    uint8  bytes[4];
+};
+
+
 #ifdef WIN32
 
 #define __attribute__(x)

@@ -1,4 +1,4 @@
-﻿// 2022/11/10 22:25:51 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2022/11/10 22:25:51 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Controls/WindowsMeasures.h"
 #include "Ampermeter/InputRelays.h"
@@ -40,7 +40,7 @@ void WindowMeasure::Reset()
 }
 
 
-void WindowMeasure::SetMeasure(float value)
+void WindowMeasure::SetMeasure(double value)
 {
     if (Page::Current() != PageMain::self)
     {
@@ -49,9 +49,9 @@ void WindowMeasure::SetMeasure(float value)
 
     char buffer[30];
 
-    buffer[0] = (value >= 0.0f) ? '+' : '-';
+    buffer[0] = (value >= 0.0) ? '+' : '-';
 
-    std::sprintf(buffer + 1, "%5f", (double)value);
+    std::sprintf(buffer + 1, "%5f", value);
 
     SetMeasure(buffer);
 }
@@ -120,9 +120,9 @@ void WindowMeasure::Draw(const Measure &measure, int range)
 }
 
 
-void WindowMeasure::ConvertDoubleToText(float value, char out[TextString::MAX_LEN], int after, pchar suffix)
+void WindowMeasure::ConvertDoubleToText(double value, char out[TextString::MAX_LEN], int after, pchar suffix)
 {
-    std::strcpy(out, value < 0.0f ? "-" : "+");
+    std::strcpy(out, value < 0.0 ? "-" : "+");
 
     value = std::fabs(value);
 
@@ -130,17 +130,17 @@ void WindowMeasure::ConvertDoubleToText(float value, char out[TextString::MAX_LE
 
     if (before == 3)
     {
-        if (value < 10.0f)
+        if (value < 10.0)
         {
             std::strcat(out, "00");
         }
-        else if (value < 100.0f)
+        else if (value < 100.0)
         {
             std::strcat(out, "0");
         }
     }
 
-    if (before == 2 && value < 10.0f)
+    if (before == 2 && value < 10.0)
     {
         std::strcat(out, "0");
     }
@@ -149,14 +149,14 @@ void WindowMeasure::ConvertDoubleToText(float value, char out[TextString::MAX_LE
     {
         for (int i = 0; i < after; i++)
         {
-            value *= 10.0f;
+            value *= 10.0;
         }
 
-        value = (float)((int)value);
+        value = (double)((int)value);
 
         for (int i = 0; i < after; i++)
         {
-            value /= 10.0f;
+            value /= 10.0;
         }
     }
 
@@ -164,7 +164,7 @@ void WindowMeasure::ConvertDoubleToText(float value, char out[TextString::MAX_LE
 
     char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0' };
 
-    std::sprintf(buffer, format, (double)value, suffix);
+    std::sprintf(buffer, format, value, suffix);
 
     std::strcat(out, buffer);
 }

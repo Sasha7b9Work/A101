@@ -80,7 +80,7 @@ namespace Nextion
     struct Command
     {
         Command() : size(0) {} //-V730
-        Command(const char *bytes, int _size);
+        Command(pchar bytes, int _size);
         virtual ~Command() {}
 
         bool IsEmpty() const { return (size == 0); }
@@ -95,8 +95,16 @@ namespace Nextion
     // Нажатие кнопки
     struct CommandButton : public Command
     {
-        CommandButton(const char *_bytes, int _size) : Command(_bytes, _size) {}
+        CommandButton(pchar _bytes, int _size) : Command(_bytes, _size) {}
         virtual ~CommandButton() override {}
+
+        virtual bool Execute() override;
+    };
+
+
+    struct CommandCoordinate : public Command
+    {
+        CommandCoordinate(pchar _bytes, int _size) : Command(_bytes, _size) {}
 
         virtual bool Execute() override;
     };
@@ -105,7 +113,7 @@ namespace Nextion
     // Служебный ответ дисплея
     struct AnswerFF : public Command
     {
-        AnswerFF(const char *_bytes, int _size) : Command(_bytes, _size) {}
+        AnswerFF(pchar _bytes, int _size) : Command(_bytes, _size) {}
         virtual ~AnswerFF() override {}
 
         virtual bool Execute() override;
@@ -190,6 +198,12 @@ bool Nextion::CommandButton::Execute()
 }
 
 
+bool Nextion::CommandCoordinate::Execute()
+{
+    return false;
+}
+
+
 bool Nextion::AnswerFF::Execute()
 {
     if (IsEmpty())
@@ -223,7 +237,7 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
 {
     for (int i = 0; i < pointer; i++)
     {
-        if (buffer[i] == (uint8)'_')
+        if (buffer[i] == (uint8)'_')            // Кнопка
         {
             for (int j = 0; j <= i; j++)
             {
@@ -231,6 +245,14 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
             }
 
             CommandButton *result = new CommandButton(buffer, i);
+
+            RemoveFromStart(i + 1);
+
+            return result;
+        }
+        else if (buffer[i] == (uint8)'-')
+        {
+            CommandCoordinate *result = new CommandCoordinate(buffer, i);
 
             RemoveFromStart(i + 1);
 

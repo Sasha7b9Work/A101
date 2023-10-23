@@ -10,9 +10,9 @@ public:
 
     ResolverAC(const Period &);
 
-    float GetResult() const { return result; }
+    double GetResult() const { return result; }
 
 private:
 
-    float result = 0.0f;
+    double result = 0.0;
 };
