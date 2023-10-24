@@ -38,7 +38,7 @@ SampleRate Calculator::AppendData()
 
     double value_dc = -period.dc.Real();
 
-    LOG_WRITE_TRACE("value_dc = %f %f", value_dc, value_dc * k);
+//    LOG_WRITE_TRACE("value_dc = %f %f", value_dc, value_dc * k);
 
     dc.Push(value_dc * k);
 

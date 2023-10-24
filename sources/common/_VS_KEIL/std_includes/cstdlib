@@ -2,7 +2,7 @@
 
 namespace std
 {
+    unsigned long strtoul(const char *start, char **end, int radix);
 
     #include "stdlib.h"
-
 }

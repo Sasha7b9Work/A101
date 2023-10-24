@@ -11,7 +11,7 @@ void Menu::Init()
 }
 
 
-void Menu::_Update(pchar signal)
+void Menu::Update(pchar signal)
 {
     Button *button = Page::Current()->GetButton(signal);
 
@@ -19,4 +19,10 @@ void Menu::_Update(pchar signal)
     {
         button->Press();
     }
+}
+
+
+void Menu::Press(int , int )
+{
+
 }

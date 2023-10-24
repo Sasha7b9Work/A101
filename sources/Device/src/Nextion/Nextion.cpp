@@ -11,6 +11,7 @@
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
+#include <cstdlib>
 
 
 #ifndef WIN32
@@ -192,7 +193,7 @@ bool Nextion::CommandButton::Execute()
         return false;
     }
 
-    Menu::_Update(buffer);
+    Menu::Update(buffer);
 
     return true;
 }
@@ -200,7 +201,24 @@ bool Nextion::CommandButton::Execute()
 
 bool Nextion::CommandCoordinate::Execute()
 {
-    return false;
+    static int x = 0;
+    static int y = 0;
+
+    if (buffer[size - 1] == '+')
+    {
+        BitSet32 bs(*((uint *)buffer));
+        x = (int)bs.word;
+    }
+
+    if (buffer[size - 1] == '-')
+    {
+        BitSet32 bs(*((uint *)buffer));
+        y = (int)bs.word;
+
+        Menu::Press(x, y);
+    }
+
+    return true;
 }
 
 
@@ -250,9 +268,9 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
 
             return result;
         }
-        else if (buffer[i] == (uint8)'-')
+        else if (buffer[i] == (uint8)'+' || buffer[i] == (uint8)'-')
         {
-            CommandCoordinate *result = new CommandCoordinate(buffer, i);
+            CommandCoordinate *result = new CommandCoordinate(buffer, i + 1);
 
             RemoveFromStart(i + 1);
 

@@ -4,23 +4,12 @@
 #include "SCPI/Commands.h"
 #include "Hardware/Communicator.h"
 #include "Utils/String.h"
+#include "SCPI/RingBuffer.h"
 #include <cctype>
 
 
 namespace SCPI
 {
-    class InBuffer : public Buffer2048<uint8>
-    {
-    public:
-        InBuffer(Direction::E _dir) : dir(_dir) {}
-        void Update();
-    private:
-        Command *ParseCommand(Buffer<uint8, 1024> &);
-        String<> FirstWord(Buffer<uint8, 1024> &);
-        Command *ExtractCommand();
-        const Direction::E dir;
-    };
-
     void Send(Direction::E, pchar);
 
     void Error(Direction::E, pchar);
@@ -28,12 +17,18 @@ namespace SCPI
     // Входной буфер. Здесь находятся принимаемые символы
     static InBuffer in_usb(Direction::USB);
     static InBuffer in_rs232(Direction::RS232);
+
+    static RingBuffer ring_usb;
+    static RingBuffer ring_rs232;
 }
 
 
 void SCPI::Update()
 {
+    ring_usb.GetData(in_usb);
     in_usb.Update();
+
+    ring_rs232.GetData(in_rs232);
     in_rs232.Update();
 }
 
@@ -57,12 +52,12 @@ void SCPI::CallbackOnReceive(Direction::E dir, uint8 byte)
 {
     if (dir & Direction::USB)
     {
-        in_usb.Append((uint8)std::toupper(byte));
+        ring_usb.Append((uint8)std::toupper(byte));
     }
 
     if (dir & Direction::RS232)
     {
-        in_rs232.Append((uint8)std::toupper(byte));
+        ring_rs232.Append((uint8)std::toupper(byte));
     }
 }
 
