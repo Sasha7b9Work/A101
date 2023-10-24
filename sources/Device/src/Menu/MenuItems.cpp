@@ -23,13 +23,27 @@ void Button::Press()
 
 void Button::SetText(pchar text) const
 {
-    Nextion::Button::SetText(name, text);
+    if (IsSoftware())
+    {
+
+    }
+    else
+    {
+        Nextion::Button::SetText(name, text);
+    }
 }
 
 
 void Button::SetVisible(bool visible) const
 {
-    Nextion::SetVisible(name, visible);
+    if (IsSoftware())
+    {
+
+    }
+    else
+    {
+        Nextion::SetVisible(name, visible);
+    }
 }
 
 
@@ -37,7 +51,14 @@ void Button::SetValue(int _value)
 {
     value = _value;
 
-    Nextion::SendCommandFormat("%s.val=%d", name, value);
+    if (IsSoftware())
+    {
+
+    }
+    else
+    {
+        Nextion::SendCommandFormat("%s.val=%d", name, value);
+    }
 }
 
 
@@ -86,14 +107,14 @@ void Page::Draw()
 
     for (int i = 0; i < GetButtonsCount(); i++)
     {
-        buttons[i]->Draw();
+        GetButton(i)->Draw();
     }
 }
 
 
 void Button::Draw()
 {
-    if (x < 0)
+    if (!IsSoftware())
     {
         return;
     }
@@ -112,12 +133,18 @@ int Page::GetButtonsCount()
 {
     int count = 0;
 
-    Button *button = buttons[0];
+    Button **button = &buttons[0];
 
-    while (button++)
+    while (*button++)
     {
         count++;
     }
 
     return count;
+}
+
+
+bool Button::IsSoftware() const
+{
+    return x >= 0;
 }

@@ -39,6 +39,9 @@ private:
 
     const int x;
     const int y;
+
+    // Возвращает true, если это "программная кнопка" - отрисовывается вручную, а не дисплеем
+    bool IsSoftware() const;
 };
 
 
