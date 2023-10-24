@@ -11,11 +11,6 @@ void RingBuffer::Clear()
 
 void RingBuffer::Append(uint8 byte)
 {
-    if (GetElementCount() == 0)
-    {
-        return;
-    }
-
     if (GetElementCount() == SIZE)
     {
         LOG_WRITE_TRACE("!!! ERRROR !!! Very small buffer");
