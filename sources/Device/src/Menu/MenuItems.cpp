@@ -78,3 +78,46 @@ Button *Page::GetButton(pchar signal)
 
     return nullptr;
 }
+
+
+void Page::Draw()
+{
+    funcOnDraw();
+
+    for (int i = 0; i < GetButtonsCount(); i++)
+    {
+        buttons[i]->Draw();
+    }
+}
+
+
+void Button::Draw()
+{
+    if (x < 0)
+    {
+        return;
+    }
+
+    int width = 150;
+    int height = 100;
+
+    Nextion::DrawLine(x, y, x + width, y, Color::White);
+    Nextion::DrawLine(x, y + height, x + width, y + height);
+    Nextion::DrawLine(x, y, x, y + height);
+    Nextion::DrawLine(x + width, y, x + width, y + height);
+}
+
+
+int Page::GetButtonsCount()
+{
+    int count = 0;
+
+    Button *button = buttons[0];
+
+    while (button++)
+    {
+        count++;
+    }
+
+    return count;
+}

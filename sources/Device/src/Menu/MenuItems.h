@@ -8,8 +8,8 @@ struct Button
 public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
-    Button(pchar _name, pchar _signal, void (*_funcOnPress)()) :
-        name(_name), signal(_signal), funcOnPress(_funcOnPress)
+    Button(pchar _name, pchar _signal, void (*_funcOnPress)(), int _x = -1, int _y = -1) :
+        name(_name), signal(_signal), funcOnPress(_funcOnPress), x(_x), y(_y)
     {
     }
 
@@ -27,6 +27,8 @@ public:
 
     int GetValue() const { return value; }
 
+    void Draw();
+
 private:
 
     pchar name;                     // Имя кнопки в редакторе
@@ -34,6 +36,9 @@ private:
     void (*funcOnPress)();
 
     int value = 0;
+
+    const int x;
+    const int y;
 };
 
 
@@ -48,12 +53,11 @@ struct Page
 
     void SetAsCurrent();
 
-    // Возвращает кнопку от 0 до 5
     Button *GetButton(int index);
 
     void SetButton(int index, Button *);
 
-    void Draw() { funcOnDraw(); }
+    void Draw();
 
     Button *GetButton(pchar signal);
 
@@ -67,4 +71,6 @@ private:
     void (*funcOnDraw)();
 
     static Page *current;
+
+    int GetButtonsCount();
 };

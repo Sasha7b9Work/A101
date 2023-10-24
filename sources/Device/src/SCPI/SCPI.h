@@ -7,7 +7,7 @@
 
 namespace SCPI
 {
-    class InBuffer : public Buffer2048<uint8>
+    class InBuffer : public Buffer1024<uint8>
     {
     public:
         InBuffer(Direction::E _dir) : dir(_dir) {}
