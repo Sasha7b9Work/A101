@@ -186,7 +186,7 @@ namespace PageCalibration
 
     static Button btnSign("b11", "KBS", []() { PressDigit('-'); });
 
-    static Button btnDebugPage("", "", []() {}, 10, 400);
+    static Button btnDebugPage("Debug", "", []() {}, 10, 300);
 
     static Button *buttons[] =
     {

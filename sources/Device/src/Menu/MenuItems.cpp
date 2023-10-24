@@ -120,12 +120,21 @@ void Button::Draw()
     }
 
     int width = 150;
-    int height = 100;
+    int height = 50;
 
     Nextion::DrawLine(x, y, x + width, y, Color::White);
+    Nextion::DrawLine(x, y + 1, x + width, y + 1, Color::White);
+
     Nextion::DrawLine(x, y + height, x + width, y + height);
+    Nextion::DrawLine(x, y + height + 1, x + width, y + height + 1);
+
     Nextion::DrawLine(x, y, x, y + height);
+    Nextion::DrawLine(x + 1, y, x + 1, y + height);
+
     Nextion::DrawLine(x + width, y, x + width, y + height);
+    Nextion::DrawLine(x + width + 1, y, x + width + 1, y + height);
+
+    Nextion::DrawString(x + 2, y + height / 2 - 16, width - 4, height / 2, 2, Color::White, Color::Background, Text(), 1);
 }
 
 

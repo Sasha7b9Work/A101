@@ -29,6 +29,8 @@ public:
 
     void Draw();
 
+    pchar Text() const { return name; }
+
 private:
 
     pchar name;                     // Имя кнопки в редакторе
