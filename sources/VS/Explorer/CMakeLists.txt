@@ -92,10 +92,18 @@ add_executable(${PROJECT_NAME} ${DOC}
 )
 
 
-set_source_files_properties(${SRC}
-                            ${CONTROLS}
-                            ${EDITOR}
-                            ${EDITOR_PAINTER}
+set_source_files_properties(src/main.cpp
+                            src/Controls/SpinControl.cpp
+                            src/Controls/TextControl.cpp
+                            src/Editor/Editor.cpp
+                            src/Editor/Form.cpp
+                            src/Editor/History.cpp
+                            src/Editor/Selector.cpp
+                            src/Editor/Settings.cpp
+                            src/Editor/Painter/Bitmap.cpp
+                            src/Editor/Painter/Canvas.cpp
+                            src/Editor/Painter/Painter.cpp
+                            src/Editor/Painter/Zoomer.cpp
                             PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)
