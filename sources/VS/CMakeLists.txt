@@ -14,6 +14,6 @@ if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
 endif()
 
 add_subdirectory(ControlPanel)
-add_subdirectory(Emulator)
+add_subdirectory(A101-GUI)
 add_subdirectory(Explorer)
 add_subdirectory(Updater)

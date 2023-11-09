@@ -1,6 +1,6 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 
-project (Emulator)
+project (A101-GUI)
 
 #set(CMAKE_UNITY_BUILD OFF)
 
