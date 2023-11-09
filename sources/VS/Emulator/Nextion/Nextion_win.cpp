@@ -105,3 +105,9 @@ void Nextion::Page::Enable(int)
 {
 
 }
+
+
+void Nextion::SendCommandFormat(const char *, ...)
+{
+
+}

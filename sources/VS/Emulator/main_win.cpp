@@ -6,7 +6,6 @@
 #include "Menu/Menu.h"
 #include "Display/Display.h"
 #include "Nextion/Nextion.h"
-#include "Generator/Generator.h"
 #include "Ampermeter/Ampermeter.h"
 #include "Screen.h"
 #include "SCPI/SCPI.h"
@@ -23,8 +22,6 @@ void Application::Init()
     Screen::self->Init();
 
     Display::Init();
-
-    Generator::Enable();
 }
 
 

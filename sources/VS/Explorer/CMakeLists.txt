@@ -1,7 +1,7 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Explorer)
 
-set(CMAKE_UNITY_BUILD OFF)
+#set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(src
                     ../../VS/ThirdParty/wxWidgets/include
@@ -55,6 +55,7 @@ add_compile_options(/wd5039)    # pointer or reference to potentially throwing f
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 add_compile_options(/wd5219)    # implicit conversion from 'int' to 'float', possible loss of data
 add_compile_options(/wd5264)    # 'const' variable is not used
+add_compile_options(/wd5267)
 
 
 file(GLOB DOC            doc/*)
@@ -89,6 +90,13 @@ add_executable(${PROJECT_NAME} ${DOC}
                                ${WINDOWS}
                                ${RESOURCES}
 )
+
+
+set_source_files_properties(${SRC}
+                            ${CONTROLS}
+                            ${EDITOR}
+                            ${EDITOR_PAINTER}
+                            PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)
 

@@ -243,7 +243,7 @@ bool ButtonGUI::PixelInside(int pixel_x, int pixel_y)
 
 void ButtonGUI::Press()
 {
-    Nextion::CallbackOnReceive((uint8)(0x30 + index));
+    Nextion::CallbackOnReceive((char)(0x30 + index));
     Nextion::CallbackOnReceive('Z');
 }
 

@@ -14,3 +14,9 @@ void HAL_USART3::SendTextWith0D0A(pchar)
 {
 
 }
+
+
+void HAL_USART3::SendChar(char)
+{
+
+}

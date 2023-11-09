@@ -7,6 +7,8 @@ project (A101-GUI)
 
 set (TARGET_NAME A101-GUI)
 
+set(CMAKE_UNITY_BUILD ON)
+
 if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
     add_definitions(-DDEBUG)
 endif()

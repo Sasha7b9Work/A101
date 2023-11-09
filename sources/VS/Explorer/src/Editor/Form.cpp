@@ -112,24 +112,24 @@ void Form::SetMarkerInMouseCoord(int mouseX, int mouseY)
 
 
 void Form::UndoHistory()
-{	
-	Form* form = History::Prev();
+{
+    Form *form = History::Prev();
 
-	if (form)
-	{
-		*TheForm = *form;
-	}
+    if (form)
+    {
+        *TheForm = *form;
+    }
 }
 
 
 void Form::RedoHistory()
 {
-	Form* form = History::Next();
+    Form *form = History::Next();
 
-	if (form)
-	{
-		*TheForm = *form;
-	}
+    if (form)
+    {
+        *TheForm = *form;
+    }
 }
 
 
@@ -148,7 +148,7 @@ void Form::SetPointInPosition(uint16 pos)
 
     uint index = PointInPosition(point.pos);
 
-    if(index != (uint)(-1))
+    if (index != (uint)(-1))
     {
         markers[index] = point;
     }
@@ -243,7 +243,7 @@ void Form::AlignPoint(Align::E align)
     {
         if (iCurMarker > 0)
         {
-            if(align == Align::Left)
+            if (align == Align::Left)
             {
                 index = iCurMarker - 1;
             }
@@ -255,7 +255,7 @@ void Form::AlignPoint(Align::E align)
 
                 while (i < markers.size())
                 {
-                    if(func(markers[i], point))
+                    if (func(markers[i], point))
                     {
                         index = i;
                         break;
@@ -324,20 +324,20 @@ bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, ui
     uint16 positionNearestPoint = (uint16)(-1);
     double nearestDistance = 1e10;
 
-    for(uint16 i = 0; i < markers.size(); i++)
+    for (uint16 i = 0; i < markers.size(); i++)
     {
         double distance = markers[i].DistanceFromCanvas(canvasX, canvasY);
 
-        if(distance < nearestDistance)
+        if (distance < nearestDistance)
         {
             nearestDistance = distance;
             positionNearestPoint = i;
         }
     }
 
-    if(nearestDistance < Marker::SIZE * 2.5)
+    if (nearestDistance < Marker::SIZE * 2.5)
     {
-        if(iCurMarker == (uint)(-1) || !pressed)
+        if (iCurMarker == (uint)(-1) || !pressed)
         {
             iCurMarker = positionNearestPoint;
         }
@@ -442,9 +442,9 @@ void Form::LinearInterpolation(uint16 pos1, uint16 pos2)
     uint16 data2 = data[pos2];
 
     float delta = (float)(data2 - data1) / (float)(pos2 - pos1);  // Разность значений между соседними точками
-    
+
     float value = (float)data[pos1] + delta;                                  // Значение в текущей позиции
-    
+
     for (int i = pos1 + 1; i < pos2; i++)
     {
         data[i] = Math::Round<uint16>(value);
@@ -504,9 +504,9 @@ void Form::SetMainForm(const uint16 dat[Point::AMOUNT], const std::vector<Point>
 
     std::memcpy(data, dat, Point::AMOUNT * 2);
 
-    if(p)
+    if (p)
     {
-        for(Point point : *p)
+        for (Point point : *p)
         {
             SetPoint(point);
         }
@@ -534,14 +534,14 @@ void Form::SetAdditionForm(const uint16 d[Point::AMOUNT])
 
 bool Form::IsEquals(const Form *form) const
 {
-    if(markers != form->markers)
+    if (markers != form->markers)
     {
         return false;
     }
 
-    for(int i = 0; i < Point::AMOUNT; i++)
+    for (int i = 0; i < Point::AMOUNT; i++)
     {
-        if(data[i] != form->data[i])
+        if (data[i] != form->data[i])
         {
             return false;
         }
@@ -580,20 +580,20 @@ void Form::LoadFromFile(wxTextFile &file)
 {
     wxString line = file.GetFirstLine();
 
-    if(line.Cmp(LABEL_FILE) != 0)
+    if (line.Cmp(LABEL_FILE) != 0)
     {
         return ErrorMessage(wxT("Файл не является файлом данных."));
     }
 
-    if(file.GetNextLine().Cmp(wxT("points")) != 0)
+    if (file.GetNextLine().Cmp(wxT("points")) != 0)
     {
         return ErrorMessage(file.GetCurrentLine());
     }
 
-    while(true)
+    while (true)
     {
         line = file.GetNextLine();
-        if(line.IsEmpty())
+        if (line.IsEmpty())
         {
             break;
         }
@@ -601,7 +601,7 @@ void Form::LoadFromFile(wxTextFile &file)
         uint16 index = 0;
         uint16 d = 0;
 
-        if(!ConvertStringToTwoShort(line, &index, &d))
+        if (!ConvertStringToTwoShort(line, &index, &d))
         {
             return ErrorMessage(file.GetCurrentLine());
         }
@@ -627,17 +627,17 @@ static bool ConvertStringToTwoShort(const wxString &line, uint16 *val1, uint16 *
 {
     int pos = line.Find(' ');
 
-    if(pos == -1)
+    if (pos == -1)
     {
         return false;
     }
 
-    if(!ConvertSubStringToShort(line, 0, (uint)(pos - 1), val1, Point::AMOUNT))
+    if (!ConvertSubStringToShort(line, 0, (uint)(pos - 1), val1, Point::AMOUNT))
     {
         return false;
     }
 
-    if(!ConvertSubStringToShort(line, (uint)(pos + 1), line.size() - 1, val2, Point::MAX))
+    if (!ConvertSubStringToShort(line, (uint)(pos + 1), line.size() - 1, val2, Point::MAX))
     {
         return false;
     }
@@ -652,7 +652,7 @@ static bool ConvertSubStringToShort(const wxString &line, uint startPos, uint en
 
     unsigned long val = 0;
 
-    if(!str.ToULong(&val) || val > max)
+    if (!str.ToULong(&val) || val > max)
     {
         return false;
     }

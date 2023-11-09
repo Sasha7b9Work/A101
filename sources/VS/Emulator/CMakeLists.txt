@@ -2,7 +2,7 @@
 
 project (Emulator)
 
-set(CMAKE_UNITY_BUILD OFF)
+#set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(.
                     ../../Device/src
@@ -90,11 +90,13 @@ file(GLOB HARDWARE_HAL          ./Hardware/HAL/*.*
                                 ../../Device/src/Hardware/HAL/HAL_TIM.cpp)
 file(GLOB AMPERMETER            ../../Device/src/Ampermeter/*.*)
 file(GLOB AMPERMETER_CALC       ../../Device/src/Ampermeter/Calculator/*.*)
+file(GLOB AMPERMETER_CALIBRATOR ../../Device/src/Ampermeter/Calibrator/*.*)
 file(GLOB MENU                  ../../Device/src/Menu/*.*)
 file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
 file(GLOB NEXTION               ./Nextion/*.*
                                 ../../Device/src/Nextion/*.h
                                 ../../Device/src/Nextion/Nextion.cpp)
+file(GLOB NEXTION_CONTROLS      ../../Device/src/Nextion/Controls/*.*)
 file(GLOB SCPI                  ../../Device/src/SCPI/*.*)
 file(GLOB SETTINGS              ../../Device/src/Settings/*.*)
 file(GLOB UTILS                 ../../Device/src/Utils/*.*)
@@ -107,9 +109,11 @@ source_group(Hardware              FILES ${HARDWARE})
 source_group(Hardware/HAL          FILES ${HARDWARE_HAL})
 source_group(Ampermeter            FILES ${AMPERMETER})
 source_group(Ampermeter/Calculator FILES ${AMPERMETER_CALC})
+source_group(Ampermeter/Calibrator FILES ${AMPERMETER_CALIBRATOR})
 source_group(Menu                  FILES ${MENU})
 source_group(Menu/Pages            FILES ${MENU_PAGES})
 source_group(Nextion               FILES ${NEXTION})
+source_group(Nextion/Controls      FILES ${NEXTION_CONTROLS})
 source_group(SCPI                  FILES ${SCPI})
 source_group(Settings              FILES ${SETTINGS})
 source_group(Utils                 FILES ${UTILS})
@@ -123,9 +127,11 @@ add_executable( ${PROJECT_NAME}
                 ${HARDWARE_HAL}
                 ${AMPERMETER}
                 ${AMPERMETER_CALC}
+                ${AMPERMETER_CALIBRATOR}
                 ${MENU}
                 ${MENU_PAGES}
                 ${NEXTION}
+                ${NEXTION_CONTROLS}
                 ${SCPI}
                 ${SETTINGS}
                 ${UTILS}
