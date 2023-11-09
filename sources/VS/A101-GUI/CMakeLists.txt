@@ -88,7 +88,13 @@ file(GLOB HARDWARE_HAL          ./Hardware/HAL/*.*
                                 ../../Device/src/Hardware/HAL/HAL.h
                                 ../../Device/src/Hardware/HAL/HAL_PIO.h
                                 ../../Device/src/Hardware/HAL/HAL_TIM.cpp)
-file(GLOB AMPERMETER            ../../Device/src/Ampermeter/*.*)
+file(GLOB AMPERMETER            Ampermeter/*.*
+                                ../../Device/src/Ampermeter/AD7691.h
+                                ../../Device/src/Ampermeter/Ampermeter.*
+                                ../../Device/src/Ampermeter/Ampermeter_settings.*
+                                ../../Device/src/Ampermeter/BufferADC.*
+                                ../../Device/src/Ampermeter/FIR.*
+                                ../../Device/src/Ampermeter/InputRelays.*)
 file(GLOB AMPERMETER_CALC       ../../Device/src/Ampermeter/Calculator/*.*)
 file(GLOB AMPERMETER_CALIBRATOR ../../Device/src/Ampermeter/Calibrator/*.*)
 file(GLOB MENU                  ../../Device/src/Menu/*.*)
