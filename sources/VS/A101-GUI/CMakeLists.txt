@@ -2,7 +2,7 @@
 
 project (A101-GUI)
 
-#set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(.
                     ../../Device/src
@@ -97,6 +97,7 @@ file(GLOB AMPERMETER            Ampermeter/*.*
                                 ../../Device/src/Ampermeter/InputRelays.*)
 file(GLOB AMPERMETER_CALC       ../../Device/src/Ampermeter/Calculator/*.*)
 file(GLOB AMPERMETER_CALIBRATOR ../../Device/src/Ampermeter/Calibrator/*.*)
+file(GLOB COMMUNICATOR          Communicator/*.*)
 file(GLOB MENU                  ../../Device/src/Menu/*.*)
 file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
 file(GLOB NEXTION               ./Nextion/*.*
@@ -116,6 +117,8 @@ source_group(Hardware/HAL          FILES ${HARDWARE_HAL})
 source_group(Ampermeter            FILES ${AMPERMETER})
 source_group(Ampermeter/Calculator FILES ${AMPERMETER_CALC})
 source_group(Ampermeter/Calibrator FILES ${AMPERMETER_CALIBRATOR})
+source_group(Communicator          FILES ${COMMUNICATOR})
+Добавить Controls
 source_group(Menu                  FILES ${MENU})
 source_group(Menu/Pages            FILES ${MENU_PAGES})
 source_group(Nextion               FILES ${NEXTION})
@@ -134,6 +137,7 @@ add_executable( ${PROJECT_NAME}
                 ${AMPERMETER}
                 ${AMPERMETER_CALC}
                 ${AMPERMETER_CALIBRATOR}
+                ${COMMUNICATOR}
                 ${MENU}
                 ${MENU_PAGES}
                 ${NEXTION}

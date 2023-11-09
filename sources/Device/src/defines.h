@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
-#define VERSION 2
+#define VERSION 3
 
 // Закомментировать, чтобы логи не валили в UART
 #define LOGGED
@@ -23,6 +23,8 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+#else
+#define WIN32_LEAN_AND_MEAN
 #endif
 
 typedef unsigned int       uint;
