@@ -21,7 +21,7 @@ void Button::Press()
 }
 
 
-void Button::SetText(pchar text) const
+void Button::SetText(pchar txt) const
 {
     if (IsSoftware())
     {
@@ -29,7 +29,7 @@ void Button::SetText(pchar text) const
     }
     else
     {
-        Nextion::Button::SetText(name, text);
+        Nextion::Button::SetText(name, txt);
     }
 }
 

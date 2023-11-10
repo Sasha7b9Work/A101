@@ -29,6 +29,7 @@
 
 /* For more info and how to use this library, visit: http://www.teuniz.net/RS-232/ */
 
+#define WIN32_LEAN_AND_MEAN
 
 #ifndef rs232_INCLUDED
 #define rs232_INCLUDED

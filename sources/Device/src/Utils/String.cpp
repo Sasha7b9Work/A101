@@ -12,6 +12,7 @@ template      String<(int)DEFAULT_SIZE_STRING>::String(pchar, ...);
 template      String<1024>::String(pchar, ...);
 template void String<(int)DEFAULT_SIZE_STRING>::Append(pchar);
 template void String<(int)DEFAULT_SIZE_STRING>::SetFormat(pchar format, ...);
+template void String<1024>::SetFormat(pchar format, ...);
 template void String<(int)DEFAULT_SIZE_STRING>::Append(char);
 template bool String<(int)DEFAULT_SIZE_STRING>::ToInt(int *);
 template void String<(int)DEFAULT_SIZE_STRING>::AppendBytes(const void *, int);

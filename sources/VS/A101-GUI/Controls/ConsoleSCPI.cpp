@@ -1,8 +1,8 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Display/Text.h"
-#include "GUI/ConsoleSCPI.h"
-#include "GUI/ComPort.h"
+#include "Controls/ConsoleSCPI.h"
+#include "Communicator/ComPort.h"
+#include "Utils/String.h"
 #include "SCPI/SCPI.h"
 
 #undef CRC
@@ -91,7 +91,7 @@ void ConsoleSCPI::OnTimerComPort(wxTimerEvent &)
         if (n)
         {
             buffer[n] = '\0';
-            String message(">>> %s", buffer);
+            String<1024> message(">>> %s", buffer);
             AddText(message.c_str());
         }
     }
@@ -113,11 +113,11 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 {
     history.Add(line->GetLineText(0));
 
-    String txt("    %s", (pchar)line->GetLineText(0).mb_str());
+    String<1024> txt("    %s", (pchar)line->GetLineText(0).mb_str());
 
     AddLine(txt.c_str());
 
-    txt.Set(TypeConversionString::None, "%s\x0d", (pchar)line->GetLineText(0).mb_str());
+    txt.SetFormat("%s\x0d", (pchar)line->GetLineText(0).mb_str());
 
     if (ComPort::IsOpened())
     {
@@ -125,7 +125,7 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
     }
     else
     {
-        SCPI::AppendNewData(txt.c_str(), std::strlen(txt.c_str()));
+        SCPI::AppendNewData(Direction::USB, txt.c_str(), std::strlen(txt.c_str()));
     }
 
     line->Clear();

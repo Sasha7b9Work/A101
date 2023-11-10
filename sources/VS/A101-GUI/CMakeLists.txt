@@ -2,7 +2,7 @@
 
 project (A101-GUI)
 
-set(CMAKE_UNITY_BUILD OFF)
+#set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(.
                     ../../Device/src
@@ -74,6 +74,7 @@ file(GLOB SRC                   ./*.h
                                 ../../Device/src/defines.h
                                 ../../Device/src/stm_includes.h
                                 ../../Device/src/Device.*)
+file(GLOB CONTROLS              Controls/*.*)
 file(GLOB DISPLAY               ./Display/*.*
                                 ../../Device/src/Display/*.h
                                 ../../Device/src/Display/Colors.cpp
@@ -118,7 +119,7 @@ source_group(Ampermeter            FILES ${AMPERMETER})
 source_group(Ampermeter/Calculator FILES ${AMPERMETER_CALC})
 source_group(Ampermeter/Calibrator FILES ${AMPERMETER_CALIBRATOR})
 source_group(Communicator          FILES ${COMMUNICATOR})
-Добавить Controls
+source_group(Controls              FILES ${CONTROLS})
 source_group(Menu                  FILES ${MENU})
 source_group(Menu/Pages            FILES ${MENU_PAGES})
 source_group(Nextion               FILES ${NEXTION})
@@ -138,6 +139,7 @@ add_executable( ${PROJECT_NAME}
                 ${AMPERMETER_CALC}
                 ${AMPERMETER_CALIBRATOR}
                 ${COMMUNICATOR}
+                ${CONTROLS}
                 ${MENU}
                 ${MENU_PAGES}
                 ${NEXTION}
