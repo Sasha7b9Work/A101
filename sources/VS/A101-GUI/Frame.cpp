@@ -3,9 +3,18 @@
 #include "Frame.h"
 #include "Screen.h"
 #include "Application.h"
+#include "Controls/ConsoleSCPI.h"
 
 
 Frame *Frame::self = nullptr;
+
+
+enum
+{
+    FILE_QUIT = wxID_HIGHEST + 1,
+
+    TOOLS_SCPI
+};
 
 
 enum
@@ -25,7 +34,22 @@ Frame::Frame(const wxString &title)
     sizer->Add(Screen::self);
     SetSizer(sizer);
 
+    wxMenu *menuFile = new wxMenu();
+    wxMenu *menuTools = new wxMenu();
+
+    menuFile->Append(FILE_QUIT, "E&xit\tAlt-X", "Quit this program");
+    menuTools->Append(TOOLS_SCPI, "SCPI");
+
+    wxMenuBar *menuBar = new wxMenuBar();
+    menuBar->Append(menuFile, "Файл");
+    menuBar->Append(menuTools, "Инструменты");
+
+    wxFrameBase::SetMenuBar(menuBar);
+
     SetSizeAndPosition();
+
+    Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
+    Bind(wxEVT_MENU, &Frame, OnSCPI, this, TOOLS_SCPI);
 }
 
 
@@ -59,4 +83,16 @@ void Frame::OnTimer(wxTimerEvent &)
     Application::self->Update();
 
     timer.Start(25);
+}
+
+
+void Frame::OnQuit(wxCommandEvent &)
+{
+
+}
+
+
+void Frame::OnSCPI(wxCommandEvent &)
+{
+    ConsoleSCPI::S
 }

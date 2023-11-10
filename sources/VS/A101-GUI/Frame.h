@@ -12,9 +12,11 @@ public:
 
 private:
 
-    void OnTimer(wxTimerEvent &);
+    wxTimer timer;
 
     void SetSizeAndPosition();
 
-    wxTimer timer;
+    void OnTimer(wxTimerEvent &);
+    void OnQuit(wxCommandEvent &);
+    void OnSCPI(wxCommandEvent &);
 };
