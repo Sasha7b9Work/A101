@@ -49,7 +49,10 @@ Frame::Frame(const wxString &title)
     SetSizeAndPosition();
 
     Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
-    Bind(wxEVT_MENU, &Frame, OnSCPI, this, TOOLS_SCPI);
+    Bind(wxEVT_MENU, &Frame::OnSCPI, this, TOOLS_SCPI);
+    Bind(wxEVT_CLOSE_WINDOW, &Frame::OnClose, this);
+
+    ConsoleSCPI::Self()->Hide();
 }
 
 
@@ -88,11 +91,19 @@ void Frame::OnTimer(wxTimerEvent &)
 
 void Frame::OnQuit(wxCommandEvent &)
 {
+    Close(true);
+}
 
+
+void Frame::OnClose(wxCloseEvent &event)
+{
+    ConsoleSCPI::Self()->Destroy();
+
+    event.Skip();
 }
 
 
 void Frame::OnSCPI(wxCommandEvent &)
 {
-    ConsoleSCPI::S
+    ConsoleSCPI::Self()->SwitchVisibility();
 }

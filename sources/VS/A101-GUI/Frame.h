@@ -17,6 +17,7 @@ private:
     void SetSizeAndPosition();
 
     void OnTimer(wxTimerEvent &);
+    void OnClose(wxCloseEvent &);
     void OnQuit(wxCommandEvent &);
     void OnSCPI(wxCommandEvent &);
 };
