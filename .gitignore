@@ -3,6 +3,7 @@ archive.zip
 *.bin
 archiv.zip
 *.dbgconf
+*.uvgui*.*
 
 sources/generated/*
 
