@@ -7,6 +7,7 @@
 #include "Nextion/Nextion.h"
 #include "Display/Controls/WindowsMeasures.h"
 #include "Ampermeter/Ampermeter.h"
+#include "Display/Display.h"
 
 
 namespace PageMain
@@ -29,22 +30,6 @@ namespace PageMain
         wndMAX.Reset();
     }
 
-    static void DrawLabelStart()
-    {
-        uint secs = TIME_MS / 1000;
-
-        static bool is_enabled = false;
-
-        bool enabled = (secs % 2) != 0;
-
-        if (enabled != is_enabled)
-        {
-            Nextion::SetVisible("t4", enabled);
-
-            is_enabled = enabled;
-        }
-    }
-
     static void FuncOnEnter()
     {
 
@@ -52,7 +37,7 @@ namespace PageMain
 
     static void FuncDraw()
     {
-        DrawLabelStart();
+        Display::DrawLabelStar();
 
         wndDC.Draw(Ampermeter::GetDC(), Range::Current());
 
@@ -122,15 +107,18 @@ namespace PageMain
             Ampermeter::Set::ZeroAC::Disable();
         });
 
-    static Button btnSignal("bt12", "0S", []() {});
+    static Button btnSignal("bt12", "0S", []()              // Signal
+        {
+            PageGraph::self->SetAsCurrent();
+        });
 
-    static Button btnMAX("bt15", "01I", []() {});
+    static Button btnMAX("bt15", "01I", []() {});           // Imax
 
-    static Button btnAMP("bt19", "04I", []() {});
+    static Button btnAMP("bt19", "04I", []() {});           // Iamp
 
-    static Button btnMIN("bt18", "02I", []() {});
+    static Button btnMIN("bt18", "02I", []() {});           // Imin
 
-    static Button btnPEAK("bt17", "03I", []() {});
+    static Button btnPEAK("bt17", "03I", []() {});          // Ipp
 
     static Button *buttons[] =
     {

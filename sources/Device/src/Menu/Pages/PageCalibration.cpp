@@ -7,6 +7,7 @@
 #include "Hardware/Timer.h"
 #include "Display/Controls/WindowsMeasures.h"
 #include "Ampermeter/Calibrator/Calibrator.h"
+#include "Display/Display.h"
 #include <cstring>
 
 
@@ -23,22 +24,6 @@ namespace PageCalibration
     void OnEventChangeRange()
     {
         wndCurrent.Reset();
-    }
-
-    static void DrawLabelStar()
-    {
-        uint secs = TIME_MS / 1000;
-
-        static bool is_enabled = false;
-
-        bool enabled = (secs % 2) != 0;
-
-        if (enabled != is_enabled)
-        {
-            Nextion::SetVisible("t2", enabled);
-
-            is_enabled = enabled;
-        }
     }
 
     // Выбор точки калибровки
@@ -322,7 +307,7 @@ namespace PageCalibration
 
         LabelPassword::Draw();
 
-        DrawLabelStar();
+        Display::DrawLabelStar();
 
         int range = ButtonsRange::GetRange();
 

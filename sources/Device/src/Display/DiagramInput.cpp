@@ -83,25 +83,24 @@ void DiagramInput::SetData()
 
 bool DiagramInput::NeedDraw()
 {
-    if (HAL_TIM::TimeMS() < time_next_draw)
-    {
-        return false;
-    }
-
-    time_next_draw = HAL_TIM::TimeMS() + 1000;
-
     return true;
+//    if (HAL_TIM::TimeMS() < time_next_draw)
+//    {
+//        return false;
+//    }
+//
+//    time_next_draw = HAL_TIM::TimeMS() + 1000;
+//
+//    return true;
 }
 
 
 void DiagramInput::Draw()
 {
-    if (!IsEnabled() || !NeedDraw())
+    if(NeedDraw())
     {
-        return;
+        Nextion::WaveInput::Draw(points, NumPoints());
     }
-
-    Nextion::WaveInput::Draw(points, NumPoints());
 }
 
 
@@ -156,5 +155,5 @@ void DiagramInput::Repaint()
 
 int DiagramInput::NumPoints()
 {
-    return (DiagramFFT::IsEnabled() && DiagramInput::IsEnabled()) ? 390 : 783;
+    return 783;
 }

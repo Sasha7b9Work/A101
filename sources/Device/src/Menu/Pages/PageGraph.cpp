@@ -4,6 +4,7 @@
 #include "Display/DiagramFFT.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/Calibrator/Calibrator.h"
+#include "Display/Display.h"
 
 
 namespace PageGraph
@@ -15,6 +16,8 @@ namespace PageGraph
 
     static void FuncDraw()
     {
+        Display::DrawLabelStar();
+
         DiagramInput::Draw();
     }
 
@@ -34,7 +37,10 @@ namespace PageGraph
             DiagramFFT::Draw();
         });
 
-    static Button btnBack("bt6", "3B0", []() {});
+    static Button btnBack("bt6", "3B0", []()
+        {
+            PageMain::self->SetAsCurrent();
+        });
 
     static Button btnDebug("", "debug", []()
         {

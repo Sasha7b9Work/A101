@@ -3,6 +3,7 @@
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
 #include "Settings/Settings.h"
+#include "Display/Display.h"
 
 
 namespace PageDebug
@@ -14,7 +15,7 @@ namespace PageDebug
 
     static void FuncDraw()
     {
-
+        Display::DrawLabelStar();
     }
 
     static Button buttonZero("bt1", "debugZero", []()

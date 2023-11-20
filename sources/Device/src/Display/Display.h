@@ -8,4 +8,6 @@ namespace Display
     void Init();
 
     void Update();
+
+    void DrawLabelStar();
 }

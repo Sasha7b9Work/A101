@@ -66,7 +66,7 @@ void Nextion::WaveInput::Draw(uint8 *points, int num_points)
     */
 
 
-    int id = (DiagramFFT::IsEnabled() && DiagramInput::IsEnabled()) ? 9 : 7;
+    int id = 2;
 
     SendCommandFormat("addt %d,0,%d", id, num_points);
 

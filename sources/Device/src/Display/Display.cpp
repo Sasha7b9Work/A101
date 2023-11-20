@@ -5,6 +5,7 @@
 #include "Display/DiagramInput.h"
 #include "Nextion/Nextion.h"
 #include "Menu/MenuItems.h"
+#include "Hardware/Timer.h"
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
@@ -27,4 +28,21 @@ void Display::Init()
 void Display::Update()
 {
     Page::Current()->Draw();
+}
+
+
+void Display::DrawLabelStar()
+{
+    uint secs = TIME_MS / 1000;
+
+    static bool is_enabled = false;
+
+    bool enabled = (secs % 2) != 0;
+
+    if (enabled != is_enabled)
+    {
+        Nextion::SetVisible("t_star", enabled);
+
+        is_enabled = enabled;
+    }
 }

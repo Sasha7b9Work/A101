@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
-#define VERSION 4
+#define VERSION 5
 
 // Закомментировать, чтобы логи не валили в UART
 #define LOGGED
