@@ -10,12 +10,12 @@ namespace Ampermeter
     {
         namespace ZeroDC
         {
-            static double value = 0.0;
+            static float value = 0.0f;
         }
 
         namespace ZeroAC
         {
-            static double value = 0.0;
+            static float value = 0.0f;
         }
     }
 }
@@ -23,11 +23,11 @@ namespace Ampermeter
 
 void Ampermeter::Set::ZeroDC::Enable()
 {
-    value = 0.0;
+    value = 0.0f;
 
     Measure measure = Ampermeter::GetDC();
 
-    value = measure.IsValid() ? measure.value : 0.0;
+    value = measure.IsValid() ? measure.value : 0.0f;
 }
 
 
@@ -41,7 +41,7 @@ void Ampermeter::Set::ZeroDC::Disable()
 }
 
 
-double Ampermeter::Set::ZeroDC::Level()
+float Ampermeter::Set::ZeroDC::Level()
 {
     return value;
 }
@@ -49,11 +49,11 @@ double Ampermeter::Set::ZeroDC::Level()
 
 void Ampermeter::Set::ZeroAC::Enable()
 {
-    value = 0.0;
+    value = 0.0f;
 
     Measure measure = Ampermeter::GetAC();
 
-    value = measure.IsValid() ? measure.value : 0.0;
+    value = measure.IsValid() ? measure.value : 0.0f;
 }
 
 
@@ -67,7 +67,7 @@ void Ampermeter::Set::ZeroAC::Disable()
 }
 
 
-double Ampermeter::Set::ZeroAC::Level()
+float Ampermeter::Set::ZeroAC::Level()
 {
     return value;
 }

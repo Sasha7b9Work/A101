@@ -4,7 +4,7 @@
 #define VERSION 5
 
 // Закомментировать, чтобы логи не валили в UART
-#define LOGGED
+//#define LOGGED
 
 
 #ifndef WIN32

@@ -43,7 +43,7 @@ protected:
 
     void Clear();
     void SetMeasure(pchar);
-    void SetMeasure(double);
+    void SetMeasure(float);
     // after - количество цифр после запятой
-    void ConvertDoubleToText(double value, char buffer[TextString::MAX_LEN], int after, pchar suffix);
+    void ConvertDoubleToText(float value, char buffer[TextString::MAX_LEN], int after, pchar suffix);
 };

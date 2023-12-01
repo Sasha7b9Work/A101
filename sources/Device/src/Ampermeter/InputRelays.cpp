@@ -18,9 +18,9 @@ namespace InputRelays
 }
 
 
-double Range::Max(int range)
+float Range::Max(int range)
 {
-    static const double max[6] = { 2e-3, 20e-3, 200e-3, 2.0, 20.0, 50.0 };
+    static const float max[6] = { 2e-3f, 20e-3f, 200e-3f, 2.0f, 20.0f, 50.0f };
 
     return max[range];
 }

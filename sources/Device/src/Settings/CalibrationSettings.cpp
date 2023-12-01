@@ -23,9 +23,9 @@ CalibrationSettings CalibrationSettings::Storage::stored;
 CalibrationSettings cal = NS_CalibrationSettings::cal_def;
 
 
-double CalibrationSettings::Gain::Get() const
+float CalibrationSettings::Gain::Get() const
 {
-    static const double k[6] = { 61.53e-2, 61.53e-1, 61.53e0, 61.53e-2, 61.53e-1, 61.53e0 };
+    static const float k[6] = { 61.53e-2f, 61.53e-1f, 61.53e0f, 61.53e-2f, 61.53e-1f, 61.53e0f };
 
     return value * k[range];
 }

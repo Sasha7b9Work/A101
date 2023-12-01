@@ -40,7 +40,7 @@ void WindowMeasure::Reset()
 }
 
 
-void WindowMeasure::SetMeasure(double value)
+void WindowMeasure::SetMeasure(float value)
 {
     if (Page::Current() != PageMain::self)
     {
@@ -49,9 +49,9 @@ void WindowMeasure::SetMeasure(double value)
 
     char buffer[30];
 
-    buffer[0] = (value >= 0.0) ? '+' : '-';
+    buffer[0] = (value >= 0.0f) ? '+' : '-';
 
-    std::sprintf(buffer + 1, "%5f", value);
+    std::sprintf(buffer + 1, "%5f", (double)value);
 
     SetMeasure(buffer);
 }
@@ -120,9 +120,9 @@ void WindowMeasure::Draw(const Measure &measure, int range)
 }
 
 
-void WindowMeasure::ConvertDoubleToText(double value, char out[TextString::MAX_LEN], int after, pchar suffix)
+void WindowMeasure::ConvertDoubleToText(float value, char out[TextString::MAX_LEN], int after, pchar suffix)
 {
-    std::strcpy(out, value < 0.0 ? "-" : "+");
+    std::strcpy(out, value < 0.0f ? "-" : "+");
 
     value = std::fabs(value);
 
@@ -130,17 +130,17 @@ void WindowMeasure::ConvertDoubleToText(double value, char out[TextString::MAX_L
 
     if (before == 3)
     {
-        if (value < 10.0)
+        if (value < 10.0f)
         {
             std::strcat(out, "00");
         }
-        else if (value < 100.0)
+        else if (value < 100.0f)
         {
             std::strcat(out, "0");
         }
     }
 
-    if (before == 2 && value < 10.0)
+    if (before == 2 && value < 10.0f)
     {
         std::strcat(out, "0");
     }
@@ -149,14 +149,14 @@ void WindowMeasure::ConvertDoubleToText(double value, char out[TextString::MAX_L
     {
         for (int i = 0; i < after; i++)
         {
-            value *= 10.0;
+            value *= 10.0f;
         }
 
-        value = (double)((int)value);
+        value = (float)((int)value);
 
         for (int i = 0; i < after; i++)
         {
-            value /= 10.0;
+            value /= 10.0f;
         }
     }
 
@@ -164,7 +164,7 @@ void WindowMeasure::ConvertDoubleToText(double value, char out[TextString::MAX_L
 
     char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0' };
 
-    std::sprintf(buffer, format, value, suffix);
+    std::sprintf(buffer, format, (double)value, suffix);
 
     std::strcat(out, buffer);
 }

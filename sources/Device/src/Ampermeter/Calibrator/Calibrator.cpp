@@ -23,7 +23,7 @@ namespace Calibrator
         bool Run();
     private:
         int range;
-        double CalculateDC(int zero);
+        float CalculateDC(int zero);
     };
 
     static void (*callbackUpdate)() = nullptr;
@@ -72,20 +72,22 @@ bool Calibrator::CalibratorZero::Run()
 
     zero.SetConst(const_val);
 
-    double dc = CalculateDC(0);
+    float dc = CalculateDC(0);
 
-    double dc1000 = CalculateDC(1000);
+#ifdef LOGGED
+    float dc1000 = CalculateDC(1000);
 
-    LOG_WRITE("dc = %f, dc1000 = %f", dc, dc1000);
+    LOG_WRITE("dc = %f, dc1000 = %f", (double)dc, (double)dc1000);
+#endif
 
     int z = 0;
 
-    int delta = (dc < 0.0) ? 1000 : -1000;
+    int delta = (dc < 0.0f) ? 1000 : -1000;
 
     {
         for (int i = 0; i < 4; i++)
         {
-            double prev_dc = dc;
+            float prev_dc = dc;
 
             while ((int)Math::Sign(prev_dc) == (int)Math::Sign(dc))
             {
@@ -93,9 +95,9 @@ bool Calibrator::CalibratorZero::Run()
 
                 dc = CalculateDC(z);
 
-                LOG_WRITE("z = %d, dc = %f", z, dc);
+                LOG_WRITE("z = %d, dc = %f", z, (double)dc);
 
-                if (std::fabs(dc) < 1e-6)
+                if (std::fabs(dc) < 1e-6f)
                 {
                     i = 5;
                     break;
@@ -110,11 +112,13 @@ bool Calibrator::CalibratorZero::Run()
         }
     }
 
+#ifdef LOGGED
     bool correct_ac = false;
 
-    LOG_WRITE("z - 1 = %d, dc = %f", z - 1, CalculateDC(z - 1));
-    LOG_WRITE("z = %d, ac = %e, dc = %e", z, Calculator::GetAC(&correct_ac), (double)dc);
-    LOG_WRITE("z + 1 = %d, dc = %f", z + 1, CalculateDC(z + 1));
+    LOG_WRITE("z - 1 = %d, dc = %f", z - 1, (double)CalculateDC(z - 1));
+    LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(&correct_ac), (double)dc);
+    LOG_WRITE("z + 1 = %d, dc = %f", z + 1, (double)CalculateDC(z + 1));
+#endif
 
     bool result = false;
 
@@ -133,7 +137,7 @@ bool Calibrator::CalibratorZero::Run()
 }
 
 
-double Calibrator::CalibratorZero::CalculateDC(int zero)
+float Calibrator::CalibratorZero::CalculateDC(int zero)
 {
     cal.zero[range].SetConst(zero);
 
@@ -155,18 +159,18 @@ bool Calibrator::CalibrateGain(int range)
 
     bool correct_dc = false;
 
-    double dc = std::fabs(Calculator::GetDC(&correct_dc));
+    float dc = std::fabsf(Calculator::GetDC(&correct_dc));
 
-    double k = Range::Max(range) / dc;
+    float k = Range::Max(range) / dc;
 
     if (range < 3)
     {
-        k *= 1e3;
+        k *= 1e3f;
     }
 
     cal.gain[range].Set(k);
 
-    LOG_WRITE("range = %d, dc = %f, k = %f", range, dc, k);
+    LOG_WRITE("range = %d, dc = %f, k = %f", range, (double)dc, (double)k);
 
     return true;
 }

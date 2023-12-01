@@ -4,7 +4,7 @@
 
 namespace Math
 {
-    double Random(double min, double max);
+    float Random(float min, float max);
 
     template<class T> T Abs(T value)
     {

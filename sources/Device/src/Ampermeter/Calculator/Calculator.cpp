@@ -14,8 +14,8 @@
 
 namespace Calculator
 {
-    static Averager<double, 1> dc;
-    static Averager<double, 1> ac;
+    static Averager<float, 1> dc;
+    static Averager<float, 1> ac;
 }
 
 
@@ -30,33 +30,35 @@ SampleRate Calculator::AppendData()
 {
     Period period = ResolverPeriodSamples().GetResult();
 
-    double value_ac = ResolverAC(period).GetResult();
+    float value_ac = ResolverAC(period).GetResult();
 
-    double k = cal.gain[Range::Current()].Get();
+    const float k = cal.gain[Range::Current()].Get();
 
-    ac.Push(value_ac * k);
+    float value = value_ac * k;
 
-    double value_dc = -period.dc.Real();
+    ac.Push(value);
 
-//    LOG_WRITE_TRACE("value_dc = %f %f", value_dc, value_dc * k);
+    float value_dc = -period.dc.Real();
 
-    dc.Push(value_dc * k);
+    value = value_dc * k;
+
+    dc.Push(value);
 
     return SampleRate::Current::Get();
 }
 
 
-double Calculator::GetAC(bool *correct)
+float Calculator::GetAC(bool *correct)
 {
     *correct = (ac.NumElements() > 0);
 
-    return ac.NumElements() ? ac.Get() : 0.0;
+    return ac.NumElements() ? ac.Get() : 0.0f;
 }
 
 
-double Calculator::GetDC(bool *correct)
+float Calculator::GetDC(bool *correct)
 {
     *correct = (dc.NumElements() > 0);
 
-    return dc.NumElements() ? dc.Get() : 0.0;
+    return dc.NumElements() ? dc.Get() : 0.0f;
 }

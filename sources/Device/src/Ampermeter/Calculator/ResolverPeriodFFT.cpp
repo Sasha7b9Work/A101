@@ -35,15 +35,15 @@ ResolverPeriodFFT::ResolverPeriodFFT(const ResolverFFT &fft)
     }
 
 #ifdef LOGGED
-    double freq = 1.0 / ((double)(BufferADC::SIZE * BufferADC::GetSampleRate().TimeUS()) * 1e-6) * (double)index;
-#endif
+    float freq = 1.0f / ((float)(BufferADC::SIZE * BufferADC::GetSampleRate().TimeUS()) * 1e-6f) * (float)index;
 
     LOG_WRITE("index %d, period %d, index freq %.1f, freq %f",
         fft.FindIndexFreq(),
         period,
-        freq,
-        1.0 / ((double)((uint)index * BufferADC::GetSampleRate().TimeUS()) * 1e-6)
+        (double)freq,
+        (double)(1.0f / ((float)((uint)index * BufferADC::GetSampleRate().TimeUS()) * 1e-6f))
     );
+#endif
 }
 
 

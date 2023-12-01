@@ -98,9 +98,11 @@ Measure Ampermeter::GetDC()
 {
     bool correct = false;
 
-    double dc = Calculator::GetDC(&correct) - Set::ZeroDC::Level();
+    float dc = Calculator::GetDC(&correct);
 
-    return Measure(dc, OutOfRange(), correct);
+    float zero = Set::ZeroDC::Level();
+
+    return Measure(dc - zero, OutOfRange(), correct);
 }
 
 
@@ -108,7 +110,7 @@ Measure Ampermeter::GetAC()
 {
     bool correct = false;
 
-    double ac = Calculator::GetAC(&correct) - Set::ZeroAC::Level();
+    float ac = Calculator::GetAC(&correct) - Set::ZeroAC::Level();
 
     return Measure(ac, OutOfRange(), correct);
 }
@@ -174,6 +176,7 @@ void Ampermeter::MeasurementCycle()
         else
         {
             BufferADC::Push(value);
+            num_sample++;
         }
     }
 
@@ -195,21 +198,21 @@ void Ampermeter::MeasurementCycle()
 
 bool Ampermeter::OutOfRange()
 {
-    static const double maxs[6] = { 2e-3, 20e-3, 200e-3, 2.0, 20.0, 50.0 };
+    static const float maxs[6] = { 2e-3f, 20e-3f, 200e-3f, 2.0f, 20.0f, 50.0f };
 
-    double max = maxs[Range::Current()] * 1.1 * 1e3;
+    float max = maxs[Range::Current()] * 1.1f * 1e3f;
 
     bool correct_dc = false;
     bool correct_ac = false;
 
-    double dc = Calculator::GetDC(&correct_dc);
-    double ac = Calculator::GetAC(&correct_ac);
+    float dc = Calculator::GetDC(&correct_dc);
+    float ac = Calculator::GetAC(&correct_ac);
 
-    double value = std::fabs(dc) + ac;
+    float value = std::fabs(dc) + ac;
 
     if (value > max)
     {
-        LOG_WRITE("out range dc = %f, ac = %f", dc, ac);
+        LOG_WRITE("out range dc = %f, ac = %f", (double)dc, (double)ac);
 
         return true;
     }
