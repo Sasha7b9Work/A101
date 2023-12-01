@@ -25,12 +25,12 @@ namespace DiagramInput
 
 void DiagramInput::SetData()
 {
-    float scale = height / (BufferADC::Max().Real() - BufferADC::Min().Real());
-    float ave = (BufferADC::Max().Real() + BufferADC::Min().Real()) / 2.0f;
+    float scale = height / (bufADC.Max().Real() - bufADC.Min().Real());
+    float ave = (bufADC.Max().Real() + bufADC.Min().Real()) / 2.0f;
 
     for (int i = 0; i < NumPoints(); i++)
     {
-        float value = y0 + scale * (BufferADC::At(i).Real() - ave);
+        float value = y0 + scale * (bufADC.At(i).Real() - ave);
 
         if (value < 0)
         {

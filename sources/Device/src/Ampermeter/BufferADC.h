@@ -3,11 +3,11 @@
 #include "Ampermeter/AD7691.h"
 
 
-struct BufferADC
+namespace BufferADC
 {
     static const int SIZE = 16 * 1024;
 
-    static void Push(ValueADC word)
+    void Push(ValueADC word)
     {
         if (pointer < SIZE)
         {
@@ -15,37 +15,29 @@ struct BufferADC
         }
     }
 
-    static int NumElements() { return pointer; }
+    int NumElements() { return pointer; }
 
-    static bool IsFull()     { return (pointer == SIZE); }
+    bool IsFull()     { return (pointer == SIZE); }
 
-    static void Clear(SampleRate _rate) { pointer = 0; sampleRate = _rate; }
+    void Clear(SampleRate _rate) { pointer = 0; sampleRate = _rate; }
 
-    static int Size() { return SIZE; }
+    int Size() { return SIZE; }
 
-    static void CalculateLimits();
+    void CalculateLimits();
 
-    static ValueADC Min() { return min; }
+    ValueADC Min() { return min; }
 
-    static ValueADC Max() { return max; }
+    ValueADC Max() { return max; }
 
-    static void LogUART();
+    void LogUART();
 
-    static SampleRate GetSampleRate() { return sampleRate; }
+    SampleRate GetSampleRate() { return sampleRate; }
 
-    static ValueADC At(int i) { return raw[i]; }
+    ValueADC At(int i) { return raw[i]; }
 
     // Прменить медианный фильтр по трём
-    static void MiddleOf3();
+    void MiddleOf3();
 
     // Сгладить сигнал
-    static void SmoothOut();
-
-private:
-    static int        pointer;         // Указатель используется при чтении данных (массив raw)
-    static ValueADC   raw[SIZE];       // Данные, считанные с АЦП
-    static SampleRate sampleRate;
-
-    static ValueADC   min;
-    static ValueADC   max;
+    void SmoothOut();
 };

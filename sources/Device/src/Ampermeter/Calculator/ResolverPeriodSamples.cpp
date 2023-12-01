@@ -50,7 +50,7 @@ ResolverPeriodSamples::ResolverPeriodSamples()
 
     for (int i = 0; i < BufferADC::SIZE; i++)
     {
-        sum += BufferADC::At(i);
+        sum += bufADC.At(i);
     }
 
     int averaging = sum / BufferADC::SIZE;
@@ -90,8 +90,8 @@ Intersection ResolverPeriodSamples::FindFirstIntersectionRelativeAverage(const V
 
     for (int i = 1; i < BufferADC::SIZE; i++)
     {
-        int current = BufferADC::At(i);
-        int prev = BufferADC::At(i - 1);
+        int current = bufADC.At(i);
+        int prev = bufADC.At(i - 1);
 
         if (prev < zero && current >= zero)
         {
@@ -118,8 +118,8 @@ Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const Va
     {
         for (int i = BufferADC::SIZE - 1; i > 0; i--)
         {
-            int current = BufferADC::At(i);
-            int prev = BufferADC::At(i - 1);
+            int current = bufADC.At(i);
+            int prev = bufADC.At(i - 1);
 
             if (prev < zero && current >= zero)
             {
@@ -132,8 +132,8 @@ Intersection ResolverPeriodSamples::FindLastIntersectionRelativeAverage(const Va
     {
         for (int i = BufferADC::SIZE - 1; i > 0; i--)
         {
-            int current = BufferADC::At(i);
-            int prev = BufferADC::At(i - 1);
+            int current = bufADC.At(i);
+            int prev = bufADC.At(i - 1);
 
             if (prev > zero && current <= zero)
             {
@@ -205,9 +205,9 @@ uint DualIntegral::CalculatePositive(const Period &period)
 
     for (int i = i_first; i < i_last; i++)
     {
-        if (BufferADC::At(i) > zero)
+        if (bufADC.At(i) > zero)
         {
-            sum += (uint)(BufferADC::At(i) - zero);
+            sum += (uint)(bufADC.At(i) - zero);
         }
     }
 
@@ -226,9 +226,9 @@ uint DualIntegral::CalculateNegative(const Period &period)
 
     for (int i = i_first; i < i_last; i++)
     {
-        if (BufferADC::At(i) < zero)
+        if (bufADC.At(i) < zero)
         {
-            sum += (uint)(zero - BufferADC::At(i));
+            sum += (uint)(zero - bufADC.At(i));
         }
     }
 
@@ -238,8 +238,8 @@ uint DualIntegral::CalculateNegative(const Period &period)
 
 ResolverDC::ResolverDC(const Period &_period)
 {
-    int min = BufferADC::Min();
-    int max = BufferADC::Max();
+    int min = bufADC.Min();
+    int max = bufADC.Max();
 
     Period period = _period;
 
