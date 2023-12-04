@@ -15,7 +15,7 @@ ResolverAC::ResolverAC(const Period &period)
 
     for (int i = period.first.first; i < period.last.first; i++)
     {
-        float value = bufADC.At(i).Real() - dc;
+        float value = BufferADC::At(i).Real() - dc;
 
         if (std::fabs(value) < min_value)
         {

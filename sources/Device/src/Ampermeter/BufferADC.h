@@ -7,37 +7,29 @@ namespace BufferADC
 {
     static const int SIZE = 16 * 1024;
 
-    void Push(ValueADC word)
-    {
-        if (pointer < SIZE)
-        {
-            raw[pointer++] = word;
-        }
-    }
+    void Push(ValueADC word);
 
-    int NumElements() { return pointer; }
+    int NumElements();
 
-    bool IsFull()     { return (pointer == SIZE); }
+    bool IsFull();
 
-    void Clear(SampleRate _rate) { pointer = 0; sampleRate = _rate; }
-
-    int Size() { return SIZE; }
+    void Clear(SampleRate);
 
     void CalculateLimits();
 
-    ValueADC Min() { return min; }
+    ValueADC Min();
 
-    ValueADC Max() { return max; }
+    ValueADC Max();
 
     void LogUART();
 
-    SampleRate GetSampleRate() { return sampleRate; }
+    SampleRate GetSampleRate();
 
-    ValueADC At(int i) { return raw[i]; }
+    ValueADC At(int i);
 
     // Прменить медианный фильтр по трём
     void MiddleOf3();
 
     // Сгладить сигнал
     void SmoothOut();
-};
+}

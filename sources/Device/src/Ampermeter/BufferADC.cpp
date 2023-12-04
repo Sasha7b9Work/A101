@@ -7,9 +7,6 @@
 #include <limits>
 
 
-Превратить стуктуру BufferADC в namespace
-
-
 namespace BufferADC
 {
     int        pointer;         // Указатель используется при чтении данных (массив raw)
@@ -18,6 +15,58 @@ namespace BufferADC
 
     ValueADC   min;
     ValueADC   max;
+}
+
+
+void BufferADC::Push(ValueADC word)
+{
+    if (pointer < SIZE)
+    {
+        raw[pointer++] = word;
+    }
+}
+
+
+int BufferADC::NumElements()
+{
+    return pointer;
+}
+
+
+bool BufferADC::IsFull()
+{
+    return pointer == SIZE;
+}
+
+
+void BufferADC::Clear(SampleRate rate)
+{
+    pointer = 0;
+    sampleRate = rate;
+}
+
+
+ValueADC BufferADC::Min()
+{
+    return min;
+}
+
+
+ValueADC BufferADC::Max()
+{
+    return max;
+}
+
+
+SampleRate BufferADC::GetSampleRate()
+{
+    return sampleRate;
+}
+
+
+ValueADC BufferADC::At(int i)
+{
+    return raw[i];
 }
 
 
@@ -45,7 +94,7 @@ void BufferADC::CalculateLimits()
 
 void BufferADC::LogUART()
 {
-    for (int i = 0; i < Size(); i++)
+    for (int i = 0; i < SIZE; i++)
     {
         LOG_WRITE("%d", raw[i].Raw());
     }

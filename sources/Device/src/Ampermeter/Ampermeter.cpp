@@ -144,7 +144,7 @@ void Ampermeter::MeasurementCycle()
 {
     TimeMeterMS meter;
 
-    bufADC.Clear(SampleRate::Current::Get());
+    BufferADC::Clear(SampleRate::Current::Get());
 
     uint period = SampleRate::Current::Get().TimeUS();
 
@@ -152,7 +152,7 @@ void Ampermeter::MeasurementCycle()
 
     int num_sample = 0;
 
-    while (!bufADC.IsFull())
+    while (!BufferADC::IsFull())
     {
 #ifndef WIN32
         while (TIM4->CNT < period)
@@ -170,12 +170,12 @@ void Ampermeter::MeasurementCycle()
 
             if (num_sample++ > 200)
             {
-                bufADC.Push(value);
+                BufferADC::Push(value);
             }
         }
         else
         {
-            bufADC.Push(value);
+            BufferADC::Push(value);
             num_sample++;
         }
     }
@@ -184,15 +184,15 @@ void Ampermeter::MeasurementCycle()
 
     if (set.middle_of_3)
     {
-        bufADC.MiddleOf3();
+        BufferADC::MiddleOf3();
     }
 
     if (set.smooth)
     {
-        bufADC.SmoothOut();
+        BufferADC::SmoothOut();
     }
 
-    bufADC.CalculateLimits();
+    BufferADC::CalculateLimits();
 }
 
 

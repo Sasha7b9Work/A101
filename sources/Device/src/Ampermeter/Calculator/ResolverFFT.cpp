@@ -15,7 +15,7 @@ ResolverFFT::ResolverFFT()
 
     for (int i = 0; i < NUM_POINTS; i++)
     {
-        in[i] = bufADC.At(i).Real(); //-V522
+        in[i] = BufferADC::At(i).Real(); //-V522
     }
 
     TimeMeterMS meter;

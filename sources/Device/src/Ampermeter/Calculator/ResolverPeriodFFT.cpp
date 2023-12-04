@@ -100,7 +100,7 @@ int ResolverPeriodFFT::FindIntegral(int line, int index_start)
 
     for (int i = index_start; i < index_start + line; i++)
     {
-        result += bufADC.At(i).Raw();
+        result += BufferADC::At(i).Raw();
     }
 
     return result;
@@ -109,10 +109,10 @@ int ResolverPeriodFFT::FindIntegral(int line, int index_start)
 
 void ResolverPeriodFFT::CalculateSums()
 {
-    sum[0] = bufADC.At(0).Raw();
+    sum[0] = BufferADC::At(0).Raw();
     
     for(int i = 1; i < BufferADC::SIZE; i++)
     {
-        sum[i] = sum[i - 1] + bufADC.At(i).Raw();
+        sum[i] = sum[i - 1] + BufferADC::At(i).Raw();
     }
 }
