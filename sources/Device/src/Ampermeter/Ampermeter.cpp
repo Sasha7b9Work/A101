@@ -229,14 +229,22 @@ void Ampermeter::OnEventChangeRange()
 
 void Ampermeter::AdjustmentZero()
 {
-    static uint next_time = TIME_MS + 10000;
+    static int prev_range = -1;
 
-    if (TIME_MS < next_time)
+    if (Range::Current() == prev_range)
     {
-        return;
+        static uint next_time = TIME_MS + 10000;
+
+        if (TIME_MS < next_time)
+        {
+
+            return;
+        }
+
+        next_time = TIME_MS + 10000;
     }
 
-    next_time = TIME_MS + 10000;
+    prev_range = Range::Current();
 
     CalibrationSettings::Zero &zero = cal.zero[Range::Current()];
     const int const_val = zero.GetConst();
