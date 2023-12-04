@@ -14,8 +14,6 @@ void CntrlText::SetLabel(pchar label, bool if_different)
             std::strcpy(prev_label, label);
 
             Nextion::SendCommandFormat("%s.txt=\"%s\"", name, label);
-
-//            LOG_WRITE_TRACE("Set label %s", label);
         }
     }
 }

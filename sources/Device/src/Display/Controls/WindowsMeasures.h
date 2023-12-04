@@ -23,9 +23,8 @@ class WindowMeasure
 {
 public:
     WindowMeasure(TypeMeasure::E _type, pchar nameType, pchar nameSign, pchar nameDigits, pchar nameUnits, pchar _label_type = "") :
-        cntrlType(nameType), cntrlSign(nameSign), cntrlDigits(nameDigits), cntrlUnits(nameUnits), label_type(_label_type), type(_type)
+        cntrlType(nameType), cntrlSign(nameSign), cntrlDigits(nameDigits), cntrlUnits(nameUnits), __label_type(_label_type), type(_type)
     {
-        Reset();
     }
     void Draw(const Measure &, int range);
     // Нанести надпись, даже если такая надпись уже нанесена
@@ -36,7 +35,7 @@ protected:
     CntrlText cntrlSign;        // Сюда выводим знак
     CntrlText cntrlDigits;      // Сюда выводим числовое значение
     CntrlText cntrlUnits;       // Здесь единицы измерения
-    pchar label_type = "";
+    pchar __label_type = "";
     TypeMeasure::E type;
 
     char buf_measure[TextString::MAX_LEN];

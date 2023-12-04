@@ -31,9 +31,9 @@ void WindowMeasure::Reset()
 
     cntrlSign.SetLabel("");
 
-    if (label_type[0] != '\0')
+    if (__label_type[0] != '\0')
     {
-        cntrlType.SetLabel(label_type);
+        cntrlType.SetLabel(__label_type);
     }
 
     buf_measure[0] = '\0';

@@ -12,8 +12,8 @@
 
 namespace PageMain
 {
-    static WindowMeasure wndDC(TypeMeasure::DC, "t2", "t19", "t0", "t18", "DC:");
-    static WindowMeasure wndAC(TypeMeasure::AC, "t3", "", "t1", "t17", "AC:");
+    static WindowMeasure wndDC(TypeMeasure::DC, "titleDC", "f_sign", "valueDC", "unitsDC", "DC:");
+    static WindowMeasure wndAC(TypeMeasure::AC, "titleAC", "",       "valueAC", "unitsAC", "AC:");
 
     static WindowMeasure wndAMPL(TypeMeasure::Ampl, "t23", "", "t10", "t27", "Iamp:");
     static WindowMeasure wndPEAK(TypeMeasure::Peak, "t20", "", "t9", "t26", "Ipp:");
@@ -32,7 +32,12 @@ namespace PageMain
 
     static void FuncOnEnter()
     {
-
+        wndDC.Reset();
+        wndAC.Reset();
+        wndAMPL.Reset();
+        wndPEAK.Reset();
+        wndMIN.Reset();
+        wndMAX.Reset();
     }
 
     static void FuncDraw()
