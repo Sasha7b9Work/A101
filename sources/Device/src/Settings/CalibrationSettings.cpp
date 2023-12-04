@@ -12,7 +12,7 @@ namespace NS_CalibrationSettings
         sizeof(CalibrationSettings),
         0,
         { {0, 1.0}, {1, 1.0}, {2, 1.0}, {3, 1.0}, {4, 1.0}, {5, 1.0} },
-        {  3245,     3245,     3245,     3251,     3245,     3242 }
+        {  0,        0,        0,        0,        0,        0 }
     };
 }
 
