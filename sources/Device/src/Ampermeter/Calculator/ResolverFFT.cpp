@@ -9,9 +9,9 @@
 
 ResolverFFT::ResolverFFT()
 {
-    float *in = (float *)std::malloc(sizeof(float) * NUM_POINTS); //-V829
+    float *in = new float[NUM_POINTS];
 
-    float *out = (float *)std::malloc(sizeof(float) * NUM_POINTS);
+    float *out = new float[NUM_POINTS];
 
     for (int i = 0; i < NUM_POINTS; i++)
     {
@@ -29,8 +29,8 @@ ResolverFFT::ResolverFFT()
         data[i] = (uint8)(255.0f * out[i]); //-V522
     }
 
-    std::free(in);
-    std::free(out);
+    delete[] in;
+    delete[] out;
 }
 
 

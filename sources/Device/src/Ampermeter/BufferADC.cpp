@@ -9,12 +9,12 @@
 
 namespace BufferADC
 {
-    int        pointer;         // Указатель используется при чтении данных (массив raw)
-    ValueADC   raw[SIZE];       // Данные, считанные с АЦП
-    SampleRate sampleRate;
+    static int        pointer;                                          // Указатель используется при чтении данных (массив raw)
+    static ValueADC   raw[SIZE] __attribute__((section("CCM_DATA")));   // Данные, считанные с АЦП
+    static SampleRate sampleRate;
 
-    ValueADC   min;
-    ValueADC   max;
+    static ValueADC   min;
+    static ValueADC   max;
 }
 
 
@@ -86,9 +86,6 @@ void BufferADC::CalculateLimits()
         if (value < min) { min = value; }
         if (value > max) { max = value; }
     }
-
-    min = min;
-    max = max;
 }
 
 

@@ -39,7 +39,7 @@ uint HAL_CRC32::Calculate(const void *data, uint size)
 
     uint result = 0;
 
-    uint *buffer = (uint *)std::malloc(size_buffer);
+    uint *buffer = new uint[size_buffer];
 
     if (buffer)
     {
@@ -53,7 +53,7 @@ uint HAL_CRC32::Calculate(const void *data, uint size)
         result = HAL_CRC_Calculate(&handleCRC, buffer, size_buffer / 4);
     }
 
-    std::free(buffer);
+    delete[] buffer;
 
     return result;
 }
