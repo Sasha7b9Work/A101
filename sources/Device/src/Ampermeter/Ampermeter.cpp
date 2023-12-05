@@ -231,18 +231,18 @@ void Ampermeter::AdjustmentZero()
 {
     static int prev_range = -1;
 
+    static uint next_time = 0;
+
     if (Range::Current() == prev_range)
     {
-        static uint next_time = TIME_MS + 10000;
-
         if (TIME_MS < next_time)
         {
 
             return;
         }
-
-        next_time = TIME_MS + 10000;
     }
+
+    next_time = TIME_MS + 10000;
 
     prev_range = Range::Current();
 
