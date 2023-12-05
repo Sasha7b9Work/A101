@@ -4,7 +4,7 @@
 
 struct Measure
 {
-    Measure(float _value, bool _out_of_range, bool _correct) :
+    Measure(REAL _value, bool _out_of_range, bool _correct) :
         value(_value),
         out_of_range(_out_of_range),
         correct(_correct)
@@ -16,7 +16,7 @@ struct Measure
         return !out_of_range && correct;
     }
 
-    float value = 0.0;
+    REAL value = 0.0;
     bool out_of_range = false;
     bool correct = false;
 };
@@ -49,7 +49,7 @@ namespace Ampermeter
 
             void Disable();
 
-            float Level();
+            REAL Level();
         }
 
         namespace ZeroAC
@@ -58,7 +58,7 @@ namespace Ampermeter
 
             void Disable();
 
-            float Level();
+            REAL Level();
         }
     }
 }

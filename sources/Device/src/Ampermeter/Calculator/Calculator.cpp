@@ -14,8 +14,8 @@
 
 namespace Calculator
 {
-    static Averager<float, 1> dc;
-    static Averager<float, 1> ac;
+    static Averager<REAL, 1> dc;
+    static Averager<REAL, 1> ac;
 }
 
 
@@ -30,15 +30,15 @@ SampleRate Calculator::AppendData()
 {
     Period period = ResolverPeriodSamples().GetResult();
 
-    float value_ac = ResolverAC(period).GetResult();
+    REAL value_ac = ResolverAC(period).GetResult();
 
-    const float k = cal.gain[Range::Current()].Get();
+    const REAL k = cal.gain[Range::Current()].Get();
 
-    float value = value_ac * k;
+    REAL value = value_ac * k;
 
     ac.Push(value);
 
-    float value_dc = -period.dc.Real();
+    REAL value_dc = -period.dc.Real();
 
     value = value_dc * k;
 
@@ -48,17 +48,17 @@ SampleRate Calculator::AppendData()
 }
 
 
-float Calculator::GetAC(bool *correct)
+REAL Calculator::GetAC(bool *correct)
 {
     *correct = (ac.NumElements() > 0);
 
-    return ac.NumElements() ? ac.Get() : 0.0f;
+    return ac.NumElements() ? ac.Get() : 0.0;
 }
 
 
-float Calculator::GetDC(bool *correct)
+REAL Calculator::GetDC(bool *correct)
 {
     *correct = (dc.NumElements() > 0);
 
-    return dc.NumElements() ? dc.Get() : 0.0f;
+    return dc.NumElements() ? dc.Get() : 0.0;
 }

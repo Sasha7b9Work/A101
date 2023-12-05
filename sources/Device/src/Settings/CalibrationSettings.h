@@ -6,12 +6,12 @@ struct CalibrationSettings
 {
     struct Gain
     {
-        Gain(int _range = -1, float _value = 1.0) : range(_range), value(_value) { }
-        void Set(float v) { value = v; }
-        float Get() const;
+        Gain(int _range = -1, REAL _value = 1.0) : range(_range), value(_value) { }
+        void Set(REAL v) { value = v; }
+        REAL Get() const;
     private:
         int range;
-        float value;
+        REAL value;
     };
 
     struct Zero

@@ -40,7 +40,7 @@ void WindowMeasure::Reset()
 }
 
 
-void WindowMeasure::SetMeasure(float value)
+void WindowMeasure::SetMeasure(REAL value)
 {
     if (Page::Current() != PageMain::self)
     {
@@ -49,7 +49,7 @@ void WindowMeasure::SetMeasure(float value)
 
     char buffer[30];
 
-    buffer[0] = (value >= 0.0f) ? '+' : '-';
+    buffer[0] = (value >= 0.0) ? '+' : '-';
 
     std::sprintf(buffer + 1, "%5f", (double)value);
 
@@ -112,7 +112,7 @@ void WindowMeasure::Draw(const Measure &measure, int range)
             static const int after[6] = { 4, 3, 2, 4, 3, 3 };
             const pchar suffix = (range < 3) ? "mA" : "A";
 
-            ConvertDoubleToText(measure.value, buf_measure, after[range], suffix);
+            ConvertRealToText(measure.value, buf_measure, after[range], suffix);
         }
 
         SetMeasure(buf_measure);
@@ -120,9 +120,9 @@ void WindowMeasure::Draw(const Measure &measure, int range)
 }
 
 
-void WindowMeasure::ConvertDoubleToText(float value, char out[TextString::MAX_LEN], int after, pchar suffix)
+void WindowMeasure::ConvertRealToText(REAL value, char out[TextString::MAX_LEN], int after, pchar suffix)
 {
-    std::strcpy(out, value < 0.0f ? "-" : "+");
+    std::strcpy(out, value < 0.0 ? "-" : "+");
 
     value = std::fabs(value);
 
@@ -130,17 +130,17 @@ void WindowMeasure::ConvertDoubleToText(float value, char out[TextString::MAX_LE
 
     if (before == 3)
     {
-        if (value < 10.0f)
+        if (value < 10.0)
         {
             std::strcat(out, "00");
         }
-        else if (value < 100.0f)
+        else if (value < 100.0)
         {
             std::strcat(out, "0");
         }
     }
 
-    if (before == 2 && value < 10.0f)
+    if (before == 2 && value < 10.0)
     {
         std::strcat(out, "0");
     }
@@ -149,14 +149,12 @@ void WindowMeasure::ConvertDoubleToText(float value, char out[TextString::MAX_LE
     {
         for (int i = 0; i < after; i++)
         {
-            value *= 10.0f;
+            value *= 10.0;
         }
-
-        value = (float)((int)value);
 
         for (int i = 0; i < after; i++)
         {
-            value /= 10.0f;
+            value /= 10.0;
         }
     }
 

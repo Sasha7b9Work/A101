@@ -23,7 +23,7 @@ namespace Calibrator
         bool Run();
     private:
         int range;
-        float CalculateDC(int zero);
+        REAL CalculateDC(int zero);
     };
 
     static void (*callbackUpdate)() = nullptr;
@@ -72,22 +72,22 @@ bool Calibrator::CalibratorZero::Run()
 
     zero.SetConst(const_val);
 
-    float dc = CalculateDC(0);
+    REAL dc = CalculateDC(0);
 
 #ifdef LOGGED
-    float dc1000 = CalculateDC(1000);
+    REAL dc1000 = CalculateDC(1000);
 
     LOG_WRITE("dc = %f, dc1000 = %f", (double)dc, (double)dc1000);
 #endif
 
     int z = 0;
 
-    int delta = (dc < 0.0f) ? 1000 : -1000;
+    int delta = (dc < 0.0) ? 1000 : -1000;
 
     {
         for (int i = 0; i < 4; i++)
         {
-            float prev_dc = dc;
+            REAL prev_dc = dc;
 
             while ((int)Math::Sign(prev_dc) == (int)Math::Sign(dc))
             {
@@ -97,7 +97,7 @@ bool Calibrator::CalibratorZero::Run()
 
                 LOG_WRITE("z = %d, dc = %f", z, (double)dc);
 
-                if (std::fabs(dc) < 1e-6f)
+                if (std::fabs(dc) < 1e-6)
                 {
                     i = 5;
                     break;
@@ -137,7 +137,7 @@ bool Calibrator::CalibratorZero::Run()
 }
 
 
-float Calibrator::CalibratorZero::CalculateDC(int zero)
+REAL Calibrator::CalibratorZero::CalculateDC(int zero)
 {
     cal.zero[range].SetConst(zero);
 
@@ -159,13 +159,13 @@ bool Calibrator::CalibrateGain(int range)
 
     bool correct_dc = false;
 
-    float dc = std::fabsf(Calculator::GetDC(&correct_dc));
+    REAL dc = std::fabs(Calculator::GetDC(&correct_dc));
 
-    float k = Range::Max(range) / dc;
+    REAL k = Range::Max(range) / dc;
 
     if (range < 3)
     {
-        k *= 1e3f;
+        k *= 1e3;
     }
 
     cal.gain[range].Set(k);

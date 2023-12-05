@@ -10,7 +10,7 @@ namespace Calculator
 
     void Reset();
 
-    float GetAC(bool *correct);
+    REAL GetAC(bool *correct);
 
-    float GetDC(bool *correct);
+    REAL GetDC(bool *correct);
 }

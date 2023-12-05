@@ -1,11 +1,8 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "opt.h"
 
-#define VERSION 5
-
-// Закомментировать, чтобы логи не валили в UART
-//#define LOGGED
-
+#define VERSION 6
 
 #ifndef WIN32
 #pragma clang diagnostic ignored "-Wglobal-constructors"
@@ -20,6 +17,8 @@
 #pragma clang diagnostic ignored "-Wcast-align"
 #pragma clang diagnostic ignored "-Wnon-virtual-dtor"
 #pragma clang diagnostic ignored "-Wundefined-func-template"
+#pragma clang diagnostic ignored "-Wimplicit-float-conversion"
+#pragma clang diagnostic ignored "-Wdouble-promotion"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
