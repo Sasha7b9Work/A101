@@ -25,35 +25,5 @@ void HAL_CRC32::Init()
 
 uint HAL_CRC32::Calculate(const void *data, uint size)
 {
-    if ((size % 4) == 0)
-    {
-        return HAL_CRC_Calculate(&handleCRC, (uint *)data, size / 4);
-    }
-
-    uint size_buffer = size;
-
-    while (size_buffer % 4)
-    {
-        ++size_buffer;
-    }
-
-    uint result = 0;
-
-    uint *buffer = new uint[size_buffer];
-
-    if (buffer)
-    {
-        std::memcpy(buffer, data, size);
-
-        for (uint i = size; i < size_buffer; i++)
-        {
-            buffer[i] = 0;
-        }
-
-        result = HAL_CRC_Calculate(&handleCRC, buffer, size_buffer / 4);
-    }
-
-    delete[] buffer;
-
-    return result;
+    return HAL_CRC_Calculate(&handleCRC, (uint *)data, size / 4);          // \todo Предусмотреть ситуацию, когда size не кратно 4
 }
