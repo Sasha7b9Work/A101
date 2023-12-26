@@ -7,14 +7,14 @@
 
 namespace SCPI
 {
-    class InBuffer : public Buffer1024<uint8>
+    class InBuffer : public Buffer1024
     {
     public:
         InBuffer(Direction::E _dir) : dir(_dir) {}
         void Update();
     private:
-        Command *ParseCommand(Buffer<uint8, 1024> &);
-        String<> FirstWord(Buffer<uint8, 1024> &);
+        Command *ParseCommand(Buffer<1024> &);
+        String<> FirstWord(Buffer<1024> &);
         Command *ExtractCommand();
         const Direction::E dir;
     };

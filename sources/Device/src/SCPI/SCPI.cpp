@@ -78,7 +78,7 @@ SCPI::Command *SCPI::InBuffer::ExtractCommand()
         RemoveFirst(1);
     }
 
-    Buffer<uint8, 1024> symbols;
+    Buffer<1024> symbols;
 
     for (int i = 0; i < Size(); i++)
     {
@@ -103,7 +103,7 @@ SCPI::Command *SCPI::InBuffer::ExtractCommand()
 }
 
 
-SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
+SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<1024> &symbols)
 {
     if (std::strcmp((char *)symbols.Data(), "*IDN?") == 0)
     {
@@ -134,7 +134,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<uint8, 1024> &symbols)
     return new Command();
 }
 
-String<> SCPI::InBuffer::FirstWord(Buffer<uint8, 1024> &symbols)
+String<> SCPI::InBuffer::FirstWord(Buffer<1024> &symbols)
 {
     String<> result;
 

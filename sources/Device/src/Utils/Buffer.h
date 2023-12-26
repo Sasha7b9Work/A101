@@ -2,14 +2,14 @@
 #include <cstring>
 
 
-template<class T, int MAX_SIZE>
+template<int MAX_SIZE>
 class Buffer
 {
 public:
 
     Buffer() : size(0) {} //-V730
 
-    void Fill(T value)
+    void Fill(uint8 value)
     {
         for (int i = 0; i < size; i++)
         {
@@ -17,11 +17,11 @@ public:
         }
     }
 
-    T *Data() { return buffer; }
+    uint8 *Data() { return buffer; }
 
-    const T *DataConst() const { return buffer; }
+    const uint8 *DataConst() const { return buffer; }
 
-    T *Last()
+    uint8 *Last()
     {
         return buffer + Size();
     }
@@ -56,7 +56,7 @@ public:
         }
     }
 
-    void Append(const T *data, int _size)
+    void Append(const uint8 *data, int _size)
     {
         if (Size() + _size > Capacity())
         {
@@ -64,12 +64,12 @@ public:
         }
         else
         {
-            std::memcpy(&buffer[size], data, (uint)_size * sizeof(T));
+            std::memcpy(&buffer[size], data, (uint)_size * sizeof(buffer[0]));
             size += _size;
         }
     }
 
-    void Append(T value)
+    void Append(uint8 value)
     {
         if (Size() + 1 > Capacity())
         {
@@ -81,26 +81,26 @@ public:
         }
     }
 
-    T &operator[](uint i)
+    uint8 &operator[](uint i)
     {
         if ((int)i >= 0 && (int)i < Size())
         {
             return buffer[i];
         }
 
-        static T null(0);
+        static uint8 null(0);
 
         return null;
     }
 
-    T &operator[](int i)
+    uint8 &operator[](int i)
     {
         if (i >= 0 && i < Size())
         {
             return buffer[i];
         }
 
-        static T null(0);
+        static uint8 null(0);
 
         return null;
     }
@@ -121,25 +121,12 @@ protected:
 
     int size;
 
-    T buffer[MAX_SIZE];
+    uint8 buffer[MAX_SIZE];
 };
 
 
-template<class T>
-class Buffer1024 : public Buffer<T, 1024>
+class Buffer1024 : public Buffer<1024>
 {
 public:
-    Buffer1024() : Buffer<T, 1024>() { }
-    Buffer1024(int size) : Buffer<T, 1024>(size) { }
-    Buffer1024(int size, T value) : Buffer<T, 1024>(size, value) { }
-};
-
-
-template<class T>
-class Buffer2048 : public Buffer<T, 2048>
-{
-public:
-    Buffer2048() : Buffer<T, 2048>() { }
-    Buffer2048(int size) : Buffer<T, 2048>(size) { }
-    Buffer2048(int size, T value) : Buffer<T, 2048>(size, value) { }
+    Buffer1024() : Buffer<1024>() { }
 };
