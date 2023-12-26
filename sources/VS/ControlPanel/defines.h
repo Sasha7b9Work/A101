@@ -3,6 +3,7 @@
 #define WIN32_LEAN_AND_MEAN
 
 #pragma warning(push, 0)
+#pragma warning(disable: 4668)
 
 #include <vector>
 #include <queue>
@@ -14,7 +15,6 @@
 #include <map>
 
 #include "wx_includes.h"
-
 
 #include <wx/wx.h>
 #pragma warning(pop)
