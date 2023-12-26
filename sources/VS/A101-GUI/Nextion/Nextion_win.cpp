@@ -1,7 +1,7 @@
 // 2022/10/31 19:37:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Nextion/Nextion.h"
-#include "Screen.h"
+#include "GUI/Screen.h"
 
 
 void Nextion::DrawRect(int x, int y, int width, int height, const Color &color)

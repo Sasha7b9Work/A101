@@ -1,6 +1,6 @@
 // 2022/10/28 23:17:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Screen.h"
+#include "GUI/Screen.h"
 #include "Nextion/Nextion.h"
 #include <string>
 #include <map>
