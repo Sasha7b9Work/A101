@@ -2,14 +2,14 @@
 #include <cstring>
 
 
-template<int MAX_SIZE>
+template<int MAX_SIZE, class T = uint8 >
 class Buffer
 {
 public:
 
     Buffer() : size(0) {} //-V730
 
-    void Fill(uint8 value)
+    void Fill(T value)
     {
         for (int i = 0; i < size; i++)
         {
@@ -17,11 +17,11 @@ public:
         }
     }
 
-    uint8 *Data() { return buffer; }
+    T *Data() { return buffer; }
 
-    const uint8 *DataConst() const { return buffer; }
+    const T *DataConst() const { return buffer; }
 
-    uint8 *Last()
+    T *Last()
     {
         return buffer + Size();
     }
@@ -81,26 +81,26 @@ public:
         }
     }
 
-    uint8 &operator[](uint i)
+    T &operator[](uint i)
     {
         if ((int)i >= 0 && (int)i < Size())
         {
             return buffer[i];
         }
 
-        static uint8 null(0);
+        static T null(0);
 
         return null;
     }
 
-    uint8 &operator[](int i)
+    T &operator[](int i)
     {
         if (i >= 0 && i < Size())
         {
             return buffer[i];
         }
 
-        static uint8 null(0);
+        static T null(0);
 
         return null;
     }
@@ -121,7 +121,7 @@ protected:
 
     int size;
 
-    uint8 buffer[MAX_SIZE];
+    T buffer[MAX_SIZE];
 };
 
 

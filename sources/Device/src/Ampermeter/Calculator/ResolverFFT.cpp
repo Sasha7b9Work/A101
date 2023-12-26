@@ -3,15 +3,15 @@
 #include "Ampermeter/Calculator/ResolverFFT.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Timer.h"
+#include "Utils/Buffer.h"
 #include <cmath>
 #include <cstdlib>
 
 
 ResolverFFT::ResolverFFT()
 {
-    float *in = new float[NUM_POINTS];
-
-    float *out = new float[NUM_POINTS];
+    Buffer<NUM_POINTS, float> in;
+    Buffer<NUM_POINTS, float> out;
 
     for (int i = 0; i < NUM_POINTS; i++)
     {
@@ -20,7 +20,7 @@ ResolverFFT::ResolverFFT()
 
     TimeMeterMS meter;
 
-    CalculateFFT(in, out);
+    CalculateFFT(in.Data(), out.Data());
 
     LOG_WRITE("time fft %d ms", meter.ElapsedTime());
 
@@ -28,9 +28,6 @@ ResolverFFT::ResolverFFT()
     {
         data[i] = (uint8)(255.0f * out[i]); //-V522
     }
-
-    delete[] in;
-    delete[] out;
 }
 
 
