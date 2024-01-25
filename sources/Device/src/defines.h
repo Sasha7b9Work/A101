@@ -2,7 +2,7 @@
 #pragma once
 #include "opt.h"
 
-#define VERSION 6
+#define VERSION 7
 
 #ifndef WIN32
 #pragma clang diagnostic ignored "-Wglobal-constructors"
