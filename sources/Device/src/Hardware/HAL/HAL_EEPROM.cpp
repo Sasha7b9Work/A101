@@ -103,6 +103,11 @@ namespace HAL_EEPROM
         }
         void Write(uint8 *place, void *data, uint num_bytes)
         {
+            if (size_place < num_bytes)
+            {
+                LOG_ERROR_TRACE("Very small place for save");
+            }
+
             CLEAR_FLASH_FLAGS;
 
             HAL_FLASH_Unlock();
@@ -164,7 +169,7 @@ namespace HAL_EEPROM
     template<class T, uint addr>
     struct SectorSettings : public Sector
     {
-        SectorSettings() : Sector(addr, 128 * 1024, 128) {}
+        SectorSettings() : Sector(addr, 128 * 1024, 512) {}
 
         void Write(T *settings)
         {

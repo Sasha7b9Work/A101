@@ -35,8 +35,6 @@ struct CalibrationSettings
     Gain gain[6];                   // Растяжка
     Zero zero[6];                   // Смещения нуля
 
-    void Reset();
-
     uint CalculateCRC32() const;
     bool IsEqual(const CalibrationSettings *) const;
 
@@ -58,6 +56,7 @@ struct CalibrationSettings
 
     void Save();
     void Load();
+    void Reset();
 };
 
 

@@ -59,6 +59,8 @@ void CalibrationSettings::Load()
 void CalibrationSettings::Reset()
 {
     *this = NS_CalibrationSettings::cal_def;
+
+    Save();
 }
 
 
