@@ -8,6 +8,7 @@
 #include "Display/Controls/WindowsMeasures.h"
 #include "Ampermeter/Calibrator/Calibrator.h"
 #include "Display/Display.h"
+#include "Settings/CalibrationSettings.h"
 #include <cstring>
 
 
@@ -110,28 +111,28 @@ namespace PageCalibration
     {
         if (symbol == '0' && !btn2.IsVisible())
         {
-            Calibrator::ResetSettings();
-
-            return;
+            cal.Reset();
         }
-
-        LabelPassword::Append(symbol);
-
-        if (LabelPassword::PasswordCorrect())
+        else
         {
-            LabelPassword::Draw();
+            LabelPassword::Append(symbol);
 
-            ChooseDot(0);
-            ChooseRange(5);
+            if (LabelPassword::PasswordCorrect())
+            {
+                LabelPassword::Draw();
 
-            SetVisibleExceptButtons(true);
+                ChooseDot(0);
+                ChooseRange(5);
 
-            SetVisibleDigits(false);
+                SetVisibleExceptButtons(true);
 
-            btnSave.SetVisible(false);
+                SetVisibleDigits(false);
 
-            btn0.SetText("Res");
-            btn0.SetVisible(true);
+                btnSave.SetVisible(false);
+
+                btn0.SetText("Res");
+                btn0.SetVisible(true);
+            }
         }
     }
 
