@@ -20,7 +20,9 @@ public:
 
     void SetText(pchar) const;
 
-    void SetVisible(bool) const;
+    void SetVisible(bool);
+
+    bool IsVisible() const {return is_visible; }
 
     // 1 - "нажать", 0 - "отпустить"
     void SetValue(int);
@@ -41,6 +43,8 @@ private:
 
     const int x;
     const int y;
+
+    bool is_visible = true;
 
     // Возвращает true, если это "программная кнопка" - отрисовывается вручную, а не дисплеем
     bool IsSoftware() const;

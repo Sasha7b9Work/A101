@@ -180,3 +180,9 @@ void Calibrator::PressButtonSave()
 {
     cal.Save();
 }
+
+
+void Calibrator::ResetSettings()
+{
+
+}

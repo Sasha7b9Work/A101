@@ -15,6 +15,8 @@ namespace PageCalibration
 {
     extern Button btnSave;
     extern Button btnCalib;
+    extern Button btn0;
+    extern Button btn2;
 
     static void FuncDraw();
 
@@ -106,6 +108,13 @@ namespace PageCalibration
     // Нажатие кнопки на цифровой клавиатуре
     static void PressDigit(char symbol)
     {
+        if (symbol == '0' && !btn2.IsVisible())
+        {
+            Calibrator::ResetSettings();
+
+            return;
+        }
+
         LabelPassword::Append(symbol);
 
         if (LabelPassword::PasswordCorrect())
@@ -120,6 +129,9 @@ namespace PageCalibration
             SetVisibleDigits(false);
 
             btnSave.SetVisible(false);
+
+            btn0.SetText("Res");
+            btn0.SetVisible(true);
         }
     }
 
@@ -147,11 +159,11 @@ namespace PageCalibration
 
     static Button btn50A("bt12", "26P", []() { ChooseRange(5); });
 
-    static Button btn0("b0", "KB0", []() { PressDigit('0'); });
+    Button btn0("b0", "KB0", []() { PressDigit('0'); });
 
     static Button btn1("b1", "KB1", []() { PressDigit('1'); });
 
-    static Button btn2("b2", "KB2", []() { PressDigit('2'); });
+    Button btn2("b2", "KB2", []() { PressDigit('2'); });
 
     static Button btn3("b3", "KB3", []() { PressDigit('3'); });
 

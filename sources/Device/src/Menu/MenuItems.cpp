@@ -34,7 +34,7 @@ void Button::SetText(pchar txt) const
 }
 
 
-void Button::SetVisible(bool visible) const
+void Button::SetVisible(bool visible)
 {
     if (IsSoftware())
     {
@@ -43,6 +43,8 @@ void Button::SetVisible(bool visible) const
     else
     {
         Nextion::SetVisible(name, visible);
+
+        is_visible = visible;
     }
 }
 
