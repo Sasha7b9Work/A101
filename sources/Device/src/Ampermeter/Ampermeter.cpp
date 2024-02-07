@@ -148,7 +148,7 @@ void Ampermeter::MeasurementCycle()
 
     uint period = SampleRate::Current::Get().TimeUS();
 
-    HAL_TIM4::StartPeriodicUS(period);
+    HAL_TIM4::StartPeriodicUS(period * 2);
 
     int num_sample = 0;
 
