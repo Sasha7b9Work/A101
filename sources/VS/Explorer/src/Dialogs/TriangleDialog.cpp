@@ -51,7 +51,7 @@ TriangleDialog::TriangleDialog() : Dialog(wxT("Параметры треугольного сигнала"),
     vBox->Add(hBoxPanels);
     vBox->Add(CreatePanelOffsets());
     
-    SetBoxSizer(vBox, { 221, 150 });
+    Dialog::SetBoxSizer(vBox, { 221, 150 });
 }
 
 

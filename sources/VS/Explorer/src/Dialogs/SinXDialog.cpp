@@ -29,7 +29,7 @@ SinXDialog::SinXDialog() : Dialog(wxT("Параметры сигнала sin(x)/x"), true)
 
     vBox->AddSpacer(10);
 
-    SetBoxSizer(vBox, { 200, 55 });
+    Dialog::SetBoxSizer(vBox, { 200, 55 });
 }
 
 

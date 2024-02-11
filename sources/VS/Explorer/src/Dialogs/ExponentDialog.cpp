@@ -78,7 +78,7 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
     hBoxPanels->Add(CreatePanelPower());
     vBox->Add(hBoxPanels);
 
-    SetBoxSizer(vBox, { 221, 80 });
+    Dialog::SetBoxSizer(vBox, { 221, 80 });
 }
 
 

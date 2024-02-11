@@ -41,17 +41,14 @@ uint HAL_CRC32::Calculate(const void *data, uint size)
 
     uint *buffer = new uint[size_buffer];
 
-    if (buffer)
+    std::memcpy(buffer, data, size);
+
+    for (uint i = size; i < size_buffer; i++)
     {
-        std::memcpy(buffer, data, size);
-
-        for (uint i = size; i < size_buffer; i++)
-        {
-            buffer[i] = 0;
-        }
-
-        result = HAL_CRC_Calculate(&handleCRC, buffer, size_buffer / 4);
+        buffer[i] = 0;
     }
+
+    result = HAL_CRC_Calculate(&handleCRC, buffer, size_buffer / 4);
 
     delete [] buffer;
 

@@ -58,7 +58,7 @@ TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала")
     vBox->Add(hBoxPanels);
     vBox->Add(CreatePanelOffsets());
 
-    SetBoxSizer(vBox, { 221, 175 });
+    Dialog::SetBoxSizer(vBox, { 221, 175 });
 }
 
 
