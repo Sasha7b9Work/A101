@@ -4,7 +4,9 @@ project (Updater)
 
 #set(CMAKE_UNITY_BUILD OFF)
 
-include_directories(.)
+include_directories(
+    .
+)
 
 if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
@@ -56,13 +58,14 @@ if(WIN32)
 
 endif()
 
-file(GLOB SRC                    *.h *.c *.cpp *.me)
+file(GLOB SRC       *.h *.c *.cpp *.me)
 
-source_group(src                 FILES ${SRC})
+source_group(src    FILES ${SRC})
 
-add_executable( ${PROJECT_NAME}
-                ${SRC}
-                )
+add_executable(
+    ${PROJECT_NAME}
+    ${SRC}
+)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "update101")
 
