@@ -74,6 +74,8 @@ void BufferADC::CalculateLimits()
 {
     int64 sum = 0;
 
+    (void)sum;
+
     min = ValueADC::MAX;
     max = ValueADC::MIN;
 

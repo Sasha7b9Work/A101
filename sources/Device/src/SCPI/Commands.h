@@ -8,18 +8,15 @@
 
 namespace SCPI
 {
-
-    class Command
+    struct Command
     {
-    public:
         virtual bool Execute(Direction::E);
         virtual ~Command() {}
     };
 
 
-    class CommandWithParameters : public Command
+    struct CommandWithParameters : public Command
     {
-    public:
         CommandWithParameters(pchar _params) { params.SetFormat(_params); }
         virtual ~CommandWithParameters() override {}
         virtual bool Execute(Direction::E) override;
@@ -28,34 +25,30 @@ namespace SCPI
     };
 
 
-    class CommandIDN : public Command
+    struct CommandIDN : public Command
     {
-    public:
         virtual bool Execute(Direction::E) override;
         virtual ~CommandIDN() override {}
     };
 
 
-    class CommandRST : public Command
+    struct CommandRST : public Command
     {
-    public:
         virtual bool Execute(Direction::E) override;
         virtual ~CommandRST() override {}
     };
 
 
-    class CommandRANGE : public CommandWithParameters
+    struct CommandRANGE : public CommandWithParameters
     {
-    public:
         CommandRANGE(pchar par) : CommandWithParameters(par) {}
         virtual ~CommandRANGE() override {}
         virtual bool Execute(Direction::E) override;
     };
 
 
-    class CommandDATA : public CommandWithParameters
+    struct CommandDATA : public CommandWithParameters
     {
-    public:
         CommandDATA(pchar par) : CommandWithParameters(par) {}
         virtual ~CommandDATA() override {}
         virtual bool Execute(Direction::E) override;
