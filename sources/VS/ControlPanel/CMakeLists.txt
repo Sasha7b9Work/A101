@@ -4,9 +4,11 @@ project (ControlPanel)
 
 #set(CMAKE_UNITY_BUILD OFF)
 
-include_directories(.
-                    ../../VS/ThirdParty/wxWidgets/include
-                    ../../generated/ThirdParty/lib/vc_dll/mswud)
+include_directories(
+    .
+    ../../VS/ThirdParty/wxWidgets/include
+    ../../generated/ThirdParty/lib/vc_dll/mswud
+)
 
 link_directories(../../generated/ThirdParty/lib/vc_dll)
 
@@ -48,19 +50,21 @@ if(WIN32)
     endif()
 
 #    add_compile_options(/wd4244)    # initializing': conversion from 'double' to 'int', possible loss of data
-    add_compile_options(/wd4464)    # relative include path contains '..'
-    add_compile_options(/wd4514)    # unreferenced inline function has been removed
-    add_compile_options(/wd4625)    # copy constructor was implicitly defined as deleted
-    add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
-    add_compile_options(/wd4774)    # 'string' : format string expected in argument number is not a string literal
-    add_compile_options(/wd4820)    # 'bytes' bytes padding added after construct 'member_name'
-    add_compile_options(/wd4996)    # This function or variable may be unsafe
-    add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
-    add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
-    add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
-    add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specifie
-    add_compile_options(/wd5219)    # implicit conversion from 'int' to 'float'
-    add_compile_options(/wd5264)    # variable is not used
+    add_compile_options(
+        /wd4464    # relative include path contains '..'
+        /wd4514    # unreferenced inline function has been removed
+        /wd4625    # copy constructor was implicitly defined as deleted
+        /wd4626    # assignment operator was implicitly defined as deleted
+        /wd4774    # 'string' : format string expected in argument number is not a string literal
+        /wd4820    # 'bytes' bytes padding added after construct 'member_name'
+        /wd4996    # This function or variable may be unsafe
+        /wd5026    # move constructor was implicitly defined as deleted
+        /wd5027    # move assignment operator was implicitly defined as deleted
+        /wd5039    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
+        /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specifie
+        /wd5219    # implicit conversion from 'int' to 'float'
+        /wd5264    # variable is not used
+    )
 endif()
 
 file(GLOB SRC               *.h  *.cpp *.c)
@@ -75,13 +79,14 @@ source_group(Display        FILES ${DISPLAY})
 source_group(SCPI           FILES ${SCPI})
 source_group(SCPI/Parser    FILES ${SCPI_PARSER})
 
-add_executable( ${PROJECT_NAME}
-                ${SRC}
-                ${DIALOGS}
-                ${DISPLAY}
-                ${SCPI}
-                ${SCPI_PARSER}
-                )
+add_executable(
+    ${PROJECT_NAME}
+    ${SRC}
+    ${DIALOGS}
+    ${DISPLAY}
+    ${SCPI}
+    ${SCPI_PARSER}
+)
 
 target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)
 

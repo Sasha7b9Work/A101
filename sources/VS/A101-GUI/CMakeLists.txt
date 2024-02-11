@@ -4,13 +4,15 @@ project (A101-GUI)
 
 #set(CMAKE_UNITY_BUILD OFF)
 
-include_directories(.
-                    ../../Device/src
-                    ../../Device/src/Hardware/HAL
-                    ../../VS/ThirdParty/wxWidgets/include
-                    ../../generated/ThirdParty/lib/vc_dll/mswud
-                    ../../common/_VS_GUI/HAL
-                    ../../common/_VS_GUI/CMSIS)
+include_directories(
+    .
+    ../../Device/src
+    ../../Device/src/Hardware/HAL
+    ../../VS/ThirdParty/wxWidgets/include
+    ../../generated/ThirdParty/lib/vc_dll/mswud
+    ../../common/_VS_GUI/HAL
+    ../../common/_VS_GUI/CMSIS
+)
 
 link_directories(../../generated/ThirdParty/lib/vc_dll)
 
@@ -57,6 +59,7 @@ if(WIN32)
         /wd4514    # unreferenced inline function has been removed
         /wd4625    # copy constructor was implicitly defined as deleted
         /wd4626    # assignment operator was implicitly defined as deleted
+        /wd4710
         /wd4774    # 'string' : format string expected in argument number is not a string literal
         /wd4820    # 'bytes' bytes padding added after construct 'member_name'
         /wd4996    # This function or variable may be unsafe
@@ -133,27 +136,28 @@ source_group(SCPI                  FILES ${SCPI})
 source_group(Settings              FILES ${SETTINGS})
 source_group(Utils                 FILES ${UTILS})
 
-add_executable( ${PROJECT_NAME}
-                ${SRC}
-                ${DISPLAY}
-                ${DISPLAY_CONTROLS}
-                ${GENERATOR}
-                ${GUI}
-                ${HARDWARE}
-                ${HARDWARE_HAL}
-                ${AMPERMETER}
-                ${AMPERMETER_CALC}
-                ${AMPERMETER_CALIBRATOR}
-                ${COMMUNICATOR}
-                ${CONTROLS}
-                ${MENU}
-                ${MENU_PAGES}
-                ${NEXTION}
-                ${NEXTION_CONTROLS}
-                ${SCPI}
-                ${SETTINGS}
-                ${UTILS}
-                )
+add_executable(
+    ${PROJECT_NAME}
+    ${SRC}
+    ${DISPLAY}
+    ${DISPLAY_CONTROLS}
+    ${GENERATOR}
+    ${GUI}
+    ${HARDWARE}
+    ${HARDWARE_HAL}
+    ${AMPERMETER}
+    ${AMPERMETER_CALC}
+    ${AMPERMETER_CALIBRATOR}
+    ${COMMUNICATOR}
+    ${CONTROLS}
+    ${MENU}
+    ${MENU_PAGES}
+    ${NEXTION}
+    ${NEXTION_CONTROLS}
+    ${SCPI}
+    ${SETTINGS}
+    ${UTILS}
+)
 
 target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)
 
