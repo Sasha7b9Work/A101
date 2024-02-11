@@ -17,5 +17,6 @@ public:
     bool IsExist() const { return name[0] != '\0'; }
 private:
     pchar name;
-    char prev_label[16];
+
+    char prev_label[16];    // Здесь хранится засланное перед этим значение, чтобы не засылать повторно
 };
