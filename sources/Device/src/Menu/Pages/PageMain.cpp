@@ -20,7 +20,7 @@ namespace PageMain
     static WindowMeasure wndMIN(TypeMeasure::Min, "t22", "", "t8", "t25", "Imin:");
     static WindowMeasure wndMAX(TypeMeasure::Max, "t21", "", "t7", "t24", "Imax:");
 
-    void OnEventChangeRange()
+    static void ResetAllMeasures()
     {
         wndDC.Reset();
         wndAC.Reset();
@@ -30,14 +30,19 @@ namespace PageMain
         wndMAX.Reset();
     }
 
+    void PageMain::Init()
+    {
+        ResetAllMeasures();
+    }
+
+    void OnEventChangeRange()
+    {
+        ResetAllMeasures();
+    }
+
     static void FuncOnEnter()
     {
-        wndDC.Reset();
-        wndAC.Reset();
-        wndAMPL.Reset();
-        wndPEAK.Reset();
-        wndMIN.Reset();
-        wndMAX.Reset();
+        ResetAllMeasures();
     }
 
     static void FuncDraw()

@@ -7,6 +7,9 @@ namespace PageMain
 {
     extern Page *self;
 
+    // Вызываем сразу после включения
+    void Init();
+
     void OnEventChangeRange();
 }
 
