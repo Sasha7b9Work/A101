@@ -103,10 +103,6 @@ void WindowMeasure::Draw(const Measure &measure, int range)
         if (measure.out_of_range)
         {
             std::strcpy(buf_measure, "OL");
-//            for (int i = 0; (i < TextString::MAX_LEN) && (buf_measure[i] != '\0'); i++)
-//            {
-//                if (buf_measure[i] != '.') { buf_measure[i] = '8'; }
-//            }
         }
         else
         {

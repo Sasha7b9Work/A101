@@ -29,6 +29,7 @@ public:
     void Draw(const Measure &, int range);
     // Нанести надпись, даже если такая надпись уже нанесена
     void Flash();
+    // Вызываем эту функцию после переключения на другой диапазон, чтобы очистить изображение
     void Reset();
 protected:
     CntrlText cntrlType;        // DC или AC
