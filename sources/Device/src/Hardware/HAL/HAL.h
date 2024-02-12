@@ -132,8 +132,6 @@ namespace HAL_USART3
     // Послать с 0d0a в конце
     void SendTextWith0D0A(pchar);
 
-    void SendChar(char);
-
     extern void *handle;    // UART_HandleTypeDef
 
     void CallbackOnReceive();

@@ -259,7 +259,8 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
         {
             for (int j = 0; j <= i; j++)
             {
-                HAL_USART3::SendChar((char)buffer[j]);
+                char symbol[2] = { (char)buffer[j], '\0' };
+                HAL_USART3::SendText(symbol);
             }
 
             CommandButton *result = new CommandButton(buffer, i);
@@ -288,7 +289,8 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
 
                 for (int j = 0; j < i + 3; j++)
                 {
-                    HAL_USART3::SendChar((char)buffer[j]);
+                    char symbol[2] = { (char)buffer[j], '\0' };
+                    HAL_USART3::SendText(symbol);
                 }
 
                 RemoveFromStart(i + 3);
