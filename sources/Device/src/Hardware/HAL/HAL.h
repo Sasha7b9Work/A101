@@ -113,8 +113,7 @@ namespace HAL_UART4
 
     void SendText(pchar);
 
-    // Послать с 0d0a в конце
-    void SendTextWith0D0A(pchar);
+    void Send0D0A();
 
     extern void *handle;    // UART_HandleTypeDef
 

@@ -14,7 +14,8 @@ void Communicator::SendWith0D0A(Direction::E dir, pchar message)
 
     if (dir & Direction::RS232)
     {
-        HAL_UART4::SendTextWith0D0A(message);
+        HAL_UART4::SendText(message);
+        HAL_UART4::Send0D0A();
     }
 }
 

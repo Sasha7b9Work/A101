@@ -39,8 +39,6 @@ namespace HAL_UART4
     void *handle = (void *)&handleUART4;
 
     static uint8 buffer = 0;
-
-    static void Send0D0A();
 }
 
 
@@ -63,13 +61,6 @@ void HAL_UART4::Init()
 void HAL_UART4::SendText(pchar message)
 {
     HAL_UART_Transmit(&handleUART4, (const uint8 *)message, (uint16)std::strlen(message), 100);
-}
-
-
-void HAL_UART4::SendTextWith0D0A(pchar message)
-{
-    HAL_UART_Transmit(&handleUART4, (const uint8 *)message, (uint16)std::strlen(message), 100);
-    Send0D0A();
 }
 
 
