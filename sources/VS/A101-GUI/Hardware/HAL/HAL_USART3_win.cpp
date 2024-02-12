@@ -10,13 +10,7 @@ void HAL_USART3::SendText(pchar)
 }
 
 
-void HAL_USART3::SendTextWith0D0A(pchar)
-{
-
-}
-
-
-void HAL_USART3::SendChar(char)
+void HAL_USART3::Send0D0A()
 {
 
 }

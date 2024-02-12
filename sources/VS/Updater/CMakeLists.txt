@@ -69,5 +69,6 @@ add_executable(
 
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "update101")
 
-set_target_properties(Updater PROPERTIES
-    VS_DEBUGGER_COMMAND_ARGUMENTS "com5 a101.bin")
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    VS_DEBUGGER_COMMAND_ARGUMENTS "com5 a101.bin"
+)

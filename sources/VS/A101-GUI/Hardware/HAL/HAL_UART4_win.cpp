@@ -9,7 +9,7 @@ void HAL_UART4::SendText(pchar)
 }
 
 
-void HAL_UART4::SendTextWith0D0A(pchar)
+void HAL_UART4::Send0D0A()
 {
 
 }
