@@ -30,7 +30,7 @@ namespace PageMain
         wndMAX.Reset();
     }
 
-    void PageMain::Init()
+    void Init()
     {
         ResetAllMeasures();
     }
