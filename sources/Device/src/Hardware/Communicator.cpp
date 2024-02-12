@@ -8,7 +8,8 @@ void Communicator::SendWith0D0A(Direction::E dir, pchar message)
 {
     if (dir & Direction::USB)
     {
-        HAL_USART3::SendTextWith0D0A(message);
+        HAL_USART3::SendText(message);
+        HAL_USART3::Send0D0A();
     }
 
     if (dir & Direction::RS232)
