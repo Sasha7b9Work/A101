@@ -4,5 +4,7 @@ namespace std
 {
     unsigned long strtoul(const char *start, char **end, int radix);
 
+    int atoi(const char *str);
+
     #include "stdlib.h"
 }
