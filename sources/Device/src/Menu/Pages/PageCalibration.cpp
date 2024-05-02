@@ -9,7 +9,9 @@
 #include "Ampermeter/Calibrator/Calibrator.h"
 #include "Display/Display.h"
 #include "Settings/CalibrationSettings.h"
+#include "Settings/Settings.h"
 #include <cstring>
+#include <cstdlib>
 
 
 namespace PageCalibration
@@ -40,23 +42,23 @@ namespace PageCalibration
     namespace LabelPassword
     {
         static const int SIZE_BUFFER = 32;
-        static int size_password = 0;
+        static int num_symbols = 0;                     // Столько символов нажато
         static char buffer[SIZE_BUFFER] = { '\0' };
         static bool is_changed = true;
 
         static void Reset()
         {
-            size_password = 0;
+            num_symbols = 0;
             buffer[0] = '\0';
             is_changed = true;
         }
 
         static void Append(char symbol)
         {
-            if (size_password < SIZE_BUFFER - 1)
+            if (num_symbols < SIZE_BUFFER - 1)
             {
-                buffer[size_password++] = symbol;
-                buffer[size_password] = '\0';
+                buffer[num_symbols++] = symbol;
+                buffer[num_symbols] = '\0';
                 is_changed = true;
             }
         }
@@ -132,6 +134,18 @@ namespace PageCalibration
 
                 btn0.SetText("Res");
                 btn0.SetVisible(true);
+            }
+            else
+            {
+                // Первый символ - точка, последний - '-', между ними - серийный номер
+                if (LabelPassword::buffer[0] == '.' && LabelPassword::buffer[LabelPassword::num_symbols - 1] == '-')
+                {
+                    LabelPassword::buffer[LabelPassword::num_symbols - 1] = '\0';
+
+                    set.serial_number = std::atoi(LabelPassword::buffer + 1);
+
+                    set.Save();
+                }
             }
         }
     }

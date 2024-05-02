@@ -13,7 +13,8 @@ namespace NS_Settings
         0,
         false,      // middle_of_3
         false,      // smooth
-        false       // firLPF
+        false,      // firLPF
+        0
     };
 
     static Settings stored = set_def;

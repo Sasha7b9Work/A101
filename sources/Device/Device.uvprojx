@@ -1136,6 +1136,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMain.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageSettings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSettings.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1357,7 +1362,7 @@
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
-          <DebugInformation>0</DebugInformation>
+          <DebugInformation>1</DebugInformation>
           <BrowseInformation>0</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
@@ -2472,6 +2477,11 @@
               <FileName>PageMain.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMain.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageSettings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSettings.cpp</FilePath>
             </File>
           </Files>
         </Group>

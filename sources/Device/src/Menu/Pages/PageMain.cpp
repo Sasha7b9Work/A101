@@ -97,6 +97,11 @@ namespace PageMain
             PageCalibration::self->SetAsCurrent();
         });
 
+    static Button btnSettings("bt7", "0T", []()
+        {
+            PageSettings::self->SetAsCurrent();
+        });
+
     static Button btnZeroDC_EN("bt11", "0DZ1", []()         // Включение режима "Zero DC"
         {
             Ampermeter::Set::ZeroDC::Enable();
@@ -149,6 +154,7 @@ namespace PageMain
         &btnAMP,
         &btnMIN,
         &btnPEAK,
+        &btnSettings,
         nullptr
     };
 
