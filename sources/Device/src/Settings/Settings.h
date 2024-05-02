@@ -12,7 +12,7 @@ struct Settings
     bool smooth;                // Включение сглаживания по соседним точкам
     bool firLPF;                // Включён цифровой ФНЧ
 
-    int serial_number;
+    uint serial_number;
 
     void Save();
     void Load();

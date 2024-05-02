@@ -23,7 +23,7 @@ namespace PageSettings
     {
         char buffer[32];
 
-        std::sprintf(buffer, "%d", set.serial_number);
+        std::sprintf(buffer, "%04u %04u", set.serial_number & 0xFFFF, (set.serial_number >> 16));
 
         Nextion::Text::SetLabel("NumVersion", buffer);
     }

@@ -80,7 +80,7 @@ namespace PageCalibration
                 Color fill = PasswordCorrect() ? Color::Background : Color::White;
                 Color back = PasswordCorrect() ? Color::Background : Color::Black;
 
-                Nextion::DrawString(50, 100, 300, 50, 4, fill, back, LabelPassword::buffer);
+                Nextion::DrawString(50, 100, 600, 100, 4, fill, back, LabelPassword::buffer);
 
                 is_changed = false;
             }
@@ -141,8 +141,12 @@ namespace PageCalibration
                 if (LabelPassword::buffer[0] == '.' && LabelPassword::buffer[LabelPassword::num_symbols - 1] == '-')
                 {
                     LabelPassword::buffer[LabelPassword::num_symbols - 1] = '\0';
+                    LabelPassword::buffer[5] = '\0';
 
-                    set.serial_number = std::atoi(LabelPassword::buffer + 1);
+                    uint low = (uint)std::atoi(LabelPassword::buffer + 1);
+                    uint hi = (uint)std::atoi(LabelPassword::buffer + 6);
+
+                    set.serial_number = (hi << 16) + low;
 
                     set.Save();
                 }
