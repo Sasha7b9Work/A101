@@ -237,7 +237,6 @@ void Ampermeter::AdjustmentZero()
     {
         if (TIME_MS < next_time)
         {
-
             return;
         }
     }
