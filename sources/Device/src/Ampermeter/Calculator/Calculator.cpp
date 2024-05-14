@@ -9,6 +9,7 @@
 #include "Hardware/Timer.h"
 #include "Ampermeter/InputRelays.h"
 #include "Settings/Settings.h"
+#include "Display/Display.h"
 #include <cmath>
 
 
@@ -43,6 +44,8 @@ SampleRate Calculator::AppendData()
     value = value_dc * k;
 
     dc.Push(value);
+
+    Display::LabelStar::Show();
 
     return SampleRate::Current::Get();
 }

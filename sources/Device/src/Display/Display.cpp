@@ -11,6 +11,17 @@
 #include <cstdlib>
 
 
+namespace Display
+{
+    namespace LabelStar
+    {
+        static uint time_show = 0;      // Время зажигания звёздочки. Нужно, чтобы знать, когда потушить.
+        static uint time_hide = 0;      // Время, когда была потушена звёздочка
+        static bool is_shown = false;
+    }
+}
+
+
 void Display::Init()
 {
     Nextion::Page::Enable(0);
@@ -31,18 +42,29 @@ void Display::Update()
 }
 
 
-void Display::DrawLabelStar()
+void Display::LabelStar::Show()
 {
-    uint secs = TIME_MS / 1000;
-
-    static bool is_enabled = false;
-
-    bool enabled = (secs % 2) != 0;
-
-    if (enabled != is_enabled)
+    if (is_shown || (TIME_MS - time_hide < 500))
     {
-        Nextion::SetVisible("t_star", enabled);
+        return;
+    }
 
-        is_enabled = enabled;
+    is_shown = true;
+
+    time_show = TIME_MS;
+
+    Nextion::SetVisible("t_star", true);
+}
+
+
+void Display::LabelStar::Update()
+{
+    if (is_shown && (TIME_MS - time_show > 500))
+    {
+        is_shown = false;
+
+        time_hide = TIME_MS;
+
+        Nextion::SetVisible("t_star", false);
     }
 }

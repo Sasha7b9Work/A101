@@ -9,5 +9,12 @@ namespace Display
 
     void Update();
 
-    void DrawLabelStar();
+    namespace LabelStar
+    {
+        // Вызывается после поступившего измерения, чтобы зажечь звёздочку
+        void Show();
+
+        // Вызывается в главном цикле, чтобы потушить звёздочку, когда пройдёт достаточно времени
+        void Update();
+    }
 }

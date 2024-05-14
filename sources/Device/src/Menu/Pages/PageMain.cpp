@@ -47,7 +47,7 @@ namespace PageMain
 
     static void FuncDraw()
     {
-        Display::DrawLabelStar();
+        Display::LabelStar::Update();
 
         wndDC.Draw(Ampermeter::GetDC(), Range::Current());
 
