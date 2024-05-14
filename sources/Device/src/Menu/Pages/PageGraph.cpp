@@ -16,8 +16,6 @@ namespace PageGraph
 
     static void FuncDraw()
     {
-        Display::DrawLabelStar();
-
         DiagramInput::Draw();
     }
 

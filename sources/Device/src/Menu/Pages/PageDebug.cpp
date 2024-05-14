@@ -15,7 +15,6 @@ namespace PageDebug
 
     static void FuncDraw()
     {
-        Display::DrawLabelStar();
     }
 
     static Button buttonZero("bt1", "debugZero", []()

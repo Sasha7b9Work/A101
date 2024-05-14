@@ -338,8 +338,6 @@ namespace PageCalibration
 
         LabelPassword::Draw();
 
-        Display::DrawLabelStar();
-
         int range = ButtonsRange::GetRange();
 
         if (range >= 0)
