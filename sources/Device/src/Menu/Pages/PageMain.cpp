@@ -179,6 +179,11 @@ namespace PageMain
 
     void SetRange(MeasuresOnDisplay::E, int range)
     {
+        for (int i = 0; i < 6; i++)
+        {
+            PageMain::self->GetButton(i)->SetValue(i == range ? 1 : 0);
+        }
+
         PageMain::self->GetButton(range)->Press();
     }
 
