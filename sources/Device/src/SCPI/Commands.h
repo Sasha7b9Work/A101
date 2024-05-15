@@ -30,27 +30,4 @@ namespace SCPI
         virtual bool Execute(Direction::E) override;
         virtual ~CommandIDN() override {}
     };
-
-
-    struct CommandRST : public Command
-    {
-        virtual bool Execute(Direction::E) override;
-        virtual ~CommandRST() override {}
-    };
-
-
-    struct CommandRANGE : public CommandWithParameters
-    {
-        CommandRANGE(pchar par) : CommandWithParameters(par) {}
-        virtual ~CommandRANGE() override {}
-        virtual bool Execute(Direction::E) override;
-    };
-
-
-    struct CommandDATA : public CommandWithParameters
-    {
-        CommandDATA(pchar par) : CommandWithParameters(par) {}
-        virtual ~CommandDATA() override {}
-        virtual bool Execute(Direction::E) override;
-    };
 }
