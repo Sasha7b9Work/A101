@@ -20,6 +20,8 @@ namespace PageMain
     void SetRange(MeasuresOnDisplay::E, int);
 
     void EnableZero(MeasuresOnDisplay::E, bool);
+
+    Button &GetButtonMeasuresOnDisplay();
 }
 
 

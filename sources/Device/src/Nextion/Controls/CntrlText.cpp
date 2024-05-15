@@ -19,6 +19,12 @@ void CntrlText::SetLabel(pchar label, bool if_different)
 }
 
 
+void CntrlText::SetVisible(bool visible)
+{
+    Nextion::Text::SetVisible(name, visible);
+}
+
+
 void CntrlText::Flash()
 {
     SetLabel(prev_label, false);

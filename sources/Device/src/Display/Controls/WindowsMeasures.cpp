@@ -164,3 +164,11 @@ void WindowMeasure::ConvertRealToText(REAL value, char out[TextString::MAX_LEN],
     std::strcat(out, buffer);
 }
 
+
+void WindowMeasure::SetVisible(bool visible)
+{
+    cntrlType.SetVisible(visible);
+    cntrlSign.SetVisible(visible);
+    cntrlDigits.SetVisible(visible);
+    cntrlUnits.SetVisible(visible);
+}

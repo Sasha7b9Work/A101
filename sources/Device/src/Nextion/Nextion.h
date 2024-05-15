@@ -90,6 +90,8 @@ namespace Nextion
     namespace Text
     {
         void SetLabel(pchar name, pchar label);
+
+        void SetVisible(pchar name, bool);
     }
 
     namespace WaveFFT

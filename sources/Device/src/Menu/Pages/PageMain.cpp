@@ -177,8 +177,26 @@ namespace PageMain
 
     Page *self = &pageMain;
 
-    void SetRange(MeasuresOnDisplay::E, int range)
+    void SetRange(MeasuresOnDisplay::E meas, int range)
     {
+        MeasuresOnDisplay::Set(meas);
+
+        if (MeasuresOnDisplay::IsAC_DC())
+        {
+            PageMain::GetButtonMeasuresOnDisplay().SetText("AC+DC");
+        }
+        else if (MeasuresOnDisplay::IsAC())
+        {
+            PageMain::GetButtonMeasuresOnDisplay().SetText("AC");
+        }
+        else if (MeasuresOnDisplay::IsDC())
+        {
+            PageMain::GetButtonMeasuresOnDisplay().SetText("DC");
+        }
+
+        wndAC.SetVisible(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsAC());
+        wndDC.SetVisible(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsDC());
+
         for (int i = 0; i < 6; i++)
         {
             PageMain::self->GetButton(i)->SetValue(i == range ? 1 : 0);
@@ -191,6 +209,11 @@ namespace PageMain
     void EnableZero(MeasuresOnDisplay::E, bool)
     {
 
+    }
+
+    Button &GetButtonMeasuresOnDisplay()
+    {
+        return btnAC_DC;
     }
 }
 

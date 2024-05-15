@@ -36,6 +36,8 @@ public:
     const CntrlText &GetControlDigits() const { return cntrlDigits; }
     const CntrlText &GetControlUnits() const { return cntrlUnits; }
 
+    void SetVisible(bool);
+
 protected:
     CntrlText cntrlType;        // DC или AC
     CntrlText cntrlSign;        // —юда выводим знак

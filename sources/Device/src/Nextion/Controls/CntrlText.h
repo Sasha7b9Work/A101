@@ -16,6 +16,7 @@ public:
     void Flash();
     bool IsExist() const { return name[0] != '\0'; }
     pchar LastLabel() const { return prev_label; }
+    void SetVisible(bool);
 private:
     pchar name;             // Имя, как оно обозначено в программе дисплея
     char prev_label[16];    // Здесь хранится засланное перед этим значение, чтобы не засылать повторно
