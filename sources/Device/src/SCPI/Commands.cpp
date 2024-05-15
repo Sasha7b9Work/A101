@@ -83,3 +83,9 @@ bool SCPI::CommandRangeIJ::Execute(Direction::E dir)
 {
     return true;
 }
+
+
+bool SCPI::CommandZero::Execute(Direction::E dir)
+{
+    return true;
+}

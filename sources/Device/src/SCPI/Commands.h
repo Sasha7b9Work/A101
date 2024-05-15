@@ -58,4 +58,13 @@ namespace SCPI
     protected:
         int range;
     };
+
+    struct CommandZero : public Command
+    {
+        CommandZero(char _type, bool _enabled) : type(_type), enabled(_enabled) { }
+        virtual bool Execute(Direction::E) override;
+    protected:
+        char type;
+        bool enabled;
+    };
 }

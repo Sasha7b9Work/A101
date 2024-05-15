@@ -150,6 +150,17 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<1024> &symbols)
                 return new CommandRangeIJ(range);
             }
         }
+
+        if (data[0] == 'Z')
+        {
+            if (data[1] == 'I' || data[1] == 'J')
+            {
+                if (data[2] == '0' || data[2] == '1')
+                {
+                    return new CommandZero(data[1], data[2] == '1');
+                }
+            }
+        }
     }
 
     String<1024> message((char *)symbols.Data());
