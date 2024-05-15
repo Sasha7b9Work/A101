@@ -176,5 +176,16 @@ namespace PageMain
     static Page pageMain(buttons, FuncOnEnter, FuncDraw);
 
     Page *self = &pageMain;
+
+    void SetRange(MeasuresOnDisplay::E, int)
+    {
+
+    }
+
+
+    void EnableZero(MeasuresOnDisplay::E, bool)
+    {
+
+    }
 }
 

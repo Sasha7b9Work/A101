@@ -67,25 +67,33 @@ bool SCPI::CommandMEAS::Execute(Direction::E dir)
 }
 
 
-bool SCPI::CommandRangeI::Execute(Direction::E dir)
+bool SCPI::CommandRangeI::Execute(Direction::E)
 {
+    PageMain::SetRange(MeasuresOnDisplay::DC, range);
+
     return true;
 }
 
 
-bool SCPI::CommandRangeJ::Execute(Direction::E dir)
+bool SCPI::CommandRangeJ::Execute(Direction::E)
 {
+    PageMain::SetRange(MeasuresOnDisplay::AC, range);
+
     return true;
 }
 
 
-bool SCPI::CommandRangeIJ::Execute(Direction::E dir)
+bool SCPI::CommandRangeIJ::Execute(Direction::E)
 {
+    PageMain::SetRange(MeasuresOnDisplay::AC_DC, range);
+
     return true;
 }
 
 
-bool SCPI::CommandZero::Execute(Direction::E dir)
+bool SCPI::CommandZero::Execute(Direction::E)
 {
+    PageMain::EnableZero(type == 'I' ? MeasuresOnDisplay::DC : MeasuresOnDisplay::AC, enabled);
+
     return true;
 }

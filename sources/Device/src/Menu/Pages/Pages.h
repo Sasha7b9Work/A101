@@ -2,6 +2,7 @@
 #pragma once
 #include "Menu/MenuItems.h"
 #include "Display/Controls/WindowsMeasures.h"
+#include "Settings/Settings.h"
 
 
 namespace PageMain
@@ -15,6 +16,10 @@ namespace PageMain
 
     extern WindowMeasure wndDC;
     extern WindowMeasure wndAC;
+
+    void SetRange(MeasuresOnDisplay::E, int);
+
+    void EnableZero(MeasuresOnDisplay::E, bool);
 }
 
 
