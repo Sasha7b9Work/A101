@@ -117,6 +117,41 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<1024> &symbols)
         return new CommandMEAS();
     }
 
+    if (std::strlen(data) == 2)
+    {
+        if (data[0] == 'I')
+        {
+            int range = data[1] & 0x0F;
+
+            if (range >= 0 && range < 6)
+            {
+                return new CommandRangeI(range);
+            }
+        }
+        else if (data[0] == 'J')
+        {
+            int range = data[1] & 0x0F;
+
+            if (range >= 0 && range < 6)
+            {
+                return new CommandRangeJ(range);
+            }
+        }
+    }
+
+    if (std::strlen(data) == 3)
+    {
+        if (data[0] == 'I' && data[1] == 'J')
+        {
+            int range = data[2] & 0x0F;
+
+            if (range >= 0 && range < 6)
+            {
+                return new CommandRangeIJ(range);
+            }
+        }
+    }
+
     String<1024> message((char *)symbols.Data());
 
     SCPI::Error(dir, message.c_str());

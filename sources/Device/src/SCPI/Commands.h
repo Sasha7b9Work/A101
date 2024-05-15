@@ -33,4 +33,29 @@ namespace SCPI
     {
         virtual bool Execute(Direction::E) override;
     };
+
+
+    struct CommandRangeI : public Command
+    {
+        CommandRangeI(int _range) : range(_range) { }
+        virtual bool Execute(Direction::E) override;
+    protected:
+        int range;
+    };
+
+    struct CommandRangeJ : public Command
+    {
+        CommandRangeJ(int _range) : range(_range) { }
+        virtual bool Execute(Direction::E) override;
+    protected:
+        int range;
+    };
+
+    struct CommandRangeIJ : public Command
+    {
+        CommandRangeIJ(int _range) : range(_range) { }
+        virtual bool Execute(Direction::E) override;
+    protected:
+        int range;
+    };
 }

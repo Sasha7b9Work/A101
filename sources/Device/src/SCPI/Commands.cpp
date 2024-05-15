@@ -65,3 +65,21 @@ bool SCPI::CommandMEAS::Execute(Direction::E dir)
 
     return true;
 }
+
+
+bool SCPI::CommandRangeI::Execute(Direction::E dir)
+{
+    return true;
+}
+
+
+bool SCPI::CommandRangeJ::Execute(Direction::E dir)
+{
+    return true;
+}
+
+
+bool SCPI::CommandRangeIJ::Execute(Direction::E dir)
+{
+    return true;
+}
