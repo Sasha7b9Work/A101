@@ -1,0 +1,73 @@
+Dependencies for Project 'arm_fir_example', Target 'ARMCM4_FP': (DO NOT MODIFY !)
+CompilerVersion: 6160000::V6.16::ARMCLANG
+F (.\math_helper.c)(0x652007F9)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-mlittle-endian -gdwarf-4 -O1 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/DSP/Include-IC:/Users/Sasha/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/Device/ARM/ARMCM4/Include-D__UVISION_VERSION="536" -DARMCM4_FP -DARM_MATH_CM4 -D__FPU_PRESENT="1U" -DSTM32F407xx-o ./armcm4_debug/math_helper.o -MD)
+I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x60354E1A)
+I (math_helper.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\DSP\Include\arm_math.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\core_cm4.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x60354E20)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_version.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_compiler.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_armclang.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x602A81CE)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x60354E14)
+I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x60354E20)
+F (.\arm_fir_data.c)(0x652007F9)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-mlittle-endian -gdwarf-4 -O1 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/DSP/Include-IC:/Users/Sasha/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/Device/ARM/ARMCM4/Include-D__UVISION_VERSION="536" -DARMCM4_FP -DARM_MATH_CM4 -D__FPU_PRESENT="1U" -DSTM32F407xx-o ./armcm4_debug/arm_fir_data.o -MD)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\DSP\Include\arm_math.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\core_cm4.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x60354E20)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_version.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_compiler.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_armclang.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x602A81CE)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x60354E14)
+I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x60354E20)
+I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x60354E1A)
+F (.\arm_fir_example_f32.c)(0x652007F9)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-mlittle-endian -gdwarf-4 -O1 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/DSP/Include-IC:/Users/Sasha/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/Device/ARM/ARMCM4/Include-D__UVISION_VERSION="536" -DARMCM4_FP -DARM_MATH_CM4 -D__FPU_PRESENT="1U" -DSTM32F407xx-o ./armcm4_debug/arm_fir_example_f32.o -MD)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\DSP\Include\arm_math.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\core_cm4.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x60354E20)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_version.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_compiler.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_armclang.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x602A81CE)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x60354E14)
+I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x60354E20)
+I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x60354E1A)
+I (math_helper.h)(0x652007F9)
+F (.\startup_stm32f407xx.s)(0x652007F9)(--cpu Cortex-M4.fp.sp --li -g-IC:\Users\Sasha\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\Device\ARM\ARMCM4\Include--pd "__UVISION_VERSION SETA 536"--pd "ARMCM4_FP SETA 1"--list .\armcm4_debug\startup_stm32f407xx.lst--xref -o .\armcm4_debug\startup_stm32f407xx.o--depend .\armcm4_debug\startup_stm32f407xx.d)
+F (.\system_stm32f4xx.c)(0x652007F9)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-mlittle-endian -gdwarf-4 -O1 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/DSP/Include-IC:/Users/Sasha/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/Device/ARM/ARMCM4/Include-D__UVISION_VERSION="536" -DARMCM4_FP -DARM_MATH_CM4 -D__FPU_PRESENT="1U" -DSTM32F407xx-o ./armcm4_debug/system_stm32f4xx.o -MD)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\core_cm4.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x60354E20)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_version.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_compiler.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_armclang.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x602A81CE)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x60354E14)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\mpu_armv7.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x652007F9)
+F (.\Abstract.txt)(0x652007F9)()
+F (..\common\libs\STM32Cube_F4\Drivers\CMSIS\DSP\Source\FilteringFunctions\arm_fir_f32.c)(0x652007F9)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-mlittle-endian -gdwarf-4 -O1 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/DSP/Include-IC:/Users/Sasha/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/Device/ARM/ARMCM4/Include-D__UVISION_VERSION="536" -DARMCM4_FP -DARM_MATH_CM4 -D__FPU_PRESENT="1U" -DSTM32F407xx-o ./armcm4_debug/arm_fir_f32.o -MD)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\DSP\Include\arm_math.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\core_cm4.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x60354E20)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_version.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_compiler.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_armclang.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x602A81CE)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x60354E14)
+I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x60354E20)
+I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x60354E1A)
+F (..\common\libs\STM32Cube_F4\Drivers\CMSIS\DSP\Source\FilteringFunctions\arm_fir_init_f32.c)(0x652007F9)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-mlittle-endian -gdwarf-4 -O1 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../common/libs/STM32Cube_F4/Drivers/CMSIS/DSP/Include-IC:/Users/Sasha/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/Device/ARM/ARMCM4/Include-D__UVISION_VERSION="536" -DARMCM4_FP -DARM_MATH_CM4 -D__FPU_PRESENT="1U" -DSTM32F407xx-o ./armcm4_debug/arm_fir_init_f32.o -MD)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\DSP\Include\arm_math.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\core_cm4.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x60354E20)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_version.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_compiler.h)(0x652007F9)
+I (..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include\cmsis_armclang.h)(0x652007F9)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x602A81CE)
+I (C:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x60354E14)
+I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x60354E20)
+I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x60354E1A)
