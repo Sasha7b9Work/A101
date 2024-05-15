@@ -177,9 +177,9 @@ namespace PageMain
 
     Page *self = &pageMain;
 
-    void SetRange(MeasuresOnDisplay::E, int)
+    void SetRange(MeasuresOnDisplay::E, int range)
     {
-
+        PageMain::self->GetButton(range)->Press();
     }
 
 
