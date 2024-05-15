@@ -4,7 +4,7 @@
 #include "Display/Display.h"
 
 
-template      String<(int)DEFAULT_SIZE_STRING>::String(pchar, ...);
+//template      String<(int)DEFAULT_SIZE_STRING>::String(char *, ...);
 template void String<(int)DEFAULT_SIZE_STRING>::Append(pchar);
 template void String<(int)DEFAULT_SIZE_STRING>::SetFormat(pchar format, ...);
 template void String<1024>::SetFormat(pchar format, ...);

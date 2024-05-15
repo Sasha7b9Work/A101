@@ -16,7 +16,7 @@ public:
 
     String() { Clear(); }
 
-    explicit String(pchar format, ...)
+    String(pchar format, ...)
     {
         std::va_list args;
         va_start(args, format);

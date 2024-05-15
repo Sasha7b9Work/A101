@@ -257,11 +257,11 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
     {
         if (buffer[i] == (uint8)'_')            // Кнопка
         {
-            for (int j = 0; j <= i; j++)
-            {
-                char symbol[2] = { (char)buffer[j], '\0' };
-                HAL_USART3::SendText(symbol);
-            }
+//          for (int j = 0; j <= i; j++)
+//          {
+//              char symbol[2] = { (char)buffer[j], '\0' };
+//                HAL_USART3::SendText(symbol);
+//          }
 
             CommandButton *result = new CommandButton(buffer, i);
 
@@ -287,11 +287,11 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
             {
                 AnswerFF *result = new AnswerFF(buffer, i);
 
-                for (int j = 0; j < i + 3; j++)
-                {
-                    char symbol[2] = { (char)buffer[j], '\0' };
-                    HAL_USART3::SendText(symbol);
-                }
+//                for (int j = 0; j < i + 3; j++)
+//                {
+//                    char symbol[2] = { (char)buffer[j], '\0' };
+//                    HAL_USART3::SendText(symbol);
+//                }
 
                 RemoveFromStart(i + 3);
 

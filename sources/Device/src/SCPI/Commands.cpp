@@ -3,6 +3,7 @@
 #include "SCPI/Commands.h"
 #include "Device.h"
 #include "Menu/Pages/Pages.h"
+#include "Settings/Settings.h"
 
 
 namespace SCPI
@@ -27,7 +28,9 @@ bool SCPI::CommandWithParameters::Execute(Direction::E)
 
 bool SCPI::CommandIDN::Execute(Direction::E dir)
 {
-    Send(dir, "OAO MNIPI, A101");
+    String<> message("OAO MNIPI, A101, %04u %04u, v1.0.1", set.serial_number & 0xFFFF, (set.serial_number >> 16));
+
+    Send(dir, message.c_str());
     return true;
 }
 
