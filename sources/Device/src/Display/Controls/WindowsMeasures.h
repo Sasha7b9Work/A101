@@ -31,6 +31,11 @@ public:
     void Flash();
     // Вызываем эту функцию после переключения на другой диапазон, чтобы очистить изображение
     void Reset();
+
+    const CntrlText &GetControlSign() const { return cntrlSign; }
+    const CntrlText &GetControlDigits() const { return cntrlDigits; }
+    const CntrlText &GetControlUnits() const { return cntrlUnits; }
+
 protected:
     CntrlText cntrlType;        // DC или AC
     CntrlText cntrlSign;        // Сюда выводим знак

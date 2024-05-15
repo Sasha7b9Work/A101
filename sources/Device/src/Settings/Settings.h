@@ -16,6 +16,10 @@ struct MeasuresOnDisplay
 
     static void Set(E v) { current = v; }
 
+    static bool IsAC_DC() { return current == AC_DC; }
+    static bool IsAC() { return current == AC; }
+    static bool IsDC() { return current == DC; }
+
     static E current;
 };
 

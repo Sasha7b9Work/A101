@@ -37,7 +37,31 @@ bool SCPI::CommandIDN::Execute(Direction::E dir)
 
 bool SCPI::CommandMEAS::Execute(Direction::E dir)
 {
+    String<> message;
 
+    if (MeasuresOnDisplay::IsDC() || MeasuresOnDisplay::IsAC_DC())
+    {
+        message.Append("I=");
+        message.Append(PageMain::wndDC.GetControlSign().LastLabel());
+        message.Append(PageMain::wndDC.GetControlDigits().LastLabel());
+        message.Append(" ");
+        message.Append(PageMain::wndDC.GetControlUnits().LastLabel());
+    }
+
+    if (MeasuresOnDisplay::IsAC_DC())
+    {
+        message.Append(";");
+    }
+
+    if (MeasuresOnDisplay::IsAC() || MeasuresOnDisplay::IsAC_DC())
+    {
+        message.Append("J=");
+        message.Append(PageMain::wndAC.GetControlDigits().LastLabel());
+        message.Append(" ");
+        message.Append(PageMain::wndAC.GetControlUnits().LastLabel());
+    }
+
+    Send(dir, message.c_str());
 
     return true;
 }
