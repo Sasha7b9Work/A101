@@ -19,6 +19,7 @@
 #pragma clang diagnostic ignored "-Wundefined-func-template"
 #pragma clang diagnostic ignored "-Wimplicit-float-conversion"
 #pragma clang diagnostic ignored "-Wdouble-promotion"
+#pragma clang diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"

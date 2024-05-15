@@ -105,9 +105,16 @@ SCPI::Command *SCPI::InBuffer::ExtractCommand()
 
 SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<1024> &symbols)
 {
-    if (std::strcmp((char *)symbols.Data(), "*IDN?") == 0)
+    char *data = (char *)symbols.Data();
+
+    if (std::strcmp(data, "*IDN?") == 0)
     {
         return new CommandIDN();
+    }
+
+    if (std::strcmp(data, "MEAS?") == 0)
+    {
+        return new CommandMEAS();
     }
 
     String<1024> message((char *)symbols.Data());

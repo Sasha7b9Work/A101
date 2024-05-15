@@ -64,6 +64,13 @@ void HAL_USART3::SendText(pchar message)
 }
 
 
+void HAL_USART3::SendTextWith0D0A(pchar message)
+{
+    SendText(message);
+    Send0D0A();
+}
+
+
 void HAL_USART3::Send0D0A()
 {
     HAL_UART_Transmit(&handleUSART3, (const uint8 *)"\x0D\x0A", 2, 100);

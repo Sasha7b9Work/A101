@@ -3,6 +3,23 @@
 #include "Settings/CalibrationSettings.h"
 
 
+// „то выводитс€ на дисплей
+struct MeasuresOnDisplay
+{
+    enum E
+    {
+        AC_DC,
+        AC,
+        DC,
+        Count
+    };
+
+    static void Set(E v) { current = v; }
+
+    static E current;
+};
+
+
 struct Settings
 {
     uint size;                  // «десь размер настроек - дл€ проверки того, что версии соответствуют

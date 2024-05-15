@@ -5,6 +5,9 @@
 #include <cstring>
 
 
+MeasuresOnDisplay::E MeasuresOnDisplay::current = MeasuresOnDisplay::AC_DC;
+
+
 namespace NS_Settings
 {
     static Settings set_def

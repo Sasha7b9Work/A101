@@ -33,3 +33,11 @@ bool SCPI::CommandIDN::Execute(Direction::E dir)
     Send(dir, message.c_str());
     return true;
 }
+
+
+bool SCPI::CommandMEAS::Execute(Direction::E dir)
+{
+
+
+    return true;
+}

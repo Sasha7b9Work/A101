@@ -8,6 +8,7 @@
 #include "Display/Controls/WindowsMeasures.h"
 #include "Ampermeter/Ampermeter.h"
 #include "Display/Display.h"
+#include "Settings/Settings.h"
 
 
 namespace PageMain
@@ -90,7 +91,20 @@ namespace PageMain
             Range::Set(5);
         });
 
-    static Button btnAC_DC("b0", "0AD", []() {});
+    static Button btnAC_DC("b0", "0AD", []()            // Переход в AC+DC
+        {
+            MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
+        });
+
+    static Button btnAC("b0", "0AC", []()              // Переход в AC
+        {
+            MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
+        });
+
+    static Button btnDC("b0", "0DC", []()              // Переход в DC
+        {
+            MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
+        });
 
     static Button btnCalibration("bt13", "0C", []()
         {
@@ -144,6 +158,8 @@ namespace PageMain
         &btn20A,
         &btn50A,
         &btnAC_DC,
+        &btnAC,
+        &btnDC,
         &btnCalibration,
         &btnZeroDC_EN,
         &btnZeroDC_DIS,

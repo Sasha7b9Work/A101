@@ -128,6 +128,8 @@ namespace HAL_USART3
 
     void SendText(pchar);
 
+    void SendTextWith0D0A(pchar);
+
     void Send0D0A();
 
     extern void *handle;    // UART_HandleTypeDef

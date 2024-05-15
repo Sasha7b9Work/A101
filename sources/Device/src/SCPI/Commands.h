@@ -11,14 +11,12 @@ namespace SCPI
     struct Command
     {
         virtual bool Execute(Direction::E);
-        virtual ~Command() {}
     };
 
 
     struct CommandWithParameters : public Command
     {
         CommandWithParameters(pchar _params) { params.SetFormat(_params); }
-        virtual ~CommandWithParameters() override {}
         virtual bool Execute(Direction::E) override;
     protected:
         String<> params;
@@ -28,6 +26,11 @@ namespace SCPI
     struct CommandIDN : public Command
     {
         virtual bool Execute(Direction::E) override;
-        virtual ~CommandIDN() override {}
+    };
+
+
+    struct CommandMEAS : public Command
+    {
+        virtual bool Execute(Direction::E) override;
     };
 }
