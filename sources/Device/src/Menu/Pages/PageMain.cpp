@@ -183,15 +183,15 @@ namespace PageMain
 
         if (MeasuresOnDisplay::IsAC_DC())
         {
-            PageMain::GetButtonMeasuresOnDisplay().SetText("AC+DC");
+            btnAC_DC.SetText("AC+DC");
         }
         else if (MeasuresOnDisplay::IsAC())
         {
-            PageMain::GetButtonMeasuresOnDisplay().SetText("AC");
+            btnAC_DC.SetText("AC");
         }
         else if (MeasuresOnDisplay::IsDC())
         {
-            PageMain::GetButtonMeasuresOnDisplay().SetText("DC");
+            btnAC_DC.SetText("DC");
         }
 
         wndAC.SetVisible(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsAC());
@@ -209,11 +209,6 @@ namespace PageMain
     void EnableZero(MeasuresOnDisplay::E, bool)
     {
 
-    }
-
-    Button &GetButtonMeasuresOnDisplay()
-    {
-        return btnAC_DC;
     }
 }
 
