@@ -262,3 +262,8 @@ void TimeMeterMS::Wait(uint dMS)
     }
 }
 
+
+uint Timer::GetSecs()
+{
+    return TIME_MS / 1000;
+}

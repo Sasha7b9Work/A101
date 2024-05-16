@@ -5,3 +5,5 @@
 //#define LOGGED
 
 #define REAL double
+
+//#define EMULATOR_ENABLED

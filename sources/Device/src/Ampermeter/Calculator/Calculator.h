@@ -13,4 +13,7 @@ namespace Calculator
     REAL GetAC(bool *correct);
 
     REAL GetDC(bool *correct);
+
+    // Пересчитать значение таким образом, чтобы оно нормально отображалось на дисплее
+    REAL CastRealToDisplay(REAL, int range);
 }

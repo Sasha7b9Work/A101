@@ -68,6 +68,9 @@ namespace Timer
 
     // Вызывается при срабатывании таймера
     void ElapsedCallback();
+
+    // Столько секунд прошло от включения
+    uint GetSecs();
 }
 
 

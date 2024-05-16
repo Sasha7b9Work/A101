@@ -51,17 +51,86 @@ SampleRate Calculator::AppendData()
 }
 
 
+namespace Calculator
+{
+    static const int SIZE = 24;
+    static const int NUM_VALUES = 1;
+
+    static REAL vals_ac[SIZE] = { 13.37, 1.9, 2.1, 19.0, 21.0, 190.0, 210.0, 1.9, 2.1, 19.0, 21.0, 49.0, 51.0 };
+    static REAL vals_dc[SIZE] = { 13.37, 1.9, 2.1, 19.0, 21.0, 190.0, 210.0, 1.9, 2.1, 19.0, 21.0, 49.0, 51.0 };
+
+    static const uint tempo_secs = 1;          // Так часто будем переключать измерения
+}
+
+
 REAL Calculator::GetAC(bool *correct)
 {
+#ifdef EMULATOR_ENABLED
+
+    static int pointer = 0;
+    static uint next_secs = 0;
+
+    if (Timer::GetSecs() == next_secs)
+    {
+        next_secs += tempo_secs;
+
+        if (++pointer == NUM_VALUES)
+        {
+            pointer = 0;
+        }
+    }
+
+    *correct = true;
+
+    return CastRealToDisplay(vals_ac[pointer], Range::Current());
+
+#else
+
     *correct = (ac.NumElements() > 0);
 
     return ac.NumElements() ? ac.Get() : 0.0;
+
+#endif
 }
 
 
 REAL Calculator::GetDC(bool *correct)
 {
+#ifdef EMULATOR_ENABLED
+
+    *correct = true;
+
+    static int pointer = 0;
+    static uint next_secs = 0;
+
+    if (Timer::GetSecs() == next_secs)
+    {
+        next_secs += tempo_secs;
+
+        if (++pointer == NUM_VALUES)
+        {
+            pointer = 0;
+        }
+    }
+
+    return CastRealToDisplay(vals_dc[pointer], Range::Current());
+
+#else
+
     *correct = (dc.NumElements() > 0);
 
     return dc.NumElements() ? dc.Get() : 0.0;
+
+#endif
+}
+
+
+REAL Calculator::CastRealToDisplay(REAL value, int range)
+{
+    if (range < 3)
+    {
+        return value * 1e3;
+    }
+
+    return value;
 }
