@@ -53,13 +53,7 @@ SampleRate Calculator::AppendData()
 
 namespace Calculator
 {
-    static const int SIZE = 24;
-    static const int NUM_VALUES = 1;
-
-    static REAL vals_ac[SIZE] = { 13.37, 1.9, 2.1, 19.0, 21.0, 190.0, 210.0, 1.9, 2.1, 19.0, 21.0, 49.0, 51.0 };
-    static REAL vals_dc[SIZE] = { 13.37, 1.9, 2.1, 19.0, 21.0, 190.0, 210.0, 1.9, 2.1, 19.0, 21.0, 49.0, 51.0 };
-
-    static const uint tempo_secs = 1;          // Так часто будем переключать измерения
+    static const uint tempo_secs = 2;          // Так часто будем переключать измерения
 }
 
 
@@ -67,22 +61,25 @@ REAL Calculator::GetAC(bool *correct)
 {
 #ifdef EMULATOR_ENABLED
 
-    static int pointer = 0;
+    static REAL value = 0.001;
+    static REAL k = 3.3;
     static uint next_secs = 0;
 
-    if (Timer::GetSecs() == next_secs)
+    if (Timer::GetSecs() >= next_secs)
     {
         next_secs += tempo_secs;
 
-        if (++pointer == NUM_VALUES)
+        value *= k;
+
+        if (value > 10000e3 || value < 0.001)
         {
-            pointer = 0;
+            k = 1.0 / k;
         }
     }
 
     *correct = true;
 
-    return CastRealToDisplay(vals_ac[pointer], Range::Current());
+    return CastRealToDisplay(value, Range::Current());
 
 #else
 
@@ -100,20 +97,23 @@ REAL Calculator::GetDC(bool *correct)
 
     *correct = true;
 
-    static int pointer = 0;
+    static REAL value = 0.001;
+    static REAL k = 1.0;
     static uint next_secs = 0;
 
-    if (Timer::GetSecs() == next_secs)
+    if (Timer::GetSecs() >= next_secs)
     {
         next_secs += tempo_secs;
 
-        if (++pointer == NUM_VALUES)
+        value *= k;
+
+        if (value > 50e3 || value < 0.001)
         {
-            pointer = 0;
+            k = 1.0f / k;
         }
     }
 
-    return CastRealToDisplay(vals_dc[pointer], Range::Current());
+    return CastRealToDisplay(value, Range::Current());
 
 #else
 
@@ -127,10 +127,10 @@ REAL Calculator::GetDC(bool *correct)
 
 REAL Calculator::CastRealToDisplay(REAL value, int range)
 {
-    if (range < 3)
-    {
-        return value * 1e3;
-    }
+//    if (range > 2)
+//    {
+//        return value / 1e3;
+//    }
 
     return value;
 }
