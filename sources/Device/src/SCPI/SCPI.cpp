@@ -119,7 +119,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<1024> &symbols)
 
     if (std::strlen(data) == 2)
     {
-        if (data[0] == 'I')
+        if (data[0] == 'I')                             // I0...I5
         {
             int range = data[1] & 0x0F;
 
@@ -128,7 +128,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<1024> &symbols)
                 return new CommandRangeI(range);
             }
         }
-        else if (data[0] == 'J')
+        else if (data[0] == 'J')                        // J0...J5
         {
             int range = data[1] & 0x0F;
 
@@ -141,7 +141,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<1024> &symbols)
 
     if (std::strlen(data) == 3)
     {
-        if (data[0] == 'I' && data[1] == 'J')
+        if (data[0] == 'I' && data[1] == 'J')           // IJ0...IJ5
         {
             int range = data[2] & 0x0F;
 
@@ -151,7 +151,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<1024> &symbols)
             }
         }
 
-        if (data[0] == 'Z')
+        if (data[0] == 'Z')                             // ZI0, ZI1, ZJ0, ZJ1
         {
             if (data[1] == 'I' || data[1] == 'J')
             {
