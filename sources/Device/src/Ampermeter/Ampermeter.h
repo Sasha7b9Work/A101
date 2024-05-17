@@ -50,7 +50,7 @@ namespace Ampermeter
 
             void Disable();
 
-            REAL Level();
+            REAL LevelAbs();
         }
 
         // Режим "Ноль AC"
@@ -60,7 +60,7 @@ namespace Ampermeter
 
             void Disable();
 
-            REAL Level();
+            REAL LevelAbs();
         }
     }
 }

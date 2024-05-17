@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Ampermeter/Ampermeter.h"
 #include "Nextion/Nextion.h"
+#include "Ampermeter/InputRelays.h"
 
 
 namespace Ampermeter
@@ -10,12 +11,12 @@ namespace Ampermeter
     {
         namespace ZeroDC
         {
-            static REAL value = 0.0;
+            static REAL value_abs = 0.0;
         }
 
         namespace ZeroAC
         {
-            static REAL value = 0.0;
+            static REAL value_abs = 0.0;
         }
     }
 }
@@ -23,17 +24,22 @@ namespace Ampermeter
 
 void Ampermeter::Set::ZeroDC::Enable()
 {
-    value = 0.0;
+    value_abs = 0.0;
 
     Measure measure = Ampermeter::GetDC();
 
-    value = measure.IsValid() ? measure.value : 0.0;
+    value_abs = measure.IsValid() ? measure.value : 0.0;
+
+    if (Range::Current() > 2)
+    {
+        value_abs *= 1e3;
+    }
 }
 
 
 void Ampermeter::Set::ZeroDC::Disable()
 {
-    value = 0.0;
+    value_abs = 0.0;
 
     Nextion::SetVisible("t5", false);
 
@@ -41,25 +47,30 @@ void Ampermeter::Set::ZeroDC::Disable()
 }
 
 
-REAL Ampermeter::Set::ZeroDC::Level()
+REAL Ampermeter::Set::ZeroDC::LevelAbs()
 {
-    return value;
+    return value_abs;
 }
 
 
 void Ampermeter::Set::ZeroAC::Enable()
 {
-    value = 0.0;
+    value_abs = 0.0;
 
     Measure measure = Ampermeter::GetAC();
 
-    value = measure.IsValid() ? measure.value : 0.0;
+    value_abs = measure.IsValid() ? measure.value : 0.0;
+
+    if (Range::Current() > 2)
+    {
+        value_abs *= 1e3;
+    }
 }
 
 
 void Ampermeter::Set::ZeroAC::Disable()
 {
-    value = 0.0;
+    value_abs = 0.0;
 
     Nextion::SetVisible("t6", false);
 
@@ -67,7 +78,7 @@ void Ampermeter::Set::ZeroAC::Disable()
 }
 
 
-REAL Ampermeter::Set::ZeroAC::Level()
+REAL Ampermeter::Set::ZeroAC::LevelAbs()
 {
-    return value;
+    return value_abs;
 }

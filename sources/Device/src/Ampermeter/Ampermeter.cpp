@@ -100,7 +100,12 @@ Measure Ampermeter::GetDC()
 
     REAL dc = Calculator::GetRelativeDC(&correct);
 
-    REAL zero = Set::ZeroDC::Level();
+    REAL zero = Set::ZeroDC::LevelAbs();
+
+    if (Range::Current() > 2)
+    {
+        zero /= 1e3;
+    }
 
     return Measure(dc - zero, OutOfRange(), correct);
 }
@@ -110,9 +115,16 @@ Measure Ampermeter::GetAC()
 {
     bool correct = false;
 
-    REAL ac = Calculator::GetRelativeAC(&correct) - Set::ZeroAC::Level();
+    REAL ac = Calculator::GetRelativeAC(&correct);
 
-    return Measure(ac, OutOfRange(), correct);
+    REAL zero = Set::ZeroAC::LevelAbs();
+
+    if (Range::Current() > 2)
+    {
+        zero /= 1e3;
+    }
+
+    return Measure(ac - zero, OutOfRange(), correct);
 }
 
 
