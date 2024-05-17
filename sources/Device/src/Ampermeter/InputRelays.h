@@ -26,7 +26,7 @@ namespace InputRelays
     void EnableZero(bool reset_measures);
 
     // Выключить режим "нуль" (измерения невозможны)
-    void DisableZero(bool reeset_measures);
+    void DisableZero(bool reset_measures);
 
     bool ZeroIsEanbled();
 }

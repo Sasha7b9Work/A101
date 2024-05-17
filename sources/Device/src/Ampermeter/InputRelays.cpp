@@ -74,6 +74,7 @@ void Range::Set(int _range, bool reset_measures)
 void InputRelays::DisableZero(bool reset_measures)
 {
     zero_enabled = false;
+
     Range::Load(reset_measures);
 }
 
@@ -81,6 +82,7 @@ void InputRelays::DisableZero(bool reset_measures)
 void InputRelays::EnableZero(bool reset_measures)
 {
     zero_enabled = true;
+
     Range::Load(reset_measures);
 }
 

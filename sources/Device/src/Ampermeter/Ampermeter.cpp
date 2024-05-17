@@ -200,7 +200,7 @@ bool Ampermeter::OutOfRange()
 {
     static const REAL maxs[6] = { 2e-3, 20e-3, 200e-3, 2.0, 20.0, 50.0 };
 
-    REAL max = maxs[Range::Current()] * 1.1 * 1e3;
+    REAL max = Calculator::CastRealToDisplay(maxs[Range::Current()] * 1.1 * 1e3, Range::Current());
 
     bool correct_dc = false;
     bool correct_ac = false;

@@ -62,7 +62,7 @@ REAL Calculator::GetAC(bool *correct)
 #ifdef EMULATOR_ENABLED
 
     static REAL value = 0.001;
-    static REAL k = 3.3;
+    static REAL k = 1.0;
     static uint next_secs = 0;
 
     if (Timer::GetSecs() >= next_secs)
@@ -97,7 +97,7 @@ REAL Calculator::GetDC(bool *correct)
 
     *correct = true;
 
-    static REAL value = 0.001;
+    static REAL value = 2.5e4;
     static REAL k = 1.0;
     static uint next_secs = 0;
 
@@ -125,12 +125,12 @@ REAL Calculator::GetDC(bool *correct)
 }
 
 
-REAL Calculator::CastRealToDisplay(REAL value, int /*range*/)
+REAL Calculator::CastRealToDisplay(REAL value, int range)
 {
-//    if (range > 2)
-//    {
-//        return value / 1e3;
-//    }
+    if (range > 2)
+    {
+        return value / 1e3;
+    }
 
     return value;
 }
