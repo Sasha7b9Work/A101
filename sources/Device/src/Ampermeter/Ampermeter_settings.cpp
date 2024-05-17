@@ -28,7 +28,7 @@ void Ampermeter::Set::ZeroDC::Enable()
 
     Measure measure = Ampermeter::GetDC();
 
-    value_abs = measure.IsValid() ? measure.value : 0.0;
+    value_abs = measure.IsValid() ? measure.value_abs : 0.0;
 
     if (Range::Current() > 2)
     {
@@ -59,7 +59,7 @@ void Ampermeter::Set::ZeroAC::Enable()
 
     Measure measure = Ampermeter::GetAC();
 
-    value_abs = measure.IsValid() ? measure.value : 0.0;
+    value_abs = measure.IsValid() ? measure.value_abs : 0.0;
 
     if (Range::Current() > 2)
     {

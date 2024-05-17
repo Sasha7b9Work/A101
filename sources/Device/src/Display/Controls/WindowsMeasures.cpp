@@ -109,7 +109,7 @@ void WindowMeasure::Draw(const Measure &measure, int range)
             static const int after[6] = { 4, 3, 2, 4, 3, 3 };
             const pchar suffix = (range < 3) ? "mA" : "A";
 
-            ConvertRealToText(measure.value, buf_measure, after[range], suffix);
+            ConvertRealToText(measure.value_abs / (Range::Current() > 2 ? 1e3 : 1.0), buf_measure, after[range], suffix);
         }
 
         SetMeasure(buf_measure);

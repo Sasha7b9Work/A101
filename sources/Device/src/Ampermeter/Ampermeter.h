@@ -5,7 +5,7 @@
 struct Measure
 {
     Measure(REAL _value, bool _out_of_range, bool _correct) :
-        value(_value),
+        value_abs(_value),
         out_of_range(_out_of_range),
         correct(_correct)
     {
@@ -16,7 +16,8 @@ struct Measure
         return !out_of_range && correct;
     }
 
-    REAL value = 0.0;
+    // Абсолютное значение. Перед выводом нужно приводить к пределу
+    REAL value_abs = 0.0;
     bool out_of_range = false;
     bool correct = false;
 };
