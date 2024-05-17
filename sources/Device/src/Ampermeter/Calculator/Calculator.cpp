@@ -49,10 +49,6 @@ SampleRate Calculator::AppendData()
 
     dc.Push(value);
 
-    bool correct = false;
-
-    LOG_WRITE("ac = %f, dc = %f", GetRelativeAC(&correct), GetRelativeDC(&correct));
-
     Display::LabelStar::Show();
 
     return SampleRate::Current::Get();
