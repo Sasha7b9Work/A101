@@ -14,6 +14,9 @@ namespace Calculator
     REAL GetRelativeAC(bool *correct);
     REAL GetRelativeDC(bool *correct);
 
+    REAL GetAbsAC(bool *correct);
+    REAL GetAbsDC(bool *correct);
+
     // Пересчитать значение таким образом, чтобы оCно нормально отображалось на дисплее
     REAL CastRealToDisplay(REAL, int range);
 }

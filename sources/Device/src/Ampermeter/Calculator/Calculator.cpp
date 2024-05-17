@@ -101,7 +101,7 @@ REAL Calculator::GetRelativeDC(bool *correct)
 
     *correct = true;
 
-    static REAL value = 2.5e4;
+    static REAL value = 2.1e4;
     static REAL k = 1.0;
     static uint next_secs = 0;
 
@@ -137,4 +137,16 @@ REAL Calculator::CastRealToDisplay(REAL value, int range)
     }
 
     return value;
+}
+
+
+REAL Calculator::GetAbsAC(bool *correct)
+{
+    return GetRelativeAC(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
+}
+
+
+REAL Calculator::GetAbsDC(bool *correct)
+{
+    return GetRelativeDC(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
 }

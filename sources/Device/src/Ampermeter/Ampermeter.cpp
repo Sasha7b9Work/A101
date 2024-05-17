@@ -198,15 +198,15 @@ void Ampermeter::MeasurementCycle()
 
 bool Ampermeter::OutOfRange()
 {
-    static const REAL maxs[6] = { 2e-3, 20e-3, 200e-3, 2.0, 20.0, 50.0 };
+    static const REAL maxs[6] = { 2.0, 2e1, 2e2, 2e3, 2e4, 5e4 };
 
-    REAL max = Calculator::CastRealToDisplay(maxs[Range::Current()] * 1.1 * 1e3, Range::Current());
+    REAL max = maxs[Range::Current()] * 1.15;
 
     bool correct_dc = false;
     bool correct_ac = false;
 
-    REAL dc = Calculator::GetRelativeDC(&correct_dc);
-    REAL ac = Calculator::GetRelativeAC(&correct_ac);
+    REAL dc = Calculator::GetAbsDC(&correct_dc);
+    REAL ac = Calculator::GetAbsAC(&correct_ac);
 
     REAL value = std::fabs(dc) + ac;
 
