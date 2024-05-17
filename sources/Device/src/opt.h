@@ -2,7 +2,7 @@
 #pragma once
 
 // Закомментировать, чтобы логи не валили в UART
-//#define LOGGED
+#define LOGGED
 
 #define REAL double
 

@@ -27,6 +27,7 @@ void Log::Write(const char *format, ...)
     std::sprintf(line, "%d : %s\x0d\x0a", counter++, message);
 
     HAL_USART3::SendText(line);
+    HAL_UART4::SendText(line);
 }
 
 
@@ -44,4 +45,5 @@ void Log::Write(const char *file, int line, const char *format, ...)
     std::sprintf(buffer, "%d : %s          %s:%d\x0d\x0a", counter++, message, file, line);
 
     HAL_USART3::SendText(buffer);
+    HAL_UART4::SendText(buffer);
 }

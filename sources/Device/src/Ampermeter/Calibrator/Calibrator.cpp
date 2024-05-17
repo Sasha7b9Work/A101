@@ -116,7 +116,7 @@ bool Calibrator::CalibratorZero::Run()
     bool correct_ac = false;
 
     LOG_WRITE("z - 1 = %d, dc = %f", z - 1, (double)CalculateDC(z - 1));
-    LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAC(&correct_ac), (double)dc);
+    LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetRelativeAC(&correct_ac), (double)dc);
     LOG_WRITE("z + 1 = %d, dc = %f", z + 1, (double)CalculateDC(z + 1));
 #endif
 
@@ -146,7 +146,7 @@ REAL Calibrator::CalibratorZero::CalculateDC(int zero)
 
     bool correct_dc = false;
 
-    return Calculator::GetDC(&correct_dc);
+    return Calculator::GetRelativeDC(&correct_dc);
 }
 
 
@@ -159,7 +159,7 @@ bool Calibrator::CalibrateGain(int range)
 
     bool correct_dc = false;
 
-    REAL dc = std::fabs(Calculator::GetDC(&correct_dc));
+    REAL dc = std::fabs(Calculator::GetRelativeDC(&correct_dc));
 
     REAL k = Range::Max(range) / dc;
 

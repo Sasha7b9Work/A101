@@ -10,9 +10,9 @@ namespace Calculator
 
     void Reset();
 
-    REAL GetAC(bool *correct);
-
-    REAL GetDC(bool *correct);
+    // Значения, приведённые к пределу - mA для 2,20,200мА, амперы для 2A, 20A, 50A
+    REAL GetRelativeAC(bool *correct);
+    REAL GetRelativeDC(bool *correct);
 
     // Пересчитать значение таким образом, чтобы оCно нормально отображалось на дисплее
     REAL CastRealToDisplay(REAL, int range);

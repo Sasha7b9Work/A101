@@ -45,6 +45,10 @@ SampleRate Calculator::AppendData()
 
     dc.Push(value);
 
+    bool correct = false;
+
+    LOG_WRITE("ac = %f, dc = %f", GetRelativeAC(&correct), GetRelativeDC(&correct));
+
     Display::LabelStar::Show();
 
     return SampleRate::Current::Get();
@@ -57,7 +61,7 @@ namespace Calculator
 }
 
 
-REAL Calculator::GetAC(bool *correct)
+REAL Calculator::GetRelativeAC(bool *correct)
 {
 #ifdef EMULATOR_ENABLED
 
@@ -91,7 +95,7 @@ REAL Calculator::GetAC(bool *correct)
 }
 
 
-REAL Calculator::GetDC(bool *correct)
+REAL Calculator::GetRelativeDC(bool *correct)
 {
 #ifdef EMULATOR_ENABLED
 

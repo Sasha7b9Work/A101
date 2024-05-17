@@ -98,7 +98,7 @@ Measure Ampermeter::GetDC()
 {
     bool correct = false;
 
-    REAL dc = Calculator::GetDC(&correct);
+    REAL dc = Calculator::GetRelativeDC(&correct);
 
     REAL zero = Set::ZeroDC::Level();
 
@@ -110,7 +110,7 @@ Measure Ampermeter::GetAC()
 {
     bool correct = false;
 
-    REAL ac = Calculator::GetAC(&correct) - Set::ZeroAC::Level();
+    REAL ac = Calculator::GetRelativeAC(&correct) - Set::ZeroAC::Level();
 
     return Measure(ac, OutOfRange(), correct);
 }
@@ -205,8 +205,8 @@ bool Ampermeter::OutOfRange()
     bool correct_dc = false;
     bool correct_ac = false;
 
-    REAL dc = Calculator::GetDC(&correct_dc);
-    REAL ac = Calculator::GetAC(&correct_ac);
+    REAL dc = Calculator::GetRelativeDC(&correct_dc);
+    REAL ac = Calculator::GetRelativeAC(&correct_ac);
 
     REAL value = std::fabs(dc) + ac;
 
