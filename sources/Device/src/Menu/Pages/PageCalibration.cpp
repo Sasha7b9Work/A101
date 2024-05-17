@@ -353,9 +353,9 @@ namespace PageCalibration
                     2.0,
                     20.0,
                     200.0,
-                    2.0,
-                    20.0,
-                    50.0
+                    2000.0,
+                    20000.0,
+                    50000.0
                 };
 
                 wndGiven.Draw({ values[range], false, true }, range);
