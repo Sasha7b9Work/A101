@@ -71,12 +71,14 @@ void Range::Set(int _range)
 void InputRelays::DisableZero()
 {
     zero_enabled = false;
+    Range::Load();
 }
 
 
 void InputRelays::EnableZero()
 {
     zero_enabled = true;
+    Range::Load();
 }
 
 
