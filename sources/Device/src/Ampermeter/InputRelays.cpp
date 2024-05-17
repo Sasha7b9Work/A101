@@ -26,7 +26,7 @@ REAL Range::Max(int range)
 }
 
 
-void Range::Set(int _range)
+void Range::Set(int _range, bool reset_measures)
 {
     PageCalibration::OnEventChangeRange();
 
@@ -63,20 +63,27 @@ void Range::Set(int _range)
         HAL_PIO::Write(PIN_US8, states[current][6] == 1);
     }
 
-    PageMain::OnEventChangeRange();
-    Ampermeter::OnEventChangeRange();
+    if (reset_measures)
+    {
+        PageMain::OnEventChangeRange();
+        Ampermeter::OnEventChangeRange();
+    }
 }
 
 
-void InputRelays::DisableZero()
+void InputRelays::DisableZero(bool reset_measures)
 {
     zero_enabled = false;
+
+    Range::Load(reset_measures);
 }
 
 
-void InputRelays::EnableZero()
+void InputRelays::EnableZero(bool reset_measures)
 {
     zero_enabled = true;
+
+    Range::Load(reset_measures);
 }
 
 

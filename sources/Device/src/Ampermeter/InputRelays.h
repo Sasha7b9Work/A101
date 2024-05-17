@@ -4,12 +4,12 @@
 
 struct Range
 {
-    static void Set(int);
+    static void Set(int, bool reset_measures = true);
 
     // Текущее значение
     static int Current();
 
-    static void Load() { Set(current); }
+    static void Load(bool reset_measures) { Set(current, reset_measures); }
 
     static REAL Max(int);
 
@@ -23,10 +23,10 @@ private:
 namespace InputRelays
 {
     // Включить режим "нуль" (измерения невозможны)
-    void EnableZero();
+    void EnableZero(bool reset_measures);
 
     // Выключить режим "нуль" (измерения невозможны)
-    void DisableZero();
+    void DisableZero(bool reset_measures);
 
     bool ZeroIsEanbled();
 }

@@ -125,7 +125,7 @@ REAL Calculator::GetDC(bool *correct)
 }
 
 
-REAL Calculator::CastRealToDisplay(REAL value, int range)
+REAL Calculator::CastRealToDisplay(REAL value, int /*range*/)
 {
 //    if (range > 2)
 //    {

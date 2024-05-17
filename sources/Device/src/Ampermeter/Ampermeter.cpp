@@ -248,13 +248,13 @@ void Ampermeter::AdjustmentZero()
     CalibrationSettings::Zero &zero = cal.zero[Range::Current()];
     const int const_val = zero.GetConst();
 
-    InputRelays::EnableZero();
+    InputRelays::EnableZero(false);
 
     zero.SetConst(0);
     zero.SetVar(0);
     zero.SetVar(AD7691::GetAverageValue());
 
-    InputRelays::DisableZero();
+    InputRelays::DisableZero(false);
 
     zero.SetConst(const_val);
 }

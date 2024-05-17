@@ -62,13 +62,13 @@ bool Calibrator::CalibratorZero::Run()
 
     const int const_val = zero.GetFull();
 
-    InputRelays::EnableZero();
+    InputRelays::EnableZero(true);
     zero.SetVar(0);
     zero.SetConst(0);
     int average = AD7691::GetAverageValue();
     LOG_WRITE("average = %d", average);
     zero.SetVar(average);
-    InputRelays::DisableZero();
+    InputRelays::DisableZero(true);
 
     zero.SetConst(const_val);
 
