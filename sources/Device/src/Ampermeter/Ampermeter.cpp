@@ -98,7 +98,7 @@ Measure Ampermeter::GetDC()
 {
     bool correct = false;
 
-    REAL dc = Calculator::GetRelativeDC(&correct);
+    REAL dc = Calculator::GetAbsDC(&correct);
 
     REAL zero = Set::ZeroDC::LevelAbs();
 
@@ -115,7 +115,7 @@ Measure Ampermeter::GetAC()
 {
     bool correct = false;
 
-    REAL ac = Calculator::GetRelativeAC(&correct);
+    REAL ac = Calculator::GetAbsAC(&correct);
 
     REAL zero = Set::ZeroAC::LevelAbs();
 

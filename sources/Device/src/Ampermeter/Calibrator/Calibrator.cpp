@@ -116,7 +116,7 @@ bool Calibrator::CalibratorZero::Run()
     bool correct_ac = false;
 
     LOG_WRITE("z - 1 = %d, dc = %f", z - 1, (double)CalculateDC(z - 1));
-    LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetRelativeAC(&correct_ac), (double)dc);
+    LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAbsAC(&correct_ac), (double)dc);
     LOG_WRITE("z + 1 = %d, dc = %f", z + 1, (double)CalculateDC(z + 1));
 #endif
 
@@ -146,7 +146,7 @@ REAL Calibrator::CalibratorZero::CalculateDC(int zero)
 
     bool correct_dc = false;
 
-    return Calculator::GetRelativeDC(&correct_dc);
+    return Calculator::GetAbsDC(&correct_dc);
 }
 
 
@@ -159,18 +159,13 @@ bool Calibrator::CalibrateGain(int range)
 
     bool correct_dc = false;
 
-    REAL dc = std::fabs(Calculator::GetRelativeDC(&correct_dc));
+    REAL dc = std::fabs(Calculator::GetAbsDC(&correct_dc));
 
     REAL k = Range::Max(range) / dc;
 
-    if (range < 3)
-    {
-        k *= 1e3;
-    }
-
     cal.gain[range].Set(k);
 
-    LOG_WRITE("range = %d, dc = %f, k = %f", range, (double)dc, (double)k);
+    LOG_WRITE("range = %d, dc = %e, k = %e", range, (double)dc, (double)k);
 
     return true;
 }

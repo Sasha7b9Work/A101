@@ -17,6 +17,10 @@ namespace Calculator
 {
     static Averager<REAL, 1> dc;
     static Averager<REAL, 1> ac;
+
+    // Значения, приведённые к пределу - mA для 2,20,200мА, амперы для 2A, 20A, 50A
+    REAL GetRelativeDC(bool *correct);
+    REAL GetRelativeAC(bool *correct);
 }
 
 
@@ -126,17 +130,6 @@ REAL Calculator::GetRelativeDC(bool *correct)
     return dc.NumElements() ? dc.Get() : 0.0;
 
 #endif
-}
-
-
-REAL Calculator::CastRealToDisplay(REAL value, int range)
-{
-    if (range > 2)
-    {
-        return value / 1e3;
-    }
-
-    return value;
 }
 
 
