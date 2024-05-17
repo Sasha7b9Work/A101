@@ -43,6 +43,7 @@ namespace Ampermeter
 
     namespace Set
     {
+        // Режим "Ноль DC"
         namespace ZeroDC
         {
             void Enable();
@@ -52,6 +53,7 @@ namespace Ampermeter
             REAL Level();
         }
 
+        // Режим "Ноль AC"
         namespace ZeroAC
         {
             void Enable();
