@@ -8,6 +8,7 @@
 #include "Ampermeter/Ampermeter.h"
 #include "Display/Display.h"
 #include "Settings/Settings.h"
+#include "Ampermeter/AVP.h"
 
 
 namespace PageMain
@@ -63,37 +64,69 @@ namespace PageMain
     static Button btn2mA("bt0", "01P", []()
         {
             Range::Set(0);
+            AVP::Disable();
         });
 
     static Button btn2maAVP("t11", "01A", []()
         {
-
+            AVP::Enable();
         });
 
     static Button btn20mA("bt1", "02P", []()
         {
             Range::Set(1);
+            AVP::Disable();
+        });
+
+    static Button btn20maAVP("t12", "02A", []()
+        {
+            AVP::Enable();
         });
 
     static Button btn200mA("bt2", "03P", []()
         {
             Range::Set(2);
+            AVP::Disable();
+        });
+
+    static Button btn200maAVP("t13", "03A", []()
+        {
+            AVP::Enable();
         });
 
     static Button btn2A("bt3", "04P", []()
         {
             Range::Set(3);
+            AVP::Disable();
+        });
+
+    static Button btn2aAVP("t14", "04A", []()
+        {
+            AVP::Enable();
         });
 
     static Button btn20A("bt4", "05P", []()
         {
             Range::Set(4);
+            AVP::Disable();
+        });
+
+    static Button btn20aAVP("t15", "05A", []()
+        {
+            AVP::Enable();
         });
 
     static Button btn50A("bt5", "06P", []()
         {
             Range::Set(5);
+            AVP::Disable();
         });
+
+    static Button btn50aAVP("t16", "06A", []()
+        {
+            AVP::Enable();
+        });
+
 
     static Button btnAC_DC("b0", "0AD", []()            // Переход в AC+DC
         {
@@ -175,6 +208,12 @@ namespace PageMain
         &btnMIN,
         &btnPEAK,
         &btnSettings,
+        &btn2maAVP,
+        &btn20maAVP,
+        &btn200maAVP,
+        &btn2aAVP,
+        &btn20aAVP,
+        &btn50aAVP,
         nullptr
     };
 
