@@ -65,6 +65,11 @@ namespace PageMain
             Range::Set(0);
         });
 
+    static Button btn2maAVP("t11", "01A", []()
+        {
+
+        });
+
     static Button btn20mA("bt1", "02P", []()
         {
             Range::Set(1);

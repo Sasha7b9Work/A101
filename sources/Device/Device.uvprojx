@@ -926,6 +926,16 @@
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\Ampermeter_settings.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AVP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\AVP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AVP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\AVP.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2267,6 +2277,16 @@
               <FileName>Ampermeter_settings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\Ampermeter_settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AVP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\AVP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AVP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\AVP.h</FilePath>
             </File>
           </Files>
         </Group>

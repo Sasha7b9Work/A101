@@ -16,6 +16,7 @@
 #include "Ampermeter/FIR.h"
 #include "stm_includes.h"
 #include "Menu/Pages/Pages.h"
+#include "Ampermeter/AVP.h"
 #include <cmath>
 
 
@@ -91,6 +92,8 @@ void Ampermeter::Update()
     {
         DiagramInput::SetData();
     }
+
+    AVP::Update();
 }
 
 
