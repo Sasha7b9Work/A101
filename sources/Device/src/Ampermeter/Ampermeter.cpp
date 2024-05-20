@@ -16,12 +16,31 @@
 #include "Ampermeter/FIR.h"
 #include "stm_includes.h"
 #include "Menu/Pages/Pages.h"
-#include "Ampermeter/AVP.h"
 #include <cmath>
 
 
 namespace Ampermeter
 {
+    namespace AVP
+    {
+        static bool is_enabled = false;
+
+        bool IsEnabled()
+        {
+            return is_enabled;
+        }
+
+        void Enable()
+        {
+            is_enabled = true;
+        }
+
+        void Disable()
+        {
+            is_enabled = false;
+        }
+    }
+
     // Медианный фильтр по трём
     struct MiddlerOf3
     {

@@ -42,6 +42,16 @@ namespace Ampermeter
     Measure GetMin();
     Measure GetMax();
 
+    // Автоматический выбор предела
+    namespace AVP
+    {
+        void Enable();
+
+        void Disable();
+
+        bool IsEnabled();
+    }
+
     namespace Set
     {
         // Режим "Ноль DC"

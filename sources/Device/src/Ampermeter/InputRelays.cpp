@@ -6,7 +6,6 @@
 #include "Settings/Settings.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/Ampermeter.h"
-#include "Ampermeter/AVP.h"
 #include "Nextion/Nextion.h"
 #include <cstdio>
 
@@ -72,7 +71,7 @@ void Range::Set(int _range, bool reset_measures)
         Ampermeter::OnEventChangeRange();
     }
 
-    if (AVP::IsEnabled())
+    if (Ampermeter::AVP::IsEnabled())
     {
         for (int i = 0; i < 6; i++)
         {
