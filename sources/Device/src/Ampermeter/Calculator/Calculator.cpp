@@ -55,17 +55,16 @@ SampleRate Calculator::AppendData()
 }
 
 
+#ifdef EMULATOR_ENABLED
+
 namespace Calculator
 {
     static const uint tempo_secs = 2;          // Так часто будем переключать измерения
-}
 
-
-#ifdef EMULATOR_ENABLED
-
-static REAL CastRealToDisplay(REAL value)
-{
-    return Range::Current() > 2 ? (value * 1e-3) : (value);
+    static REAL CastRealToDisplay(REAL value)
+    {
+        return Range::Current() > 2 ? (value * 1e-3) : (value);
+    }
 }
 
 #endif
