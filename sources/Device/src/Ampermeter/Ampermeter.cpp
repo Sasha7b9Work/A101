@@ -287,7 +287,7 @@ bool Ampermeter::VerySmall()
 
     if (!correct_ac || !correct_dc)
     {
-        return true;
+        return false;
     }
 
     REAL value = std::fabs(dc) + ac;
