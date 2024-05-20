@@ -256,7 +256,7 @@ bool Ampermeter::OutOfRange()
 
 bool Ampermeter::VerySmall()
 {
-    static const REAL mins[6] = { 0.0, 2e0, 2e1, 2e2, 2e3, 5e3 };
+    static const REAL mins[6] = { 0.0, 2e0, 2e1, 2e2, 2e3, 20e3 };
 
     REAL min = mins[Range::Current()];
 

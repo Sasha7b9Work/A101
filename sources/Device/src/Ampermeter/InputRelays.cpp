@@ -6,6 +6,9 @@
 #include "Settings/Settings.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/Ampermeter.h"
+#include "Ampermeter/AVP.h"
+#include "Nextion/Nextion.h"
+#include <cstdio>
 
 
 int Range::current = 3;
@@ -67,6 +70,17 @@ void Range::Set(int _range, bool reset_measures)
     {
         PageMain::OnEventChangeRange();
         Ampermeter::OnEventChangeRange();
+    }
+
+    if (AVP::IsEnabled())
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            char buffer[32] = "\0";
+
+            std::sprintf(buffer, "t1%d", i + 1);
+            Nextion::Text::SetVisible(buffer,_range == i);
+        }
     }
 }
 
