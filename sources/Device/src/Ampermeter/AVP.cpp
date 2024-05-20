@@ -3,19 +3,25 @@
 #include "Ampermeter/AVP.h"
 
 
+namespace AVP
+{
+    static bool is_enabled = false;
+}
+
+
 void AVP::Enable()
 {
-
+    is_enabled = true;
 }
 
 
 void AVP::Disable()
 {
-
+    is_enabled = false;
 }
 
 
-void AVP::Update()
+bool AVP::IsEnabled()
 {
-
+    return is_enabled;
 }

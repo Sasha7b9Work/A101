@@ -61,12 +61,22 @@ namespace Calculator
 }
 
 
+#ifdef EMULATOR_ENABLED
+
+static REAL CastRealToDisplay(REAL value)
+{
+    return Range::Current() > 2 ? (value * 1e-3) : (value);
+}
+
+#endif
+
+
 REAL Calculator::GetRelativeAC(bool *correct)
 {
 #ifdef EMULATOR_ENABLED
 
     static REAL value = 0.001;
-    static REAL k = 1.0;
+    static REAL k = 1.5;
     static uint next_secs = 0;
 
     if (Timer::GetSecs() >= next_secs)
@@ -83,7 +93,7 @@ REAL Calculator::GetRelativeAC(bool *correct)
 
     *correct = true;
 
-    return CastRealToDisplay(value, Range::Current());
+    return CastRealToDisplay(value);
 
 #else
 
@@ -101,8 +111,8 @@ REAL Calculator::GetRelativeDC(bool *correct)
 
     *correct = true;
 
-    static REAL value = 2.1e4;
-    static REAL k = 1.0;
+    static REAL value = 0.001;
+    static REAL k = 1.5;
     static uint next_secs = 0;
 
     if (Timer::GetSecs() >= next_secs)
@@ -117,7 +127,7 @@ REAL Calculator::GetRelativeDC(bool *correct)
         }
     }
 
-    return CastRealToDisplay(value, Range::Current());
+    return CastRealToDisplay(value);
 
 #else
 

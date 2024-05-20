@@ -6,4 +6,4 @@
 
 #define REAL double
 
-//#define EMULATOR_ENABLED
+#define EMULATOR_ENABLED

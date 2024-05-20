@@ -64,6 +64,9 @@ namespace Ampermeter
     // Считанные значения выходят за пределы диапазона
     static bool OutOfRange();
 
+    // Измеряемая величина слишком маленькая - нужно перейти на предыдущий диапазон
+    static bool VerySmall();
+
     // Подстрока нуля
     static void AdjustmentZero();
 }
@@ -93,7 +96,22 @@ void Ampermeter::Update()
         DiagramInput::SetData();
     }
 
-    AVP::Update();
+    if (AVP::IsEnabled())
+    {
+        if (OutOfRange())
+        {
+            Range::Set(5);
+        }
+        else if (VerySmall())
+        {
+            int range = Range::Current();
+
+            if (range > 0)
+            {
+                Range::Set(range - 1);
+            }
+        }
+    }
 }
 
 
@@ -233,6 +251,29 @@ bool Ampermeter::OutOfRange()
     }
 
     return false;
+}
+
+
+bool Ampermeter::VerySmall()
+{
+    static const REAL mins[6] = { 0.0, 2e0, 2e1, 2e2, 2e3, 5e3 };
+
+    REAL min = mins[Range::Current()];
+
+    bool correct_dc = false;
+    bool correct_ac = false;
+
+    REAL dc = Calculator::GetAbsDC(&correct_dc);
+    REAL ac = Calculator::GetAbsAC(&correct_ac);
+
+    if (!correct_ac || !correct_dc)
+    {
+        return true;
+    }
+
+    REAL value = std::fabs(dc) + ac;
+
+    return value <= min;
 }
 
 

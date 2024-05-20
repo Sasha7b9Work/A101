@@ -8,5 +8,5 @@ namespace AVP
 
     void Disable();
 
-    void Update();
+    bool IsEnabled();
 }
