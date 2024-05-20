@@ -59,7 +59,7 @@ SampleRate Calculator::AppendData()
 
 namespace Calculator
 {
-    static const uint tempo_secs = 2;          // Так часто будем переключать измерения
+    static const uint tempo_secs = 2;   // Так часто будем переключать измерения
 
     static REAL CastRealToDisplay(REAL value)
     {
