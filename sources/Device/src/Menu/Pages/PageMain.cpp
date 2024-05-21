@@ -72,6 +72,7 @@ namespace PageMain
     static Button btn2maAVP("t11", "01A", []()
         {
             Ampermeter::AVP::Enable();
+            Nextion::SetVisible("t11", true);
         });
 
     static Button btn20mA("bt1", "02P", []()
@@ -116,6 +117,7 @@ namespace PageMain
     static Button btn20aAVP("t15", "05A", []()
         {
             Ampermeter::AVP::Enable();
+            Nextion::SetVisible("t15", true);
         });
 
     static Button btn50A("bt5", "06P", []()
