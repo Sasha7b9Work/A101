@@ -16,7 +16,9 @@
 #include "Ampermeter/FIR.h"
 #include "stm_includes.h"
 #include "Menu/Pages/Pages.h"
+#include "Nextion/Nextion.h"
 #include <cmath>
+#include <cstdio>
 
 
 namespace Ampermeter
@@ -32,11 +34,21 @@ namespace Ampermeter
 
         void Enable()
         {
+            Set::ZeroAC::Disable();
+            Set::ZeroDC::Disable();
+
             is_enabled = true;
         }
 
         void Disable()
         {
+            for (int i = 0; i < 6; i++)
+            {
+                char buffer[32] = "\0";
+                std::sprintf(buffer, "t1%d", i + 1);
+                Nextion::Text::SetVisible(buffer, false);
+            }
+
             is_enabled = false;
         }
     }
@@ -117,15 +129,27 @@ void Ampermeter::Update()
 
     if (AVP::IsEnabled())
     {
+        int range = Range::Current();
+
+        int min = 4;
+        int max = 5;
+
+        if (range < 4)
+        {
+            min = 0;
+            max = 3;
+        }
+
         if (OutOfRange())
         {
-            Range::Set(5);
+            if (range < max)
+            {
+                Range::Set(max);
+            }
         }
         else if (VerySmall())
         {
-            int range = Range::Current();
-
-            if (range > 0)
+            if (range > min)
             {
                 Range::Set(range - 1);
             }

@@ -65,8 +65,8 @@ namespace PageMain
 
     static Button btn2mA("bt0", "01P", []()
         {
-            Range::Set(0);
             Ampermeter::AVP::Disable();
+            Range::Set(0);
         });
 
     static Button btn2maAVP("t11", "01A", []()
@@ -76,8 +76,8 @@ namespace PageMain
 
     static Button btn20mA("bt1", "02P", []()
         {
-            Range::Set(1);
             Ampermeter::AVP::Disable();
+            Range::Set(1);
         });
 
     static Button btn20maAVP("t12", "02A", []()
@@ -87,8 +87,8 @@ namespace PageMain
 
     static Button btn200mA("bt2", "03P", []()
         {
-            Range::Set(2);
             Ampermeter::AVP::Disable();
+            Range::Set(2);
         });
 
     static Button btn200maAVP("t13", "03A", []()
@@ -98,8 +98,8 @@ namespace PageMain
 
     static Button btn2A("bt3", "04P", []()
         {
-            Range::Set(3);
             Ampermeter::AVP::Disable();
+            Range::Set(3);
         });
 
     static Button btn2aAVP("t14", "04A", []()
@@ -109,8 +109,8 @@ namespace PageMain
 
     static Button btn20A("bt4", "05P", []()
         {
-            Range::Set(4);
             Ampermeter::AVP::Disable();
+            Range::Set(4);
         });
 
     static Button btn20aAVP("t15", "05A", []()
@@ -120,8 +120,8 @@ namespace PageMain
 
     static Button btn50A("bt5", "06P", []()
         {
-            Range::Set(5);
             Ampermeter::AVP::Disable();
+            Range::Set(5);
         });
 
     static Button btn50aAVP("t16", "06A", []()

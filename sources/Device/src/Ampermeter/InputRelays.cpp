@@ -75,10 +75,13 @@ void Range::Set(int _range, bool reset_measures)
     {
         for (int i = 0; i < 6; i++)
         {
-            char buffer[32] = "\0";
+            char name[32] = "\0";
 
-            std::sprintf(buffer, "t1%d", i + 1);
-            Nextion::Text::SetVisible(buffer,_range == i);
+            std::sprintf(name, "t1%d", i + 1);
+            Nextion::Text::SetVisible(name, _range == i);
+
+//            std::sprintf(name, "bt%d", i);
+//            Nextion::Button::SetValue(name, _range == i ? 1 : 0);
         }
     }
 

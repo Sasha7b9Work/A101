@@ -24,6 +24,8 @@ namespace Ampermeter
 
 void Ampermeter::Set::ZeroDC::Enable()
 {
+    AVP::Disable();
+
     value_abs = 0.0;
 
     Measure measure = Ampermeter::GetDC();
@@ -55,6 +57,8 @@ REAL Ampermeter::Set::ZeroDC::LevelAbs()
 
 void Ampermeter::Set::ZeroAC::Enable()
 {
+    AVP::Disable();
+
     value_abs = 0.0;
 
     Measure measure = Ampermeter::GetAC();
