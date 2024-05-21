@@ -19,8 +19,6 @@ namespace SCPI
         const Direction::E dir;
     };
 
-    void AppendNewData(Direction::E, char *, uint size);
-
     void CallbackOnReceive(Direction::E, uint8);
 
     void Update();

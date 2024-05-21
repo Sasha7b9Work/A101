@@ -48,15 +48,6 @@ void SCPI::InBuffer::Update()
 }
 
 
-void SCPI::AppendNewData(Direction::E dir, char *data, uint size)
-{
-    for (uint i = 0; i < size; i++)
-    {
-        CallbackOnReceive(dir, (uint8)*data++);
-    }
-}
-
-
 void SCPI::CallbackOnReceive(Direction::E dir, uint8 byte)
 {
     if (dir & Direction::USB)
