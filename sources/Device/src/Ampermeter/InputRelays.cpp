@@ -81,6 +81,9 @@ void Range::Set(int _range, bool reset_measures)
             Nextion::Text::SetVisible(buffer,_range == i);
         }
     }
+
+    Ampermeter::Set::ZeroAC::Disable();
+    Ampermeter::Set::ZeroDC::Disable();
 }
 
 

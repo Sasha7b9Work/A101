@@ -33,6 +33,9 @@ namespace PageMain
     void Init()
     {
         ResetAllMeasures();
+
+        Range::Set(2);
+        Range::Set(3);
     }
 
     void OnEventChangeRange()
