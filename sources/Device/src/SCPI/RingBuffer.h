@@ -12,9 +12,10 @@ public:
     void Append(uint8 byte);
     void GetData(SCPI::InBuffer &);
     int GetElementCount() const;
+    uint8 Pop();
 private:
     uint8 buffer[SIZE];
     int index_in;
     int index_out;
-    bool is_busy;
+    int num_elements;
 };

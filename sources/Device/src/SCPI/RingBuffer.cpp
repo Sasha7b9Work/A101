@@ -7,18 +7,14 @@ void RingBuffer::Clear()
 {
     index_in = 0;
     index_out = 0;
-    is_busy = false;
+    num_elements = 0;
 }
 
 void RingBuffer::Append(uint8 byte)
 {
-    is_busy = true;
-
     if (GetElementCount() == SIZE)
     {
         LOG_WRITE_TRACE("!!! ERRROR !!! Very small buffer");
-
-        is_busy = false;
 
         return;
     }
@@ -31,7 +27,7 @@ void RingBuffer::Append(uint8 byte)
         index_in = 0;
     }
 
-    is_busy = false;
+    num_elements++;
 }
 
 
@@ -48,34 +44,30 @@ int RingBuffer::GetElementCount() const
 }
 
 
-void RingBuffer::GetData(SCPI::InBuffer &out)
+uint8 RingBuffer::Pop()
 {
-    if (is_busy)
-    {
-        return;
-    }
-
     if (GetElementCount() == 0)
     {
-        return;
+        return 0;
     }
 
-    if (is_busy)
+    num_elements--;
+
+    uint8 result = buffer[index_out++];
+
+    if (index_out == SIZE)
     {
-        return;
+        index_out = 0;
     }
 
-    int index_new = index_in;
+    return result;
+}
 
-    if (index_new >= index_out)
+
+void RingBuffer::GetData(SCPI::InBuffer &out)
+{
+    while (GetElementCount() != 0)
     {
-        out.Append(buffer + index_out, index_new - index_out);
+        out.Append(Pop());
     }
-    else
-    {
-        out.Append(buffer + index_out, SIZE - index_out);
-        out.Append(buffer, index_new);
-    }
-
-    index_out = index_new;
 }
