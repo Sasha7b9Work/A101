@@ -16,4 +16,5 @@ private:
     uint8 buffer[SIZE];
     int index_in;
     int index_out;
+    bool is_busy;
 };

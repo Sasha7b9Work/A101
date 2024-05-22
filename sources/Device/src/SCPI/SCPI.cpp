@@ -64,30 +64,37 @@ void SCPI::CallbackOnReceive(Direction::E dir, uint8 byte)
 
 SCPI::Command *SCPI::InBuffer::ExtractCommand()
 {
-    while (Size() && (buffer[0] == 0x0a || buffer[0] == 0x0d))
+    while (Size() && (buffer[0] == 0x0d || buffer[0] == 0x0a))
     {
         RemoveFirst(1);
     }
 
-    Buffer<1024> symbols;
-
     for (int i = 0; i < Size(); i++)
     {
-        if (buffer[i] == 0x0a || buffer[i] == 0x0d)
+        if (buffer[i] == 0x0d || buffer[i] == 0x0a)
         {
-            RemoveFirst(symbols.Size());
+            Buffer<1024> symbols;
 
-            while (Size() && (buffer[0] == 0x0a || buffer[0] == 0x0d))
+            while (Size())
             {
+                uint8 symbol = buffer[0];
+
                 RemoveFirst(1);
+
+                if (symbol == 0x0a || symbol == 0x0d)
+                {
+                    symbols.Append('\0');
+
+                    return symbols.Size() > 1 ? ParseCommand(symbols) : new Command();
+                }
+                else
+                {
+                    symbols.Append(symbol);
+                }
             }
 
-            symbols.Append('\0');
-
-            return ParseCommand(symbols);
+            break;
         }
-
-        symbols.Append(buffer[i]);
     }
 
     return new Command();
