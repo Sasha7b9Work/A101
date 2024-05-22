@@ -69,31 +69,21 @@ SCPI::Command *SCPI::InBuffer::ExtractCommand()
         RemoveFirst(1);
     }
 
-    for (int i = 0; i < Size(); i++)
+    if(Size())
     {
-        if (buffer[i] == 0x0d || buffer[i] == 0x0a)
+        for (int i = 0; i < Size(); i++)
         {
-            Buffer<1024> symbols;
-
-            while (Size())
+            if (buffer[i] == 0x0d || buffer[i] == 0x0a)
             {
-                uint8 symbol = buffer[0];
-
-                RemoveFirst(1);
-
-                if (symbol == 0x0a || symbol == 0x0d)
-                {
-                    symbols.Append('\0');
-
-                    return symbols.Size() > 1 ? ParseCommand(symbols) : new Command();
-                }
-                else
-                {
-                    symbols.Append(symbol);
-                }
+                char symbols[64];
+    
+                std::memcpy(symbols, buffer, (uint)i);
+                symbols[i] = '\0';
+    
+                RemoveFirst(i);
+    
+                return ParseCommand(symbols);   
             }
-
-            break;
         }
     }
 
@@ -101,9 +91,9 @@ SCPI::Command *SCPI::InBuffer::ExtractCommand()
 }
 
 
-SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<1024> &symbols)
+SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
 {
-    char *data = (char *)symbols.Data();
+    char *data = (char *)symbols;
 
     if (std::strcmp(data, "*IDN?") == 0)
     {
@@ -161,14 +151,12 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(Buffer<1024> &symbols)
         }
     }
 
-    String<1024> message((char *)symbols.Data());
-
-    SCPI::Error(dir, message.c_str());
+    SCPI::Error(dir, symbols);
 
     return new Command();
 }
 
-String<> SCPI::InBuffer::FirstWord(Buffer<1024> &symbols)
+String<> SCPI::InBuffer::FirstWord(pchar symbols)
 {
     String<> result;
 
@@ -176,17 +164,19 @@ String<> SCPI::InBuffer::FirstWord(Buffer<1024> &symbols)
 
     // Пропускаем первые пробелы
 
-    while (pos < symbols.Size() && symbols[pos] == ' ')
+    int length = (int)std::strlen(symbols);
+
+    while (pos < length && symbols[pos] == ' ')
     {
         pos++;
     }
 
-    if (pos == symbols.Size())
+    if (pos == length)
     {
         return result;
     }
 
-    while (pos < symbols.Size() && symbols[pos] != ' ')
+    while (pos < length && symbols[pos] != ' ')
     {
         result.Append((char)symbols[pos]);
         pos++;

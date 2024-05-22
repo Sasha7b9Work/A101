@@ -51,8 +51,8 @@ public:
         }
         else
         {
-            std::memmove(buffer, buffer + num_elements, (uint)(size - num_elements));
             size -= num_elements;
+            std::memmove(buffer, buffer + num_elements, (uint)(size));
         }
     }
 

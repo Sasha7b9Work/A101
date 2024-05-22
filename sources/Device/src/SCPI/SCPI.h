@@ -13,8 +13,8 @@ namespace SCPI
         InBuffer(Direction::E _dir) : dir(_dir) {}
         void Update();
     private:
-        Command *ParseCommand(Buffer<1024> &);
-        String<> FirstWord(Buffer<1024> &);
+        Command *ParseCommand(pchar);
+        String<> FirstWord(pchar);
         Command *ExtractCommand();
         const Direction::E dir;
     };
