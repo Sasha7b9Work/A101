@@ -130,3 +130,10 @@ class Buffer1024 : public Buffer<1024>
 public:
     Buffer1024() : Buffer<1024>() { }
 };
+
+
+class Buffer2048 : public Buffer<2048>
+{
+public:
+    Buffer2048() : Buffer<2048>() { }
+};

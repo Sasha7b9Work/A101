@@ -7,7 +7,7 @@ class RingBuffer
 {
 public:
     RingBuffer() { Clear(); }
-    static const int SIZE = 1024;
+    static const int SIZE = 2048;
     void Clear();
     void Append(uint8 byte);
     void GetData(SCPI::InBuffer &);
