@@ -69,21 +69,18 @@ SCPI::Command *SCPI::InBuffer::ExtractCommand()
         RemoveFirst(1);
     }
 
-    if(Size())
+    for (int i = 0; i < Size(); i++)
     {
-        for (int i = 0; i < Size(); i++)
+        if (buffer[i] == 0x0d || buffer[i] == 0x0a)
         {
-            if (buffer[i] == 0x0d || buffer[i] == 0x0a)
-            {
-                char symbols[64];
-    
-                std::memcpy(symbols, buffer, (uint)i);
-                symbols[i] = '\0';
-    
-                RemoveFirst(i);
-    
-                return ParseCommand(symbols);   
-            }
+            char symbols[64];
+
+            std::memcpy(symbols, buffer, (uint)i);
+            symbols[i] = '\0';
+
+            RemoveFirst(i);
+
+            return ParseCommand(symbols);
         }
     }
 
