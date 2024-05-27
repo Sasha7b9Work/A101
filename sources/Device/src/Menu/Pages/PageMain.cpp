@@ -258,26 +258,25 @@ namespace PageMain
     {
         PageMain::self->GetButton(Range::Current())->SetValue(1);
     }
-
-
-    void EnableZero(MeasuresOnDisplay::E meas, bool enable)
-    {
-        if (meas == MeasuresOnDisplay::AC)
-        {
-            btnZeroAC_EN.SetValue(enable ? 1 : 0);
-
-            enable ? btnZeroAC_EN.Press() : btnZeroAC_DIS.Press();
-
-            Nextion::Text::SetVisible("t6", enable);
-        }
-        else if (meas == MeasuresOnDisplay::DC)
-        {
-            btnZeroDC_EN.SetValue(enable ? 1 : 0);
-
-            enable ? btnZeroDC_EN.Press() : btnZeroDC_DIS.Press();
-
-            Nextion::Text::SetVisible("t5", enable);
-        }
-    }
 }
 
+
+void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
+{
+    if (meas == MeasuresOnDisplay::AC)
+    {
+        btnZeroAC_EN.SetValue(enable ? 1 : 0);
+
+        enable ? btnZeroAC_EN.Press() : btnZeroAC_DIS.Press();
+
+        Nextion::Text::SetVisible("t6", enable);
+    }
+    else if (meas == MeasuresOnDisplay::DC)
+    {
+        btnZeroDC_EN.SetValue(enable ? 1 : 0);
+
+        enable ? btnZeroDC_EN.Press() : btnZeroDC_DIS.Press();
+
+        Nextion::Text::SetVisible("t5", enable);
+    }
+}
