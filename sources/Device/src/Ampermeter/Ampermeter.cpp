@@ -34,8 +34,8 @@ namespace Ampermeter
 
         void Enable()
         {
-            Set::ZeroAC::Disable();
-            Set::ZeroDC::Disable();
+            Set::ZeroAC::_Disable();
+            Set::ZeroDC::_Disable();
 
             is_enabled = true;
         }

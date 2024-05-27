@@ -42,7 +42,7 @@ void Ampermeter::Set::ZeroDC::Enable()
 }
 
 
-void Ampermeter::Set::ZeroDC::Disable()
+void Ampermeter::Set::ZeroDC::_Disable()
 {
     value_abs = 0.0;
 
@@ -77,7 +77,7 @@ void Ampermeter::Set::ZeroAC::Enable()
 }
 
 
-void Ampermeter::Set::ZeroAC::Disable()
+void Ampermeter::Set::ZeroAC::_Disable()
 {
     value_abs = 0.0;
 

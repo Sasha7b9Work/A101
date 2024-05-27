@@ -59,7 +59,7 @@ namespace Ampermeter
         {
             void Enable();
 
-            void Disable();
+            void _Disable();
 
             REAL LevelAbs();
         }
@@ -69,7 +69,7 @@ namespace Ampermeter
         {
             void Enable();
 
-            void Disable();
+            void _Disable();
 
             REAL LevelAbs();
         }

@@ -30,6 +30,8 @@ REAL Range::Max(int range)
 
 void Range::Set(int _range, bool reset_measures)
 {
+    const bool disable_zero = current != _range;        // Если не переключаем на другой диапазон - выключать зеро не надо
+
     PageCalibration::OnEventChangeRange();
 
     prev = current;
@@ -85,8 +87,11 @@ void Range::Set(int _range, bool reset_measures)
         }
     }
 
-    Ampermeter::Set::ZeroAC::Disable();
-    Ampermeter::Set::ZeroDC::Disable();
+    if (disable_zero)
+    {
+        Ampermeter::Set::ZeroAC::_Disable();
+        Ampermeter::Set::ZeroDC::_Disable();
+    }
 }
 
 

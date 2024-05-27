@@ -164,7 +164,7 @@ namespace PageMain
 
     static Button btnZeroDC_DIS("bt11", "0DZ0", []()        // Выключение режима "Zero DC"
         {
-            Ampermeter::Set::ZeroDC::Disable();
+            Ampermeter::Set::ZeroDC::_Disable();
         });
 
     static Button btnZeroAC_EN("bt10", "0AZ1", []()         // Включение режима "Zero AC"
@@ -174,7 +174,7 @@ namespace PageMain
 
     static Button btnZeroAC_DIS("bt10", "0AZ0", []()        // Выключение режима "Zero AC"
         {
-            Ampermeter::Set::ZeroAC::Disable();
+            Ampermeter::Set::ZeroAC::_Disable();
         });
 
     static Button btnSignal("bt12", "0S", []()              // Signal
