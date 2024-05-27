@@ -10,6 +10,7 @@
 #include "Display/Display.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
+#include "Utils/String.h"
 #include <cstring>
 #include <cstdlib>
 
@@ -80,9 +81,11 @@ namespace PageCalibration
                 Color fill = PasswordCorrect() ? Color::Background : Color::White;
                 Color back = PasswordCorrect() ? Color::Background : Color::Black;
 
-                Nextion::DrawString(50, 100, 600, 100, 4, fill, back, LabelPassword::buffer);
+                Nextion::DrawString(50, 100, 500, 90, 4, fill, back, LabelPassword::buffer);
 
                 is_changed = false;
+
+                Nextion::DrawString(300, 20, 200, 40, 0, fill, back, String<>("%08X", cal.crc32).c_str());
             }
         }
     }
