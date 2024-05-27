@@ -254,6 +254,12 @@ namespace PageMain
     }
 
 
+    void HightLightCurrentRange()
+    {
+        PageMain::self->GetButton(Range::Current())->SetValue(1);
+    }
+
+
     void EnableZero(MeasuresOnDisplay::E meas, bool enable)
     {
         if (meas == MeasuresOnDisplay::AC)

@@ -20,6 +20,9 @@ namespace PageMain
     void SetRange(MeasuresOnDisplay::E, int);
 
     void EnableZero(MeasuresOnDisplay::E, bool);
+
+    // ѕодсветить выбор текущего диапазона
+    void HightLightCurrentRange();
 }
 
 

@@ -3,6 +3,7 @@
 #include "Ampermeter/Ampermeter.h"
 #include "Nextion/Nextion.h"
 #include "Ampermeter/InputRelays.h"
+#include "Menu/Pages/Pages.h"
 
 
 namespace Ampermeter
@@ -36,6 +37,8 @@ void Ampermeter::Set::ZeroDC::Enable()
     {
         value_abs *= 1e3;
     }
+
+    PageMain::HightLightCurrentRange();
 }
 
 
@@ -69,6 +72,8 @@ void Ampermeter::Set::ZeroAC::Enable()
     {
         value_abs *= 1e3;
     }
+
+    PageMain::HightLightCurrentRange();
 }
 
 
