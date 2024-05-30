@@ -114,7 +114,11 @@ namespace PageCalibration
     // Нажатие кнопки на цифровой клавиатуре
     static void PressDigit(char symbol)
     {
-        if (symbol == '0' && !btn2.IsVisible())
+        if (symbol == ' ')                              // Backspace
+        {
+
+        }
+        else if (symbol == '0' && !btn2.IsVisible())
         {
             cal.Reset();
         }
@@ -205,13 +209,15 @@ namespace PageCalibration
 
     static Button btnSign("b11", "KBS", []() { PressDigit('-'); });
 
+    static Button btnBackspace("b14", "KBBACK", []() { PressDigit(' '); });
+
 //    static Button btnDebugPage("Debug", "", []() {}, 10, 300);
 
     static Button *buttons[] =
     {
         &btnBack, &btnSave, &btnCalib, &btnMin, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
         &btn2A,   &btn20A,  &btn50A,   &btn0,   &btn1,    &btn2,   &btn3,    &btn4,
-        &btn5,    &btn6,    &btn7,     &btn8,   &btn9,    &btnDot, &btnSign, /* &btnDebugPage, */ nullptr
+        &btn5,    &btn6,    &btn7,     &btn8,   &btn9,    &btnDot, &btnSign, &btnBackspace, /* &btnDebugPage, */ nullptr
     };
 
     namespace ButtonsRange
@@ -294,6 +300,7 @@ namespace PageCalibration
         btn9.SetVisible(visible);
         btnSign.SetVisible(visible);
         btnDot.SetVisible(visible);
+        btnBackspace.SetVisible(visible);
     }
 
     void SetVisibleExceptButtons(bool visible)
