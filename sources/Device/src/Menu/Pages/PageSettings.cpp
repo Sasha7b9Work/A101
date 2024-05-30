@@ -14,9 +14,13 @@ namespace PageSettings
         }
     );
 
+    static Button btnLanguageRU("r0", "RBRU", [] {});
+
+    static Button btnLanguageEN("r1", "RBEN", [] {});
+
     static Button *buttons[] =
     {
-        &btnBack, nullptr
+        &btnBack, &btnLanguageRU, &btnLanguageEN, nullptr
     };
 
     static void FuncOnEnter()
