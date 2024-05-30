@@ -8,6 +8,7 @@
 #include "Ampermeter/Ampermeter.h"
 #include "Display/Display.h"
 #include "Settings/Settings.h"
+#include <cstdio>
 
 
 namespace PageMain
@@ -32,10 +33,6 @@ namespace PageMain
 
     void Init()
     {
-        ResetAllMeasures();
-
-        Range::Set(2);
-        Range::Set(3);
     }
 
     void OnEventChangeRange()
@@ -46,6 +43,26 @@ namespace PageMain
     static void FuncOnEnter()
     {
         ResetAllMeasures();
+
+        int range = Range::Current();
+
+        if (range > 0)
+        {
+            Range::Set(range - 1);
+            Range::Set(range);
+        }
+        else
+        {
+            Range::Set(range + 1);
+            Range::Set(range);
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            char name[32];
+            std::sprintf(name, "bt%d", i);
+            Nextion::Button::SetValue(name, Range::Current() == i ? 1 : 0);
+        }
     }
 
     static void FuncDraw()
