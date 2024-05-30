@@ -88,6 +88,15 @@ namespace PageCalibration
                 Nextion::DrawString(300, 20, 150, 40, 0, fill, back, String<>("%08X", cal.crc32).c_str());
             }
         }
+
+        static void Backspace()
+        {
+            if (num_symbols > 0)
+            {
+                buffer[--num_symbols] = '\0';
+                is_changed = true;
+            }
+        }
     }
 
     // Установить видимость для всех элементов кроме кнопок
@@ -116,7 +125,7 @@ namespace PageCalibration
     {
         if (symbol == ' ')                              // Backspace
         {
-
+            LabelPassword::Backspace();
         }
         else if (symbol == '0' && !btn2.IsVisible())
         {
