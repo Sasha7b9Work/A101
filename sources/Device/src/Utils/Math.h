@@ -28,4 +28,6 @@ namespace Math
         if (value < min)        { min = value; }
         if (value > max)        { max = value; }
     }
+
+    uint CalculateCRC32(const void *buffer, int size);
 }

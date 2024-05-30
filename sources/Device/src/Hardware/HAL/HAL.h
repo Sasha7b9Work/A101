@@ -17,14 +17,6 @@ namespace HAL
 }
 
 
-namespace HAL_CRC32
-{
-    void Init();
-
-    uint Calculate(const void *data, uint num_bytes);
-}
-
-
 namespace HAL_EEPROM
 {
     void Save(CalibrationSettings *);

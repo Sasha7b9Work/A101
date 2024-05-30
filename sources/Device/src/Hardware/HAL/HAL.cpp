@@ -36,8 +36,6 @@ void HAL::Init()
 
     HAL_TIM3::Init();
 
-    HAL_CRC32::Init();
-
     Timer::Init();
 }
 

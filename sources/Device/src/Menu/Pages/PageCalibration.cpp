@@ -85,7 +85,7 @@ namespace PageCalibration
 
                 is_changed = false;
 
-                Nextion::DrawString(300, 20, 200, 40, 0, fill, back, String<>("%08X", cal.crc32).c_str());
+                Nextion::DrawString(300, 20, 150, 40, 0, fill, back, String<>("%08X", cal.crc32).c_str());
             }
         }
     }

@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Settings/CalibrationSettings.h"
 #include "Hardware/HAL/HAL.h"
+#include "Utils/Math.h"
 #include <cstring>
 
 
@@ -66,7 +67,7 @@ void CalibrationSettings::Reset()
 
 uint CalibrationSettings::CalculateCRC32() const
 {
-    return HAL_CRC32::Calculate(PointerToFirstData(), SizeData());
+    return Math::CalculateCRC32(PointerToFirstData(), (int)SizeData());
 }
 
 

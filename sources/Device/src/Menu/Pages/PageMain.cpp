@@ -269,7 +269,7 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 
         enable ? btnZeroAC_EN.Press() : btnZeroAC_DIS.Press();
 
-        Nextion::Text::SetVisible("t6", enable);
+        Nextion::Text::SetVisible("tzAC", enable);
     }
     else if (meas == MeasuresOnDisplay::DC)
     {
@@ -277,6 +277,6 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 
         enable ? btnZeroDC_EN.Press() : btnZeroDC_DIS.Press();
 
-        Nextion::Text::SetVisible("t5", enable);
+        Nextion::Text::SetVisible("tzDC", enable);
     }
 }

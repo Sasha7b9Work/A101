@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
+#include "Utils/Math.h"
 #include <cstring>
 
 
@@ -94,5 +95,5 @@ void Settings::Load()
 
 uint Settings::CalculateCRC32() const
 {
-    return HAL_CRC32::Calculate(PointerToFirstData(), SizeData());
+    return Math::CalculateCRC32(PointerToFirstData(), (int)SizeData());
 }
