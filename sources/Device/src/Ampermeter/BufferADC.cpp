@@ -16,12 +16,10 @@ namespace BufferADC
 
     static ValueADC   min;
     static ValueADC   max;
-
-    static int ave;
 }
 
 
-void BufferADC::Push(ValueADC word)
+void BufferADC::_Push(ValueADC word)
 {
     if (pointer < SIZE)
     {
@@ -73,7 +71,7 @@ ValueADC BufferADC::At(int i)
 }
 
 
-void BufferADC::CalculateLimits()
+void BufferADC::CalculateLimits(int ave)
 {
     int64 sum = 0;
 
@@ -92,9 +90,11 @@ void BufferADC::CalculateLimits()
         if (value > max) { max = value; }
     }
 
-    ave = (int)(sum / SIZE);
+    int ave_zero = (int)(sum / SIZE);
 
-    Nextion::DrawString(300, 20, 150, 40, 0, Color::White, Color::Black, String<>("%d", ave).c_str());
+    Nextion::DrawString(250, 20, 300, 40, 0, Color::White, Color::Background, String<>("%d   %d", ave_zero, ave).c_str());
+
+//    Nextion::DrawString(250, 50, 300, 40, 0, Color::White, Color::Background, String<>("%d", ave_zero - ave).c_str());
 }
 
 

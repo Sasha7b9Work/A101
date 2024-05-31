@@ -7,7 +7,7 @@ namespace BufferADC
 {
     static const int SIZE = 16 * 1024;
 
-    void Push(ValueADC word);
+    void _Push(ValueADC word);
 
     int NumElements();
 
@@ -15,7 +15,7 @@ namespace BufferADC
 
     void Clear(SampleRate);
 
-    void CalculateLimits();
+    void CalculateLimits(int ave);
 
     ValueADC Min();
 

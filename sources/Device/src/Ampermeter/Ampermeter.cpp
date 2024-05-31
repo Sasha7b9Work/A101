@@ -228,6 +228,9 @@ void Ampermeter::MeasurementCycle()
 
     int num_sample = 0;
 
+    int64 sum = 0;
+    int counter = 0;
+
     while (!BufferADC::IsFull())
     {
 #ifndef WIN32
@@ -240,18 +243,20 @@ void Ampermeter::MeasurementCycle()
 
         ValueADC value = AD7691::ReadValue();
 
+        sum += value._raw;
+
         if (set.firLPF)
         {
             value = ValueADC::FromRaw(FIR::Step(value.Raw()));
 
             if (num_sample++ > 200)
             {
-                BufferADC::Push(value);
+                BufferADC::_Push(value);
             }
         }
         else
         {
-            BufferADC::Push(value);
+            BufferADC::_Push(value);
             num_sample++;
         }
     }
@@ -268,7 +273,7 @@ void Ampermeter::MeasurementCycle()
         BufferADC::SmoothOut();
     }
 
-    BufferADC::CalculateLimits();
+    BufferADC::CalculateLimits((int)sum / counter);
 }
 
 

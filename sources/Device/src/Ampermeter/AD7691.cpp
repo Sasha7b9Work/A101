@@ -12,6 +12,9 @@ const ValueADC ValueADC::MAX = ValueADC((1 << 17) - 1);
 const ValueADC ValueADC::MIN = ValueADC((1 << 17));
 
 
+int ValueADC::_raw = 0;
+
+
 SampleRate SampleRate::current(10);      // Минимально возможное расстояние между точками - 5 мкс.
 
 
@@ -146,6 +149,8 @@ ValueADC AD7691::ReadValue()
 
 ValueADC::ValueADC(int reading)
 {
+    _raw = reading;
+
     value = reading;
 
     if (_GET_BIT(value, 17))
