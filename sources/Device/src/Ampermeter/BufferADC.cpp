@@ -4,6 +4,7 @@
 #include "Nextion/Nextion.h"
 #include "Hardware/HAL/HAL.h"
 #include "Ampermeter/Calculator/Averager.h"
+#include "Utils/String.h"
 #include <limits>
 
 
@@ -15,6 +16,8 @@ namespace BufferADC
 
     static ValueADC   min;
     static ValueADC   max;
+
+    static int ave;
 }
 
 
@@ -88,6 +91,10 @@ void BufferADC::CalculateLimits()
         if (value < min) { min = value; }
         if (value > max) { max = value; }
     }
+
+    ave = (int)(sum / SIZE);
+
+    Nextion::DrawString(300, 20, 150, 40, 0, Color::White, Color::Black, String<>("%d", ave).c_str());
 }
 
 
