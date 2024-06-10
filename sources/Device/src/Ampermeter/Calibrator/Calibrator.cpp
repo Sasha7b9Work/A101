@@ -60,12 +60,12 @@ bool Calibrator::CalibratorZero::Run()
 {
     CalibrationSettings::Zero &zero = cal.zero[Range::Current()];
 
-    const int const_val = zero.GetFull();
+    const int const_val = zero._GetFull();
 
     InputRelays::EnableZero(true);
     zero.SetVar(0);
     zero.SetConst(0);
-    int average = AD7691::GetAverageValue();
+    int average = AD7691::_GetAverageValue();
     LOG_WRITE("average = %d", average);
     zero.SetVar(average);
     InputRelays::DisableZero(true);

@@ -158,11 +158,11 @@ ValueADC::ValueADC(int reading)
         value -= 1 << 18;
     }
 
-    value -= cal.zero[Range::Current()].GetFull();
+    value -= cal.zero[Range::Current()]._GetFull();
 }
 
 
-int AD7691::GetAverageValue()
+int AD7691::_GetAverageValue()
 {
     int64 sum = 0;
 

@@ -17,6 +17,7 @@
 #include "stm_includes.h"
 #include "Menu/Pages/Pages.h"
 #include "Nextion/Nextion.h"
+#include "Utils/String.h"
 #include <cmath>
 #include <cstdio>
 
@@ -244,6 +245,7 @@ void Ampermeter::MeasurementCycle()
         ValueADC value = AD7691::ReadValue();
 
         sum += value._raw;
+        counter++;
 
         if (set.firLPF)
         {
@@ -337,11 +339,27 @@ void Ampermeter::AdjustmentZero()
 
     static uint next_time = 0;
 
+    static bool need_pause = true;
+
     if (Range::Current() == prev_range)
     {
+        need_pause = true;
+
         if (TIME_MS < next_time)
         {
             return;
+        }
+    }
+    else
+    {
+        if (need_pause)
+        {
+            need_pause = false;
+
+            if (Range::Current() > 3)
+            {
+                Timer::Delay(2000);
+            }
         }
     }
 
@@ -352,13 +370,22 @@ void Ampermeter::AdjustmentZero()
     CalibrationSettings::Zero &zero = cal.zero[Range::Current()];
     const int const_val = zero.GetConst();
 
-    InputRelays::EnableZero(false);
-
     zero.SetConst(0);
     zero.SetVar(0);
-    zero.SetVar(AD7691::GetAverageValue());
+
+    int non_zero_var = AD7691::_GetAverageValue();
+
+    InputRelays::EnableZero(false);
+
+    int zero_var = AD7691::_GetAverageValue();
+
+    zero.SetVar(zero_var);
 
     InputRelays::DisableZero(false);
 
     zero.SetConst(const_val);
+
+    static int counter = 0;
+
+    Nextion::DrawString(200, 60, 400, 40, 0, Color::White, Color::Background, String<>("%d nz_v=%d v=%d c=%d", counter++, non_zero_var, zero_var, const_val).c_str());
 }
