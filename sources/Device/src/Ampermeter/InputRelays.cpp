@@ -34,14 +34,19 @@ void Range::Set(int _range, bool reset_measures)
 {
     const bool disable_zero = (current != _range);        // Если не переключаем на другой диапазон - выключать зеро не надо
 
+    PageCalibration::OnEventChangeRange();
+
+    if (reset_measures)
+    {
+        PageMain::OnEventChangeRange();
+    }
+
     if ((_range > 3) && current != _range)
     {
         HAL_PIO::Write(PIN_ZERO, true);
 
         Timer::Delay(400);
     }
-
-    PageCalibration::OnEventChangeRange();
 
     prev = current;
     current = _range;
@@ -78,7 +83,6 @@ void Range::Set(int _range, bool reset_measures)
 
     if (reset_measures)
     {
-        PageMain::OnEventChangeRange();
         Ampermeter::OnEventChangeRange();
     }
 
