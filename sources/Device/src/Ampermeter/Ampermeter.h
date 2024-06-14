@@ -52,26 +52,23 @@ namespace Ampermeter
         bool IsEnabled();
     }
 
-    namespace Set
+    // Режим "Ноль DC"
+    namespace ZeroDC
     {
-        // Режим "Ноль DC"
-        namespace ZeroDC
-        {
-            void Enable();
+        void Enable();
 
-            void _Disable();
+        void Disable();
 
-            REAL LevelAbs();
-        }
+        REAL LevelAbs();
+    }
 
-        // Режим "Ноль AC"
-        namespace ZeroAC
-        {
-            void Enable();
+    // Режим "Ноль AC"
+    namespace ZeroAC
+    {
+        void Enable();
 
-            void _Disable();
+        void Disable();
 
-            REAL LevelAbs();
-        }
+        REAL LevelAbs();
     }
 }

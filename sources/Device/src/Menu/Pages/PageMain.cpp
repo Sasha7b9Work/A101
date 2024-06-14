@@ -164,22 +164,22 @@ namespace PageMain
 
     static Button btnZeroDC_EN("bt11", "0DZ1", []()         // Включение режима "Zero DC"
         {
-            Ampermeter::Set::ZeroDC::Enable();
+            Ampermeter::ZeroDC::Enable();
         });
 
     static Button btnZeroDC_DIS("bt11", "0DZ0", []()        // Выключение режима "Zero DC"
         {
-            Ampermeter::Set::ZeroDC::_Disable();
+            Ampermeter::ZeroDC::Disable();
         });
 
     static Button btnZeroAC_EN("bt10", "0AZ1", []()         // Включение режима "Zero AC"
         {
-            Ampermeter::Set::ZeroAC::Enable();
+            Ampermeter::ZeroAC::Enable();
         });
 
     static Button btnZeroAC_DIS("bt10", "0AZ0", []()        // Выключение режима "Zero AC"
         {
-            Ampermeter::Set::ZeroAC::_Disable();
+            Ampermeter::ZeroAC::Disable();
         });
 
     static Button btnSignal("bt12", "0S", []()              // Signal
@@ -194,6 +194,14 @@ namespace PageMain
     static Button btnMIN("bt18", "02I", []() {});           // Imin
 
     static Button btnPEAK("bt17", "03I", []() {});          // Ipp
+
+    static Button btnMenu("bt6", "0M", []()
+        {
+            if (Range::Current() > 3)
+            {
+
+            }
+        });
 
     static Button *buttons[] =
     {

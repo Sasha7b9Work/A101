@@ -8,22 +8,19 @@
 
 namespace Ampermeter
 {
-    namespace Set
+    namespace ZeroDC
     {
-        namespace ZeroDC
-        {
-            static REAL value_abs = 0.0;
-        }
+        static REAL value_abs = 0.0;
+    }
 
-        namespace ZeroAC
-        {
-            static REAL value_abs = 0.0;
-        }
+    namespace ZeroAC
+    {
+        static REAL value_abs = 0.0;
     }
 }
 
 
-void Ampermeter::Set::ZeroDC::Enable()
+void Ampermeter::ZeroDC::Enable()
 {
     AVP::Disable();
 
@@ -42,7 +39,7 @@ void Ampermeter::Set::ZeroDC::Enable()
 }
 
 
-void Ampermeter::Set::ZeroDC::_Disable()
+void Ampermeter::ZeroDC::Disable()
 {
     value_abs = 0.0;
 
@@ -52,13 +49,13 @@ void Ampermeter::Set::ZeroDC::_Disable()
 }
 
 
-REAL Ampermeter::Set::ZeroDC::LevelAbs()
+REAL Ampermeter::ZeroDC::LevelAbs()
 {
     return value_abs;
 }
 
 
-void Ampermeter::Set::ZeroAC::Enable()
+void Ampermeter::ZeroAC::Enable()
 {
     AVP::Disable();
 
@@ -77,7 +74,7 @@ void Ampermeter::Set::ZeroAC::Enable()
 }
 
 
-void Ampermeter::Set::ZeroAC::_Disable()
+void Ampermeter::ZeroAC::Disable()
 {
     value_abs = 0.0;
 
@@ -87,7 +84,7 @@ void Ampermeter::Set::ZeroAC::_Disable()
 }
 
 
-REAL Ampermeter::Set::ZeroAC::LevelAbs()
+REAL Ampermeter::ZeroAC::LevelAbs()
 {
     return value_abs;
 }

@@ -36,8 +36,8 @@ namespace Ampermeter
 
         void Enable()
         {
-            Set::ZeroAC::_Disable();
-            Set::ZeroDC::_Disable();
+            ZeroAC::Disable();
+            ZeroDC::Disable();
 
             is_enabled = true;
         }
@@ -166,7 +166,7 @@ Measure Ampermeter::GetDC()
 
     REAL dc = Calculator::GetAbsDC(&correct);
 
-    REAL zero = Set::ZeroDC::LevelAbs();
+    REAL zero = ZeroDC::LevelAbs();
 
     if (Range::Current() > 2)
     {
@@ -183,7 +183,7 @@ Measure Ampermeter::GetAC()
 
     REAL ac = Calculator::GetAbsAC(&correct);
 
-    REAL zero = Set::ZeroAC::LevelAbs();
+    REAL zero = ZeroAC::LevelAbs();
 
     if (Range::Current() > 2)
     {

@@ -94,8 +94,8 @@ void Range::Set(int _range, bool reset_measures)
 
     if (disable_zero)
     {
-        Ampermeter::Set::ZeroAC::_Disable();
-        Ampermeter::Set::ZeroDC::_Disable();
+        Ampermeter::ZeroAC::Disable();
+        Ampermeter::ZeroDC::Disable();
     }
 }
 
