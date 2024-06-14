@@ -11,6 +11,7 @@
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 #include "Utils/String.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include <cstring>
 #include <cstdlib>
 
@@ -291,6 +292,10 @@ namespace PageCalibration
     {
         ButtonsRange::SetRange(range);
         Range::Set(range);
+
+        Timer::Delay(400);
+
+        HAL_PIO::Write(PIN_ZERO, false);
 
         btnSave.SetVisible(false);
     }

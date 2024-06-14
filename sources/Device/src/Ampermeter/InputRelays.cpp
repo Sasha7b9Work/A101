@@ -7,6 +7,7 @@
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/Ampermeter.h"
 #include "Nextion/Nextion.h"
+#include "Hardware/Timer.h"
 #include <cstdio>
 
 
@@ -30,7 +31,14 @@ REAL Range::Max(int range)
 
 void Range::Set(int _range, bool reset_measures)
 {
-    const bool disable_zero = current != _range;        // Если не переключаем на другой диапазон - выключать зеро не надо
+    const bool disable_zero = (current != _range);        // Если не переключаем на другой диапазон - выключать зеро не надо
+
+    if ((_range > 3) && current != _range)
+    {
+        HAL_PIO::Write(PIN_ZERO, true);
+
+        Timer::Delay(400);
+    }
 
     PageCalibration::OnEventChangeRange();
 

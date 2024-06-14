@@ -18,6 +18,7 @@
 #include "Menu/Pages/Pages.h"
 #include "Nextion/Nextion.h"
 #include "Utils/String.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include <cmath>
 #include <cstdio>
 
@@ -358,7 +359,7 @@ void Ampermeter::AdjustmentZero()
 
             if (Range::Current() > 3)
             {
-                Timer::Delay(2000);
+                Timer::Delay(400);
             }
         }
     }
@@ -387,5 +388,7 @@ void Ampermeter::AdjustmentZero()
 
     static int counter = 0;
 
-    Nextion::DrawString(200, 60, 400, 40, 0, Color::White, Color::Background, String<>("%d nz_v=%d v=%d c=%d", counter++, non_zero_var, zero_var, const_val).c_str());
+    Nextion::DrawString(160, 60, 440, 40, 0, Color::White, Color::Background, String<>("%d nz_v=%d v=%d c=%d", counter++, non_zero_var, zero_var, const_val).c_str());
+
+    HAL_PIO::Write(PIN_ZERO, false);
 }

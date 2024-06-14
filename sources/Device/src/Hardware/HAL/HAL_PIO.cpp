@@ -146,6 +146,7 @@ void HAL_PIO::Init()
         {PIN_US6},
         {PIN_US7},
         {PIN_US8},
+        {PIN_ZERO},
         {HPort::Count, 0}
     };
 
