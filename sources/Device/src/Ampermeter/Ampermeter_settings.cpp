@@ -62,6 +62,10 @@ void Ampermeter::ZeroDC::FloatingZero::Process()
 void Ampermeter::ZeroDC::Disable()
 {
     value_abs = 0.0;
+
+    Nextion::SetVisible("tzDC", false);
+
+    Nextion::SetValue("bt11", 0);
 }
 
 
