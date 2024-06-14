@@ -136,9 +136,9 @@ void Nextion::Button::Highligth(pchar name_button, bool val)
 }
 
 
-void Nextion::Button::SetValue(pchar name_button, int val)
+void Nextion::SetValue(pchar name, int value)
 {
-    Nextion::SendCommandFormat("%s.val=%d", name_button, val);
+    SendCommandFormat("%s.val=%d", name, value);
 }
 
 

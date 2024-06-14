@@ -59,7 +59,15 @@ namespace Ampermeter
 
         void Disable();
 
-        REAL LevelAbs();
+        // Установка нуля для пределов 20 и 50 А.
+        // В связи со спецификой преобразователя
+        namespace FloatingZero
+        {
+            void Process();
+        }
+
+        // Возвращает полное смещение - с учётом FloatingZero
+        REAL LevelAbsFull();
     }
 
     // Режим "Ноль AC"

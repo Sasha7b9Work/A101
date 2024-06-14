@@ -8,13 +8,14 @@
 #include "Ampermeter/Ampermeter.h"
 #include "Display/Display.h"
 #include "Settings/Settings.h"
+#include "Menu/Menu.h"
 #include <cstdio>
 
 
 namespace PageMain
 {
     WindowMeasure wndDC(TypeMeasure::DC, "titleDC", "f_sign", "valueDC", "unitsDC", "DC:");
-    WindowMeasure wndAC(TypeMeasure::AC, "titleAC", "",       "valueAC", "unitsAC", "AC:");
+    WindowMeasure wndAC(TypeMeasure::AC, "titleAC", "", "valueAC", "unitsAC", "AC:");
 
     static WindowMeasure wndAMPL(TypeMeasure::Ampl, "t23", "", "t10", "t27", "Iamp:");
     static WindowMeasure wndPEAK(TypeMeasure::Peak, "t20", "", "t9", "t26", "Ipp:");
@@ -61,7 +62,7 @@ namespace PageMain
         {
             char name[32];
             std::sprintf(name, "bt%d", i);
-            Nextion::Button::SetValue(name, Range::Current() == i ? 1 : 0);
+            Nextion::SetValue(name, Range::Current() == i ? 1 : 0);
         }
     }
 
@@ -81,111 +82,111 @@ namespace PageMain
 
 
     static Button btn2mA("bt0", "01P", []()
-        {
-            Ampermeter::AVP::Disable();
-            Range::Set(0);
-        });
+    {
+        Ampermeter::AVP::Disable();
+        Range::Set(0);
+    });
 
     static Button btn2maAVP("t11", "01A", []()
-        {
-            Ampermeter::AVP::Enable();
-            Nextion::SetVisible("t11", true);
-        });
+    {
+        Ampermeter::AVP::Enable();
+        Nextion::SetVisible("t11", true);
+    });
 
     static Button btn20mA("bt1", "02P", []()
-        {
-            Ampermeter::AVP::Disable();
-            Range::Set(1);
-        });
+    {
+        Ampermeter::AVP::Disable();
+        Range::Set(1);
+    });
 
     static Button btn20maAVP("t12", "02A", []()
-        {
-            Ampermeter::AVP::Enable();
-        });
+    {
+        Ampermeter::AVP::Enable();
+    });
 
     static Button btn200mA("bt2", "03P", []()
-        {
-            Ampermeter::AVP::Disable();
-            Range::Set(2);
-        });
+    {
+        Ampermeter::AVP::Disable();
+        Range::Set(2);
+    });
 
     static Button btn200maAVP("t13", "03A", []()
-        {
-            Ampermeter::AVP::Enable();
-        });
+    {
+        Ampermeter::AVP::Enable();
+    });
 
     static Button btn2A("bt3", "04P", []()
-        {
-            Ampermeter::AVP::Disable();
-            Range::Set(3);
-        });
+    {
+        Ampermeter::AVP::Disable();
+        Range::Set(3);
+    });
 
     static Button btn2aAVP("t14", "04A", []()
-        {
-            Ampermeter::AVP::Enable();
-        });
+    {
+        Ampermeter::AVP::Enable();
+    });
 
     static Button btn20A("bt4", "05P", []()
-        {
-            Ampermeter::AVP::Disable();
-            Range::Set(4);
-        });
+    {
+        Ampermeter::AVP::Disable();
+        Range::Set(4);
+    });
 
     static Button btn50A("bt5", "06P", []()
-        {
-            Ampermeter::AVP::Disable();
-            Range::Set(5);
-        });
+    {
+        Ampermeter::AVP::Disable();
+        Range::Set(5);
+    });
 
     static Button btnAC_DC("b0", "0AD", []()            // Переход в AC+DC
-        {
-            MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
-        });
+    {
+        MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
+    });
 
     static Button btnAC("b0", "0AC", []()              // Переход в AC
-        {
-            MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
-        });
+    {
+        MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
+    });
 
     static Button btnDC("b0", "0DC", []()              // Переход в DC
-        {
-            MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
-        });
+    {
+        MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
+    });
 
     static Button btnCalibration("bt13", "0C", []()
-        {
-            PageCalibration::self->SetAsCurrent();
-        });
+    {
+        PageCalibration::self->SetAsCurrent();
+    });
 
     static Button btnSettings("bt7", "0T", []()
-        {
-            PageSettings::self->SetAsCurrent();
-        });
+    {
+        PageSettings::self->SetAsCurrent();
+    });
 
     static Button btnZeroDC_EN("bt11", "0DZ1", []()         // Включение режима "Zero DC"
-        {
-            Ampermeter::ZeroDC::Enable();
-        });
+    {
+        Ampermeter::ZeroDC::Enable();
+    });
 
     static Button btnZeroDC_DIS("bt11", "0DZ0", []()        // Выключение режима "Zero DC"
-        {
-            Ampermeter::ZeroDC::Disable();
-        });
+    {
+        Ampermeter::ZeroDC::Disable();
+    });
 
     static Button btnZeroAC_EN("bt10", "0AZ1", []()         // Включение режима "Zero AC"
-        {
-            Ampermeter::ZeroAC::Enable();
-        });
+    {
+        Ampermeter::ZeroAC::Enable();
+    });
 
     static Button btnZeroAC_DIS("bt10", "0AZ0", []()        // Выключение режима "Zero AC"
-        {
-            Ampermeter::ZeroAC::Disable();
-        });
+    {
+        Ampermeter::ZeroAC::Disable();
+    });
 
     static Button btnSignal("bt12", "0S", []()              // Signal
-        {
-            PageGraph::self->SetAsCurrent();
-        });
+    {
+        PageGraph::self->SetAsCurrent();
+    });
 
     static Button btnMAX("bt15", "01I", []() {});           // Imax
 
@@ -195,13 +196,10 @@ namespace PageMain
 
     static Button btnPEAK("bt17", "03I", []() {});          // Ipp
 
-    static Button btnMenu("bt6", "0M", []()
-        {
-            if (Range::Current() > 3)
-            {
-
-            }
-        });
+    static Button btnZero("btnZero", "0ZE", []()
+    {
+        Ampermeter::ZeroDC::FloatingZero::Process();
+    });
 
     static Button *buttons[] =
     {
@@ -229,6 +227,7 @@ namespace PageMain
         &btn20maAVP,
         &btn200maAVP,
         &btn2aAVP,
+        &btnZero,
         nullptr
     };
 

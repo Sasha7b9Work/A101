@@ -8,6 +8,7 @@
 #include "Ampermeter/Ampermeter.h"
 #include "Nextion/Nextion.h"
 #include "Hardware/Timer.h"
+#include "Menu/Menu.h"
 #include <cstdio>
 
 

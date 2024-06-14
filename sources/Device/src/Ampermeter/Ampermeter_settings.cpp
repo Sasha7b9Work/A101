@@ -10,6 +10,11 @@ namespace Ampermeter
 {
     namespace ZeroDC
     {
+        namespace FloatingZero
+        {
+            static REAL value_abs[6] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+        }
+
         static REAL value_abs = 0.0;
     }
 
@@ -39,19 +44,30 @@ void Ampermeter::ZeroDC::Enable()
 }
 
 
-void Ampermeter::ZeroDC::Disable()
+void Ampermeter::ZeroDC::FloatingZero::Process()
 {
-    value_abs = 0.0;
+    value_abs[Range::Current()] = 0.0;
 
-    Nextion::SetVisible("tzDC", false);
+    Measure measure = Ampermeter::GetDC();
 
-    Nextion::SetValue("bt11", 0);
+    value_abs[Range::Current()] = measure.IsValid() ? measure.value_abs : 0.0;
+
+    if (Range::Current() > 2)
+    {
+        value_abs[Range::Current()] *= 1e3;
+    }
 }
 
 
-REAL Ampermeter::ZeroDC::LevelAbs()
+void Ampermeter::ZeroDC::Disable()
 {
-    return value_abs;
+    value_abs = 0.0;
+}
+
+
+REAL Ampermeter::ZeroDC::LevelAbsFull()
+{
+    return value_abs + FloatingZero::value_abs[Range::Current()];
 }
 
 

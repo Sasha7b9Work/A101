@@ -387,12 +387,6 @@ void Nextion::SetVisible(pchar name, bool visible)
 }
 
 
-void Nextion::SetValue(pchar name, int value)
-{
-    SendCommandFormat("%s.val=%d", name, value);
-}
-
-
 #ifndef WIN32
 #pragma clang diagnostic pop
 #endif

@@ -166,7 +166,7 @@ Measure Ampermeter::GetDC()
 
     REAL dc = Calculator::GetAbsDC(&correct);
 
-    REAL zero = ZeroDC::LevelAbs();
+    REAL zero = ZeroDC::LevelAbsFull();
 
     if (Range::Current() > 2)
     {
