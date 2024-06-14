@@ -131,23 +131,11 @@ namespace PageMain
             Range::Set(4);
         });
 
-    static Button btn20aAVP("t15", "05A", []()
-        {
-            Ampermeter::AVP::Enable();
-            Nextion::SetVisible("t15", true);
-        });
-
     static Button btn50A("bt5", "06P", []()
         {
             Ampermeter::AVP::Disable();
             Range::Set(5);
         });
-
-    static Button btn50aAVP("t16", "06A", []()
-        {
-            Ampermeter::AVP::Enable();
-        });
-
 
     static Button btnAC_DC("b0", "0AD", []()            // Переход в AC+DC
         {
@@ -233,8 +221,6 @@ namespace PageMain
         &btn20maAVP,
         &btn200maAVP,
         &btn2aAVP,
-        &btn20aAVP,
-        &btn50aAVP,
         nullptr
     };
 
