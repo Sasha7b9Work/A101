@@ -183,7 +183,7 @@ namespace PageMain
         Ampermeter::ZeroAC::Disable();
     });
 
-    static Button btnSignal("bt12", "0S", []()              // Signal
+    static Button btnGraphics("btnGraphics", "0S", []()            // Доступ к графикам
     {
         PageGraph::self->SetAsCurrent();
     });
@@ -217,7 +217,7 @@ namespace PageMain
         &btnZeroDC_DIS,
         &btnZeroAC_EN,
         &btnZeroAC_DIS,
-        &btnSignal,
+        &btnGraphics,
         &btnMAX,
         &btnAMP,
         &btnMIN,
