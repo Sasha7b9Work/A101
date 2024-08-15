@@ -81,104 +81,104 @@ namespace PageMain
     }
 
 
-    static Button btn2mA("bt0", "01P", []()
+    static Button btn2mA("btn2mA", "01P", []()
     {
         Ampermeter::AVP::Disable();
         Range::Set(0);
     });
 
-    static Button btn2maAVP("t11", "01A", []()
+    static Button btn2maAVP("tAVP2mA", "01A", []()
     {
         Ampermeter::AVP::Enable();
-        Nextion::SetVisible("t11", true);
+        Nextion::SetVisible("tAVP2mA", true);
     });
 
-    static Button btn20mA("bt1", "02P", []()
+    static Button btn20mA("btn20mA", "02P", []()
     {
         Ampermeter::AVP::Disable();
         Range::Set(1);
     });
 
-    static Button btn20maAVP("t12", "02A", []()
+    static Button btn20maAVP("tAVP20mA", "02A", []()
     {
         Ampermeter::AVP::Enable();
     });
 
-    static Button btn200mA("bt2", "03P", []()
+    static Button btn200mA("btn200mA", "03P", []()
     {
         Ampermeter::AVP::Disable();
         Range::Set(2);
     });
 
-    static Button btn200maAVP("t13", "03A", []()
+    static Button btn200maAVP("tAVP200mA", "03A", []()
     {
         Ampermeter::AVP::Enable();
     });
 
-    static Button btn2A("bt3", "04P", []()
+    static Button btn2A("btn2A", "04P", []()
     {
         Ampermeter::AVP::Disable();
         Range::Set(3);
     });
 
-    static Button btn2aAVP("t14", "04A", []()
+    static Button btn2aAVP("tAVP2A", "04A", []()
     {
         Ampermeter::AVP::Enable();
     });
 
-    static Button btn20A("bt4", "05P", []()
+    static Button btn20A("btn20A", "05P", []()
     {
         Ampermeter::AVP::Disable();
         Range::Set(4);
     });
 
-    static Button btn50A("bt5", "06P", []()
+    static Button btn50A("btn50A", "06P", []()
     {
         Ampermeter::AVP::Disable();
         Range::Set(5);
     });
 
-    static Button btnAC_DC("b0", "0AD", []()            // Переход в AC+DC
+    static Button btnAC_DC("btnACDC", "0AD", []()            // Переход в AC+DC
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
     });
 
-    static Button btnAC("b0", "0AC", []()              // Переход в AC
+    static Button btnAC("btnACDC", "0AC", []()              // Переход в AC
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
     });
 
-    static Button btnDC("b0", "0DC", []()              // Переход в DC
+    static Button btnDC("btnACDC", "0DC", []()              // Переход в DC
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
     });
 
-    static Button btnCalibration("bt13", "0C", []()
+    static Button btnCalibration("btnCalibr", "0C", []()
     {
         PageCalibration::self->SetAsCurrent();
     });
 
-    static Button btnSettings("bt7", "0T", []()
+    static Button btnSettings("btnSettings", "0T", []()
     {
         PageSettings::self->SetAsCurrent();
     });
 
-    static Button btnZeroDC_EN("bt11", "0DZ1", []()         // Включение режима "Zero DC"
+    static Button btnZeroDC_EN("btnZeroDC", "0DZ1", []()         // Включение режима "Zero DC"
     {
         Ampermeter::ZeroDC::Enable();
     });
 
-    static Button btnZeroDC_DIS("bt11", "0DZ0", []()        // Выключение режима "Zero DC"
+    static Button btnZeroDC_DIS("btnZeroDC", "0DZ0", []()        // Выключение режима "Zero DC"
     {
         Ampermeter::ZeroDC::Disable();
     });
 
-    static Button btnZeroAC_EN("bt10", "0AZ1", []()         // Включение режима "Zero AC"
+    static Button btnZeroAC_EN("btnZeroAC", "0AZ1", []()         // Включение режима "Zero AC"
     {
         Ampermeter::ZeroAC::Enable();
     });
 
-    static Button btnZeroAC_DIS("bt10", "0AZ0", []()        // Выключение режима "Zero AC"
+    static Button btnZeroAC_DIS("btnZeroAC", "0AZ0", []()        // Выключение режима "Zero AC"
     {
         Ampermeter::ZeroAC::Disable();
     });
@@ -188,13 +188,13 @@ namespace PageMain
         PageGraph::self->SetAsCurrent();
     });
 
-    static Button btnMAX("bt15", "01I", []() {});           // Imax
+    static Button btnMAX("btnImax", "01I", []() {});           // Imax
 
-    static Button btnAMP("bt19", "04I", []() {});           // Iamp
+    static Button btnAMP("btnIamp", "04I", []() {});           // Iamp
 
-    static Button btnMIN("bt18", "02I", []() {});           // Imin
+    static Button btnMIN("btnImin", "02I", []() {});           // Imin
 
-    static Button btnPEAK("bt17", "03I", []() {});          // Ipp
+    static Button btnPEAK("btnIpp", "03I", []() {});          // Ipp
 
     static Button btnZero("btnZero", "0ZE", []()
     {
