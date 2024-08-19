@@ -11,6 +11,7 @@ namespace SCPI
     struct Command
     {
         virtual bool Execute(Direction::E);
+        virtual ~Command() { }
     };
 
 

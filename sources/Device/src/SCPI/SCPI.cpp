@@ -115,7 +115,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
         {
             int range = data[1] & 0x0F;
 
-            if (range >= 0 && range < 6)
+            if (range < 6)
             {
                 return new CommandRangeI(range);
             }
@@ -124,7 +124,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
         {
             int range = data[1] & 0x0F;
 
-            if (range >= 0 && range < 6)
+            if (range < 6)
             {
                 return new CommandRangeJ(range);
             }
@@ -137,7 +137,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
         {
             int range = data[2] & 0x0F;
 
-            if (range >= 0 && range < 6)
+            if (range < 6)
             {
                 return new CommandRangeIJ(range);
             }
