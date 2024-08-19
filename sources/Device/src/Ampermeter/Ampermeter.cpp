@@ -194,6 +194,23 @@ Measure Ampermeter::GetAC()
 }
 
 
+Measure Ampermeter::GetMin()
+{
+    bool correct = false;
+
+    REAL ac = Calculator::GetValueMin(&correct);
+
+    REAL zero = ZeroDC::LevelAbsFull();
+
+    if (Range::Current() > 2)
+    {
+        zero /= 1e3;
+    }
+
+    return Measure(ac - zero, OutOfRange(), correct);
+}
+
+
 Measure Ampermeter::GetAmpl()
 {
     return Measure(0.0, false, true);
@@ -207,12 +224,6 @@ Measure Ampermeter::GetPeak()
 
 
 Measure Ampermeter::GetMax()
-{
-    return Measure(0.0, false, true);
-}
-
-
-Measure Ampermeter::GetMin()
 {
     return Measure(0.0, false, true);
 }

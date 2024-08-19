@@ -12,4 +12,5 @@ namespace Calculator
 
     REAL GetAbsAC(bool *correct);
     REAL GetAbsDC(bool *correct);
+    REAL GetValueMin(bool *correct);
 }
