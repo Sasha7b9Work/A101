@@ -35,4 +35,4 @@ def ProcessFile(name_file):
                 file.write(line)
             file.close()
 
-ProcessFile("sources/Reader/src/defines.h")
+ProcessFile("sources/Device/src/defines.h")
