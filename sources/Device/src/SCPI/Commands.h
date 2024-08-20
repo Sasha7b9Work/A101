@@ -10,8 +10,14 @@ namespace SCPI
 {
     struct Command
     {
-        virtual bool Execute(Direction::E);
+        virtual bool Execute(Direction::E) = 0;
         virtual ~Command() { }
+    };
+
+
+    struct CommandNull : public Command
+    {
+        virtual bool Execute(Direction::E) override { return false; }
     };
 
 
@@ -25,6 +31,12 @@ namespace SCPI
 
 
     struct CommandIDN : public Command
+    {
+        virtual bool Execute(Direction::E) override;
+    };
+
+
+    struct CommandINFO : public Command
     {
         virtual bool Execute(Direction::E) override;
     };

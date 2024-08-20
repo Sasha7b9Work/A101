@@ -14,12 +14,6 @@ namespace SCPI
 }
 
 
-bool SCPI::Command::Execute(Direction::E)
-{
-    return false;
-}
-
-
 bool SCPI::CommandWithParameters::Execute(Direction::E)
 {
     return false;
@@ -60,6 +54,19 @@ bool SCPI::CommandMEAS::Execute(Direction::E dir)
         message.Append(" ");
         message.Append(PageMain::wndAC.GetControlUnits().LastLabel());
     }
+
+    Send(dir, message.c_str());
+
+    return true;
+}
+
+bool SCPI::CommandINFO::Execute(Direction::E dir)
+{
+    String<128> message;
+
+    message.AppendFormat("VERSION=%d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD);
+    message.AppendFormat("DATE BUILD=%s\n", DATE_BUILD);
+    message.AppendFormat("SCPI=%s", VERSION_SCPI);
 
     Send(dir, message.c_str());
 

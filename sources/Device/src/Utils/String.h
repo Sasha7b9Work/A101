@@ -31,6 +31,8 @@ public:
 
     void SetFormat(pchar format, ...);
 
+    void AppendFormat(pchar format, ...);
+
     char *c_str() const { return (char *)&buffer[0]; }
 
     int Size() const { return (int)std::strlen(buffer); }

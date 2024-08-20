@@ -91,7 +91,7 @@ SCPI::Command *SCPI::InBuffer::ExtractCommand()
         }
     }
 
-    return new Command();
+    return new CommandNull();
 }
 
 
@@ -107,6 +107,11 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
     if (std::strcmp(data, "MEAS?") == 0)
     {
         return new CommandMEAS();
+    }
+
+    if (std::strcmp(data, "INFO?") == 0)
+    {
+        return new CommandINFO();
     }
 
     if (std::strlen(data) == 2)
@@ -157,7 +162,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
 
     SCPI::Error(dir, symbols);
 
-    return new Command();
+    return new CommandNull();
 }
 
 String<> SCPI::InBuffer::FirstWord(pchar symbols)

@@ -7,6 +7,7 @@
 //template      String<(int)DEFAULT_SIZE_STRING>::String(char *, ...);
 template void String<(int)DEFAULT_SIZE_STRING>::Append(pchar);
 template void String<(int)DEFAULT_SIZE_STRING>::SetFormat(pchar format, ...);
+template void String<128>::AppendFormat(pchar format, ...);
 template void String<1024>::SetFormat(pchar format, ...);
 template void String<(int)DEFAULT_SIZE_STRING>::Append(char);
 template bool String<(int)DEFAULT_SIZE_STRING>::ToInt(int *);
@@ -63,6 +64,26 @@ void String<capacity>::SetFormat(pchar format, ...)
     if(num_symbols < 0 || num_symbols > capacity - 1)
     {
         LOG_ERROR_TRACE("Very small string buffer %d, need %d:", capacity, num_symbols);
+    }
+}
+
+
+template<int capacity>
+void String<capacity>::AppendFormat(pchar format, ...)
+{
+    char append[capacity];
+    std::va_list args;
+    va_start(args, format);
+    int num_symbols = std::vsprintf(append, format, args);
+    va_end(args);
+
+    if (num_symbols < 0 || num_symbols > capacity - Size() - 1)
+    {
+        LOG_ERROR_TRACE("Very small string buffer %d, need %d:", capacity, num_symbols);
+    }
+    else
+    {
+        std::strcat(buffer, append);
     }
 }
 

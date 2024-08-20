@@ -4,9 +4,9 @@
 
 #define VERSION_MAJOR 0
 #define VERSION_MINOR 1
-#define VERSION_BUILD 101
+#define VERSION_BUILD 102
 
-#define DATE_BUILD "2024-08-20 14:28:10"
+#define DATE_BUILD "2024-08-20 14:51:04"
 
 #define VERSION_SCPI  "1.0"
 
@@ -26,6 +26,7 @@
 #pragma clang diagnostic ignored "-Wimplicit-float-conversion"
 #pragma clang diagnostic ignored "-Wdouble-promotion"
 #pragma clang diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
+#pragma clang diagnostic ignored "-Wweak-vtables"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
