@@ -9,7 +9,7 @@ struct TypeMeasure
 {
     enum E
     {
-        DC,
+        DC, 
         AC,
         Ampl,
         Peak,

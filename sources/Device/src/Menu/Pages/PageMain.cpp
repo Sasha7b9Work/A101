@@ -17,10 +17,10 @@ namespace PageMain
     WindowMeasure wndDC(TypeMeasure::DC, "titleDC", "f_sign", "valueDC", "unitsDC", "DC:");
     WindowMeasure wndAC(TypeMeasure::AC, "titleAC", "", "valueAC", "unitsAC", "AC:");
 
-    static WindowMeasure wndAMPL(TypeMeasure::Ampl, "t23", "", "t10", "t27", "Iamp:");
-    static WindowMeasure wndPEAK(TypeMeasure::Peak, "t20", "", "t9", "t26", "Ipp:");
-    static WindowMeasure wndMIN(TypeMeasure::Min, "t22", "", "t8", "t25", "Imin:");
-    static WindowMeasure wndMAX(TypeMeasure::Max, "t21", "", "t7", "t24", "Imax:");
+    static WindowMeasure wndAMPL(TypeMeasure::Ampl, "tIamp", "", "tIampValue", "tIampUnits", "");
+    static WindowMeasure wndPEAK(TypeMeasure::Peak, "tIpp",  "", "tIppValue",  "tIppUnits", "");
+    static WindowMeasure wndMIN(TypeMeasure::Min,   "tImin", "", "tIminValue", "tIminUnits", "");
+    static WindowMeasure wndMAX(TypeMeasure::Max,   "tImax", "", "tImaxValue", "tImaxUnits", "");
 
     static void ResetAllMeasures()
     {
