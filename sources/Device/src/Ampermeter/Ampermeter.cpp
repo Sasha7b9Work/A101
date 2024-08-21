@@ -242,7 +242,16 @@ Measure Ampermeter::GetPeak()
 
 Measure Ampermeter::GetAmpl()
 {
-    return Measure(0.0, false, true);
+    bool correct = false;
+
+    REAL ampl = Calculator::GetValueAmpl(&correct);
+
+    if (Range::Current() > 2)
+    {
+        ampl /= 1e3;
+    }
+
+    return Measure(ampl, OutOfRange(), correct);
 }
 
 

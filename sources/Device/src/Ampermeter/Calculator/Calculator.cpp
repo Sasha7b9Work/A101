@@ -7,6 +7,7 @@
 #include "Ampermeter/Calculator/Averager.h"
 #include "Ampermeter/Calculator/ResolverAC.h"
 #include "Ampermeter/Calculator/ResolverMinMax.h"
+#include "Ampermeter/Calculator/ResolverAmpl.h"
 #include "Hardware/Timer.h"
 #include "Ampermeter/InputRelays.h"
 #include "Settings/Settings.h"
@@ -29,6 +30,7 @@ namespace Calculator
     static REAL GetRelativeAC(bool *correct);
     static REAL GetMin(bool *correct);
     static REAL GetMax(bool *correct);
+    static REAL GetAmpl(bool *correct);
 }
 
 
@@ -61,13 +63,19 @@ SampleRate Calculator::AppendData()
         dc.Push(value_dc * k);
     }
 
-    // —читаем MIN и MAX
+    // —читаем MIN и MAX и AMPL
     {
-        ResolverMinMax resolver(period);
+        ResolverMinMax resolver_min_max(period);
 
-        min.Push(resolver.GetMin() * k);
+        min.Push(resolver_min_max.GetMin() * k);
 
-        max.Push(resolver.GetMax() * k);
+        max.Push(resolver_min_max.GetMax() * k);
+
+        ResolverAmpl resolver_ampl(period, resolver_min_max.GetMin(), resolver_min_max.GetMax());
+
+        REAL ampl_value = resolver_ampl.GetResult();
+
+        ampl.Push(ampl_value * k);
     }
 
     Display::LabelStar::Show();
@@ -175,6 +183,14 @@ REAL Calculator::GetMax(bool *correct)
 }
 
 
+REAL Calculator::GetAmpl(bool *correct)
+{
+    *correct = (ampl.NumElements() > 0);
+
+    return ampl.NumElements() ? ampl.Get() : 0.0;
+}
+
+
 REAL Calculator::GetAbsAC(bool *correct)
 {
     return GetRelativeAC(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
@@ -196,4 +212,10 @@ REAL Calculator::GetValueMin(bool *correct)
 REAL Calculator::GetValueMax(bool *correct)
 {
     return GetMax(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
+}
+
+
+REAL Calculator::GetValueAmpl(bool *correct)
+{
+    return GetAmpl(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
 }

@@ -74,7 +74,9 @@ namespace PageMain
 
         wndAC.Draw(Ampermeter::GetAC(), Range::Current());
 
-        wndAMPL.Draw(Ampermeter::GetAmpl(), Range::Current());
+        Measure ampl = Ampermeter::GetAmpl();
+        wndAMPL.Draw(ampl, Range::Current());
+
         wndPEAK.Draw(Ampermeter::GetPeak(), Range::Current());
         wndMIN.Draw(Ampermeter::GetMin(), Range::Current());
         wndMAX.Draw(Ampermeter::GetMax(), Range::Current());
