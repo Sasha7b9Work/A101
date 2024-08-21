@@ -6,6 +6,7 @@
 #include "Ampermeter/Calculator/ResolverPeriodSamples.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include "Ampermeter/Calculator/ResolverAC.h"
+#include "Ampermeter/Calculator/ResolverMin.h"
 #include "Hardware/Timer.h"
 #include "Ampermeter/InputRelays.h"
 #include "Settings/Settings.h"
@@ -43,19 +44,28 @@ SampleRate Calculator::AppendData()
 {
     Period period = ResolverPeriodSamples().GetResult();
 
-    REAL value_ac = ResolverAC(period).GetResult();
-
     const REAL k = cal.gain[Range::Current()].Get();
 
-    REAL value = value_ac * k;
+    // Считаем AC
+    {
+        REAL value_ac = ResolverAC(period).GetResult();
 
-    ac.Push(value);
+        ac.Push(value_ac * k);
+    }
 
-    REAL value_dc = -period.dc.Real();
+    // Считаем ВС
+    {
+        REAL value_dc = -period.dc.Real();
 
-    value = value_dc * k;
+        _dc.Push(value_dc * k);
+    }
 
-    _dc.Push(value);
+    // Считаем MIN
+    {
+        REAL value_min = ResolverMin(period).GetResult();
+
+        min.Push(value_min * k);
+    }
 
     Display::LabelStar::Show();
 
