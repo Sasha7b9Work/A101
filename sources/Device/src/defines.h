@@ -4,9 +4,9 @@
 
 #define VERSION_MAJOR 0
 #define VERSION_MINOR 1
-#define VERSION_BUILD 109
+#define VERSION_BUILD 110
 
-#define DATE_BUILD "2024-08-21 13:59:31"
+#define DATE_BUILD "2024-08-21 15:14:33"
 
 #define VERSION_SCPI  "1.0"
 

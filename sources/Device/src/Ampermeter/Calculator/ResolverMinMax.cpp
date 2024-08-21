@@ -9,11 +9,9 @@ ResolverMinMax::ResolverMinMax(const Period &period)
     min = std::numeric_limits<REAL>::max();
     max = std::numeric_limits<REAL>::min();
 
-    REAL dc = period.dc.Real();
-
     for (int i = period.first.first; i < period.last.first; i++)
     {
-        REAL value = BufferADC::At(i).Real() - dc;
+        REAL value = -BufferADC::At(i).Real();
 
         if (value < min)
         {
