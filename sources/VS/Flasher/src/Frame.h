@@ -1,5 +1,6 @@
 ﻿// 2022/04/29 13:56:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Controls/Sizer.h"
 
 
 class DiagramPool;
@@ -17,6 +18,9 @@ public:
 private:
 
     wxToolBar *toolBar = nullptr;
+
+    Sizer *sizer_file = nullptr;
+    Sizer *sizer_version = nullptr;
 
     void OnSize(wxSizeEvent &);
 

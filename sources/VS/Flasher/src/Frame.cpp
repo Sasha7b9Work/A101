@@ -1,7 +1,7 @@
 ﻿// 2022/04/29 13:56:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Frame.h"
-#include "TableModules.h"
+#include "Controls/Sizer.h"
 
 
 Frame *Frame::self = nullptr;
@@ -61,6 +61,9 @@ Frame::Frame(const wxString &title)
     CreatePanel();
 
     SetClientSize(470, 215);
+
+    sizer_version->Enable(false);
+    sizer_file->Enable(false);
 }
 
 
@@ -131,45 +134,71 @@ void Frame::CreatePanel()
 
     wxBoxSizer *top = new wxBoxSizer(wxHORIZONTAL);
     {
-        wxStaticText *txtDevice = new wxStaticText(window, wxID_ANY, _("Устройство"));
+        wxStaticText *txtPort = new wxStaticText(window, wxID_ANY, _("COM-порт"));
+        wxComboBox *cbComPort = new wxComboBox(window, wxID_ANY, wxEmptyString, wxDefaultPosition, { 80, 20 });
+        wxButton *btnUpdate = new wxButton(window, wxID_ANY, _("Обновить"));
+        wxButton *btnConnect = new wxButton(window, wxID_ANY, _("Подключиться"));
 
-        wxStaticText *txtConnect = new wxStaticText(window, wxID_ANY, _("Подключено"));
-
-        wxButton *btnConfig = new wxButton(window, wxID_ANY, _("Конфигурация"));
-
+        top->AddSpacer(10);
+        top->Add(txtPort);
+        top->AddSpacer(10);
+        top->Add(cbComPort);
+        top->AddSpacer(10);
+        top->Add(btnUpdate);
         top->AddSpacer(50);
-        top->Add(txtDevice);
-        top->AddSpacer(50);
-        top->Add(txtConnect);
-        top->AddSpacer(100);
-        top->Add(btnConfig);
+        top->Add(btnConnect);
+        top->AddSpacer(10);
     }
 
-    wxBoxSizer *medium = new wxBoxSizer(wxHORIZONTAL);
+    wxSize size_label{ 90, 15 };
+
+    sizer_version = new Sizer(wxHORIZONTAL);
     {
-        new TableModules(window);
+        wxStaticText *txtVersionLabel = new wxStaticText(window, wxID_ANY, _("Версия"), wxDefaultPosition, size_label);
+        wxStaticText *txtVersionValue = new wxStaticText(window, wxID_ANY, "-", wxDefaultPosition, size_label);
 
-        TableModules::self->TestView();
-
-        medium->Add(TableModules::self);
+        sizer_version->AddSpacer(50);
+        sizer_version->Add(txtVersionLabel);
+        sizer_version->AddSpacer(10);
+        sizer_version->Add(txtVersionValue);
+        sizer_version->AddSpacer(10);
     }
 
-    wxBoxSizer *down = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer *box_date = new wxBoxSizer(wxHORIZONTAL);
     {
+        wxStaticText *txtDateLabel = new wxStaticText(window, wxID_ANY, _("Дата сборки"), wxDefaultPosition, size_label);
+        wxStaticText *txtDateValue = new wxStaticText(window, wxID_ANY, "-", wxDefaultPosition, size_label);
+
+        box_date->AddSpacer(50);
+        box_date->Add(txtDateLabel);
+        box_date->AddSpacer(10);
+        box_date->Add(txtDateValue);
+        box_date->AddSpacer(10);
+    }
+
+    sizer_file = new Sizer(wxHORIZONTAL);
+    {
+        wxButton *btnSelectFile = new wxButton(window, wxID_ANY, _("Выбор файла"), wxDefaultPosition, { 250, 23 });
         wxButton *btnUpdate = new wxButton(window, wxID_ANY, _("Обновить"));
 
-        down->AddSpacer(200);
-        down->Add(btnUpdate);
+        btnUpdate->Enable(false);
+
+        sizer_file->AddSpacer(25);
+        sizer_file->Add(btnSelectFile);
+        sizer_file->AddSpacer(25);
+        sizer_file->Add(btnUpdate);
     }
 
     wxBoxSizer *window_sizer = new wxBoxSizer(wxVERTICAL);
 
     window_sizer->AddSpacer(10);
     window_sizer->Add(top);
+    window_sizer->AddSpacer(20);
+    window_sizer->Add(sizer_version);
     window_sizer->AddSpacer(10);
-    window_sizer->Add(medium);
-    window_sizer->AddSpacer(10);
-    window_sizer->Add(down);
+    window_sizer->Add(box_date);
+    window_sizer->AddSpacer(20);
+    window_sizer->Add(sizer_file);
     window_sizer->AddSpacer(10);
 
     window->SetSizer(window_sizer);

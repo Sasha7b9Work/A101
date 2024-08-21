@@ -2,12 +2,13 @@
 
 project (Flasher)
 
-set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD ON)
 
 #set(CMAKE_UNITY_BUILD_BATCH_SIZE 8)
 
 include_directories(
     src
+    .
     lib/mfproto
     lib/serial/include
     binarylibs/src/libusb/msvc
@@ -93,12 +94,15 @@ if(WIN32)
 endif()
 
 
-file(GLOB SRC       src/*.h src/*.cpp)
+file(GLOB SRC         src/*.h src/*.cpp)
+file(GLOB CONTROLS    Controls/*.h Controls/*.cpp)
 
-source_group(src     FILES ${SRC})
+source_group(src      FILES ${SRC})
+source_group(Controls FILES ${CONTROLS})
 
 add_executable( ${PROJECT_NAME}
     ${SRC}
+    ${CONTROLS}
 )
 
 target_link_libraries(${PROJECT_NAME}

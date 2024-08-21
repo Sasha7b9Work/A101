@@ -22,7 +22,7 @@ bool Application::OnInit()
     wxImage::AddHandler(new wxPNGHandler);
 
     // create and show the main application window
-    Frame *frame = new Frame(_("AirLogic"));
+    Frame *frame = new Frame(_("A101 Устройство программирования"));
 
     Init();
 
