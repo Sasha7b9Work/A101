@@ -236,12 +236,6 @@ Measure Ampermeter::GetPeak()
 
     REAL min = Calculator::GetValueMin(&correct);
 
-    if (Range::Current() > 2)
-    {
-        max /= 1e3;
-        min /= 1e3;
-    }
-
     return Measure(max - min, OutOfRange(), correct);
 }
 

@@ -4,12 +4,12 @@
 #include <limits>
 
 
-ResolverMinMax::ResolverMinMax(const Period &)
+ResolverMinMax::ResolverMinMax(const Period &period)
 {
     min = std::numeric_limits<REAL>::max();
     max = std::numeric_limits<REAL>::min();
 
-    for (int i = 0; i < BufferADC::NumElements(); i++)
+    for (int i = period.first.first; i < period.last.first; i++)
     {
         REAL value = BufferADC::At(i).Real();
 
