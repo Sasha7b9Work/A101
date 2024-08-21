@@ -163,7 +163,7 @@ REAL Calculator::GetMin(bool *correct)
 {
     *correct = (min.NumElements() > 0);
 
-    return min.NumElements() ? dc.Get() : 0.0;
+    return min.NumElements() ? min.Get() : 0.0;
 }
 
 

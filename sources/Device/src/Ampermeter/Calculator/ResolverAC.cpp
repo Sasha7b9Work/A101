@@ -8,7 +8,6 @@
 ResolverAC::ResolverAC(const Period &period)
 {
     REAL min_value = 1.0;
-    int num_min = 0;
 
     REAL sum = 0.0;
     REAL dc = period.dc.Real();
@@ -20,11 +19,6 @@ ResolverAC::ResolverAC(const Period &period)
         if (std::fabs(value) < min_value)
         {
             min_value = std::fabs(value);
-        }
-
-        if (std::fabs(value) < 1e-4)
-        {
-            num_min++;
         }
 
         sum += value * value;
