@@ -162,7 +162,7 @@ ValueADC::ValueADC(int reading)
 }
 
 
-int AD7691::_GetAverageValue()
+int AD7691::GetAverageValue()
 {
     int64 sum = 0;
 

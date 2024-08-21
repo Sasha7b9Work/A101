@@ -46,5 +46,5 @@ namespace AD7691
     ValueADC ReadValue();
 
     // ¬озвращает усреднЄнное значение по максимальному количеству выборок
-    int _GetAverageValue();
+    int GetAverageValue();
 }

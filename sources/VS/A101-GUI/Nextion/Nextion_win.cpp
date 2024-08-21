@@ -4,6 +4,12 @@
 #include "GUI/Screen.h"
 
 
+void Nextion::SetValue(pchar, int)
+{
+
+}
+
+
 void Nextion::DrawRect(int x, int y, int width, int height, const Color &color)
 {
     color.SetAsCurrent();
@@ -108,6 +114,12 @@ void Nextion::Page::Enable(int)
 
 
 void Nextion::SendCommandFormat(const char *, ...)
+{
+
+}
+
+
+void Nextion::Text::SetVisible(pchar, bool)
 {
 
 }

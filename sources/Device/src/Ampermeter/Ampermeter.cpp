@@ -415,7 +415,7 @@ void Ampermeter::AdjustmentZero()
 
     InputRelays::EnableZero(false);
 
-    int zero_var = AD7691::_GetAverageValue();
+    int zero_var = AD7691::GetAverageValue();
 
     zero.SetVar(zero_var);
 

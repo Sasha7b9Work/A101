@@ -125,7 +125,6 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
     }
     else
     {
-        SCPI::AppendNewData(Direction::USB, txt.c_str(), std::strlen(txt.c_str()));
     }
 
     line->Clear();

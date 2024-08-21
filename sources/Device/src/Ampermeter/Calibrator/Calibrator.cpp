@@ -65,7 +65,7 @@ bool Calibrator::CalibratorZero::Run()
     InputRelays::EnableZero(true);
     zero.SetVar(0);
     zero.SetConst(0);
-    int average = AD7691::_GetAverageValue();
+    int average = AD7691::GetAverageValue();
     LOG_WRITE("average = %d", average);
     zero.SetVar(average);
     InputRelays::DisableZero(true);
