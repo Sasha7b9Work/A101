@@ -6,7 +6,7 @@
 #include "Ampermeter/Calculator/ResolverPeriodSamples.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include "Ampermeter/Calculator/ResolverAC.h"
-#include "Ampermeter/Calculator/ResolverMin.h"
+#include "Ampermeter/Calculator/ResolverMinMax.h"
 #include "Hardware/Timer.h"
 #include "Ampermeter/InputRelays.h"
 #include "Settings/Settings.h"
@@ -18,7 +18,7 @@ namespace Calculator
 {
 #define NUM_AVERAGES 1
 
-    static Averager<REAL, NUM_AVERAGES> _dc;
+    static Averager<REAL, NUM_AVERAGES> dc;
     static Averager<REAL, NUM_AVERAGES> ac;
     static Averager<REAL, NUM_AVERAGES> min;
     static Averager<REAL, NUM_AVERAGES> max;
@@ -28,12 +28,13 @@ namespace Calculator
     static REAL GetRelativeDC(bool *correct);
     static REAL GetRelativeAC(bool *correct);
     static REAL GetMin(bool *correct);
+    static REAL GetMax(bool *correct);
 }
 
 
 void Calculator::Reset()
 {
-    _dc.Reset();
+    dc.Reset();
     ac.Reset();
     min.Reset();
     ampl.Reset();
@@ -57,14 +58,16 @@ SampleRate Calculator::AppendData()
     {
         REAL value_dc = -period.dc.Real();
 
-        _dc.Push(value_dc * k);
+        dc.Push(value_dc * k);
     }
 
-    // —читаем MIN
+    // —читаем MIN и MAX
     {
-        REAL value_min = ResolverMin(period).GetResult();
+        ResolverMinMax resolver(period);
 
-        min.Push(value_min * k);
+        min.Push(resolver.GetMin() * k);
+
+        max.Push(resolver.GetMax() * k);
     }
 
     Display::LabelStar::Show();
@@ -148,9 +151,9 @@ REAL Calculator::GetRelativeDC(bool *correct)
 
 #else
 
-    *correct = (_dc.NumElements() > 0);
+    *correct = (dc.NumElements() > 0);
 
-    return _dc.NumElements() ? _dc.Get() : 0.0;
+    return dc.NumElements() ? dc.Get() : 0.0;
 
 #endif
 }
@@ -160,7 +163,15 @@ REAL Calculator::GetMin(bool *correct)
 {
     *correct = (min.NumElements() > 0);
 
-    return min.NumElements() ? _dc.Get() : 0.0;
+    return min.NumElements() ? dc.Get() : 0.0;
+}
+
+
+REAL Calculator::GetMax(bool *correct)
+{
+    *correct = (max.NumElements() > 0);
+
+    return max.NumElements() ? max.Get() : 0.0;
 }
 
 
@@ -179,4 +190,10 @@ REAL Calculator::GetAbsDC(bool *correct)
 REAL Calculator::GetValueMin(bool *correct)
 {
     return GetMin(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
+}
+
+
+REAL Calculator::GetValueMax(bool *correct)
+{
+    return GetMax(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
 }

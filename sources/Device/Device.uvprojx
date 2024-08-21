@@ -982,14 +982,14 @@
               <FilePath>.\src\Ampermeter\Calculator\ResolverAC.h</FilePath>
             </File>
             <File>
-              <FileName>ResolverMin.cpp</FileName>
+              <FileName>ResolverMinMax.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\ResolverMin.cpp</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverMinMax.cpp</FilePath>
             </File>
             <File>
-              <FileName>ResolverMin.h</FileName>
+              <FileName>ResolverMinMax.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\ResolverMin.h</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverMinMax.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2329,14 +2329,14 @@
               <FilePath>.\src\Ampermeter\Calculator\ResolverAC.h</FilePath>
             </File>
             <File>
-              <FileName>ResolverMin.cpp</FileName>
+              <FileName>ResolverMinMax.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\ResolverMin.cpp</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverMinMax.cpp</FilePath>
             </File>
             <File>
-              <FileName>ResolverMin.h</FileName>
+              <FileName>ResolverMinMax.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\ResolverMin.h</FilePath>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverMinMax.h</FilePath>
             </File>
           </Files>
         </Group>

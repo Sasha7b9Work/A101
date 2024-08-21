@@ -4,15 +4,18 @@
 
 
 // Вычисляет миинмальное значение
-class ResolverMin
+class ResolverMinMax
 {
 public:
 
-    ResolverMin(const Period &);
+    ResolverMinMax(const Period &);
 
-    REAL GetResult() const { return result; }
+    REAL GetMin() const { return min; }
+
+    REAL GetMax() const { return max; }
 
 private:
 
-    REAL result = 0.0;
+    REAL min = 0.0;
+    REAL max = 0.0;
 };

@@ -7,7 +7,7 @@ namespace BufferADC
 {
     static const int SIZE = 16 * 1024;
 
-    void _Push(ValueADC word);
+    void Push(ValueADC word);
 
     int NumElements();
 

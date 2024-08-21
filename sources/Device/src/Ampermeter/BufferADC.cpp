@@ -19,7 +19,7 @@ namespace BufferADC
 }
 
 
-void BufferADC::_Push(ValueADC word)
+void BufferADC::Push(ValueADC word)
 {
     if (pointer < SIZE)
     {

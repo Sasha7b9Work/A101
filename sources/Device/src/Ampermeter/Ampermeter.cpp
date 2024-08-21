@@ -198,7 +198,7 @@ Measure Ampermeter::GetMin()
 {
     bool correct = false;
 
-    REAL ac = Calculator::GetValueMin(&correct);
+    REAL min = Calculator::GetValueMin(&correct);
 
     REAL zero = ZeroDC::LevelAbsFull();
 
@@ -207,23 +207,46 @@ Measure Ampermeter::GetMin()
         zero /= 1e3;
     }
 
-    return Measure(ac - zero, OutOfRange(), correct);
+    return Measure(min - zero, OutOfRange(), correct);
 }
 
 
-Measure Ampermeter::GetAmpl()
+Measure Ampermeter::GetMax()
 {
-    return Measure(0.0, false, true);
+    bool correct = false;
+
+    REAL max = Calculator::GetValueMax(&correct);
+
+    REAL zero = ZeroDC::LevelAbsFull();
+
+    if (Range::Current() > 2)
+    {
+        zero /= 1e3;
+    }
+
+    return Measure(max - zero, OutOfRange(), correct);
 }
 
 
 Measure Ampermeter::GetPeak()
 {
-    return Measure(0.0, false, true);
+    bool correct = false;
+
+    REAL max = Calculator::GetValueMax(&correct);
+
+    REAL min = Calculator::GetValueMin(&correct);
+
+    if (Range::Current() > 2)
+    {
+        max /= 1e3;
+        min /= 1e3;
+    }
+
+    return Measure(max - min, OutOfRange(), correct);
 }
 
 
-Measure Ampermeter::GetMax()
+Measure Ampermeter::GetAmpl()
 {
     return Measure(0.0, false, true);
 }
@@ -265,12 +288,12 @@ void Ampermeter::MeasurementCycle()
 
             if (num_sample++ > 200)
             {
-                BufferADC::_Push(value);
+                BufferADC::Push(value);
             }
         }
         else
         {
-            BufferADC::_Push(value);
+            BufferADC::Push(value);
             num_sample++;
         }
     }
