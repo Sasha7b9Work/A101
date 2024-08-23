@@ -23,7 +23,7 @@ void ButtonOld::Press()
 
 void Button::Press()
 {
-
+    funcOnPress();
 }
 
 

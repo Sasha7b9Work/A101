@@ -91,10 +91,19 @@ private:
 };
 
 
-struct ButtonRange : public Button
+struct ButtonToggle : public Button
+{
+    ButtonToggle(pchar title_ru, pchar title_en, Font::E f, int x, int y, int w, int h, void (*_funcOnPress)()) :
+        Button(title_ru, title_en, f, x, y, w, h, _funcOnPress)
+    {
+    }
+};
+
+
+struct ButtonRange : public ButtonToggle
 {
     ButtonRange(pchar title_ru, pchar title_en, int x, int y, void (*funcOnPress)()) :
-        Button(title_ru, title_en, Font::_1, x, y, 127, 74, funcOnPress)
+        ButtonToggle(title_ru, title_en, Font::_1, x, y, 127, 74, funcOnPress)
     {
     }
 };
