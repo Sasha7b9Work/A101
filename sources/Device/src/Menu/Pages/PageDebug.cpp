@@ -27,7 +27,7 @@ namespace PageDebug
             cal.Reset();
         });
 
-    static ButtonOld *buttons[] =
+    static ButtonCommon *buttons[] =
     {
         &buttonZero,
         &buttonResetCal,

@@ -46,7 +46,7 @@ namespace PageGraph
         });
 
 
-    static ButtonOld *buttons[] =
+    static ButtonCommon *buttons[] =
     {
         &btnWave,
         &btnSpectr,

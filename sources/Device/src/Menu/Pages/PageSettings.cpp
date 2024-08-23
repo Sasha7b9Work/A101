@@ -18,7 +18,7 @@ namespace PageSettings
 
     static ButtonOld btnLanguageEN("r1", "RBEN", [] {});
 
-    static ButtonOld *buttons[] =
+    static ButtonCommon *buttons[] =
     {
         &btnBack, &btnLanguageRU, &btnLanguageEN, nullptr
     };

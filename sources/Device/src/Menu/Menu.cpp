@@ -15,7 +15,7 @@ void Menu::Init()
 
 void Menu::Update(pchar signal)
 {
-    ButtonOld *button = Page::Current()->GetButton(signal);
+    ButtonCommon *button = Page::Current()->GetButton(signal);
 
     if (button)
     {

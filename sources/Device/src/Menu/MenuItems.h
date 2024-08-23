@@ -3,7 +3,21 @@
 #include "Utils/Log.h"
 
 
-struct ButtonOld
+struct ButtonCommon
+{
+    virtual void Press() = 0;
+
+    // 1 - "нажать", 0 - "отпустить"
+    virtual void SetValue(int) = 0;
+
+    // Сиганл, который присылает кнопка при нажатии
+    virtual pchar Signal() const = 0;
+
+    virtual void Draw() = 0;
+};
+
+
+struct ButtonOld : public ButtonCommon
 {
 public:
 
@@ -13,10 +27,10 @@ public:
     {
     }
 
-    void Press();
-
     // Сиганл, который присылает кнопка при нажатии
-    pchar Signal() const { return signal; }
+    virtual pchar Signal() const override { return signal; }
+
+    virtual void Press() override;
 
     void SetText(pchar) const;
 
@@ -24,12 +38,11 @@ public:
 
     bool IsVisible() const {return is_visible; }
 
-    // 1 - "нажать", 0 - "отпустить"
-    void SetValue(int);
+    virtual void SetValue(int) override;
 
     int GetValue() const { return value; }
 
-    void Draw();
+    virtual void Draw() override;
 
     pchar Text() const { return name; }
 
@@ -53,7 +66,7 @@ private:
 
 struct Page
 {
-    Page(ButtonOld **_buttons, void (*_funcOnEnter)(), void (*_funcOnDraw)()) :
+    Page(ButtonCommon **_buttons, void (*_funcOnEnter)(), void (*_funcOnDraw)()) :
         buttons(_buttons), funcOnEnter(_funcOnEnter), funcOnDraw(_funcOnDraw)
     {
     }
@@ -62,17 +75,17 @@ struct Page
 
     void SetAsCurrent();
 
-    ButtonOld *GetButton(int index);
+    ButtonCommon *GetButton(int index);
 
     void SetButton(int index, ButtonOld *);
 
     void Draw();
 
-    ButtonOld *GetButton(pchar signal);
+    ButtonCommon *GetButton(pchar signal);
 
 private:
 
-    ButtonOld **buttons;
+    ButtonCommon **buttons;
 
     // Вызывается при появлении на экране
     void (*funcOnEnter)();

@@ -203,7 +203,7 @@ namespace PageMain
         Ampermeter::ZeroDC::FloatingZero::Process();
     });
 
-    static ButtonOld *buttons[] =
+    static ButtonCommon *buttons[] =
     {
         &btn2mA,
         &btn20mA,

@@ -64,7 +64,7 @@ void ButtonOld::SetValue(int _value)
 }
 
 
-ButtonOld *Page::GetButton(int index)
+ButtonCommon *Page::GetButton(int index)
 {
     return buttons[index];
 }
@@ -85,9 +85,9 @@ void Page::SetAsCurrent()
     current->funcOnEnter();
 }
 
-ButtonOld *Page::GetButton(pchar signal)
+ButtonCommon *Page::GetButton(pchar signal)
 {
-    ButtonOld **button = &buttons[0];
+    ButtonCommon **button = &buttons[0];
 
     while (*button)
     {
@@ -144,7 +144,7 @@ int Page::GetButtonsCount()
 {
     int count = 0;
 
-    ButtonOld **button = &buttons[0];
+    ButtonCommon **button = &buttons[0];
 
     while (*button++)
     {
