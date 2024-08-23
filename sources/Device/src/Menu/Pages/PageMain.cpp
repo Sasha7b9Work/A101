@@ -92,21 +92,10 @@ namespace PageMain
         );
 
 
-    static ButtonOld btn2maAVP("tAVP2mA", "01A", []()
-    {
-        Ampermeter::AVP::Enable();
-        Nextion::SetVisible("tAVP2mA", true);
-    });
-
     static ButtonOld btn20mA("btn20mA", "02P", []()
     {
         Ampermeter::AVP::Disable();
         Range::Set(1);
-    });
-
-    static ButtonOld btn20maAVP("tAVP20mA", "02A", []()
-    {
-        Ampermeter::AVP::Enable();
     });
 
     static ButtonOld btn200mA("btn200mA", "03P", []()
@@ -115,20 +104,10 @@ namespace PageMain
         Range::Set(2);
     });
 
-    static ButtonOld btn200maAVP("tAVP200mA", "03A", []()
-    {
-        Ampermeter::AVP::Enable();
-    });
-
     static ButtonOld btn2A("btn2A", "04P", []()
     {
         Ampermeter::AVP::Disable();
         Range::Set(3);
-    });
-
-    static ButtonOld btn2aAVP("tAVP2A", "04A", []()
-    {
-        Ampermeter::AVP::Enable();
     });
 
     static ButtonOld btn20A("btn20A", "05P", []()
@@ -228,10 +207,6 @@ namespace PageMain
         &btnMIN,
         &btnPEAK,
         &btnSettings,
-        &btn2maAVP,
-        &btn20maAVP,
-        &btn200maAVP,
-        &btn2aAVP,
         &btnZero,
         nullptr
     };
