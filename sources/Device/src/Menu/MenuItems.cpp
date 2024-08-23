@@ -189,5 +189,9 @@ pchar Button::Signal() const
 
 void Button::Draw()
 {
+    Nextion::DrawRect(x, y, width - 1, height - 1, Color::White);
+    Nextion::DrawRect(x + 1, y + 1, width - 3, height - 3, Color::White);
+    Nextion::DrawRect(x + 2, y + 2, width - 5, height - 5, Color::White);
 
+    Nextion::DrawString(x + 3, y + 3, width - 7, height - 7, font, Color::White, Color::Background, title[set.lang], 1, 1);
 }

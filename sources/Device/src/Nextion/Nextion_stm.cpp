@@ -19,6 +19,30 @@ namespace Nextion
 
     // Функция заверашется при получении кода
     void WaitResponse(pchar, ResponseCode::E);
+
+    static pchar Convert(pchar text)
+    {
+        static uint8 buffer[32];
+
+        uint8 *pointer = buffer;
+
+        while (*text)
+        {
+            *pointer = (uint8)*text;
+
+            if (*pointer > 127)
+            {
+                *pointer = (uint8)((*pointer) - 16);
+            }
+
+            text++;
+            pointer++;
+        }
+
+        *pointer = 0;
+
+        return (pchar)buffer;
+    }
 }
 
 
@@ -52,9 +76,10 @@ void Nextion::DrawLine(int x1, int y1, int x2, int y2, const Color &color)
 }
 
 
-void Nextion::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text, int h_align)
+void Nextion::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text, int h_align, int v_align)
 {
-    SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,%d,0,1,\"%s\"", x, y, width, height, font, color.ToRaw(), back_color.ToRaw(), h_align, text);
+    SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,%d,%d,1,\"%s\"",
+        x, y, width, height, font, color.ToRaw(), back_color.ToRaw(), h_align, v_align, Convert(text));
 }
 
 
