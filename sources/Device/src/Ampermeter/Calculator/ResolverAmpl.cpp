@@ -14,8 +14,6 @@ ResolverAmpl::ResolverAmpl(const Period &period, REAL min, REAL max)
     REAL _min = CalculateMin(first, last, period.dc.Real(), min, max);
 
     _ampl = _max - _min;
-
-    _ampl = _ampl;
 }
 
 
