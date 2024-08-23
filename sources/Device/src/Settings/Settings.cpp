@@ -18,7 +18,8 @@ namespace NS_Settings
         false,      // middle_of_3
         false,      // smooth
         false,      // firLPF
-        0U
+        0U,         // serial number
+        Lang::RU
     };
 
     static Settings stored = set_def;

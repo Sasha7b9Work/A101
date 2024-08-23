@@ -3,6 +3,17 @@
 #include "Settings/CalibrationSettings.h"
 
 
+struct Lang
+{
+    enum E
+    {
+        RU,
+        EN,
+        Count
+    };
+};
+
+
 // Что выводится на дисплей
 struct MeasuresOnDisplay
 {
@@ -34,6 +45,8 @@ struct Settings
     bool firLPF;                // Включён цифровой ФНЧ
 
     uint serial_number;
+
+    Lang::E lang;
 
     void Save();
     void Load();

@@ -83,11 +83,14 @@ namespace PageMain
     }
 
 
-    static ButtonOld btn2mA("btn2mA", "01P", []()
-    {
-        Ampermeter::AVP::Disable();
-        Range::Set(0);
-    });
+    static ButtonRange btn2mA("2 לְ", "2 mA", 4, 402,
+        []()
+            {
+                Ampermeter::AVP::Disable();
+                Range::Set(0);
+            }
+        );
+
 
     static ButtonOld btn2maAVP("tAVP2mA", "01A", []()
     {

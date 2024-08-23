@@ -1,6 +1,7 @@
 // 2022/10/24 11:25:49 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Utils/Log.h"
+#include "Nextion/Controls.h"
 
 
 struct ButtonCommon
@@ -42,7 +43,7 @@ public:
 
     int GetValue() const { return value; }
 
-    virtual void Draw() override;
+    virtual void Draw() override    ;
 
     pchar Text() const { return name; }
 
@@ -61,6 +62,41 @@ private:
 
     // Возвращает true, если это "программная кнопка" - отрисовывается вручную, а не дисплеем
     bool IsSoftware() const;
+};
+
+
+struct Button : public ButtonCommon
+{
+    Button(pchar title_ru, pchar title_en, Font::E f, int x, int y, int w, int h, void (*_funcOnPress)());
+
+    virtual void Press() override;
+
+    virtual void SetValue(int) override;
+
+    virtual pchar Signal() const override;
+
+    virtual void Draw() override;
+
+private:
+
+    pchar title[2];
+
+    Font::E font;
+    int x;
+    int y;
+    int width;
+    int height;
+
+    void (*funcOnPress)();
+};
+
+
+struct ButtonRange : public Button
+{
+    ButtonRange(pchar title_ru, pchar title_en, int x, int y, void (*funcOnPress)()) :
+        Button(title_ru, title_en, Font::_1, x, y, 127, 74, funcOnPress)
+    {
+    }
 };
 
 

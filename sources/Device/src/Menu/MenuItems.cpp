@@ -21,6 +21,12 @@ void ButtonOld::Press()
 }
 
 
+void Button::Press()
+{
+
+}
+
+
 void ButtonOld::SetText(pchar txt) const
 {
     if (IsSoftware())
@@ -158,4 +164,30 @@ int Page::GetButtonsCount()
 bool ButtonOld::IsSoftware() const
 {
     return x >= 0;
+}
+
+
+Button::Button(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) : ButtonCommon(),
+    font(_f), x(_x), y(_y), width(_w), height(_h), funcOnPress(_funcOnPress)
+{
+    title[0] = title_ru;
+    title[1] = title_en;
+}
+
+
+void Button::SetValue(int)
+{
+
+}
+
+
+pchar Button::Signal() const
+{
+    return "";
+}
+
+
+void Button::Draw()
+{
+
 }
