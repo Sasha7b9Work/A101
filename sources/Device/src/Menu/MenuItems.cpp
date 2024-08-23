@@ -15,13 +15,13 @@ using namespace std;
 Page *Page::current = PageMain::self;
 
 
-void Button::Press()
+void ButtonOld::Press()
 {
     funcOnPress();
 }
 
 
-void Button::SetText(pchar txt) const
+void ButtonOld::SetText(pchar txt) const
 {
     if (IsSoftware())
     {
@@ -34,7 +34,7 @@ void Button::SetText(pchar txt) const
 }
 
 
-void Button::SetVisible(bool visible)
+void ButtonOld::SetVisible(bool visible)
 {
     if (IsSoftware())
     {
@@ -49,7 +49,7 @@ void Button::SetVisible(bool visible)
 }
 
 
-void Button::SetValue(int _value)
+void ButtonOld::SetValue(int _value)
 {
     value = _value;
 
@@ -64,13 +64,13 @@ void Button::SetValue(int _value)
 }
 
 
-Button *Page::GetButton(int index)
+ButtonOld *Page::GetButton(int index)
 {
     return buttons[index];
 }
 
 
-void Page::SetButton(int index, Button *button)
+void Page::SetButton(int index, ButtonOld *button)
 {
     buttons[index] = button;
 }
@@ -85,9 +85,9 @@ void Page::SetAsCurrent()
     current->funcOnEnter();
 }
 
-Button *Page::GetButton(pchar signal)
+ButtonOld *Page::GetButton(pchar signal)
 {
-    Button **button = &buttons[0];
+    ButtonOld **button = &buttons[0];
 
     while (*button)
     {
@@ -114,7 +114,7 @@ void Page::Draw()
 }
 
 
-void Button::Draw()
+void ButtonOld::Draw()
 {
     if (!IsSoftware())
     {
@@ -144,7 +144,7 @@ int Page::GetButtonsCount()
 {
     int count = 0;
 
-    Button **button = &buttons[0];
+    ButtonOld **button = &buttons[0];
 
     while (*button++)
     {
@@ -155,7 +155,7 @@ int Page::GetButtonsCount()
 }
 
 
-bool Button::IsSoftware() const
+bool ButtonOld::IsSoftware() const
 {
     return x >= 0;
 }

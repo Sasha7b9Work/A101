@@ -8,17 +8,17 @@
 
 namespace PageSettings
 {
-    static Button btnBack("bt18", "2B0", []()
+    static ButtonOld btnBack("bt18", "2B0", []()
         {
             PageMain::self->SetAsCurrent();
         }
     );
 
-    static Button btnLanguageRU("r0", "RBRU", [] {});
+    static ButtonOld btnLanguageRU("r0", "RBRU", [] {});
 
-    static Button btnLanguageEN("r1", "RBEN", [] {});
+    static ButtonOld btnLanguageEN("r1", "RBEN", [] {});
 
-    static Button *buttons[] =
+    static ButtonOld *buttons[] =
     {
         &btnBack, &btnLanguageRU, &btnLanguageEN, nullptr
     };

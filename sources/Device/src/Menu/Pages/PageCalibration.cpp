@@ -18,10 +18,10 @@
 
 namespace PageCalibration
 {
-    extern Button btnSave;
-    extern Button btnCalib;
-    extern Button btn0;
-    extern Button btn2;
+    extern ButtonOld btnSave;
+    extern ButtonOld btnCalib;
+    extern ButtonOld btn0;
+    extern ButtonOld btn2;
 
     static void FuncDraw();
 
@@ -106,16 +106,16 @@ namespace PageCalibration
     // Установить видимость для цифровых кнопок
     static void SetVisibleDigits(bool visible);
 
-    static Button btnBack("bt18", "2B0", []()
+    static ButtonOld btnBack("bt18", "2B0", []()
         {
             PageMain::self->SetAsCurrent();
         });
 
-    static Button btnMin("bt22", "2D1", []() { ChooseDot(0); });
+    static ButtonOld btnMin("bt22", "2D1", []() { ChooseDot(0); });
 
-    static Button btnMax("bt21", "2D2", []() { ChooseDot(1); });
+    static ButtonOld btnMax("bt21", "2D2", []() { ChooseDot(1); });
 
-    Button btnSave("b12", "2SV", []()
+    ButtonOld btnSave("b12", "2SV", []()
         {
             Calibrator::PressButtonSave();
             btnSave.SetVisible(false);
@@ -171,7 +171,7 @@ namespace PageCalibration
         }
     }
 
-    Button btnCalib("b13", "2OK", []()
+    ButtonOld btnCalib("b13", "2OK", []()
         {
             btnSave.SetVisible(false);
             btnCalib.SetValue(0);
@@ -183,47 +183,47 @@ namespace PageCalibration
             btnCalib.SetVisible(true);
         });
 
-    static Button btn2mA("bt17", "21P", []() { ChooseRange(0); });
+    static ButtonOld btn2mA("bt17", "21P", []() { ChooseRange(0); });
 
-    static Button btn20mA("bt16", "22P", []() { ChooseRange(1); });
+    static ButtonOld btn20mA("bt16", "22P", []() { ChooseRange(1); });
 
-    static Button btn200mA("bt15", "23P", []() { ChooseRange(2); });
+    static ButtonOld btn200mA("bt15", "23P", []() { ChooseRange(2); });
 
-    static Button btn2A("bt14", "24P", []() { ChooseRange(3); });
+    static ButtonOld btn2A("bt14", "24P", []() { ChooseRange(3); });
 
-    static Button btn20A("bt13", "25P", []() { ChooseRange(4); });
+    static ButtonOld btn20A("bt13", "25P", []() { ChooseRange(4); });
 
-    static Button btn50A("bt12", "26P", []() { ChooseRange(5); });
+    static ButtonOld btn50A("bt12", "26P", []() { ChooseRange(5); });
 
-    Button btn0("b0", "KB0", []() { PressDigit('0'); });
+    ButtonOld btn0("b0", "KB0", []() { PressDigit('0'); });
 
-    static Button btn1("b1", "KB1", []() { PressDigit('1'); });
+    static ButtonOld btn1("b1", "KB1", []() { PressDigit('1'); });
 
-    Button btn2("b2", "KB2", []() { PressDigit('2'); });
+    ButtonOld btn2("b2", "KB2", []() { PressDigit('2'); });
 
-    static Button btn3("b3", "KB3", []() { PressDigit('3'); });
+    static ButtonOld btn3("b3", "KB3", []() { PressDigit('3'); });
 
-    static Button btn4("b4", "KB4", []() { PressDigit('4'); });
+    static ButtonOld btn4("b4", "KB4", []() { PressDigit('4'); });
 
-    static Button btn5("b5", "KB5", []() { PressDigit('5'); });
+    static ButtonOld btn5("b5", "KB5", []() { PressDigit('5'); });
 
-    static Button btn6("b6", "KB6", []() { PressDigit('6'); });
+    static ButtonOld btn6("b6", "KB6", []() { PressDigit('6'); });
 
-    static Button btn7("b7", "KB7", []() { PressDigit('7'); });
+    static ButtonOld btn7("b7", "KB7", []() { PressDigit('7'); });
 
-    static Button btn8("b8", "KB8", []() { PressDigit('8'); });
+    static ButtonOld btn8("b8", "KB8", []() { PressDigit('8'); });
 
-    static Button btn9("b9", "KB9", []() { PressDigit('9'); });
+    static ButtonOld btn9("b9", "KB9", []() { PressDigit('9'); });
 
-    static Button btnDot("b10", "KBD", []() { PressDigit('.'); });
+    static ButtonOld btnDot("b10", "KBD", []() { PressDigit('.'); });
 
-    static Button btnSign("b11", "KBS", []() { PressDigit('-'); });
+    static ButtonOld btnSign("b11", "KBS", []() { PressDigit('-'); });
 
-    static Button btnBackspace("b14", "KBBACK", []() { PressDigit(' '); });
+    static ButtonOld btnBackspace("b14", "KBBACK", []() { PressDigit(' '); });
 
-//    static Button btnDebugPage("Debug", "", []() {}, 10, 300);
+//    static ButtonOld btnDebugPage("Debug", "", []() {}, 10, 300);
 
-    static Button *buttons[] =
+    static ButtonOld *buttons[] =
     {
         &btnBack, &btnSave, &btnCalib, &btnMin, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
         &btn2A,   &btn20A,  &btn50A,   &btn0,   &btn1,    &btn2,   &btn3,    &btn4,
@@ -232,7 +232,7 @@ namespace PageCalibration
 
     namespace ButtonsRange
     {
-        static Button *buttons[6] =
+        static ButtonOld *buttons[6] =
         {
             &btn2mA,
             &btn20mA,
@@ -274,7 +274,7 @@ namespace PageCalibration
 
     static void ChooseDot(int dot)
     {
-        static Button *btns[2] =
+        static ButtonOld *btns[2] =
         {
             &btnMin,
             &btnMax

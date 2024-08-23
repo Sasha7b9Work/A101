@@ -20,7 +20,7 @@ namespace PageGraph
     }
 
 
-    static Button btnWave("btnSignal", "3WP", []()
+    static ButtonOld btnWave("btnSignal", "3WP", []()
         {
             DiagramInput::Draw();
 
@@ -28,25 +28,25 @@ namespace PageGraph
         });
 
 
-    static Button btnSpectr("btnSpectr", "3SP", []()
+    static ButtonOld btnSpectr("btnSpectr", "3SP", []()
         {
             DiagramInput::Draw();
 
             DiagramFFT::Draw();
         });
 
-    static Button btnBack("btnBackToMain", "3B0", []()
+    static ButtonOld btnBack("btnBackToMain", "3B0", []()
         {
             PageMain::self->SetAsCurrent();
         });
 
-    static Button btnDebug("", "debug", []()
+    static ButtonOld btnDebug("", "debug", []()
         {
             PageDebug::self->SetAsCurrent();
         });
 
 
-    static Button *buttons[] =
+    static ButtonOld *buttons[] =
     {
         &btnWave,
         &btnSpectr,
