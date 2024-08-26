@@ -1,6 +1,6 @@
 // 2022/11/10 19:59:41 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Display/Colors.h"
+#include "Nextion/Colors.h"
 
 /*
 *   Отрисовка прямо на поверхности страницы

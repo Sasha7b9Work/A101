@@ -11,7 +11,7 @@
 #include "Hardware/Timer.h"
 #include "Ampermeter/InputRelays.h"
 #include "Settings/Settings.h"
-#include "Display/Display.h"
+#include "Nextion/Display.h"
 #include <cmath>
 
 

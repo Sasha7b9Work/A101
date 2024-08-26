@@ -1,7 +1,7 @@
 // 2022/11/23 14:55:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Device.h"
-#include "Display/Display.h"
+#include "Nextion/Display.h"
 #include "Nextion/Nextion.h"
 #include "Hardware/HAL/HAL.h"
 #include "Ampermeter/Ampermeter.h"

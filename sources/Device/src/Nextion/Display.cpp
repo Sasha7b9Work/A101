@@ -1,8 +1,8 @@
 // 2022/10/17 13:48:19 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Display/Display.h"
+#include "Nextion/Display.h"
 #include "Hardware/HAL/HAL.h"
-#include "Display/DiagramInput.h"
+#include "Nextion/DiagramInput.h"
 #include "Nextion/Nextion.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/Timer.h"

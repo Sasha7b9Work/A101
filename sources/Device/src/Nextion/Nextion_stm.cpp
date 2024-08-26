@@ -1,8 +1,8 @@
 // 2022/10/31 19:37:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Nextion/Nextion.h"
-#include "Display/DiagramFFT.h"
-#include "Display/DiagramInput.h"
+#include "Nextion/DiagramFFT.h"
+#include "Nextion/DiagramInput.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Profiler.h"

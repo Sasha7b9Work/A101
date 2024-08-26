@@ -1,10 +1,10 @@
 // 2022/10/24 12:16:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Display/DiagramInput.h"
-#include "Display/DiagramFFT.h"
+#include "Nextion/DiagramInput.h"
+#include "Nextion/DiagramFFT.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/Calibrator/Calibrator.h"
-#include "Display/Display.h"
+#include "Nextion/Display.h"
 
 
 namespace PageGraph

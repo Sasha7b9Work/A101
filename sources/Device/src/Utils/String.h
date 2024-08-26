@@ -1,6 +1,6 @@
 // 2022/03/30 08:25:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Display/Colors.h"
+#include "Nextion/Colors.h"
 #include <cstdarg>
 #include <cstring>
 #include <cstdio>

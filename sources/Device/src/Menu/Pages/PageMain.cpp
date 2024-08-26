@@ -6,7 +6,7 @@
 #include "Hardware/Timer.h"
 #include "Nextion/Nextion.h"
 #include "Ampermeter/Ampermeter.h"
-#include "Display/Display.h"
+#include "Nextion/Display.h"
 #include "Settings/Settings.h"
 #include "Menu/Menu.h"
 #include <cstdio>

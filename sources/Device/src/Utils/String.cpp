@@ -1,7 +1,7 @@
 // 2022/03/30 08:25:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Utils/String.h"
-#include "Display/Display.h"
+#include "Nextion/Display.h"
 
 
 //template      String<(int)DEFAULT_SIZE_STRING>::String(char *, ...);
