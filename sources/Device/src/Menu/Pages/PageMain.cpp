@@ -82,39 +82,38 @@ namespace PageMain
         wndMAX.Draw(Ampermeter::GetMax(), Range::Current());
     }
 
-
-    static ButtonRange btn2mA("2 לְ", "2 mA", 4, 402,
-        []()
+    static void FuncOnRange(int range)
+    {
+        if (Range::Current() != range)
+        {
+            for (int i = 0; i < 6; i++)
             {
-                if (Range::Current() != 0)
-                {
-                    for (int i = 0; i < 6; i++)
-                    {
-                        PageMain::self->GetButton(i)->SetValue(i == 0 ? 1 : 0);
-                    }
-                    Ampermeter::AVP::Disable();
-                    Range::Set(0);
-                }
+                PageMain::self->GetButton(i)->SetValue(i == 0 ? 1 : 0);
             }
-        );
+            Ampermeter::AVP::Disable();
+            Range::Set(0);
+        }
+    }
 
-
-    static ButtonOld btn20mA("btn20mA", "02P", []()
+    static ButtonRange btn2mA("2 לְ", "2 mA", 4, 402, []()
     {
-        Ampermeter::AVP::Disable();
-        Range::Set(1);
+        FuncOnRange(0);
     });
 
-    static ButtonOld btn200mA("btn200mA", "03P", []()
+
+    static ButtonRange btn20mA("20 לְ", "20 mA", 104, 402, []()
     {
-        Ampermeter::AVP::Disable();
-        Range::Set(2);
+        FuncOnRange(1);
     });
 
-    static ButtonOld btn2A("btn2A", "04P", []()
+    static ButtonRange btn200mA("200 לְ", "200 mA", 204, 402, []()
     {
-        Ampermeter::AVP::Disable();
-        Range::Set(3);
+        FuncOnRange(2);
+    });
+
+    static ButtonRange btn2A("2 ְ", "2 A", 34, 402, []()
+    {
+        FuncOnRange(3);
     });
 
     static ButtonOld btn20A("btn20A", "05P", []()
