@@ -168,10 +168,18 @@ void Page::SetButton(int index, ButtonOld *button)
 
 void Page::SetAsCurrent()
 {
+    ButtonCommon::SetAllInactive();
+
     current = this;
 
     Timer::Delay(50);           // Эта задержка нужна для того, чтобы дисплей успел переключиться на новую страницу.
                                 // Иначе сообщения элементам управления будут посылаться на старую страницу
+
+    for (int i = 0; i < GetButtonsCount(); i++)
+    {
+        GetButton(i)->SetActive(true);
+    }
+
     current->funcOnEnter();
 }
 
