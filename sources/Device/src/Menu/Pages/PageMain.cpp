@@ -32,10 +32,6 @@ namespace PageMain
         wndMAX.Reset();
     }
 
-    void Init()
-    {
-    }
-
     void OnEventChangeRange()
     {
         ResetAllMeasures();
@@ -278,4 +274,10 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 
         Nextion::Text::SetVisible("tzDC", enable);
     }
+}
+
+
+void PageMain::Init()
+{
+    btn2A.SetValue(1);
 }
