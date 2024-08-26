@@ -86,8 +86,15 @@ namespace PageMain
     static ButtonRange btn2mA("2 לְ", "2 mA", 4, 402,
         []()
             {
-                Ampermeter::AVP::Disable();
-                Range::Set(0);
+                if (Range::Current() != 0)
+                {
+                    for (int i = 0; i < 6; i++)
+                    {
+                        PageMain::self->GetButton(i)->SetValue(i == 0 ? 1 : 0);
+                    }
+                    Ampermeter::AVP::Disable();
+                    Range::Set(0);
+                }
             }
         );
 

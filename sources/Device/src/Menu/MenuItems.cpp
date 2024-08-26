@@ -59,6 +59,26 @@ void ButtonCommon::SetAllInactive()
 }
 
 
+void ButtonCommon::Press()
+{
+    funcOnPress();
+
+    is_pressed = true;
+
+    Draw();
+}
+
+
+void ButtonCommon::Release()
+{
+    if (IsWithoutFixation())
+    {
+        is_pressed = false;
+
+        return;
+    }
+}
+
 ButtonCommon::ButtonCommon(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
     font(_f), rect{_x, _y, _w, _h }, funcOnPress(_funcOnPress)
 {
@@ -102,24 +122,6 @@ void Menu::Init()
 void ButtonOld::Press()
 {
     funcOnPress();
-}
-
-
-void Button::Press()
-{
-    funcOnPress();
-
-    is_pressed = true;
-
-    Draw();
-}
-
-
-void Button::Release()
-{
-    is_pressed = false;
-
-    Draw();
 }
 
 
@@ -277,9 +279,11 @@ Button::Button(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _
 }
 
 
-void Button::SetValue(int)
+void ButtonCommon::SetValue(int value)
 {
+    is_pressed = (value != 0);
 
+    Draw();
 }
 
 

@@ -9,12 +9,12 @@ struct ButtonCommon
 {
     ButtonCommon(pchar title_ru, pchar title_en, Font::E, int x, int y, int w, int h, void (*_funcOnPress)());
 
-    virtual void Press() = 0;
+    virtual void Press();
 
-    virtual void Release() = 0;
+    virtual void Release();
 
     // 1 - "нажать", 0 - "отпустить"
-    virtual void SetValue(int) = 0;
+    virtual void SetValue(int);
 
     // Сиганл, который присылает кнопка при нажатии
     virtual pchar Signal() const = 0;
@@ -105,12 +105,6 @@ struct Button : public ButtonCommon
 {
     Button(pchar title_ru, pchar title_en, Font::E f, int x, int y, int w, int h, void (*_funcOnPress)());
 
-    virtual void Press() override;
-
-    virtual void Release() override;
-
-    virtual void SetValue(int) override;
-
     virtual pchar Signal() const override;
 
     virtual void Draw() override;
@@ -130,12 +124,14 @@ struct ButtonToggle : public Button
 };
 
 
-struct ButtonRange : public Button
+struct ButtonRange : public ButtonToggle
 {
     ButtonRange(pchar title_ru, pchar title_en, int x, int y, void (*_funcOnPress)()) :
-        Button(title_ru, title_en, Font::_1, x, y, 127, 74, _funcOnPress)
+        ButtonToggle(title_ru, title_en, Font::_1, x, y, 127, 74, _funcOnPress)
     {
     }
+
+
 };
 
 
