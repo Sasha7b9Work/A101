@@ -281,9 +281,14 @@ Button::Button(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _
 
 void ButtonCommon::SetValue(int value)
 {
-    is_pressed = (value != 0);
+    bool new_pressed = (value != 0);
 
-    Draw();
+    if (new_pressed != is_pressed)
+    {
+        is_pressed = new_pressed;
+
+        Draw();
+    }
 }
 
 

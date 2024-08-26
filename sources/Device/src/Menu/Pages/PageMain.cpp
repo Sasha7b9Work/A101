@@ -88,10 +88,13 @@ namespace PageMain
         {
             for (int i = 0; i < 6; i++)
             {
-                PageMain::self->GetButton(i)->SetValue(i == 0 ? 1 : 0);
+                if (i != range)
+                {
+                    PageMain::self->GetButton(i)->SetValue(0);
+                }
             }
             Ampermeter::AVP::Disable();
-            Range::Set(0);
+            Range::Set(range);
         }
     }
 
@@ -101,17 +104,17 @@ namespace PageMain
     });
 
 
-    static ButtonRange btn20mA("20 לְ", "20 mA", 104, 402, []()
+    static ButtonRange btn20mA("20 לְ", "20 mA", 137, 402, []()
     {
         FuncOnRange(1);
     });
 
-    static ButtonRange btn200mA("200 לְ", "200 mA", 204, 402, []()
+    static ButtonRange btn200mA("200 לְ", "200 mA", 270, 402, []()
     {
         FuncOnRange(2);
     });
 
-    static ButtonRange btn2A("2 ְ", "2 A", 34, 402, []()
+    static ButtonRange btn2A("2 ְ", "2 A", 403, 402, []()
     {
         FuncOnRange(3);
     });
