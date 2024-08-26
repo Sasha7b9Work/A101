@@ -43,6 +43,9 @@ protected:
 
     bool active = false;
 
+    bool is_pressed = false;        // Для обычной кнопки переходит в состяние false сразу после отпускания, для кнопки с фиксацией -
+                                    // после повторного нажатия
+
     void (*funcOnPress)();
 };
 
@@ -104,7 +107,7 @@ struct Button : public ButtonCommon
 
     virtual void Press() override;
 
-    virtual void Release() override { }
+    virtual void Release() override;
 
     virtual void SetValue(int) override;
 

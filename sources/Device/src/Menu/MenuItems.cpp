@@ -108,6 +108,18 @@ void ButtonOld::Press()
 void Button::Press()
 {
     funcOnPress();
+
+    is_pressed = true;
+
+    Draw();
+}
+
+
+void Button::Release()
+{
+    is_pressed = false;
+
+    Draw();
 }
 
 
@@ -288,7 +300,10 @@ void Button::Draw()
     Nextion::DrawRect(x + 1, y + 1, width - 3, height - 3, Color::White);
     Nextion::DrawRect(x + 2, y + 2, width - 5, height - 5, Color::White);
 
-    Nextion::DrawString(x + 3, y + 3, width - 7, height - 7, font, Color::White, Color::Background, title[set.lang], 1, 1);
+    Nextion::DrawString(x + 3, y + 3, width - 7, height - 7, font,
+        Color::White,
+        is_pressed ? Color::ButtonPress : Color::Background,
+        title[set.lang], 1, 1);
 
     SetActive(true);
 }
