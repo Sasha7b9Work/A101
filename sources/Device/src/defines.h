@@ -4,9 +4,9 @@
 
 #define VERSION_MAJOR 0
 #define VERSION_MINOR 1
-#define VERSION_BUILD 124
+#define VERSION_BUILD 125
 
-#define DATE_BUILD "2024-08-26 10:09:40"
+#define DATE_BUILD "2024-08-26 10:24:24"
 
 #define VERSION_SCPI  "1.0"
 
@@ -79,6 +79,7 @@ typedef void(*pFuncVI)(int);
 
 union BitSet32
 {
+    BitSet32(uint *_word) : word(*_word) { }
     BitSet32(uint _word = 0) : word(_word) { }
     BitSet32(uint8 byte0, uint8 byte1, uint8 byte2, uint8 byte3)
     {

@@ -15,6 +15,27 @@ using namespace std;
 Page *Page::current = PageMain::self;
 
 
+namespace NSBC
+{
+    static int x = 0;
+    static int y = 0;
+}
+
+
+
+void ButtonCommon::OnEventPress(int _x, int _y)
+{
+    NSBC::x = _x;
+    NSBC::y = _y;
+}
+
+
+void ButtonCommon::OnEventRelease(int _x, int _y)
+{
+    NSBC::x = _x;
+    NSBC::y = _y;
+}
+
 void ButtonOld::Press()
 {
     funcOnPress();

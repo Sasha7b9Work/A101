@@ -15,6 +15,9 @@ struct ButtonCommon
     virtual pchar Signal() const = 0;
 
     virtual void Draw() = 0;
+
+    static void OnEventPress(int, int);
+    static void OnEventRelease(int, int);
 };
 
 

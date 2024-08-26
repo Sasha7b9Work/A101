@@ -7,6 +7,7 @@
 #include "Hardware/Timer.h"
 #include "Utils/Profiler.h"
 #include "Menu/PasswordResolver.h"
+#include "Nextion/Keyboard.h"
 #include "Menu/Menu.h"
 #include <cstdarg>
 #include <cstdio>
@@ -201,21 +202,16 @@ bool Nextion::CommandButton::Execute()
 
 bool Nextion::CommandCoordinate::Execute()
 {
-    static int x = 0;
-    static int y = 0;
+    BitSet32 x((uint *)buffer);
+    BitSet32 y((uint *)(buffer + 4));
 
-    if (buffer[size - 1] == '+')
+    if (buffer[8] == '+')
     {
-        BitSet32 bs(*((uint *)buffer));
-        x = (int)bs.word;
+        Keyboard::CallbackOnPress((int)x.word, (int)y.word);
     }
-
-    if (buffer[size - 1] == '-')
+    else if (buffer[8] == '-')
     {
-        BitSet32 bs(*((uint *)buffer));
-        y = (int)bs.word;
-
-        Menu::Press(x, y);
+        Keyboard::CallbackOnRelease((int)x.word, (int)y.word);
     }
 
     return true;
@@ -257,12 +253,6 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
     {
         if (buffer[i] == (uint8)'_')            // Кнопка
         {
-//          for (int j = 0; j <= i; j++)
-//          {
-//              char symbol[2] = { (char)buffer[j], '\0' };
-//                HAL_USART3::SendText(symbol);
-//          }
-
             CommandButton *result = new CommandButton(buffer, i);
 
             RemoveFromStart(i + 1);
@@ -271,11 +261,20 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
         }
         else if (buffer[i] == (uint8)'+' || buffer[i] == (uint8)'-')
         {
-            CommandCoordinate *result = new CommandCoordinate(buffer, i + 1);
+            int num_symbols = i + 1;
 
-            RemoveFromStart(i + 1);
+            if (i == 8)
+            {
+                CommandCoordinate *result = new CommandCoordinate(buffer, num_symbols);
 
-            return result;
+                RemoveFromStart(num_symbols);
+
+                return result;
+            }
+            else
+            {
+                RemoveFromStart(num_symbols);
+            }
         }
     }
 

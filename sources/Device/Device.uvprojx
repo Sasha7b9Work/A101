@@ -1564,6 +1564,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Nextion\Display.h</FilePath>
             </File>
+            <File>
+              <FileName>Keyboard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Nextion\Keyboard.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Nextion\Keyboard.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2920,6 +2930,16 @@
               <FileName>Display.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Nextion\Display.h</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Nextion\Keyboard.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Nextion\Keyboard.h</FilePath>
             </File>
           </Files>
         </Group>
