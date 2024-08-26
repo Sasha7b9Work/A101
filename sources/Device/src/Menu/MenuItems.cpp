@@ -17,24 +17,87 @@ Page *Page::current = PageMain::self;
 
 namespace NSBC
 {
-    static int x = 0;
-    static int y = 0;
+    static const int MAX_BUTTONS = 32;                  // Здесь хранятся все созданные кнопки (со всех страниц)
+    static ButtonCommon *buttons[MAX_BUTTONS];
+    static int num_buttons = 0;                         // Столько создано кнопок в данный момент
+
+    static void AppendNewButton(ButtonCommon *button)
+    {
+        buttons[num_buttons] = button;
+
+        button->SetActive(false);
+
+        if (num_buttons++ >= MAX_BUTTONS)
+        {
+            LOG_ERROR_TRACE("The button buffer is full");
+        }
+    }
+
+    static ButtonCommon *GetButton(int x, int y)
+    {
+        for (int i = 0; i < num_buttons; i++)
+        {
+            ButtonCommon *button = buttons[i];
+
+            if (button->GetRect().Intersect(x, y) && button->IsActive())
+            {
+                return button;
+            }
+        }
+
+        return nullptr;
+    }
 }
 
 
-
-void ButtonCommon::OnEventPress(int _x, int _y)
+void ButtonCommon::SetAllInactive()
 {
-    NSBC::x = _x;
-    NSBC::y = _y;
+    for (int i = 0; i < NSBC::num_buttons; i++)
+    {
+        NSBC::buttons[i]->SetActive(false);
+    }
 }
 
 
-void ButtonCommon::OnEventRelease(int _x, int _y)
+ButtonCommon::ButtonCommon(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
+    font(_f), rect{_x, _y, _w, _h }, funcOnPress(_funcOnPress)
 {
-    NSBC::x = _x;
-    NSBC::y = _y;
+    title[Lang::RU] = title_ru;
+    title[Lang::EN] = title_en;
+
+    NSBC::AppendNewButton(this);
 }
+
+
+void ButtonCommon::OnEventPress(int x, int y)
+{
+    ButtonCommon *button = NSBC::GetButton(x, y);
+
+    if (button)
+    {
+        button->Press();
+    }
+}
+
+
+void ButtonCommon::OnEventRelease(int x, int y)
+{
+    ButtonCommon *button = NSBC::GetButton(x, y);
+
+    if (button)
+    {
+        button->Release();
+    }
+}
+
+
+void Menu::Init()
+{
+    PageMain::self->SetAsCurrent();
+
+    PageMain::Init();
+}
+
 
 void ButtonOld::Press()
 {
@@ -188,11 +251,9 @@ bool ButtonOld::IsSoftware() const
 }
 
 
-Button::Button(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) : ButtonCommon(),
-    font(_f), x(_x), y(_y), width(_w), height(_h), funcOnPress(_funcOnPress)
+Button::Button(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
+    ButtonCommon(title_ru, title_en, _f, _x, _y, _w, _h, _funcOnPress)
 {
-    title[0] = title_ru;
-    title[1] = title_en;
 }
 
 
@@ -210,9 +271,16 @@ pchar Button::Signal() const
 
 void Button::Draw()
 {
+    int x = rect.x;
+    int y = rect.y;
+    int width = rect.width;
+    int height = rect.height;
+
     Nextion::DrawRect(x, y, width - 1, height - 1, Color::White);
     Nextion::DrawRect(x + 1, y + 1, width - 3, height - 3, Color::White);
     Nextion::DrawRect(x + 2, y + 2, width - 5, height - 5, Color::White);
 
     Nextion::DrawString(x + 3, y + 3, width - 7, height - 7, font, Color::White, Color::Background, title[set.lang], 1, 1);
+
+    SetActive(true);
 }

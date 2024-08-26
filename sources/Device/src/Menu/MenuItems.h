@@ -2,11 +2,16 @@
 #pragma once
 #include "Utils/Log.h"
 #include "Nextion/Controls.h"
+#include "Utils/Math.h"
 
 
 struct ButtonCommon
 {
+    ButtonCommon(pchar title_ru, pchar title_en, Font::E, int x, int y, int w, int h, void (*_funcOnPress)());
+
     virtual void Press() = 0;
+
+    virtual void Release() = 0;
 
     // 1 - "нажать", 0 - "отпустить"
     virtual void SetValue(int) = 0;
@@ -16,8 +21,29 @@ struct ButtonCommon
 
     virtual void Draw() = 0;
 
+    virtual bool IsWithoutFixation() const = 0;
+
     static void OnEventPress(int, int);
     static void OnEventRelease(int, int);
+
+    const Rect &GetRect() const { return rect; }
+
+    // Активная - это когда реагирует на на нажатия. Как правило (может быть, всегда) -
+    // если кнопка видна на экране, то она активна
+    void SetActive(bool _active) { active = _active; }
+    bool IsActive() const { return active; }
+    static void SetAllInactive();
+
+protected:
+
+    pchar title[2];
+
+    Font::E font;
+    Rect rect;
+
+    bool active = false;
+
+    void (*funcOnPress)();
 };
 
 
@@ -27,7 +53,8 @@ public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
     ButtonOld(pchar _name, pchar _signal, void (*_funcOnPress)(), int _x = -1, int _y = -1) :
-        name(_name), signal(_signal), funcOnPress(_funcOnPress), x(_x), y(_y)
+        ButtonCommon(_name, _name, Font::_1, _x, _y, 0, 0, _funcOnPress),
+        name(_name), signal(_signal), x(_x), y(_y)
     {
     }
 
@@ -35,6 +62,8 @@ public:
     virtual pchar Signal() const override { return signal; }
 
     virtual void Press() override;
+
+    virtual void Release() override { }
 
     void SetText(pchar) const;
 
@@ -50,11 +79,12 @@ public:
 
     pchar Text() const { return name; }
 
+    virtual bool IsWithoutFixation() const override { return true; }
+
 private:
 
     pchar name;                     // Имя кнопки в редакторе
     pchar signal;                   // Такой сигнал присылает кнопка при нажатии
-    void (*funcOnPress)();
 
     int value = 0;
 
@@ -74,23 +104,15 @@ struct Button : public ButtonCommon
 
     virtual void Press() override;
 
+    virtual void Release() override { }
+
     virtual void SetValue(int) override;
 
     virtual pchar Signal() const override;
 
     virtual void Draw() override;
 
-private:
-
-    pchar title[2];
-
-    Font::E font;
-    int x;
-    int y;
-    int width;
-    int height;
-
-    void (*funcOnPress)();
+    virtual bool IsWithoutFixation() const override { return true; }
 };
 
 
@@ -100,13 +122,15 @@ struct ButtonToggle : public Button
         Button(title_ru, title_en, f, x, y, w, h, _funcOnPress)
     {
     }
+
+    virtual bool IsWithoutFixation() const override { return false; }
 };
 
 
-struct ButtonRange : public ButtonToggle
+struct ButtonRange : public Button
 {
-    ButtonRange(pchar title_ru, pchar title_en, int x, int y, void (*funcOnPress)()) :
-        ButtonToggle(title_ru, title_en, Font::_1, x, y, 127, 74, funcOnPress)
+    ButtonRange(pchar title_ru, pchar title_en, int x, int y, void (*_funcOnPress)()) :
+        Button(title_ru, title_en, Font::_1, x, y, 127, 74, _funcOnPress)
     {
     }
 };

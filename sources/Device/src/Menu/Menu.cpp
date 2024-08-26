@@ -5,14 +5,6 @@
 #include <cstring>
 
 
-void Menu::Init()
-{
-    PageMain::self->SetAsCurrent();
-
-    PageMain::Init();
-}
-
-
 void Menu::Update(pchar signal)
 {
     ButtonCommon *button = Page::Current()->GetButton(signal);

@@ -74,3 +74,29 @@ float Math::Random(float min, float max)
 
     return min + (float)std::rand() * scale;
 }
+
+
+bool Rect::Intersect(int _x, int _y) const
+{
+    if (_x < x)
+    {
+        return false;
+    }
+
+    if (_x > x + width)
+    {
+        return false;
+    }
+
+    if (_y < y)
+    {
+        return false;
+    }
+
+    if (_y > y + height)
+    {
+        return false;
+    }
+
+    return true;
+}
