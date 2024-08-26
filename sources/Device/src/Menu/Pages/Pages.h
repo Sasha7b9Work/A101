@@ -1,7 +1,7 @@
 // 2022/10/29 22:49:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Menu/MenuItems.h"
-#include "Display/Controls/WindowsMeasures.h"
+#include "Nextion/Controls/WindowsMeasures.h"
 #include "Settings/Settings.h"
 
 

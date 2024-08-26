@@ -5,7 +5,7 @@
 #include "Nextion/Nextion.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
-#include "Display/Controls/WindowsMeasures.h"
+#include "Nextion/Controls/WindowsMeasures.h"
 #include "Ampermeter/Calibrator/Calibrator.h"
 #include "Nextion/Display.h"
 #include "Settings/CalibrationSettings.h"

@@ -1,6 +1,6 @@
 // 2022/11/10 19:59:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Display/Controls/TextString.h"
+#include "Nextion/Controls/TextString.h"
 #include "Nextion/Nextion.h"
 #include <cstring>
 
