@@ -63,7 +63,7 @@ void Ampermeter::ZeroDC::Disable()
 {
     value_abs = 0.0;
 
-    Nextion::SetVisible("tzDC", false);
+    PageMain::labelZeroDC.Hide();
 
     Nextion::SetValue("bt11", 0);
 }
@@ -98,7 +98,7 @@ void Ampermeter::ZeroAC::Disable()
 {
     value_abs = 0.0;
 
-    Nextion::SetVisible("tzAC", false);
+    PageMain::labelZeroAC.Hide();
 
     Nextion::SetValue("bt10", 0);
 }

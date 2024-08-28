@@ -1,6 +1,6 @@
 // 2022/11/10 22:26:12 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "TextString.h"
+#include "Nextion/Controls/Label.h"
 #include "Nextion/Controls/CntrlText.h"
 #include "Ampermeter/Ampermeter.h"
 
@@ -46,11 +46,11 @@ protected:
     pchar __label_type = "";
     TypeMeasure::E type;
 
-    char buf_measure[TextString::MAX_LEN];
+    char buf_measure[Label::MAX_LEN];
 
     void Clear();
     void SetMeasure(pchar);
     void SetMeasure(REAL);
     // after - количество цифр после запятой
-    void ConvertRealToText(REAL value, char buffer[TextString::MAX_LEN], int after, pchar suffix);
+    void ConvertRealToText(REAL value, char buffer[Label::MAX_LEN], int after, pchar suffix);
 };

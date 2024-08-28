@@ -6,14 +6,15 @@
 *   Отрисовка прямо на поверхности страницы
 */
 
-struct TextString
+struct Label
 {
     static const int MAX_LEN = 32;
 
-    TextString(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText,
+    Label(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText,
         bool _h_aligned = false, const Color &_colorBack = Color::Count);
-    void Disable();
-    void Enable();
+    void Hide();
+    void Show();
+    void SetVisible(bool);
     void SetText(const char[MAX_LEN]);
     void SetX(int _x) { x = _x; }
     int GetX() const { return x; }

@@ -1767,7 +1767,7 @@
 
   <Group>
     <GroupName>Nextion/Controls</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1802,8 +1802,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Nextion\Controls\TextString.cpp</PathWithFileName>
-      <FilenameWithoutPath>TextString.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Nextion\Controls\WindowsMeasures.cpp</PathWithFileName>
+      <FilenameWithoutPath>WindowsMeasures.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1814,8 +1814,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Nextion\Controls\TextString.h</PathWithFileName>
-      <FilenameWithoutPath>TextString.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Nextion\Controls\WindowsMeasures.h</PathWithFileName>
+      <FilenameWithoutPath>WindowsMeasures.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1826,8 +1826,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Nextion\Controls\WindowsMeasures.cpp</PathWithFileName>
-      <FilenameWithoutPath>WindowsMeasures.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Nextion\Controls\Label.cpp</PathWithFileName>
+      <FilenameWithoutPath>Label.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1838,8 +1838,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Nextion\Controls\WindowsMeasures.h</PathWithFileName>
-      <FilenameWithoutPath>WindowsMeasures.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Nextion\Controls\Label.h</PathWithFileName>
+      <FilenameWithoutPath>Label.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

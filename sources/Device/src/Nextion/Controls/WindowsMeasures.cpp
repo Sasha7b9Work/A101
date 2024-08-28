@@ -117,7 +117,7 @@ void WindowMeasure::Draw(const Measure &measure, int range)
 }
 
 
-void WindowMeasure::ConvertRealToText(REAL value, char out[TextString::MAX_LEN], int after, pchar suffix)
+void WindowMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int after, pchar suffix)
 {
     std::strcpy(out, value < 0.0 ? "-" : "+");
 
@@ -155,7 +155,7 @@ void WindowMeasure::ConvertRealToText(REAL value, char out[TextString::MAX_LEN],
         }
     }
 
-    char buffer[TextString::MAX_LEN];
+    char buffer[Label::MAX_LEN];
 
     char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0' };
 

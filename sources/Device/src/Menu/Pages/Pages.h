@@ -23,6 +23,9 @@ namespace PageMain
 
     // ѕодсветить выбор текущего диапазона
     void HightLightCurrentRange();
+
+    extern Label labelZeroDC;
+    extern Label labelZeroAC;
 }
 
 

@@ -14,6 +14,9 @@
 
 namespace PageMain
 {
+    Label labelZeroDC{ 23, 170, 90, 50, Font::_1, "ноль", Color::White, false };
+    Label labelZeroAC{ 23, 260, 90, 50, Font::_1, "ноль", Color::White, false };
+
     WindowMeasure wndDC(TypeMeasure::DC, "titleDC", "f_sign", "valueDC", "unitsDC", "DC:");
     WindowMeasure wndAC(TypeMeasure::AC, "titleAC", "", "valueAC", "unitsAC", "AC:");
 
@@ -268,7 +271,7 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 
         enable ? btnZeroAC_EN.Press() : btnZeroAC_DIS.Press();
 
-        Nextion::Text::SetVisible("tzAC", enable);
+        PageMain::labelZeroAC.SetVisible(enable);
     }
     else if (meas == MeasuresOnDisplay::DC)
     {
@@ -276,7 +279,7 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 
         enable ? btnZeroDC_EN.Press() : btnZeroDC_DIS.Press();
 
-        Nextion::Text::SetVisible("tzDC", enable);
+        PageMain::labelZeroDC.SetVisible(enable);
     }
 }
 
