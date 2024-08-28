@@ -5,6 +5,9 @@
 #include "Utils/Math.h"
 
 
+struct Page;
+
+
 struct ButtonCommon
 {
     ButtonCommon(pchar title_ru, pchar title_en, Font::E, int x, int y, int w, int h, void (*_funcOnPress)());
@@ -28,11 +31,14 @@ struct ButtonCommon
 
     const Rect &GetRect() const { return rect; }
 
-    // Активная - это когда реагирует на на нажатия. Как правило (может быть, всегда) -
-    // если кнопка видна на экране, то она активна
-    void SetActive(bool _active) { active = _active; }
-    bool IsActive() const { return active; }
+    void SetShown(bool show);
+    bool IsShown() const;
     static void SetAllInactive();
+
+    void SetParent(Page *page)
+    {
+        parent = page;
+    }
 
 protected:
 
@@ -41,12 +47,13 @@ protected:
     Font::E font;
     Rect rect;
 
-    bool active = false;
-
+    bool is_shown = true;           // Если true, то надо отрисовывать
     bool is_pressed = false;        // Для обычной кнопки переходит в состяние false сразу после отпускания, для кнопки с фиксацией -
                                     // после повторного нажатия
 
     void (*funcOnPress)();
+
+    Page *parent;
 };
 
 
@@ -140,6 +147,10 @@ struct Page
     Page(ButtonCommon **_buttons, void (*_funcOnEnter)(), void (*_funcOnDraw)()) :
         buttons(_buttons), funcOnEnter(_funcOnEnter), funcOnDraw(_funcOnDraw)
     {
+        for (int i = 0; i < GetButtonsCount(); i++)
+        {
+            GetButton(i)->SetParent(this);
+        }
     }
 
     static Page *Current() { return current; }

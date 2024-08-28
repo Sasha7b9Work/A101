@@ -32,9 +32,16 @@ namespace PageMain
         wndMAX.Reset();
     }
 
+    static Button btnZero("׃סע. 0", "Set 0", Font::_1, 669, 321, 127, 74, []()
+    {
+        Ampermeter::ZeroDC::FloatingZero::Process();
+    });
+
     void OnEventChangeRange()
     {
         ResetAllMeasures();
+
+        btnZero.SetShown(Range::Current() >= 4);
     }
 
     static void FuncOnEnter()
@@ -93,6 +100,8 @@ namespace PageMain
 
             Ampermeter::AVP::Disable();
             Range::Set(range);
+
+            btnZero.SetShown(range >= 4);
         }
     }
 
@@ -117,12 +126,12 @@ namespace PageMain
         FuncOnRange(3);
     });
 
-    static ButtonOld btn20A("btn20A", "05P", []()
+    static ButtonRange btn20A("20 ְ", "20 A", 536, 402, []()
     {
         FuncOnRange(4);
     });
 
-    static ButtonOld btn50A("btn50A", "06P", []()
+    static ButtonRange btn50A("50 ְ", "50 A", 669, 402, []()
     {
         FuncOnRange(5);
     });
@@ -184,11 +193,6 @@ namespace PageMain
     static ButtonOld btnMIN("btnImin", "02I", []() {});           // Imin
 
     static ButtonOld btnPEAK("btnIpp", "03I", []() {});          // Ipp
-
-    static ButtonOld btnZero("btnZero", "0ZE", []()
-    {
-        Ampermeter::ZeroDC::FloatingZero::Process();
-    });
 
     static ButtonCommon *buttons[] =
     {

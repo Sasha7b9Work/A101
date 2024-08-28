@@ -26,8 +26,6 @@ namespace NSBC
     {
         buttons[num_buttons] = button;
 
-        button->SetActive(false);
-
         if (num_buttons++ >= MAX_BUTTONS)
         {
             LOG_ERROR_TRACE("The button buffer is full");
@@ -40,7 +38,7 @@ namespace NSBC
         {
             ButtonCommon *button = buttons[i];
 
-            if (button->GetRect().Intersect(x, y) && button->IsActive())
+            if (button->IsShown() && button->GetRect().Intersect(x, y))
             {
                 return button;
             }
@@ -55,7 +53,7 @@ void ButtonCommon::SetAllInactive()
 {
     for (int i = 0; i < NSBC::num_buttons; i++)
     {
-        NSBC::buttons[i]->SetActive(false);
+        NSBC::buttons[i]->SetShown(false);
     }
 }
 
@@ -192,7 +190,7 @@ void Page::SetAsCurrent()
 
     for (int i = 0; i < GetButtonsCount(); i++)
     {
-        GetButton(i)->SetActive(true);
+        GetButton(i)->SetShown(true);
     }
 
     current->funcOnEnter();
@@ -306,14 +304,33 @@ void Button::Draw()
     int width = rect.width;
     int height = rect.height;
 
-    Nextion::DrawRect(x, y, width - 1, height - 1, Color::White);
-    Nextion::DrawRect(x + 1, y + 1, width - 3, height - 3, Color::White);
-    Nextion::DrawRect(x + 2, y + 2, width - 5, height - 5, Color::White);
+    if (IsShown())
+    {
+        Nextion::DrawRect(x, y, width - 1, height - 1, Color::White);
+        Nextion::DrawRect(x + 1, y + 1, width - 3, height - 3, Color::White);
+        Nextion::DrawRect(x + 2, y + 2, width - 5, height - 5, Color::White);
 
-    Nextion::DrawString(x + 3, y + 3, width - 7, height - 7, font,
-        Color::White,
-        is_pressed ? Color::ButtonPress : Color::Background,
-        title[set.lang], 1, 1);
+        Nextion::DrawString(x + 3, y + 3, width - 7, height - 7, font,
+            Color::White,
+            is_pressed ? Color::ButtonPress : Color::Background,
+            title[set.lang], 1, 1);
+    }
+    else
+    {
+        Nextion::FillRect(x, y, width, height, Color::Background);
+    }
+}
 
-    SetActive(true);
+
+bool ButtonCommon::IsShown() const
+{
+    return (Page::Current() == parent) && is_shown;
+}
+
+
+void ButtonCommon::SetShown(bool show)
+{
+    is_shown = show;
+
+    Draw();
 }
