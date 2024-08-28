@@ -61,11 +61,11 @@ void ButtonCommon::SetAllInactive()
 
 void ButtonCommon::Press()
 {
-    funcOnPress();
-
     is_pressed = true;
 
     Draw();
+
+    funcOnPress();
 }
 
 
