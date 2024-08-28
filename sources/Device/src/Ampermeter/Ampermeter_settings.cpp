@@ -41,6 +41,8 @@ void Ampermeter::ZeroDC::Enable()
     }
 
     PageMain::HightLightCurrentRange();
+
+    PageMain::labelZeroDC.Show();
 }
 
 
@@ -91,6 +93,8 @@ void Ampermeter::ZeroAC::Enable()
     }
 
     PageMain::HightLightCurrentRange();
+
+    PageMain::labelZeroAC.Show();
 }
 
 
