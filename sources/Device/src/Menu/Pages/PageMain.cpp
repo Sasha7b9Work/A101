@@ -119,14 +119,12 @@ namespace PageMain
 
     static ButtonOld btn20A("btn20A", "05P", []()
     {
-        Ampermeter::AVP::Disable();
-        Range::Set(4);
+        FuncOnRange(4);
     });
 
     static ButtonOld btn50A("btn50A", "06P", []()
     {
-        Ampermeter::AVP::Disable();
-        Range::Set(5);
+        FuncOnRange(5);
     });
 
     static ButtonOld btnAC_DC("btnACDC", "0AD", []()            // Переход в AC+DC

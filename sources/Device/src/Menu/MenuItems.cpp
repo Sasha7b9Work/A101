@@ -81,7 +81,7 @@ void ButtonCommon::Release()
 }
 
 ButtonCommon::ButtonCommon(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
-    font(_f), rect{_x, _y, _w, _h}, funcOnPress(_funcOnPress)
+    font(_f), rect{(int16)_x, (int16)_y, (int16)_w, (int16)_h}, funcOnPress(_funcOnPress)
 {
     title[Lang::RU] = title_ru;
     title[Lang::EN] = title_en;

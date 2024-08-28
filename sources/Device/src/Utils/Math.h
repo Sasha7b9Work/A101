@@ -4,10 +4,10 @@
 
 struct Rect
 {
-    int x;
-    int y;
-    int width;
-    int height;
+    int16 x;
+    int16 y;
+    int16 width;
+    int16 height;
 
     bool Intersect(int x, int y) const;
 };
