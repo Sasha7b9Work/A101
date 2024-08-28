@@ -14,8 +14,8 @@
 
 namespace PageMain
 {
-    Label labelZeroDC{ 23, 170, 90, 50, Font::_1, "ноль", Color::White, false };
-    Label labelZeroAC{ 23, 260, 90, 50, Font::_1, "ноль", Color::White, false };
+    Label labelZeroDC{ 23, 170, 90, 50, Font::_1, "ноль", "zero", Color::White, false };
+    Label labelZeroAC{ 23, 260, 90, 50, Font::_1, "ноль", "zero", Color::White, false };
 
     WindowMeasure wndDC(TypeMeasure::DC, "titleDC", "f_sign", "valueDC", "unitsDC", "DC:");
     WindowMeasure wndAC(TypeMeasure::AC, "titleAC", "", "valueAC", "unitsAC", "AC:");

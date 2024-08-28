@@ -5,17 +5,24 @@
 #include <cstring>
 
 
-Label::Label(int _x, int _y, int _w, int _h, int _font, pchar _text, const Color &_colorText, bool _h_align, const Color &_colorBack) :
+Label::Label(int _x, int _y, int _w, int _h, int _font, pchar _textRU, pchar _textEN, const Color &_colorText, bool _h_align, const Color &_colorBack) :
     x(_x), y(_y), width(_w), height(_h), font(_font), h_aligned(_h_align), colorText(_colorText), colorBack(_colorBack)
 {
-    std::strcpy(text, _text);
+    std::strcpy(text[0], _textRU);
+    std::strcpy(text[1], _textEN);
+}
+
+
+pchar Label::Text() const
+{
+    return text[set.lang];
 }
 
 
 void Label::Show()
 {
     Nextion::DrawString(x, y, width, height, font, colorText,
-        (colorBack.value == Color::Count.value) ? Color::Background : colorBack, text, h_aligned ? 1 : 0);
+        (colorBack.value == Color::Count.value) ? Color::Background : colorBack, Text(), h_aligned ? 1 : 0);
 }
 
 
@@ -31,14 +38,17 @@ void Label::SetVisible(bool visible)
 }
 
 
-void Label::SetText(const char _text[MAX_LEN])
+void Label::SetText(const char _textRU[MAX_LEN], const char _textEN[MAX_LEN])
 {
-    if (std::strcmp(_text, text) == 0)
+    if (std::strcmp(_textRU, text[Lang::RU]) != 0)
     {
-        return;
+        std::strcpy(text[Lang::RU], _textRU);
     }
 
-    std::strcpy(text, _text);
+    if (std::strcmp(_textEN, text[Lang::EN]) != 0)
+    {
+        std::strcpy(text[Lang::EN], _textEN);
+    }
 
     Show();
 }
