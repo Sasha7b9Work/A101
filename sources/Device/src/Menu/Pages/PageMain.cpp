@@ -78,6 +78,7 @@ namespace PageMain
         wndMAX.Draw(Ampermeter::GetMax(), Range::Current());
     }
 
+    // Вызывается при нажатии кнопки
     static void FuncOnRange(int range)
     {
         if (Range::Current() != range)
@@ -89,6 +90,7 @@ namespace PageMain
                     PageMain::self->GetButton(i)->SetValue(0);
                 }
             }
+
             Ampermeter::AVP::Disable();
             Range::Set(range);
         }

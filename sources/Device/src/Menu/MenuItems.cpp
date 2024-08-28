@@ -5,6 +5,7 @@
 #include "Nextion/Nextion.h"
 #include "Menu/Pages/Pages.h"
 #include "Hardware/Timer.h"
+#include "Utils/String.h"
 #include <cstring>
 #include <cstdio>
 
@@ -17,7 +18,7 @@ Page *Page::current = PageMain::self;
 
 namespace NSBC
 {
-    static const int MAX_BUTTONS = 32;                  // Здесь хранятся все созданные кнопки (со всех страниц)
+    static const int MAX_BUTTONS = 128;                  // Здесь хранятся все созданные кнопки (со всех страниц)
     static ButtonCommon *buttons[MAX_BUTTONS];
     static int num_buttons = 0;                         // Столько создано кнопок в данный момент
 
@@ -80,7 +81,7 @@ void ButtonCommon::Release()
 }
 
 ButtonCommon::ButtonCommon(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
-    font(_f), rect{_x, _y, _w, _h }, funcOnPress(_funcOnPress)
+    font(_f), rect{_x, _y, _w, _h}, funcOnPress(_funcOnPress)
 {
     title[Lang::RU] = title_ru;
     title[Lang::EN] = title_en;
