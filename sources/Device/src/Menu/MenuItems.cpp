@@ -285,7 +285,7 @@ bool ButtonOld::IsSoftware() const
 
 
 Button::Button(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
-    ButtonCommon(TypeItem::ItemButton, title_ru, title_en, _f, _x, _y, _w, _h, _funcOnPress)
+    ButtonCommon(TypeItem::Button, title_ru, title_en, _f, _x, _y, _w, _h, _funcOnPress)
 {
 }
 
@@ -350,11 +350,11 @@ void Item::SetShown(bool show)
 
 ButtonRange *Item::ToButtonRange()
 {
-    return (type == TypeItem::ItemButtonToggle) ? (ButtonRange *)this : nullptr;
+    return (type == TypeItem::ButtonToggle) ? (ButtonRange *)this : nullptr;
 }
 
 
 ButtonOld *Item::ToButtonOld()
 {
-    return (type == TypeItem::ItemButtonOld) ? (ButtonOld *)this : nullptr;
+    return (type == TypeItem::ButtonOld) ? (ButtonOld *)this : nullptr;
 }

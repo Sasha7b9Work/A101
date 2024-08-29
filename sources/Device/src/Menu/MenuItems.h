@@ -14,10 +14,10 @@ struct TypeItem
 {
     enum E
     {
-        ItemAnother,
-        ItemButton,
-        ItemButtonToggle,
-        ItemButtonOld,
+        Another,
+        Button,
+        ButtonToggle,
+        ButtonOld,
         Count
     };
 };
@@ -95,7 +95,7 @@ public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
     ButtonOld(pchar _name, pchar _signal, void (*_funcOnPress)(), int _x = -1, int _y = -1) :
-        ButtonCommon(TypeItem::ItemButtonOld, _name, _name, Font::_1, _x, _y, 0, 0, _funcOnPress),
+        ButtonCommon(TypeItem::ButtonOld, _name, _name, Font::_1, _x, _y, 0, 0, _funcOnPress),
         name(_name), signal(_signal), x(_x), y(_y)
     {
     }
