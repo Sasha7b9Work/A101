@@ -29,11 +29,11 @@ void WindowMeasure::Reset()
 
     if (range < 3)
     {
-        cntrlUnits.SetText("Ð¼Ð", "mA");
+        cntrlUnits.SetText("ìÀ", "mA");
     }
     else
     {
-        cntrlUnits.SetText("Ð", "A");
+        cntrlUnits.SetText("À", "A");
     }
 
     cntrlSign.SetLabel("");
@@ -83,11 +83,11 @@ void WindowMeasure::SetMeasure(pchar measure)
 
         if (measure[std::strlen(measure) - 2] == ' ')
         {
-            cntrlUnits.SetText("Ð", "A");
+            cntrlUnits.SetText("À", "A");
         }
         else
         {
-            cntrlUnits.SetText("Ð¼Ð", "mA");
+            cntrlUnits.SetText("ìÀ", "mA");
         }
     }
 }
@@ -149,7 +149,7 @@ void WindowMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int 
         std::strcat(out, "0");
     }
 
-    // ÐžÑ‚Ð±Ñ€Ð°ÑÑ‹Ð²Ð°ÐµÐ¼ Ñ†Ð¸Ñ„Ñ€Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… Ð½ÐµÑ‚ Ð½Ð° ÑÐºÑ€Ð°Ð½Ðµ - Ð²Ð¾ Ð¸Ð·Ð±ÐµÐ¶Ð°Ð½Ð¸Ðµ Ð±Ð°Ð³Ð°, ÐºÐ¾Ð³Ð´Ð° 10 Ð¿Ñ€ÐµÐ²Ñ€Ð°Ñ‰ÐµÐµÑ‚ÑÑ Ð² 1 (Ð¿Ñ€Ð¸ 9.999999)
+    // Îòáðàñûâàåì öèôðû, êîòîðûõ íåò íà ýêðàíå - âî èçáåæàíèå áàãà, êîãäà 10 ïðåâðàùååòñÿ â 1 (ïðè 9.999999)
     {
         for (int i = 0; i < after; i++)
         {
