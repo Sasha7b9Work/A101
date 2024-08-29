@@ -1,4 +1,4 @@
-п»ї// 2022/10/29 21:41:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2022/10/29 21:41:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
@@ -25,15 +25,15 @@ namespace PageCalibration
 
     static void FuncDraw();
 
-    static WindowMeasure wndCurrent(TypeMeasure::DC, "", "t5", "t0", Label(500, 98,  112, 78, Font::_2, "", ""), "");     // РўРµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РЅР°РїСЂСЏР¶РµРЅРёСЏ
-    static WindowMeasure wndGiven(TypeMeasure::DC,   "", "t6", "t1", Label(500, 183, 110, 78, Font::_2, "", ""), "");     // Р—Р°РґР°РЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РЅР°РїСЂСЏР¶РµРЅРёСЏ
+    static WindowMeasure wndCurrent(TypeMeasure::DC, "", "t5", "t0", Label(500, 98,  112, 78, Font::_2, "", ""), "");     // Текущее значение напряжения
+    static WindowMeasure wndGiven(TypeMeasure::DC,   "", "t6", "t1", Label(500, 183, 110, 78, Font::_2, "", ""), "");     // Заданное значение напряжения
 
     void OnEventChangeRange()
     {
         wndCurrent.Reset();
     }
 
-    // Р’С‹Р±РѕСЂ С‚РѕС‡РєРё РєР°Р»РёР±СЂРѕРІРєРё
+    // Выбор точки калибровки
     // 0 - min, 1 - max
     static void ChooseDot(int);
 
@@ -44,7 +44,7 @@ namespace PageCalibration
     namespace LabelPassword
     {
         static const int SIZE_BUFFER = 32;
-        static int num_symbols = 0;                     // РЎС‚РѕР»СЊРєРѕ СЃРёРјРІРѕР»РѕРІ РЅР°Р¶Р°С‚Рѕ
+        static int num_symbols = 0;                     // Столько символов нажато
         static char buffer[SIZE_BUFFER] = { '\0' };
         static bool is_changed = true;
 
@@ -100,10 +100,10 @@ namespace PageCalibration
         }
     }
 
-    // РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РІРёРґРёРјРѕСЃС‚СЊ РґР»СЏ РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ РєСЂРѕРјРµ РєРЅРѕРїРѕРє
+    // Установить видимость для всех элементов кроме кнопок
     static void SetVisibleExceptButtons(bool visible);
 
-    // РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РІРёРґРёРјРѕСЃС‚СЊ РґР»СЏ С†РёС„СЂРѕРІС‹С… РєРЅРѕРїРѕРє
+    // Установить видимость для цифровых кнопок
     static void SetVisibleDigits(bool visible);
 
     static ButtonOld btnBack("bt18", "2B0", []()
@@ -121,7 +121,7 @@ namespace PageCalibration
             btnSave.SetVisible(false);
         });
 
-    // РќР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё РЅР° С†РёС„СЂРѕРІРѕР№ РєР»Р°РІРёР°С‚СѓСЂРµ
+    // Нажатие кнопки на цифровой клавиатуре
     static void PressDigit(char symbol)
     {
         if (symbol == ' ')                              // Backspace
@@ -154,7 +154,7 @@ namespace PageCalibration
             }
             else
             {
-                // РџРµСЂРІС‹Р№ СЃРёРјРІРѕР» - С‚РѕС‡РєР°, РїРѕСЃР»РµРґРЅРёР№ - '-', РјРµР¶РґСѓ РЅРёРјРё - СЃРµСЂРёР№РЅС‹Р№ РЅРѕРјРµСЂ
+                // Первый символ - точка, последний - '-', между ними - серийный номер
                 if (LabelPassword::buffer[0] == '.' && LabelPassword::buffer[LabelPassword::num_symbols - 1] == '-')
                 {
                     LabelPassword::buffer[LabelPassword::num_symbols - 1] = '\0';
