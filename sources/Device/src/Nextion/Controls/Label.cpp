@@ -6,7 +6,7 @@
 
 
 Label::Label(int _x, int _y, int _w, int _h, int _font, pchar _textRU, pchar _textEN, const Color &_colorText, bool _h_align, const Color &_colorBack) :
-    x((int16)_x), y((int16)_y), width((int16)_w), height((int16)_h), font(_font), h_aligned(_h_align), colorText(_colorText), colorBack(_colorBack)
+    rect{ (int16)_x, (int16)_y, (int16)_w, (int16)_h }, font(_font), h_aligned(_h_align), colorText(_colorText), colorBack(_colorBack)
 {
     std::strcpy(text[0], _textRU);
     std::strcpy(text[1], _textEN);
@@ -21,14 +21,14 @@ pchar Label::Text() const
 
 void Label::Show()
 {
-    Nextion::DrawString(x, y, width, height, font, colorText,
+    Nextion::DrawString(rect.x, rect.y, rect.width, rect.height, font, colorText,
         (colorBack.value == Color::Count.value) ? Color::Background : colorBack, Text(), h_aligned ? 1 : 0);
 }
 
 
 void Label::Hide()
 {
-    Nextion::DrawString(x, y, width, height, font, colorText, Color::Background, "");
+    Nextion::DrawString(rect.x, rect.y, rect.width, rect.height, font, colorText, Color::Background, "");
 }
 
 

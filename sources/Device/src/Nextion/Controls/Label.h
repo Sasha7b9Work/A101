@@ -2,6 +2,7 @@
 #pragma once
 #include "Nextion/Colors.h"
 #include "Settings/Settings.h"
+#include "Utils/Math.h"
 
 
 /*
@@ -19,18 +20,15 @@ struct Label
     void Show();
     void SetVisible(bool);
     void SetText(const char _textRU[MAX_LEN], const char _textEN[MAX_LEN]);
-    void SetX(int _x) { x = (int16)_x; }
-    int GetX() const { return x; }
-    int GetY() const { return y; }
-    int GetWidth() const { return width; }
+    void SetX(int _x) { rect.x = (int16)_x; }
+    int GetX() const { return rect.x; }
+    int GetY() const { return rect.y; }
+    int GetWidth() const { return rect.width; }
     pchar Text() const;
     pchar Text(Lang::E lang) const { return text[lang]; }
 private:
     char  text[Lang::Count][MAX_LEN];
-    int16 x;
-    int16 y;
-    int16 width;
-    int16 height;
+    Rect  rect;
     int   font;
     bool  h_aligned;
     Color colorText;
