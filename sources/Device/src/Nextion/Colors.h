@@ -12,7 +12,7 @@ struct Color
     static Color MeasureAC;
     static Color Count;
 
-    Color(uint8 v) : value(v) {}
+    Color(uint8 v = 255) : value(v) {}
 
     void SetAsCurrent() const;
 

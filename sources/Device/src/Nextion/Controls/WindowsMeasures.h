@@ -22,8 +22,8 @@ struct TypeMeasure
 class WindowMeasure
 {
 public:
-    WindowMeasure(TypeMeasure::E _type, pchar nameType, pchar nameSign, pchar nameDigits, pchar nameUnits, pchar _label_type = "") :
-        cntrlType(nameType), cntrlSign(nameSign), cntrlDigits(nameDigits), cntrlUnits(nameUnits), __label_type(_label_type), type(_type)
+    WindowMeasure(TypeMeasure::E _type, pchar nameType, pchar nameSign, pchar nameDigits, const Label &labelUnits, pchar _label_type = "") :
+        cntrlType(nameType), cntrlSign(nameSign), cntrlDigits(nameDigits), cntrlUnits(labelUnits), __label_type(_label_type), type(_type)
     {
     }
     void Draw(const Measure &, int range);
@@ -34,7 +34,7 @@ public:
 
     const CntrlText &GetControlSign() const { return cntrlSign; }
     const CntrlText &GetControlDigits() const { return cntrlDigits; }
-    const CntrlText &GetControlUnits() const { return cntrlUnits; }
+    const Label &GetControlUnits() const { return cntrlUnits; }
 
     void SetVisible(bool);
 
@@ -42,7 +42,7 @@ protected:
     CntrlText cntrlType;        // DC или AC
     CntrlText cntrlSign;        // —юда выводим знак
     CntrlText cntrlDigits;      // —юда выводим числовое значение
-    CntrlText cntrlUnits;       // «десь единицы измерени€
+    Label     cntrlUnits;       // «десь единицы измерени€
     pchar __label_type = "";
     TypeMeasure::E type;
 

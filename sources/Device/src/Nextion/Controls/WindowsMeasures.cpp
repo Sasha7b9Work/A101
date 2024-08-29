@@ -27,7 +27,14 @@ void WindowMeasure::Reset()
         cntrlDigits.SetLabel("***.**");
     }
 
-    cntrlUnits.SetLabel(range < 3 ? "mA" : "A");
+    if (range < 3)
+    {
+        cntrlUnits.SetText("мА", "mA");
+    }
+    else
+    {
+        cntrlUnits.SetText("А", "A");
+    }
 
     cntrlSign.SetLabel("");
 
@@ -76,11 +83,11 @@ void WindowMeasure::SetMeasure(pchar measure)
 
         if (measure[std::strlen(measure) - 2] == ' ')
         {
-            cntrlUnits.SetLabel("A");
+            cntrlUnits.SetText("А", "A");
         }
         else
         {
-            cntrlUnits.SetLabel("mA");
+            cntrlUnits.SetText("мА", "mA");
         }
     }
 }

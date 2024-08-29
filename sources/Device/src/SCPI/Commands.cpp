@@ -39,7 +39,7 @@ bool SCPI::CommandMEAS::Execute(Direction::E dir)
         message.Append(PageMain::wndDC.GetControlSign().LastLabel());
         message.Append(PageMain::wndDC.GetControlDigits().LastLabel());
         message.Append(" ");
-        message.Append(PageMain::wndDC.GetControlUnits().LastLabel());
+        message.Append(PageMain::wndDC.GetControlUnits().Text());
     }
 
     if (MeasuresOnDisplay::IsAC_DC())
@@ -52,7 +52,7 @@ bool SCPI::CommandMEAS::Execute(Direction::E dir)
         message.Append("J=");
         message.Append(PageMain::wndAC.GetControlDigits().LastLabel());
         message.Append(" ");
-        message.Append(PageMain::wndAC.GetControlUnits().LastLabel());
+        message.Append(PageMain::wndAC.GetControlUnits().Text());
     }
 
     Send(dir, message.c_str());

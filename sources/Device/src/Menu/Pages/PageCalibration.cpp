@@ -25,8 +25,8 @@ namespace PageCalibration
 
     static void FuncDraw();
 
-    static WindowMeasure wndCurrent(TypeMeasure::DC, "", "t5", "t0", "t3", "");     // Текущее значение напряжения
-    static WindowMeasure wndGiven(TypeMeasure::DC, "", "t6", "t1", "t4", "");       // Заданное значение напряжения
+    static WindowMeasure wndCurrent(TypeMeasure::DC, "", "t5", "t0", Label(500, 98,  112, 78, Font::_2, "", ""), "");     // Текущее значение напряжения
+    static WindowMeasure wndGiven(TypeMeasure::DC,   "", "t6", "t1", Label(500, 183, 110, 78, Font::_2, "", ""), "");     // Заданное значение напряжения
 
     void OnEventChangeRange()
     {
