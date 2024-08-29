@@ -142,7 +142,7 @@ private:
 
 struct Button : public ButtonCommon
 {
-    Button(pchar title_ru, pchar title_en, Font::E f, int x, int y, int w, int h, void (*_funcOnPress)());
+    Button(pchar title_ru, pchar title_en, Font::E f, int x, int y, int w, int h, void (*_funcOnPress)(), TypeItem::E = TypeItem::Button);
 
     virtual pchar Signal() const override;
 
@@ -155,7 +155,7 @@ struct Button : public ButtonCommon
 struct ButtonToggle : public Button
 {
     ButtonToggle(pchar title_ru, pchar title_en, Font::E f, int x, int y, int w, int h, void (*_funcOnPress)()) :
-        Button(title_ru, title_en, f, x, y, w, h, _funcOnPress)
+        Button(title_ru, title_en, f, x, y, w, h, _funcOnPress, TypeItem::ButtonToggle)
     {
     }
 
