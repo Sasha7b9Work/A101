@@ -40,11 +40,11 @@ namespace PageMain
         Ampermeter::ZeroDC::FloatingZero::Process();
     });
 
-    void OnEventChangeRange()
+    void OnEventChangeRange(int new_range)
     {
         ResetAllMeasures();
 
-        btnZero.SetShown(Range::Current() >= 4);
+        btnZero.SetShown(new_range >= 4);
     }
 
     static void FuncOnEnter()
@@ -103,8 +103,6 @@ namespace PageMain
 
             Ampermeter::AVP::Disable();
             Range::Set(range);
-
-            btnZero.SetShown(range >= 4);
         }
     }
 

@@ -38,7 +38,7 @@ void Range::Set(int _range, bool reset_measures)
 
     if (reset_measures)
     {
-        PageMain::OnEventChangeRange();
+        PageMain::OnEventChangeRange(_range);
     }
 
     if ((_range > 3) && current != _range)

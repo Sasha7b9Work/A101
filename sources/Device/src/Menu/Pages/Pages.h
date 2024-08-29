@@ -12,7 +12,7 @@ namespace PageMain
     // Вызываем сразу после включения
     void Init();
 
-    void OnEventChangeRange();
+    void OnEventChangeRange(int new_range);
 
     extern WindowMeasure wndDC;
     extern WindowMeasure wndAC;
