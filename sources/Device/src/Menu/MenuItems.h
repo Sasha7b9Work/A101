@@ -8,13 +8,51 @@
 struct Page;
 
 
-struct ButtonCommon
+struct Item
 {
-    ButtonCommon(pchar title_ru, pchar title_en, Font::E, int x, int y, int w, int h, void (*_funcOnPress)());
+    Item(int x, int y, int w, int h, void (*_funcOnPress)());
+
+    void SetParent(Page *page)
+    {
+        parent = page;
+    }
+
+    const Rect &GetRect() const
+    {
+        return rect;
+    }
+
+    void SetShown(bool show);
+    bool IsShown() const;
+
+    virtual void Draw() = 0;
+    virtual bool IsWithoutFixation() const = 0;
 
     virtual void Press();
-
     virtual void Release();
+
+    static void SetAllInactive();
+
+    static void OnEventPress(int, int);
+    static void OnEventRelease(int, int);
+
+protected:
+
+    Rect rect;
+    Page *parent;
+
+    void (*funcOnPress)();
+
+    bool is_pressed = false;        // Для обычной кнопки переходит в состяние false сразу после отпускания, для кнопки с фиксацией -
+                                    // после повторного нажатия
+
+    bool is_shown = true;           // Если true, то надо отрисовывать
+};
+
+
+struct ButtonCommon : public Item
+{
+    ButtonCommon(pchar title_ru, pchar title_en, Font::E, int x, int y, int w, int h, void (*_funcOnPress)());
 
     // 1 - "нажать", 0 - "отпустить"
     virtual void SetValue(int);
@@ -22,38 +60,11 @@ struct ButtonCommon
     // Сиганл, который присылает кнопка при нажатии
     virtual pchar Signal() const = 0;
 
-    virtual void Draw() = 0;
-
-    virtual bool IsWithoutFixation() const = 0;
-
-    static void OnEventPress(int, int);
-    static void OnEventRelease(int, int);
-
-    const Rect &GetRect() const { return rect; }
-
-    void SetShown(bool show);
-    bool IsShown() const;
-    static void SetAllInactive();
-
-    void SetParent(Page *page)
-    {
-        parent = page;
-    }
-
 protected:
 
     pchar title[2];
 
     Font::E font;
-    Rect rect;
-
-    bool is_shown = true;           // Если true, то надо отрисовывать
-    bool is_pressed = false;        // Для обычной кнопки переходит в состяние false сразу после отпускания, для кнопки с фиксацией -
-                                    // после повторного нажатия
-
-    void (*funcOnPress)();
-
-    Page *parent;
 };
 
 
@@ -137,8 +148,6 @@ struct ButtonRange : public ButtonToggle
         ButtonToggle(title_ru, title_en, Font::_1, x, y, 127, 74, _funcOnPress)
     {
     }
-
-
 };
 
 

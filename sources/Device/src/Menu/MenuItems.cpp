@@ -16,31 +16,31 @@ using namespace std;
 Page *Page::current = PageMain::self;
 
 
-namespace NSBC
+namespace NS_ITEMS
 {
-    static const int MAX_BUTTONS = 128;                  // Здесь хранятся все созданные кнопки (со всех страниц)
-    static ButtonCommon *buttons[MAX_BUTTONS];
-    static int num_buttons = 0;                         // Столько создано кнопок в данный момент
+    static const int MAX_ITEMS = 1024;                  // Здесь хранятся все созданные кнопки (со всех страниц)
+    static Item *items[MAX_ITEMS];
+    static int num_items = 0;                         // Столько создано кнопок в данный момент
 
-    static void AppendNewButton(ButtonCommon *button)
+    static void AppendNewItem(Item *item)
     {
-        buttons[num_buttons] = button;
+        items[num_items] = item;
 
-        if (num_buttons++ >= MAX_BUTTONS)
+        if (num_items++ >= MAX_ITEMS)
         {
-            LOG_ERROR_TRACE("The button buffer is full");
+            LOG_ERROR_TRACE("The items buffer is full");
         }
     }
 
-    static ButtonCommon *GetButton(int x, int y)
+    static Item *GetItem(int x, int y)
     {
-        for (int i = 0; i < num_buttons; i++)
+        for (int i = 0; i < num_items; i++)
         {
-            ButtonCommon *button = buttons[i];
+            Item *item = items[i];
 
-            if (button->IsShown() && button->GetRect().Intersect(x, y))
+            if (item->IsShown() && item->GetRect().Intersect(x, y))
             {
-                return button;
+                return item;
             }
         }
 
@@ -49,16 +49,16 @@ namespace NSBC
 }
 
 
-void ButtonCommon::SetAllInactive()
+void Item::SetAllInactive()
 {
-    for (int i = 0; i < NSBC::num_buttons; i++)
+    for (int i = 0; i < NS_ITEMS::num_items; i++)
     {
-        NSBC::buttons[i]->SetShown(false);
+        NS_ITEMS::items[i]->SetShown(false);
     }
 }
 
 
-void ButtonCommon::Press()
+void Item::Press()
 {
     is_pressed = true;
 
@@ -68,7 +68,7 @@ void ButtonCommon::Press()
 }
 
 
-void ButtonCommon::Release()
+void Item::Release()
 {
     if (IsWithoutFixation())
     {
@@ -78,34 +78,41 @@ void ButtonCommon::Release()
     }
 }
 
-ButtonCommon::ButtonCommon(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
-    font(_f), rect{(int16)_x, (int16)_y, (int16)_w, (int16)_h}, funcOnPress(_funcOnPress)
-{
-    title[Lang::RU] = title_ru;
-    title[Lang::EN] = title_en;
 
-    NSBC::AppendNewButton(this);
+Item::Item(int _x, int _y, int _h, int _w, void (*_funcOnPress)()) :
+    rect{ (int16)_x, (int16)_y, (int16)_w, (int16)_h }, funcOnPress(_funcOnPress)
+{
+    NS_ITEMS::AppendNewItem(this);
 }
 
 
-void ButtonCommon::OnEventPress(int x, int y)
+ButtonCommon::ButtonCommon(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
+    Item(_x, _y, _h, _w, _funcOnPress),
+    font(_f)
 {
-    ButtonCommon *button = NSBC::GetButton(x, y);
+    title[Lang::RU] = title_ru;
+    title[Lang::EN] = title_en;
+}
 
-    if (button)
+
+void Item::OnEventPress(int x, int y)
+{
+    Item *item = NS_ITEMS::GetItem(x, y);
+
+    if (item)
     {
-        button->Press();
+        item->Press();
     }
 }
 
 
-void ButtonCommon::OnEventRelease(int x, int y)
+void Item::OnEventRelease(int x, int y)
 {
-    ButtonCommon *button = NSBC::GetButton(x, y);
+    Item *item = NS_ITEMS::GetItem(x, y);
 
-    if (button)
+    if (item)
     {
-        button->Release();
+        item->Release();
     }
 }
 
@@ -322,13 +329,13 @@ void Button::Draw()
 }
 
 
-bool ButtonCommon::IsShown() const
+bool Item::IsShown() const
 {
     return (Page::Current() == parent) && is_shown;
 }
 
 
-void ButtonCommon::SetShown(bool show)
+void Item::SetShown(bool show)
 {
     is_shown = show;
 
