@@ -48,5 +48,5 @@ void Device::Update()
 
 void Device::Reset()
 {
-    PageMain::self->GetButton(3)->Press();
+    PageMain::self->GetItem(3)->Press();
 }

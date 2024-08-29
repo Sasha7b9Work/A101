@@ -223,7 +223,7 @@ namespace PageCalibration
 
 //    static ButtonOld btnDebugPage("Debug", "", []() {}, 10, 300);
 
-    static ButtonCommon *buttons[] =
+    static Item *items[] =
     {
         &btnBack, &btnSave, &btnCalib, &btnMin, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
         &btn2A,   &btn20A,  &btn50A,   &btn0,   &btn1,    &btn2,   &btn3,    &btn4,
@@ -261,7 +261,7 @@ namespace PageCalibration
         {
             for (int i = 0; i < 6; i++)
             {
-                if (buttons[i]->GetValue())
+                if (((ButtonOld *)buttons[i])->GetValue())
                 {
                     return i;
                 }
@@ -387,7 +387,7 @@ namespace PageCalibration
         }
     }
 
-    static Page pageCalibration(buttons, FuncOnEnter, FuncDraw);
+    static Page pageCalibration(items, FuncOnEnter, FuncDraw);
 
     Page *self = &pageCalibration;
 }

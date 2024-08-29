@@ -27,14 +27,14 @@ namespace PageDebug
             cal.Reset();
         });
 
-    static ButtonCommon *buttons[] =
+    static Item *items[] =
     {
         &buttonZero,
         &buttonResetCal,
         nullptr
     };
 
-    static Page pageDebug(buttons, FuncOnEnter, FuncDraw);
+    static Page pageDebug(items, FuncOnEnter, FuncDraw);
 
     Page *self = &pageDebug;
 }

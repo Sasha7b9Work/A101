@@ -46,7 +46,7 @@ namespace PageGraph
         });
 
 
-    static ButtonCommon *buttons[] =
+    static Item *items[] =
     {
         &btnWave,
         &btnSpectr,
@@ -54,12 +54,12 @@ namespace PageGraph
         nullptr
     };
 
-    static Page pageTwo(buttons, FuncOnEnter, FuncDraw);
+    static Page pageTwo(items, FuncOnEnter, FuncDraw);
 
     Page *self = &pageTwo;
 
     void EnableDebug()
     {
-        pageTwo.SetButton(4, &btnDebug);
+        pageTwo.SetItem(4, &btnDebug);
     }
 }

@@ -6,11 +6,26 @@
 
 
 struct Page;
+struct ButtonRange;
+struct ButtonOld;
+
+
+struct TypeItem
+{
+    enum E
+    {
+        ItemAnother,
+        ItemButton,
+        ItemButtonToggle,
+        ItemButtonOld,
+        Count
+    };
+};
 
 
 struct Item
 {
-    Item(int x, int y, int w, int h, void (*_funcOnPress)());
+    Item(TypeItem::E, int x, int y, int w, int h, void (*_funcOnPress)());
 
     void SetParent(Page *page)
     {
@@ -36,7 +51,13 @@ struct Item
     static void OnEventPress(int, int);
     static void OnEventRelease(int, int);
 
+    ButtonRange *ToButtonRange();
+
+    ButtonOld *ToButtonOld();
+
 protected:
+
+    TypeItem::E type;
 
     Rect rect;
     Page *parent;
@@ -52,7 +73,7 @@ protected:
 
 struct ButtonCommon : public Item
 {
-    ButtonCommon(pchar title_ru, pchar title_en, Font::E, int x, int y, int w, int h, void (*_funcOnPress)());
+    ButtonCommon(TypeItem::E, pchar title_ru, pchar title_en, Font::E, int x, int y, int w, int h, void (*_funcOnPress)());
 
     // 1 - "нажать", 0 - "отпустить"
     virtual void SetValue(int);
@@ -74,7 +95,7 @@ public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
     ButtonOld(pchar _name, pchar _signal, void (*_funcOnPress)(), int _x = -1, int _y = -1) :
-        ButtonCommon(_name, _name, Font::_1, _x, _y, 0, 0, _funcOnPress),
+        ButtonCommon(TypeItem::ItemButtonOld, _name, _name, Font::_1, _x, _y, 0, 0, _funcOnPress),
         name(_name), signal(_signal), x(_x), y(_y)
     {
     }
@@ -153,12 +174,12 @@ struct ButtonRange : public ButtonToggle
 
 struct Page
 {
-    Page(ButtonCommon **_buttons, void (*_funcOnEnter)(), void (*_funcOnDraw)()) :
-        buttons(_buttons), funcOnEnter(_funcOnEnter), funcOnDraw(_funcOnDraw)
+    Page(Item **_items, void (*_funcOnEnter)(), void (*_funcOnDraw)()) :
+        items(_items), funcOnEnter(_funcOnEnter), funcOnDraw(_funcOnDraw)
     {
-        for (int i = 0; i < GetButtonsCount(); i++)
+        for (int i = 0; i < GetItemCount(); i++)
         {
-            GetButton(i)->SetParent(this);
+            GetItem(i)->SetParent(this);
         }
     }
 
@@ -166,9 +187,9 @@ struct Page
 
     void SetAsCurrent();
 
-    ButtonCommon *GetButton(int index);
+    Item *GetItem(int index);
 
-    void SetButton(int index, ButtonOld *);
+    void SetItem(int index, Item *);
 
     void Draw();
 
@@ -176,7 +197,7 @@ struct Page
 
 private:
 
-    ButtonCommon **buttons;
+    Item **items;
 
     // Вызывается при появлении на экране
     void (*funcOnEnter)();
@@ -185,5 +206,5 @@ private:
 
     static Page *current;
 
-    int GetButtonsCount();
+    int GetItemCount();
 };

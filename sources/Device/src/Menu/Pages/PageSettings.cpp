@@ -18,7 +18,7 @@ namespace PageSettings
 
     static ButtonOld btnLanguageEN("r1", "RBEN", [] {});
 
-    static ButtonCommon *buttons[] =
+    static Item *items[] =
     {
         &btnBack, &btnLanguageRU, &btnLanguageEN, nullptr
     };
@@ -37,7 +37,7 @@ namespace PageSettings
 //        Nextion::Text::SetLabel("NumVersion", "7");
     }
 
-    static Page pageSettings(buttons, FuncOnEnter, FuncDraw);
+    static Page pageSettings(items, FuncOnEnter, FuncDraw);
 
     Page *self = &pageSettings;
 }

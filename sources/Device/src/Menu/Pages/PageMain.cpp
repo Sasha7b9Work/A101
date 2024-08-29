@@ -97,7 +97,7 @@ namespace PageMain
             {
                 if (i != range)
                 {
-                    PageMain::self->GetButton(i)->SetValue(0);
+                    PageMain::self->GetItem(i)->ToButtonRange()->SetValue(0);
                 }
             }
 
@@ -195,7 +195,7 @@ namespace PageMain
 
     static ButtonOld btnPEAK("btnIpp", "03I", []() {});          // Ipp
 
-    static ButtonCommon *buttons[] =
+    static Item *items[] =
     {
         &btn2mA,
         &btn20mA,
@@ -221,7 +221,7 @@ namespace PageMain
         nullptr
     };
 
-    static Page pageMain(buttons, FuncOnEnter, FuncDraw);
+    static Page pageMain(items, FuncOnEnter, FuncDraw);
 
     Page *self = &pageMain;
 
@@ -247,16 +247,16 @@ namespace PageMain
 
         for (int i = 0; i < 6; i++)
         {
-            PageMain::self->GetButton(i)->SetValue(i == range ? 1 : 0);
+            PageMain::self->GetItem(i)->ToButtonRange()->SetValue(i == range ? 1 : 0);
         }
 
-        PageMain::self->GetButton(range)->Press();
+        PageMain::self->GetItem(range)->ToButtonRange()->Press();
     }
 
 
     void HightLightCurrentRange()
     {
-        PageMain::self->GetButton(Range::Current())->SetValue(1);
+        PageMain::self->GetItem(Range::Current())->ToButtonRange()->SetValue(1);
     }
 }
 

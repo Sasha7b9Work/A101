@@ -79,15 +79,15 @@ void Item::Release()
 }
 
 
-Item::Item(int _x, int _y, int _h, int _w, void (*_funcOnPress)()) :
-    rect{ (int16)_x, (int16)_y, (int16)_w, (int16)_h }, funcOnPress(_funcOnPress)
+Item::Item(TypeItem::E _type, int _x, int _y, int _h, int _w, void (*_funcOnPress)()) :
+    type(_type), rect{ (int16)_x, (int16)_y, (int16)_w, (int16)_h }, funcOnPress(_funcOnPress)
 {
     NS_ITEMS::AppendNewItem(this);
 }
 
 
-ButtonCommon::ButtonCommon(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
-    Item(_x, _y, _h, _w, _funcOnPress),
+ButtonCommon::ButtonCommon(TypeItem::E _type, pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
+    Item(_type, _x, _y, _h, _w, _funcOnPress),
     font(_f)
 {
     title[Lang::RU] = title_ru;
@@ -174,15 +174,15 @@ void ButtonOld::SetValue(int _value)
 }
 
 
-ButtonCommon *Page::GetButton(int index)
+Item *Page::GetItem(int index)
 {
-    return buttons[index];
+    return items[index];
 }
 
 
-void Page::SetButton(int index, ButtonOld *button)
+void Page::SetItem(int index, Item *item)
 {
-    buttons[index] = button;
+    items[index] = item;
 }
 
 
@@ -195,9 +195,9 @@ void Page::SetAsCurrent()
     Timer::Delay(50);           // Эта задержка нужна для того, чтобы дисплей успел переключиться на новую страницу.
                                 // Иначе сообщения элементам управления будут посылаться на старую страницу
 
-    for (int i = 0; i < GetButtonsCount(); i++)
+    for (int i = 0; i < GetItemCount(); i++)
     {
-        GetButton(i)->SetShown(true);
+        GetItem(i)->SetShown(true);
     }
 
     current->funcOnEnter();
@@ -205,16 +205,21 @@ void Page::SetAsCurrent()
 
 ButtonCommon *Page::GetButton(pchar signal)
 {
-    ButtonCommon **button = &buttons[0];
+    Item **item = &items[0];
 
-    while (*button)
+    while (*item)
     {
-        if (std::strcmp((*button)->Signal(), signal) == 0)
+        ButtonOld *button = (*item)->ToButtonOld();
+
+        if (button)
         {
-            return *button;
+            if (std::strcmp(button->Signal(), signal) == 0)
+            {
+                return button;
+            }
         }
 
-        button++;
+        item++;
     }
 
     return nullptr;
@@ -225,9 +230,9 @@ void Page::Draw()
 {
     funcOnDraw();
 
-    for (int i = 0; i < GetButtonsCount(); i++)
+    for (int i = 0; i < GetItemCount(); i++)
     {
-        GetButton(i)->Draw();
+        GetItem(i)->Draw();
     }
 }
 
@@ -258,13 +263,13 @@ void ButtonOld::Draw()
 }
 
 
-int Page::GetButtonsCount()
+int Page::GetItemCount()
 {
     int count = 0;
 
-    ButtonCommon **button = &buttons[0];
+    Item **item = &items[0];
 
-    while (*button++)
+    while (*item++)
     {
         count++;
     }
@@ -280,7 +285,7 @@ bool ButtonOld::IsSoftware() const
 
 
 Button::Button(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
-    ButtonCommon(title_ru, title_en, _f, _x, _y, _w, _h, _funcOnPress)
+    ButtonCommon(TypeItem::ItemButton, title_ru, title_en, _f, _x, _y, _w, _h, _funcOnPress)
 {
 }
 
@@ -340,4 +345,16 @@ void Item::SetShown(bool show)
     is_shown = show;
 
     Draw();
+}
+
+
+ButtonRange *Item::ToButtonRange()
+{
+    return (type == TypeItem::ItemButtonToggle) ? (ButtonRange *)this : nullptr;
+}
+
+
+ButtonOld *Item::ToButtonOld()
+{
+    return (type == TypeItem::ItemButtonOld) ? (ButtonOld *)this : nullptr;
 }
