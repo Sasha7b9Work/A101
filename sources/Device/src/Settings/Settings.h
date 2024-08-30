@@ -44,6 +44,11 @@ struct Settings
     bool smooth;                // Включение сглаживания по соседним точкам
     bool firLPF;                // Включён цифровой ФНЧ
 
+    bool en_Imax;
+    bool en_Imin;
+    bool en_Iampl;
+    bool en_Ipp;
+
     uint serial_number;
 
     Lang::E lang;

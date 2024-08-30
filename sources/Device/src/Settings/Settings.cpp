@@ -18,6 +18,12 @@ namespace NS_Settings
         false,      // middle_of_3
         false,      // smooth
         false,      // firLPF
+
+        false,      // en_Imax;
+        false,      // en_Imin;
+        false,      // en_Iampl;
+        false,      // en_Ipp;
+
         0U,         // serial number
         Lang::RU
     };
