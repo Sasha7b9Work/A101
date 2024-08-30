@@ -251,14 +251,12 @@ private:
 
     char buf_measure[Label::MAX_LEN];
 
-    TypeMeasure::E type_measure;
+    TypeMeasure type_measure;
 
     void SetMeasure(pchar);
 
     // after - количество цифр после запятой
     void ConvertRealToText(REAL value, char buffer[Label::MAX_LEN], int after, pchar suffix);
-
-    bool ExistFieldSign() const;
 
     void DrawSign(pchar);
 

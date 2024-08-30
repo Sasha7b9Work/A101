@@ -27,6 +27,12 @@ struct TypeMeasure
         Frequency,
         Count
     };
+
+    E value;
+
+    TypeMeasure(E v) : value(v) { }
+
+    bool ExistFieldSign() const;
 };
 
 

@@ -140,7 +140,7 @@ void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int a
 }
 
 
-bool LabelMeasure::ExistFieldSign() const
+bool TypeMeasure::ExistFieldSign() const
 {
     static const bool exist[TypeMeasure::Count] =
     {
@@ -153,7 +153,7 @@ bool LabelMeasure::ExistFieldSign() const
         false
     };
 
-    return exist[type_measure];
+    return exist[value];
 }
 
 
@@ -179,7 +179,7 @@ void LabelMeasure::SetMeasure(pchar measure)
 {
     if (measure[0])
     {
-        if (ExistFieldSign())
+        if (type_measure.ExistFieldSign())
         {
             char sign[2] = { measure[0], '\0' };
             DrawSign(sign);
