@@ -183,7 +183,7 @@ struct Label : public Item
 {
     static const int MAX_LEN = 32;
 
-    Label(pchar _textRU, pchar _textEN, int _x, int _y, int _w, int _h, int _font, void (*_funcOnPress)() = EmptyFuncVV,
+    Label(pchar _textRU, pchar _textEN, int _x, int _y, int _w, int _h, Font::E, void (*_funcOnPress)() = EmptyFuncVV,
         const Color &_colorText = Color::White, const Color &_colorBack = Color::Count, bool _h_aligned = false);
 
     void SetText(const char _textRU[MAX_LEN], const char _textEN[MAX_LEN]);
@@ -241,11 +241,15 @@ struct LabelMeasure : public Label
 
     void SetMeasure(const Measure &, int range);
 
-    pchar GetSign();
+    pchar GetSign() const;
 
-    pchar GetDigits();
+    pchar GetDigits() const;
 
-    pchar GetUnits();
+    pchar GetUnits() const;
+
+    static int CalculateFullWidth(SizeMeasure::E);
+    static int CalculateFullHeight(SizeMeasure::E);
+    static Font::E CalculateFont(SizeMeasure::E);
 };
 
 

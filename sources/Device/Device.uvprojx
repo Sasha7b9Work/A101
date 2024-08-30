@@ -1459,6 +1459,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Menu\PasswordResolver.h</FilePath>
             </File>
+            <File>
+              <FileName>LabelMeasure.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\LabelMeasure.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Menu.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Menu.txt</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1639,16 +1649,6 @@
               <FileName>CntrlText.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Nextion\Controls\CntrlText.h</FilePath>
-            </File>
-            <File>
-              <FileName>WindowsMeasures.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Nextion\Controls\WindowsMeasures.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WindowsMeasures.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Nextion\Controls\WindowsMeasures.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2867,6 +2867,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Menu\PasswordResolver.h</FilePath>
             </File>
+            <File>
+              <FileName>LabelMeasure.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\LabelMeasure.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Menu.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Menu.txt</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2996,16 +3006,6 @@
               <FileName>CntrlText.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Nextion\Controls\CntrlText.h</FilePath>
-            </File>
-            <File>
-              <FileName>WindowsMeasures.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Nextion\Controls\WindowsMeasures.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WindowsMeasures.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Nextion\Controls\WindowsMeasures.h</FilePath>
             </File>
           </Files>
         </Group>

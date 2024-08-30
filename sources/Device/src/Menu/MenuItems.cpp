@@ -360,7 +360,7 @@ ButtonOld *Item::ToButtonOld()
 }
 
 
-Label::Label(pchar _textRU, pchar _textEN, int _x, int _y, int _w, int _h, int _font, void (*_funcOnPress)(),
+Label::Label(pchar _textRU, pchar _textEN, int _x, int _y, int _w, int _h, Font::E _font, void (*_funcOnPress)(),
     const Color &_colorText, const Color &_colorBack, bool _h_aligned) :
     Item(TypeItem::Label, _x, _y, _w, _h, _funcOnPress),
     font(_font), h_aligned(_h_aligned), colorText(_colorText), colorBack(_colorBack)
