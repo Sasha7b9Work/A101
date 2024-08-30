@@ -23,7 +23,9 @@ struct TypeMeasure
         Ampl,
         Peak,
         Min,
-        Max
+        Max,
+        Frequency,
+        Count
     };
 };
 
