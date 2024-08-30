@@ -17,13 +17,13 @@ namespace PageMain
     Label labelZeroDC{ "ноль", "zero", 23, 170, 90, 50, Font::_1 };
     Label labelZeroAC{ "ноль", "zero", 23, 260, 90, 50, Font::_1 };
 
-    _WindowMeasure_ wndDC(TypeMeasure::DC, "titleDC", "f_sign", "valueDC", Label{ "", "", 552, 143, 100, 85, Font::_4 }, "DC:");
-    _WindowMeasure_ wndAC(TypeMeasure::AC, "titleAC", "",       "valueAC", Label{ "", "", 552, 233, 100, 85, Font::_4 }, "AC:");
+    LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 100, 100 };
+    LabelMeasure wndAC{ TypeMeasure::AC, SizeMeasure::Big, 100, 300 };
 
-    static _WindowMeasure_ wndAMPL(TypeMeasure::Ampl, "tIamp", "",          "tIampValue", Label{ "", "", 606, 27, 51, 40, Font::_0 }, "");
-    static _WindowMeasure_ wndPEAK(TypeMeasure::Peak, "tIpp",  "",          "tIppValue",  Label{ "", "", 606, 70, 51, 40, Font::_0 }, "");
-    static _WindowMeasure_ wndMIN(TypeMeasure::Min,   "tImin", "tIminSign", "tIminValue", Label{ "", "", 360, 70, 51, 40, Font::_0 }, "");
-    static _WindowMeasure_ wndMAX(TypeMeasure::Max,   "tImax", "tImaxSign", "tImaxValue", Label{ "", "", 360, 27, 51, 40, Font::_0 }, "");
+    static LabelMeasure wndAMPL{ TypeMeasure::Ampl, SizeMeasure::Small, 100, 20 };
+    static LabelMeasure wndPEAK{ TypeMeasure::Peak, SizeMeasure::Small, 100, 50 };
+    static LabelMeasure wndMIN{ TypeMeasure::Min,   SizeMeasure::Small, 300, 20 };
+    static LabelMeasure wndMAX{ TypeMeasure::Max,   SizeMeasure::Small, 300, 50 };
 
     static void ResetAllMeasures()
     {
@@ -76,16 +76,16 @@ namespace PageMain
     {
         Display::LabelStar::Update();
 
-        wndDC.Draw(Ampermeter::GetDC(), Range::Current());
+        wndDC.SetMeasure(Ampermeter::GetDC(), Range::Current());
 
-        wndAC.Draw(Ampermeter::GetAC(), Range::Current());
+        wndAC.SetMeasure(Ampermeter::GetAC(), Range::Current());
 
         Measure ampl = Ampermeter::GetAmpl();
-        wndAMPL.Draw(ampl, Range::Current());
+        wndAMPL.SetMeasure(ampl, Range::Current());
 
-        wndPEAK.Draw(Ampermeter::GetPeak(), Range::Current());
-        wndMIN.Draw(Ampermeter::GetMin(), Range::Current());
-        wndMAX.Draw(Ampermeter::GetMax(), Range::Current());
+        wndPEAK.SetMeasure(Ampermeter::GetPeak(), Range::Current());
+        wndMIN.SetMeasure(Ampermeter::GetMin(), Range::Current());
+        wndMAX.SetMeasure(Ampermeter::GetMax(), Range::Current());
     }
 
     // Вызывается при нажатии кнопки
@@ -242,8 +242,8 @@ namespace PageMain
             btnAC_DC.SetText("DC");
         }
 
-        wndAC.SetVisible(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsAC());
-        wndDC.SetVisible(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsDC());
+        wndAC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsAC());
+        wndDC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsDC());
 
         for (int i = 0; i < 6; i++)
         {

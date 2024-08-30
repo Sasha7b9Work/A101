@@ -14,6 +14,20 @@ struct Lang
 };
 
 
+struct TypeMeasure
+{
+    enum E
+    {
+        DC,
+        AC,
+        Ampl,
+        Peak,
+        Min,
+        Max
+    };
+};
+
+
 // Что выводится на дисплей
 struct MeasuresOnDisplay
 {

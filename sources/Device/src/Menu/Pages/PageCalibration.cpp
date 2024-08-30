@@ -5,7 +5,6 @@
 #include "Nextion/Nextion.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
-#include "Nextion/Controls/WindowsMeasures.h"
 #include "Ampermeter/Calibrator/Calibrator.h"
 #include "Nextion/Display.h"
 #include "Settings/CalibrationSettings.h"
@@ -25,8 +24,8 @@ namespace PageCalibration
 
     static void FuncDraw();
 
-    static _WindowMeasure_ wndCurrent(TypeMeasure::DC, "", "t5", "t0", Label{ "", "", 500, 98,  112, 78, Font::_2 }, "");     // Текущее значение напряжения
-    static _WindowMeasure_ wndGiven(TypeMeasure::DC,   "", "t6", "t1", Label{ "", "", 500, 183, 110, 78, Font::_2 }, "");     // Заданное значение напряжения
+    static LabelMeasure wndCurrent{ TypeMeasure::DC, SizeMeasure::Big, 100, 100 };     // Текущее значение напряжения
+    static LabelMeasure wndGiven{ TypeMeasure::DC,   SizeMeasure::Big, 100, 200 };     // Заданное значение напряжения
 
     void OnEventChangeRange()
     {
@@ -358,7 +357,7 @@ namespace PageCalibration
 
     static void FuncDraw()
     {
-        wndCurrent.Draw(Ampermeter::GetDC(), Range::Current());
+        wndCurrent.SetMeasure(Ampermeter::GetDC(), Range::Current());
 
         LabelPassword::Draw();
 
@@ -368,7 +367,7 @@ namespace PageCalibration
         {
             if (btnMin.GetValue() == 1)
             {
-                wndGiven.Draw({ 0.0, false, true }, range);
+                wndGiven.SetMeasure({ 0.0, false, true }, range);
             }
             else
             {
@@ -382,7 +381,7 @@ namespace PageCalibration
                     50000.0
                 };
 
-                wndGiven.Draw({ values[range], false, true }, range);
+                wndGiven.SetMeasure({ values[range], false, true }, range);
             }
         }
     }

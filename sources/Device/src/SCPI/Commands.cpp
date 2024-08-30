@@ -36,10 +36,10 @@ bool SCPI::CommandMEAS::Execute(Direction::E dir)
     if (MeasuresOnDisplay::IsDC() || MeasuresOnDisplay::IsAC_DC())
     {
         message.Append("I=");
-        message.Append(PageMain::wndDC.GetControlSign().LastLabel());
-        message.Append(PageMain::wndDC.GetControlDigits().LastLabel());
+        message.Append(PageMain::wndDC.GetSign());
+        message.Append(PageMain::wndDC.GetDigits());
         message.Append(" ");
-        message.Append(PageMain::wndDC.GetControlUnits().Text());
+        message.Append(PageMain::wndDC.GetUnits());
     }
 
     if (MeasuresOnDisplay::IsAC_DC())
@@ -50,9 +50,9 @@ bool SCPI::CommandMEAS::Execute(Direction::E dir)
     if (MeasuresOnDisplay::IsAC() || MeasuresOnDisplay::IsAC_DC())
     {
         message.Append("J=");
-        message.Append(PageMain::wndAC.GetControlDigits().LastLabel());
+        message.Append(PageMain::wndAC.GetDigits());
         message.Append(" ");
-        message.Append(PageMain::wndAC.GetControlUnits().Text());
+        message.Append(PageMain::wndAC.GetUnits());
     }
 
     Send(dir, message.c_str());

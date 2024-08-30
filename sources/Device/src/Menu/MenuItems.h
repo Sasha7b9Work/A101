@@ -5,6 +5,7 @@
 #include "Utils/Math.h"
 #include "Nextion/Colors.h"
 #include "Settings/Settings.h"
+#include "Ampermeter/Ampermeter.h"
 
 
 struct Page;
@@ -21,6 +22,7 @@ struct TypeItem
         ButtonToggle,   // Кнопка с фиксацией
         ButtonOld,      // Старая кнопка - реализована в прошивке дисплея
         Label,          // Текстовая строка
+        LabelMeasure,
         Count
     };
 };
@@ -215,6 +217,35 @@ private:
     bool  h_aligned;
     Color colorText;
     Color colorBack;
+};
+
+
+struct SizeMeasure
+{
+    enum E
+    {
+        Big,
+        Small,
+        Count
+    };
+};
+
+
+struct LabelMeasure : public Label
+{
+    LabelMeasure(TypeMeasure::E, SizeMeasure::E, int _x, int _y, void (*_funcOnPress)() = EmptyFuncVV);
+
+    void Reset();
+
+    void Flash();
+
+    void SetMeasure(const Measure &, int range);
+
+    pchar GetSign();
+
+    pchar GetDigits();
+
+    pchar GetUnits();
 };
 
 
