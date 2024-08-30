@@ -19,10 +19,10 @@ struct TypeMeasure
 };
 
 
-class WindowMeasure
+class _WindowMeasure_
 {
 public:
-    WindowMeasure(TypeMeasure::E _type, pchar nameType, pchar nameSign, pchar nameDigits, const Label &labelUnits, pchar _label_type = "") :
+    _WindowMeasure_(TypeMeasure::E _type, pchar nameType, pchar nameSign, pchar nameDigits, const Label &labelUnits, pchar _label_type = "") :
         cntrlType(nameType), cntrlSign(nameSign), cntrlDigits(nameDigits), cntrlUnits(labelUnits), __label_type(_label_type), type(_type)
     {
     }

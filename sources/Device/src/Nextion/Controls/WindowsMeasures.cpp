@@ -10,7 +10,7 @@
 #include <cmath>
 
 
-void WindowMeasure::Reset()
+void _WindowMeasure_::Reset()
 {
     int range = Range::Current();
 
@@ -47,7 +47,7 @@ void WindowMeasure::Reset()
 }
 
 
-void WindowMeasure::SetMeasure(REAL value)
+void _WindowMeasure_::SetMeasure(REAL value)
 {
     if (Page::Current() != PageMain::self)
     {
@@ -64,7 +64,7 @@ void WindowMeasure::SetMeasure(REAL value)
 }
 
 
-void WindowMeasure::SetMeasure(pchar measure)
+void _WindowMeasure_::SetMeasure(pchar measure)
 {
     if (measure[0])
     {
@@ -93,13 +93,13 @@ void WindowMeasure::SetMeasure(pchar measure)
 }
 
 
-void WindowMeasure::Flash()
+void _WindowMeasure_::Flash()
 {
     cntrlDigits.Flash();
 }
 
 
-void WindowMeasure::Draw(const Measure &measure, int range)
+void _WindowMeasure_::Draw(const Measure &measure, int range)
 {
     if (!measure.correct)
     {
@@ -124,7 +124,7 @@ void WindowMeasure::Draw(const Measure &measure, int range)
 }
 
 
-void WindowMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int after, pchar suffix)
+void _WindowMeasure_::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int after, pchar suffix)
 {
     std::strcpy(out, value < 0.0 ? "-" : "+");
 
@@ -172,7 +172,7 @@ void WindowMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int 
 }
 
 
-void WindowMeasure::SetVisible(bool visible)
+void _WindowMeasure_::SetVisible(bool visible)
 {
     cntrlType.SetVisible(visible);
     cntrlSign.SetVisible(visible);

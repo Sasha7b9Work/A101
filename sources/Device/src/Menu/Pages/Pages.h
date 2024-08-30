@@ -14,8 +14,8 @@ namespace PageMain
 
     void OnEventChangeRange(int new_range);
 
-    extern WindowMeasure wndDC;
-    extern WindowMeasure wndAC;
+    extern _WindowMeasure_ wndDC;
+    extern _WindowMeasure_ wndAC;
 
     void SetRange(MeasuresOnDisplay::E, int);
 
