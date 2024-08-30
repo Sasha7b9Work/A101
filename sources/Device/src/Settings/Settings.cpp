@@ -19,6 +19,9 @@ namespace NS_Settings
         false,      // smooth
         false,      // firLPF
 
+        true,       // en_DC
+        true,       // en_AC
+        false,      // en_f
         false,      // en_Imax;
         false,      // en_Imin;
         false,      // en_Iampl;

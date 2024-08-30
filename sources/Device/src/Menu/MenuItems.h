@@ -15,7 +15,7 @@ struct TypeItem
     enum E
     {
         Another,
-        Button,
+        ButtonPress,
         ButtonToggle,
         ButtonOld,
         Count
@@ -140,9 +140,10 @@ private:
 };
 
 
-struct Button : public ButtonCommon
+// Кнопка без фиксации (возвращается в отжатое состояние при отпускании)
+struct ButtonPress : public ButtonCommon
 {
-    Button(pchar title_ru, pchar title_en, Font::E f, int x, int y, int w, int h, void (*_funcOnPress)(), TypeItem::E = TypeItem::Button);
+    ButtonPress(pchar title_ru, pchar title_en, Font::E f, int x, int y, int w, int h, void (*_funcOnPress)(), TypeItem::E = TypeItem::ButtonPress);
 
     virtual pchar Signal() const override;
 
@@ -152,10 +153,11 @@ struct Button : public ButtonCommon
 };
 
 
-struct ButtonToggle : public Button
+// Кнопка с фиксацией (при нажатии переключается в противоположное состояние, на отпускание реакциии нет)
+struct ButtonToggle : public ButtonPress
 {
     ButtonToggle(pchar title_ru, pchar title_en, Font::E f, int x, int y, int w, int h, void (*_funcOnPress)()) :
-        Button(title_ru, title_en, f, x, y, w, h, _funcOnPress, TypeItem::ButtonToggle)
+        ButtonPress(title_ru, title_en, f, x, y, w, h, _funcOnPress, TypeItem::ButtonToggle)
     {
     }
 

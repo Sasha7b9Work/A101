@@ -35,7 +35,7 @@ namespace PageMain
         wndMAX.Reset();
     }
 
-    static Button btnZero("Óñò. 0", "Set 0", Font::_1, 669, 321, 127, 74, []()
+    static ButtonPress btnZero("Óñò. 0", "Set 0", Font::_1, 669, 321, 127, 74, []()
     {
         Ampermeter::ZeroDC::FloatingZero::Process();
     });

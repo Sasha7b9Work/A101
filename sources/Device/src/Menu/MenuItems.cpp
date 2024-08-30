@@ -284,7 +284,7 @@ bool ButtonOld::IsSoftware() const
 }
 
 
-Button::Button(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)(), TypeItem::E _type) :
+ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)(), TypeItem::E _type) :
     ButtonCommon(_type, title_ru, title_en, _f, _x, _y, _w, _h, _funcOnPress)
 {
 }
@@ -303,13 +303,13 @@ void ButtonCommon::SetValue(int value)
 }
 
 
-pchar Button::Signal() const
+pchar ButtonPress::Signal() const
 {
     return "";
 }
 
 
-void Button::Draw()
+void ButtonPress::Draw()
 {
     int x = rect.x;
     int y = rect.y;
