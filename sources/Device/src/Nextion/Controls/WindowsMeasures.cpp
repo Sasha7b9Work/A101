@@ -177,5 +177,5 @@ void WindowMeasure::SetVisible(bool visible)
     cntrlType.SetVisible(visible);
     cntrlSign.SetVisible(visible);
     cntrlDigits.SetVisible(visible);
-    cntrlUnits.SetVisible(visible);
+    cntrlUnits.SetShown(visible);
 }

@@ -358,3 +358,49 @@ ButtonOld *Item::ToButtonOld()
 {
     return (type == TypeItem::ButtonOld) ? (ButtonOld *)this : nullptr;
 }
+
+
+Label::Label(pchar _textRU, pchar _textEN, int _x, int _y, int _w, int _h, int _font, void (*_funcOnPress)(),
+    const Color &_colorText, const Color &_colorBack, bool _h_aligned) :
+    Item(TypeItem::Label, _x, _y, _w, _h, _funcOnPress),
+    font(_font), h_aligned(_h_aligned), colorText(_colorText), colorBack(_colorBack)
+{
+    std::strcpy(text[0], _textRU);
+    std::strcpy(text[1], _textEN);
+}
+
+
+pchar Label::Text() const
+{
+    return text[set.lang];
+}
+
+
+void Label::Draw()
+{
+    if (IsShown())
+    {
+        Nextion::DrawString(rect.x, rect.y, rect.width, rect.height, font, colorText,
+            (colorBack.value == Color::Count.value) ? Color::Background : colorBack, Text(), h_aligned ? 1 : 0);
+    }
+    else
+    {
+        Nextion::DrawString(rect.x, rect.y, rect.width, rect.height, font, colorText, Color::Background, "");
+    }
+}
+
+
+void Label::SetText(const char _textRU[MAX_LEN], const char _textEN[MAX_LEN])
+{
+    if (std::strcmp(_textRU, text[Lang::RU]) != 0)
+    {
+        std::strcpy(text[Lang::RU], _textRU);
+    }
+
+    if (std::strcmp(_textEN, text[Lang::EN]) != 0)
+    {
+        std::strcpy(text[Lang::EN], _textEN);
+    }
+
+    Draw();
+}

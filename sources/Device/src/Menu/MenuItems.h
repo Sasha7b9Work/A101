@@ -3,6 +3,8 @@
 #include "Utils/Log.h"
 #include "Nextion/Controls.h"
 #include "Utils/Math.h"
+#include "Nextion/Colors.h"
+#include "Settings/Settings.h"
 
 
 struct Page;
@@ -15,9 +17,10 @@ struct TypeItem
     enum E
     {
         Another,
-        ButtonPress,
-        ButtonToggle,
-        ButtonOld,
+        ButtonPress,    // Кнопка без фиксации
+        ButtonToggle,   // Кнопка с фиксацией
+        ButtonOld,      // Старая кнопка - реализована в прошивке дисплея
+        Label,          // Текстовая строка
         Count
     };
 };
@@ -171,6 +174,47 @@ struct ButtonRange : public ButtonToggle
         ButtonToggle(title_ru, title_en, Font::_1, x, y, 127, 74, _funcOnPress)
     {
     }
+};
+
+
+struct Label : public Item
+{
+    static const int MAX_LEN = 32;
+
+    Label(pchar _textRU, pchar _textEN, int _x, int _y, int _w, int _h, int _font, void (*_funcOnPress)() = EmptyFuncVV,
+        const Color &_colorText = Color::White, const Color &_colorBack = Color::Count, bool _h_aligned = false);
+
+    void SetText(const char _textRU[MAX_LEN], const char _textEN[MAX_LEN]);
+
+    void SetX(int _x)
+    {
+        rect.x = (int16)_x;
+    }
+    int GetX() const
+    {
+        return rect.x;
+    }
+    int GetY() const
+    {
+        return rect.y;
+    }
+    int GetWidth() const
+    {
+        return rect.width;
+    }
+    pchar Text() const;
+    pchar Text(Lang::E lang) const
+    {
+        return text[lang];
+    }
+    virtual void Draw() override;
+    virtual bool IsWithoutFixation() const override { return true; }
+private:
+    char  text[Lang::Count][MAX_LEN];
+    int   font;
+    bool  h_aligned;
+    Color colorText;
+    Color colorBack;
 };
 
 

@@ -14,16 +14,16 @@
 
 namespace PageMain
 {
-    Label labelZeroDC{ 23, 170, 90, 50, Font::_1, "ноль", "zero", Color::White, false };
-    Label labelZeroAC{ 23, 260, 90, 50, Font::_1, "ноль", "zero", Color::White, false };
+    Label labelZeroDC{ "ноль", "zero", 23, 170, 90, 50, Font::_1 };
+    Label labelZeroAC{ "ноль", "zero", 23, 260, 90, 50, Font::_1 };
 
-    WindowMeasure wndDC(TypeMeasure::DC, "titleDC", "f_sign", "valueDC", Label(552, 143, 100, 85, Font::_4, "", ""), "DC:");
-    WindowMeasure wndAC(TypeMeasure::AC, "titleAC", "",       "valueAC", Label(552, 233, 100, 85, Font::_4, "", ""), "AC:");
+    WindowMeasure wndDC(TypeMeasure::DC, "titleDC", "f_sign", "valueDC", Label{ "", "", 552, 143, 100, 85, Font::_4 }, "DC:");
+    WindowMeasure wndAC(TypeMeasure::AC, "titleAC", "",       "valueAC", Label{ "", "", 552, 233, 100, 85, Font::_4 }, "AC:");
 
-    static WindowMeasure wndAMPL(TypeMeasure::Ampl, "tIamp", "",          "tIampValue", Label(606, 27, 51, 40, Font::_0, "", ""), "");
-    static WindowMeasure wndPEAK(TypeMeasure::Peak, "tIpp",  "",          "tIppValue",  Label(606, 70, 51, 40, Font::_0, "", ""), "");
-    static WindowMeasure wndMIN(TypeMeasure::Min,   "tImin", "tIminSign", "tIminValue", Label(360, 70, 51, 40, Font::_0, "", ""), "");
-    static WindowMeasure wndMAX(TypeMeasure::Max,   "tImax", "tImaxSign", "tImaxValue", Label(360, 27, 51, 40, Font::_0, "", ""), "");
+    static WindowMeasure wndAMPL(TypeMeasure::Ampl, "tIamp", "",          "tIampValue", Label{ "", "", 606, 27, 51, 40, Font::_0 }, "");
+    static WindowMeasure wndPEAK(TypeMeasure::Peak, "tIpp",  "",          "tIppValue",  Label{ "", "", 606, 70, 51, 40, Font::_0 }, "");
+    static WindowMeasure wndMIN(TypeMeasure::Min,   "tImin", "tIminSign", "tIminValue", Label{ "", "", 360, 70, 51, 40, Font::_0 }, "");
+    static WindowMeasure wndMAX(TypeMeasure::Max,   "tImax", "tImaxSign", "tImaxValue", Label{ "", "", 360, 27, 51, 40, Font::_0 }, "");
 
     static void ResetAllMeasures()
     {
@@ -269,7 +269,7 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 
         enable ? btnZeroAC_EN.Press() : btnZeroAC_DIS.Press();
 
-        PageMain::labelZeroAC.SetVisible(enable);
+        PageMain::labelZeroAC.SetShown(enable);
     }
     else if (meas == MeasuresOnDisplay::DC)
     {
@@ -277,7 +277,7 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 
         enable ? btnZeroDC_EN.Press() : btnZeroDC_DIS.Press();
 
-        PageMain::labelZeroDC.SetVisible(enable);
+        PageMain::labelZeroDC.SetShown(enable);
     }
 }
 

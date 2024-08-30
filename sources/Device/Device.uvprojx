@@ -1650,16 +1650,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Nextion\Controls\WindowsMeasures.h</FilePath>
             </File>
-            <File>
-              <FileName>Label.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Nextion\Controls\Label.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Label.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Nextion\Controls\Label.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -3016,16 +3006,6 @@
               <FileName>WindowsMeasures.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Nextion\Controls\WindowsMeasures.h</FilePath>
-            </File>
-            <File>
-              <FileName>Label.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Nextion\Controls\Label.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Label.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Nextion\Controls\Label.h</FilePath>
             </File>
           </Files>
         </Group>

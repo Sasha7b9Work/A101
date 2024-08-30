@@ -42,7 +42,7 @@ void Ampermeter::ZeroDC::Enable()
 
     PageMain::HightLightCurrentRange();
 
-    PageMain::labelZeroDC.Show();
+    PageMain::labelZeroDC.SetShown(true);
 }
 
 
@@ -65,7 +65,7 @@ void Ampermeter::ZeroDC::Disable()
 {
     value_abs = 0.0;
 
-    PageMain::labelZeroDC.Hide();
+    PageMain::labelZeroDC.SetShown(false);
 
     Nextion::SetValue("bt11", 0);
 }
@@ -94,7 +94,7 @@ void Ampermeter::ZeroAC::Enable()
 
     PageMain::HightLightCurrentRange();
 
-    PageMain::labelZeroAC.Show();
+    PageMain::labelZeroAC.SetShown(true);
 }
 
 
@@ -102,7 +102,7 @@ void Ampermeter::ZeroAC::Disable()
 {
     value_abs = 0.0;
 
-    PageMain::labelZeroAC.Hide();
+    PageMain::labelZeroAC.SetShown(false);
 
     Nextion::SetValue("bt10", 0);
 }

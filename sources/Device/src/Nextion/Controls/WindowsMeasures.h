@@ -1,8 +1,8 @@
 // 2022/11/10 22:26:12 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Nextion/Controls/Label.h"
 #include "Nextion/Controls/CntrlText.h"
 #include "Ampermeter/Ampermeter.h"
+#include "Menu/MenuItems.h"
 
 
 struct TypeMeasure
