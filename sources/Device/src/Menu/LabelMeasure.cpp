@@ -3,14 +3,7 @@
 #include "Menu/MenuItems.h"
 
 
-LabelMeasure::LabelMeasure(TypeMeasure::E, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)()) :
-    Label("", "", _x, _y, CalculateFullWidth(_size), CalculateFullHeight(_size), CalculateFont(_size), _funcOnPress)
-{
-
-}
-
-
-Font::E LabelMeasure::CalculateFont(SizeMeasure::E size)
+namespace LM
 {
     static const Font::E fonts[SizeMeasure::Count] =
     {
@@ -18,31 +11,24 @@ Font::E LabelMeasure::CalculateFont(SizeMeasure::E size)
         Font::_0
     };
 
-    return fonts[size];
-}
-
-
-int LabelMeasure::CalculateFullWidth(SizeMeasure::E size)
-{
     static const int widths[SizeMeasure::Count] =
     {
         518,
         240
     };
 
-    return widths[size];
-}
-
-
-int LabelMeasure::CalculateFullHeight(SizeMeasure::E size)
-{
     static const int heights[SizeMeasure::Count] =
     {
         85,
         40
     };
+}
 
-    return heights[size];
+
+LabelMeasure::LabelMeasure(TypeMeasure::E, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)()) :
+    Label("", "", _x, _y, LM::widths[_size], LM::heights[_size], LM::fonts[_size], _funcOnPress)
+{
+
 }
 
 

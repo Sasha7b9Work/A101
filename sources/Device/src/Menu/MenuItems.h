@@ -246,10 +246,6 @@ struct LabelMeasure : public Label
     pchar GetDigits() const;
 
     pchar GetUnits() const;
-
-    static int CalculateFullWidth(SizeMeasure::E);
-    static int CalculateFullHeight(SizeMeasure::E);
-    static Font::E CalculateFont(SizeMeasure::E);
 };
 
 
