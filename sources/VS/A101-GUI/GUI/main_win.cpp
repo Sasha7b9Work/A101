@@ -4,11 +4,11 @@
 #include "GUI/Application.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
-#include "Display/Display.h"
-#include "Nextion/Nextion.h"
 #include "Ampermeter/Ampermeter.h"
 #include "GUI/Screen.h"
 #include "SCPI/SCPI.h"
+#include "Nextion/Display.h"
+#include "Nextion/Nextion.h"
 
 
 void Application::Init()

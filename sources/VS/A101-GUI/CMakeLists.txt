@@ -81,14 +81,6 @@ file(GLOB SRC                   ./*.h
                                 ../../Device/src/stm_includes.h
                                 ../../Device/src/Device.*)
 file(GLOB CONTROLS              Controls/*.*)
-file(GLOB DISPLAY               ./Display/*.*
-                                ../../Device/src/Display/*.h
-                                ../../Device/src/Display/Colors.cpp
-                                ../../Device/src/Display/DiagramFFT.cpp
-                                ../../Device/src/Display/DiagramInput.cpp
-                                ../../Device/src/Display/Display.cpp
-                                ../../Device/src/Display/Indicator.cpp)
-file(GLOB DISPLAY_CONTROLS      ../../Device/src/Display/Controls/*.*)
 file(GLOB GENERATOR             ../../Device/src/Generator/*.*)
 file(GLOB GUI                   ./GUI/*.*)
 file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
@@ -110,6 +102,10 @@ file(GLOB MENU                  ../../Device/src/Menu/*.*)
 file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
 file(GLOB NEXTION               ./Nextion/*.*
                                 ../../Device/src/Nextion/*.h
+                                ../../Device/src/Nextion/Diagram*.cpp
+                                ../../Device/src/Nextion/Display.cpp
+                                ../../Device/src/Nextion/Colors.cpp
+                                ../../Device/src/Nextion/Keyboard.cpp
                                 ../../Device/src/Nextion/Nextion.cpp)
 file(GLOB NEXTION_CONTROLS      ../../Device/src/Nextion/Controls/*.*)
 file(GLOB SCPI                  ../../Device/src/SCPI/*.*)
@@ -117,8 +113,6 @@ file(GLOB SETTINGS              ../../Device/src/Settings/*.*)
 file(GLOB UTILS                 ../../Device/src/Utils/*.*)
 
 source_group(src                   FILES ${SRC})
-source_group(Display               FILES ${DISPLAY})
-source_group(Display/Controls      FILES ${DISPLAY_CONTROLS})
 source_group(Generator             FILES ${GENERATOR})
 source_group(GUI                   FILES ${GUI})
 source_group(Hardware              FILES ${HARDWARE})
@@ -139,8 +133,6 @@ source_group(Utils                 FILES ${UTILS})
 add_executable(
     ${PROJECT_NAME}
     ${SRC}
-    ${DISPLAY}
-    ${DISPLAY_CONTROLS}
     ${GENERATOR}
     ${GUI}
     ${HARDWARE}

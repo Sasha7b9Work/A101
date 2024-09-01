@@ -2,7 +2,7 @@
 
 project (ControlPanel)
 
-#set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD ON)
 
 include_directories(
     .
@@ -69,7 +69,7 @@ endif()
 
 file(GLOB SRC               *.h  *.cpp *.c)
 file(GLOB DIALOGS           Dialogs/*.*)
-file(GLOB DISPLAY           ../../Device/src/Display/Colors.*)
+file(GLOB DISPLAY           ../../Device/src/Nextion/Colors.*)
 file(GLOB SCPI              SCPI/*.*)
 file(GLOB SCPI_PARSER       SCPI/Parser/*.*)
 

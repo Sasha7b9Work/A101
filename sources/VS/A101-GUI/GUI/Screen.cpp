@@ -77,7 +77,7 @@ private:
 };
 
 
-struct Font
+struct FontGUI
 {
     static wxFont Get(int num_font);
 };
@@ -184,7 +184,7 @@ void Screen::DrawString(int x, int y, int num_font, const wxColor &color, pchar 
     wxMemoryDC dc;
     dc.SelectObject(bitmap);
     dc.SetTextForeground(color);
-    dc.SetFont(Font::Get(num_font));
+    dc.SetFont(FontGUI::Get(num_font));
     dc.DrawText(text, x, y);
     dc.SelectObject(wxNullBitmap);
     Refresh();
@@ -389,7 +389,7 @@ void Wave::Draw()
 }
 
 
-wxFont Font::Get(int num_font)
+wxFont FontGUI::Get(int num_font)
 {
     static const int sizes[10] = { 30, 30, 30, 20, 30, 30, 30, 60, 30, 30 };
 
