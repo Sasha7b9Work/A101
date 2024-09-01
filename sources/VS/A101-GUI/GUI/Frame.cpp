@@ -6,7 +6,7 @@
 #include "Controls/ConsoleSCPI.h"
 
 
-Frame *Frame::self = nullptr;
+MainWindow *MainWindow::self = nullptr;
 
 
 enum
@@ -23,7 +23,7 @@ enum
 };
 
 
-Frame::Frame(const wxString &title)
+MainWindow::MainWindow(const wxString &title)
     :wxFrame((wxFrame *)NULL, wxID_ANY, title)
 {
     self = this;
@@ -48,15 +48,15 @@ Frame::Frame(const wxString &title)
 
     SetSizeAndPosition();
 
-    Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
-    Bind(wxEVT_MENU, &Frame::OnSCPI, this, TOOLS_SCPI);
-    Bind(wxEVT_CLOSE_WINDOW, &Frame::OnClose, this);
+    Bind(wxEVT_MENU, &MainWindow::OnQuit, this, FILE_QUIT);
+    Bind(wxEVT_MENU, &MainWindow::OnSCPI, this, TOOLS_SCPI);
+    Bind(wxEVT_CLOSE_WINDOW, &MainWindow::OnClose, this);
 
     ConsoleSCPI::Self()->Hide();
 }
 
 
-void Frame::SetSizeAndPosition()
+void MainWindow::SetSizeAndPosition()
 {
     wxWindowBase::SetClientSize(Screen::WIDTH, Screen::HEIGHT);
 
@@ -71,7 +71,7 @@ void Frame::SetSizeAndPosition()
 
     wxWindowBase::SetPosition({ x, y });
 
-    Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
+    Bind(wxEVT_TIMER, &MainWindow::OnTimer, this, TIMER_ID);
 
     timer.SetOwner(this, TIMER_ID);
 
@@ -79,7 +79,7 @@ void Frame::SetSizeAndPosition()
 }
 
 
-void Frame::OnTimer(wxTimerEvent &)
+void MainWindow::OnTimer(wxTimerEvent &)
 {
     timer.Stop();
 
@@ -89,13 +89,13 @@ void Frame::OnTimer(wxTimerEvent &)
 }
 
 
-void Frame::OnQuit(wxCommandEvent &)
+void MainWindow::OnQuit(wxCommandEvent &)
 {
     Close(true);
 }
 
 
-void Frame::OnClose(wxCloseEvent &event)
+void MainWindow::OnClose(wxCloseEvent &event)
 {
     ConsoleSCPI::Self()->Destroy();
 
@@ -103,7 +103,7 @@ void Frame::OnClose(wxCloseEvent &event)
 }
 
 
-void Frame::OnSCPI(wxCommandEvent &)
+void MainWindow::OnSCPI(wxCommandEvent &)
 {
     ConsoleSCPI::Self()->SwitchVisibility();
 }

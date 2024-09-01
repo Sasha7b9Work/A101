@@ -3,12 +3,12 @@
 #include "wx_includes.h"
 
 
-class Frame : public wxFrame
+class MainWindow : public wxFrame
 {
 public:
-    Frame(const wxString &title);
+    MainWindow(const wxString &title);
 
-    static Frame *self;
+    static MainWindow *self;
 
 private:
 
