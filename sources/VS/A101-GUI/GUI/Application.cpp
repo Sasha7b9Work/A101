@@ -1,7 +1,7 @@
 // 2022/10/28 22:56:00 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "GUI/Application.h"
-#include "GUI/Frame.h"
+#include "GUI/MainWindow.h"
 
 
 wxIMPLEMENT_APP(Application);
