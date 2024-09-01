@@ -1,12 +1,12 @@
 // 2022/10/28 22:55:49 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "GUI/MainWindow.h"
+#include "GUI/MainFrame.h"
 #include "GUI/Screen.h"
 #include "GUI/Application.h"
 #include "Controls/ConsoleSCPI.h"
 
 
-MainWindow *MainWindow::self = nullptr;
+MainFrame *MainFrame::self = nullptr;
 
 
 enum
@@ -23,7 +23,7 @@ enum
 };
 
 
-MainWindow::MainWindow(const wxString &title)
+MainFrame::MainFrame(const wxString &title)
     :wxFrame((wxFrame *)NULL, wxID_ANY, title)
 {
     self = this;
@@ -48,15 +48,15 @@ MainWindow::MainWindow(const wxString &title)
 
     SetSizeAndPosition();
 
-    Bind(wxEVT_MENU, &MainWindow::OnQuit, this, FILE_QUIT);
-    Bind(wxEVT_MENU, &MainWindow::OnSCPI, this, TOOLS_SCPI);
-    Bind(wxEVT_CLOSE_WINDOW, &MainWindow::OnClose, this);
+    Bind(wxEVT_MENU, &MainFrame::OnQuit, this, FILE_QUIT);
+    Bind(wxEVT_MENU, &MainFrame::OnSCPI, this, TOOLS_SCPI);
+    Bind(wxEVT_CLOSE_WINDOW, &MainFrame::OnClose, this);
 
     ConsoleSCPI::Self()->Hide();
 }
 
 
-void MainWindow::SetSizeAndPosition()
+void MainFrame::SetSizeAndPosition()
 {
     wxWindowBase::SetClientSize(Screen::WIDTH, Screen::HEIGHT);
 
@@ -71,7 +71,7 @@ void MainWindow::SetSizeAndPosition()
 
     wxWindowBase::SetPosition({ x, y });
 
-    Bind(wxEVT_TIMER, &MainWindow::OnTimer, this, TIMER_ID);
+    Bind(wxEVT_TIMER, &MainFrame::OnTimer, this, TIMER_ID);
 
     timer.SetOwner(this, TIMER_ID);
 
@@ -79,7 +79,7 @@ void MainWindow::SetSizeAndPosition()
 }
 
 
-void MainWindow::OnTimer(wxTimerEvent &)
+void MainFrame::OnTimer(wxTimerEvent &)
 {
     timer.Stop();
 
@@ -89,13 +89,13 @@ void MainWindow::OnTimer(wxTimerEvent &)
 }
 
 
-void MainWindow::OnQuit(wxCommandEvent &)
+void MainFrame::OnQuit(wxCommandEvent &)
 {
     Close(true);
 }
 
 
-void MainWindow::OnClose(wxCloseEvent &event)
+void MainFrame::OnClose(wxCloseEvent &event)
 {
     ConsoleSCPI::Self()->Destroy();
 
@@ -103,7 +103,7 @@ void MainWindow::OnClose(wxCloseEvent &event)
 }
 
 
-void MainWindow::OnSCPI(wxCommandEvent &)
+void MainFrame::OnSCPI(wxCommandEvent &)
 {
     ConsoleSCPI::Self()->SwitchVisibility();
 }
