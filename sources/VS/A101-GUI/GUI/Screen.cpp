@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "GUI/Screen.h"
 #include "Nextion/Nextion.h"
+#include "Nextion/Keyboard.h"
 #include <string>
 #include <map>
 #include <algorithm>
@@ -63,6 +64,7 @@ Screen::Screen(wxWindow *parent) : wxPanel(parent)
     SetDoubleBuffered(true);
     Bind(wxEVT_PAINT, &Screen::OnPaint, this);
     Bind(wxEVT_LEFT_DOWN, &Screen::OnMouseDown, this);
+    Bind(wxEVT_LEFT_UP, &Screen::OnMouseUp, this);
 }
 
 
@@ -74,10 +76,15 @@ void Screen::OnPaint(wxPaintEvent &)
 }
 
 
-void Screen::OnMouseDown(wxMouseEvent & /*event*/) //-V2009
+void Screen::OnMouseDown(wxMouseEvent & event) //-V2009
 {
-//    int x = event.GetX();
-//    int y = event.GetY();
+    Keyboard::CallbackOnPress(event.GetX(), event.GetY());
+}
+
+
+void Screen::OnMouseUp(wxMouseEvent &event)
+{
+    Keyboard::CallbackOnRelease(event.GetX(), event.GetY());
 }
 
 
