@@ -21,39 +21,6 @@ static const int width_wave = 390;
 static const int height_wave = 196;
 
 
-struct ButtonGUI
-{
-    ButtonGUI(int _index, int _x, int _y, int _width, int _height)
-        : index(_index), text(), x(_x), y(_y), width(_width), height(_height), enabled(true), highlight(false) {}
-
-    void Draw();
-
-    // Возвращает true, если пикслеь внутри кнопки
-    bool PixelInside(int x, int y);
-
-    // "Нажать" кнопку
-    void Press();
-
-    void SetText(pchar);
-
-    void Enable();
-
-    void Disable();
-
-    void SetHightlight(bool);
-
-private:
-    int index;
-    std::string text;
-    int x;
-    int y;
-    int width;
-    int height;
-    bool enabled;
-    bool highlight;
-};
-
-
 struct Wave
 {
     Wave(int _x, int _y, int _w, int _h) : x(_x), y(_y), width(_w), height(_h), enabled(false) {};
@@ -83,27 +50,6 @@ struct FontGUI
 };
 
 
-static ButtonGUI btn0(0, 3,   y_button, width_button, height_button);
-static ButtonGUI btn1(1, 136, y_button, width_button, height_button);
-static ButtonGUI btn2(2, 269, y_button, width_button, height_button);
-static ButtonGUI btn3(3, 402, y_button, width_button, height_button);
-static ButtonGUI btn4(4, 535, y_button, width_button, height_button);
-static ButtonGUI btn5(5, 668, y_button, width_button, height_button);
-static ButtonGUI btMenu(6, 725, 7, 67, 67);
-
-
-static std::map<std::string, ButtonGUI *> buttons
-{
-    {"button0", &btn0},
-    {"button1", &btn1},
-    {"button2", &btn2},
-    {"button3", &btn3},
-    {"button4", &btn4},
-    {"button5", &btn5},
-    {"btMenu", &btMenu}
-};
-
-
 static Wave waveLeft(x_wave, y_wave, width_wave, height_wave);
 static Wave waveRight(401, y_wave, width_wave, height_wave);
 static Wave waveBig(x_wave, y_wave, 783, height_wave);
@@ -128,31 +74,16 @@ void Screen::OnPaint(wxPaintEvent &)
 }
 
 
-void Screen::OnMouseDown(wxMouseEvent &event) //-V2009
+void Screen::OnMouseDown(wxMouseEvent & /*event*/) //-V2009
 {
-    int x = event.GetX();
-    int y = event.GetY();
-
-    for (auto &elem : buttons)
-    {
-        ButtonGUI *button = elem.second;
-
-        if (button->PixelInside(x, y))
-        {
-            button->Press();
-        }
-    }
+//    int x = event.GetX();
+//    int y = event.GetY();
 }
 
 
 void Screen::Init()
 {
     Nextion::FillRect(0, 0, WIDTH, HEIGHT, Color::Background);
-
-    for (auto &elem : buttons)
-    {
-        elem.second->Draw();
-    }
 }
 
 
@@ -188,99 +119,6 @@ void Screen::DrawString(int x, int y, int num_font, const wxColor &color, pchar 
     dc.DrawText(text, x, y);
     dc.SelectObject(wxNullBitmap);
     Refresh();
-}
-
-
-void Screen::Button::SetText(pchar name_button, pchar text)
-{
-    buttons[name_button]->SetText(text);
-}
-
-
-void Screen::Button::Highlight(pchar name_button, bool hightlight)
-{
-    buttons[name_button]->SetHightlight(hightlight);
-}
-
-
-void ButtonGUI::Draw()
-{
-    if (!enabled)
-    {
-        Nextion::FillRect(x, y, width, height, Color::Background);
-    }
-    else
-    {
-        Nextion::DrawRect(x, y, width, height, Color::White);
-
-        Color color_fill = highlight ? Color::ButtonPress : Color::Background;
-
-        Nextion::FillRect(x + 1, y + 1, width - 2, height - 2, color_fill);
-
-        int d = 20;
-        Nextion::DrawString(x + d, y + d, width - 2 * d, height - 2 * d, 3, Color::White, color_fill, text.c_str());
-    }
-}
-
-
-void ButtonGUI::SetText(pchar _text)
-{
-    text = _text;
-    Draw();
-}
-
-
-bool ButtonGUI::PixelInside(int pixel_x, int pixel_y)
-{
-    if (pixel_x < x)          { return false; }
-    if (pixel_x > x + width)  { return false; }
-    if (pixel_y < y)          { return false; }
-    if (pixel_y > y + height) { return false; }
-
-    return true;
-}
-
-
-void ButtonGUI::Press()
-{
-    Nextion::CallbackOnReceive((char)(0x30 + index));
-    Nextion::CallbackOnReceive('Z');
-}
-
-
-void ButtonGUI::Enable()
-{
-    enabled = true;
-
-    Draw();
-}
-
-
-void ButtonGUI::Disable()
-{
-    enabled = false;
-
-    Draw();
-}
-
-
-void ButtonGUI::SetHightlight(bool _highlight)
-{
-    highlight = _highlight;
-
-    Draw();
-}
-
-
-void Screen::Button::Enable(pchar name_button)
-{
-    buttons[name_button]->Enable();
-}
-
-
-void Screen::Button::Disable(pchar name_button)
-{
-    buttons[name_button]->Disable();
 }
 
 

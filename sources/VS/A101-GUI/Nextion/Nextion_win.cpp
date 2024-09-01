@@ -83,27 +83,23 @@ void Nextion::WaveFFT::Disable(int size)
 }
 
 
-void Nextion::Button::SetText(pchar _name_button, pchar _text)
+void Nextion::Button::SetText(pchar /*_name_button*/, pchar /*_text*/)
 {
-    Screen::self->Button::SetText(_name_button, _text);
 }
 
 
-void Nextion::Button::Highligth(pchar _name_button, bool _highlight)
+void Nextion::Button::Highligth(pchar /*_name_button*/, bool /*_highlight*/)
 {
-    Screen::self->Button::Highlight(_name_button, _highlight);
 }
 
 
-void Nextion::Button::Enable(pchar _name_button)
+void Nextion::Button::Enable(pchar /*_name_button*/)
 {
-    Screen::Button::Enable(_name_button);
 }
 
 
-void Nextion::Button::Disable(pchar _name_button)
+void Nextion::Button::Disable(pchar /*_name_button*/)
 {
-    Screen::Button::Disable(_name_button);
 }
 
 
