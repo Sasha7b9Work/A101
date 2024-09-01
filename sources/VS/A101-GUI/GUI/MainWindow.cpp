@@ -1,9 +1,29 @@
 // 2022/10/28 22:55:49 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "GUI/MainFrame.h"
+#include "GUI/MainWindow.h"
 #include "GUI/Screen.h"
 #include "GUI/Application.h"
 #include "Controls/ConsoleSCPI.h"
+
+
+class MainFrame : public wxFrame
+{
+public:
+    MainFrame(const wxString &title);
+
+    static MainFrame *self;
+
+private:
+
+    wxTimer timer;
+
+    void SetSizeAndPosition();
+
+    void OnTimer(wxTimerEvent &);
+    void OnClose(wxCloseEvent &);
+    void OnQuit(wxCommandEvent &);
+    void OnSCPI(wxCommandEvent &);
+};
 
 
 MainFrame *MainFrame::self = nullptr;
@@ -106,4 +126,12 @@ void MainFrame::OnClose(wxCloseEvent &event)
 void MainFrame::OnSCPI(wxCommandEvent &)
 {
     ConsoleSCPI::Self()->SwitchVisibility();
+}
+
+
+void MainWindow::Create()
+{
+    // create and show the main application window
+    new MainFrame(_("A101 GUI version"));
+    MainFrame::self->Show();
 }
