@@ -311,16 +311,16 @@ pchar ButtonPress::Signal() const
 
 void ButtonPress::Draw()
 {
-    int x = rect.x;
-    int y = rect.y;
-    int width = rect.width;
-    int height = rect.height;
+    int16 x = rect.x;
+    int16 y = rect.y;
+    int16 width = rect.width;
+    int16 height = rect.height;
 
     if (IsShown())
     {
-        Nextion::DrawRect(x, y, width - 1, height - 1, Color::White);
-        Nextion::DrawRect(x + 1, y + 1, width - 3, height - 3, Color::White);
-        Nextion::DrawRect(x + 2, y + 2, width - 5, height - 5, Color::White);
+        Nextion::DrawRect({ x, y, (int16)(width - 1), (int16)(height - 1) }, Color::White);
+        Nextion::DrawRect({ (int16)(x + 1), (int16)(y + 1), (int16)(width - 3), (int16)(height - 3) }, Color::White);
+        Nextion::DrawRect({ (int16)(x + 2), (int16)(y + 2), (int16)(width - 5), (int16)(height - 5) }, Color::White);
 
         Nextion::DrawString(x + 3, y + 3, width - 7, height - 7, font,
             Color::White,

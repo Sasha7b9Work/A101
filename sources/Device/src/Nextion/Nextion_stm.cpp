@@ -52,11 +52,11 @@ namespace Nextion
 }
 
 
-void Nextion::DrawRect(int x, int y, int width, int height, const Color &color)
+void Nextion::DrawRect(const Rect &rect, const Color &color)
 {
     color.SetAsCurrent();
 
-    SendCommandFormat("draw %d,%d,%d,%d,%s", x, y, x + width, y + height, Color::CurrentValue());
+    SendCommandFormat("draw %d,%d,%d,%d,%s", rect.x, rect.y, rect.x + rect.width, rect.y + rect.height, Color::CurrentValue());
 }
 
 

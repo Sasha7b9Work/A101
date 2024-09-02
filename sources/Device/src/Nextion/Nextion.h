@@ -1,6 +1,7 @@
 // 2022/10/17 15:30:21 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Nextion/Colors.h"
+#include "Utils/Math.h"
 
 
 // Код ответа дисплея
@@ -50,7 +51,7 @@ namespace Nextion
         ResponseCode::E Get();
     }
 
-    void DrawRect(int x, int y, int width, int height, const Color & = Color::Count);
+    void DrawRect(const Rect &, const Color & = Color::Count);
 
     void FillRect(int x, int y, int width, int height, const Color & = Color::Count);
 

@@ -77,7 +77,7 @@ void LabelMeasure::Flash()
 
 void LabelMeasure::Draw()
 {
-    Nextion::DrawRect(rect.x, rect.y, rect.width, rect.height, Color::White);
+    Nextion::DrawRect(rect, Color::White);
 }
 
 
