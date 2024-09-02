@@ -247,6 +247,8 @@ struct LabelMeasure : public Label
 
     pchar GetUnits() const;
 
+    virtual void Draw() override;
+
 private:
 
     char buf_measure[Label::MAX_LEN];

@@ -17,13 +17,13 @@ namespace PageMain
     Label labelZeroDC{ "ноль", "zero", 23, 170, 90, 50, Font::_1 };
     Label labelZeroAC{ "ноль", "zero", 23, 260, 90, 50, Font::_1 };
 
-    LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 100, 100 };
-    LabelMeasure wndAC{ TypeMeasure::AC, SizeMeasure::Big, 100, 300 };
+    LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 134, 143 };
+    LabelMeasure wndAC{ TypeMeasure::AC, SizeMeasure::Big, 134, 233 };
 
-    static LabelMeasure wndAMPL{ TypeMeasure::Ampl, SizeMeasure::Small, 100, 20 };
-    static LabelMeasure wndPEAK{ TypeMeasure::Peak, SizeMeasure::Small, 100, 50 };
-    static LabelMeasure wndMIN{ TypeMeasure::Min,   SizeMeasure::Small, 300, 20 };
-    static LabelMeasure wndMAX{ TypeMeasure::Max,   SizeMeasure::Small, 300, 50 };
+    static LabelMeasure wndAMPL{ TypeMeasure::Ampl, SizeMeasure::Small, 433, 27 };
+    static LabelMeasure wndPEAK{ TypeMeasure::Peak, SizeMeasure::Small, 433, 70 };
+    static LabelMeasure wndMIN{ TypeMeasure::Min,   SizeMeasure::Small, 171, 70 };
+    static LabelMeasure wndMAX{ TypeMeasure::Max,   SizeMeasure::Small, 171, 27 };
 
     static void ResetAllMeasures()
     {
@@ -218,6 +218,12 @@ namespace PageMain
         &btnPEAK,
         &btnSettings,
         &btnZero,
+        &wndDC,
+        &wndAC,
+        &wndAMPL,
+        &wndPEAK,
+        &wndMIN,
+        &wndMAX,
         nullptr
     };
 

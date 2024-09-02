@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/MenuItems.h"
 #include "Ampermeter/InputRelays.h"
+#include "Nextion/Nextion.h"
 #include <cstring>
 #include <cmath>
 #include <cstdio>
@@ -71,6 +72,12 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
 void LabelMeasure::Flash()
 {
 
+}
+
+
+void LabelMeasure::Draw()
+{
+    Nextion::DrawRect(rect.x, rect.y, rect.width, rect.height, Color::White);
 }
 
 
