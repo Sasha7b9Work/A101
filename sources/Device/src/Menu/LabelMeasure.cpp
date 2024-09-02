@@ -16,14 +16,28 @@ namespace LM
         Font::_0
     };
 
-    static const int widths[SizeMeasure::Count] =
+    static const int16 widths[SizeMeasure::Count] =
     {
         518,
         240,
         391
     };
 
-    static const int heights[SizeMeasure::Count] =
+    static const int16 width_name[SizeMeasure::Count] =     // Ширина поля имени измерения (DC, Iampl, etc)
+    {
+        50,
+        50,
+        0
+    };
+
+    static const int16 height_name[SizeMeasure::Count] =
+    {
+        50,
+        50,
+        0
+    };
+
+    static const int16 heights[SizeMeasure::Count] =
     {
         85,
         40,
@@ -34,9 +48,9 @@ namespace LM
 
 LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)()) :
     Label("", "", { _x, _y, LM::widths[_size], LM::heights[_size] }, LM::fonts[_size], _funcOnPress),
+    name_measure("", "", { _x, _y, LM::width_name[_type], LM::height_name[_type] }, LM::fonts[_size]),
     type_measure(_type)
 {
-
 }
 
 

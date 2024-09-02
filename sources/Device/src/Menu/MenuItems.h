@@ -254,6 +254,8 @@ private:
 
     char buf_measure[Label::MAX_LEN];
 
+    Label name_measure;
+
     TypeMeasure type_measure;
 
     void SetMeasure(pchar);

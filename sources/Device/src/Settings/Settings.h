@@ -33,6 +33,8 @@ struct TypeMeasure
     TypeMeasure(E v) : value(v) { }
 
     bool ExistFieldSign() const;
+
+    pchar Title()
 };
 
 
