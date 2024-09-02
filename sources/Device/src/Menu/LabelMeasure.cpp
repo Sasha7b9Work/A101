@@ -48,8 +48,8 @@ namespace LM
 
 LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)()) :
     Label("", "", { _x, _y, LM::widths[_size], LM::heights[_size] }, LM::fonts[_size], _funcOnPress),
-    name_measure("", "", { _x, _y, LM::width_name[_type], LM::height_name[_type] }, LM::fonts[_size]),
-    type_measure(_type)
+    label_name(TypeMeasure(_type).Title(Lang::RU), TypeMeasure(_type).Title(Lang::EN),
+    {_x, _y, LM::width_name[_type], LM::height_name[_type]}, LM::fonts[_size]), type_measure(_type)
 {
 }
 
@@ -94,6 +94,8 @@ void LabelMeasure::Flash()
 void LabelMeasure::Draw()
 {
     Nextion::DrawRect(rect, Color::White);
+
+    label_name.Draw();
 }
 
 
@@ -177,6 +179,23 @@ bool TypeMeasure::ExistFieldSign() const
     };
 
     return exist[value];
+}
+
+
+pchar TypeMeasure::Title(Lang::E lang) const
+{
+    static const pchar titles[TypeMeasure::Count][Lang::Count] =
+    {
+        {"DC:",    "DC:"},
+        {"AC:",    "AC:"},
+        {"Iампл:", "Iampl:"},
+        {"Iпп:",   "Ipp:"},
+        {"Iмин:",  "Imin:"},
+        {"Iмакс:", "Imax:"},
+        {"F:",     "F:"}
+    };
+
+    return titles[value][lang];
 }
 
 

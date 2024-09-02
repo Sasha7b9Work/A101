@@ -254,7 +254,7 @@ private:
 
     char buf_measure[Label::MAX_LEN];
 
-    Label name_measure;
+    Label label_name;
 
     TypeMeasure type_measure;
 

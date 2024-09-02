@@ -1,6 +1,7 @@
 // 2022/11/14 13:39:00 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Settings/CalibrationSettings.h"
+#include "Settings/Settings.h"
 
 
 struct Lang
@@ -28,13 +29,15 @@ struct TypeMeasure
         Count
     };
 
-    E value;
-
     TypeMeasure(E v) : value(v) { }
 
     bool ExistFieldSign() const;
 
-    pchar Title()
+    pchar Title(Lang::E lang) const;
+
+private:
+
+    E value;
 };
 
 
