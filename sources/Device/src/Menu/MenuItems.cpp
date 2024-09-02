@@ -244,8 +244,8 @@ void ButtonOld::Draw()
         return;
     }
 
-    int width = 150;
-    int height = 50;
+    int16 width = 150;
+    int16 height = 50;
 
     Nextion::DrawLine(x, y, x + width, y, Color::White);
     Nextion::DrawLine(x, y + 1, x + width, y + 1, Color::White);
@@ -259,7 +259,8 @@ void ButtonOld::Draw()
     Nextion::DrawLine(x + width, y, x + width, y + height);
     Nextion::DrawLine(x + width + 1, y, x + width + 1, y + height);
 
-    Nextion::DrawString(x + 2, y + height / 2 - 16, width - 4, height / 2, 2, Color::White, Color::Background, Text(), 1);
+    Nextion::DrawString({ (int16)(x + 2), (int16)(y + height / 2 - 16), (int16)(width - 4), (int16)(height / 2) },
+        2, Color::White, Color::Background, Text(), 1);
 }
 
 
@@ -318,11 +319,11 @@ void ButtonPress::Draw()
 
     if (IsShown())
     {
-        Nextion::DrawRect({ x, y, (int16)(width - 1), (int16)(height - 1) }, Color::White);
-        Nextion::DrawRect({ (int16)(x + 1), (int16)(y + 1), (int16)(width - 3), (int16)(height - 3) }, Color::White);
-        Nextion::DrawRect({ (int16)(x + 2), (int16)(y + 2), (int16)(width - 5), (int16)(height - 5) }, Color::White);
+        Nextion::DrawRect({ x, y, width - 1, height - 1 }, Color::White);
+        Nextion::DrawRect({ x + 1, y + 1, width - 3, height - 3 }, Color::White);
+        Nextion::DrawRect({ x + 2, y + 2, width - 5, height - 5 }, Color::White);
 
-        Nextion::DrawString(x + 3, y + 3, width - 7, height - 7, font,
+        Nextion::DrawString({ x + 3, y + 3, width - 7, height - 7 }, font,
             Color::White,
             is_pressed ? Color::ButtonPress : Color::Background,
             title[set.lang], 1, 1);
@@ -380,12 +381,12 @@ void Label::Draw()
 {
     if (IsShown())
     {
-        Nextion::DrawString(rect.x, rect.y, rect.width, rect.height, font, colorText,
+        Nextion::DrawString(rect, font, colorText,
             (colorBack.value == Color::Count.value) ? Color::Background : colorBack, Text(), h_aligned ? 1 : 0);
     }
     else
     {
-        Nextion::DrawString(rect.x, rect.y, rect.width, rect.height, font, colorText, Color::Background, "");
+        Nextion::DrawString(rect, font, colorText, Color::Background, "");
     }
 }
 

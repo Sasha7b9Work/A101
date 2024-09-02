@@ -4,6 +4,10 @@
 
 struct Rect
 {
+    Rect(int _x, int _y, int _width, int _height) :
+        x((int16)_x), y((int16)_y), width((int16)_width), height((int16)_height)
+    {
+    }
     int16 x;
     int16 y;
     int16 width;
