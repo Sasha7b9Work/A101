@@ -30,7 +30,7 @@ struct TypeItem
 
 struct Item
 {
-    Item(TypeItem::E, const Rect &, void (*_funcOnPress)());
+    Item(TypeItem::E = TypeItem::Count, const Rect & = Rect(), void (*_funcOnPress)() = nullptr);
 
     void SetParent(Page *page)
     {
@@ -183,8 +183,10 @@ struct Label : public Item
 {
     static const int MAX_LEN = 32;
 
-    Label(pchar _textRU, pchar _textEN, const Rect &, Font::E, void (*_funcOnPress)() = EmptyFuncVV,
+    Label(pchar _textRU = "", pchar _textEN = "", const Rect & = Rect(), Font::E = Font::_0, void (*_funcOnPress)() = EmptyFuncVV,
         const Color &_colorText = Color::White, const Color &_colorBack = Color::Count, bool _h_aligned = false);
+
+    Label(const Label &);
 
     void SetText(const char _textRU[MAX_LEN], const char _textEN[MAX_LEN]);
 
@@ -220,6 +222,7 @@ private:
 };
 
 
+// Условный размер поля для измерения
 struct SizeMeasure
 {
     enum E
@@ -227,6 +230,16 @@ struct SizeMeasure
         Big,
         Small,
         Calibration,
+        Count
+    };
+};
+
+
+struct TypeLabelMeasure
+{
+    enum E
+    {
+        Name,           // Метка поля измерения - DC, F, etc
         Count
     };
 };
@@ -254,7 +267,7 @@ private:
 
     char buf_measure[Label::MAX_LEN];
 
-    Label label_name;
+    Label labels[TypeLabelMeasure::Count];
 
     TypeMeasure type_measure;
 

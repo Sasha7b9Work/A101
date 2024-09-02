@@ -23,34 +23,48 @@ namespace LM
         391
     };
 
-    static const int16 width_name[SizeMeasure::Count] =     // Ширина поля имени измерения (DC, Iampl, etc)
-    {
-        50,
-        50,
-        0
-    };
-
-    static const int16 height_name[SizeMeasure::Count] =
-    {
-        50,
-        50,
-        0
-    };
-
     static const int16 heights[SizeMeasure::Count] =
     {
         85,
         40,
         85
     };
+
+    static const int16 width_labels[TypeLabelMeasure::Count] =
+    {
+        50
+    };
+
+    static const int16 heigth_labels[TypeLabelMeasure::Count] =
+    {
+        50
+    };
+
+    static const int16 x_labels[TypeLabelMeasure::Count] =
+    {
+        0
+    };
+
+    static const int16 y_labels[TypeLabelMeasure::Count] =
+    {
+        0
+    };
 }
 
 
 LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)()) :
     Label("", "", { _x, _y, LM::widths[_size], LM::heights[_size] }, LM::fonts[_size], _funcOnPress),
-    label_name(TypeMeasure(_type).Title(Lang::RU), TypeMeasure(_type).Title(Lang::EN),
-    {_x, _y, LM::width_name[_type], LM::height_name[_type]}, LM::fonts[_size]), type_measure(_type)
+    type_measure(_type)
 {
+    if (_type < 1)
+    {
+        for (int i = 0; i < TypeLabelMeasure::Count; i++)
+        {
+            labels[i] = Label(type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
+                { LM::x_labels[i], LM::y_labels[i], LM::width_labels[i], LM::heigth_labels[i] },
+                LM::fonts[_size]);
+        }
+    }
 }
 
 
@@ -95,7 +109,10 @@ void LabelMeasure::Draw()
 {
     Nextion::DrawRect(rect, Color::White);
 
-    label_name.Draw();
+    for (int i = 0; i < TypeLabelMeasure::Count; i++)
+    {
+//        labels[i].Draw();
+    }
 }
 
 
