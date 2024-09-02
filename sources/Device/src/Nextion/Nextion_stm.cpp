@@ -60,11 +60,11 @@ void Nextion::DrawRect(const Rect &rect, const Color &color)
 }
 
 
-void Nextion::FillRect(int x, int y, int width, int height, const Color & color)
+void Nextion::FillRect(const Rect &rect, const Color & color)
 {
     color.SetAsCurrent();
 
-    SendCommandFormat("fill %d,%d,%d,%d,%s", x, y, width, height, Color::CurrentValue());
+    SendCommandFormat("fill %d,%d,%d,%d,%s", rect.x, rect.y, rect.width, rect.height, Color::CurrentValue());
 }
 
 

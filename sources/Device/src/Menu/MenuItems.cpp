@@ -329,7 +329,7 @@ void ButtonPress::Draw()
     }
     else
     {
-        Nextion::FillRect(x, y, width, height, Color::Background);
+        Nextion::FillRect(rect, Color::Background);
     }
 }
 
