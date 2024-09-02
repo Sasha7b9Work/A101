@@ -24,8 +24,8 @@ namespace PageCalibration
 
     static void FuncDraw();
 
-    static LabelMeasure wndCurrent{ TypeMeasure::DC, SizeMeasure::Big, 100, 100 };     // Текущее значение напряжения
-    static LabelMeasure wndGiven{ TypeMeasure::DC,   SizeMeasure::Big, 100, 200 };     // Заданное значение напряжения
+    static LabelMeasure wndCurrent{ TypeMeasure::DC, SizeMeasure::Calibration, 221, 98 };     // Текущее значение напряжения
+    static LabelMeasure wndGiven  { TypeMeasure::DC, SizeMeasure::Calibration, 221, 183 };     // Заданное значение напряжения
 
     void OnEventChangeRange()
     {

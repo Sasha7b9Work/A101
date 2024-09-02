@@ -226,6 +226,7 @@ struct SizeMeasure
     {
         Big,
         Small,
+        Calibration,
         Count
     };
 };

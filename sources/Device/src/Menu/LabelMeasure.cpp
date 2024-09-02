@@ -19,13 +19,15 @@ namespace LM
     static const int widths[SizeMeasure::Count] =
     {
         518,
-        240
+        240,
+        391
     };
 
     static const int heights[SizeMeasure::Count] =
     {
         85,
-        40
+        40,
+        85
     };
 }
 
