@@ -374,6 +374,9 @@ Label::Label(pchar _textRU, pchar _textEN, const Rect &_rect, Font::E _font, voi
 Label::Label(const Label &rhs)
 {
     *this = rhs;
+
+    std::strcpy(text[0], rhs.text[0]);
+    std::strcpy(text[1], rhs.text[1]);
 }
 
 
