@@ -79,15 +79,15 @@ void Item::Release()
 }
 
 
-Item::Item(TypeItem::E _type, int _x, int _y, int _h, int _w, void (*_funcOnPress)()) :
-    type(_type), rect{ (int16)_x, (int16)_y, (int16)_w, (int16)_h }, funcOnPress(_funcOnPress)
+Item::Item(TypeItem::E _type, const Rect &_rect, void (*_funcOnPress)()) :
+    type(_type), rect(_rect), funcOnPress(_funcOnPress)
 {
     NS_ITEMS::AppendNewItem(this);
 }
 
 
-ButtonCommon::ButtonCommon(TypeItem::E _type, pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)()) :
-    Item(_type, _x, _y, _h, _w, _funcOnPress),
+ButtonCommon::ButtonCommon(TypeItem::E _type, pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)()) :
+    Item(_type, _rect, _funcOnPress),
     font(_f)
 {
     title[Lang::RU] = title_ru;
@@ -285,8 +285,8 @@ bool ButtonOld::IsSoftware() const
 }
 
 
-ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, int _x, int _y, int _w, int _h, void (*_funcOnPress)(), TypeItem::E _type) :
-    ButtonCommon(_type, title_ru, title_en, _f, _x, _y, _w, _h, _funcOnPress)
+ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)(), TypeItem::E _type) :
+    ButtonCommon(_type, title_ru, title_en, _f, _rect, _funcOnPress)
 {
 }
 
@@ -361,9 +361,9 @@ ButtonOld *Item::ToButtonOld()
 }
 
 
-Label::Label(pchar _textRU, pchar _textEN, int _x, int _y, int _w, int _h, Font::E _font, void (*_funcOnPress)(),
+Label::Label(pchar _textRU, pchar _textEN, const Rect &_rect, Font::E _font, void (*_funcOnPress)(),
     const Color &_colorText, const Color &_colorBack, bool _h_aligned) :
-    Item(TypeItem::Label, _x, _y, _w, _h, _funcOnPress),
+    Item(TypeItem::Label, _rect, _funcOnPress),
     font(_font), h_aligned(_h_aligned), colorText(_colorText), colorBack(_colorBack)
 {
     std::strcpy(text[0], _textRU);

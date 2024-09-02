@@ -30,7 +30,7 @@ struct TypeItem
 
 struct Item
 {
-    Item(TypeItem::E, int x, int y, int w, int h, void (*_funcOnPress)());
+    Item(TypeItem::E, const Rect &, void (*_funcOnPress)());
 
     void SetParent(Page *page)
     {
@@ -78,7 +78,7 @@ protected:
 
 struct ButtonCommon : public Item
 {
-    ButtonCommon(TypeItem::E, pchar title_ru, pchar title_en, Font::E, int x, int y, int w, int h, void (*_funcOnPress)());
+    ButtonCommon(TypeItem::E, pchar title_ru, pchar title_en, Font::E, const Rect &, void (*_funcOnPress)());
 
     // 1 - "нажать", 0 - "отпустить"
     virtual void SetValue(int);
@@ -100,7 +100,7 @@ public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
     ButtonOld(pchar _name, pchar _signal, void (*_funcOnPress)(), int16 _x = -1, int16 _y = -1) :
-        ButtonCommon(TypeItem::ButtonOld, _name, _name, Font::_1, _x, _y, 0, 0, _funcOnPress),
+        ButtonCommon(TypeItem::ButtonOld, _name, _name, Font::_1, { _x, _y, 0, 0 }, _funcOnPress),
         name(_name), signal(_signal), x(_x), y(_y)
     {
     }
@@ -148,7 +148,7 @@ private:
 // Кнопка без фиксации (возвращается в отжатое состояние при отпускании)
 struct ButtonPress : public ButtonCommon
 {
-    ButtonPress(pchar title_ru, pchar title_en, Font::E f, int x, int y, int w, int h, void (*_funcOnPress)(), TypeItem::E = TypeItem::ButtonPress);
+    ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(), TypeItem::E = TypeItem::ButtonPress);
 
     virtual pchar Signal() const override;
 
@@ -161,8 +161,8 @@ struct ButtonPress : public ButtonCommon
 // Кнопка с фиксацией (при нажатии переключается в противоположное состояние, на отпускание реакциии нет)
 struct ButtonToggle : public ButtonPress
 {
-    ButtonToggle(pchar title_ru, pchar title_en, Font::E f, int x, int y, int w, int h, void (*_funcOnPress)()) :
-        ButtonPress(title_ru, title_en, f, x, y, w, h, _funcOnPress, TypeItem::ButtonToggle)
+    ButtonToggle(pchar title_ru, pchar title_en, Font::E f, const Rect &_rect, void (*_funcOnPress)()) :
+        ButtonPress(title_ru, title_en, f, _rect, _funcOnPress, TypeItem::ButtonToggle)
     {
     }
 
@@ -173,7 +173,7 @@ struct ButtonToggle : public ButtonPress
 struct ButtonRange : public ButtonToggle
 {
     ButtonRange(pchar title_ru, pchar title_en, int x, int y, void (*_funcOnPress)()) :
-        ButtonToggle(title_ru, title_en, Font::_1, x, y, 127, 74, _funcOnPress)
+        ButtonToggle(title_ru, title_en, Font::_1, { x, y, 127, 74 }, _funcOnPress)
     {
     }
 };
@@ -183,7 +183,7 @@ struct Label : public Item
 {
     static const int MAX_LEN = 32;
 
-    Label(pchar _textRU, pchar _textEN, int _x, int _y, int _w, int _h, Font::E, void (*_funcOnPress)() = EmptyFuncVV,
+    Label(pchar _textRU, pchar _textEN, const Rect &, Font::E, void (*_funcOnPress)() = EmptyFuncVV,
         const Color &_colorText = Color::White, const Color &_colorBack = Color::Count, bool _h_aligned = false);
 
     void SetText(const char _textRU[MAX_LEN], const char _textEN[MAX_LEN]);

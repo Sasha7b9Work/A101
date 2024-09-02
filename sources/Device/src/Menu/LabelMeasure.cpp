@@ -31,7 +31,7 @@ namespace LM
 
 
 LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)()) :
-    Label("", "", _x, _y, LM::widths[_size], LM::heights[_size], LM::fonts[_size], _funcOnPress),
+    Label("", "", { _x, _y, LM::widths[_size], LM::heights[_size] }, LM::fonts[_size], _funcOnPress),
     type_measure(_type)
 {
 

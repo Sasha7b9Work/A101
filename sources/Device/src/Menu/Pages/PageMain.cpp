@@ -14,8 +14,8 @@
 
 namespace PageMain
 {
-    Label labelZeroDC{ "ноль", "zero", 23, 170, 90, 50, Font::_1 };
-    Label labelZeroAC{ "ноль", "zero", 23, 260, 90, 50, Font::_1 };
+    Label labelZeroDC{ "ноль", "zero", { 23, 170, 90, 50 }, Font::_1 };
+    Label labelZeroAC{ "ноль", "zero", { 23, 260, 90, 50 }, Font::_1 };
 
     LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 134, 143 };
     LabelMeasure wndAC{ TypeMeasure::AC, SizeMeasure::Big, 134, 233 };
@@ -35,7 +35,7 @@ namespace PageMain
         wndMAX.Reset();
     }
 
-    static ButtonPress btnZero("”ст. 0", "Set 0", Font::_1, 669, 321, 127, 74, []()
+    static ButtonPress btnZero("”ст. 0", "Set 0", Font::_1, { 669, 321, 127, 74 }, []()
     {
         Ampermeter::ZeroDC::FloatingZero::Process();
     });
