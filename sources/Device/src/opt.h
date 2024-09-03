@@ -7,3 +7,5 @@
 #define REAL double
 
 //#define EMULATOR_ENABLED
+
+#define DRAW_DEBUG_LINES

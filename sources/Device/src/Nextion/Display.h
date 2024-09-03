@@ -5,9 +5,14 @@
 
 namespace Display
 {
+    static const int WIDTH = 800;
+    static const int HEIGHT = 480;
+
     void Init();
 
     void Update();
+
+    void Clear();
 
     namespace LabelStar
     {

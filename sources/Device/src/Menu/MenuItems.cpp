@@ -6,6 +6,7 @@
 #include "Menu/Pages/Pages.h"
 #include "Hardware/Timer.h"
 #include "Utils/String.h"
+#include "Nextion/Display.h"
 #include <cstring>
 #include <cstdio>
 
@@ -241,6 +242,8 @@ void Page::SetAsCurrent()
 
     Timer::Delay(50);           // Эта задержка нужна для того, чтобы дисплей успел переключиться на новую страницу.
                                 // Иначе сообщения элементам управления будут посылаться на старую страницу
+
+    Display::Clear();
 
     for (int i = 0; i < GetItemCount(); i++)
     {

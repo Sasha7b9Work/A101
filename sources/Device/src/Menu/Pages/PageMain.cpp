@@ -224,6 +224,8 @@ namespace PageMain
         &wndPEAK,
         &wndMIN,
         &wndMAX,
+        &labelZeroAC,
+        &labelZeroDC,
         nullptr
     };
 

@@ -42,6 +42,12 @@ void Display::Update()
 }
 
 
+void Display::Clear()
+{
+    Nextion::FillRect({ 0, 0, Display::WIDTH, Display::HEIGHT }, Color::Background);
+}
+
+
 void Display::LabelStar::Show()
 {
     if (is_shown || (TIME_MS - time_hide < 500))
