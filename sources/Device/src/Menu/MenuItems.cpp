@@ -16,11 +16,19 @@ using namespace std;
 Page *Page::current = PageMain::self;
 
 
-namespace NS_ITEMS
+namespace PoolItems
 {
     static const int MAX_ITEMS = 1024;                  // Здесь хранятся все созданные кнопки (со всех страниц)
     static Item *items[MAX_ITEMS];
     static int num_items = 0;                         // Столько создано кнопок в данный момент
+
+    static void SetAllInactive()
+    {
+        for (int i = 0; i < num_items; i++)
+        {
+            items[i]->SetShown(false);
+        }
+    }
 
     static void AppendNewItem(Item *item)
     {
@@ -30,6 +38,19 @@ namespace NS_ITEMS
         {
             LOG_ERROR_TRACE("The items buffer is full");
         }
+    }
+
+    static bool Consist(const Item *item)
+    {
+        for (int i = 0; i < num_items; i++)
+        {
+            if (item == items[i])
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     static Item *GetItem(int x, int y)
@@ -51,18 +72,20 @@ namespace NS_ITEMS
 
 bool Item::IsShown() const
 {
-    здесь нужно учесть, находится ли объект в пуле и если да, то результат == is_shown
-
-    return (Page::Current() == parent) && is_shown;
+    if (PoolItems::Consist(this))
+    {
+        return (Page::Current() == parent) && is_shown;
+    }
+    else
+    {
+        return is_shown;
+    }
 }
 
 
 void Item::SetAllInactive()
 {
-    for (int i = 0; i < NS_ITEMS::num_items; i++)
-    {
-        NS_ITEMS::items[i]->SetShown(false);
-    }
+    PoolItems::SetAllInactive();
 }
 
 
@@ -92,7 +115,7 @@ Item::Item(TypeItem::E _type, const Rect &_rect, void (*_funcOnPress)(), bool ap
 {
     if (append)
     {
-        NS_ITEMS::AppendNewItem(this);
+        PoolItems::AppendNewItem(this);
     }
 }
 
@@ -121,7 +144,7 @@ ButtonCommon::ButtonCommon(TypeItem::E _type, pchar title_ru, pchar title_en, Fo
 
 void Item::OnEventPress(int x, int y)
 {
-    Item *item = NS_ITEMS::GetItem(x, y);
+    Item *item = PoolItems::GetItem(x, y);
 
     if (item)
     {
@@ -132,7 +155,7 @@ void Item::OnEventPress(int x, int y)
 
 void Item::OnEventRelease(int x, int y)
 {
-    Item *item = NS_ITEMS::GetItem(x, y);
+    Item *item = PoolItems::GetItem(x, y);
 
     if (item)
     {
