@@ -62,6 +62,19 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
         labels[i] = Label(false, type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
             { _x + LM::x_labels[i], _y + LM::y_labels[i], LM::width_labels[i], LM::heigth_labels[i] },
             LM::fonts[_size]);
+
+            labels[i].SetShown(true);
+    }
+}
+
+
+void LabelMeasure::Draw()
+{
+    Nextion::DrawRect(rect, Color::White);
+
+    for (int i = 0; i < TypeLabelMeasure::Count; i++)
+    {
+        labels[i].Draw();
     }
 }
 
@@ -100,17 +113,6 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
 void LabelMeasure::Flash()
 {
 
-}
-
-
-void LabelMeasure::Draw()
-{
-    Nextion::DrawRect(rect, Color::White);
-
-    for (int i = 0; i < TypeLabelMeasure::Count; i++)
-    {
-        labels[i].Draw();
-    }
 }
 
 

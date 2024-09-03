@@ -49,6 +49,14 @@ namespace NS_ITEMS
 }
 
 
+bool Item::IsShown() const
+{
+    здесь нужно учесть, находится ли объект в пуле и если да, то результат == is_shown
+
+    return (Page::Current() == parent) && is_shown;
+}
+
+
 void Item::SetAllInactive()
 {
     for (int i = 0; i < NS_ITEMS::num_items; i++)
@@ -348,12 +356,6 @@ void ButtonPress::Draw()
     {
         Nextion::FillRect(rect, Color::Background);
     }
-}
-
-
-bool Item::IsShown() const
-{
-    return (Page::Current() == parent) && is_shown;
 }
 
 
