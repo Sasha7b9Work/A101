@@ -374,6 +374,12 @@ Label::Label(bool append, pchar _textRU, pchar _textEN, const Rect &_rect, Font:
 }
 
 
+Label::Label(const Label &rhs)
+{
+    *this = rhs;
+}
+
+
 pchar Label::Text() const
 {
     return text[set.lang];
