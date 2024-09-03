@@ -235,7 +235,7 @@ void Page::SetItem(int index, Item *item)
 
 void Page::SetAsCurrent()
 {
-    ButtonCommon::SetAllInactive();
+    Item::SetAllInactive();
 
     current = this;
 
@@ -245,6 +245,7 @@ void Page::SetAsCurrent()
     for (int i = 0; i < GetItemCount(); i++)
     {
         GetItem(i)->SetShown(true);
+        GetItem(i)->Draw();
     }
 
     current->funcOnEnter();
@@ -385,8 +386,6 @@ void ButtonPress::Draw()
 void Item::SetShown(bool show)
 {
     is_shown = show;
-
-    Draw();
 }
 
 
@@ -438,15 +437,8 @@ pchar Label::Text() const
 
 void Label::Draw()
 {
-    if (IsShown())
-    {
-        Nextion::DrawString(rect, font, colorText,
-            (colorBack.value == Color::Count.value) ? Color::Background : colorBack, Text(), h_aligned ? 1 : 0);
-    }
-    else
-    {
-        Nextion::DrawString(rect, font, colorText, Color::Background, "");
-    }
+    Nextion::DrawString(rect, font, colorText,
+        (colorBack.value == Color::Count.value) ? Color::Background : colorBack, IsShown() ? Text() : "", h_aligned ? 1 : 0);
 }
 
 

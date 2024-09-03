@@ -45,7 +45,7 @@ struct Item
         return rect;
     }
 
-    void SetShown(bool show);
+    virtual void SetShown(bool show);
     bool IsShown() const;
 
     virtual void Draw() = 0;
@@ -187,7 +187,7 @@ struct Label : public Item
     static const int MAX_LEN = 32;
 
     // Если append == true - видимостью управляет страница - объект помещается в глобальный пул объектов
-    Label(bool append = true, pchar _textRU = "", pchar _textEN = "", const Rect & = Rect(), Font::E = Font::_0, void (*_funcOnPress)() = EmptyFuncVV,
+    Label(bool append = false, pchar _textRU = "", pchar _textEN = "", const Rect & = Rect(), Font::E = Font::_0, void (*_funcOnPress)() = EmptyFuncVV,
         const Color &_colorText = Color::White, const Color &_colorBack = Color::Count, bool _h_aligned = false);
 
     Label &operator=(const Label &);
@@ -266,6 +266,8 @@ struct LabelMeasure : public Label
     pchar GetUnits() const;
 
     virtual void Draw() override;
+
+    virtual void SetShown(bool show) override;
 
 private:
 
