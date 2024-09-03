@@ -76,10 +76,10 @@ void Nextion::DrawLine(int x1, int y1, int x2, int y2, const Color &color)
 }
 
 
-void Nextion::DrawString(const Rect &rect, int font, const Color &color, const Color &back_color, pchar text, int h_align, int v_align)
+void Nextion::DrawString(const Rect &rect, int font, const Color &color, const Color &back_color, pchar text, bool h_align, bool v_align)
 {
     SendCommandFormat("xstr %d,%d,%d,%d,%d,%d,%d,%d,%d,1,\"%s\"",
-        rect.x, rect.y, rect.width, rect.height, font, color.ToRaw(), back_color.ToRaw(), h_align, v_align, Convert(text));
+        rect.x, rect.y, rect.width, rect.height, font, color.ToRaw(), back_color.ToRaw(), h_align ? 1 : 0, v_align ? 1 : 0, Convert(text));
 }
 
 

@@ -188,7 +188,7 @@ struct Label : public Item
 
     // Если append == true - видимостью управляет страница - объект помещается в глобальный пул объектов
     Label(bool append = false, pchar _textRU = "", pchar _textEN = "", const Rect & = Rect(), Font::E = Font::_0, void (*_funcOnPress)() = EmptyFuncVV,
-        const Color &_colorText = Color::White, const Color &_colorBack = Color::Count, bool _h_aligned = false);
+        const Color &_colorText = Color::White, const Color &_colorBack = Color::Count, bool _h_aligned = false, bool _v_align = true);
 
     Label &operator=(const Label &);
 
@@ -221,6 +221,7 @@ private:
     char  text[Lang::Count][MAX_LEN];
     int   font;
     bool  h_aligned;
+    bool  v_aligned;
     Color colorText;
     Color colorBack;
 };

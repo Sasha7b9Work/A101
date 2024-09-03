@@ -405,9 +405,9 @@ ButtonOld *Item::ToButtonOld()
 
 
 Label::Label(bool append, pchar _textRU, pchar _textEN, const Rect &_rect, Font::E _font, void (*_funcOnPress)(),
-    const Color &_colorText, const Color &_colorBack, bool _h_aligned) :
+    const Color &_colorText, const Color &_colorBack, bool _h_aligned, bool _v_aligned) :
     Item(TypeItem::Label, _rect, _funcOnPress, append),
-    font(_font), h_aligned(_h_aligned), colorText(_colorText), colorBack(_colorBack)
+    font(_font), h_aligned(_h_aligned), v_aligned(_v_aligned), colorText(_colorText), colorBack(_colorBack)
 {
     std::strcpy(text[0], _textRU);
     std::strcpy(text[1], _textEN);
@@ -425,6 +425,7 @@ Label &Label::operator=(const Label &rhs)
     std::strcpy(text[1], rhs.text[1]);
     font = rhs.font;
     h_aligned = rhs.h_aligned;
+    v_aligned = rhs.v_aligned;
     colorText = rhs.colorText;
     colorBack = rhs.colorBack;
 
@@ -441,7 +442,7 @@ pchar Label::Text() const
 void Label::Draw()
 {
     Nextion::DrawString(rect, font, colorText,
-        (colorBack.value == Color::Count.value) ? Color::Background : colorBack, IsShown() ? Text() : "", h_aligned ? 1 : 0);
+        (colorBack.value == Color::Count.value) ? Color::Background : colorBack, IsShown() ? Text() : "", h_aligned, v_aligned);
 }
 
 
