@@ -79,10 +79,13 @@ void Item::Release()
 }
 
 
-Item::Item(TypeItem::E _type, const Rect &_rect, void (*_funcOnPress)()) :
+Item::Item(TypeItem::E _type, const Rect &_rect, void (*_funcOnPress)(), bool append) :
     type(_type), rect(_rect), funcOnPress(_funcOnPress)
 {
-    NS_ITEMS::AppendNewItem(this);
+    if (append)
+    {
+        NS_ITEMS::AppendNewItem(this);
+    }
 }
 
 
@@ -361,22 +364,13 @@ ButtonOld *Item::ToButtonOld()
 }
 
 
-Label::Label(pchar _textRU, pchar _textEN, const Rect &_rect, Font::E _font, void (*_funcOnPress)(),
+Label::Label(bool append, pchar _textRU, pchar _textEN, const Rect &_rect, Font::E _font, void (*_funcOnPress)(),
     const Color &_colorText, const Color &_colorBack, bool _h_aligned) :
-    Item(TypeItem::Label, _rect, _funcOnPress),
+    Item(TypeItem::Label, _rect, _funcOnPress, append),
     font(_font), h_aligned(_h_aligned), colorText(_colorText), colorBack(_colorBack)
 {
     std::strcpy(text[0], _textRU);
     std::strcpy(text[1], _textEN);
-}
-
-
-Label::Label(const Label &rhs)
-{
-    *this = rhs;
-
-    std::strcpy(text[0], rhs.text[0]);
-    std::strcpy(text[1], rhs.text[1]);
 }
 
 

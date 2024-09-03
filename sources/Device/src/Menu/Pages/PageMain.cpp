@@ -14,8 +14,8 @@
 
 namespace PageMain
 {
-    Label labelZeroDC{ "ноль", "zero", { 23, 170, 90, 50 }, Font::_1 };
-    Label labelZeroAC{ "ноль", "zero", { 23, 260, 90, 50 }, Font::_1 };
+    Label labelZeroDC{ true, "ноль", "zero", { 23, 170, 90, 50 }, Font::_1 };
+    Label labelZeroAC{ true, "ноль", "zero", { 23, 260, 90, 50 }, Font::_1 };
 
     LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 134, 143 };
     LabelMeasure wndAC{ TypeMeasure::AC, SizeMeasure::Big, 134, 233 };

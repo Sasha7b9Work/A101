@@ -4,7 +4,7 @@
 
 struct Rect
 {
-    Rect(int _x = 0, int _y = 0, int _width = 0, int _height = 0) :
+    Rect(int _x = 0, int _y = 0, int _width = 1, int _height = 1) :
         x((int16)_x), y((int16)_y), width((int16)_width), height((int16)_height)
     {
     }

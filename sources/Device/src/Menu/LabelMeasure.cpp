@@ -13,7 +13,8 @@ namespace LM
     static const Font::E fonts[SizeMeasure::Count] =
     {
         Font::_4,
-        Font::_0
+        Font::_0,
+        Font::_4
     };
 
     static const int16 widths[SizeMeasure::Count] =
@@ -53,16 +54,24 @@ namespace LM
 
 
 LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)()) :
-    Label("", "", { _x, _y, LM::widths[_size], LM::heights[_size] }, LM::fonts[_size], _funcOnPress),
+    Label(true, "", "", { _x, _y, LM::widths[_size], LM::heights[_size] }, LM::fonts[_size], _funcOnPress),
     type_measure(_type)
 {
     if (_type < 1)
     {
         for (int i = 0; i < TypeLabelMeasure::Count; i++)
         {
-            labels[i] = Label(type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
-                { LM::x_labels[i], LM::y_labels[i], LM::width_labels[i], LM::heigth_labels[i] },
-                LM::fonts[_size]);
+//            labels[i].Set(Label(type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
+//                { LM::x_labels[i], LM::y_labels[i], LM::width_labels[i], LM::heigth_labels[i] },
+//                LM::fonts[_size]));
+
+//            Label(TypeMeasure(_type).Title(Lang::RU), TypeMeasure(_type).Title(Lang::EN),
+//                { LM::x_labels[i], LM::y_labels[i], LM::width_labels[i], LM::heigth_labels[i] },
+//                LM::fonts[_size]);
+
+            Label(false, "", "",
+                { 0, 0, 50, 50 },
+                Font::_4);
         }
     }
 }
