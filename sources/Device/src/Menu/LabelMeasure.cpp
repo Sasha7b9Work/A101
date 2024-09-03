@@ -59,17 +59,9 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
 {
     for (int i = 0; i < TypeLabelMeasure::Count; i++)
     {
-        //            labels[i].Set(Label(type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
-        //                { LM::x_labels[i], LM::y_labels[i], LM::width_labels[i], LM::heigth_labels[i] },
-        //                LM::fonts[_size]));
-
-        //            Label(TypeMeasure(_type).Title(Lang::RU), TypeMeasure(_type).Title(Lang::EN),
-        //                { LM::x_labels[i], LM::y_labels[i], LM::width_labels[i], LM::heigth_labels[i] },
-        //                LM::fonts[_size]);
-
-        Label(false, "", "",
-            { 0, 0, 50, 50 },
-            Font::_4);
+        labels[i] = Label(false, type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
+            { _x + LM::x_labels[i], _y + LM::y_labels[i], LM::width_labels[i], LM::heigth_labels[i] },
+            LM::fonts[_size]);
     }
 }
 
@@ -117,7 +109,7 @@ void LabelMeasure::Draw()
 
     for (int i = 0; i < TypeLabelMeasure::Count; i++)
     {
-//        labels[i].Draw();
+        labels[i].Draw();
     }
 }
 

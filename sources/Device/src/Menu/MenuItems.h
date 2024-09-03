@@ -33,6 +33,8 @@ struct Item
     // Если append_to_pool == true - объект нужно добавить в глобальный пул объектов, чтобы страницы управляли их видимостью
     Item(TypeItem::E = TypeItem::Count, const Rect & = Rect(), void (*_funcOnPress)() = nullptr, bool append_to_pool = true);
 
+    Item &operator=(const Item &);
+
     void SetParent(Page *page)
     {
         parent = page;
@@ -188,7 +190,7 @@ struct Label : public Item
     Label(bool append = true, pchar _textRU = "", pchar _textEN = "", const Rect & = Rect(), Font::E = Font::_0, void (*_funcOnPress)() = EmptyFuncVV,
         const Color &_colorText = Color::White, const Color &_colorBack = Color::Count, bool _h_aligned = false);
 
-    Label(const Label &);
+    Label &operator=(const Label &);
 
     void SetText(const char _textRU[MAX_LEN], const char _textEN[MAX_LEN]);
 

@@ -89,6 +89,19 @@ Item::Item(TypeItem::E _type, const Rect &_rect, void (*_funcOnPress)(), bool ap
 }
 
 
+Item &Item::operator=(const Item &rhs)
+{
+    type = rhs.type;
+    rect = rhs.rect;
+    parent = rhs.parent;
+    funcOnPress = rhs.funcOnPress;
+    is_pressed = rhs.is_pressed;
+    is_shown = rhs.is_shown;
+
+    return *this;
+}
+
+
 ButtonCommon::ButtonCommon(TypeItem::E _type, pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)()) :
     Item(_type, _rect, _funcOnPress),
     font(_f)
@@ -374,9 +387,21 @@ Label::Label(bool append, pchar _textRU, pchar _textEN, const Rect &_rect, Font:
 }
 
 
-Label::Label(const Label &rhs)
+Label &Label::operator=(const Label &rhs)
 {
-    *this = rhs;
+    Item *item = (Item *)this;
+    Item *item_rhs = (Item *)&rhs;
+
+    *item = *item_rhs;
+
+    std::strcpy(text[0], rhs.text[0]);
+    std::strcpy(text[1], rhs.text[1]);
+    font = rhs.font;
+    h_aligned = rhs.h_aligned;
+    colorText = rhs.colorText;
+    colorBack = rhs.colorBack;
+
+    return *this;
 }
 
 
