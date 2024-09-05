@@ -17,10 +17,10 @@
 
 namespace PageCalibration
 {
-    extern ButtonOld btnSave;
-    extern ButtonOld btnCalib;
-    extern ButtonOld btn0;
-    extern ButtonOld btn2;
+    extern ButtonPress btnSave;
+    extern ButtonPress btnCalib;
+    extern ButtonPress btn0;
+    extern ButtonPress btn2;
 
     static void FuncDraw();
 
@@ -105,19 +105,25 @@ namespace PageCalibration
     // Установить видимость для цифровых кнопок
     static void SetVisibleDigits(bool visible);
 
-    static ButtonOld btnBack("bt18", "2B0", [](Item *)
+    static ButtonPress btnBack("Назад", "Back", Font::_1, { 11, 6, 150, 73 }, [](Item *)
         {
             PageMain::self->SetAsCurrent();
         });
 
-    static ButtonOld btnMin("bt22", "2D1", [](Item *) { ChooseDot(0); });
+    static ButtonPress btnMin("Мин", "Min", Font::_1, { 11, 183, 150, 73 }, [](Item *)
+    {
+        ChooseDot(0);
+    });
 
-    static ButtonOld btnMax("bt21", "2D2", [](Item *) { ChooseDot(1); });
+    static ButtonPress btnMax("Макс", "Max", Font::_1, { 11, 104, 150, 73 }, [](Item *)
+    {
+        ChooseDot(1);
+    });
 
-    ButtonOld btnSave("b12", "2SV", [](Item *)
+    ButtonPress btnSave("Сохр.", "Save", Font::_1, { 236, 6, 130, 73 }, [](Item *item)
         {
             Calibrator::PressButtonSave();
-            btnSave.SetVisible(false);
+            item->ToButtonPress()->SetShown(false);
         });
 
     // Нажатие кнопки на цифровой клавиатуре
@@ -127,7 +133,7 @@ namespace PageCalibration
         {
             LabelPassword::Backspace();
         }
-        else if (symbol == '0' && !btn2.IsVisible())
+        else if (symbol == '0' && !btn2.IsShown())
         {
             cal.Reset();
         }
@@ -146,10 +152,10 @@ namespace PageCalibration
 
                 SetVisibleDigits(false);
 
-                btnSave.SetVisible(false);
+                btnSave.SetShown(false);
 
-                btn0.SetText("Res");
-                btn0.SetVisible(true);
+                btn0.SetText("Сброс", "Reset");
+                btn0.SetShown(true);
             }
             else
             {
@@ -170,68 +176,125 @@ namespace PageCalibration
         }
     }
 
-    ButtonOld btnCalib("b13", "2OK", [](Item *)
+    ButtonPress btnCalib("Старт", "Start", Font::_1, { 372, 6, 130, 73 }, [](Item *)
         {
-            btnSave.SetVisible(false);
+            btnSave.SetShown(false);
             btnCalib.SetValue(0);
-            btnCalib.SetVisible(false);
-            if (Calibrator::Run(Range::Current(), (btnMax.GetValue() == 0) ? Calibrator::Type::DC : Calibrator::Type::AC, FuncDraw))
+            btnCalib.SetShown(false);
+            if (Calibrator::Run(Range::Current(), (!btnMax.IsPressed()) ? Calibrator::Type::DC : Calibrator::Type::AC, FuncDraw))
             {
-                btnSave.SetVisible(true);
+                btnSave.SetShown(true);
             }
-            btnCalib.SetVisible(true);
+            btnCalib.SetShown(true);
         });
 
-    static ButtonOld btn2mA("bt17", "21P", [](Item *) { ChooseRange(0); });
+    static ButtonPress btn2mA("2 мА", "2 mA", Font::_1, { 640, 6, 150, 73 }, [](Item *)
+    {
+        ChooseRange(0);
+    });
 
-    static ButtonOld btn20mA("bt16", "22P", [](Item *) { ChooseRange(1); });
+    static ButtonPress btn20mA("20 мА", "20 mA", Font::_1, { 640, 85, 150, 73 }, [](Item *)
+    {
+        ChooseRange(1);
+    });
 
-    static ButtonOld btn200mA("bt15", "23P", [](Item *) { ChooseRange(2); });
+    static ButtonPress btn200mA("200 мА", "200 mA", Font::_1, { 640, 164, 150, 73 }, [](Item *)
+    {
+        ChooseRange(2);
+    });
 
-    static ButtonOld btn2A("bt14", "24P", [](Item *) { ChooseRange(3); });
+    static ButtonPress btn2A("2 А", "2 A", Font::_1, { 640, 243, 150, 73 }, [](Item *)
+    {
+        ChooseRange(3);
+    });
 
-    static ButtonOld btn20A("bt13", "25P", [](Item *) { ChooseRange(4); });
+    static ButtonPress btn20A("20 А", "20 A", Font::_1, { 640, 322, 150, 73 }, [](Item *)
+    {
+        ChooseRange(4);
+    });
 
-    static ButtonOld btn50A("bt12", "26P", [](Item *) { ChooseRange(5); });
+    static ButtonPress btn50A("50 А", "50 A", Font::_1, { 640, 401, 150, 73 }, [](Item *)
+    {
+        ChooseRange(5);
+    });
 
-    ButtonOld btn0("b0", "KB0", [](Item *) { PressDigit('0'); });
+#define SIZE_DIGIT 96, 96
 
-    static ButtonOld btn1("b1", "KB1", [](Item *) { PressDigit('1'); });
+    ButtonPress btn0("0", "0", Font::_1, { 12, 276, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit('0');
+    });
 
-    ButtonOld btn2("b2", "KB2", [](Item *) { PressDigit('2'); });
+    static ButtonPress btn1("1", "1", Font::_1, { 113, 276, SIZE_DIGIT },  [](Item *)
+    {
+        PressDigit('1');
+    });
 
-    static ButtonOld btn3("b3", "KB3", [](Item *) { PressDigit('3'); });
+    ButtonPress btn2("2", "2", Font::_1, { 214, 276, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit('2');
+    });
 
-    static ButtonOld btn4("b4", "KB4", [](Item *) { PressDigit('4'); });
+    static ButtonPress btn3("3", "3", Font::_1, { 315, 276, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit('3');
+    });
 
-    static ButtonOld btn5("b5", "KB5", [](Item *) { PressDigit('5'); });
+    static ButtonPress btn4("4", "4", Font::_1, { 416, 276, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit('4');
+    });
 
-    static ButtonOld btn6("b6", "KB6", [](Item *) { PressDigit('6'); });
+    static ButtonPress btn5("5", "5", Font::_1, { 517, 276, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit('5');
+    });
 
-    static ButtonOld btn7("b7", "KB7", [](Item *) { PressDigit('7'); });
+    static ButtonPress btn6("6", "6", Font::_1, { 113, 377, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit('6');
+    });
 
-    static ButtonOld btn8("b8", "KB8", [](Item *) { PressDigit('8'); });
+    static ButtonPress btn7("7", "7", Font::_1, { 217, 377, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit('7');
+    });
 
-    static ButtonOld btn9("b9", "KB9", [](Item *) { PressDigit('9'); });
+    static ButtonPress btn8("8", "8", Font::_1, { 315, 377, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit('8');
+    });
 
-    static ButtonOld btnDot("b10", "KBD", [](Item *) { PressDigit('.'); });
+    static ButtonPress btn9("9", "9", Font::_1, { 416, 377, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit('9');
+    });
 
-    static ButtonOld btnSign("b11", "KBS", [](Item *) { PressDigit('-'); });
+    static ButtonPress btnDot(".", ".", Font::_1, { 12, 377, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit('.');
+    });
 
-    static ButtonOld btnBackspace("b14", "KBBACK", [](Item *) { PressDigit(' '); });
+    static ButtonPress btnSign("+-", "+-", Font::_1, { 517, 377, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit('-');
+    });
 
-//    static ButtonOld btnDebugPage("Debug", "", []() {}, 10, 300);
+    static ButtonPress btnBackspace("<-", "<-", Font::_1, { 624, 334, SIZE_DIGIT }, [](Item *)
+    {
+        PressDigit(' ');
+    });
 
     static Item *items[] =
     {
         &btnBack, &btnSave, &btnCalib, &btnMin, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
         &btn2A,   &btn20A,  &btn50A,   &btn0,   &btn1,    &btn2,   &btn3,    &btn4,
-        &btn5,    &btn6,    &btn7,     &btn8,   &btn9,    &btnDot, &btnSign, &btnBackspace, /* &btnDebugPage, */ nullptr
+        &btn5,    &btn6,    &btn7,     &btn8,   &btn9,    &btnDot, &btnSign, &btnBackspace, nullptr
     };
 
     namespace ButtonsRange
     {
-        static ButtonOld *buttons[6] =
+        static ButtonPress *buttons[6] =
         {
             &btn2mA,
             &btn20mA,
@@ -260,7 +323,7 @@ namespace PageCalibration
         {
             for (int i = 0; i < 6; i++)
             {
-                if (((ButtonOld *)buttons[i])->GetValue())
+                if (((ButtonPress *)buttons[i])->IsPressed())
                 {
                     return i;
                 }
@@ -273,7 +336,7 @@ namespace PageCalibration
 
     static void ChooseDot(int dot)
     {
-        static ButtonOld *btns[2] =
+        static ButtonPress *btns[2] =
         {
             &btnMin,
             &btnMax
@@ -296,52 +359,45 @@ namespace PageCalibration
 
         HAL_PIO::Write(PIN_ZERO, false);
 
-        btnSave.SetVisible(false);
+        btnSave.SetShown(false);
     }
 
     void SetVisibleDigits(bool visible)
     {
-        btn0.SetVisible(visible);
-        btn1.SetVisible(visible);
-        btn2.SetVisible(visible);
-        btn3.SetVisible(visible);
-        btn4.SetVisible(visible);
-        btn5.SetVisible(visible);
-        btn6.SetVisible(visible);
-        btn7.SetVisible(visible);
-        btn8.SetVisible(visible);
-        btn9.SetVisible(visible);
-        btnSign.SetVisible(visible);
-        btnDot.SetVisible(visible);
-        btnBackspace.SetVisible(visible);
+        btn0.SetShown(visible);
+        btn1.SetShown(visible);
+        btn2.SetShown(visible);
+        btn3.SetShown(visible);
+        btn4.SetShown(visible);
+        btn5.SetShown(visible);
+        btn6.SetShown(visible);
+        btn7.SetShown(visible);
+        btn8.SetShown(visible);
+        btn9.SetShown(visible);
+        btnSign.SetShown(visible);
+        btnDot.SetShown(visible);
+        btnBackspace.SetShown(visible);
     }
 
     void SetVisibleExceptButtons(bool visible)
     {
-        btnMin.SetVisible(visible);
-        btnMax.SetVisible(visible);
-        btnSave.SetVisible(visible);
-        btnCalib.SetVisible(visible);
-        btn2mA.SetVisible(visible);
-        btn20mA.SetVisible(visible);
-        btn200mA.SetVisible(visible);
-        btn2A.SetVisible(visible);
-        btn20A.SetVisible(visible);
-        btn50A.SetVisible(visible);
-
-        Nextion::SetVisible("t5", visible);
-        Nextion::SetVisible("t0", visible);
-        Nextion::SetVisible("t3", visible);
-        Nextion::SetVisible("t6", visible);
-        Nextion::SetVisible("t1", visible);
-        Nextion::SetVisible("t4", visible);
+        btnMin.SetShown(visible);
+        btnMax.SetShown(visible);
+        btnSave.SetShown(visible);
+        btnCalib.SetShown(visible);
+        btn2mA.SetShown(visible);
+        btn20mA.SetShown(visible);
+        btn200mA.SetShown(visible);
+        btn2A.SetShown(visible);
+        btn20A.SetShown(visible);
+        btn50A.SetShown(visible);
     }
 
     static void FuncOnEnter()
     {
-        btnMin.SetText("Min");
-        btnMax.SetText("Max");
-        btnCalib.SetText("Calib");
+        btnMin.SetText("Мин", "Min");
+        btnMax.SetText("Макс", "Max");
+        btnCalib.SetText("Калиб.", "Calib.");
 
         wndCurrent.Flash();
         wndGiven.Flash();
@@ -365,7 +421,7 @@ namespace PageCalibration
 
         if (range >= 0)
         {
-            if (btnMin.GetValue() == 1)
+            if (btnMin.IsPressed())
             {
                 wndGiven.SetMeasure({ 0.0, false, true }, range);
             }

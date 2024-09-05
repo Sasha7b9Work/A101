@@ -14,13 +14,20 @@ namespace PageSettings
         }
     );
 
-    static ButtonOld btnLanguageRU("r0", "RBRU", [] (Item *) {});
+    static ButtonToggle btnLanguageRU("Русский", "Russian", Font::_1, { 300, 300, 100, 50 }, [](Item *)
+    {
+    });
 
-    static ButtonOld btnLanguageEN("r1", "RBEN", [] (Item *) {});
+    static ButtonToggle btnLanguageEN("Английский", "English", Font::_1, { 300, 400, 100, 50 }, [](Item *)
+    {
+    });
 
     static Item *items[] =
     {
-        &btnBack, &btnLanguageRU, &btnLanguageEN, nullptr
+        &btnBack,
+        &btnLanguageRU,
+        &btnLanguageEN,
+        nullptr
     };
 
     static void FuncOnEnter()

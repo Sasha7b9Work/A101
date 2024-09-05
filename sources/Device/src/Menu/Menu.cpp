@@ -5,17 +5,6 @@
 #include <cstring>
 
 
-void Menu::Update(pchar signal)
-{
-    ButtonCommon *button = Page::Current()->GetButton(signal);
-
-    if (button)
-    {
-        button->Press();
-    }
-}
-
-
 void Menu::Press(int , int )
 {
 

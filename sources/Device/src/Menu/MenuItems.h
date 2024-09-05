@@ -10,7 +10,7 @@
 
 struct Page;
 struct ButtonRange;
-struct ButtonOld;
+struct ButtonPress;
 
 
 struct TypeItem
@@ -20,7 +20,6 @@ struct TypeItem
         Another,
         ButtonPress,    // Кнопка без фиксации
         ButtonToggle,   // Кнопка с фиксацией
-        ButtonOld,      // Старая кнопка - реализована в прошивке дисплея
         Label,          // Текстовая строка
         LabelMeasure,
         Count
@@ -61,7 +60,7 @@ struct Item
 
     ButtonRange *ToButtonRange();
 
-    ButtonOld *ToButtonOld();
+    ButtonPress *ToButtonPress();
 
 protected:
 
@@ -98,57 +97,6 @@ protected:
     pchar title[2];
 
     Font::E font;
-};
-
-
-struct ButtonOld : public ButtonCommon
-{
-public:
-
-    // _highlight - в этом состоянии кнопка находится при первом появлении на экране
-    ButtonOld(pchar _name, pchar _signal, void (*_funcOnPress)(Item *), int16 _x = -1, int16 _y = -1) :
-        ButtonCommon(TypeItem::ButtonOld, _name, _name, Font::_1, { _x, _y, 0, 0 }, _funcOnPress),
-        name(_name), signal(_signal), x(_x), y(_y)
-    {
-    }
-
-    // Сиганл, который присылает кнопка при нажатии
-    virtual pchar Signal() const override { return signal; }
-
-    virtual void Press() override;
-
-    virtual void Release() override { }
-
-    void SetText(pchar) const;
-
-    void SetVisible(bool);
-
-    bool IsVisible() const {return is_visible; }
-
-    virtual void SetValue(int) override;
-
-    int GetValue() const { return value; }
-
-    virtual void Draw() override    ;
-
-    pchar Text() const { return name; }
-
-    virtual bool IsWithoutFixation() const override { return true; }
-
-private:
-
-    pchar name;                     // Имя кнопки в редакторе
-    pchar signal;                   // Такой сигнал присылает кнопка при нажатии
-
-    int value = 0;
-
-    const int16 x;
-    const int16 y;
-
-    bool is_visible = true;
-
-    // Возвращает true, если это "программная кнопка" - отрисовывается вручную, а не дисплеем
-    bool IsSoftware() const;
 };
 
 
@@ -315,8 +263,6 @@ struct Page
     void SetItem(int index, Item *);
 
     void Draw();
-
-    ButtonCommon *GetButton(pchar signal);
 
 private:
 

@@ -180,55 +180,6 @@ void Menu::Init()
 }
 
 
-void ButtonOld::Press()
-{
-    funcOnPress(this);
-}
-
-
-void ButtonOld::SetText(pchar txt) const
-{
-    if (IsSoftware())
-    {
-
-    }
-    else
-    {
-        Nextion::Button::SetText(name, txt);
-    }
-}
-
-
-void ButtonOld::SetVisible(bool visible)
-{
-    if (IsSoftware())
-    {
-
-    }
-    else
-    {
-        Nextion::SetVisible(name, visible);
-
-        is_visible = visible;
-    }
-}
-
-
-void ButtonOld::SetValue(int _value)
-{
-    value = _value;
-
-    if (IsSoftware())
-    {
-
-    }
-    else
-    {
-        Nextion::SendCommandFormat("%s.val=%d", name, value);
-    }
-}
-
-
 Item *Page::GetItem(int index)
 {
     return items[index];
@@ -261,28 +212,6 @@ void Page::SetAsCurrent()
     current->funcOnEnter();
 }
 
-ButtonCommon *Page::GetButton(pchar signal)
-{
-    Item **item = &items[0];
-
-    while (*item)
-    {
-        ButtonOld *button = (*item)->ToButtonOld();
-
-        if (button)
-        {
-            if (std::strcmp(button->Signal(), signal) == 0)
-            {
-                return button;
-            }
-        }
-
-        item++;
-    }
-
-    return nullptr;
-}
-
 
 void Page::Draw()
 {
@@ -292,33 +221,6 @@ void Page::Draw()
     {
         GetItem(i)->Draw();
     }
-}
-
-
-void ButtonOld::Draw()
-{
-    if (!IsSoftware())
-    {
-        return;
-    }
-
-    int16 width = 150;
-    int16 height = 50;
-
-    Nextion::DrawLine(x, y, x + width, y, Color::White);
-    Nextion::DrawLine(x, y + 1, x + width, y + 1, Color::White);
-
-    Nextion::DrawLine(x, y + height, x + width, y + height);
-    Nextion::DrawLine(x, y + height + 1, x + width, y + height + 1);
-
-    Nextion::DrawLine(x, y, x, y + height);
-    Nextion::DrawLine(x + 1, y, x + 1, y + height);
-
-    Nextion::DrawLine(x + width, y, x + width, y + height);
-    Nextion::DrawLine(x + width + 1, y, x + width + 1, y + height);
-
-    Nextion::DrawString({ (int16)(x + 2), (int16)(y + height / 2 - 16), (int16)(width - 4), (int16)(height / 2) },
-        2, Color::White, Color::Background, Text(), 1);
 }
 
 
@@ -334,12 +236,6 @@ int Page::GetItemCount()
     }
 
     return count;
-}
-
-
-bool ButtonOld::IsSoftware() const
-{
-    return x >= 0;
 }
 
 
@@ -411,9 +307,9 @@ ButtonRange *Item::ToButtonRange()
 }
 
 
-ButtonOld *Item::ToButtonOld()
+ButtonPress *Item::ToButtonPress()
 {
-    return (type == TypeItem::ButtonOld) ? (ButtonOld *)this : nullptr;
+    return (type == TypeItem::ButtonPress) ? (ButtonPress *)this : nullptr;
 }
 
 

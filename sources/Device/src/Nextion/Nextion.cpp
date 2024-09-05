@@ -94,16 +94,6 @@ namespace Nextion
     };
 
 
-    // Нажатие кнопки
-    struct CommandButton : public Command
-    {
-        CommandButton(pchar _bytes, int _size) : Command(_bytes, _size) {}
-        virtual ~CommandButton() override {}
-
-        virtual bool Execute() override;
-    };
-
-
     struct CommandCoordinate : public Command
     {
         CommandCoordinate(pchar _bytes, int _size) : Command(_bytes, _size) {}
@@ -187,19 +177,6 @@ Nextion::Command::Command(const char *bytes, int _size) : size(_size)
 }
 
 
-bool Nextion::CommandButton::Execute()
-{
-    if (IsEmpty())
-    {
-        return false;
-    }
-
-    Menu::Update(buffer);
-
-    return true;
-}
-
-
 bool Nextion::CommandCoordinate::Execute()
 {
     BitSet32 x((uint *)buffer);
@@ -251,15 +228,7 @@ Nextion::Command *Nextion::BufferData::ExtractCommand()
 {
     for (int i = 0; i < pointer; i++)
     {
-        if (buffer[i] == (uint8)'_')            // Кнопка
-        {
-            CommandButton *result = new CommandButton(buffer, i);
-
-            RemoveFromStart(i + 1);
-
-            return result;
-        }
-        else if (buffer[i] == (uint8)'+' || buffer[i] == (uint8)'-')
+        if (buffer[i] == (uint8)'+' || buffer[i] == (uint8)'-')
         {
             int num_symbols = i + 1;
 

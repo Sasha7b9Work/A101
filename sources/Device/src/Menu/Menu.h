@@ -7,7 +7,5 @@ namespace Menu
 {
     void Init();
 
-    void Update(pchar signal);
-
     void Press(int x, int y);
 }
