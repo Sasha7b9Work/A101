@@ -343,12 +343,6 @@ void Nextion::LastCode::Set(ResponseCode::E _code)
 }
 
 
-void Nextion::SetVisible(pchar name, bool visible)
-{
-    SendCommandFormat("vis %s,%d", name, visible ? 1 : 0);
-}
-
-
 #ifndef WIN32
 #pragma clang diagnostic pop
 #endif

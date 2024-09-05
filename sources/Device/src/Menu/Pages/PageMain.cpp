@@ -63,13 +63,6 @@ namespace PageMain
             Range::Set(range + 1);
             Range::Set(range);
         }
-
-        for (int i = 0; i < 6; i++)
-        {
-            char name[32];
-            std::sprintf(name, "bt%d", i);
-            Nextion::SetValue(name, Range::Current() == i ? 1 : 0);
-        }
     }
 
     static void FuncDraw()

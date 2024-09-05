@@ -66,10 +66,6 @@ namespace Nextion
 
     void SendCommandFormat(const char *, ...);
 
-    void SetVisible(pchar name, bool);
-
-    void SetValue(pchar name, int);
-
     namespace Page
     {
         // 0 - основная страница
@@ -95,16 +91,5 @@ namespace Nextion
 
         // 0 - маленький, 1 - большой
         void Disable(int size);
-    }
-
-    namespace Button
-    {
-        void SetText(pchar name_button, pchar text);
-
-        void Highligth(pchar name_button, bool);
-
-        void Enable(pchar name_button);
-
-        void Disable(pchar name_button);
     }
 }

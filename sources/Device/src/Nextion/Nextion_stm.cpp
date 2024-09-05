@@ -144,41 +144,6 @@ void Nextion::WaveFFT::Disable(int size)
 }
 
 
-void Nextion::Button::SetText(pchar name_button, pchar _text)
-{
-    Nextion::SendCommandFormat("%s.txt=\"%s\"", name_button, _text);
-}
-
-
-void Nextion::Button::Highligth(pchar name_button, bool val)
-{
-    uint color_val = val ? Color::ButtonPress.ToRaw() : Color::Background.ToRaw();
-
-//    LOG_WRITE("%s higthligth = %d, color %d", name_button, (int)val, color_val);
-
-    Nextion::SendCommandFormat("%s.bco=%d", name_button, color_val);
-    Nextion::SendCommandFormat("%s.bco2=%d", name_button, color_val);
-}
-
-
-void Nextion::SetValue(pchar name, int value)
-{
-    SendCommandFormat("%s.val=%d", name, value);
-}
-
-
-void Nextion::Button::Enable(pchar name_button)
-{
-    Nextion::SendCommandFormat("vis %s,1", name_button);
-}
-
-
-void Nextion::Button::Disable(pchar name_button)
-{
-    Nextion::SendCommandFormat("vis %s,0", name_button);
-}
-
-
 void Nextion::SendByte(uint8 byte)
 {
     LastCode::Set(ResponseCode::None);
