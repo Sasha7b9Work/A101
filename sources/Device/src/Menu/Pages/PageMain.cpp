@@ -157,19 +157,23 @@ namespace PageMain
         PageCalibration::self->SetAsCurrent();
     });
 
-    static ButtonOld btnSettings("btnSettings", "0T", [](Item *)
+    static ButtonPress btnSettings("Настройки", "Settings", Font::_0, { 463, 4, 188, 74 }, [](Item *)
     {
         PageSettings::self->SetAsCurrent();
     });
 
-    static ButtonOld btnZeroDC_EN("btnZeroDC", "0DZ1", [](Item *)         // Включение режима "Zero DC"
+    static ButtonToggle btnZeroDC("Ноль DC", "Zero DC", Font::_0, { 660, 84, 136, 74 }, [](Item *item)
     {
-        Ampermeter::ZeroDC::Enable();
-    });
+        ButtonToggle *btn = (ButtonToggle *)item;
 
-    static ButtonOld btnZeroDC_DIS("btnZeroDC", "0DZ0", [](Item *)        // Выключение режима "Zero DC"
-    {
-        Ampermeter::ZeroDC::Disable();
+        if (btn->IsPressed())
+        {
+            Ampermeter::ZeroDC::Enable();
+        }
+        else
+        {
+            Ampermeter::ZeroDC::Disable();
+        }
     });
 
     static ButtonToggle btnZeroAC("Ноль AC", "Zero AC", Font::_0, { 660, 164, 136, 74 }, [](Item *item)
@@ -191,6 +195,11 @@ namespace PageMain
         PageGraph::self->SetAsCurrent();
     });
 
+    static ButtonToggle btnMeasures("Измерения", "Measures", Font::_5, { 463, 84, 188, 74 }, [](Item *)
+    {
+
+    });
+
     static ButtonToggle btnMAX("Iмакс", "Imax", Font::_0, { 105, 165, 133, 74 }, [](Item *) {});      // Imax
 
     static ButtonToggle btnAMP("Iамп", "Iamp", Font::_0, { 381, 165, 133, 74 }, [](Item *) {});       // Iampl
@@ -198,6 +207,8 @@ namespace PageMain
     static ButtonToggle btnMIN("Iмин", "Imin", Font::_0, { 243, 165, 133, 74 }, [](Item *) {});       // Imin
 
     static ButtonToggle btnPEAK("Iпп", "Ipp", Font::_0, { 519, 165, 133, 74},  [](Item *) {});        // Ipp
+
+    static ButtonPress btnMenu
 
     static Item *items[] =
     {
@@ -211,8 +222,7 @@ namespace PageMain
         &btnAC,
         &btnDC,
         &btnCalibration,
-        &btnZeroDC_EN,
-        &btnZeroDC_DIS,
+        &btnZeroDC,
         &btnZeroAC,
         &btnGraphics,
         &btnMAX,
@@ -223,6 +233,7 @@ namespace PageMain
         &btnZero,
         &wndDC,
         &wndAC,
+        &btnMeasures,
         &wndAMPL,
         &wndPEAK,
         &wndMIN,
@@ -282,9 +293,7 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
     }
     else if (meas == MeasuresOnDisplay::DC)
     {
-        btnZeroDC_EN.SetValue(enable ? 1 : 0);
-
-        enable ? btnZeroDC_EN.Press() : btnZeroDC_DIS.Press();
+        btnZeroDC.SetValue(enable ? 1 : 0);
 
         PageMain::labelZeroDC.SetShown(enable);
     }
