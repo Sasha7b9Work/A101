@@ -6,6 +6,4 @@
 namespace Menu
 {
     void Init();
-
-    void Press(int x, int y);
 }
