@@ -343,12 +343,6 @@ void Nextion::LastCode::Set(ResponseCode::E _code)
 }
 
 
-void Nextion::Text::SetLabel(pchar name, pchar label)
-{
-    SendCommandFormat("%s.txt=\"%s\"", name, label);
-}
-
-
 void Nextion::SetVisible(pchar name, bool visible)
 {
     SendCommandFormat("vis %s,%d", name, visible ? 1 : 0);

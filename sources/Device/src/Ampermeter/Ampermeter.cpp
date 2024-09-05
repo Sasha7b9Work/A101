@@ -44,13 +44,6 @@ namespace Ampermeter
 
         void Disable()
         {
-            for (int i = 0; i < 6; i++)
-            {
-                char buffer[32] = "\0";
-                std::sprintf(buffer, "t1%d", i + 1);
-                Nextion::Text::SetVisible(buffer, false);
-            }
-
             is_enabled = false;
         }
     }

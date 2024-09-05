@@ -36,12 +36,13 @@ namespace PageSettings
 
         std::sprintf(buffer, "%04u %04u", set.serial_number & 0xFFFF, (set.serial_number >> 16));
 
-        Nextion::Text::SetLabel("NumVersion", buffer);
+        // \todo Здесь надо вывести номер версии
+
+//        Nextion::Text::SetLabel("NumVersion", buffer);
     }
 
     static void FuncDraw()
     {
-//        Nextion::Text::SetLabel("NumVersion", "7");
     }
 
     static Page pageSettings(items, FuncOnEnter, FuncDraw);

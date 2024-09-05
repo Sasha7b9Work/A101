@@ -173,19 +173,6 @@ void Nextion::Button::Enable(pchar name_button)
 }
 
 
-void Nextion::Text::SetVisible(pchar name, bool visible)
-{
-    if (visible)
-    {
-        Nextion::SendCommandFormat("vis %s,1", name);
-    }
-    else
-    {
-        Nextion::SendCommandFormat("vis %s,0", name);
-    }
-}
-
-
 void Nextion::Button::Disable(pchar name_button)
 {
     Nextion::SendCommandFormat("vis %s,0", name_button);

@@ -1689,21 +1689,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Nextion/Controls</GroupName>
-          <Files>
-            <File>
-              <FileName>CntrlText.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Nextion\Controls\CntrlText.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CntrlText.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Nextion\Controls\CntrlText.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>SCPI</GroupName>
           <Files>
             <File>
@@ -3042,21 +3027,6 @@
               <FileName>Keyboard.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Nextion\Keyboard.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Nextion/Controls</GroupName>
-          <Files>
-            <File>
-              <FileName>CntrlText.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Nextion\Controls\CntrlText.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CntrlText.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Nextion\Controls\CntrlText.h</FilePath>
             </File>
           </Files>
         </Group>

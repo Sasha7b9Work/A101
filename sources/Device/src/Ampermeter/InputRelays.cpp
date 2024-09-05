@@ -86,17 +86,6 @@ void Range::Set(int _range, bool reset_measures)
         Ampermeter::OnEventChangeRange();
     }
 
-    if (Ampermeter::AVP::IsEnabled())
-    {
-        for (int i = 0; i < 6; i++)
-        {
-            char name[32] = "\0";
-
-            std::sprintf(name, "t1%d", i + 1);
-            Nextion::Text::SetVisible(name, _range == i);
-        }
-    }
-
     if (disable_zero)
     {
         Ampermeter::ZeroAC::Disable();
