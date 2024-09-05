@@ -223,9 +223,16 @@ namespace PageMain
 
     ButtonToggle btnPEAK("Iοο", "Ipp", Font::_0, { 519, 165, 133, 74},  [](Item *) {});          // Ipp
 
-    ButtonToggle btnMenu("Μενώ", "Menu", Font::_1, { 660, 4, 136, 74 }, [](Item *)                // Menu
+    ButtonToggle btnMenu("Μενώ", "Menu", Font::_1, { 660, 4, 136, 74 }, [](Item *item)           // Menu
     {
+        bool is_show = item->ToButtonToggle()->IsPressed();
 
+        btnSettings.SetShown(is_show);
+        btnMeasures.SetShown(is_show);
+        btnZeroAC.SetShown(is_show);
+        btnZeroDC.SetShown(is_show);
+        btnGraphics.SetShown(is_show);
+        btnCalibration.SetShown(is_show);
     });
 
     static Item *items[] =

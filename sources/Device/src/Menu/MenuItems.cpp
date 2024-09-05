@@ -316,6 +316,12 @@ ButtonPress *Item::ToButtonPress()
 }
 
 
+ButtonToggle *Item::ToButtonToggle()
+{
+    return (type == TypeItem::ButtonToggle) ? (ButtonToggle *)this : nullptr;
+}
+
+
 Label::Label(bool append, pchar _textRU, pchar _textEN, const Rect &_rect, Font::E _font, void (*_funcOnPress)(Item *),
     const Color &_colorText, const Color &_colorBack, bool _h_aligned, bool _v_aligned) :
     Item(TypeItem::Label, _rect, _funcOnPress, append),

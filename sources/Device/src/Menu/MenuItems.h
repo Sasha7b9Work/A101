@@ -11,6 +11,7 @@
 struct Page;
 struct ButtonRange;
 struct ButtonPress;
+struct ButtonToggle;
 
 
 struct TypeItem
@@ -56,8 +57,8 @@ struct Item
     static void OnEventRelease(int, int);
 
     ButtonRange *ToButtonRange();
-
     ButtonPress *ToButtonPress();
+    ButtonToggle *ToButtonToggle();
 
 protected:
 
