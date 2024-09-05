@@ -88,7 +88,14 @@ bool Item::IsShown() const
 
 void Item::Press()
 {
-    is_pressed = true;
+    if (type == TypeItem::ButtonToggle)
+    {
+        is_pressed = !is_pressed;
+    }
+    else
+    {
+        is_pressed = true;
+    }
 
     Draw();
 
@@ -98,7 +105,7 @@ void Item::Press()
 
 void Item::Release()
 {
-    if (IsWithoutFixation())
+    if (type != TypeItem::ButtonToggle)
     {
         is_pressed = false;
 

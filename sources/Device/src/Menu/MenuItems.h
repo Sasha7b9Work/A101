@@ -48,7 +48,6 @@ struct Item
     bool IsShown() const;
 
     virtual void Draw() = 0;
-    virtual bool IsWithoutFixation() const = 0;
 
     virtual void Press();
     virtual void Release();
@@ -106,8 +105,6 @@ struct ButtonPress : public ButtonCommon
     virtual pchar Signal() const override;
 
     virtual void Draw() override;
-
-    virtual bool IsWithoutFixation() const override { return true; }
 };
 
 
@@ -118,8 +115,6 @@ struct ButtonToggle : public ButtonPress
         ButtonPress(title_ru, title_en, f, _rect, _funcOnPress, TypeItem::ButtonToggle)
     {
     }
-
-    virtual bool IsWithoutFixation() const override { return false; }
 };
 
 
@@ -166,8 +161,9 @@ struct Label : public Item
         return text[lang];
     }
     virtual void Draw() override;
-    virtual bool IsWithoutFixation() const override { return true; }
+
 private:
+
     char  text[Lang::Count][MAX_LEN];
     int   font;
     bool  h_aligned;
