@@ -8,15 +8,15 @@
 
 namespace PageSettings
 {
-    static ButtonOld btnBack("bt18", "2B0", []()
+    static ButtonOld btnBack("bt18", "2B0", [](Item *)
         {
             PageMain::self->SetAsCurrent();
         }
     );
 
-    static ButtonOld btnLanguageRU("r0", "RBRU", [] {});
+    static ButtonOld btnLanguageRU("r0", "RBRU", [] (Item *) {});
 
-    static ButtonOld btnLanguageEN("r1", "RBEN", [] {});
+    static ButtonOld btnLanguageEN("r1", "RBEN", [] (Item *) {});
 
     static Item *items[] =
     {

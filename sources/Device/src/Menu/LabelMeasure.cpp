@@ -48,7 +48,7 @@ namespace LM
 }
 
 
-LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)()) :
+LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)(Item *)) :
     Label(true, "", "", { _x, _y, LM::widths[_size], LM::heights[_size] }, LM::fonts[_size], _funcOnPress),
     type_measure(_type)
 {
@@ -56,7 +56,7 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
     {
         labels[i] = Label(false, type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
             { _x + LM::x_labels[i], _y + LM::y_labels[i], LM::width_labels[i][_size], LM::heights[_size]},
-            LM::fonts[_size], EmptyFuncVV, Color::White, Color::Count, false, true);
+            LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
     }
 }
 

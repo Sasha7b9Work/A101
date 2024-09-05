@@ -31,7 +31,7 @@ struct TypeItem
 struct Item
 {
     // Если append_to_pool == true - объект нужно добавить в глобальный пул объектов, чтобы страницы управляли их видимостью
-    Item(TypeItem::E = TypeItem::Count, const Rect & = Rect(), void (*_funcOnPress)() = nullptr, bool append_to_pool = true);
+    Item(TypeItem::E = TypeItem::Count, const Rect & = Rect(), void (*_funcOnPress)(Item *) = nullptr, bool append_to_pool = true);
 
     Item &operator=(const Item &);
 
@@ -70,7 +70,7 @@ protected:
     Rect rect;
     Page *parent;
 
-    void (*funcOnPress)();
+    void (*funcOnPress)(Item *);
 
     bool is_pressed = false;        // Для обычной кнопки переходит в состяние false сразу после отпускания, для кнопки с фиксацией -
                                     // после повторного нажатия
@@ -81,10 +81,12 @@ protected:
 
 struct ButtonCommon : public Item
 {
-    ButtonCommon(TypeItem::E, pchar title_ru, pchar title_en, Font::E, const Rect &, void (*_funcOnPress)());
+    ButtonCommon(TypeItem::E, pchar title_ru, pchar title_en, Font::E, const Rect &, void (*_funcOnPress)(Item *));
 
     // 1 - "нажать", 0 - "отпустить"
     virtual void SetValue(int);
+
+    bool IsPressed() const;
 
     // Сиганл, который присылает кнопка при нажатии
     virtual pchar Signal() const = 0;
@@ -102,7 +104,7 @@ struct ButtonOld : public ButtonCommon
 public:
 
     // _highlight - в этом состоянии кнопка находится при первом появлении на экране
-    ButtonOld(pchar _name, pchar _signal, void (*_funcOnPress)(), int16 _x = -1, int16 _y = -1) :
+    ButtonOld(pchar _name, pchar _signal, void (*_funcOnPress)(Item *), int16 _x = -1, int16 _y = -1) :
         ButtonCommon(TypeItem::ButtonOld, _name, _name, Font::_1, { _x, _y, 0, 0 }, _funcOnPress),
         name(_name), signal(_signal), x(_x), y(_y)
     {
@@ -151,7 +153,7 @@ private:
 // Кнопка без фиксации (возвращается в отжатое состояние при отпускании)
 struct ButtonPress : public ButtonCommon
 {
-    ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(), TypeItem::E = TypeItem::ButtonPress);
+    ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(Item *), TypeItem::E = TypeItem::ButtonPress);
 
     virtual pchar Signal() const override;
 
@@ -164,7 +166,7 @@ struct ButtonPress : public ButtonCommon
 // Кнопка с фиксацией (при нажатии переключается в противоположное состояние, на отпускание реакциии нет)
 struct ButtonToggle : public ButtonPress
 {
-    ButtonToggle(pchar title_ru, pchar title_en, Font::E f, const Rect &_rect, void (*_funcOnPress)()) :
+    ButtonToggle(pchar title_ru, pchar title_en, Font::E f, const Rect &_rect, void (*_funcOnPress)(Item *)) :
         ButtonPress(title_ru, title_en, f, _rect, _funcOnPress, TypeItem::ButtonToggle)
     {
     }
@@ -175,7 +177,7 @@ struct ButtonToggle : public ButtonPress
 
 struct ButtonRange : public ButtonToggle
 {
-    ButtonRange(pchar title_ru, pchar title_en, int x, int y, void (*_funcOnPress)()) :
+    ButtonRange(pchar title_ru, pchar title_en, int x, int y, void (*_funcOnPress)(Item *)) :
         ButtonToggle(title_ru, title_en, Font::_1, { x, y, 127, 74 }, _funcOnPress)
     {
     }
@@ -187,7 +189,7 @@ struct Label : public Item
     static const int MAX_LEN = 32;
 
     // Если append == true - видимостью управляет страница - объект помещается в глобальный пул объектов
-    Label(bool append = false, pchar _textRU = "", pchar _textEN = "", const Rect & = Rect(), Font::E = Font::_0, void (*_funcOnPress)() = EmptyFuncVV,
+    Label(bool append = false, pchar _textRU = "", pchar _textEN = "", const Rect & = Rect(), Font::E = Font::_0, void (*_funcOnPress)(Item *) = EmptyFuncVIem,
         const Color &_colorText = Color::White, const Color &_colorBack = Color::Count, bool _h_aligned = false, bool _v_align = true);
 
     Label &operator=(const Label &);
@@ -252,7 +254,7 @@ struct TypeLabelMeasure
 
 struct LabelMeasure : public Label
 {
-    LabelMeasure(TypeMeasure::E, SizeMeasure::E, int _x, int _y, void (*_funcOnPress)() = EmptyFuncVV);
+    LabelMeasure(TypeMeasure::E, SizeMeasure::E, int _x, int _y, void (*_funcOnPress)(Item *) = EmptyFuncVIem);
 
     void Reset();
 

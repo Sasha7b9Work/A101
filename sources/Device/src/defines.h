@@ -4,9 +4,9 @@
 
 #define VERSION_MAJOR 0
 #define VERSION_MINOR 1
-#define VERSION_BUILD 184
+#define VERSION_BUILD 185
 
-#define DATE_BUILD "2024-09-03 14:18:33"
+#define DATE_BUILD "2024-09-05 13:59:14"
 
 #define VERSION_SCPI  "1.0"
 
@@ -77,7 +77,9 @@ typedef void(*pFuncVI)(int);
 #define HEX_FROM_2(hex1, hex0) ((uint)(0x##hex1) << 16 | (uint)0x##hex0)
 
 
-inline void EmptyFuncVV()
+struct Item;
+
+inline void EmptyFuncVIem(Item *)
 {
 }
 

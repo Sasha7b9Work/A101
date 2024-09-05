@@ -17,12 +17,12 @@ namespace PageDebug
     {
     }
 
-    static ButtonOld buttonZero("bt1", "debugZero", []()
+    static ButtonOld buttonZero("bt1", "debugZero", [](Item *)
         {
         });
 
     static ButtonOld buttonResetCal("bt2", "debugReset",
-        []()
+        [](Item *)
         {
             cal.Reset();
         });

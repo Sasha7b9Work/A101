@@ -35,7 +35,7 @@ namespace PageMain
         wndMAX.Reset();
     }
 
-    static ButtonPress btnZero("Уст. 0", "Set 0", Font::_1, { 669, 321, 127, 74 }, []()
+    static ButtonPress btnZero("Уст. 0", "Set 0", Font::_1, { 669, 321, 127, 74 }, [](Item *)
     {
         Ampermeter::ZeroDC::FloatingZero::Process();
     });
@@ -106,94 +106,98 @@ namespace PageMain
         }
     }
 
-    static ButtonRange btn2mA("2 мА", "2 mA", 4, 402, []()
+    static ButtonRange btn2mA("2 мА", "2 mA", 4, 402, [](Item *)
     {
         FuncOnRange(0);
     });
 
 
-    static ButtonRange btn20mA("20 мА", "20 mA", 137, 402, []()
+    static ButtonRange btn20mA("20 мА", "20 mA", 137, 402, [](Item *)
     {
         FuncOnRange(1);
     });
 
-    static ButtonRange btn200mA("200 мА", "200 mA", 270, 402, []()
+    static ButtonRange btn200mA("200 мА", "200 mA", 270, 402, [](Item *)
     {
         FuncOnRange(2);
     });
 
-    static ButtonRange btn2A("2 А", "2 A", 403, 402, []()
+    static ButtonRange btn2A("2 А", "2 A", 403, 402, [](Item *)
     {
         FuncOnRange(3);
     });
 
-    static ButtonRange btn20A("20 А", "20 A", 536, 402, []()
+    static ButtonRange btn20A("20 А", "20 A", 536, 402, [](Item *)
     {
         FuncOnRange(4);
     });
 
-    static ButtonRange btn50A("50 А", "50 A", 669, 402, []()
+    static ButtonRange btn50A("50 А", "50 A", 669, 402, [](Item *)
     {
         FuncOnRange(5);
     });
 
-    static ButtonOld btnAC_DC("btnACDC", "0AD", []()            // Переход в AC+DC
+    static ButtonOld btnAC_DC("btnACDC", "0AD", [](Item *)            // Переход в AC+DC
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
     });
 
-    static ButtonOld btnAC("btnACDC", "0AC", []()              // Переход в AC
+    static ButtonOld btnAC("btnACDC", "0AC", [](Item *)              // Переход в AC
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
     });
 
-    static ButtonOld btnDC("btnACDC", "0DC", []()              // Переход в DC
+    static ButtonOld btnDC("btnACDC", "0DC", [](Item *)              // Переход в DC
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
     });
 
-    static ButtonOld btnCalibration("btnCalibr", "0C", []()
+    static ButtonOld btnCalibration("btnCalibr", "0C", [](Item *)
     {
         PageCalibration::self->SetAsCurrent();
     });
 
-    static ButtonOld btnSettings("btnSettings", "0T", []()
+    static ButtonOld btnSettings("btnSettings", "0T", [](Item *)
     {
         PageSettings::self->SetAsCurrent();
     });
 
-    static ButtonOld btnZeroDC_EN("btnZeroDC", "0DZ1", []()         // Включение режима "Zero DC"
+    static ButtonOld btnZeroDC_EN("btnZeroDC", "0DZ1", [](Item *)         // Включение режима "Zero DC"
     {
         Ampermeter::ZeroDC::Enable();
     });
 
-    static ButtonOld btnZeroDC_DIS("btnZeroDC", "0DZ0", []()        // Выключение режима "Zero DC"
+    static ButtonOld btnZeroDC_DIS("btnZeroDC", "0DZ0", [](Item *)        // Выключение режима "Zero DC"
     {
         Ampermeter::ZeroDC::Disable();
     });
 
-    static ButtonOld btnZeroAC_EN("btnZeroAC", "0AZ1", []()         // Включение режима "Zero AC"
+    static ButtonToggle btnZeroAC("Ноль AC", "Zero AC", Font::_0, { 660, 164, 136, 74 }, [](Item *item)
     {
-        Ampermeter::ZeroAC::Enable();
+        ButtonToggle *btn = (ButtonToggle *)item;
+
+        if (btn->IsPressed())
+        {
+            Ampermeter::ZeroAC::Enable();
+        }
+        else
+        {
+            Ampermeter::ZeroAC::Disable();
+        }
     });
 
-    static ButtonOld btnZeroAC_DIS("btnZeroAC", "0AZ0", []()        // Выключение режима "Zero AC"
-    {
-        Ampermeter::ZeroAC::Disable();
-    });
-
-    static ButtonOld btnGraphics("btnGraphics", "0S", []()            // Доступ к графикам
+    static ButtonPress btnGraphics("Графики", "Graphs", Font::_0, { 660, 243, 136, 74}, [](Item *)    // Доступ к графикам
     {
         PageGraph::self->SetAsCurrent();
     });
 
-    static ButtonOld btnMAX("btnImax", "01I", []() {});           // Imax
+    static ButtonToggle btnMAX("Iмакс", "Imax", Font::_0, { 105, 165, 133, 74 }, [](Item *) {});      // Imax
 
-    static ButtonOld btnAMP("btnIamp", "04I", []() {});           // Iamp
+    static ButtonToggle btnAMP("Iамп", "Iamp", Font::_0, { 381, 165, 133, 74 }, [](Item *) {});       // Iampl
 
-    static ButtonOld btnMIN("btnImin", "02I", []() {});           // Imin
+    static ButtonToggle btnMIN("Iмин", "Imin", Font::_0, { 243, 165, 133, 74 }, [](Item *) {});       // Imin
 
-    static ButtonOld btnPEAK("btnIpp", "03I", []() {});          // Ipp
+    static ButtonToggle btnPEAK("Iпп", "Ipp", Font::_0, { 519, 165, 133, 74},  [](Item *) {});        // Ipp
 
     static Item *items[] =
     {
@@ -209,8 +213,7 @@ namespace PageMain
         &btnCalibration,
         &btnZeroDC_EN,
         &btnZeroDC_DIS,
-        &btnZeroAC_EN,
-        &btnZeroAC_DIS,
+        &btnZeroAC,
         &btnGraphics,
         &btnMAX,
         &btnAMP,
@@ -273,9 +276,7 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 {
     if (meas == MeasuresOnDisplay::AC)
     {
-        btnZeroAC_EN.SetValue(enable ? 1 : 0);
-
-        enable ? btnZeroAC_EN.Press() : btnZeroAC_DIS.Press();
+        btnZeroAC.SetValue(enable ? 1 : 0);
 
         PageMain::labelZeroAC.SetShown(enable);
     }

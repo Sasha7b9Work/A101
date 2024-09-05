@@ -105,16 +105,16 @@ namespace PageCalibration
     // Установить видимость для цифровых кнопок
     static void SetVisibleDigits(bool visible);
 
-    static ButtonOld btnBack("bt18", "2B0", []()
+    static ButtonOld btnBack("bt18", "2B0", [](Item *)
         {
             PageMain::self->SetAsCurrent();
         });
 
-    static ButtonOld btnMin("bt22", "2D1", []() { ChooseDot(0); });
+    static ButtonOld btnMin("bt22", "2D1", [](Item *) { ChooseDot(0); });
 
-    static ButtonOld btnMax("bt21", "2D2", []() { ChooseDot(1); });
+    static ButtonOld btnMax("bt21", "2D2", [](Item *) { ChooseDot(1); });
 
-    ButtonOld btnSave("b12", "2SV", []()
+    ButtonOld btnSave("b12", "2SV", [](Item *)
         {
             Calibrator::PressButtonSave();
             btnSave.SetVisible(false);
@@ -170,7 +170,7 @@ namespace PageCalibration
         }
     }
 
-    ButtonOld btnCalib("b13", "2OK", []()
+    ButtonOld btnCalib("b13", "2OK", [](Item *)
         {
             btnSave.SetVisible(false);
             btnCalib.SetValue(0);
@@ -182,43 +182,43 @@ namespace PageCalibration
             btnCalib.SetVisible(true);
         });
 
-    static ButtonOld btn2mA("bt17", "21P", []() { ChooseRange(0); });
+    static ButtonOld btn2mA("bt17", "21P", [](Item *) { ChooseRange(0); });
 
-    static ButtonOld btn20mA("bt16", "22P", []() { ChooseRange(1); });
+    static ButtonOld btn20mA("bt16", "22P", [](Item *) { ChooseRange(1); });
 
-    static ButtonOld btn200mA("bt15", "23P", []() { ChooseRange(2); });
+    static ButtonOld btn200mA("bt15", "23P", [](Item *) { ChooseRange(2); });
 
-    static ButtonOld btn2A("bt14", "24P", []() { ChooseRange(3); });
+    static ButtonOld btn2A("bt14", "24P", [](Item *) { ChooseRange(3); });
 
-    static ButtonOld btn20A("bt13", "25P", []() { ChooseRange(4); });
+    static ButtonOld btn20A("bt13", "25P", [](Item *) { ChooseRange(4); });
 
-    static ButtonOld btn50A("bt12", "26P", []() { ChooseRange(5); });
+    static ButtonOld btn50A("bt12", "26P", [](Item *) { ChooseRange(5); });
 
-    ButtonOld btn0("b0", "KB0", []() { PressDigit('0'); });
+    ButtonOld btn0("b0", "KB0", [](Item *) { PressDigit('0'); });
 
-    static ButtonOld btn1("b1", "KB1", []() { PressDigit('1'); });
+    static ButtonOld btn1("b1", "KB1", [](Item *) { PressDigit('1'); });
 
-    ButtonOld btn2("b2", "KB2", []() { PressDigit('2'); });
+    ButtonOld btn2("b2", "KB2", [](Item *) { PressDigit('2'); });
 
-    static ButtonOld btn3("b3", "KB3", []() { PressDigit('3'); });
+    static ButtonOld btn3("b3", "KB3", [](Item *) { PressDigit('3'); });
 
-    static ButtonOld btn4("b4", "KB4", []() { PressDigit('4'); });
+    static ButtonOld btn4("b4", "KB4", [](Item *) { PressDigit('4'); });
 
-    static ButtonOld btn5("b5", "KB5", []() { PressDigit('5'); });
+    static ButtonOld btn5("b5", "KB5", [](Item *) { PressDigit('5'); });
 
-    static ButtonOld btn6("b6", "KB6", []() { PressDigit('6'); });
+    static ButtonOld btn6("b6", "KB6", [](Item *) { PressDigit('6'); });
 
-    static ButtonOld btn7("b7", "KB7", []() { PressDigit('7'); });
+    static ButtonOld btn7("b7", "KB7", [](Item *) { PressDigit('7'); });
 
-    static ButtonOld btn8("b8", "KB8", []() { PressDigit('8'); });
+    static ButtonOld btn8("b8", "KB8", [](Item *) { PressDigit('8'); });
 
-    static ButtonOld btn9("b9", "KB9", []() { PressDigit('9'); });
+    static ButtonOld btn9("b9", "KB9", [](Item *) { PressDigit('9'); });
 
-    static ButtonOld btnDot("b10", "KBD", []() { PressDigit('.'); });
+    static ButtonOld btnDot("b10", "KBD", [](Item *) { PressDigit('.'); });
 
-    static ButtonOld btnSign("b11", "KBS", []() { PressDigit('-'); });
+    static ButtonOld btnSign("b11", "KBS", [](Item *) { PressDigit('-'); });
 
-    static ButtonOld btnBackspace("b14", "KBBACK", []() { PressDigit(' '); });
+    static ButtonOld btnBackspace("b14", "KBBACK", [](Item *) { PressDigit(' '); });
 
 //    static ButtonOld btnDebugPage("Debug", "", []() {}, 10, 300);
 
