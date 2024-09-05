@@ -143,6 +143,13 @@ ButtonCommon::ButtonCommon(TypeItem::E _type, pchar title_ru, pchar title_en, Fo
 }
 
 
+void ButtonCommon::SetText(pchar title_ru, pchar title_en)
+{
+    title[Lang::RU] = title_ru;
+    title[Lang::EN] = title_en;
+}
+
+
 void Item::OnEventPress(int x, int y)
 {
     Item *item = PoolItems::GetItem(x, y);

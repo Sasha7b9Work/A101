@@ -137,22 +137,14 @@ namespace PageMain
         FuncOnRange(5);
     });
 
-    static ButtonOld btnAC_DC("btnACDC", "0AD", [](Item *)            // Переход в AC+DC
+    static ButtonPress btnAC_DC("AC + DC", "AC + DC", Font::_1, { 6, 4, 127, 74 }, [](Item *)
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
-    });
-
-    static ButtonOld btnAC("btnACDC", "0AC", [](Item *)              // Переход в AC
-    {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
-    });
-
-    static ButtonOld btnDC("btnACDC", "0DC", [](Item *)              // Переход в DC
-    {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
     });
 
-    static ButtonOld btnCalibration("btnCalibr", "0C", [](Item *)
+    static ButtonPress btnCalibration("Калибр.", "Calibr.", Font::_0, { 5, 84, 127, 74 }, [](Item *)
     {
         PageCalibration::self->SetAsCurrent();
     });
@@ -200,15 +192,18 @@ namespace PageMain
 
     });
 
-    static ButtonToggle btnMAX("Iмакс", "Imax", Font::_0, { 105, 165, 133, 74 }, [](Item *) {});      // Imax
+    static ButtonToggle btnMAX("Iмакс", "Imax", Font::_0, { 105, 165, 133, 74 }, [](Item *) {});        // Imax
 
-    static ButtonToggle btnAMP("Iамп", "Iamp", Font::_0, { 381, 165, 133, 74 }, [](Item *) {});       // Iampl
+    static ButtonToggle btnAMP("Iамп", "Iamp", Font::_0, { 381, 165, 133, 74 }, [](Item *) {});         // Iampl
 
-    static ButtonToggle btnMIN("Iмин", "Imin", Font::_0, { 243, 165, 133, 74 }, [](Item *) {});       // Imin
+    static ButtonToggle btnMIN("Iмин", "Imin", Font::_0, { 243, 165, 133, 74 }, [](Item *) {});         // Imin
 
-    static ButtonToggle btnPEAK("Iпп", "Ipp", Font::_0, { 519, 165, 133, 74},  [](Item *) {});        // Ipp
+    static ButtonToggle btnPEAK("Iпп", "Ipp", Font::_0, { 519, 165, 133, 74},  [](Item *) {});          // Ipp
 
-    static ButtonPress btnMenu
+    static ButtonPress btnMenu("Меню", "Menu", Font::_1, { 660, 4, 136, 74 }, [](Item *)                // Menu
+    {
+
+    });
 
     static Item *items[] =
     {
@@ -219,8 +214,6 @@ namespace PageMain
         &btn20A,
         &btn50A,
         &btnAC_DC,
-        &btnAC,
-        &btnDC,
         &btnCalibration,
         &btnZeroDC,
         &btnZeroAC,
@@ -240,6 +233,7 @@ namespace PageMain
         &wndMAX,
         &labelZeroAC,
         &labelZeroDC,
+        &btnMenu,
         nullptr
     };
 
@@ -253,15 +247,15 @@ namespace PageMain
 
         if (MeasuresOnDisplay::IsAC_DC())
         {
-            btnAC_DC.SetText("AC+DC");
+            btnAC_DC.SetText("AC+DC", "AC+DC");
         }
         else if (MeasuresOnDisplay::IsAC())
         {
-            btnAC_DC.SetText("AC");
+            btnAC_DC.SetText("AC", "AC");
         }
         else if (MeasuresOnDisplay::IsDC())
         {
-            btnAC_DC.SetText("DC");
+            btnAC_DC.SetText("DC", "DC");
         }
 
         wndAC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsAC());

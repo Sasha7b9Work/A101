@@ -17,20 +17,13 @@ namespace PageDebug
     {
     }
 
-    static ButtonOld buttonZero("bt1", "debugZero", [](Item *)
+    static ButtonPress btnBack("Назад", "Back", Font::_1, { 19, 17, 150, 73 }, [](Item *)
         {
-        });
-
-    static ButtonOld buttonResetCal("bt2", "debugReset",
-        [](Item *)
-        {
-            cal.Reset();
         });
 
     static Item *items[] =
     {
-        &buttonZero,
-        &buttonResetCal,
+        &btnBack,
         nullptr
     };
 

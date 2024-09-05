@@ -88,6 +88,8 @@ struct ButtonCommon : public Item
 
     bool IsPressed() const;
 
+    void SetText(pchar title_ru, pchar title_en);
+
     // Сиганл, который присылает кнопка при нажатии
     virtual pchar Signal() const = 0;
 

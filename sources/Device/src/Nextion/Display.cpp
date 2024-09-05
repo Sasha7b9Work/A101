@@ -59,7 +59,7 @@ void Display::LabelStar::Show()
 
     time_show = TIME_MS;
 
-    Nextion::SetVisible("t_star", true);
+//    Nextion::SetVisible("t_star", true);
 }
 
 
@@ -71,6 +71,6 @@ void Display::LabelStar::Update()
 
         time_hide = TIME_MS;
 
-        Nextion::SetVisible("t_star", false);
+//        Nextion::SetVisible("t_star", false);
     }
 }

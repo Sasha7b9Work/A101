@@ -8,7 +8,7 @@
 
 namespace PageSettings
 {
-    static ButtonOld btnBack("bt18", "2B0", [](Item *)
+    static ButtonPress btnBack("Назад", "Back", Font::_1, { 4, 5, 150, 73 }, [](Item *)
         {
             PageMain::self->SetAsCurrent();
         }
