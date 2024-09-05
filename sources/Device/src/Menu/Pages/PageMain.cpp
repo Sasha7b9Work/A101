@@ -14,6 +14,18 @@
 
 namespace PageMain
 {
+    extern ButtonToggle btnZeroAC;
+    extern ButtonToggle btnZeroDC;
+    extern ButtonPress btnGraphics;
+    extern ButtonToggle btnMenu;
+    extern ButtonToggle btnMAX;
+    extern ButtonToggle btnMIN;
+    extern ButtonToggle btnAMP;
+    extern ButtonToggle btnPEAK;
+    extern ButtonPress btnSettings;
+    extern ButtonToggle btnMeasures;
+    extern ButtonPress btnCalibration;
+
     Label labelZeroDC{ true, "ноль", "zero", { 23, 170, 90, 50 }, Font::_1 };
     Label labelZeroAC{ true, "ноль", "zero", { 23, 260, 90, 50 }, Font::_1 };
 
@@ -63,6 +75,24 @@ namespace PageMain
             Range::Set(range + 1);
             Range::Set(range);
         }
+
+        bool is_show = btnMenu.IsPressed();
+
+        btnZeroDC.SetShown(is_show);
+        btnZeroAC.SetShown(is_show);
+        btnGraphics.SetShown(is_show);
+        btnAMP.SetShown(is_show);
+        btnMAX.SetShown(is_show);
+        btnPEAK.SetShown(is_show);
+        btnMIN.SetShown(is_show);
+        btnSettings.SetShown(is_show);
+        btnMeasures.SetShown(is_show);
+        btnCalibration.SetShown(is_show);
+
+        wndAMPL.SetShown(btnAMP.IsPressed());
+        wndMAX.SetShown(btnMAX.IsPressed());
+        wndPEAK.SetShown(btnPEAK.IsPressed());
+        wndMIN.SetShown(btnMIN.IsPressed());
     }
 
     static void FuncDraw()
@@ -130,24 +160,24 @@ namespace PageMain
         FuncOnRange(5);
     });
 
-    static ButtonPress btnAC_DC("AC + DC", "AC + DC", Font::_1, { 6, 4, 127, 74 }, [](Item *)
+    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_1, { 6, 4, 127, 74 }, [](Item *)
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
         MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
     });
 
-    static ButtonPress btnCalibration("Калибр.", "Calibr.", Font::_0, { 5, 84, 127, 74 }, [](Item *)
+    ButtonPress btnCalibration("Калибр.", "Calibr.", Font::_0, { 5, 84, 127, 74 }, [](Item *)
     {
         PageCalibration::self->SetAsCurrent();
     });
 
-    static ButtonPress btnSettings("Настройки", "Settings", Font::_0, { 463, 4, 188, 74 }, [](Item *)
+    ButtonPress btnSettings("Настройки", "Settings", Font::_0, { 463, 4, 188, 74 }, [](Item *)
     {
         PageSettings::self->SetAsCurrent();
     });
 
-    static ButtonToggle btnZeroDC("Ноль DC", "Zero DC", Font::_0, { 660, 84, 136, 74 }, [](Item *item)
+    ButtonToggle btnZeroDC("Ноль DC", "Zero DC", Font::_0, { 660, 84, 136, 74 }, [](Item *item)
     {
         ButtonToggle *btn = (ButtonToggle *)item;
 
@@ -161,7 +191,7 @@ namespace PageMain
         }
     });
 
-    static ButtonToggle btnZeroAC("Ноль AC", "Zero AC", Font::_0, { 660, 164, 136, 74 }, [](Item *item)
+    ButtonToggle btnZeroAC("Ноль AC", "Zero AC", Font::_0, { 660, 164, 136, 74 }, [](Item *item)
     {
         ButtonToggle *btn = (ButtonToggle *)item;
 
@@ -175,25 +205,25 @@ namespace PageMain
         }
     });
 
-    static ButtonPress btnGraphics("Графики", "Graphs", Font::_0, { 660, 243, 136, 74}, [](Item *)    // Доступ к графикам
+    ButtonPress btnGraphics("Графики", "Graphs", Font::_0, { 660, 243, 136, 74}, [](Item *)    // Доступ к графикам
     {
         PageGraph::self->SetAsCurrent();
     });
 
-    static ButtonToggle btnMeasures("Измерения", "Measures", Font::_5, { 463, 84, 188, 74 }, [](Item *)
+    ButtonToggle btnMeasures("Измерения", "Measures", Font::_5, { 463, 84, 188, 74 }, [](Item *)
     {
 
     });
 
-    static ButtonToggle btnMAX("Iмакс", "Imax", Font::_0, { 105, 165, 133, 74 }, [](Item *) {});        // Imax
+    ButtonToggle btnMAX("Iмакс", "Imax", Font::_0, { 105, 165, 133, 74 }, [](Item *) {});        // Imax
 
-    static ButtonToggle btnAMP("Iамп", "Iamp", Font::_0, { 381, 165, 133, 74 }, [](Item *) {});         // Iampl
+    ButtonToggle btnAMP("Iамп", "Iamp", Font::_0, { 381, 165, 133, 74 }, [](Item *) {});         // Iampl
 
-    static ButtonToggle btnMIN("Iмин", "Imin", Font::_0, { 243, 165, 133, 74 }, [](Item *) {});         // Imin
+    ButtonToggle btnMIN("Iмин", "Imin", Font::_0, { 243, 165, 133, 74 }, [](Item *) {});         // Imin
 
-    static ButtonToggle btnPEAK("Iпп", "Ipp", Font::_0, { 519, 165, 133, 74},  [](Item *) {});          // Ipp
+    ButtonToggle btnPEAK("Iпп", "Ipp", Font::_0, { 519, 165, 133, 74},  [](Item *) {});          // Ipp
 
-    static ButtonPress btnMenu("Меню", "Menu", Font::_1, { 660, 4, 136, 74 }, [](Item *)                // Menu
+    ButtonToggle btnMenu("Меню", "Menu", Font::_1, { 660, 4, 136, 74 }, [](Item *)                // Menu
     {
 
     });
@@ -284,10 +314,4 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 
         PageMain::labelZeroDC.SetShown(enable);
     }
-}
-
-
-void PageMain::Init()
-{
-    btn2A.SetValue(1);
 }

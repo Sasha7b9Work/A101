@@ -53,8 +53,6 @@ struct Item
     virtual void Press();
     virtual void Release();
 
-    static void SetAllInactive();
-
     static void OnEventPress(int, int);
     static void OnEventRelease(int, int);
 
@@ -74,7 +72,7 @@ protected:
     bool is_pressed = false;        // Для обычной кнопки переходит в состяние false сразу после отпускания, для кнопки с фиксацией -
                                     // после повторного нажатия
 
-    bool is_shown = true;           // Если true, то надо отрисовывать
+    bool is_shown = false;          // Если true, то надо отрисовывать
 };
 
 

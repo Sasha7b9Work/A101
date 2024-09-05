@@ -63,21 +63,24 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
 
 void LabelMeasure::Draw()
 {
-#ifdef DRAW_DEBUG_LINES
-
-    Nextion::DrawRect(rect, Color::White);
-
-#endif
-
-    for (int i = 0; i < TypeLabelMeasure::Count; i++)
+    if (IsShown())
     {
-        labels[i].Draw();
+#ifdef DRAW_DEBUG_LINES
+
+        Nextion::DrawRect(rect, Color::White);
+
+#endif
+
+        for (int i = 0; i < TypeLabelMeasure::Count; i++)
+        {
+            labels[i].Draw();
 
 #ifdef DRAW_DEBUG_LINES
 
-        Nextion::DrawRect(labels[i].GetRect());
+            Nextion::DrawRect(labels[i].GetRect());
 
 #endif
+        }
     }
 }
 

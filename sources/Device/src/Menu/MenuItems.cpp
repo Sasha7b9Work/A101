@@ -7,6 +7,7 @@
 #include "Hardware/Timer.h"
 #include "Utils/String.h"
 #include "Nextion/Display.h"
+#include "Ampermeter/InputRelays.h"
 #include <cstring>
 #include <cstdio>
 
@@ -28,6 +29,7 @@ namespace PoolItems
         for (int i = 0; i < num_items; i++)
         {
             items[i]->SetShown(false);
+            items[i]->Draw();
         }
     }
 
@@ -81,12 +83,6 @@ bool Item::IsShown() const
     {
         return is_shown;
     }
-}
-
-
-void Item::SetAllInactive()
-{
-    PoolItems::SetAllInactive();
 }
 
 
@@ -174,9 +170,9 @@ void Item::OnEventRelease(int x, int y)
 
 void Menu::Init()
 {
-    PageMain::self->SetAsCurrent();
+    PageMain::SetRange(MeasuresOnDisplay::AC_DC, 3);
 
-    PageMain::Init();
+    PageMain::self->SetAsCurrent();
 }
 
 
@@ -194,7 +190,7 @@ void Page::SetItem(int index, Item *item)
 
 void Page::SetAsCurrent()
 {
-    Item::SetAllInactive();
+    PoolItems::SetAllInactive();
 
     current = this;
 
