@@ -33,17 +33,16 @@ namespace LM
 
     static const int16 width_labels[TypeLabelMeasure::Count][SizeMeasure::Count] =
     {
+        { 100, 80, 0 },
+        { 100, 80, 0 },
         { 100, 80, 0 }
     };
 
     static const int16 x_labels[TypeLabelMeasure::Count] =
     {
-        0
-    };
-
-    static const int16 y_labels[TypeLabelMeasure::Count] =
-    {
-        0
+        0,
+        100,
+        300
     };
 }
 
@@ -54,8 +53,10 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
 {
     for (int i = 0; i < TypeLabelMeasure::Count; i++)
     {
-        labels[i] = Label(false, type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
-            { _x + LM::x_labels[i], _y + LM::y_labels[i], LM::width_labels[i][_size], LM::heights[_size]},
+        _labels[i] = Label(false,
+            i == 0 ? type_measure.Title(Lang::RU) : "",
+            i == 0 ? type_measure.Title(Lang::EN) : "",
+            { _x + LM::x_labels[i], _y, LM::width_labels[i][_size], LM::heights[_size]},
             LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
     }
 }
@@ -73,11 +74,11 @@ void LabelMeasure::Draw()
 
         for (int i = 0; i < TypeLabelMeasure::Count; i++)
         {
-            labels[i].Draw();
+            _labels[i].Draw();
 
 #ifdef DRAW_DEBUG_LINES
 
-            Nextion::DrawRect(labels[i].GetRect());
+            Nextion::DrawRect(_labels[i].GetRect());
 
 #endif
         }
@@ -89,7 +90,7 @@ void LabelMeasure::SetShown(bool show)
 {
     for (int i = 0; i < TypeLabelMeasure::Count; i++)
     {
-        labels[i].SetShown(show);
+        _labels[i].SetShown(show);
     }
 
     Item::SetShown(show);

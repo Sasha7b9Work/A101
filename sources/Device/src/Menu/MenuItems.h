@@ -192,6 +192,8 @@ struct TypeLabelMeasure
     enum E
     {
         Name,           // Метка поля измерения - DC, F, etc
+        Digits,
+        Units,
         Count
     };
 };
@@ -221,7 +223,7 @@ private:
 
     char buf_measure[Label::MAX_LEN];
 
-    Label labels[TypeLabelMeasure::Count];
+    Label _labels[TypeLabelMeasure::Count];
 
     TypeMeasure type_measure;
 

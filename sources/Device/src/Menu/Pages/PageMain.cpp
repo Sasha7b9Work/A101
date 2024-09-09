@@ -210,9 +210,14 @@ namespace PageMain
         PageGraph::self->SetAsCurrent();
     });
 
-    ButtonToggle btnMeasures("Измерения", "Measures", Font::_5, { 463, 84, 188, 74 }, [](Item *)
+    ButtonToggle btnMeasures("Измерения", "Measures", Font::_5, { 463, 84, 188, 74 }, [](Item *item)
     {
+        bool is_show = item->ToButtonToggle()->IsPressed();
 
+        btnMAX.SetShown(is_show);
+        btnMIN.SetShown(is_show);
+        btnAMP.SetShown(is_show);
+        btnPEAK.SetShown(is_show);
     });
 
     ButtonToggle btnMAX("Iмакс", "Imax", Font::_0, { 105, 165, 133, 74 }, [](Item *) {});        // Imax
