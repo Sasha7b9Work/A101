@@ -187,19 +187,6 @@ struct SizeMeasure
 };
 
 
-struct TypeLabelMeasure
-{
-    enum E
-    {
-        Name,           // Метка поля измерения - DC, F, etc
-
-        Digits,
-        Units,
-        Count
-    };
-};
-
-
 struct LabelMeasure : public Label
 {
     LabelMeasure(TypeMeasure::E, SizeMeasure::E, int _x, int _y, void (*_funcOnPress)(Item *) = EmptyFuncVIem);
@@ -224,7 +211,10 @@ private:
 
     char buf_measure[Label::MAX_LEN];
 
-    Label labels[TypeLabelMeasure::Count];
+    Label label_name;
+    Label label_sign;
+    Label label_digits;
+    Label label_units;
 
     TypeMeasure type_measure;
 

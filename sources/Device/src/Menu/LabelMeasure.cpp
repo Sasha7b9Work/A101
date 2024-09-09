@@ -30,20 +30,6 @@ namespace LM
         40,
         85
     };
-
-    static const int16 width_labels[TypeLabelMeasure::Count][SizeMeasure::Count] =
-    {
-        { 100, 80, 0 },
-        { 100, 80, 0 },
-        { 100, 80, 0 }
-    };
-
-    static const int16 x_labels[TypeLabelMeasure::Count] =
-    {
-        0,
-        100,
-        300
-    };
 }
 
 
@@ -51,14 +37,35 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
     Label(true, "", "", { _x, _y, LM::widths[_size], LM::heights[_size] }, LM::fonts[_size], _funcOnPress),
     type_measure(_type)
 {
-    for (int i = 0; i < TypeLabelMeasure::Count; i++)
-    {
-        labels[i] = Label(false,
-            i == 0 ? type_measure.Title(Lang::RU) : "",
-            i == 0 ? type_measure.Title(Lang::EN) : "",
-            { _x + LM::x_labels[i], _y, LM::width_labels[i][_size], LM::heights[_size]},
-            LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
-    }
+    int x = 0;
+    int y = 0;
+    int width = 100;
+    int height = LM::heights[_size];
+
+    label_name = Label(false, type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
+        { _x + x, _y + y, width, height },
+        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
+
+    x += width;
+    width = 10;
+
+    label_sign = Label(false, "", "",
+        { _x += x, _y + y, width, height },
+        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
+
+    x += width;
+    width = 400;
+
+    label_digits = Label(false, "", "",
+        { _x += x, _y + y, width, height },
+        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
+
+    x += width;
+    width = 100;
+
+    label_units = Label(false, "", "",
+        { _x += x, _y + y, width, height },
+        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
 }
 
 
@@ -72,26 +79,36 @@ void LabelMeasure::Draw()
 
 #endif
 
-        for (int i = 0; i < TypeLabelMeasure::Count; i++)
-        {
-            labels[i].Draw();
-
+        label_name.Draw();
 #ifdef DRAW_DEBUG_LINES
-
-            Nextion::DrawRect(labels[i].GetRect());
-
+        Nextion::DrawRect(label_name.GetRect());
 #endif
-        }
+
+        label_sign.Draw();
+#ifdef DRAW_DEBUG_LINES
+        Nextion::DrawRect(label_sign.GetRect());
+#endif
+
+        label_digits.Draw();
+#ifdef DRAW_DEBUG_LINES
+        Nextion::DrawRect(label_digits.GetRect());
+#endif
+
+        label_units.Draw();
+#ifdef DRAW_DEBUG_LINES
+        Nextion::DrawRect(label_units.GetRect());
+#endif
+
     }
 }
 
 
 void LabelMeasure::SetShown(bool show)
 {
-    for (int i = 0; i < TypeLabelMeasure::Count; i++)
-    {
-        labels[i].SetShown(show);
-    }
+    label_name.SetShown(show);
+    label_sign.SetShown(show);
+    label_digits.SetShown(show);
+    label_units.SetShown(show);
 
     Item::SetShown(show);
 }
@@ -234,21 +251,21 @@ pchar TypeMeasure::Title(Lang::E lang) const
 }
 
 
-void LabelMeasure::DrawSign(pchar)
+void LabelMeasure::DrawSign(pchar sign)
 {
-
+    label_sign.SetText(sign, sign);
 }
 
 
 void LabelMeasure::DrawDigits(pchar digits)
 {
-    labels[TypeLabelMeasure::Digits].SetText(digits, digits);
+    label_digits.SetText(digits, digits);
 }
 
 
 void LabelMeasure::DrawUnits(pchar ru, pchar en)
 {
-    labels[TypeLabelMeasure::Units].SetText(ru, en);
+    label_units.SetText(ru, en);
 }
 
 
