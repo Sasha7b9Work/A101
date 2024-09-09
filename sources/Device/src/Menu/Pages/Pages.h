@@ -25,6 +25,12 @@ namespace PageMain
 }
 
 
+namespace PageMenu
+{
+    extern Page *self;
+}
+
+
 namespace PageGraph
 {
     extern Page *self;

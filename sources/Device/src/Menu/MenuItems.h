@@ -92,6 +92,9 @@ struct ButtonCommon : public Item
 
     void SetText(pchar title_ru, pchar title_en);
 
+    static const int WIDTH_MENU = 200;
+    static const int HEIGHT_MENU = 75;
+
 protected:
 
     pchar title[2];
