@@ -92,6 +92,9 @@ namespace PageMenu
         PageMain::self->SetAsCurrent();
     });
 
+//    static ButtonPress btnChangeRange("Ручной", "Hand", Font::_1,
+//        { })
+
 
     static Item *items[] =
     {
@@ -111,12 +114,6 @@ namespace PageMenu
 
     static void FuncOnEnter()
     {
-        btnFrequency.SetShown(false);
-        btnImin.SetShown(false);
-        btnImax.SetShown(false);
-        btnIamp.SetShown(false);
-        btnIpeak.SetShown(false);
-
         btnFrequency.SetValue(set.en_f);
         btnImax.SetValue(set.en_Imax);
         btnImin.SetValue(set.en_Imin);

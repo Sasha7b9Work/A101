@@ -48,10 +48,7 @@ struct Item
     virtual void SetShown(bool show);
     bool IsShown() const;
 
-    virtual void Draw()
-    {
-        need_draw = false;
-    }
+    virtual void Draw() = 0;
 
     virtual void Press();
     virtual void Release();
@@ -76,8 +73,6 @@ protected:
                                     // после повторного нажатия
 
     bool is_shown = false;          // Если true, то надо отрисовывать
-
-    bool need_draw = true;
 };
 
 
