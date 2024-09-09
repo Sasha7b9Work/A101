@@ -48,7 +48,7 @@ struct Item
     virtual void SetShown(bool show);
     bool IsShown() const;
 
-    virtual void Draw() = 0;
+    virtual bool Draw() = 0;
 
     virtual void Press();
     virtual void Release();
@@ -73,6 +73,8 @@ protected:
                                     // после повторного нажатия
 
     bool is_shown = false;          // Если true, то надо отрисовывать
+
+    bool need_draw = true;
 };
 
 
@@ -106,7 +108,7 @@ struct ButtonPress : public ButtonCommon
 {
     ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(Item *), TypeItem::E = TypeItem::ButtonPress);
 
-    virtual void Draw() override;
+    virtual bool Draw() override;
 };
 
 
@@ -162,7 +164,7 @@ struct Label : public Item
     {
         return text[lang];
     }
-    virtual void Draw() override;
+    virtual bool Draw() override;
 
 protected:
 
@@ -204,7 +206,7 @@ struct LabelMeasure : public Label
 
     pchar GetUnits() const;
 
-    virtual void Draw() override;
+    virtual bool Draw() override;
 
     virtual void SetShown(bool show) override;
 
@@ -229,6 +231,8 @@ private:
     void DrawDigits(pchar);
 
     void DrawUnits(pchar, pchar);
+
+    int GetWidth(SizeMeasure::E, int label);
 };
 
 

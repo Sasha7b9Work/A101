@@ -17,13 +17,6 @@ namespace LM
         Font::_4
     };
 
-    static const int16 widths[SizeMeasure::Count] =
-    {
-        518,
-        240,
-        391
-    };
-
     static const int16 heights[SizeMeasure::Count] =
     {
         85,
@@ -34,11 +27,11 @@ namespace LM
 
 
 LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)(Item *)) :
-    Label(true, "", "", { _x, _y, LM::widths[_size], LM::heights[_size] }, LM::fonts[_size], _funcOnPress),
+    Label(true, "", "", { _x, _y, 0, LM::heights[_size] }, LM::fonts[_size], _funcOnPress),
     type_measure(_type)
 {
     int x = 0;
-    int width = 100;
+    int width = GetWidth(_size, 0);
     int height = LM::heights[_size];
 
     label_name = Label(false, type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
@@ -46,62 +39,94 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
         LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
 
     x += width;
-    width = 40;
+    width = GetWidth(_size, 1);
 
     label_sign = Label(false, "", "",
         { _x + x, _y, width, height },
         LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, true, true);
 
     x += width;
-    width = 250;
+    width = GetWidth(_size, 2);
 
     label_digits = Label(false, "", "",
         { _x + x, _y, width, height },
         LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, true, true);
 
     x += width;
-    width = 100;
+    width = GetWidth(_size, 3);
 
     label_units = Label(false, "", "",
         { _x + x, _y, width, height },
         LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
+
+    rect.width = (int16)(GetWidth(_size, 0) + GetWidth(_size, 1) + GetWidth(_size, 2) + GetWidth(_size, 3));
 }
 
 
-void LabelMeasure::Draw()
+int LabelMeasure::GetWidth(SizeMeasure::E size, int label)
 {
-    if (IsShown())
+    static const int width[SizeMeasure::Count][4] =
     {
-#ifdef DRAW_DEBUG_LINES
+        {100, 40, 250, 100},
+        {80,  17, 100, 45},
+        {100, 40, 250, 100}
+    };
 
-        Nextion::DrawRect(rect, Color::White);
+    return width[size][label];
+}
 
-#endif
 
-        label_name.Draw();
-#ifdef DRAW_DEBUG_LINES
-        Nextion::DrawRect(label_name.GetRect());
-#endif
-
-        label_sign.Draw();
-#ifdef DRAW_DEBUG_LINES
-        Nextion::DrawRect(label_sign.GetRect());
-#endif
-
-        label_digits.Draw();
-#ifdef DRAW_DEBUG_LINES
-        Nextion::DrawRect(label_digits.GetRect());
-#endif
-
-        label_units.Draw();
-#ifdef DRAW_DEBUG_LINES
-        Nextion::DrawRect(label_units.GetRect());
-#endif
-    }
-    else
+bool LabelMeasure::Draw()
+{
+    if (need_draw)
     {
-        Nextion::FillRect(rect, colorBack);
+        if (IsShown())
+        {
+#ifdef DRAW_DEBUG_LINES
+
+            Nextion::DrawRect(rect, Color::White);
+
+#endif
+
+            if (label_name.Draw())
+            {
+#ifdef DRAW_DEBUG_LINES
+                Nextion::DrawRect(label_name.GetRect());
+#endif
+            }
+
+            if (label_sign.Draw())
+            {
+#ifdef DRAW_DEBUG_LINES
+                Nextion::DrawRect(label_sign.GetRect());
+#endif
+            }
+
+            if (label_digits.Draw())
+            {
+#ifdef DRAW_DEBUG_LINES
+                Nextion::DrawRect(label_digits.GetRect());
+#endif
+            }
+
+            if (label_units.Draw())
+            {
+#ifdef DRAW_DEBUG_LINES
+                Nextion::DrawRect(label_units.GetRect());
+#endif
+            }
+        }
+        else
+        {
+            Nextion::FillRect(rect, colorBack);
+        }
+
+        need_draw = false;
+
+        return true;
     }
+
+    return false;
 }
 
 
@@ -118,7 +143,7 @@ void LabelMeasure::SetShown(bool show)
 
 void LabelMeasure::Reset()
 {
-
+    need_draw = true;
 }
 
 
@@ -144,6 +169,8 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
 
         SetMeasure(buf_measure);
     }
+
+    need_draw = true;
 }
 
 
