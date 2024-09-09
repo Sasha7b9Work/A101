@@ -97,6 +97,8 @@ void Item::Press()
         is_pressed = true;
     }
 
+    need_draw = true;
+
     Draw();
 
     funcOnPress(this);
@@ -256,6 +258,8 @@ void ButtonCommon::SetValue(int value)
     {
         is_pressed = new_pressed;
 
+        need_draw = true;
+
         Draw();
     }
 }
@@ -267,33 +271,32 @@ bool ButtonCommon::IsPressed() const
 }
 
 
-pchar ButtonPress::Signal() const
-{
-    return "";
-}
-
-
 void ButtonPress::Draw()
 {
-    int16 x = rect.x;
-    int16 y = rect.y;
-    int16 width = rect.width;
-    int16 height = rect.height;
-
-    if (IsShown())
+    if (need_draw)
     {
-        Nextion::DrawRect({ x, y, width - 1, height - 1 }, Color::White);
-        Nextion::DrawRect({ x + 1, y + 1, width - 3, height - 3 }, Color::White);
-        Nextion::DrawRect({ x + 2, y + 2, width - 5, height - 5 }, Color::White);
+        int16 x = rect.x;
+        int16 y = rect.y;
+        int16 width = rect.width;
+        int16 height = rect.height;
 
-        Nextion::DrawString({ x + 3, y + 3, width - 7, height - 7 }, font,
-            Color::White,
-            is_pressed ? Color::ButtonPress : Color::Background,
-            title[set.lang], 1, 1);
-    }
-    else
-    {
-        Nextion::FillRect(rect, Color::Background);
+        if (IsShown())
+        {
+            Nextion::DrawRect({ x, y, width - 1, height - 1 }, Color::White);
+            Nextion::DrawRect({ x + 1, y + 1, width - 3, height - 3 }, Color::White);
+            Nextion::DrawRect({ x + 2, y + 2, width - 5, height - 5 }, Color::White);
+
+            Nextion::DrawString({ x + 3, y + 3, width - 7, height - 7 }, font,
+                Color::White,
+                is_pressed ? Color::ButtonPress : Color::Background,
+                title[set.lang], 1, 1);
+        }
+        else
+        {
+            Nextion::FillRect(rect, Color::Background);
+        }
+
+        ButtonCommon::Draw();
     }
 }
 
@@ -301,6 +304,10 @@ void ButtonPress::Draw()
 void Item::SetShown(bool show)
 {
     is_shown = show;
+
+    need_draw = true;
+
+    Draw();
 }
 
 
@@ -359,8 +366,13 @@ pchar Label::Text() const
 
 void Label::Draw()
 {
-    Nextion::DrawString(rect, font, colorText,
-        (colorBack.value == Color::Count.value) ? Color::Background : colorBack, IsShown() ? Text() : "", h_aligned, v_aligned);
+    if (need_draw)
+    {
+        Nextion::DrawString(rect, font, colorText,
+            (colorBack.value == Color::Count.value) ? Color::Background : colorBack, IsShown() ? Text() : "", h_aligned, v_aligned);
+
+        Item::Draw();
+    }
 }
 
 
@@ -375,6 +387,8 @@ void Label::SetText(const char _textRU[MAX_LEN], const char _textEN[MAX_LEN])
     {
         std::strcpy(text[Lang::EN], _textEN);
     }
+
+    need_draw = true;
 
     Draw();
 }

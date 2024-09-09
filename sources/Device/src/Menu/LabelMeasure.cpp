@@ -70,34 +70,42 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
 
 void LabelMeasure::Draw()
 {
-    if (IsShown())
+    if (need_draw)
     {
+        if (IsShown())
+        {
 #ifdef DRAW_DEBUG_LINES
 
-        Nextion::DrawRect(rect, Color::White);
+            Nextion::DrawRect(rect, Color::White);
 
 #endif
 
-        label_name.Draw();
+            label_name.Draw();
 #ifdef DRAW_DEBUG_LINES
-        Nextion::DrawRect(label_name.GetRect());
+            Nextion::DrawRect(label_name.GetRect());
 #endif
 
-        label_sign.Draw();
+            label_sign.Draw();
 #ifdef DRAW_DEBUG_LINES
-        Nextion::DrawRect(label_sign.GetRect());
+            Nextion::DrawRect(label_sign.GetRect());
 #endif
 
-        label_digits.Draw();
+            label_digits.Draw();
 #ifdef DRAW_DEBUG_LINES
-        Nextion::DrawRect(label_digits.GetRect());
+            Nextion::DrawRect(label_digits.GetRect());
 #endif
 
-        label_units.Draw();
+            label_units.Draw();
 #ifdef DRAW_DEBUG_LINES
-        Nextion::DrawRect(label_units.GetRect());
+            Nextion::DrawRect(label_units.GetRect());
 #endif
+        }
+        else
+        {
+            Nextion::FillRect(rect, colorBack);
+        }
 
+        Item::Draw();
     }
 }
 

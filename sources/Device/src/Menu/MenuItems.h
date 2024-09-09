@@ -48,7 +48,10 @@ struct Item
     virtual void SetShown(bool show);
     bool IsShown() const;
 
-    virtual void Draw() = 0;
+    virtual void Draw()
+    {
+        need_draw = false;
+    }
 
     virtual void Press();
     virtual void Release();
@@ -73,6 +76,8 @@ protected:
                                     // после повторного нажатия
 
     bool is_shown = false;          // Если true, то надо отрисовывать
+
+    bool need_draw = true;
 };
 
 
@@ -87,9 +92,6 @@ struct ButtonCommon : public Item
 
     void SetText(pchar title_ru, pchar title_en);
 
-    // Сиганл, который присылает кнопка при нажатии
-    virtual pchar Signal() const = 0;
-
 protected:
 
     pchar title[2];
@@ -102,8 +104,6 @@ protected:
 struct ButtonPress : public ButtonCommon
 {
     ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(Item *), TypeItem::E = TypeItem::ButtonPress);
-
-    virtual pchar Signal() const override;
 
     virtual void Draw() override;
 };
@@ -163,7 +163,7 @@ struct Label : public Item
     }
     virtual void Draw() override;
 
-private:
+protected:
 
     char  text[Lang::Count][MAX_LEN];
     int   font;
