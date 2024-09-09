@@ -392,3 +392,19 @@ void Label::SetText(const char _textRU[MAX_LEN], const char _textEN[MAX_LEN])
 
     Draw();
 }
+
+
+int ButtonCommon::GetCoordX(int col)
+{
+    int dx = 10;
+
+    return dx + (ButtonCommon::WIDTH_MENU + dx) * col;
+}
+
+
+int ButtonCommon::GetCoordY(int row)
+{
+    int dy = 10;
+
+    return dy + (ButtonCommon::HEIGHT_MENU + dy) * row;
+}

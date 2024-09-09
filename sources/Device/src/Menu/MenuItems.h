@@ -95,6 +95,9 @@ struct ButtonCommon : public Item
     static const int WIDTH_MENU = 200;
     static const int HEIGHT_MENU = 75;
 
+    static int GetCoordX(int col);
+    static int GetCoordY(int row);
+
 protected:
 
     pchar title[2];
