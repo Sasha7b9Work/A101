@@ -38,33 +38,32 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
     type_measure(_type)
 {
     int x = 0;
-    int y = 0;
     int width = 100;
     int height = LM::heights[_size];
 
     label_name = Label(false, type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
-        { _x + x, _y + y, width, height },
+        { _x + x, _y, width, height },
         LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
 
     x += width;
-    width = 10;
+    width = 40;
 
     label_sign = Label(false, "", "",
-        { _x += x, _y + y, width, height },
-        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
+        { _x + x, _y, width, height },
+        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, true, true);
 
     x += width;
-    width = 400;
+    width = 250;
 
     label_digits = Label(false, "", "",
-        { _x += x, _y + y, width, height },
-        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
+        { _x + x, _y, width, height },
+        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, true, true);
 
     x += width;
     width = 100;
 
     label_units = Label(false, "", "",
-        { _x += x, _y + y, width, height },
+        { _x + x, _y, width, height },
         LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
 }
 
