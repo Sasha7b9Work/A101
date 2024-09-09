@@ -86,7 +86,7 @@ struct ButtonCommon : public Item
     ButtonCommon(TypeItem::E, pchar title_ru, pchar title_en, Font::E, const Rect &, void (*_funcOnPress)(Item *));
 
     // 1 - "нажать", 0 - "отпустить"
-    virtual void SetValue(int);
+    virtual void SetValue(bool);
 
     bool IsPressed() const;
 

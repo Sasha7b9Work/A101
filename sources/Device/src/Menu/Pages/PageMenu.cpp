@@ -14,37 +14,37 @@ namespace PageMenu
 
     static ButtonToggle btnFrequency("Частота", "Frequency", Font::_1,
         {ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(0), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU},
-        [](Item *)
+        [](Item *item)
     {
-
+        set.en_f = item->ToButtonToggle()->IsPressed();
     });
 
     static ButtonToggle btnImin("Iмин", "Imin", Font::_1,
         { ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(1), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *)
+        [](Item *item)
     {
-
+        set.en_Imin = item->ToButtonToggle()->IsPressed();
     });
 
     static ButtonToggle btnImax("Iмакс", "Imax", Font::_1,
         { ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(2), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *)
+        [](Item *item)
     {
-
+        set.en_Imax = item->ToButtonToggle()->IsPressed();
     });
 
     static ButtonToggle btnIamp("Iамп", "Iamp", Font::_1,
         { ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(3), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *)
+        [](Item *item)
     {
-
+        set.en_Iampl = item->ToButtonToggle()->IsPressed();
     });
 
     static ButtonToggle btnIpeak("Iпп", "Ipp", Font::_1,
         { ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(4), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *)
+        [](Item *item)
     {
-
+        set.en_Ipp = item->ToButtonToggle()->IsPressed();
     });
 
     static ButtonPress btnSettings("Настройки", "Settings", Font::_1,
@@ -116,6 +116,14 @@ namespace PageMenu
         btnImax.SetShown(false);
         btnIamp.SetShown(false);
         btnIpeak.SetShown(false);
+
+        btnFrequency.SetValue(set.en_f);
+        btnImax.SetValue(set.en_Imax);
+        btnImin.SetValue(set.en_Imin);
+        btnIamp.SetValue(set.en_Iampl);
+        btnIpeak.SetValue(set.en_Ipp);
+
+        btnIndication.SetValue(false);
     }
 
 

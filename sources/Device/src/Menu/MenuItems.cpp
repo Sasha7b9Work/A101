@@ -250,9 +250,9 @@ ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, const Rect 
 }
 
 
-void ButtonCommon::SetValue(int value)
+void ButtonCommon::SetValue(bool value)
 {
-    bool new_pressed = (value != 0);
+    bool new_pressed = value;
 
     if (new_pressed != is_pressed)
     {

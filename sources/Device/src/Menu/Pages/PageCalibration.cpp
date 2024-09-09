@@ -304,7 +304,7 @@ namespace PageCalibration
             &btn50A
         };
 
-        static void SetAllValue(int value)
+        static void SetAllValue(bool value)
         {
             for (int i = 0; i < 6; i++)
             {

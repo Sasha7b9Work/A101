@@ -78,6 +78,11 @@ namespace PageMain
         btnGraphics.SetShown(is_show);
         btnSettings.SetShown(is_show);
         btnCalibration.SetShown(is_show);
+
+        wndMIN.SetShown(set.en_Imin);
+        wndMAX.SetShown(set.en_Imax);
+        wndAMPL.SetShown(set.en_Iampl);
+        wndPEAK.SetShown(set.en_Ipp);
     }
 
     static void FuncDraw()
