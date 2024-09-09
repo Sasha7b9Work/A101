@@ -53,7 +53,7 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
 {
     for (int i = 0; i < TypeLabelMeasure::Count; i++)
     {
-        _labels[i] = Label(false,
+        labels[i] = Label(false,
             i == 0 ? type_measure.Title(Lang::RU) : "",
             i == 0 ? type_measure.Title(Lang::EN) : "",
             { _x + LM::x_labels[i], _y, LM::width_labels[i][_size], LM::heights[_size]},
@@ -74,11 +74,11 @@ void LabelMeasure::Draw()
 
         for (int i = 0; i < TypeLabelMeasure::Count; i++)
         {
-            _labels[i].Draw();
+            labels[i].Draw();
 
 #ifdef DRAW_DEBUG_LINES
 
-            Nextion::DrawRect(_labels[i].GetRect());
+            Nextion::DrawRect(labels[i].GetRect());
 
 #endif
         }
@@ -90,7 +90,7 @@ void LabelMeasure::SetShown(bool show)
 {
     for (int i = 0; i < TypeLabelMeasure::Count; i++)
     {
-        _labels[i].SetShown(show);
+        labels[i].SetShown(show);
     }
 
     Item::SetShown(show);
@@ -240,15 +240,15 @@ void LabelMeasure::DrawSign(pchar)
 }
 
 
-void LabelMeasure::DrawDigits(pchar)
+void LabelMeasure::DrawDigits(pchar digits)
 {
-
+    labels[TypeLabelMeasure::Digits].SetText(digits, digits);
 }
 
 
-void LabelMeasure::DrawUnits(pchar, pchar)
+void LabelMeasure::DrawUnits(pchar ru, pchar en)
 {
-
+    labels[TypeLabelMeasure::Units].SetText(ru, en);
 }
 
 
