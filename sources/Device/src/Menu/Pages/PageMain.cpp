@@ -18,12 +18,7 @@ namespace PageMain
     extern ButtonToggle btnZeroDC;
     extern ButtonPress btnGraphics;
     extern ButtonToggle btnMenu;
-    extern ButtonToggle btnMAX;
-    extern ButtonToggle btnMIN;
-    extern ButtonToggle btnAMP;
-    extern ButtonToggle btnPEAK;
     extern ButtonPress btnSettings;
-    extern ButtonToggle btnMeasures;
     extern ButtonPress btnCalibration;
 
     Label labelZeroDC{ true, "ноль", "zero", { 23, 170, 90, 50 }, Font::_1 };
@@ -81,18 +76,8 @@ namespace PageMain
         btnZeroDC.SetShown(is_show);
         btnZeroAC.SetShown(is_show);
         btnGraphics.SetShown(is_show);
-        btnAMP.SetShown(is_show);
-        btnMAX.SetShown(is_show);
-        btnPEAK.SetShown(is_show);
-        btnMIN.SetShown(is_show);
         btnSettings.SetShown(is_show);
-        btnMeasures.SetShown(is_show);
         btnCalibration.SetShown(is_show);
-
-        wndAMPL.SetShown(btnAMP.IsPressed());
-        wndMAX.SetShown(btnMAX.IsPressed());
-        wndPEAK.SetShown(btnPEAK.IsPressed());
-        wndMIN.SetShown(btnMIN.IsPressed());
     }
 
     static void FuncDraw()
@@ -210,24 +195,6 @@ namespace PageMain
         PageGraph::self->SetAsCurrent();
     });
 
-    ButtonToggle btnMeasures("Измерения", "Measures", Font::_5, { 463, 84, 188, 74 }, [](Item *item)
-    {
-        bool is_show = item->ToButtonToggle()->IsPressed();
-
-        btnMAX.SetShown(is_show);
-        btnMIN.SetShown(is_show);
-        btnAMP.SetShown(is_show);
-        btnPEAK.SetShown(is_show);
-    });
-
-    ButtonToggle btnMAX("Iмакс", "Imax", Font::_0, { 105, 165, 133, 74 }, [](Item *) {});        // Imax
-
-    ButtonToggle btnAMP("Iамп", "Iamp", Font::_0, { 381, 165, 133, 74 }, [](Item *) {});         // Iampl
-
-    ButtonToggle btnMIN("Iмин", "Imin", Font::_0, { 243, 165, 133, 74 }, [](Item *) {});         // Imin
-
-    ButtonToggle btnPEAK("Iпп", "Ipp", Font::_0, { 519, 165, 133, 74},  [](Item *) {});          // Ipp
-
     ButtonToggle btnMenu("Меню", "Menu", Font::_1, { 660, 4, 136, 74 }, [](Item *)           // Menu
     {
         PageMenu::self->SetAsCurrent();
@@ -246,15 +213,10 @@ namespace PageMain
         &btnZeroDC,
         &btnZeroAC,
         &btnGraphics,
-        &btnMAX,
-        &btnAMP,
-        &btnMIN,
-        &btnPEAK,
         &btnSettings,
         &btnZero,
         &wndDC,
         &wndAC,
-        &btnMeasures,
         &wndAMPL,
         &wndPEAK,
         &wndMIN,
