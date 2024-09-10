@@ -36,7 +36,7 @@ struct Item
 
     Item &operator=(const Item &);
 
-    void SetParent(Page *page)
+    virtual void SetParent(Page *page)
     {
         parent = page;
     }
@@ -136,16 +136,26 @@ struct ButtonRange : public ButtonToggle
 
 struct Choice : public Item
 {
-    Choice(pchar title_ru, pchar title_en, pchar _choices[][2],
+    Choice(pchar title_ru, pchar title_en, pchar *_choices,
         int x, int y, void (*_funcOnPress)(Item *, bool), Font::E = Font::_1);
 
     virtual bool Draw() override;
+
+    virtual void SetShown(bool) override;
+
+    virtual void SetParent(Page *) override;
+
+    virtual void Press() override { button.Press(); }
+
+    virtual void Release() override { button.Release(); }
 
 private:
 
     pchar titles[Lang::Count];
 
-    pchar choices[2];
+    pchar *choices;
+
+    ButtonPress button;
 };
 
 

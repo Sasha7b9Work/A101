@@ -123,11 +123,11 @@ namespace PageMenu
         }
     });
 
-    static pchar choices_change_range[3][Lang::Count] =
+    static pchar choices_change_range[] =
     {
-        { "–учной", "Hand" },
-        { "јвтоматический","Auto" },
-        { nullptr, nullptr }
+        "–учной",         "Hand",
+        "јвтоматический", "Auto",
+        nullptr
     };
 
     Choice chChangeRange("¬ыбор диапазона", "Range selection", choices_change_range,
@@ -135,12 +135,12 @@ namespace PageMenu
     {
     });
 
-    static pchar choices_range[4][Lang::Count] =
+    static pchar choices_range[] =
     {
-        { "1√ц - 4√ц",   "1Hz - 4Hz" },
-        { "4√ц - 40√ц",  "4Hz - 40Hz" },
-        { "40√ц - 5к√ц", "40Hz - 5kHz" },
-        { nullptr,       nullptr }
+        "1√ц - 4√ц",   "1Hz - 4Hz",
+        "4√ц - 40√ц",  "4Hz - 40Hz",
+        "40√ц - 5к√ц", "40Hz - 5kHz",
+        nullptr
     };
 
     Choice chRange("ƒиапазон", "Range", choices_range,

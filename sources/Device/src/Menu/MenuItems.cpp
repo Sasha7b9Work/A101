@@ -164,13 +164,16 @@ void ButtonCommon::SetText(pchar title_ru, pchar title_en)
 }
 
 
-Choice::Choice(pchar title_ru, pchar title_en, pchar _choices[][2],
+Choice::Choice(pchar title_ru, pchar title_en, pchar *_choices,
     int x, int y, void (*_funcOnPress)(Item *, bool), Font::E) :
-    Item(TypeItem::Choice, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress)
+    Item(TypeItem::Choice, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress, false),
+    choices(_choices),
+    button(title_ru, title_ru, Font::_1, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress)
 {
     titles[Lang::RU] = title_ru;
     titles[Lang::EN] = title_en;
-    choices = _choices;
+
+    PoolItems::AppendNewItem(&button);
 }
 
 
@@ -383,6 +386,35 @@ bool Label::Draw()
     }
 
     return false;
+}
+
+
+bool Choice::Draw()
+{
+    if (button.IsShown())
+    {
+        button.Refresh();
+        return true;
+    }
+
+    return false;
+}
+
+
+void Choice::SetShown(bool show)
+{
+    button.SetShown(show);
+
+    if (show)
+    {
+        need_draw = true;
+    }
+}
+
+
+void Choice::SetParent(Page *page)
+{
+    button.SetParent(page);
 }
 
 
