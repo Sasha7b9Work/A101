@@ -37,6 +37,12 @@ namespace PageCOM
 }
 
 
+namespace PageInformation
+{
+    extern Page *self;
+}
+
+
 namespace PageGraph
 {
     extern Page *self;

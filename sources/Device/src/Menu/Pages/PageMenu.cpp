@@ -67,7 +67,13 @@ namespace PageMenu
         }
     });
 
-    static ButtonMenuPress btnInformation("Информация", "Information", 1, 4);
+    static ButtonMenuPress btnInformation("Информация", "Information", 1, 4, [](Item *, bool press)
+    {
+        if (!press)
+        {
+            PageInformation::self->SetAsCurrent();
+        }
+    });
 
     ButtonMenuToggle btnSystem("Система", "System", 0, 1, [](Item *, bool press)
     {
@@ -106,7 +112,6 @@ namespace PageMenu
         if (!press)
         {
             PageMain::self->SetAsCurrent();
-            set.Save();
         }
     });
 

@@ -39,7 +39,6 @@ namespace PageCOM
         if (!press)
         {
             PageMenu::self->SetAsCurrent();
-            set.Save();
         }
     });
 
