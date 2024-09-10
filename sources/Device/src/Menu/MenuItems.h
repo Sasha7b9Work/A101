@@ -110,17 +110,22 @@ protected:
 // Кнопка без фиксации (возвращается в отжатое состояние при отпускании)
 struct ButtonPress : public ButtonCommon
 {
-    ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(Item *, bool), TypeItem::E = TypeItem::ButtonPress, bool append_to_pool = true);
+    // tickness - толщина границы
+    ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(Item *, bool), int _tickness = 3, TypeItem::E = TypeItem::ButtonPress, bool append_to_pool = true);
 
     virtual bool Draw() override;
+
+protected:
+
+    int tickness = 0;
 };
 
 
 // Кнопка с фиксацией (при нажатии переключается в противоположное состояние, на отпускание реакциии нет)
 struct ButtonToggle : public ButtonPress
 {
-    ButtonToggle(pchar title_ru, pchar title_en, Font::E f, const Rect &_rect, void (*_funcOnPress)(Item *, bool)) :
-        ButtonPress(title_ru, title_en, f, _rect, _funcOnPress, TypeItem::ButtonToggle)
+    ButtonToggle(pchar title_ru, pchar title_en, Font::E f, const Rect &_rect, void (*_funcOnPress)(Item *, bool), int _tickness = 3) :
+        ButtonPress(title_ru, title_en, f, _rect, _funcOnPress, _tickness, TypeItem::ButtonToggle)
     {
     }
 

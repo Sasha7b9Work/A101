@@ -176,7 +176,7 @@ void ButtonCommon::SetText(pchar title_ru, pchar title_en)
 Choice::Choice(pchar title_ru, pchar title_en, uint8 *_choice, pchar *_names, int x, int y, void (*_funcOnPress)(Item *, bool), Font::E) :
     Item(TypeItem::Choice, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress),
     names(_names),
-    button(title_ru, title_ru, Font::_1, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress, TypeItem::ButtonPress, false),
+    button(title_ru, title_ru, Font::_1, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress, 3, TypeItem::ButtonPress, false),
     label(false, "", "", { Item::GetCoordX(x) + 10 + Item::WIDTH_MENU, Item::GetCoordY(y) , Item::WIDTH_MENU, Item::HEIGHT_MENU} ),
     choice(_choice)
 {
@@ -339,8 +339,9 @@ int Page::GetItemCount()
 }
 
 
-ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)(Item *, bool), TypeItem::E _type, bool _append_to_pool) :
-    ButtonCommon(_type, title_ru, title_en, _f, _rect, _funcOnPress, _append_to_pool)
+ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)(Item *, bool), int _tickness, TypeItem::E _type, bool _append_to_pool) :
+    ButtonCommon(_type, title_ru, title_en, _f, _rect, _funcOnPress, _append_to_pool),
+    tickness(_tickness)
 {
 }
 
@@ -362,9 +363,10 @@ bool ButtonPress::Draw()
 
         if (IsShown())
         {
-            Nextion::DrawRect({ x, y, width - 1, height - 1 }, Color::White);
-            Nextion::DrawRect({ x + 1, y + 1, width - 3, height - 3 }, Color::White);
-            Nextion::DrawRect({ x + 2, y + 2, width - 5, height - 5 }, Color::White);
+            for (int i = 0; i < tickness; i++)
+            {
+                Nextion::DrawRect({ x + i, y + i, width - 1 - i * 2, height - 1 - i * 2}, Color::White);
+            }
 
             Nextion::DrawString({ x + 3, y + 3, width - 7, height - 7 }, font,
                 Color::White,

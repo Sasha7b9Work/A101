@@ -155,12 +155,12 @@ namespace PageMain
         FuncOnRange(item, 5, press);
     });
 
-    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_5, { 6, 4, 120, 37 }, [](Item *, bool)
+    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_5, { 6, 4, 100, 37 }, [](Item *, bool)
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
         MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
-    });
+    }, 1);
 
     ButtonPress btnCalibration("Калибр.", "Calibr.", Font::_0, { 5, 84, 127, 74 }, [](Item *, bool)
     {
@@ -205,13 +205,13 @@ namespace PageMain
         PageGraph::self->SetAsCurrent();
     });
 
-    ButtonPress btnMenu("Меню", "Menu", Font::_5, { 676, 4, 120, 37 }, [](Item *, bool press)           // Menu
+    ButtonPress btnMenu("Меню", "Menu", Font::_5, { 696, 4, 100, 37 }, [](Item *, bool press)           // Menu
     {
         if (!press)
         {
             PageMenu::self->SetAsCurrent();
         }
-    });
+    }, 1);
 
     static Item *items[] =
     {
