@@ -62,7 +62,7 @@ namespace Nextion
     void DrawLineV(int x, int y1, int y2, const Color & = Color::Count);
 
     // h_align - горизонтальное выравнивание. 0 - лево, 1 - центр
-    void DrawString(const Rect &, int font, const Color &color, const Color &back_color, pchar, bool h_align = 0, bool v_align = 0);
+    void DrawString(const Rect &, int font, const Color &color, const Color &back_color, pchar, bool h_align = false, bool v_align = false);
 
     void SendCommandFormat(const char *, ...);
 
