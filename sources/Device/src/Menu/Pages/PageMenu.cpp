@@ -8,7 +8,7 @@ namespace PageMenu
 {
     extern ButtonMenuToggle btnIndication;
     extern Choice chChangeRange;
-    extern Choice chRange;
+    extern Choice chRangeFreq;
     extern ButtonMenuPress btnCOM;
 
     static void FuncDraw()
@@ -50,7 +50,7 @@ namespace PageMenu
         }
 
         chChangeRange.SetShown(press);
-        chRange.SetShown(press);
+        chRangeFreq.SetShown(press);
         btnCOM.SetShown(press);
     });
 
@@ -96,9 +96,9 @@ namespace PageMenu
         nullptr
     };
 
-    Choice chChangeRange("Выбор диапазона", "Range selection", &set.change_range,  names_change_range, 1, 2);
+    Choice chChangeRange("Выбор диапазона", "Range selection", (uint8 *)&set.change_range, names_change_range, 1, 2);
 
-    static pchar names_range[] =
+    static pchar names_range_freq[] =
     {
         "1Гц - 4Гц",   "1Hz - 4Hz",
         "4Гц - 40Гц",  "4Hz - 40Hz",
@@ -106,7 +106,7 @@ namespace PageMenu
         nullptr
     };
 
-    Choice chRange("Диапазон", "Range", &set.range, names_range, 1, 3);
+    Choice chRangeFreq("Диапазон частоты", "Range frequency", (uint8 *)&set.range_freq, names_range_freq, 1, 3);
 
     ButtonMenuPress btnCOM("COM-порт", "COM-port", 1, 4, [](Item *, bool press)
     {
@@ -131,7 +131,7 @@ namespace PageMenu
         &btnGraphics,
         &btnBack,
         &chChangeRange,
-        &chRange,
+        &chRangeFreq,
         &btnCOM,
         nullptr
     };
@@ -148,7 +148,7 @@ namespace PageMenu
         btnIndication.SetToggled(false);
 
         chChangeRange.SetShown(false);
-        chRange.SetShown(false);
+        chRangeFreq.SetShown(false);
         btnCOM.SetShown(false);
     }
 

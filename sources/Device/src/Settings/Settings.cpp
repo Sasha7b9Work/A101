@@ -26,11 +26,11 @@ namespace NS_Settings
         false,      // en_Imin;
         false,      // en_Iampl;
         false,      // en_Ipp;
-        0,
-        0,
-        0,
-        0,
-        0,
+        Baudrate::_9600,
+        Parity::No,
+        StopBits::_1,
+        ChangeRange::Hand,
+        RangeFreq::Hi,
 
         0U,         // serial number
         Lang::RU

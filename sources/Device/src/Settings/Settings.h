@@ -62,6 +62,58 @@ struct MeasuresOnDisplay
 };
 
 
+struct Baudrate
+{
+    enum E
+    {
+        _9600,
+        _115200
+    };
+};
+
+
+struct Parity
+{
+    enum E
+    {
+        No,
+        Yes
+    };
+};
+
+
+struct StopBits
+{
+    enum E
+    {
+        _1,
+        _1_5,
+        _2
+    };
+};
+
+
+struct ChangeRange
+{
+    enum E
+    {
+        Hand,
+        Auto
+    };
+};
+
+
+struct RangeFreq
+{
+    enum E
+    {
+        Low,
+        Middle,
+        Hi
+    };
+};
+
+
 struct Settings
 {
     uint size;          // Здесь размер настроек - для проверки того, что версии соответствуют
@@ -78,11 +130,11 @@ struct Settings
     bool en_Imin;       // Включена индикация измерения Imin
     bool en_Iampl;      // Включена нндикация измерения Iampl
     bool en_Ipp;        // Включена индикация измерения Ipp
-    uint8 baudrates;
-    uint8 parity;
-    uint8 stop_bits;
-    uint8 change_range;
-    uint8 range;
+    Baudrate::E baudrate;
+    Parity::E parity;
+    StopBits::E stop_bits;
+    ChangeRange::E change_range;
+    RangeFreq::E range_freq;
 
     uint serial_number;
 
