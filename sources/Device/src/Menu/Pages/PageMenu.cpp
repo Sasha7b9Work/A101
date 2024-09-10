@@ -127,8 +127,12 @@ namespace PageMenu
 
     });
 
-    ButtonMenuPress btnCOM("COM-порт", "COM-port", 1, 4, [](Item *, bool)
+    ButtonMenuPress btnCOM("COM-порт", "COM-port", 1, 4, [](Item *, bool press)
     {
+        if (!press)
+        {
+            PageCOM::self->SetAsCurrent();
+        }
     });
 
 

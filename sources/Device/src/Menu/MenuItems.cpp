@@ -283,13 +283,19 @@ void Page::SetAsCurrent()
         GetItem(i)->SetShown(true);
     }
 
-    current->funcOnEnter();
+    if (current->funcOnEnter)
+    {
+        current->funcOnEnter();
+    }
 }
 
 
 void Page::Draw()
 {
-    funcOnDraw();
+    if (funcOnDraw)
+    {
+        funcOnDraw();
+    }
 
     for (int i = 0; i < GetItemCount(); i++)
     {
