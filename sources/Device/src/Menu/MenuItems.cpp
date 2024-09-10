@@ -98,7 +98,10 @@ void Item::Press()
 
     need_draw = true;
 
-    funcOnPress(this, is_pressed);
+    if (funcOnPress)
+    {
+        funcOnPress(this, is_pressed);
+    }
 }
 
 
@@ -110,7 +113,10 @@ void Item::Release()
 
         need_draw = true;
 
-        funcOnPress(this, false);
+        if (funcOnPress)
+        {
+            funcOnPress(this, false);
+        }
     }
 }
 
@@ -121,7 +127,10 @@ void ButtonToggle::SetToggled(bool toggled)
 
     need_draw = true;
 
-    funcOnPress(this, is_pressed);
+    if (funcOnPress)
+    {
+        funcOnPress(this, is_pressed);
+    }
 }
 
 
@@ -164,11 +173,10 @@ void ButtonCommon::SetText(pchar title_ru, pchar title_en)
 }
 
 
-Choice::Choice(pchar title_ru, pchar title_en, pchar *_choices,
-    int x, int y, void (*_funcOnPress)(Item *, bool), Font::E) :
-    Item(TypeItem::Choice, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress),
+Choice::Choice(pchar title_ru, pchar title_en, pchar *_choices, int x, int y, Font::E) :
+    Item(TypeItem::Choice, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, nullptr),
     choices(_choices),
-    button(title_ru, title_ru, Font::_1, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress, TypeItem::ButtonPress, false),
+    button(title_ru, title_ru, Font::_1, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU}, nullptr, TypeItem::ButtonPress, false),
     label(false, "", "", { Item::GetCoordX(x) + 10 + Item::WIDTH_MENU, Item::GetCoordY(y) , Item::WIDTH_MENU, Item::HEIGHT_MENU} )
 {
     titles[Lang::RU] = title_ru;

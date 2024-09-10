@@ -203,8 +203,7 @@ protected:
 
 struct Choice : public Item
 {
-    Choice(pchar title_ru, pchar title_en, pchar *_choices,
-        int col_x, int row_y, void (*_funcOnPress)(Item *, bool), Font::E = Font::_1);
+    Choice(pchar title_ru, pchar title_en, pchar *_choices, int col_x, int row_y, Font::E = Font::_1);
 
     virtual void SetParent(Page *) override;
 

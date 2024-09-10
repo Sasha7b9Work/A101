@@ -110,9 +110,7 @@ namespace PageMenu
         nullptr
     };
 
-    Choice chChangeRange("Выбор диапазона", "Range selection", choices_change_range, 1, 2, [](Item *, bool)
-    {
-    });
+    Choice chChangeRange("Выбор диапазона", "Range selection", choices_change_range, 1, 2);
 
     static pchar choices_range[] =
     {
@@ -122,10 +120,7 @@ namespace PageMenu
         nullptr
     };
 
-    Choice chRange("Диапазон", "Range", choices_range, 1, 3, [](Item *, bool)
-    {
-
-    });
+    Choice chRange("Диапазон", "Range", choices_range, 1, 3);
 
     ButtonMenuPress btnCOM("COM-порт", "COM-port", 1, 4, [](Item *, bool press)
     {

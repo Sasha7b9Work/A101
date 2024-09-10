@@ -13,10 +13,7 @@ namespace PageCOM
         nullptr
     };
 
-    static Choice chBaudrate("Скорость", "Baudrate", names_baudrates, 0, 0, [](Item *, bool)
-    {
-
-    });
+    static Choice chBaudrate("Скорость", "Baudrate", names_baudrates, 0, 0);
 
     static pchar names_parity[] =
     {
@@ -25,10 +22,7 @@ namespace PageCOM
         nullptr
     };
 
-    static Choice chParity("Четность", "Parity", names_parity, 0, 1, [](Item *, bool)
-    {
-
-    });
+    static Choice chParity("Четность", "Parity", names_parity, 0, 1);
 
     static pchar names_stop_bits[] =
     {
@@ -38,10 +32,7 @@ namespace PageCOM
         nullptr
     };
 
-    static Choice chStopBits("Стоп-биты", "Stop-bits", names_stop_bits, 0, 2, [](Item *, bool)
-    {
-
-    });
+    static Choice chStopBits("Стоп-биты", "Stop-bits", names_stop_bits, 0, 2);
 
     static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
     {
