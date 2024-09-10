@@ -201,6 +201,8 @@ struct Choice : public Item
         need_draw = true;
 
         button.Release();
+
+        button.Refresh();
     }
 
     // Установить текстовое значение, соответствующее текущему выбору

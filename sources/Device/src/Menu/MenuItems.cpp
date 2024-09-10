@@ -196,6 +196,8 @@ void Choice::Press()
 {
     button.Press();
 
+    button.Refresh();
+
     index++;
 
     if (index == GetCountValue())
