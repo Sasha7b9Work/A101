@@ -10,12 +10,7 @@ namespace PageMenu
     extern Choice chChangeRange;
     extern Choice chRangeFreq;
     extern ButtonMenuPress btnCOM;
-
-    static void FuncDraw()
-    {
-
-    }
-
+    extern ButtonMenuToggle btnSystem;
 
     static ButtonMenuToggle btnFrequency("Частота", "Frequency", 1, 0, [](Item *item, bool)
     {
@@ -47,6 +42,7 @@ namespace PageMenu
         if (press)
         {
             btnIndication.SetToggled(false);
+            btnSystem.SetToggled(false);
         }
 
         chChangeRange.SetShown(press);
@@ -54,8 +50,30 @@ namespace PageMenu
         btnCOM.SetShown(press);
     });
 
-    static ButtonMenuPress btnSystem("Система", "System", 0, 1, [](Item *, bool)
+    static ButtonMenuPress btnBrightness("Яркость", "Brightness", 1, 2);
+
+    static pchar names_lang[] =
     {
+        "Russian",    "Русский",
+        "Английский", "English",
+        nullptr
+    };
+
+    static Choice chLanguage("Язык", "Language", (uint8 *)&set.lang, names_lang, 1, 3);
+
+    static ButtonMenuPress btnInformation("Информация", "Information", 1, 4);
+
+    ButtonMenuToggle btnSystem("Система", "System", 0, 1, [](Item *, bool press)
+    {
+        if (press)
+        {
+            btnSettings.SetToggled(false);
+            btnIndication.SetToggled(false);
+        }
+
+        btnBrightness.SetShown(press);
+        chLanguage.SetShown(press);
+        btnInformation.SetShown(press);
     });
 
     ButtonMenuToggle btnIndication("Индикация", "Indication", 0, 2, [](Item *, bool press)
@@ -63,6 +81,7 @@ namespace PageMenu
         if (press)
         {
             btnSettings.SetToggled(false);
+            btnSystem.SetToggled(false);
         }
 
         btnFrequency.SetShown(press);
@@ -72,13 +91,9 @@ namespace PageMenu
         btnIpeak.SetShown(press);
     });
 
-    static ButtonMenuPress btnCalibration("Калибровка", "Calibration", 0, 3, [](Item *, bool)
-    {
-    });
+    static ButtonMenuPress btnCalibration("Калибровка", "Calibration", 0, 3);
 
-    static ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 4, [](Item *, bool)
-    {
-    });
+    static ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 4);
 
     static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
     {
@@ -133,6 +148,9 @@ namespace PageMenu
         &chChangeRange,
         &chRangeFreq,
         &btnCOM,
+        &btnBrightness,
+        &chLanguage,
+        &btnInformation,
         nullptr
     };
 
@@ -146,14 +164,15 @@ namespace PageMenu
 
         btnSettings.SetToggled(false);
         btnIndication.SetToggled(false);
+        btnSystem.SetToggled(false);
 
-        chChangeRange.SetShown(false);
-        chRangeFreq.SetShown(false);
-        btnCOM.SetShown(false);
+//        chChangeRange.SetShown(false);
+//        chRangeFreq.SetShown(false);
+//        btnCOM.SetShown(false);
     }
 
 
-    static Page pageMenu(items, FuncOnEnter, FuncDraw);
+    static Page pageMenu(items, FuncOnEnter, nullptr);
 
     Page *self = &pageMenu;
 }

@@ -139,7 +139,7 @@ struct ButtonRange : public ButtonToggle
 
 struct ButtonMenuPress : public ButtonPress
 {
-    ButtonMenuPress(pchar title_ru, pchar title_en, int col_x, int row_y, void (*_funcOnPress)(Item *, bool)) :
+    ButtonMenuPress(pchar title_ru, pchar title_en, int col_x, int row_y, void (*_funcOnPress)(Item *, bool) = nullptr) :
         ButtonPress(title_ru, title_en, Font::_1, { Item::GetCoordX(col_x), Item::GetCoordY(row_y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress)
     {
     }
