@@ -102,9 +102,9 @@ namespace PageMain
     }
 
     // Вызывается при нажатии кнопки
-    static void FuncOnRange(Item *item, int range)
+    static void FuncOnRange(Item *, int range, bool press)
     {
-        if (item->ToButtonRange()->IsPressed())
+        if (press)
         {
             if (Range::Current() != range)
             {
@@ -122,35 +122,35 @@ namespace PageMain
         }
     }
 
-    static ButtonRange btn2mA("2 мА", "2 mA", 4, 402, [](Item *item, bool)
+    static ButtonRange btn2mA("2 мА", "2 mA", 4, 402, [](Item *item, bool press)
     {
-        FuncOnRange(item, 0);
+        FuncOnRange(item, 0, press);
     });
 
 
-    static ButtonRange btn20mA("20 мА", "20 mA", 137, 402, [](Item *item, bool)
+    static ButtonRange btn20mA("20 мА", "20 mA", 137, 402, [](Item *item, bool press)
     {
-        FuncOnRange(item, 1);
+        FuncOnRange(item, 1, press);
     });
 
-    static ButtonRange btn200mA("200 мА", "200 mA", 270, 402, [](Item *item, bool)
+    static ButtonRange btn200mA("200 мА", "200 mA", 270, 402, [](Item *item, bool press)
     {
-        FuncOnRange(item, 2);
+        FuncOnRange(item, 2, press);
     });
 
-    static ButtonRange btn2A("2 А", "2 A", 403, 402, [](Item *item, bool)
+    static ButtonRange btn2A("2 А", "2 A", 403, 402, [](Item *item, bool press)
     {
-        FuncOnRange(item, 3);
+        FuncOnRange(item, 3, press);
     });
 
-    static ButtonRange btn20A("20 А", "20 A", 536, 402, [](Item *item, bool)
+    static ButtonRange btn20A("20 А", "20 A", 536, 402, [](Item *item, bool press)
     {
-        FuncOnRange(item, 4);
+        FuncOnRange(item, 4, press);
     });
 
-    static ButtonRange btn50A("50 А", "50 A", 669, 402, [](Item *item, bool)
+    static ButtonRange btn50A("50 А", "50 A", 669, 402, [](Item *item, bool press)
     {
-        FuncOnRange(item, 5);
+        FuncOnRange(item, 5, press);
     });
 
     static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_1, { 6, 4, 127, 74 }, [](Item *, bool)
