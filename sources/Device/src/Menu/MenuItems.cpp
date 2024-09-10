@@ -173,11 +173,12 @@ void ButtonCommon::SetText(pchar title_ru, pchar title_en)
 }
 
 
-Choice::Choice(pchar title_ru, pchar title_en, pchar *_choices, int x, int y, Font::E) :
+Choice::Choice(pchar title_ru, pchar title_en, uint8 *_choice, pchar *_names, int x, int y, Font::E) :
     Item(TypeItem::Choice, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, nullptr),
-    choices(_choices),
+    names(_names),
     button(title_ru, title_ru, Font::_1, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU}, nullptr, TypeItem::ButtonPress, false),
-    label(false, "", "", { Item::GetCoordX(x) + 10 + Item::WIDTH_MENU, Item::GetCoordY(y) , Item::WIDTH_MENU, Item::HEIGHT_MENU} )
+    label(false, "", "", { Item::GetCoordX(x) + 10 + Item::WIDTH_MENU, Item::GetCoordY(y) , Item::WIDTH_MENU, Item::HEIGHT_MENU} ),
+    choice(_choice)
 {
     titles[Lang::RU] = title_ru;
     titles[Lang::EN] = title_en;
@@ -188,7 +189,7 @@ Choice::Choice(pchar title_ru, pchar title_en, pchar *_choices, int x, int y, Fo
 
 void Choice::SetTextValue()
 {
-    pchar *value_ru = choices + index * 2;
+    pchar *value_ru = names + (*choice) * 2;
     pchar *value_en = value_ru + 1;
 
     label.SetText(*value_ru, *value_en);
@@ -206,11 +207,11 @@ void Choice::Press()
 
     button.Refresh();
 
-    index++;
+    (*choice)++;
 
-    if (index == GetCountValue())
+    if ((*choice) == GetCountValue())
     {
-        index = 0;
+        *choice = 0;
     }
 
     SetTextValue();
@@ -219,7 +220,7 @@ void Choice::Press()
 
 int Choice::GetCountValue() const
 {
-    pchar *pointer = choices;
+    pchar *pointer = names;
 
     int counter = 0;
 

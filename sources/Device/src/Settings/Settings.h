@@ -78,6 +78,11 @@ struct Settings
     bool en_Imin;       // Включена индикация измерения Imin
     bool en_Iampl;      // Включена нндикация измерения Iampl
     bool en_Ipp;        // Включена индикация измерения Ipp
+    uint8 baudrates;
+    uint8 parity;
+    uint8 stop_bits;
+    uint8 change_range;
+    uint8 range;
 
     uint serial_number;
 

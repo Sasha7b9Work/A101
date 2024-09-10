@@ -26,6 +26,11 @@ namespace NS_Settings
         false,      // en_Imin;
         false,      // en_Iampl;
         false,      // en_Ipp;
+        0,
+        0,
+        0,
+        0,
+        0,
 
         0U,         // serial number
         Lang::RU

@@ -17,44 +17,29 @@ namespace PageMenu
     }
 
 
-    static ButtonMenuToggle btnFrequency("Частота", "Frequency", 1, 0, [](Item *item, bool press)
+    static ButtonMenuToggle btnFrequency("Частота", "Frequency", 1, 0, [](Item *item, bool)
     {
-        if (press)
-        {
-            set.en_f = item->ToButtonToggle()->IsPressed();
-        }
+        set.en_f = item->ToButtonToggle()->IsPressed();
     });
 
-    static ButtonMenuToggle btnImin("Iмин", "Imin", 1, 1, [](Item *item, bool press)
+    static ButtonMenuToggle btnImin("Iмин", "Imin", 1, 1, [](Item *item, bool)
     {
-        if (press)
-        {
-            set.en_Imin = item->ToButtonToggle()->IsPressed();
-        }
+        set.en_Imin = item->ToButtonToggle()->IsPressed();
     });
 
-    static ButtonMenuToggle btnImax("Iмакс", "Imax", 1, 2, [](Item *item, bool press)
+    static ButtonMenuToggle btnImax("Iмакс", "Imax", 1, 2, [](Item *item, bool)
     {
-        if (press)
-        {
-            set.en_Imax = item->ToButtonToggle()->IsPressed();
-        }
+        set.en_Imax = item->ToButtonToggle()->IsPressed();
     });
 
-    static ButtonMenuToggle btnIamp("Iамп", "Iamp", 1, 3, [](Item *item, bool press)
+    static ButtonMenuToggle btnIamp("Iамп", "Iamp", 1, 3, [](Item *item, bool)
     {
-        if (press)
-        {
-            set.en_Iampl = item->ToButtonToggle()->IsPressed();
-        }
+        set.en_Iampl = item->ToButtonToggle()->IsPressed();
     });
 
-    static ButtonMenuToggle btnIpeak("Iпп", "Ipp", 1, 4, [](Item *item, bool press)
+    static ButtonMenuToggle btnIpeak("Iпп", "Ipp", 1, 4, [](Item *item, bool)
     {
-        if (press)
-        {
-            set.en_Ipp = item->ToButtonToggle()->IsPressed();
-        }
+        set.en_Ipp = item->ToButtonToggle()->IsPressed();
     });
 
     static ButtonMenuToggle btnSettings("Настройки", "Settings", 0, 0, [](Item *, bool press)
@@ -100,19 +85,20 @@ namespace PageMenu
         if (!press)
         {
             PageMain::self->SetAsCurrent();
+            set.Save();
         }
     });
 
-    static pchar choices_change_range[] =
+    static pchar names_change_range[] =
     {
         "Ручной",         "Hand",
         "Автоматический", "Auto",
         nullptr
     };
 
-    Choice chChangeRange("Выбор диапазона", "Range selection", choices_change_range, 1, 2);
+    Choice chChangeRange("Выбор диапазона", "Range selection", &set.change_range,  names_change_range, 1, 2);
 
-    static pchar choices_range[] =
+    static pchar names_range[] =
     {
         "1Гц - 4Гц",   "1Hz - 4Hz",
         "4Гц - 40Гц",  "4Hz - 40Hz",
@@ -120,7 +106,7 @@ namespace PageMenu
         nullptr
     };
 
-    Choice chRange("Диапазон", "Range", choices_range, 1, 3);
+    Choice chRange("Диапазон", "Range", &set.range, names_range, 1, 3);
 
     ButtonMenuPress btnCOM("COM-порт", "COM-port", 1, 4, [](Item *, bool press)
     {

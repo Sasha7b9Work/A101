@@ -203,7 +203,7 @@ protected:
 
 struct Choice : public Item
 {
-    Choice(pchar title_ru, pchar title_en, pchar *_choices, int col_x, int row_y, Font::E = Font::_1);
+    Choice(pchar title_ru, pchar title_en, uint8 *choice, pchar *_names, int col_x, int row_y, Font::E = Font::_1);
 
     virtual void SetParent(Page *) override;
 
@@ -229,14 +229,11 @@ private:
 
     int GetCountValue() const;
 
-    pchar titles[Lang::Count];
-
-    pchar *choices;
-
+    pchar       titles[Lang::Count];
+    pchar      *names;
     ButtonPress button;
     Label       label;
-
-    int index = 0;
+    uint8      *choice;
 };
 
 
