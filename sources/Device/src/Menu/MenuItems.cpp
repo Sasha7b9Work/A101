@@ -111,9 +111,17 @@ void Item::Release()
         need_draw = true;
 
         funcOnPress(this, false);
-
-        return;
     }
+}
+
+
+void ButtonToggle::SetToggled(bool toggled)
+{
+    is_pressed = toggled;
+
+    need_draw = true;
+
+    funcOnPress(this, is_pressed);
 }
 
 

@@ -112,7 +112,7 @@ namespace PageMain
                 {
                     if (i != range)
                     {
-                        PageMain::self->GetItem(i)->ToButtonRange()->Release();
+                        PageMain::self->GetItem(i)->ToButtonRange()->SetToggled(false);
                     }
                 }
 

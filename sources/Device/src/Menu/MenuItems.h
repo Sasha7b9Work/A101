@@ -116,6 +116,8 @@ struct ButtonToggle : public ButtonPress
         ButtonPress(title_ru, title_en, f, _rect, _funcOnPress, TypeItem::ButtonToggle)
     {
     }
+
+    void SetToggled(bool);
 };
 
 
