@@ -121,6 +121,12 @@ namespace PageMenu
         btnIpeak.SetValue(set.en_Ipp);
 
         btnIndication.SetValue(false);
+
+        btnFrequency.SetShown(false);
+        btnImax.SetShown(false);
+        btnImin.SetShown(false);
+        btnIamp.SetShown(false);
+        btnIpeak.SetShown(false);
     }
 
 

@@ -102,52 +102,55 @@ namespace PageMain
     }
 
     // Вызывается при нажатии кнопки
-    static void FuncOnRange(int range)
+    static void FuncOnRange(Item *item, int range)
     {
-        if (Range::Current() != range)
+        if (item->ToButtonRange()->IsPressed())
         {
-            for (int i = 0; i < 6; i++)
+            if (Range::Current() != range)
             {
-                if (i != range)
+                for (int i = 0; i < 6; i++)
                 {
-                    PageMain::self->GetItem(i)->ToButtonRange()->SetValue(0);
+                    if (i != range)
+                    {
+                        PageMain::self->GetItem(i)->ToButtonRange()->SetValue(0);
+                    }
                 }
-            }
 
-            Ampermeter::AVP::Disable();
-            Range::Set(range);
+                Ampermeter::AVP::Disable();
+                Range::Set(range);
+            }
         }
     }
 
-    static ButtonRange btn2mA("2 мА", "2 mA", 4, 402, [](Item *)
+    static ButtonRange btn2mA("2 мА", "2 mA", 4, 402, [](Item *item)
     {
-        FuncOnRange(0);
+        FuncOnRange(item, 0);
     });
 
 
-    static ButtonRange btn20mA("20 мА", "20 mA", 137, 402, [](Item *)
+    static ButtonRange btn20mA("20 мА", "20 mA", 137, 402, [](Item *item)
     {
-        FuncOnRange(1);
+        FuncOnRange(item, 1);
     });
 
-    static ButtonRange btn200mA("200 мА", "200 mA", 270, 402, [](Item *)
+    static ButtonRange btn200mA("200 мА", "200 mA", 270, 402, [](Item *item)
     {
-        FuncOnRange(2);
+        FuncOnRange(item, 2);
     });
 
-    static ButtonRange btn2A("2 А", "2 A", 403, 402, [](Item *)
+    static ButtonRange btn2A("2 А", "2 A", 403, 402, [](Item *item)
     {
-        FuncOnRange(3);
+        FuncOnRange(item, 3);
     });
 
-    static ButtonRange btn20A("20 А", "20 A", 536, 402, [](Item *)
+    static ButtonRange btn20A("20 А", "20 A", 536, 402, [](Item *item)
     {
-        FuncOnRange(4);
+        FuncOnRange(item, 4);
     });
 
-    static ButtonRange btn50A("50 А", "50 A", 669, 402, [](Item *)
+    static ButtonRange btn50A("50 А", "50 A", 669, 402, [](Item *item)
     {
-        FuncOnRange(5);
+        FuncOnRange(item, 5);
     });
 
     static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_1, { 6, 4, 127, 74 }, [](Item *)
@@ -207,12 +210,13 @@ namespace PageMain
 
     static Item *items[] =
     {
-        &btn2mA,
-        &btn20mA,
-        &btn200mA,
-        &btn2A,
-        &btn20A,
-        &btn50A,
+        &btn2mA,    // /
+        &btn20mA,   // |
+        &btn200mA,  // | Эти кнопки всегда должны быть первыми
+        &btn2A,     // |
+        &btn20A,    // |
+        &btn50A,    // /
+
         &btnAC_DC,
         &btnCalibration,
         &btnZeroDC,
@@ -256,12 +260,15 @@ namespace PageMain
         wndAC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsAC());
         wndDC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsDC());
 
+        PageMain::self->GetItem(range)->ToButtonRange()->SetValue(true);
+
         for (int i = 0; i < 6; i++)
         {
-            PageMain::self->GetItem(i)->ToButtonRange()->SetValue(i == range ? 1 : 0);
+            if (i != range)
+            {
+                PageMain::self->GetItem(i)->ToButtonRange()->SetValue(false);
+            }
         }
-
-        PageMain::self->GetItem(range)->ToButtonRange()->Press();
     }
 
 

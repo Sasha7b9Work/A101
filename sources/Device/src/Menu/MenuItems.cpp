@@ -176,6 +176,7 @@ void Item::OnEventRelease(int x, int y)
 
 void Menu::Init()
 {
+    PageMain::SetRange(MeasuresOnDisplay::AC_DC, 2);
     PageMain::SetRange(MeasuresOnDisplay::AC_DC, 3);
 
     PageMain::self->SetAsCurrent();
@@ -248,13 +249,11 @@ ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, const Rect 
 
 void ButtonCommon::SetValue(bool value)
 {
-    bool new_pressed = value;
+    need_draw = true;
 
-    if (new_pressed != is_pressed)
+    if (value != is_pressed)
     {
-        is_pressed = new_pressed;
-
-        need_draw = true;
+        is_pressed = value;
 
         if (funcOnPress)
         {
