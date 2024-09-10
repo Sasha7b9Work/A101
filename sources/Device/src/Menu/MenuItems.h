@@ -56,7 +56,6 @@ struct Item
     static void OnEventPress(int, int);
     static void OnEventRelease(int, int);
 
-    ButtonRange *ToButtonRange();
     ButtonToggle *ToButtonToggle();
 
 protected:

@@ -307,12 +307,6 @@ void Item::SetShown(bool show)
 }
 
 
-ButtonRange *Item::ToButtonRange()
-{
-    return (type == TypeItem::ButtonToggle) ? (ButtonRange *)this : nullptr;
-}
-
-
 ButtonToggle *Item::ToButtonToggle()
 {
     return (type == TypeItem::ButtonToggle) ? (ButtonToggle *)this : nullptr;

@@ -112,7 +112,7 @@ namespace PageMain
                 {
                     if (i != range)
                     {
-                        PageMain::self->GetItem(i)->ToButtonRange()->SetToggled(false);
+                        PageMain::self->GetItem(i)->ToButtonToggle()->SetToggled(false);
                     }
                 }
 
@@ -263,13 +263,13 @@ namespace PageMain
         wndAC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsAC());
         wndDC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsDC());
 
-        PageMain::self->GetItem(range)->ToButtonRange()->Press();
+        PageMain::self->GetItem(range)->Press();
 
         for (int i = 0; i < 6; i++)
         {
             if (i != range)
             {
-                PageMain::self->GetItem(i)->ToButtonRange()->Release();
+                PageMain::self->GetItem(i)->Release();
             }
         }
     }
@@ -277,7 +277,7 @@ namespace PageMain
 
     void HightLightCurrentRange()
     {
-        PageMain::self->GetItem(Range::Current())->ToButtonRange()->Press();
+        PageMain::self->GetItem(Range::Current())->Press();
     }
 }
 
