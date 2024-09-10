@@ -104,11 +104,10 @@ namespace PageMenu
 
     static ButtonPress btnBack("Назад", "Back", Font::_1,
         { Display::WIDTH - ButtonCommon::WIDTH_MENU - 10, ButtonCommon::GetCoordY(0), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *item, bool press)
+        [](Item *, bool press)
     {
         if (!press)
         {
-            item->Release();
             PageMain::self->SetAsCurrent();
         }
     });

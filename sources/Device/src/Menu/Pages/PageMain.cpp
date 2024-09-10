@@ -102,10 +102,12 @@ namespace PageMain
     }
 
     // Вызывается при нажатии кнопки
-    static void FuncOnRange(Item *, int range, bool press)
+    static void FuncOnRange(Item *item, int range, bool press)
     {
         if (press)
         {
+            item->Refresh();
+
             if (Range::Current() != range)
             {
                 for (int i = 0; i < 6; i++)

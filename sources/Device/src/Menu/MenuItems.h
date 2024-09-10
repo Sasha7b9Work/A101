@@ -49,6 +49,11 @@ struct Item
     bool IsShown() const;
 
     virtual bool Draw() = 0;
+    virtual void Refresh()
+    {
+        need_draw = true;
+        Draw();
+    }
 
     virtual void Press();
     virtual void Release();
