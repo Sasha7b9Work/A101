@@ -155,7 +155,7 @@ namespace PageMain
         FuncOnRange(item, 5, press);
     });
 
-    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_1, { 6, 4, 127, 74 }, [](Item *, bool)
+    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_5, { 6, 4, 120, 37 }, [](Item *, bool)
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
@@ -205,7 +205,7 @@ namespace PageMain
         PageGraph::self->SetAsCurrent();
     });
 
-    ButtonPress btnMenu("Μενώ", "Menu", Font::_1, { 660, 4, 136, 74 }, [](Item *, bool press)           // Menu
+    ButtonPress btnMenu("Μενώ", "Menu", Font::_5, { 676, 4, 120, 37 }, [](Item *, bool press)           // Menu
     {
         if (!press)
         {

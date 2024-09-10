@@ -369,7 +369,7 @@ bool ButtonPress::Draw()
             Nextion::DrawString({ x + 3, y + 3, width - 7, height - 7 }, font,
                 Color::White,
                 is_pressed ? Color::ButtonPress : Color::Background,
-                title[set.lang], 1, 1);
+                title[set.lang], true, true);
         }
         else
         {
