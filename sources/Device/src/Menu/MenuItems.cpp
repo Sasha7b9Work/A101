@@ -148,8 +148,8 @@ Item &Item::operator=(const Item &rhs)
 }
 
 
-ButtonCommon::ButtonCommon(TypeItem::E _type, pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)(Item *, bool)) :
-    Item(_type, _rect, _funcOnPress),
+ButtonCommon::ButtonCommon(TypeItem::E _type, pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)(Item *, bool), bool _append_to_pool) :
+    Item(_type, _rect, _funcOnPress, _append_to_pool),
     font(_f)
 {
     title[Lang::RU] = title_ru;
@@ -166,15 +166,13 @@ void ButtonCommon::SetText(pchar title_ru, pchar title_en)
 
 Choice::Choice(pchar title_ru, pchar title_en, pchar *_choices,
     int x, int y, void (*_funcOnPress)(Item *, bool), Font::E) :
-    Item(TypeItem::Choice, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress, false),
+    Item(TypeItem::Choice, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress),
     choices(_choices),
-    button(title_ru, title_ru, Font::_1, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress),
+    button(title_ru, title_ru, Font::_1, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress, TypeItem::ButtonPress, false),
     label(false, "", "", { x + 10 + Item::WIDTH_MENU, y , Item::WIDTH_MENU, Item::HEIGHT_MENU} )
 {
     titles[Lang::RU] = title_ru;
     titles[Lang::EN] = title_en;
-
-    PoolItems::AppendNewItem(&button);
 
     SetTextValue();
 }
@@ -183,7 +181,7 @@ Choice::Choice(pchar title_ru, pchar title_en, pchar *_choices,
 void Choice::SetTextValue()
 {
     pchar *value_ru = choices + index * 2;
-    pchar *value_en = choices + index * 2 + 1;
+    pchar *value_en = value_ru + 1;
 
     label.SetText(*value_ru, *value_en);
 
@@ -215,7 +213,7 @@ int Choice::GetCountValue() const
 
     int counter = 0;
 
-    while (pointer++)
+    while ((*pointer++)[0] != '\0')
     {
         counter++;
     }
@@ -313,8 +311,8 @@ int Page::GetItemCount()
 }
 
 
-ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)(Item *, bool), TypeItem::E _type) :
-    ButtonCommon(_type, title_ru, title_en, _f, _rect, _funcOnPress)
+ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)(Item *, bool), TypeItem::E _type, bool _append_to_pool) :
+    ButtonCommon(_type, title_ru, title_en, _f, _rect, _funcOnPress, _append_to_pool)
 {
 }
 
@@ -378,6 +376,12 @@ ButtonToggle *Item::ToButtonToggle()
 }
 
 
+Choice *Item::ToChoice()
+{
+    return (type == TypeItem::Choice) ? (Choice *)this : nullptr;
+}
+
+
 Label::Label(bool append, pchar _textRU, pchar _textEN, const Rect &_rect, Font::E _font, void (*_funcOnPress)(Item *, bool),
     const Color &_colorText, const Color &_colorBack, bool _h_aligned, bool _v_aligned) :
     Item(TypeItem::Label, _rect, _funcOnPress, append),
@@ -438,10 +442,13 @@ bool Label::Draw()
 
 bool Choice::Draw()
 {
-    if (button.IsShown())
+    if (need_draw)
     {
+        need_draw = false;
+
         button.Refresh();
         label.Refresh();
+
         return true;
     }
 
@@ -449,21 +456,25 @@ bool Choice::Draw()
 }
 
 
+void Choice::SetParent(Page *page)
+{
+    Item::SetParent(page);
+    button.SetParent(page);
+}
+
+
 void Choice::SetShown(bool show)
 {
+    is_shown = show;
+
     button.SetShown(show);
     label.SetShown(show);
 
     if (show)
     {
+        button.Refresh();
         need_draw = true;
     }
-}
-
-
-void Choice::SetParent(Page *page)
-{
-    button.SetParent(page);
 }
 
 

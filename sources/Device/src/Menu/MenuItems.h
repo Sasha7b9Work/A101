@@ -12,6 +12,7 @@ struct Page;
 struct ButtonRange;
 struct ButtonPress;
 struct ButtonToggle;
+struct Choice;
 
 
 struct TypeItem
@@ -66,6 +67,8 @@ struct Item
 
     ButtonToggle *ToButtonToggle();
 
+    Choice *ToChoice();
+
     static const int WIDTH_MENU = 253;
     static const int HEIGHT_MENU = 84;
 
@@ -92,7 +95,7 @@ protected:
 
 struct ButtonCommon : public Item
 {
-    ButtonCommon(TypeItem::E, pchar title_ru, pchar title_en, Font::E, const Rect &, void (*_funcOnPress)(Item *, bool));
+    ButtonCommon(TypeItem::E, pchar title_ru, pchar title_en, Font::E, const Rect &, void (*_funcOnPress)(Item *, bool), bool append_to_pool = true);
 
     void SetText(pchar title_ru, pchar title_en);
 
@@ -107,7 +110,7 @@ protected:
 // Кнопка без фиксации (возвращается в отжатое состояние при отпускании)
 struct ButtonPress : public ButtonCommon
 {
-    ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(Item *, bool), TypeItem::E = TypeItem::ButtonPress);
+    ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(Item *, bool), TypeItem::E = TypeItem::ButtonPress, bool append_to_pool = true);
 
     virtual bool Draw() override;
 };
@@ -185,16 +188,18 @@ struct Choice : public Item
     Choice(pchar title_ru, pchar title_en, pchar *_choices,
         int x, int y, void (*_funcOnPress)(Item *, bool), Font::E = Font::_1);
 
+    virtual void SetParent(Page *) override;
+
     virtual bool Draw() override;
 
     virtual void SetShown(bool) override;
-
-    virtual void SetParent(Page *) override;
 
     virtual void Press() override;
 
     virtual void Release() override
     {
+        need_draw = true;
+
         button.Release();
     }
 
@@ -210,7 +215,7 @@ private:
     pchar *choices;
 
     ButtonPress button;
-    Label label;
+    Label       label;
 
     int index = 0;
 };
