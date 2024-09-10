@@ -168,12 +168,59 @@ Choice::Choice(pchar title_ru, pchar title_en, pchar *_choices,
     int x, int y, void (*_funcOnPress)(Item *, bool), Font::E) :
     Item(TypeItem::Choice, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress, false),
     choices(_choices),
-    button(title_ru, title_ru, Font::_1, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress)
+    button(title_ru, title_ru, Font::_1, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress),
+    label(false, "", "", { x + 10 + Item::WIDTH_MENU, y , Item::WIDTH_MENU, Item::HEIGHT_MENU} )
 {
     titles[Lang::RU] = title_ru;
     titles[Lang::EN] = title_en;
 
     PoolItems::AppendNewItem(&button);
+
+    SetTextValue();
+}
+
+
+void Choice::SetTextValue()
+{
+    pchar *value_ru = choices + index * 2;
+    pchar *value_en = choices + index * 2 + 1;
+
+    label.SetText(*value_ru, *value_en);
+
+    if (label.IsShown())
+    {
+        need_draw = true;
+    }
+}
+
+
+void Choice::Press()
+{
+    button.Press();
+
+    index++;
+
+    if (index == GetCountValue())
+    {
+        index = 0;
+    }
+
+    SetTextValue();
+}
+
+
+int Choice::GetCountValue() const
+{
+    pchar *pointer = choices;
+
+    int counter = 0;
+
+    while (pointer++)
+    {
+        counter++;
+    }
+
+    return counter / 2;
 }
 
 
@@ -394,6 +441,7 @@ bool Choice::Draw()
     if (button.IsShown())
     {
         button.Refresh();
+        label.Refresh();
         return true;
     }
 
@@ -404,6 +452,7 @@ bool Choice::Draw()
 void Choice::SetShown(bool show)
 {
     button.SetShown(show);
+    label.SetShown(show);
 
     if (show)
     {

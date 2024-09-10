@@ -134,31 +134,6 @@ struct ButtonRange : public ButtonToggle
 };
 
 
-struct Choice : public Item
-{
-    Choice(pchar title_ru, pchar title_en, pchar *_choices,
-        int x, int y, void (*_funcOnPress)(Item *, bool), Font::E = Font::_1);
-
-    virtual bool Draw() override;
-
-    virtual void SetShown(bool) override;
-
-    virtual void SetParent(Page *) override;
-
-    virtual void Press() override { button.Press(); }
-
-    virtual void Release() override { button.Release(); }
-
-private:
-
-    pchar titles[Lang::Count];
-
-    pchar *choices;
-
-    ButtonPress button;
-};
-
-
 struct Label : public Item
 {
     static const int MAX_LEN = 32;
@@ -202,6 +177,42 @@ protected:
     bool  v_aligned;
     Color colorText;
     Color colorBack;
+};
+
+
+struct Choice : public Item
+{
+    Choice(pchar title_ru, pchar title_en, pchar *_choices,
+        int x, int y, void (*_funcOnPress)(Item *, bool), Font::E = Font::_1);
+
+    virtual bool Draw() override;
+
+    virtual void SetShown(bool) override;
+
+    virtual void SetParent(Page *) override;
+
+    virtual void Press() override;
+
+    virtual void Release() override
+    {
+        button.Release();
+    }
+
+    // Установить текстовое значение, соответствующее текущему выбору
+    void SetTextValue();
+
+private:
+
+    int GetCountValue() const;
+
+    pchar titles[Lang::Count];
+
+    pchar *choices;
+
+    ButtonPress button;
+    Label label;
+
+    int index = 0;
 };
 
 
