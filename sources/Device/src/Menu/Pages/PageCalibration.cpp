@@ -105,22 +105,22 @@ namespace PageCalibration
     // Установить видимость для цифровых кнопок
     static void SetVisibleDigits(bool visible);
 
-    static ButtonPress btnBack("Назад", "Back", Font::_1, { 11, 6, 150, 73 }, [](Item *)
+    static ButtonPress btnBack("Назад", "Back", Font::_1, { 11, 6, 150, 73 }, [](Item *, bool)
         {
             PageMain::self->SetAsCurrent();
         });
 
-    static ButtonPress btnMin("Мин", "Min", Font::_1, { 11, 183, 150, 73 }, [](Item *)
+    static ButtonPress btnMin("Мин", "Min", Font::_1, { 11, 183, 150, 73 }, [](Item *, bool)
     {
         ChooseDot(0);
     });
 
-    static ButtonPress btnMax("Макс", "Max", Font::_1, { 11, 104, 150, 73 }, [](Item *)
+    static ButtonPress btnMax("Макс", "Max", Font::_1, { 11, 104, 150, 73 }, [](Item *, bool)
     {
         ChooseDot(1);
     });
 
-    ButtonPress btnSave("Сохр.", "Save", Font::_1, { 236, 6, 130, 73 }, [](Item *item)
+    ButtonPress btnSave("Сохр.", "Save", Font::_1, { 236, 6, 130, 73 }, [](Item *item, bool)
         {
             Calibrator::PressButtonSave();
             item->ToButtonPress()->SetShown(false);
@@ -176,10 +176,10 @@ namespace PageCalibration
         }
     }
 
-    ButtonPress btnCalib("Старт", "Start", Font::_1, { 372, 6, 130, 73 }, [](Item *)
+    ButtonPress btnCalib("Старт", "Start", Font::_1, { 372, 6, 130, 73 }, [](Item *, bool)
         {
             btnSave.SetShown(false);
-            btnCalib.SetValue(0);
+            btnCalib.Release();
             btnCalib.SetShown(false);
             if (Calibrator::Run(Range::Current(), (!btnMax.IsPressed()) ? Calibrator::Type::DC : Calibrator::Type::AC, FuncDraw))
             {
@@ -188,99 +188,99 @@ namespace PageCalibration
             btnCalib.SetShown(true);
         });
 
-    static ButtonPress btn2mA("2 мА", "2 mA", Font::_1, { 640, 6, 150, 73 }, [](Item *)
+    static ButtonPress btn2mA("2 мА", "2 mA", Font::_1, { 640, 6, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(0);
     });
 
-    static ButtonPress btn20mA("20 мА", "20 mA", Font::_1, { 640, 85, 150, 73 }, [](Item *)
+    static ButtonPress btn20mA("20 мА", "20 mA", Font::_1, { 640, 85, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(1);
     });
 
-    static ButtonPress btn200mA("200 мА", "200 mA", Font::_1, { 640, 164, 150, 73 }, [](Item *)
+    static ButtonPress btn200mA("200 мА", "200 mA", Font::_1, { 640, 164, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(2);
     });
 
-    static ButtonPress btn2A("2 А", "2 A", Font::_1, { 640, 243, 150, 73 }, [](Item *)
+    static ButtonPress btn2A("2 А", "2 A", Font::_1, { 640, 243, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(3);
     });
 
-    static ButtonPress btn20A("20 А", "20 A", Font::_1, { 640, 322, 150, 73 }, [](Item *)
+    static ButtonPress btn20A("20 А", "20 A", Font::_1, { 640, 322, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(4);
     });
 
-    static ButtonPress btn50A("50 А", "50 A", Font::_1, { 640, 401, 150, 73 }, [](Item *)
+    static ButtonPress btn50A("50 А", "50 A", Font::_1, { 640, 401, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(5);
     });
 
 #define SIZE_DIGIT 96, 96
 
-    ButtonPress btn0("0", "0", Font::_1, { 12, 276, SIZE_DIGIT }, [](Item *)
+    ButtonPress btn0("0", "0", Font::_1, { 12, 276, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit('0');
     });
 
-    static ButtonPress btn1("1", "1", Font::_1, { 113, 276, SIZE_DIGIT },  [](Item *)
+    static ButtonPress btn1("1", "1", Font::_1, { 113, 276, SIZE_DIGIT },  [](Item *, bool)
     {
         PressDigit('1');
     });
 
-    ButtonPress btn2("2", "2", Font::_1, { 214, 276, SIZE_DIGIT }, [](Item *)
+    ButtonPress btn2("2", "2", Font::_1, { 214, 276, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit('2');
     });
 
-    static ButtonPress btn3("3", "3", Font::_1, { 315, 276, SIZE_DIGIT }, [](Item *)
+    static ButtonPress btn3("3", "3", Font::_1, { 315, 276, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit('3');
     });
 
-    static ButtonPress btn4("4", "4", Font::_1, { 416, 276, SIZE_DIGIT }, [](Item *)
+    static ButtonPress btn4("4", "4", Font::_1, { 416, 276, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit('4');
     });
 
-    static ButtonPress btn5("5", "5", Font::_1, { 517, 276, SIZE_DIGIT }, [](Item *)
+    static ButtonPress btn5("5", "5", Font::_1, { 517, 276, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit('5');
     });
 
-    static ButtonPress btn6("6", "6", Font::_1, { 113, 377, SIZE_DIGIT }, [](Item *)
+    static ButtonPress btn6("6", "6", Font::_1, { 113, 377, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit('6');
     });
 
-    static ButtonPress btn7("7", "7", Font::_1, { 217, 377, SIZE_DIGIT }, [](Item *)
+    static ButtonPress btn7("7", "7", Font::_1, { 217, 377, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit('7');
     });
 
-    static ButtonPress btn8("8", "8", Font::_1, { 315, 377, SIZE_DIGIT }, [](Item *)
+    static ButtonPress btn8("8", "8", Font::_1, { 315, 377, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit('8');
     });
 
-    static ButtonPress btn9("9", "9", Font::_1, { 416, 377, SIZE_DIGIT }, [](Item *)
+    static ButtonPress btn9("9", "9", Font::_1, { 416, 377, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit('9');
     });
 
-    static ButtonPress btnDot(".", ".", Font::_1, { 12, 377, SIZE_DIGIT }, [](Item *)
+    static ButtonPress btnDot(".", ".", Font::_1, { 12, 377, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit('.');
     });
 
-    static ButtonPress btnSign("+-", "+-", Font::_1, { 517, 377, SIZE_DIGIT }, [](Item *)
+    static ButtonPress btnSign("+-", "+-", Font::_1, { 517, 377, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit('-');
     });
 
-    static ButtonPress btnBackspace("<-", "<-", Font::_1, { 624, 334, SIZE_DIGIT }, [](Item *)
+    static ButtonPress btnBackspace("<-", "<-", Font::_1, { 624, 334, SIZE_DIGIT }, [](Item *, bool)
     {
         PressDigit(' ');
     });
@@ -308,7 +308,7 @@ namespace PageCalibration
         {
             for (int i = 0; i < 6; i++)
             {
-                buttons[i]->SetValue(value);
+                value ? buttons[i]->Press() : buttons[i]->Release();
             }
         }
 
@@ -316,7 +316,7 @@ namespace PageCalibration
         {
             SetAllValue(0);
 
-            buttons[range]->SetValue(1);
+            buttons[range]->Press();
         }
 
         static int GetRange()
@@ -344,10 +344,10 @@ namespace PageCalibration
 
         for (int i = 0; i < 2; i++)
         {
-            btns[i]->SetValue(0);
+            btns[i]->Release();
         }
 
-        btns[dot]->SetValue(1);
+        btns[dot]->Press();
     }
 
     static void ChooseRange(int range)

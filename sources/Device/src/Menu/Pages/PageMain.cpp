@@ -42,7 +42,7 @@ namespace PageMain
         wndMAX.Reset();
     }
 
-    static ButtonPress btnZero("Уст. 0", "Set 0", Font::_1, { 669, 321, 127, 74 }, [](Item *)
+    static ButtonPress btnZero("Уст. 0", "Set 0", Font::_1, { 669, 321, 127, 74 }, [](Item *, bool)
     {
         Ampermeter::ZeroDC::FloatingZero::Process();
     });
@@ -112,7 +112,7 @@ namespace PageMain
                 {
                     if (i != range)
                     {
-                        PageMain::self->GetItem(i)->ToButtonRange()->SetValue(0);
+                        PageMain::self->GetItem(i)->ToButtonRange()->Release();
                     }
                 }
 
@@ -122,55 +122,55 @@ namespace PageMain
         }
     }
 
-    static ButtonRange btn2mA("2 мА", "2 mA", 4, 402, [](Item *item)
+    static ButtonRange btn2mA("2 мА", "2 mA", 4, 402, [](Item *item, bool)
     {
         FuncOnRange(item, 0);
     });
 
 
-    static ButtonRange btn20mA("20 мА", "20 mA", 137, 402, [](Item *item)
+    static ButtonRange btn20mA("20 мА", "20 mA", 137, 402, [](Item *item, bool)
     {
         FuncOnRange(item, 1);
     });
 
-    static ButtonRange btn200mA("200 мА", "200 mA", 270, 402, [](Item *item)
+    static ButtonRange btn200mA("200 мА", "200 mA", 270, 402, [](Item *item, bool)
     {
         FuncOnRange(item, 2);
     });
 
-    static ButtonRange btn2A("2 А", "2 A", 403, 402, [](Item *item)
+    static ButtonRange btn2A("2 А", "2 A", 403, 402, [](Item *item, bool)
     {
         FuncOnRange(item, 3);
     });
 
-    static ButtonRange btn20A("20 А", "20 A", 536, 402, [](Item *item)
+    static ButtonRange btn20A("20 А", "20 A", 536, 402, [](Item *item, bool)
     {
         FuncOnRange(item, 4);
     });
 
-    static ButtonRange btn50A("50 А", "50 A", 669, 402, [](Item *item)
+    static ButtonRange btn50A("50 А", "50 A", 669, 402, [](Item *item, bool)
     {
         FuncOnRange(item, 5);
     });
 
-    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_1, { 6, 4, 127, 74 }, [](Item *)
+    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_1, { 6, 4, 127, 74 }, [](Item *, bool)
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
         MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
     });
 
-    ButtonPress btnCalibration("Калибр.", "Calibr.", Font::_0, { 5, 84, 127, 74 }, [](Item *)
+    ButtonPress btnCalibration("Калибр.", "Calibr.", Font::_0, { 5, 84, 127, 74 }, [](Item *, bool)
     {
         PageCalibration::self->SetAsCurrent();
     });
 
-    ButtonPress btnSettings("Настройки", "Settings", Font::_0, { 463, 4, 188, 74 }, [](Item *)
+    ButtonPress btnSettings("Настройки", "Settings", Font::_0, { 463, 4, 188, 74 }, [](Item *, bool)
     {
         PageSettings::self->SetAsCurrent();
     });
 
-    ButtonToggle btnZeroDC("Ноль DC", "Zero DC", Font::_0, { 660, 84, 136, 74 }, [](Item *item)
+    ButtonToggle btnZeroDC("Ноль DC", "Zero DC", Font::_0, { 660, 84, 136, 74 }, [](Item *item, bool)
     {
         ButtonToggle *btn = (ButtonToggle *)item;
 
@@ -184,7 +184,7 @@ namespace PageMain
         }
     });
 
-    ButtonToggle btnZeroAC("Ноль AC", "Zero AC", Font::_0, { 660, 164, 136, 74 }, [](Item *item)
+    ButtonToggle btnZeroAC("Ноль AC", "Zero AC", Font::_0, { 660, 164, 136, 74 }, [](Item *item, bool)
     {
         ButtonToggle *btn = (ButtonToggle *)item;
 
@@ -198,14 +198,17 @@ namespace PageMain
         }
     });
 
-    ButtonPress btnGraphics("Графики", "Graphs", Font::_0, { 660, 243, 136, 74}, [](Item *)    // Доступ к графикам
+    ButtonPress btnGraphics("Графики", "Graphs", Font::_0, { 660, 243, 136, 74}, [](Item *, bool)    // Доступ к графикам
     {
         PageGraph::self->SetAsCurrent();
     });
 
-    ButtonPress btnMenu("Меню", "Menu", Font::_1, { 660, 4, 136, 74 }, [](Item *)           // Menu
+    ButtonPress btnMenu("Меню", "Menu", Font::_1, { 660, 4, 136, 74 }, [](Item *, bool press)           // Menu
     {
-        PageMenu::self->SetAsCurrent();
+        if (!press)
+        {
+            PageMenu::self->SetAsCurrent();
+        }
     });
 
     static Item *items[] =
@@ -260,13 +263,13 @@ namespace PageMain
         wndAC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsAC());
         wndDC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsDC());
 
-        PageMain::self->GetItem(range)->ToButtonRange()->SetValue(true);
+        PageMain::self->GetItem(range)->ToButtonRange()->Press();
 
         for (int i = 0; i < 6; i++)
         {
             if (i != range)
             {
-                PageMain::self->GetItem(i)->ToButtonRange()->SetValue(false);
+                PageMain::self->GetItem(i)->ToButtonRange()->Release();
             }
         }
     }
@@ -274,7 +277,7 @@ namespace PageMain
 
     void HightLightCurrentRange()
     {
-        PageMain::self->GetItem(Range::Current())->ToButtonRange()->SetValue(1);
+        PageMain::self->GetItem(Range::Current())->ToButtonRange()->Press();
     }
 }
 
@@ -283,13 +286,13 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 {
     if (meas == MeasuresOnDisplay::AC)
     {
-        btnZeroAC.SetValue(enable ? 1 : 0);
+        enable ? btnZeroAC.Press() : btnZeroAC.Release();
 
         PageMain::labelZeroAC.SetShown(enable);
     }
     else if (meas == MeasuresOnDisplay::DC)
     {
-        btnZeroDC.SetValue(enable ? 1 : 0);
+        enable ? btnZeroDC.Press() : btnZeroDC.Release();
 
         PageMain::labelZeroDC.SetShown(enable);
     }

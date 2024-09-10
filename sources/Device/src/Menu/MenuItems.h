@@ -31,7 +31,7 @@ struct TypeItem
 struct Item
 {
     // Если append_to_pool == true - объект нужно добавить в глобальный пул объектов, чтобы страницы управляли их видимостью
-    Item(TypeItem::E = TypeItem::Count, const Rect & = Rect(), void (*_funcOnPress)(Item *) = nullptr, bool append_to_pool = true);
+    Item(TypeItem::E = TypeItem::Count, const Rect & = Rect(), void (*_funcOnPress)(Item *, bool) = nullptr, bool append_to_pool = true);
 
     Item &operator=(const Item &);
 
@@ -67,7 +67,7 @@ protected:
     Rect rect;
     Page *parent;
 
-    void (*funcOnPress)(Item *);
+    void (*funcOnPress)(Item *, bool);
 
     bool is_pressed = false;        // Для обычной кнопки переходит в состяние false сразу после отпускания, для кнопки с фиксацией -
                                     // после повторного нажатия
@@ -80,10 +80,7 @@ protected:
 
 struct ButtonCommon : public Item
 {
-    ButtonCommon(TypeItem::E, pchar title_ru, pchar title_en, Font::E, const Rect &, void (*_funcOnPress)(Item *));
-
-    // 1 - "нажать", 0 - "отпустить"
-    virtual void SetValue(bool);
+    ButtonCommon(TypeItem::E, pchar title_ru, pchar title_en, Font::E, const Rect &, void (*_funcOnPress)(Item *, bool));
 
     bool IsPressed() const;
 
@@ -106,7 +103,7 @@ protected:
 // Кнопка без фиксации (возвращается в отжатое состояние при отпускании)
 struct ButtonPress : public ButtonCommon
 {
-    ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(Item *), TypeItem::E = TypeItem::ButtonPress);
+    ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(Item *, bool), TypeItem::E = TypeItem::ButtonPress);
 
     virtual bool Draw() override;
 };
@@ -115,7 +112,7 @@ struct ButtonPress : public ButtonCommon
 // Кнопка с фиксацией (при нажатии переключается в противоположное состояние, на отпускание реакциии нет)
 struct ButtonToggle : public ButtonPress
 {
-    ButtonToggle(pchar title_ru, pchar title_en, Font::E f, const Rect &_rect, void (*_funcOnPress)(Item *)) :
+    ButtonToggle(pchar title_ru, pchar title_en, Font::E f, const Rect &_rect, void (*_funcOnPress)(Item *, bool)) :
         ButtonPress(title_ru, title_en, f, _rect, _funcOnPress, TypeItem::ButtonToggle)
     {
     }
@@ -124,7 +121,7 @@ struct ButtonToggle : public ButtonPress
 
 struct ButtonRange : public ButtonToggle
 {
-    ButtonRange(pchar title_ru, pchar title_en, int x, int y, void (*_funcOnPress)(Item *)) :
+    ButtonRange(pchar title_ru, pchar title_en, int x, int y, void (*_funcOnPress)(Item *, bool)) :
         ButtonToggle(title_ru, title_en, Font::_1, { x, y, 127, 74 }, _funcOnPress)
     {
     }
@@ -136,7 +133,7 @@ struct Label : public Item
     static const int MAX_LEN = 32;
 
     // Если append == true - видимостью управляет страница - объект помещается в глобальный пул объектов
-    Label(bool append = false, pchar _textRU = "", pchar _textEN = "", const Rect & = Rect(), Font::E = Font::_0, void (*_funcOnPress)(Item *) = EmptyFuncVIem,
+    Label(bool append = false, pchar _textRU = "", pchar _textEN = "", const Rect & = Rect(), Font::E = Font::_0, void (*_funcOnPress)(Item *, bool) = EmptyFuncVIemB,
         const Color &_colorText = Color::White, const Color &_colorBack = Color::Count, bool _h_aligned = false, bool _v_align = true);
 
     Label &operator=(const Label &);
@@ -192,7 +189,7 @@ struct SizeMeasure
 
 struct LabelMeasure : public Label
 {
-    LabelMeasure(TypeMeasure::E, SizeMeasure::E, int _x, int _y, void (*_funcOnPress)(Item *) = EmptyFuncVIem);
+    LabelMeasure(TypeMeasure::E, SizeMeasure::E, int _x, int _y, void (*_funcOnPress)(Item *, bool) = EmptyFuncVIemB);
 
     void Reset();
 

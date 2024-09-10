@@ -98,7 +98,7 @@ void Item::Press()
 
     need_draw = true;
 
-    funcOnPress(this);
+    funcOnPress(this, true);
 }
 
 
@@ -108,12 +108,16 @@ void Item::Release()
     {
         is_pressed = false;
 
+        need_draw = true;
+
+        funcOnPress(this, false);
+
         return;
     }
 }
 
 
-Item::Item(TypeItem::E _type, const Rect &_rect, void (*_funcOnPress)(Item *), bool append) :
+Item::Item(TypeItem::E _type, const Rect &_rect, void (*_funcOnPress)(Item *, bool), bool append) :
     type(_type), rect(_rect), funcOnPress(_funcOnPress)
 {
     if (append)
@@ -136,7 +140,7 @@ Item &Item::operator=(const Item &rhs)
 }
 
 
-ButtonCommon::ButtonCommon(TypeItem::E _type, pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)(Item *)) :
+ButtonCommon::ButtonCommon(TypeItem::E _type, pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)(Item *, bool)) :
     Item(_type, _rect, _funcOnPress),
     font(_f)
 {
@@ -241,25 +245,9 @@ int Page::GetItemCount()
 }
 
 
-ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)(Item *), TypeItem::E _type) :
+ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, const Rect &_rect, void (*_funcOnPress)(Item *, bool), TypeItem::E _type) :
     ButtonCommon(_type, title_ru, title_en, _f, _rect, _funcOnPress)
 {
-}
-
-
-void ButtonCommon::SetValue(bool value)
-{
-    need_draw = true;
-
-    if (value != is_pressed)
-    {
-        is_pressed = value;
-
-        if (funcOnPress)
-        {
-            funcOnPress(this);
-        }
-    }
 }
 
 
@@ -329,7 +317,7 @@ ButtonToggle *Item::ToButtonToggle()
 }
 
 
-Label::Label(bool append, pchar _textRU, pchar _textEN, const Rect &_rect, Font::E _font, void (*_funcOnPress)(Item *),
+Label::Label(bool append, pchar _textRU, pchar _textEN, const Rect &_rect, Font::E _font, void (*_funcOnPress)(Item *, bool),
     const Color &_colorText, const Color &_colorBack, bool _h_aligned, bool _v_aligned) :
     Item(TypeItem::Label, _rect, _funcOnPress, append),
     font(_font), h_aligned(_h_aligned), v_aligned(_v_aligned), colorText(_colorText), colorBack(_colorBack)

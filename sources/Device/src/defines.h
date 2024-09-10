@@ -4,9 +4,9 @@
 
 #define VERSION_MAJOR 0
 #define VERSION_MINOR 1
-#define VERSION_BUILD 208
+#define VERSION_BUILD 209
 
-#define DATE_BUILD "2024-09-10 10:42:58"
+#define DATE_BUILD "2024-09-10 10:55:38"
 
 #define VERSION_SCPI  "1.0"
 
@@ -79,7 +79,7 @@ typedef void(*pFuncVI)(int);
 
 struct Item;
 
-inline void EmptyFuncVIem(Item *)
+inline void EmptyFuncVIemB(Item *, bool)
 {
 }
 

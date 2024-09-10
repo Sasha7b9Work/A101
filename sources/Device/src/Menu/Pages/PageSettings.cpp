@@ -8,17 +8,17 @@
 
 namespace PageSettings
 {
-    static ButtonPress btnBack("Назад", "Back", Font::_1, { 4, 5, 150, 73 }, [](Item *)
+    static ButtonPress btnBack("Назад", "Back", Font::_1, { 4, 5, 150, 73 }, [](Item *, bool)
         {
             PageMain::self->SetAsCurrent();
         }
     );
 
-    static ButtonToggle btnLanguageRU("Русский", "Russian", Font::_1, { 300, 300, 100, 50 }, [](Item *)
+    static ButtonToggle btnLanguageRU("Русский", "Russian", Font::_1, { 300, 300, 100, 50 }, [](Item *, bool)
     {
     });
 
-    static ButtonToggle btnLanguageEN("Английский", "English", Font::_1, { 300, 400, 100, 50 }, [](Item *)
+    static ButtonToggle btnLanguageEN("Английский", "English", Font::_1, { 300, 400, 100, 50 }, [](Item *, bool)
     {
     });
 

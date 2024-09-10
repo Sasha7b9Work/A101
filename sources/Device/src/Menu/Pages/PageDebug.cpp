@@ -17,7 +17,7 @@ namespace PageDebug
     {
     }
 
-    static ButtonPress btnBack("Назад", "Back", Font::_1, { 19, 17, 150, 73 }, [](Item *)
+    static ButtonPress btnBack("Назад", "Back", Font::_1, { 19, 17, 150, 73 }, [](Item *, bool)
         {
         });
 

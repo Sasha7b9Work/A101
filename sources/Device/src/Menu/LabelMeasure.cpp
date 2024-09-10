@@ -26,7 +26,7 @@ namespace LM
 }
 
 
-LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)(Item *)) :
+LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, int _y, void (*_funcOnPress)(Item *, bool)) :
     Label(true, "", "", { _x, _y, 0, LM::heights[_size] }, LM::fonts[_size], _funcOnPress),
     type_measure(_type)
 {
@@ -36,28 +36,28 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
 
     label_name = Label(false, type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
         { _x + x, _y, width, height },
-        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
+        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, false, true);
 
     x += width;
     width = GetWidth(_size, 1);
 
     label_sign = Label(false, "", "",
         { _x + x, _y, width, height },
-        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, true, true);
+        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, true, true);
 
     x += width;
     width = GetWidth(_size, 2);
 
     label_digits = Label(false, "", "",
         { _x + x, _y, width, height },
-        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, true, true);
+        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, true, true);
 
     x += width;
     width = GetWidth(_size, 3);
 
     label_units = Label(false, "", "",
         { _x + x, _y, width, height },
-        LM::fonts[_size], EmptyFuncVIem, Color::White, Color::Count, false, true);
+        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, false, true);
 
     rect.width = (int16)(GetWidth(_size, 0) + GetWidth(_size, 1) + GetWidth(_size, 2) + GetWidth(_size, 3));
 }
