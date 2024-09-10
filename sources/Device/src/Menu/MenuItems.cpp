@@ -489,6 +489,8 @@ void Choice::SetShown(bool show)
 
     if (show)
     {
+        SetTextValue();
+
         button.Refresh();
         need_draw = true;
     }
