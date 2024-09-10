@@ -98,7 +98,7 @@ void Item::Press()
 
     need_draw = true;
 
-    funcOnPress(this, true);
+    funcOnPress(this, is_pressed);
 }
 
 
