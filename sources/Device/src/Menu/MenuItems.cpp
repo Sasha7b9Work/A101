@@ -164,6 +164,9 @@ void ButtonCommon::SetText(pchar title_ru, pchar title_en)
 }
 
 
+
+
+
 void Item::OnEventPress(int x, int y)
 {
     Item *item = PoolItems::GetItem(x, y);
@@ -259,7 +262,7 @@ ButtonPress::ButtonPress(pchar title_ru, pchar title_en, Font::E _f, const Rect 
 }
 
 
-bool ButtonCommon::IsPressed() const
+bool Item::IsPressed() const
 {
     return is_pressed;
 }

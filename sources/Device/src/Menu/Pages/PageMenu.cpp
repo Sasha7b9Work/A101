@@ -7,7 +7,8 @@
 namespace PageMenu
 {
     extern ButtonToggle btnIndication;
-    extern ButtonPress btnChangeRange;
+    extern ButtonPress  btnChangeRange;
+    extern ButtonPress  btnRange;
 
     static void FuncDraw()
     {
@@ -75,6 +76,7 @@ namespace PageMenu
         }
 
         btnChangeRange.SetShown(press);
+        btnRange.SetShown(press);
     });
 
     static ButtonPress btnSystem("Система", "System", Font::_1,
@@ -121,10 +123,32 @@ namespace PageMenu
         }
     });
 
-    ButtonPress btnChangeRange("Выбор диапазона", "Range selection", Font::_1,
-        { ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(2), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
+    static pchar choices_ru[] =
+    {
+        "Ручной",
+        "Автоматический",
+        nullptr
+    };
+
+    static pchar choices_en[] =
+    {
+        "Hand",
+        "Auto",
+        nullptr
+    };
+
+    Choice chChangeRange("Выбор диапазона", "Range selection", choices_ru, choices_en,
+        ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(2), [](Item *, bool)
+    {
+    });
+
+
+
+    Choice chRange("Диапазон", "Range", Font::_1,
+        { Item::GetCoordX(1), Item::GetCoordY(3), Item::WIDTH_MENU, Item::HEIGHT_MENU },
         [](Item *, bool)
     {
+
     });
 
 
@@ -142,6 +166,7 @@ namespace PageMenu
         &btnGraphics,
         &btnBack,
         &btnChangeRange,
+        &btnRange,
         nullptr
     };
 
@@ -157,6 +182,7 @@ namespace PageMenu
         btnIndication.SetToggled(false);
 
         btnChangeRange.SetShown(false);
+        btnRange.SetShown(false);
     }
 
 

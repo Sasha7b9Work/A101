@@ -23,6 +23,7 @@ struct TypeItem
         ButtonToggle,   // Кнопка с фиксацией
         Label,          // Текстовая строка
         LabelMeasure,
+        Choice,
         Count
     };
 };
@@ -58,6 +59,8 @@ struct Item
     virtual void Press();
     virtual void Release();
 
+    bool IsPressed() const;
+
     static void OnEventPress(int, int);
     static void OnEventRelease(int, int);
 
@@ -90,8 +93,6 @@ protected:
 struct ButtonCommon : public Item
 {
     ButtonCommon(TypeItem::E, pchar title_ru, pchar title_en, Font::E, const Rect &, void (*_funcOnPress)(Item *, bool));
-
-    bool IsPressed() const;
 
     void SetText(pchar title_ru, pchar title_en);
 
@@ -130,6 +131,22 @@ struct ButtonRange : public ButtonToggle
         ButtonToggle(title_ru, title_en, Font::_1, { x, y, 127, 74 }, _funcOnPress)
     {
     }
+};
+
+
+struct Choice : public Item
+{
+    Choice(pchar title_ru, pchar title_en, pchar *choices_ru, pchar *choices_en,
+        int x, int y, void (*_funcOnPress)(Item *, bool), Font::E = Font::_1);
+
+    virtual bool Draw() override;
+
+private:
+
+    pchar titles[Lang::Count];
+
+    pchar *choices_ru;
+    pchar *choices_en;
 };
 
 
