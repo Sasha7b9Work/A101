@@ -304,6 +304,11 @@ void Item::SetShown(bool show)
     is_shown = show;
 
     need_draw = true;
+
+    if (!is_shown)
+    {
+        Draw();
+    }
 }
 
 
@@ -316,7 +321,8 @@ ButtonToggle *Item::ToButtonToggle()
 Label::Label(bool append, pchar _textRU, pchar _textEN, const Rect &_rect, Font::E _font, void (*_funcOnPress)(Item *, bool),
     const Color &_colorText, const Color &_colorBack, bool _h_aligned, bool _v_aligned) :
     Item(TypeItem::Label, _rect, _funcOnPress, append),
-    font(_font), h_aligned(_h_aligned), v_aligned(_v_aligned), colorText(_colorText), colorBack(_colorBack)
+    font(_font), h_aligned(_h_aligned), v_aligned(_v_aligned), colorText(_colorText),
+    colorBack(_colorBack.value == Color::Count.value ? Color::Background : _colorBack)
 {
     std::strcpy(text[0], _textRU);
     std::strcpy(text[1], _textEN);
@@ -352,8 +358,14 @@ bool Label::Draw()
 {
     if (need_draw)
     {
-        Nextion::DrawString(rect, font, colorText,
-            (colorBack.value == Color::Count.value) ? Color::Background : colorBack, IsShown() ? Text() : "", h_aligned, v_aligned);
+        if (IsShown())
+        {
+            Nextion::DrawString(rect, font, colorText, colorBack, Text(), h_aligned, v_aligned);
+        }
+        else
+        {
+            Nextion::FillRect(rect, colorBack);
+        }
 
         need_draw = false;
 
