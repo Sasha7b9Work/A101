@@ -30,6 +30,19 @@ namespace PageCOM
 
     });
 
+    static pchar names_stop_bits[] =
+    {
+        "1",   "1",
+        "1.5", "1.5",
+        "2",   "2",
+        nullptr
+    };
+
+    static Choice chStopBits("Стоп-биты", "Stop-bits", names_stop_bits, 0, 2, [](Item *, bool)
+    {
+
+    });
+
     static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
     {
         if (!press)
@@ -42,6 +55,7 @@ namespace PageCOM
     {
         &chBaudrate,
         &chParity,
+        &chStopBits,
         &btnBack,
         nullptr
     };
