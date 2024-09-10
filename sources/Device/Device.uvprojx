@@ -1504,6 +1504,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMenu.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageCOM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageCOM.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2896,6 +2901,11 @@
               <FileName>PageMenu.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMenu.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageCOM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageCOM.cpp</FilePath>
             </File>
           </Files>
         </Group>

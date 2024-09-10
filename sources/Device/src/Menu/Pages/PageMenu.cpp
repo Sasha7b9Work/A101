@@ -6,7 +6,7 @@
 
 namespace PageMenu
 {
-    extern ButtonToggle btnIndication;
+    extern ButtonMenuToggle btnIndication;
     extern Choice chChangeRange;
     extern Choice chRange;
     extern ButtonMenuPress btnCOM;
@@ -17,9 +17,7 @@ namespace PageMenu
     }
 
 
-    static ButtonToggle btnFrequency("Частота", "Frequency", Font::_1,
-        {ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(0), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU},
-        [](Item *item, bool press)
+    static ButtonMenuToggle btnFrequency("Частота", "Frequency", 1, 0, [](Item *item, bool press)
     {
         if (press)
         {
@@ -27,9 +25,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonToggle btnImin("Iмин", "Imin", Font::_1,
-        { ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(1), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *item, bool press)
+    static ButtonMenuToggle btnImin("Iмин", "Imin", 1, 1, [](Item *item, bool press)
     {
         if (press)
         {
@@ -37,9 +33,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonToggle btnImax("Iмакс", "Imax", Font::_1,
-        { ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(2), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *item, bool press)
+    static ButtonMenuToggle btnImax("Iмакс", "Imax", 1, 2, [](Item *item, bool press)
     {
         if (press)
         {
@@ -47,9 +41,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonToggle btnIamp("Iамп", "Iamp", Font::_1,
-        { ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(3), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *item, bool press)
+    static ButtonMenuToggle btnIamp("Iамп", "Iamp", 1, 3, [](Item *item, bool press)
     {
         if (press)
         {
@@ -57,9 +49,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonToggle btnIpeak("Iпп", "Ipp", Font::_1,
-        { ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(4), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *item, bool press)
+    static ButtonMenuToggle btnIpeak("Iпп", "Ipp", 1, 4, [](Item *item, bool press)
     {
         if (press)
         {
@@ -67,9 +57,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonToggle btnSettings("Настройки", "Settings", Font::_1,
-        { ButtonCommon::GetCoordX(0), ButtonCommon::GetCoordY(0), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU},
-        [](Item *, bool press)
+    static ButtonMenuToggle btnSettings("Настройки", "Settings", 0, 0, [](Item *, bool press)
     {
         if (press)
         {
@@ -81,15 +69,11 @@ namespace PageMenu
         btnCOM.SetShown(press);
     });
 
-    static ButtonPress btnSystem("Система", "System", Font::_1,
-        { ButtonCommon::GetCoordX(0), ButtonCommon::GetCoordY(1), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *, bool)
+    static ButtonMenuPress btnSystem("Система", "System", 0, 1, [](Item *, bool)
     {
     });
 
-    ButtonToggle btnIndication("Индикация", "Indication", Font::_1,
-        { ButtonCommon::GetCoordX(0), ButtonCommon::GetCoordY(2), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *, bool press)
+    ButtonMenuToggle btnIndication("Индикация", "Indication", 0, 2, [](Item *, bool press)
     {
         if (press)
         {
@@ -103,21 +87,15 @@ namespace PageMenu
         btnIpeak.SetShown(press);
     });
 
-    static ButtonPress btnCalibration("Калибровка", "Calibration", Font::_1,
-        { ButtonCommon::GetCoordX(0), ButtonCommon::GetCoordY(3), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *, bool)
+    static ButtonMenuPress btnCalibration("Калибровка", "Calibration", 0, 3, [](Item *, bool)
     {
     });
 
-    static ButtonPress btnGraphics("Графики", "Graphs", Font::_1,
-        { ButtonCommon::GetCoordX(0), ButtonCommon::GetCoordY(4), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *, bool)
+    static ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 4, [](Item *, bool)
     {
     });
 
-    static ButtonPress btnBack("Назад", "Back", Font::_1,
-        { ButtonCommon::GetCoordX(2), ButtonCommon::GetCoordY(0), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *, bool press)
+    static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
     {
         if (!press)
         {

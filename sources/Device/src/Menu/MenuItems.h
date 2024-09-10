@@ -146,6 +146,15 @@ struct ButtonMenuPress : public ButtonPress
 };
 
 
+struct ButtonMenuToggle : public ButtonToggle
+{
+    ButtonMenuToggle(pchar title_ru, pchar title_en, int col_x, int row_y, void (*_funcOnPress)(Item *, bool)) :
+        ButtonToggle(title_ru, title_en, Font::_1, { Item::GetCoordX(col_x), Item::GetCoordY(row_y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress)
+    {
+    }
+};
+
+
 struct Label : public Item
 {
     static const int MAX_LEN = 32;
