@@ -9,6 +9,7 @@ namespace PageMenu
     extern ButtonToggle btnIndication;
     extern Choice chChangeRange;
     extern Choice chRange;
+    extern ButtonMenuPress btnCOM;
 
     static void FuncDraw()
     {
@@ -77,6 +78,7 @@ namespace PageMenu
 
         chChangeRange.SetShown(press);
         chRange.SetShown(press);
+        btnCOM.SetShown(press);
     });
 
     static ButtonPress btnSystem("Система", "System", Font::_1,
@@ -149,6 +151,10 @@ namespace PageMenu
 
     });
 
+    ButtonMenuPress btnCOM("COM-порт", "COM-port", 1, 4, [](Item *, bool)
+    {
+    });
+
 
     static Item *items[] =
     {
@@ -165,6 +171,7 @@ namespace PageMenu
         &btnBack,
         &chChangeRange,
         &chRange,
+        &btnCOM,
         nullptr
     };
 
@@ -181,6 +188,7 @@ namespace PageMenu
 
         chChangeRange.SetShown(false);
         chRange.SetShown(false);
+        btnCOM.SetShown(false);
     }
 
 
