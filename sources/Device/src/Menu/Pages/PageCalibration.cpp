@@ -123,7 +123,7 @@ namespace PageCalibration
     ButtonPress btnSave("Сохр.", "Save", Font::_1, { 236, 6, 130, 73 }, [](Item *item, bool)
         {
             Calibrator::PressButtonSave();
-            item->ToButtonPress()->SetShown(false);
+            item->SetShown(false);
         });
 
     // Нажатие кнопки на цифровой клавиатуре

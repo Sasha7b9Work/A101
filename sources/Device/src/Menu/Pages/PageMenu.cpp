@@ -108,7 +108,7 @@ namespace PageMenu
     {
         if (!press)
         {
-            item->ToButtonPress()->Release();
+            item->Release();
             PageMain::self->SetAsCurrent();
         }
     });

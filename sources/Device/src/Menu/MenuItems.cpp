@@ -313,12 +313,6 @@ ButtonRange *Item::ToButtonRange()
 }
 
 
-ButtonPress *Item::ToButtonPress()
-{
-    return (type == TypeItem::ButtonPress) ? (ButtonPress *)this : nullptr;
-}
-
-
 ButtonToggle *Item::ToButtonToggle()
 {
     return (type == TypeItem::ButtonToggle) ? (ButtonToggle *)this : nullptr;
