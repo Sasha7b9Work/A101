@@ -17,7 +17,7 @@ namespace PageMain
     extern ButtonToggle btnZeroAC;
     extern ButtonToggle btnZeroDC;
     extern ButtonPress btnGraphics;
-    extern ButtonToggle btnMenu;
+    extern ButtonPress btnMenu;
     extern ButtonPress btnSettings;
     extern ButtonPress btnCalibration;
 
@@ -203,7 +203,7 @@ namespace PageMain
         PageGraph::self->SetAsCurrent();
     });
 
-    ButtonToggle btnMenu("Μενώ", "Menu", Font::_1, { 660, 4, 136, 74 }, [](Item *)           // Menu
+    ButtonPress btnMenu("Μενώ", "Menu", Font::_1, { 660, 4, 136, 74 }, [](Item *)           // Menu
     {
         PageMenu::self->SetAsCurrent();
     });
