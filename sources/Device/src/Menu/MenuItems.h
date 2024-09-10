@@ -63,6 +63,12 @@ struct Item
 
     ButtonToggle *ToButtonToggle();
 
+    static const int WIDTH_MENU = 253;
+    static const int HEIGHT_MENU = 84;
+
+    static int GetCoordX(int col);
+    static int GetCoordY(int row);
+
 protected:
 
     TypeItem::E type;
@@ -88,12 +94,6 @@ struct ButtonCommon : public Item
     bool IsPressed() const;
 
     void SetText(pchar title_ru, pchar title_en);
-
-    static const int WIDTH_MENU = 210;
-    static const int HEIGHT_MENU = 84;
-
-    static int GetCoordX(int col);
-    static int GetCoordY(int row);
 
 protected:
 

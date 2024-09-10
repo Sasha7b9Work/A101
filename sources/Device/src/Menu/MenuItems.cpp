@@ -394,7 +394,7 @@ void Label::SetText(const char _textRU[MAX_LEN], const char _textEN[MAX_LEN])
 }
 
 
-int ButtonCommon::GetCoordX(int col)
+int Item::GetCoordX(int col)
 {
     int dx = 10;
 
@@ -402,7 +402,7 @@ int ButtonCommon::GetCoordX(int col)
 }
 
 
-int ButtonCommon::GetCoordY(int row)
+int Item::GetCoordY(int row)
 {
     int dy = 10;
 

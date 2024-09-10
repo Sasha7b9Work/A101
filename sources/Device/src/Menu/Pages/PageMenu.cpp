@@ -112,7 +112,7 @@ namespace PageMenu
     });
 
     static ButtonPress btnBack("Назад", "Back", Font::_1,
-        { Display::WIDTH - ButtonCommon::WIDTH_MENU - 10, ButtonCommon::GetCoordY(0), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
+        { ButtonCommon::GetCoordX(2), ButtonCommon::GetCoordY(0), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
         [](Item *, bool press)
     {
         if (!press)
