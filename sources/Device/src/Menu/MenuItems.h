@@ -136,7 +136,7 @@ struct ButtonRange : public ButtonToggle
 
 struct Choice : public Item
 {
-    Choice(pchar title_ru, pchar title_en, pchar *choices_ru, pchar *choices_en,
+    Choice(pchar title_ru, pchar title_en, pchar _choices[][2],
         int x, int y, void (*_funcOnPress)(Item *, bool), Font::E = Font::_1);
 
     virtual bool Draw() override;
@@ -145,8 +145,7 @@ private:
 
     pchar titles[Lang::Count];
 
-    pchar *choices_ru;
-    pchar *choices_en;
+    pchar choices[2];
 };
 
 

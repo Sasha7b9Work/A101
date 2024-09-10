@@ -164,7 +164,14 @@ void ButtonCommon::SetText(pchar title_ru, pchar title_en)
 }
 
 
-
+Choice::Choice(pchar title_ru, pchar title_en, pchar _choices[][2],
+    int x, int y, void (*_funcOnPress)(Item *, bool), Font::E) :
+    Item(TypeItem::Choice, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress)
+{
+    titles[Lang::RU] = title_ru;
+    titles[Lang::EN] = title_en;
+    choices = _choices;
+}
 
 
 void Item::OnEventPress(int x, int y)

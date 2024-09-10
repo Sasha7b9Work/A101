@@ -7,8 +7,8 @@
 namespace PageMenu
 {
     extern ButtonToggle btnIndication;
-    extern ButtonPress  btnChangeRange;
-    extern ButtonPress  btnRange;
+    extern Choice chChangeRange;
+    extern Choice chRange;
 
     static void FuncDraw()
     {
@@ -75,8 +75,8 @@ namespace PageMenu
             btnIndication.SetToggled(false);
         }
 
-        btnChangeRange.SetShown(press);
-        btnRange.SetShown(press);
+        chChangeRange.SetShown(press);
+        chRange.SetShown(press);
     });
 
     static ButtonPress btnSystem("Система", "System", Font::_1,
@@ -123,30 +123,28 @@ namespace PageMenu
         }
     });
 
-    static pchar choices_ru[] =
+    static pchar choices_change_range[3][Lang::Count] =
     {
-        "Ручной",
-        "Автоматический",
-        nullptr
+        { "Ручной", "Hand" },
+        { "Автоматический","Auto" },
+        { nullptr, nullptr }
     };
 
-    static pchar choices_en[] =
-    {
-        "Hand",
-        "Auto",
-        nullptr
-    };
-
-    Choice chChangeRange("Выбор диапазона", "Range selection", choices_ru, choices_en,
+    Choice chChangeRange("Выбор диапазона", "Range selection", choices_change_range,
         ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(2), [](Item *, bool)
     {
     });
 
+    static pchar choices_range[4][Lang::Count] =
+    {
+        { "1Гц - 4Гц",   "1Hz - 4Hz" },
+        { "4Гц - 40Гц",  "4Hz - 40Hz" },
+        { "40Гц - 5кГц", "40Hz - 5kHz" },
+        { nullptr,       nullptr }
+    };
 
-
-    Choice chRange("Диапазон", "Range", Font::_1,
-        { Item::GetCoordX(1), Item::GetCoordY(3), Item::WIDTH_MENU, Item::HEIGHT_MENU },
-        [](Item *, bool)
+    Choice chRange("Диапазон", "Range", choices_range,
+        Item::GetCoordX(1), Item::GetCoordY(3), [](Item *, bool)
     {
 
     });
@@ -165,8 +163,8 @@ namespace PageMenu
         &btnCalibration,
         &btnGraphics,
         &btnBack,
-        &btnChangeRange,
-        &btnRange,
+        &chChangeRange,
+        &chRange,
         nullptr
     };
 
@@ -181,8 +179,8 @@ namespace PageMenu
         btnSettings.SetToggled(false);
         btnIndication.SetToggled(false);
 
-        btnChangeRange.SetShown(false);
-        btnRange.SetShown(false);
+        chChangeRange.SetShown(false);
+        chRange.SetShown(false);
     }
 
 
