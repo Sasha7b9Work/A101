@@ -59,7 +59,13 @@ namespace PageMenu
         nullptr
     };
 
-    static Choice chLanguage("язык", "Language", (uint8 *)&set.lang, names_lang, 1, 3);
+    static Choice chLanguage("язык", "Language", (uint8 *)&set.lang, names_lang, 1, 3, [](Item *, bool press)
+    {
+        if (!press)
+        {
+            Page::Current()->Refresh();
+        }
+    });
 
     static ButtonMenuPress btnInformation("»нформаци€", "Information", 1, 4);
 

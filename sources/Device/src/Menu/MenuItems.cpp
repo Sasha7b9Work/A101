@@ -173,10 +173,10 @@ void ButtonCommon::SetText(pchar title_ru, pchar title_en)
 }
 
 
-Choice::Choice(pchar title_ru, pchar title_en, uint8 *_choice, pchar *_names, int x, int y, Font::E) :
-    Item(TypeItem::Choice, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, nullptr),
+Choice::Choice(pchar title_ru, pchar title_en, uint8 *_choice, pchar *_names, int x, int y, void (*_funcOnPress)(Item *, bool), Font::E) :
+    Item(TypeItem::Choice, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress),
     names(_names),
-    button(title_ru, title_ru, Font::_1, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU}, nullptr, TypeItem::ButtonPress, false),
+    button(title_ru, title_ru, Font::_1, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress, TypeItem::ButtonPress, false),
     label(false, "", "", { Item::GetCoordX(x) + 10 + Item::WIDTH_MENU, Item::GetCoordY(y) , Item::WIDTH_MENU, Item::HEIGHT_MENU} ),
     choice(_choice)
 {
@@ -309,6 +309,20 @@ void Page::Draw()
     for (int i = 0; i < GetItemCount(); i++)
     {
         GetItem(i)->Draw();
+    }
+}
+
+
+void Page::Refresh()
+{
+    if (funcOnDraw)
+    {
+        funcOnDraw();
+    }
+
+    for (int i = 0; i < GetItemCount(); i++)
+    {
+        GetItem(i)->Refresh();
     }
 }
 
