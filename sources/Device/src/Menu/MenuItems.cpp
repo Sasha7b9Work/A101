@@ -166,10 +166,10 @@ void ButtonCommon::SetText(pchar title_ru, pchar title_en)
 
 Choice::Choice(pchar title_ru, pchar title_en, pchar *_choices,
     int x, int y, void (*_funcOnPress)(Item *, bool), Font::E) :
-    Item(TypeItem::Choice, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress),
+    Item(TypeItem::Choice, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress),
     choices(_choices),
-    button(title_ru, title_ru, Font::_1, { x, y, Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress, TypeItem::ButtonPress, false),
-    label(false, "", "", { x + 10 + Item::WIDTH_MENU, y , Item::WIDTH_MENU, Item::HEIGHT_MENU} )
+    button(title_ru, title_ru, Font::_1, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress, TypeItem::ButtonPress, false),
+    label(false, "", "", { Item::GetCoordX(x) + 10 + Item::WIDTH_MENU, Item::GetCoordY(y) , Item::WIDTH_MENU, Item::HEIGHT_MENU} )
 {
     titles[Lang::RU] = title_ru;
     titles[Lang::EN] = title_en;

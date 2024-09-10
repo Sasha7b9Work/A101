@@ -110,8 +110,7 @@ namespace PageMenu
         nullptr
     };
 
-    Choice chChangeRange("Выбор диапазона", "Range selection", choices_change_range,
-        ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(2), [](Item *, bool)
+    Choice chChangeRange("Выбор диапазона", "Range selection", choices_change_range, 1, 2, [](Item *, bool)
     {
     });
 
@@ -123,8 +122,7 @@ namespace PageMenu
         nullptr
     };
 
-    Choice chRange("Диапазон", "Range", choices_range,
-        Item::GetCoordX(1), Item::GetCoordY(3), [](Item *, bool)
+    Choice chRange("Диапазон", "Range", choices_range, 1, 3, [](Item *, bool)
     {
 
     });
