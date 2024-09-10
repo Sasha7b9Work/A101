@@ -76,18 +76,13 @@ namespace PageMenu
 
     static ButtonToggle btnIndication("Индикация", "Indication", Font::_1,
         { ButtonCommon::GetCoordX(0), ButtonCommon::GetCoordY(2), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
-        [](Item *item, bool press)
+        [](Item *, bool press)
     {
-        if (press)
-        {
-            bool is_shown = item->ToButtonToggle()->IsPressed();
-
-            btnFrequency.SetShown(is_shown);
-            btnImin.SetShown(is_shown);
-            btnImax.SetShown(is_shown);
-            btnIamp.SetShown(is_shown);
-            btnIpeak.SetShown(is_shown);
-        }
+        btnFrequency.SetShown(press);
+        btnImin.SetShown(press);
+        btnImax.SetShown(press);
+        btnIamp.SetShown(press);
+        btnIpeak.SetShown(press);
     });
 
     static ButtonPress btnCalibration("Калибровка", "Calibration", Font::_1,
@@ -134,19 +129,19 @@ namespace PageMenu
 
     static void FuncOnEnter()
     {
-        set.en_f ? btnFrequency.Press() : btnFrequency.Release();
-        set.en_Imax ? btnImax.Press() : btnImax.Release();
-        set.en_Imin ? btnImin.Press() :btnImin.Release();
-        set.en_Iampl ? btnIamp.Press() : btnIamp.Release();
-        set.en_Ipp ? btnIpeak.Press() : btnIpeak.Release();
+        btnFrequency.SetToggled(set.en_f);
+        btnImax.SetToggled(set.en_Imax);
+        btnImin.SetToggled(set.en_Imin);
+        btnIamp.SetToggled(set.en_Iampl);
+        btnIpeak.SetToggled(set.en_Ipp);
 
-        btnIndication.Release();
+        btnIndication.SetToggled(false);
 
-        btnFrequency.SetShown(false);
-        btnImax.SetShown(false);
-        btnImin.SetShown(false);
-        btnIamp.SetShown(false);
-        btnIpeak.SetShown(false);
+//        btnFrequency.SetShown(false);
+//        btnImax.SetShown(false);
+//        btnImin.SetShown(false);
+//        btnIamp.SetShown(false);
+//        btnIpeak.SetShown(false);
     }
 
 
