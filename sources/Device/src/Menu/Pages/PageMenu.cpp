@@ -6,6 +6,9 @@
 
 namespace PageMenu
 {
+    extern ButtonToggle btnIndication;
+    extern ButtonPress btnChangeRange;
+
     static void FuncDraw()
     {
 
@@ -62,10 +65,16 @@ namespace PageMenu
         }
     });
 
-    static ButtonPress btnSettings("Настройки", "Settings", Font::_1,
+    static ButtonToggle btnSettings("Настройки", "Settings", Font::_1,
         { ButtonCommon::GetCoordX(0), ButtonCommon::GetCoordY(0), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU},
-        [](Item *, bool)
+        [](Item *, bool press)
     {
+        if (press)
+        {
+            btnIndication.SetToggled(false);
+        }
+
+        btnChangeRange.SetShown(press);
     });
 
     static ButtonPress btnSystem("Система", "System", Font::_1,
@@ -74,10 +83,15 @@ namespace PageMenu
     {
     });
 
-    static ButtonToggle btnIndication("Индикация", "Indication", Font::_1,
+    ButtonToggle btnIndication("Индикация", "Indication", Font::_1,
         { ButtonCommon::GetCoordX(0), ButtonCommon::GetCoordY(2), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
         [](Item *, bool press)
     {
+        if (press)
+        {
+            btnSettings.SetToggled(false);
+        }
+
         btnFrequency.SetShown(press);
         btnImin.SetShown(press);
         btnImax.SetShown(press);
@@ -107,8 +121,11 @@ namespace PageMenu
         }
     });
 
-//    static ButtonPress btnChangeRange("Ручной", "Hand", Font::_1,
-//        { })
+    ButtonPress btnChangeRange("Выбор диапазона", "Range selection", Font::_1,
+        { ButtonCommon::GetCoordX(1), ButtonCommon::GetCoordY(2), ButtonCommon::WIDTH_MENU, ButtonCommon::HEIGHT_MENU },
+        [](Item *, bool)
+    {
+    });
 
 
     static Item *items[] =
@@ -124,6 +141,7 @@ namespace PageMenu
         &btnCalibration,
         &btnGraphics,
         &btnBack,
+        &btnChangeRange,
         nullptr
     };
 
@@ -135,13 +153,10 @@ namespace PageMenu
         btnIamp.SetToggled(set.en_Iampl);
         btnIpeak.SetToggled(set.en_Ipp);
 
+        btnSettings.SetToggled(false);
         btnIndication.SetToggled(false);
 
-//        btnFrequency.SetShown(false);
-//        btnImax.SetShown(false);
-//        btnImin.SetShown(false);
-//        btnIamp.SetShown(false);
-//        btnIpeak.SetShown(false);
+        btnChangeRange.SetShown(false);
     }
 
 
