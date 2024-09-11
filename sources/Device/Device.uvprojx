@@ -1480,11 +1480,6 @@
               </FileOption>
             </File>
             <File>
-              <FileName>PageDebug.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PageGraph.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageGraph.cpp</FilePath>
@@ -2978,11 +2973,6 @@
               <FileName>PageCalibration.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageCalibration.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageDebug.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
             </File>
             <File>
               <FileName>PageGraph.cpp</FileName>
