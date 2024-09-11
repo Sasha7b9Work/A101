@@ -56,6 +56,7 @@ namespace Nextion
     void FillRect(const Rect &, const Color & = Color::Count);
 
     void DrawLine(int x1, int y1, int x2, int y2, const Color & = Color::Count);
+    void DrawLineWhite(int x1, int y1, int x2, int y2);
 
     void DrawLineH(int y, int x1, int x2, const Color & = Color::Count);
 

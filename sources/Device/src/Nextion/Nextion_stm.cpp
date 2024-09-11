@@ -68,6 +68,16 @@ void Nextion::DrawLine(int x1, int y1, int x2, int y2, const Color &color)
 }
 
 
+void Nextion::DrawLineWhite(int x1, int y1, int x2, int y2)
+{
+    char buffer[128];
+
+    std::sprintf(buffer, "line %d,%d,%d,%d,65535", x1, y1, x2, y2);
+
+    SendCommandRAW(buffer);
+}
+
+
 void Nextion::DrawString(const Rect &rect, int font, const Color &color, const Color &back_color, pchar text, bool h_align, bool v_align)
 {
     SendCommandFormat("xstr %d,%d,%d,%d,%d,%s,%s,%d,%d,1,\"%s\"",
@@ -83,12 +93,11 @@ void Nextion::WaveInput::Draw(int x, uint8 *points, int num_points)
 
     for (int i = 1; i < num_points; i++)
     {
-        Nextion::DrawLine(
+        Nextion::DrawLineWhite(
             x + i - 1,
             y0 + points[i - 1],
             x + i,
-            y0 + points[i],
-            Color::White);
+            y0 + points[i]);
     }
 }
 
@@ -133,17 +142,9 @@ void Nextion::SendCommandRAW(pchar command)
 {
     LastCode::Set(ResponseCode::None);
 
-    static TimeMeterMS meter;
-
-    while (meter.ElapsedTime() < 1)
-    {
-    }
-
     HAL_USART2::SendNZ(command);
 
     HAL_USART2::SendNZ("\xFF\xFF\xFF");
-
-    meter.Reset();
 
     Profiler::AddCommand();
 }
