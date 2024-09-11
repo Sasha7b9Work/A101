@@ -119,7 +119,7 @@ void Ampermeter::Update()
     }
     else
     {
-        DiagramInput::SetData();
+        DiagramInput::InstallData();
     }
 
     if (AVP::IsEnabled())

@@ -5,10 +5,9 @@
 
 namespace DiagramInput
 {
-    void SetData();
+    void InstallData();
 
     void Draw();
 
-    // ”казывает немедленно перерисовать картикну
-    void Repaint();
+    void Reset();
 }

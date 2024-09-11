@@ -9,18 +9,26 @@
 
 namespace DiagramInput
 {
-    static const REAL height = 256;        // Таков размах по вре
+    static const REAL height = 256;         // Таков размах по вре
     static const REAL y0 = 128;
-    static uint time_next_draw = 0;         // Время следующей отрисовки картинки
 
     static uint8 points[1024];
 
     static int NumPoints();
+
+    static bool data_installed = false;     // Признак того, что данные для отрисовки установлены
+    static int first_point = 0;             // С этой точки начнём отрисовку в следующий раз
+    static int elapsed_point = NumPoints(); // Столько точек осталось отрисовать
 }
 
 
-void DiagramInput::SetData()
+void DiagramInput::InstallData()
 {
+    if (data_installed)
+    {
+        return;
+    }
+
     REAL scale = height / (BufferADC::Max().Real() - BufferADC::Min().Real());
     REAL ave = (BufferADC::Max().Real() + BufferADC::Min().Real()) / 2.0;
 
@@ -39,6 +47,8 @@ void DiagramInput::SetData()
 
         points[i] = (uint8)value;
     }
+
+    data_installed = true;
 
 //    int index = 0;
 //
@@ -79,13 +89,36 @@ void DiagramInput::SetData()
 
 void DiagramInput::Draw()
 {
-    Nextion::WaveInput::Draw(0, points, NumPoints());
+    if (!data_installed)
+    {
+        return;
+    }
+
+    int num_points = 300;
+
+    if (num_points > elapsed_point)
+    {
+        num_points = elapsed_point;
+    }
+
+    elapsed_point -= num_points;
+
+    Nextion::WaveInput::Draw(first_point, points + first_point, num_points);
+
+    first_point += num_points;
+
+    if (elapsed_point == 0)
+    {
+        Reset();
+    }
 }
 
 
-void DiagramInput::Repaint()
+void DiagramInput::Reset()
 {
-    time_next_draw = 0;
+    data_installed = false;
+    first_point = 0;
+    elapsed_point = NumPoints();
 }
 
 

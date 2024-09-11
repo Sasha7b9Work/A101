@@ -77,17 +77,16 @@ void Nextion::DrawString(const Rect &rect, int font, const Color &color, const C
 
 void Nextion::WaveInput::Draw(int x, uint8 *points, int num_points)
 {
-    int x0 = x;
     int y0 = Display::HEIGHT - 255;
 
-    Nextion::FillRect({ x0, y0, num_points, 255 }, Color::Background);
+    Nextion::FillRect({ x, y0, num_points, 255 }, Color::Background);
 
     for (int i = 1; i < num_points; i++)
     {
         Nextion::DrawLine(
-            x0 + i - 1,
+            x + i - 1,
             y0 + points[i - 1],
-            x0 + i,
+            x + i,
             y0 + points[i],
             Color::White);
     }
