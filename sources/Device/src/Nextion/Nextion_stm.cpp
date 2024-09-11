@@ -6,6 +6,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Profiler.h"
+#include "Nextion/Display.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -77,11 +78,19 @@ void Nextion::DrawString(const Rect &rect, int font, const Color &color, const C
 
 void Nextion::WaveInput::Draw(uint8 *points, int num_points)
 {
-    Nextion::FillRect({ 0, 0, num_points, 255 }, Color::Background);
+    int x0 = 0;
+    int y0 = Display::HEIGHT - 255;
+
+    Nextion::FillRect({ x0, y0, num_points, 255 }, Color::Background);
 
     for (int i = 1; i < num_points; i++)
     {
-        Nextion::DrawLine(i - 1, points[i - 1], i, points[i], Color::White);
+        Nextion::DrawLine(
+            x0 + i - 1,
+            y0 + points[i - 1],
+            x0 + i,
+            y0 + points[i],
+            Color::White);
     }
 }
 
