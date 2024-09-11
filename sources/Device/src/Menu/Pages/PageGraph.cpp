@@ -19,13 +19,9 @@ namespace PageGraph
     }
 
 
-    static ButtonToggle btnWave("Сигнал", "Signal", Font::_1, { 8, 5, 160, 80 }, [](Item *, bool)
+    static ButtonMenuPress btnWave("Сигнал", "Signal", 0, 0, [](Item *, bool)
     {
-    });
 
-
-    static ButtonToggle btnSpectr("Спектр", "Spectr", Font::_1, { 172, 5, 160, 80 }, [](Item *, bool)
-    {
     });
 
     static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
@@ -39,7 +35,6 @@ namespace PageGraph
     static Item *items[] =
     {
         &btnWave,
-        &btnSpectr,
         &btnBack,
         nullptr
     };

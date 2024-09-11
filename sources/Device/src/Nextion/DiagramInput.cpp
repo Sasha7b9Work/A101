@@ -94,7 +94,7 @@ void DiagramInput::Draw()
         return;
     }
 
-    int num_points = 150;
+    int num_points = 50;
 
     if (num_points > elapsed_point)
     {
@@ -111,6 +111,12 @@ void DiagramInput::Draw()
     {
         Reset();
     }
+}
+
+
+bool DiagramInput::DataInstalled()
+{
+    return data_installed;
 }
 
 
