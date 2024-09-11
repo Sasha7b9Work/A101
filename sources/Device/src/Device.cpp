@@ -38,9 +38,15 @@ void Device::Update()
 
     Display::Update();
 
+    Nextion::Update();
+
     Profiler::Update();
 
+    Nextion::Update();
+
     SCPI::Update();
+
+    Nextion::Update();
 
     set.Save();
 }
