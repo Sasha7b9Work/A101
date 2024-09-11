@@ -20,14 +20,9 @@ struct Color
     static uint16 MakeColor(uint16 v) { return v; }
     static Color Current() { return current; }
     static pchar CurrentValue();
+    pchar GetValue() const;
 
     uint8 value;
-
-#ifdef WIN32
-    uint ToRaw() const;
-#else
-    uint16 ToRaw() const;
-#endif
 
 private:
 

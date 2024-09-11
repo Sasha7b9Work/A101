@@ -94,7 +94,7 @@ void DiagramInput::Draw()
         return;
     }
 
-    int num_points = 300;
+    int num_points = 150;
 
     if (num_points > elapsed_point)
     {

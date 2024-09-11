@@ -19,14 +19,14 @@ Color Color::Count(255);
 Color Color::current(0);
 
 
-static uint16 colors[255] =
+static pchar colors[255] =
 {
-    Color::MakeColor(0.0f, 0.0f, 0.0f),     // Black
-    Color::MakeColor(1.0f, 1.0f, 1.0f),     // White
-    Color::MakeColor(6964),                 // Background
-    1024,                                   // ButtonPress
-    Color::MakeColor(1.0f, 1.0f, 0.0f),     // MeasureDC
-    Color::MakeColor(1.0f, 1.0f, 0.0f)      // MeasureAC
+    "0",                // Black
+    "65535",            // White
+    "6964",             // Background
+    "1024",             // ButtonPress
+    "65504",            // MeasureDC
+    "65504"             // MeasureAC
 };
 
 
@@ -41,11 +41,13 @@ void Color::SetAsCurrent() const
 
 pchar Color::CurrentValue()
 {
-    static char buffer[32];
+    return colors[Current().value];
+}
 
-    std::sprintf(buffer, "%d", colors[Current().value]);
 
-    return buffer;
+pchar Color::GetValue() const
+{
+    return colors[value];
 }
 
 
@@ -57,32 +59,3 @@ uint16 Color::MakeColor(float r, float g, float b)
 
     return (uint16)((red << 11) | (green << 6) | (blue));
 }
-
-
-#ifdef WIN32
-
-uint Color::ToRaw() const
-{
-    uint16 val16 = colors[value];
-
-    float red = (float)((val16 >> 11) & 0x1F) / 31.0f;
-    float green = (float)((val16 >> 5) & 0x3F) / 63.0f;
-    float blue = (float)((val16 >> 0) & 0x1F) / 31.0f;
-
-    uint u_r = (uint)(red * 255.0f);
-    uint u_g = (uint)(green * 255.0f);
-    uint u_b = (uint)(blue * 255.0f);
-
-    uint result = (u_b << 16) | (u_g << 8) | u_r;
-
-    return result;  
-}
-
-#else
-
-uint16 Color::ToRaw() const
-{
-    return colors[value];
-}
-
-#endif
