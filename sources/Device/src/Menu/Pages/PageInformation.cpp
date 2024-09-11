@@ -4,10 +4,16 @@
 #include "Nextion/Nextion.h"
 #include "Nextion/Display.h"
 #include "Hardware/Timer.h"
+#include <cstdio>
 
 
 namespace PageInformation
 {
+    static void DrawString(int x, int y, pchar text)
+    {
+        Nextion::DrawString({ x, y, 300, 60 }, Font::_1, Color::White, Color::Background, text, false, true);
+    }
+
     static void FuncDraw()
     {
         for (int i = 0; i < 2; i++)
@@ -17,9 +23,28 @@ namespace PageInformation
 
         Nextion::DrawString({ 50, 100, 700, 100 }, Font::_3, Color::White, Color::Background, "О приборе:", true, true);
 
-        Timer::Delay(100);
+        static const pchar strings[3][2] =
+        {
+            { "Производитель :",  "ОАО МНИПИ" },
+            { "Версия ПО :",      "1.0.1" },
+            { "Номер прибора : ", "" }
+        };
 
-        Nextion::DrawString({ 50, 200, 700, 200 }, Font::_1, Color::White, Color::Background, "Производитель ОАО МНИПИ", true, true);
+        const int y = 220;
+        const int x1 = 80;
+        const int x2 = 400;
+
+        for (int i = 0; i < 3; i++)
+        {
+            DrawString(x1, y + i * 70, strings[i][0]);
+            DrawString(x2, y + i * 70, strings[i][1]);
+        }
+
+        char buffer[32] = { '\0' };
+
+        std::sprintf(buffer, "%u", set.serial_number);
+
+        DrawString(x2, y + 2 * 70, buffer);
     }
 
     static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
