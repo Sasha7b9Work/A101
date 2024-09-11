@@ -52,6 +52,16 @@ namespace PageMenu
 
     static ButtonMenuPress btnBrightness("яркость", "Brightness", 1, 2);
 
+    static ButtonPress btnLess("-", "-", Font::_1, { Item::GetCoordX(2), Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool)
+    {
+
+    });
+
+    static ButtonPress btnMore("+", "+", Font::_1, { Item::GetCoordX(2) + 10 + Item::HEIGHT_MENU, Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool)
+    {
+
+    });
+
     static pchar names_lang[] =
     {
         "Russian",    "–усский",
@@ -84,6 +94,8 @@ namespace PageMenu
         }
 
         btnBrightness.SetShown(press);
+        btnLess.SetShown(press);
+        btnMore.SetShown(press);
         chLanguage.SetShown(press);
         btnInformation.SetShown(press);
     });
@@ -172,6 +184,8 @@ namespace PageMenu
         &chRangeFreq,
         &btnCOM,
         &btnBrightness,
+        &btnLess,
+        &btnMore,
         &chLanguage,
         &btnInformation,
         nullptr

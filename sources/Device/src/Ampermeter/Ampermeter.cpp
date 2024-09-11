@@ -108,6 +108,11 @@ void Ampermeter::Init()
 
 void Ampermeter::Update()
 {
+    if (Page::Current() != PageMain::self && Page::Current() != PageGraph::self && Page::Current() != PageCalibration::self)
+    {
+        return;
+    }
+
     if (Page::Current() == PageGraph::self &&   // Если страница отрисовки графиков
         DiagramInput::DataInstalled())          // и данные для отрисовки имеются в наличии
     {
