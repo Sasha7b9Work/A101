@@ -91,7 +91,7 @@ void Nextion::WaveInput::Draw(uint8 *points, int num_points)
     */
 
 
-    int id = 2;
+    int id = 1;
 
     SendCommandFormat("addt %d,0,%d", id, num_points);
 
