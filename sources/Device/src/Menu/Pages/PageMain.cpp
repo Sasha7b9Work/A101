@@ -16,10 +16,7 @@ namespace PageMain
 {
     extern ButtonToggle btnZeroAC;
     extern ButtonToggle btnZeroDC;
-    extern ButtonPress btnGraphics;
     extern ButtonPress btnMenu;
-    extern ButtonPress btnSettings;
-    extern ButtonPress btnCalibration;
 
     Label labelZeroDC{ true, "ноль", "zero", { 23, 170, 90, 50 }, Font::_1 };
     Label labelZeroAC{ true, "ноль", "zero", { 23, 260, 90, 50 }, Font::_1 };
@@ -75,9 +72,6 @@ namespace PageMain
 
         btnZeroDC.SetShown(is_show);
         btnZeroAC.SetShown(is_show);
-        btnGraphics.SetShown(is_show);
-        btnSettings.SetShown(is_show);
-        btnCalibration.SetShown(is_show);
 
         wndMIN.SetShown(set.en_Imin);
         wndMAX.SetShown(set.en_Imax);
@@ -162,16 +156,6 @@ namespace PageMain
         MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
     }, 1);
 
-    ButtonPress btnCalibration("Калибр.", "Calibr.", Font::_0, { 5, 84, 127, 74 }, [](Item *, bool)
-    {
-        PageCalibration::self->SetAsCurrent();
-    });
-
-    ButtonPress btnSettings("Настройки", "Settings", Font::_0, { 463, 4, 188, 74 }, [](Item *, bool)
-    {
-        PageSettings::self->SetAsCurrent();
-    });
-
     ButtonToggle btnZeroDC("Ноль DC", "Zero DC", Font::_0, { 660, 84, 136, 74 }, [](Item *item, bool)
     {
         ButtonToggle *btn = (ButtonToggle *)item;
@@ -200,11 +184,6 @@ namespace PageMain
         }
     });
 
-    ButtonPress btnGraphics("Графики", "Graphs", Font::_0, { 660, 243, 136, 74}, [](Item *, bool)    // Доступ к графикам
-    {
-        PageGraph::self->SetAsCurrent();
-    });
-
     ButtonPress btnMenu("Меню", "Menu", Font::_5, { 696, 4, 100, 37 }, [](Item *, bool press)           // Menu
     {
         if (!press)
@@ -223,11 +202,8 @@ namespace PageMain
         &btn50A,    // /
 
         &btnAC_DC,
-        &btnCalibration,
         &btnZeroDC,
         &btnZeroAC,
-        &btnGraphics,
-        &btnSettings,
         &btnZero,
         &wndDC,
         &wndAC,

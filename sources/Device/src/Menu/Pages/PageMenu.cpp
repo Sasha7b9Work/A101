@@ -103,7 +103,13 @@ namespace PageMenu
         btnIpeak.SetShown(press);
     });
 
-    static ButtonMenuPress btnCalibration("Калибровка", "Calibration", 0, 3);
+    static ButtonMenuPress btnCalibration("Калибровка", "Calibration", 0, 3, [](Item *, bool press)
+    {
+        if (!press)
+        {
+            PageCalibration::self->SetAsCurrent();
+        }
+    });
 
     static ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 4);
 

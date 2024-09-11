@@ -111,7 +111,8 @@ protected:
 struct ButtonPress : public ButtonCommon
 {
     // tickness - толщина границы
-    ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(Item *, bool), int _tickness = 3, TypeItem::E = TypeItem::ButtonPress, bool append_to_pool = true);
+    ButtonPress(pchar title_ru, pchar title_en, Font::E f, const Rect &, void (*_funcOnPress)(Item *, bool),
+        int _tickness = 3, TypeItem::E = TypeItem::ButtonPress, bool append_to_pool = true);
 
     virtual bool Draw() override;
 

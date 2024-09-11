@@ -32,10 +32,6 @@ namespace PageCalibration
         wndCurrent.Reset();
     }
 
-    // Выбор точки калибровки
-    // 0 - min, 1 - max
-    static void ChooseDot(int);
-
     static void ChooseRange(int);
 
     static const pchar PASSWORD = "1";
@@ -105,19 +101,12 @@ namespace PageCalibration
     // Установить видимость для цифровых кнопок
     static void SetVisibleDigits(bool visible);
 
-    static ButtonPress btnBack("Назад", "Back", Font::_1, { 11, 6, 150, 73 }, [](Item *, bool)
-        {
-            PageMain::self->SetAsCurrent();
-        });
-
-    static ButtonPress btnMin("Мин", "Min", Font::_1, { 11, 183, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btnMin("Мин", "Min", Font::_1, { 11, 183, 150, 73 }, [](Item *, bool)
     {
-        ChooseDot(0);
     });
 
-    static ButtonPress btnMax("Макс", "Max", Font::_1, { 11, 104, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btnMax("Макс", "Max", Font::_1, { 11, 104, 150, 73 }, [](Item *, bool)
     {
-        ChooseDot(1);
     });
 
     ButtonPress btnSave("Сохр.", "Save", Font::_1, { 236, 6, 130, 73 }, [](Item *item, bool)
@@ -127,8 +116,13 @@ namespace PageCalibration
         });
 
     // Нажатие кнопки на цифровой клавиатуре
-    static void PressDigit(char symbol)
+    static void PressDigit(char symbol, bool press)
     {
+        if (!press)
+        {
+            return;
+        }
+
         if (symbol == ' ')                              // Backspace
         {
             LabelPassword::Backspace();
@@ -145,7 +139,6 @@ namespace PageCalibration
             {
                 LabelPassword::Draw();
 
-                ChooseDot(0);
                 ChooseRange(5);
 
                 SetVisibleExceptButtons(true);
@@ -159,7 +152,7 @@ namespace PageCalibration
             }
             else
             {
-                // Первый символ - точка, последний - '-', между ними - серийный номер
+                // Первый символ - точка, последний - '-', между ними - серийный номер - две группы по четыре цифры, между которыми пробел
                 if (LabelPassword::buffer[0] == '.' && LabelPassword::buffer[LabelPassword::num_symbols - 1] == '-')
                 {
                     LabelPassword::buffer[LabelPassword::num_symbols - 1] = '\0';
@@ -171,6 +164,8 @@ namespace PageCalibration
                     set.serial_number = (hi << 16) + low;
 
                     set.Save();
+
+                    PageInformation::self->SetAsCurrent();
                 }
             }
         }
@@ -220,77 +215,78 @@ namespace PageCalibration
 
 #define SIZE_DIGIT 96, 96
 
-    ButtonPress btn0("0", "0", Font::_1, { 12, 276, SIZE_DIGIT }, [](Item *, bool)
+    ButtonPress btn0("0", "0", Font::_1, { 12, 276, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit('0');
+        PressDigit('0', press);
     });
 
-    static ButtonPress btn1("1", "1", Font::_1, { 113, 276, SIZE_DIGIT },  [](Item *, bool)
+    static ButtonPress btn1("1", "1", Font::_1, { 113, 276, SIZE_DIGIT },  [](Item *, bool press)
     {
-        PressDigit('1');
+        PressDigit('1', press);
     });
 
-    ButtonPress btn2("2", "2", Font::_1, { 214, 276, SIZE_DIGIT }, [](Item *, bool)
+    ButtonPress btn2("2", "2", Font::_1, { 214, 276, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit('2');
+        PressDigit('2', press);
     });
 
-    static ButtonPress btn3("3", "3", Font::_1, { 315, 276, SIZE_DIGIT }, [](Item *, bool)
+    static ButtonPress btn3("3", "3", Font::_1, { 315, 276, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit('3');
+        PressDigit('3', press);
     });
 
-    static ButtonPress btn4("4", "4", Font::_1, { 416, 276, SIZE_DIGIT }, [](Item *, bool)
+    static ButtonPress btn4("4", "4", Font::_1, { 416, 276, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit('4');
+        PressDigit('4', press);
     });
 
-    static ButtonPress btn5("5", "5", Font::_1, { 517, 276, SIZE_DIGIT }, [](Item *, bool)
+    static ButtonPress btn5("5", "5", Font::_1, { 517, 276, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit('5');
+        PressDigit('5', press);
     });
 
-    static ButtonPress btn6("6", "6", Font::_1, { 113, 377, SIZE_DIGIT }, [](Item *, bool)
+    static ButtonPress btn6("6", "6", Font::_1, { 113, 377, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit('6');
+        PressDigit('6', press);
     });
 
-    static ButtonPress btn7("7", "7", Font::_1, { 217, 377, SIZE_DIGIT }, [](Item *, bool)
+    static ButtonPress btn7("7", "7", Font::_1, { 217, 377, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit('7');
+        PressDigit('7', press);
     });
 
-    static ButtonPress btn8("8", "8", Font::_1, { 315, 377, SIZE_DIGIT }, [](Item *, bool)
+    static ButtonPress btn8("8", "8", Font::_1, { 315, 377, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit('8');
+        PressDigit('8', press);
     });
 
-    static ButtonPress btn9("9", "9", Font::_1, { 416, 377, SIZE_DIGIT }, [](Item *, bool)
+    static ButtonPress btn9("9", "9", Font::_1, { 416, 377, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit('9');
+        PressDigit('9', press);
     });
 
-    static ButtonPress btnDot(".", ".", Font::_1, { 12, 377, SIZE_DIGIT }, [](Item *, bool)
+    static ButtonPress btnDot(".", ".", Font::_1, { 12, 377, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit('.');
+        PressDigit('.', press);
     });
 
-    static ButtonPress btnSign("+-", "+-", Font::_1, { 517, 377, SIZE_DIGIT }, [](Item *, bool)
+    static ButtonPress btnSign("+-", "+-", Font::_1, { 517, 377, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit('-');
+        PressDigit('-', press);
     });
 
-    static ButtonPress btnBackspace("<-", "<-", Font::_1, { 624, 334, SIZE_DIGIT }, [](Item *, bool)
+    static ButtonPress btnBackspace("<-", "<-", Font::_1, { 624, 334, SIZE_DIGIT }, [](Item *, bool press)
     {
-        PressDigit(' ');
+        PressDigit(' ', press);
     });
 
-    static Item *items[] =
+    static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
     {
-        &btnBack, &btnSave, &btnCalib, &btnMin, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
-        &btn2A,   &btn20A,  &btn50A,   &btn0,   &btn1,    &btn2,   &btn3,    &btn4,
-        &btn5,    &btn6,    &btn7,     &btn8,   &btn9,    &btnDot, &btnSign, &btnBackspace, nullptr
-    };
+        if (!press)
+        {
+            PageMenu::self->SetAsCurrent();
+        }
+    });
 
     namespace ButtonsRange
     {
@@ -333,23 +329,6 @@ namespace PageCalibration
         }
     }
 
-
-    static void ChooseDot(int dot)
-    {
-        static ButtonPress *btns[2] =
-        {
-            &btnMin,
-            &btnMax
-        };
-
-        for (int i = 0; i < 2; i++)
-        {
-            btns[i]->Release();
-        }
-
-        btns[dot]->Press();
-    }
-
     static void ChooseRange(int range)
     {
         ButtonsRange::SetRange(range);
@@ -365,6 +344,7 @@ namespace PageCalibration
     void SetVisibleDigits(bool visible)
     {
         btn0.SetShown(visible);
+        btn0.Refresh();
         btn1.SetShown(visible);
         btn2.SetShown(visible);
         btn3.SetShown(visible);
@@ -407,8 +387,6 @@ namespace PageCalibration
         SetVisibleDigits(true);
 
         LabelPassword::Reset();
-
-        ChooseDot(0);
     }
 
     static void FuncDraw()
@@ -441,6 +419,13 @@ namespace PageCalibration
             }
         }
     }
+
+    static Item *items[] =
+    {
+        &btnBack, &btnSave, &btnCalib, &btnMin, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
+        &btn2A,   &btn20A,  &btn50A,   &btn0,   &btn1,    &btn2,   &btn3,    &btn4,
+        &btn5,    &btn6,    &btn7,     &btn8,   &btn9,    &btnDot, &btnSign, &btnBackspace, nullptr
+    };
 
     static Page pageCalibration(items, FuncOnEnter, FuncDraw);
 

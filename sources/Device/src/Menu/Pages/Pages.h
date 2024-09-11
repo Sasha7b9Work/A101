@@ -64,9 +64,3 @@ namespace PageDebug
 {
     extern Page *self;
 }
-
-
-namespace PageSettings
-{
-    extern Page *self;
-}

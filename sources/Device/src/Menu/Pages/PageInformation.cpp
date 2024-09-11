@@ -42,7 +42,7 @@ namespace PageInformation
 
         char buffer[32] = { '\0' };
 
-        std::sprintf(buffer, "%u", set.serial_number);
+        std::sprintf(buffer, "%04u %04u", set.serial_number & 0xFFFF, (set.serial_number >> 16));
 
         DrawString(x2, y + 2 * 70, buffer);
     }
