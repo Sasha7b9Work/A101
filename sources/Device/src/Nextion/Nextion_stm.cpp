@@ -13,8 +13,6 @@
 
 namespace Nextion
 {
-    static void SendByte(uint8);
-
     static void SendCommandRAW(pchar);
 
     // Функция заверашется при получении кода
@@ -43,12 +41,6 @@ namespace Nextion
 
         return (pchar)buffer;
     }
-}
-
-
-namespace Nextion
-{
-    static void WaitResponse(ResponseCode::E);
 }
 
 
@@ -85,38 +77,11 @@ void Nextion::DrawString(const Rect &rect, int font, const Color &color, const C
 
 void Nextion::WaveInput::Draw(uint8 *points, int num_points)
 {
-    /*
-    * Маленький - в форму 9
-    * Большой - в форму 7
-    */
+    Nextion::FillRect({ 0, 0, num_points, 255 }, Color::Background);
 
-
-    int id = 1;
-
-    SendCommandFormat("addt %d,0,%d", id, num_points);
-
-    WaitResponse(ResponseCode::TransparentDataReady);
-
-    for (int i = 0; i < num_points; i++)
+    for (int i = 1; i < num_points; i++)
     {
-        SendByte(*points++);
-    }
-
-    WaitResponse(ResponseCode::TransparentDataFinished);
-}
-
-
-void Nextion::WaitResponse(ResponseCode::E code)
-{
-    TimeMeterMS meter;
-
-    while (LastCode::Get() != code)
-    {
-        if (meter.ElapsedTime() > 200)
-        {
-            LOG_WRITE("Not response");
-            break;
-        }
+        Nextion::DrawLine(i - 1, points[i - 1], i, points[i], Color::White);
     }
 }
 
@@ -141,14 +106,6 @@ void Nextion::WaveFFT::Enable(int size)
 void Nextion::WaveFFT::Disable(int size)
 {
     Nextion::SendCommandFormat("vis %s,0", size ? "waveBig" : "waveRight");
-}
-
-
-void Nextion::SendByte(uint8 byte)
-{
-    LastCode::Set(ResponseCode::None);
-
-    HAL_USART2::SendByte(byte);
 }
 
 
