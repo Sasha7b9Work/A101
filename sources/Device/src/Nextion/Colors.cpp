@@ -39,12 +39,6 @@ void Color::SetAsCurrent() const
 }
 
 
-pchar Color::CurrentValue()
-{
-    return colors[Current().value];
-}
-
-
 pchar Color::GetValue() const
 {
     return colors[value];
