@@ -32,27 +32,15 @@ void Device::Init()
 
 void Device::Update()
 {
-    TimeMeterMS timer;
-    
     Ampermeter::Update();
-    
-    volatile uint time = timer.ElapsedTime();
 
     Nextion::Update();
-    
-    time = timer.ElapsedTime();
 
     Display::Update();
-    
-    time = timer.ElapsedTime();
 
     Profiler::Update();
-    
-    time = timer.ElapsedTime();
 
     SCPI::Update();
-    
-    time = timer.ElapsedTime();
 
     set.Save();
 }

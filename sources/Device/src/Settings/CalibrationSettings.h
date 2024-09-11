@@ -19,7 +19,7 @@ struct CalibrationSettings
         Zero(int _value = 0) : const_val(_value), var_val(0)  { }
         void SetConst(int v) { const_val = v; }
         void SetVar(int v) { var_val = v; }
-        int _GetFull() const { return const_val + var_val; }
+        int GetFull() const { return const_val + var_val; }
 
         int GetConst() const { return const_val; }
         int _GetVar() const { return var_val; }

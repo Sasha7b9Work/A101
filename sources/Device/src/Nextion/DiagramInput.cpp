@@ -9,7 +9,7 @@
 
 namespace DiagramInput
 {
-    static const REAL height = 256;         // Таков размах по вре
+    static const REAL height = 256;         // Таков размах по высоте
     static const REAL y0 = 128;
 
     static uint8 points[1024];

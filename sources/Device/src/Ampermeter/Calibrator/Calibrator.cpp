@@ -60,7 +60,7 @@ bool Calibrator::CalibratorZero::Run()
 {
     CalibrationSettings::Zero &zero = cal.zero[Range::Current()];
 
-    const int const_val = zero._GetFull();
+    const int const_val = zero.GetFull();
 
     InputRelays::EnableZero(true);
     zero.SetVar(0);

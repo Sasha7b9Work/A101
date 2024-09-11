@@ -406,6 +406,12 @@ ButtonToggle *Item::ToButtonToggle()
 }
 
 
+ButtonPress *Item::ToButtonPress()
+{
+    return (type == TypeItem::ButtonPress) ? (ButtonPress *)this : nullptr;
+}
+
+
 Choice *Item::ToChoice()
 {
     return (type == TypeItem::Choice) ? (Choice *)this : nullptr;

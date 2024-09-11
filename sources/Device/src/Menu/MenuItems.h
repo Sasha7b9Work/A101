@@ -66,6 +66,7 @@ struct Item
     static void OnEventRelease(int, int);
 
     ButtonToggle *ToButtonToggle();
+    ButtonPress *ToButtonPress();
 
     Choice *ToChoice();
 
