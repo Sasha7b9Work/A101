@@ -1,7 +1,6 @@
 // 2022/10/31 19:37:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Nextion/Nextion.h"
-#include "Nextion/DiagramFFT.h"
 #include "Nextion/DiagramInput.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -76,9 +75,9 @@ void Nextion::DrawString(const Rect &rect, int font, const Color &color, const C
 }
 
 
-void Nextion::WaveInput::Draw(uint8 *points, int num_points)
+void Nextion::WaveInput::Draw(int x, uint8 *points, int num_points)
 {
-    int x0 = 0;
+    int x0 = x;
     int y0 = Display::HEIGHT - 255;
 
     Nextion::FillRect({ x0, y0, num_points, 255 }, Color::Background);

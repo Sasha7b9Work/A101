@@ -1586,16 +1586,6 @@
               <FilePath>.\src\Nextion\Colors.h</FilePath>
             </File>
             <File>
-              <FileName>DiagramFFT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Nextion\DiagramFFT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DiagramFFT.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Nextion\DiagramFFT.h</FilePath>
-            </File>
-            <File>
               <FileName>DiagramInput.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Nextion\DiagramInput.cpp</FilePath>
@@ -2967,16 +2957,6 @@
               <FileName>Colors.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Nextion\Colors.h</FilePath>
-            </File>
-            <File>
-              <FileName>DiagramFFT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Nextion\DiagramFFT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DiagramFFT.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Nextion\DiagramFFT.h</FilePath>
             </File>
             <File>
               <FileName>DiagramInput.cpp</FileName>

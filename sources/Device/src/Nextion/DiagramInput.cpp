@@ -1,7 +1,6 @@
 // 2022/10/19 09:03:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Nextion/DiagramInput.h"
-#include "Nextion/DiagramFFT.h"
 #include "Nextion/Nextion.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
@@ -12,12 +11,9 @@ namespace DiagramInput
 {
     static const REAL height = 256;        // Таков размах по вре
     static const REAL y0 = 128;
-    static bool enabled = false;
     static uint time_next_draw = 0;         // Время следующей отрисовки картинки
 
     static uint8 points[1024];
-
-    static bool NeedDraw();
 
     static int NumPoints();
 }
@@ -81,69 +77,9 @@ void DiagramInput::SetData()
 }
 
 
-bool DiagramInput::NeedDraw()
-{
-    return true;
-//    if (HAL_TIM::TimeMS() < time_next_draw)
-//    {
-//        return false;
-//    }
-//
-//    time_next_draw = HAL_TIM::TimeMS() + 1000;
-//
-//    return true;
-}
-
-
 void DiagramInput::Draw()
 {
-    if(NeedDraw())
-    {
-        Nextion::WaveInput::Draw(points, NumPoints());
-    }
-}
-
-
-void DiagramInput::Enable(bool _enable)
-{
-    if (enabled == _enable)
-    {
-        return;
-    }
-
-    time_next_draw = 0;
-
-    enabled = _enable;
-
-    Nextion::WaveFFT::Disable(0);
-    Nextion::WaveFFT::Disable(1);
-    Nextion::WaveInput::Disable(0);
-
-    if (enabled)
-    {
-        if (DiagramFFT::IsEnabled())
-        {
-            Nextion::WaveFFT::Enable(0);
-            Nextion::WaveInput::Enable(0);
-        }
-        else
-        {
-            Nextion::WaveInput::Enable(1);
-        }
-    }
-    else
-    {
-        if (DiagramFFT::IsEnabled())
-        {
-            Nextion::WaveFFT::Enable(1);
-        }
-    }
-}
-
-
-bool DiagramInput::IsEnabled()
-{
-    return enabled;
+    Nextion::WaveInput::Draw(0, points, NumPoints());
 }
 
 

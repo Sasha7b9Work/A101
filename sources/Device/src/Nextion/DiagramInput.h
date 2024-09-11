@@ -5,10 +5,6 @@
 
 namespace DiagramInput
 {
-    void Enable(bool);
-
-    bool IsEnabled();
-
     void SetData();
 
     void Draw();
