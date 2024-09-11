@@ -21,24 +21,27 @@ namespace PageGraph
 
 
     static ButtonToggle btnWave("Сигнал", "Signal", Font::_1, { 8, 5, 160, 80 }, [](Item *, bool)
-        {
-            DiagramInput::Draw();
+    {
+        DiagramInput::Draw();
 
-            DiagramFFT::Draw();
-        });
+        DiagramFFT::Draw();
+    });
 
 
     static ButtonToggle btnSpectr("Спектр", "Spectr", Font::_1, { 172, 5, 160, 80 }, [](Item *, bool)
-        {
-            DiagramInput::Draw();
+    {
+        DiagramInput::Draw();
 
-            DiagramFFT::Draw();
-        });
+        DiagramFFT::Draw();
+    });
 
-    static ButtonPress btnBack("Назад", "Back", Font::_1, { 635, 5, 160, 80 }, [](Item *, bool)
+    static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
+    {
+        if (!press)
         {
             PageMain::self->SetAsCurrent();
-        });
+        }
+    });
 
     static Item *items[] =
     {
@@ -51,9 +54,4 @@ namespace PageGraph
     static Page pageTwo(items, FuncOnEnter, FuncDraw);
 
     Page *self = &pageTwo;
-
-    void EnableDebug()
-    {
-//        pageTwo.SetItem(4, &btnDebug);
-    }
 }

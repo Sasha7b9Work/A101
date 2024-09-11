@@ -111,7 +111,13 @@ namespace PageMenu
         }
     });
 
-    static ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 4);
+    static ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 4, [](Item *, bool press)
+    {
+        if (!press)
+        {
+            PageGraph::self->SetAsCurrent();
+        }
+    });
 
     static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
     {

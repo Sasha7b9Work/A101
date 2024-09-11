@@ -46,9 +46,6 @@ namespace PageInformation
 namespace PageGraph
 {
     extern Page *self;
-
-    // ¬ключить страницу отладки
-    void EnableDebug();
 }
 
 
