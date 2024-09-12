@@ -135,6 +135,7 @@ struct Settings
     StopBits::E stop_bits;
     ChangeRange::E change_range;
     RangeFreq::E range_freq;
+    int16 brightness;   // €ркость от нул€ до 100
 
     uint serial_number;
 

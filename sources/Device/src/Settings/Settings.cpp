@@ -31,6 +31,7 @@ namespace NS_Settings
         StopBits::_1,
         ChangeRange::Hand,
         RangeFreq::Hi,
+        100,        // brightness
 
         0U,         // serial number
         Lang::RU

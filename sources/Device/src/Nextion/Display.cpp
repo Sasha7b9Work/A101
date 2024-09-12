@@ -30,9 +30,17 @@ void Display::Init()
     Nextion::WaveInput::Disable(1);
     Nextion::WaveFFT::Disable(0);
 
+    SetBrightness();
+
 #ifdef DEBUG
     Nextion::DrawString({10, 350, 100, 40}, 0, Color::Black, Color::Background, "Debug");
 #endif
+}
+
+
+void Display::SetBrightness()
+{
+    Nextion::SendCommandFormat("dims=%d", set.brightness);
 }
 
 

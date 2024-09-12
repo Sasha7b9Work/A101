@@ -14,6 +14,8 @@ namespace Display
 
     void Clear();
 
+    void SetBrightness();
+
     namespace LabelStar
     {
         // Вызывается после поступившего измерения, чтобы зажечь звёздочку

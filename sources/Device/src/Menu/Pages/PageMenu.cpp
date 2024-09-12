@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Nextion/Display.h"
+#include "Utils/String.h"
 
 
 namespace PageMenu
@@ -50,11 +51,28 @@ namespace PageMenu
         btnCOM.SetShown(press);
     });
 
-    static ButtonMenuPress btnBrightness("яркость", "Brightness", 1, 2);
+    static ButtonMenuPress btnBrightness("яркость", "Brightness", 1, 2, [](Item *item, bool press)
+    {
+        if (press)
+        {
+            item->ToButtonPress()->SetText(String<>("яркость %в", set.brightness).c_str(), String<>("Bright %d", set.brightness).c_str());
+            item->ToButtonPress()->Release();
+            Display::SetBrightness();
+        }
+    });
 
     static ButtonPress btnLess("-", "-", Font::_1, { Item::GetCoordX(2), Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool)
     {
-
+        if (set.brightness > 0)
+        {
+            set.brightness -= 10;
+            btnBrightness.Press();
+        }
+        if (set.brightness < 100)
+        {
+            set.brightness += 10;
+            btnBrightness.Press();
+        }
     });
 
     static ButtonPress btnMore("+", "+", Font::_1, { Item::GetCoordX(2) + 10 + Item::HEIGHT_MENU, Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool)
