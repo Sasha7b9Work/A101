@@ -174,6 +174,27 @@ void LabelMeasure::SetShown(bool show)
 
 void LabelMeasure::Reset()
 {
+    int range = Range::Current();
+
+    if (range == 0 || range == 3)
+    {
+        label_digits.SetText("*.****", "*.****");
+    }
+    else if (range == 1 || range == 4 || range == 5)
+    {
+        label_digits.SetText("**.***", "**.***");
+    }
+    else if (range == 2)
+    {
+        label_digits.SetText("***.**", "***.**");
+    }
+
+    label_units.SetText(range < 3 ? "ìA" : "A", range < 3 ? "ìA" : "A");
+
+    label_sign.SetText("", "");
+
+    buf_measure[0] = '\0';
+
     need_draw = true;
 }
 
