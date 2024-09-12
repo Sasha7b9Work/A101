@@ -76,7 +76,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonPress btnLess("-", "-", Font::_1, { Item::GetCoordX(2), Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool press)
+    static ButtonPress btnLess("-", "-", Font::_1_GB42b, { Item::GetCoordX(2), Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool press)
     {
         if (press)
         {
@@ -88,7 +88,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonPress btnMore("+", "+", Font::_1, { Item::GetCoordX(2) + 10 + Item::HEIGHT_MENU, Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool press)
+    static ButtonPress btnMore("+", "+", Font::_1_GB42b, { Item::GetCoordX(2) + 10 + Item::HEIGHT_MENU, Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool press)
     {
         if (press)
         {

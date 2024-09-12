@@ -18,8 +18,8 @@ namespace PageMain
     extern ButtonToggle btnZeroDC;
     extern ButtonPress btnMenu;
 
-    Label labelZeroDC{ true, "ноль", "zero", { 23, 170, 90, 50 }, Font::_1 };
-    Label labelZeroAC{ true, "ноль", "zero", { 23, 260, 90, 50 }, Font::_1 };
+    Label labelZeroDC{ true, "ноль", "zero", { 23, 170, 90, 50 }, Font::_1_GB42b };
+    Label labelZeroAC{ true, "ноль", "zero", { 23, 260, 90, 50 }, Font::_1_GB42b };
 
     LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 134, 143 };
     LabelMeasure wndAC{ TypeMeasure::AC, SizeMeasure::Big, 134, 233 };
@@ -39,7 +39,7 @@ namespace PageMain
         wndMAX.Reset();
     }
 
-    static ButtonPress btnZero("Уст. 0", "Set 0", Font::_1, { 669, 321, 127, 74 }, [](Item *, bool)
+    static ButtonPress btnZero("Уст. 0", "Set 0", Font::_1_GB42b, { 669, 321, 127, 74 }, [](Item *, bool)
     {
         Ampermeter::ZeroDC::FloatingZero::Process();
     });
@@ -149,14 +149,14 @@ namespace PageMain
         FuncOnRange(item, 5, press);
     });
 
-    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_5, { 6, 4, 100, 37 }, [](Item *, bool)
+    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_5_GB30b, { 6, 4, 100, 37 }, [](Item *, bool)
     {
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
         MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
     }, 1);
 
-    ButtonToggle btnZeroDC("Ноль DC", "Zero DC", Font::_0, { 660, 84, 136, 74 }, [](Item *item, bool)
+    ButtonToggle btnZeroDC("Ноль DC", "Zero DC", Font::_0_GB34b, { 660, 84, 136, 74 }, [](Item *item, bool)
     {
         ButtonToggle *btn = (ButtonToggle *)item;
 
@@ -170,7 +170,7 @@ namespace PageMain
         }
     });
 
-    ButtonToggle btnZeroAC("Ноль AC", "Zero AC", Font::_0, { 660, 164, 136, 74 }, [](Item *item, bool)
+    ButtonToggle btnZeroAC("Ноль AC", "Zero AC", Font::_0_GB34b, { 660, 164, 136, 74 }, [](Item *item, bool)
     {
         ButtonToggle *btn = (ButtonToggle *)item;
 
@@ -184,7 +184,7 @@ namespace PageMain
         }
     });
 
-    ButtonPress btnMenu("Меню", "Menu", Font::_5, { 696, 4, 100, 37 }, [](Item *, bool press)           // Menu
+    ButtonPress btnMenu("Меню", "Menu", Font::_5_GB30b, { 696, 4, 100, 37 }, [](Item *, bool press)           // Menu
     {
         if (!press)
         {

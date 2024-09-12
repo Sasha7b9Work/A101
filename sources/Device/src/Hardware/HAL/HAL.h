@@ -90,8 +90,6 @@ namespace HAL_USART2
     // Посылает без завершаюшего нуля
     void SendNZ(pchar);
 
-    void SendByte(uint8);
-
     extern void *handle;   // UART_HandleTypeDef
 
     void CallbackOnReceive();

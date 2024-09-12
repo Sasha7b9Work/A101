@@ -138,7 +138,7 @@ struct ButtonToggle : public ButtonPress
 struct ButtonRange : public ButtonToggle
 {
     ButtonRange(pchar title_ru, pchar title_en, int x, int y, void (*_funcOnPress)(Item *, bool)) :
-        ButtonToggle(title_ru, title_en, Font::_1, { x, y, 127, 74 }, _funcOnPress)
+        ButtonToggle(title_ru, title_en, Font::_1_GB42b, { x, y, 127, 74 }, _funcOnPress)
     {
     }
 };
@@ -147,7 +147,7 @@ struct ButtonRange : public ButtonToggle
 struct ButtonMenuPress : public ButtonPress
 {
     ButtonMenuPress(pchar title_ru, pchar title_en, int col_x, int row_y, void (*_funcOnPress)(Item *, bool) = nullptr) :
-        ButtonPress(title_ru, title_en, Font::_1, { Item::GetCoordX(col_x), Item::GetCoordY(row_y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress)
+        ButtonPress(title_ru, title_en, Font::_1_GB42b, { Item::GetCoordX(col_x), Item::GetCoordY(row_y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress)
     {
     }
 };
@@ -156,7 +156,7 @@ struct ButtonMenuPress : public ButtonPress
 struct ButtonMenuToggle : public ButtonToggle
 {
     ButtonMenuToggle(pchar title_ru, pchar title_en, int col_x, int row_y, void (*_funcOnPress)(Item *, bool)) :
-        ButtonToggle(title_ru, title_en, Font::_1, { Item::GetCoordX(col_x), Item::GetCoordY(row_y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress)
+        ButtonToggle(title_ru, title_en, Font::_1_GB42b, { Item::GetCoordX(col_x), Item::GetCoordY(row_y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress)
     {
     }
 };
@@ -167,7 +167,7 @@ struct Label : public Item
     static const int MAX_LEN = 32;
 
     // Если append == true - видимостью управляет страница - объект помещается в глобальный пул объектов
-    Label(bool append = false, pchar _textRU = "", pchar _textEN = "", const Rect & = Rect(), Font::E = Font::_0, void (*_funcOnPress)(Item *, bool) = EmptyFuncVIemB,
+    Label(bool append = false, pchar _textRU = "", pchar _textEN = "", const Rect & = Rect(), Font::E = Font::_0_GB34b, void (*_funcOnPress)(Item *, bool) = EmptyFuncVIemB,
         const Color &_colorText = Color::White, const Color &_colorBack = Color::Count, bool _h_aligned = false, bool _v_align = true);
 
     Label &operator=(const Label &);
@@ -210,7 +210,7 @@ protected:
 
 struct Choice : public Item
 {
-    Choice(pchar title_ru, pchar title_en, uint8 *choice, pchar *_names, int col_x, int row_y, void (_funcOnPress)(Item *, bool) = nullptr, Font::E = Font::_1);
+    Choice(pchar title_ru, pchar title_en, uint8 *choice, pchar *_names, int col_x, int row_y, void (_funcOnPress)(Item *, bool) = nullptr, Font::E = Font::_1_GB42b);
 
     virtual void SetParent(Page *) override;
 

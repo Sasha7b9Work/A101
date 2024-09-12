@@ -12,9 +12,9 @@ namespace LM
 {
     static const Font::E fonts[SizeMeasure::Count] =
     {
-        Font::_4,
-        Font::_0,
-        Font::_4
+        Font::_4_GB80b,
+        Font::_0_GB34b,
+        Font::_4_GB80b
     };
 
     static const int16 heights[SizeMeasure::Count] =

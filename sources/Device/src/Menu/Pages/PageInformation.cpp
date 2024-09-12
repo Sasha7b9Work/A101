@@ -11,7 +11,7 @@ namespace PageInformation
 {
     static void DrawString(int x, int y, pchar text)
     {
-        Nextion::DrawString({ x, y, 300, 60 }, Font::_1, Color::White, Color::Background, text, false, true);
+        Nextion::DrawString({ x, y, 300, 60 }, Font::_1_GB42b, Color::White, Color::Background, text, false, true);
     }
 
     static void FuncEnter()
@@ -21,7 +21,7 @@ namespace PageInformation
             Nextion::DrawRect({ i, i, Display::WIDTH - 1 - i * 2, Display::HEIGHT - 1 - i * 2 }, Color::White);
         }
 
-        Nextion::DrawString({ 50, 100, 700, 100 }, Font::_3, Color::White, Color::Background, "О приборе:", true, true);
+        Nextion::DrawString({ 50, 100, 700, 100 }, Font::_3_GB80_2, Color::White, Color::Background, "О приборе:", true, true);
 
         static const pchar strings[3][2] =
         {
