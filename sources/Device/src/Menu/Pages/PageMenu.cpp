@@ -51,33 +51,38 @@ namespace PageMenu
         btnCOM.SetShown(press);
     });
 
-    static ButtonMenuPress btnBrightness("яркость", "Brightness", 1, 2, [](Item *item, bool press)
+    static ButtonMenuPress btnBrightness(String<>("ярк %d", set.brightness).c_str(), String<>("Bright %d", set.brightness).c_str(), 1, 2, [](Item *item, bool press)
     {
         if (press)
         {
-            item->ToButtonPress()->SetText(String<>("яркость %в", set.brightness).c_str(), String<>("Bright %d", set.brightness).c_str());
+            item->ToButtonPress()->SetText(String<>("ярк %d", set.brightness).c_str(), String<>("Bright %d", set.brightness).c_str());
             item->ToButtonPress()->Release();
             Display::SetBrightness();
         }
     });
 
-    static ButtonPress btnLess("-", "-", Font::_1, { Item::GetCoordX(2), Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool)
+    static ButtonPress btnLess("-", "-", Font::_1, { Item::GetCoordX(2), Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool press)
     {
-        if (set.brightness > 0)
+        if (press)
         {
-            set.brightness -= 10;
-            btnBrightness.Press();
-        }
-        if (set.brightness < 100)
-        {
-            set.brightness += 10;
-            btnBrightness.Press();
+            if (set.brightness > 10)
+            {
+                set.brightness -= 10;
+                btnBrightness.Press();
+            }
         }
     });
 
-    static ButtonPress btnMore("+", "+", Font::_1, { Item::GetCoordX(2) + 10 + Item::HEIGHT_MENU, Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool)
+    static ButtonPress btnMore("+", "+", Font::_1, { Item::GetCoordX(2) + 10 + Item::HEIGHT_MENU, Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool press)
     {
-
+        if (press)
+        {
+            if (set.brightness < 100)
+            {
+                set.brightness += 10;
+                btnBrightness.Press();
+            }
+        }
     });
 
     static pchar names_lang[] =
