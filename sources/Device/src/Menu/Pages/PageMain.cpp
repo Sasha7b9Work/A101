@@ -235,13 +235,31 @@ namespace PageMain
         FuncOnRange(item, 5, press);
     });
 
-    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_5_GB30b, { CoordXHiButton(0), 4, WidthHiButton(), 37 }, [](Item *, bool press)
+    static ButtonPress btnAC_DC("AC+DC", "AC+DC", Font::_5_GB30b, { CoordXHiButton(0), 4, WidthHiButton(), 37 }, [](Item *item, bool press)
     {
         if (press)
         {
-            MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
-            MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
-            MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
+            ButtonPress *button = item->ToButtonPress();
+
+            if (MeasuresOnDisplay::IsAC_DC())
+            {
+                button->SetText("DC", "DC");
+                MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
+                wndAC.SetEnabled(false);
+            }
+            else if (MeasuresOnDisplay::IsDC())
+            {
+                button->SetText("AC", "AC");
+                MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
+                wndAC.SetEnabled(true);
+                wndDC.SetEnabled(false);
+            }
+            else
+            {
+                button->SetText("AC+DC", "AC+DC");
+                MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
+                wndDC.SetEnabled(true);
+            }
         }
     }, 1);
 

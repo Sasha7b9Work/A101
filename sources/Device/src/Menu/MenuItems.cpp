@@ -132,7 +132,7 @@ void Item::SetEnabled(bool set_enabled)
 
         enabled = true;
 
-        is_shown = true;
+        SetShown(true);
 
         Draw();
     }
@@ -143,7 +143,7 @@ void Item::SetEnabled(bool set_enabled)
             return;
         }
 
-        is_shown = false;
+        SetShown(false);
 
         Draw();
 
