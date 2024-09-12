@@ -21,7 +21,7 @@ namespace PageMain
     void HightLightCurrentRange();
 
     // После изменения выводимых на экран измерений нужно вызывать эту функцию
-    void RedrawAdditionMeasures();
+    void RedrawAllMeasures();
 }
 
 

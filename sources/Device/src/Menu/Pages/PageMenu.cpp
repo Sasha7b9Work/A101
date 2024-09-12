@@ -92,7 +92,7 @@ namespace PageMenu
 
         ToggleButtonsMeasures();
 
-        PageMain::RedrawAdditionMeasures();
+        PageMain::RedrawAllMeasures();
     }
 
 

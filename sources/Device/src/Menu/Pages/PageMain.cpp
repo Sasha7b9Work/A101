@@ -36,7 +36,7 @@ namespace PageMain
         &wndFREQ
     };
 
-    void RedrawAdditionMeasures()
+    void RedrawAllMeasures()
     {
         int16 x = 25;
 
@@ -150,7 +150,7 @@ namespace PageMain
             Range::Set(range);
         }
 
-        RedrawAdditionMeasures();
+        RedrawAllMeasures();
 
         wndMIN.SetEnabled(TypeMeasure(TypeMeasure::Min).IsShown());
         wndMAX.SetEnabled(TypeMeasure(TypeMeasure::Max).IsShown());
