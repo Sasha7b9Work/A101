@@ -41,8 +41,6 @@ void Ampermeter::ZeroDC::Enable()
     }
 
     PageMain::HightLightCurrentRange();
-
-//    PageMain::labelZeroDC.SetShown(true);
 }
 
 
@@ -64,10 +62,6 @@ void Ampermeter::ZeroDC::FloatingZero::Process()
 void Ampermeter::ZeroDC::Disable()
 {
     value_abs = 0.0;
-
-//    PageMain::labelZeroDC.SetShown(false);
-
-//    Nextion::SetValue("bt11", 0);
 }
 
 

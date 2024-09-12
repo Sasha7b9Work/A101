@@ -22,9 +22,6 @@ namespace PageMain
 
     // После изменения выводимых на экран измерений нужно вызывать эту функцию
     void RedrawAdditionMeasures();
-
-//    extern Label labelZeroDC;
-//    extern Label labelZeroAC;
 }
 
 
