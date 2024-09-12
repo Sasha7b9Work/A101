@@ -12,14 +12,14 @@ namespace LM
 {
     static const Font::E fonts[SizeMeasure::Count] =
     {
-        Font::_4_GB80b,
+        Font::_7_GOST_B_144b,
         Font::_0_GB34b,
         Font::_4_GB80b
     };
 
     static const int16 heights[SizeMeasure::Count] =
     {
-        85,
+        140,
         40,
         85
     };
@@ -36,14 +36,14 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
 
     label_name = Label(false, type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
         { _x + x, _y, width, height },
-        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, false, true);
+        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, true, true);
 
     x += width;
     width = GetWidth(_size, 1);
 
     label_sign = Label(false, "", "",
         { _x + x, _y, width, height },
-        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, true, true);
+        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, false, true);
 
     x += width;
     width = GetWidth(_size, 2);
@@ -67,7 +67,7 @@ int LabelMeasure::GetWidth(SizeMeasure::E size, int label)
 {
     static const int width[SizeMeasure::Count][4] =
     {
-        {100, 40, 250, 100},
+        {175, 64, 390, 170},
         {80,  17, 100, 45},
         {100, 40, 250, 100}
     };

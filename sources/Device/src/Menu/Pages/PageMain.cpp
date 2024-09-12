@@ -18,16 +18,16 @@ namespace PageMain
     extern ButtonToggle btnZeroDC;
     extern ButtonPress btnMenu;
 
-    Label labelZeroDC{ true, "ноль", "zero", { 23, 170, 90, 50 }, Font::_1_GB42b };
-    Label labelZeroAC{ true, "ноль", "zero", { 23, 260, 90, 50 }, Font::_1_GB42b };
+//    Label labelZeroDC{ true, "ноль", "zero", { 23, 170, 90, 50 }, Font::_1_GB42b };
+//    Label labelZeroAC{ true, "ноль", "zero", { 23, 260, 90, 50 }, Font::_1_GB42b };
 
-    LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 134, 143 };
-    LabelMeasure wndAC{ TypeMeasure::AC, SizeMeasure::Big, 134, 233 };
+    LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 0, 80 };
+    LabelMeasure wndAC{ TypeMeasure::AC, SizeMeasure::Big, 0, 220 };
 
-    static LabelMeasure wndAMPL{ TypeMeasure::Ampl, SizeMeasure::Small, 433, 27 };
-    static LabelMeasure wndPEAK{ TypeMeasure::Peak, SizeMeasure::Small, 433, 70 };
-    static LabelMeasure wndMIN{ TypeMeasure::Min,   SizeMeasure::Small, 171, 70 };
-    static LabelMeasure wndMAX{ TypeMeasure::Max,   SizeMeasure::Small, 171, 27 };
+    static LabelMeasure wndAMPL{ TypeMeasure::Ampl, SizeMeasure::Small, 433, 5 };
+    static LabelMeasure wndPEAK{ TypeMeasure::Peak, SizeMeasure::Small, 433, 55 };
+    static LabelMeasure wndMIN{ TypeMeasure::Min,   SizeMeasure::Small, 171, 55 };
+    static LabelMeasure wndMAX{ TypeMeasure::Max,   SizeMeasure::Small, 171, 5 };
 
     static void ResetAllMeasures()
     {
@@ -204,16 +204,16 @@ namespace PageMain
         &btnAC_DC,
         &btnZeroDC,
         &btnZeroAC,
-        &btnZero,
         &wndDC,
         &wndAC,
         &wndAMPL,
         &wndPEAK,
         &wndMIN,
         &wndMAX,
-        &labelZeroAC,
-        &labelZeroDC,
+//        &labelZeroAC,
+//        &labelZeroDC,
         &btnMenu,
+        &btnZero,
         nullptr
     };
 
@@ -266,12 +266,12 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
     {
         enable ? btnZeroAC.Press() : btnZeroAC.Release();
 
-        PageMain::labelZeroAC.SetShown(enable);
+//        PageMain::labelZeroAC.SetShown(enable);
     }
     else if (meas == MeasuresOnDisplay::DC)
     {
         enable ? btnZeroDC.Press() : btnZeroDC.Release();
 
-        PageMain::labelZeroDC.SetShown(enable);
+//        PageMain::labelZeroDC.SetShown(enable);
     }
 }
