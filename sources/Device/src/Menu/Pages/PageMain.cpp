@@ -41,7 +41,7 @@ namespace PageMain
 
     void RedrawAdditionMeasures()
     {
-        int16 x = 50;
+        int16 x = 25;
 
         for (int i = 0; i < 3; i++)
         {
@@ -52,7 +52,7 @@ namespace PageMain
 
             labels[set.en_add_meas[i] - 2]->SetCoord({ x, 350 });
 
-            x += (700 / 3);
+            x += (750 / 3);
         }
     }
 
@@ -66,10 +66,42 @@ namespace PageMain
         wndMAX.Reset();
     }
 
-    static ButtonPress btnZero("Уст. 0", "Set 0", Font::_1_GB42b, { 669, 321, 127, 74 }, [](Item *, bool)
+    static ButtonPress btnZero("Уст. 0", "Set 0", Font::_5_GB30b, { 200, 4, 120, 37 }, [](Item *, bool press)
     {
-        Ampermeter::ZeroDC::FloatingZero::Process();
-    });
+        if (press)
+        {
+            Ampermeter::ZeroDC::FloatingZero::Process();
+        }
+    }, 1);
+
+    ButtonToggle btnZeroDC("Нуль DC", "Zero DC", Font::_5_GB30b, { 350, 4, 120, 37 }, [](Item *item, bool)
+    {
+        ButtonToggle *btn = item->ToButtonToggle();
+
+        if (btn->IsPressed())
+        {
+            Ampermeter::ZeroDC::Enable();
+        }
+        else
+        {
+            Ampermeter::ZeroDC::Disable();
+        }
+    }, 1);
+
+    ButtonToggle btnZeroAC("Нуль AC", "Zero AC", Font::_5_GB30b, { 500, 4, 120, 37 }, [](Item *item, bool)
+    {
+        ButtonToggle *btn = item->ToButtonToggle();
+
+        if (btn->IsPressed())
+        {
+            Ampermeter::ZeroAC::Enable();
+        }
+        else
+        {
+            Ampermeter::ZeroAC::Disable();
+        }
+
+    }, 1);
 
     void OnEventChangeRange(int new_range)
     {
@@ -94,11 +126,6 @@ namespace PageMain
             Range::Set(range + 1);
             Range::Set(range);
         }
-
-        bool is_show = btnMenu.IsPressed();
-
-        btnZeroDC.SetShown(is_show);
-        btnZeroAC.SetShown(is_show);
 
         RedrawAdditionMeasures();
 
@@ -184,34 +211,6 @@ namespace PageMain
         MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
         MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
     }, 1);
-
-    ButtonToggle btnZeroDC("Ноль DC", "Zero DC", Font::_0_GB34b, { 660, 84, 136, 74 }, [](Item *item, bool)
-    {
-        ButtonToggle *btn = (ButtonToggle *)item;
-
-        if (btn->IsPressed())
-        {
-            Ampermeter::ZeroDC::Enable();
-        }
-        else
-        {
-            Ampermeter::ZeroDC::Disable();
-        }
-    });
-
-    ButtonToggle btnZeroAC("Ноль AC", "Zero AC", Font::_0_GB34b, { 660, 164, 136, 74 }, [](Item *item, bool)
-    {
-        ButtonToggle *btn = (ButtonToggle *)item;
-
-        if (btn->IsPressed())
-        {
-            Ampermeter::ZeroAC::Enable();
-        }
-        else
-        {
-            Ampermeter::ZeroAC::Disable();
-        }
-    });
 
     ButtonPress btnMenu("Меню", "Menu", Font::_5_GB30b, { 696, 4, 100, 37 }, [](Item *, bool press)           // Menu
     {

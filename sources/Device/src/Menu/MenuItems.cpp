@@ -121,13 +121,13 @@ void Item::Release()
 }
 
 
-void ButtonToggle::SetToggled(bool toggled)
+void ButtonToggle::SetToggled(bool toggled, bool execute)
 {
     is_pressed = toggled;
 
     need_draw = true;
 
-    if (funcOnPress)
+    if (execute && funcOnPress)
     {
         funcOnPress(this, is_pressed);
     }

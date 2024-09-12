@@ -134,7 +134,7 @@ struct ButtonToggle : public ButtonPress
     {
     }
 
-    void SetToggled(bool);
+    void SetToggled(bool toggle, bool execute = true);
 };
 
 

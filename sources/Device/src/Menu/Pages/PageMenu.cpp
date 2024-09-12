@@ -43,11 +43,11 @@ namespace PageMenu
 
     static void ToggleButtonsMeasures()
     {
-        btnFrequency.SetToggled(TypeMeasure(TypeMeasure::Frequency).IsShown());
-        btnImax.SetToggled(TypeMeasure(TypeMeasure::Max).IsShown());
-        btnImin.SetToggled(TypeMeasure(TypeMeasure::Min).IsShown());
-        btnIamp.SetToggled(TypeMeasure(TypeMeasure::Ampl).IsShown());
-        btnIpeak.SetToggled(TypeMeasure(TypeMeasure::Peak).IsShown());
+        btnFrequency.SetToggled(TypeMeasure(TypeMeasure::Frequency).IsShown(), false);
+        btnImax.SetToggled(TypeMeasure(TypeMeasure::Max).IsShown(), false);
+        btnImin.SetToggled(TypeMeasure(TypeMeasure::Min).IsShown(), false);
+        btnIamp.SetToggled(TypeMeasure(TypeMeasure::Ampl).IsShown(), false);
+        btnIpeak.SetToggled(TypeMeasure(TypeMeasure::Peak).IsShown(), false);
     }
 
     static void AppendRemoveMeasure(TypeMeasure::E meas, bool insert)
