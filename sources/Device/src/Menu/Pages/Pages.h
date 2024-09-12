@@ -13,6 +13,9 @@ namespace PageMain
     extern LabelMeasure wndDC;
     extern LabelMeasure wndAC;
 
+    extern ButtonToggle btnZeroAC;
+    extern ButtonToggle btnZeroDC;
+
     void SetRange(MeasuresOnDisplay::E, int);
 
     void EnableZero(MeasuresOnDisplay::E, bool);

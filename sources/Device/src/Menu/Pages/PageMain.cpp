@@ -10,12 +10,11 @@
 #include "Settings/Settings.h"
 #include "Menu/Menu.h"
 #include <cstdio>
+#include <cstring>
 
 
 namespace PageMain
 {
-    extern ButtonToggle btnZeroAC;
-    extern ButtonToggle btnZeroDC;
     extern ButtonPress btnMenu;
 
     LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 0, 60 };
@@ -39,24 +38,32 @@ namespace PageMain
     void RedrawAllMeasures()
     {
         {                           // Дополнительные измерения
-            int16 x = 25;
 
-            for (int i = 0; i < 5; i++)
-            {
-                labels[i]->SetEnabled(false);
-            }
+            static TypeMeasure::E prev[3] = { TypeMeasure::Count, TypeMeasure::Count, TypeMeasure::Count };
 
-            for (int i = 0; i < 3; i++)
+            if (std::memcmp(prev, set.en_add_meas, 3 * sizeof(TypeMeasure::E)) != 0)
             {
-                if (set.en_add_meas[i] == TypeMeasure::Count)
+                std::memcpy(prev, set.en_add_meas, 3 * sizeof(TypeMeasure::E));
+
+                int16 x = 25;
+
+                for (int i = 0; i < 5; i++)
                 {
-                    return;
+                    labels[i]->SetEnabled(false);
                 }
 
-                labels[set.en_add_meas[i] - 2]->SetCoord({ x, 350 });
-                labels[set.en_add_meas[i] - 2]->SetEnabled(true);
+                for (int i = 0; i < 3; i++)
+                {
+                    if (set.en_add_meas[i] == TypeMeasure::Count)
+                    {
+                        return;
+                    }
 
-                x += (750 / 3);
+                    labels[set.en_add_meas[i] - 2]->SetCoord({ x, 350 });
+                    labels[set.en_add_meas[i] - 2]->SetEnabled(true);
+
+                    x += (750 / 3);
+                }
             }
         }
 

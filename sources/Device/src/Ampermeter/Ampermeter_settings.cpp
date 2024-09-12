@@ -62,6 +62,7 @@ void Ampermeter::ZeroDC::FloatingZero::Process()
 void Ampermeter::ZeroDC::Disable()
 {
     value_abs = 0.0;
+    PageMain::btnZeroDC.SetToggled(false, false);
 }
 
 
@@ -95,10 +96,7 @@ void Ampermeter::ZeroAC::Enable()
 void Ampermeter::ZeroAC::Disable()
 {
     value_abs = 0.0;
-
-//    PageMain::labelZeroAC.SetShown(false);
-
-//    Nextion::SetValue("bt10", 0);
+    PageMain::btnZeroAC.SetToggled(false, false);
 }
 
 
