@@ -190,13 +190,17 @@ namespace PageMain
                 {
                     if (i != range)
                     {
-                        PageMain::self->GetItem(i)->ToButtonToggle()->SetToggled(false);
+                        PageMain::self->GetItem(i)->ToButtonToggle()->SetToggled(false, false);
                     }
                 }
 
                 Ampermeter::AVP::Disable();
                 Range::Set(range);
             }
+        }
+        else if (Range::Current() == range)
+        {
+            item->ToButtonToggle()->SetToggled(true, false);
         }
     }
 
