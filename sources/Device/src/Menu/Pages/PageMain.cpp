@@ -66,7 +66,22 @@ namespace PageMain
         wndMAX.Reset();
     }
 
-    static ButtonPress btnZero("Уст. 0", "Set 0", Font::_5_GB30b, { 200, 4, 120, 37 }, [](Item *, bool press)
+    static int WidthHiButton()
+    {
+        return Display::WIDTH / 6 - 10;
+    }
+
+    static int CoordXHiButton(int i)
+    {
+        if (i == 5)
+        {
+            return Display::WIDTH - WidthHiButton();
+        }
+
+        return i * WidthHiButton();
+    }
+
+    static ButtonPress btnZero("Уст. 0", "Set 0", Font::_5_GB30b, { CoordXHiButton(4), 4, WidthHiButton(), 37 }, [](Item *, bool press)
     {
         if (press)
         {
@@ -74,7 +89,12 @@ namespace PageMain
         }
     }, 1);
 
-    ButtonToggle btnZeroDC("Нуль DC", "Zero DC", Font::_5_GB30b, { 350, 4, 120, 37 }, [](Item *item, bool)
+    static ButtonPress btnAVP("АВП", "AVP", Font::_5_GB30b, { CoordXHiButton(3), 4, WidthHiButton(), 37 }, [](Item *, bool)
+    {
+
+    }, 1);
+
+    ButtonToggle btnZeroDC("Нуль DC", "Zero DC", Font::_5_GB30b, { CoordXHiButton(1), 4, WidthHiButton(), 37 }, [](Item *item, bool)
     {
         ButtonToggle *btn = item->ToButtonToggle();
 
@@ -88,7 +108,7 @@ namespace PageMain
         }
     }, 1);
 
-    ButtonToggle btnZeroAC("Нуль AC", "Zero AC", Font::_5_GB30b, { 500, 4, 120, 37 }, [](Item *item, bool)
+    ButtonToggle btnZeroAC("Нуль AC", "Zero AC", Font::_5_GB30b, { CoordXHiButton(2), 4, WidthHiButton(), 37 }, [](Item *item, bool)
     {
         ButtonToggle *btn = item->ToButtonToggle();
 
@@ -205,14 +225,17 @@ namespace PageMain
         FuncOnRange(item, 5, press);
     });
 
-    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_5_GB30b, { 6, 4, 100, 37 }, [](Item *, bool)
+    static ButtonPress btnAC_DC("AC+DC", "AC + DC", Font::_5_GB30b, { CoordXHiButton(0), 4, WidthHiButton(), 37 }, [](Item *, bool press)
     {
-        MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
-        MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
-        MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
+        if (press)
+        {
+            MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
+            MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
+            MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
+        }
     }, 1);
 
-    ButtonPress btnMenu("Меню", "Menu", Font::_5_GB30b, { 696, 4, 100, 37 }, [](Item *, bool press)           // Menu
+    ButtonPress btnMenu("Меню", "Menu", Font::_5_GB30b, { CoordXHiButton(5), 4, WidthHiButton(), 37 }, [](Item *, bool press)           // Menu
     {
         if (!press)
         {
@@ -242,6 +265,7 @@ namespace PageMain
 //        &labelZeroDC,
         &btnMenu,
         &btnZero,
+        &btnAVP,
         nullptr
     };
 
