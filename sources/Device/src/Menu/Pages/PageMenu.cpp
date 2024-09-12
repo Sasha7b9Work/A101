@@ -51,11 +51,26 @@ namespace PageMenu
         btnCOM.SetShown(press);
     });
 
-    static ButtonMenuPress btnBrightness(String<>("ярк %d", set.brightness).c_str(), String<>("Bright %d", set.brightness).c_str(), 1, 2, [](Item *item, bool press)
+    static const pchar name_bright[10][Lang::Count] =
+    {
+        {"яркость 10",  "Bright 10"},
+        {"яркость 20",  "Bright 20"},
+        {"яркость 30",  "Bright 30"},
+        {"яркость 40",  "Bright 40"},
+        {"яркость 50",  "Bright 50"},
+        {"яркость 60",  "Bright 60"},
+        {"яркость 70",  "Bright 70"},
+        {"яркость 80",  "Bright 80"},
+        {"яркость 90",  "Bright 90"},
+        {"яркость 100", "Bright 100"}
+    };
+
+
+    static ButtonMenuPress btnBrightness("", "", 1, 2, [](Item *item, bool press)
     {
         if (press)
         {
-            item->ToButtonPress()->SetText(String<>("ярк %d", set.brightness).c_str(), String<>("Bright %d", set.brightness).c_str());
+            item->ToButtonPress()->SetText(name_bright[set.brightness / 10 - 1][Lang::RU], name_bright[set.brightness / 10 - 1][Lang::EN]);
             item->ToButtonPress()->Release();
             Display::SetBrightness();
         }
@@ -226,9 +241,7 @@ namespace PageMenu
         btnIndication.SetToggled(false);
         btnSystem.SetToggled(false);
 
-//        chChangeRange.SetShown(false);
-//        chRangeFreq.SetShown(false);
-//        btnCOM.SetShown(false);
+        btnBrightness.SetText(name_bright[set.brightness / 10 - 1][Lang::RU], name_bright[set.brightness / 10 - 1][Lang::EN]);
     }
 
 
