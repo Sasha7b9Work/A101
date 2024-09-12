@@ -134,7 +134,10 @@ void Item::SetEnabled(bool set_enabled)
 
         SetShown(true);
 
-        Draw();
+        if (Page::Current() == parent)
+        {
+            Draw();
+        }
     }
     else
     {
@@ -145,7 +148,10 @@ void Item::SetEnabled(bool set_enabled)
 
         SetShown(false);
 
-        Draw();
+        if (Page::Current() == parent)
+        {
+            Draw();
+        }
 
         enabled = false;
     }
@@ -426,7 +432,10 @@ void Item::SetShown(bool show)
 
     if (!is_shown)
     {
-        Draw();
+        if (Page::Current() == parent)
+        {
+            Draw();
+        }
     }
 }
 

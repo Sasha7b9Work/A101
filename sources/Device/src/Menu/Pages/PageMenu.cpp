@@ -64,9 +64,12 @@ namespace PageMenu
                 }
             }
 
-            set.en_add_meas[0] = set.en_add_meas[1];
-            set.en_add_meas[1] = set.en_add_meas[2];
-            set.en_add_meas[2] = meas;
+            if (!TypeMeasure(meas).IsShown())
+            {
+                set.en_add_meas[0] = set.en_add_meas[1];
+                set.en_add_meas[1] = set.en_add_meas[2];
+                set.en_add_meas[2] = meas;
+            }
         }
         else
         {
@@ -74,8 +77,6 @@ namespace PageMenu
             {
                 if (set.en_add_meas[i] == meas)
                 {
-                    set.en_add_meas[i] = TypeMeasure::Count;
-
                     if (i == 0)
                     {
                         std::memmove(set.en_add_meas, set.en_add_meas + 1, 2 * sizeof(TypeMeasure::E));
@@ -86,6 +87,8 @@ namespace PageMenu
                     }
 
                     set.en_add_meas[2] = TypeMeasure::Count;
+
+                    break;
                 }
             }
         }
