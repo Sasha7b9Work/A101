@@ -38,24 +38,56 @@ namespace PageMain
 
     void RedrawAllMeasures()
     {
-        int16 x = 25;
+        {                           // Дополнительные измерения
+            int16 x = 25;
 
-        for (int i = 0; i < 5; i++)
-        {
-            labels[i]->SetEnabled(false);
-        }
-
-        for (int i = 0; i < 3; i++)
-        {
-            if (set.en_add_meas[i] == TypeMeasure::Count)
+            for (int i = 0; i < 5; i++)
             {
-                return;
+                labels[i]->SetEnabled(false);
             }
 
-            labels[set.en_add_meas[i] - 2]->SetCoord({ x, 350 });
-            labels[set.en_add_meas[i] - 2]->SetEnabled(true);
+            for (int i = 0; i < 3; i++)
+            {
+                if (set.en_add_meas[i] == TypeMeasure::Count)
+                {
+                    return;
+                }
 
-            x += (750 / 3);
+                labels[set.en_add_meas[i] - 2]->SetCoord({ x, 350 });
+                labels[set.en_add_meas[i] - 2]->SetEnabled(true);
+
+                x += (750 / 3);
+            }
+        }
+
+        {                           // Основные измерения
+            static MeasuresOnDisplay::E prev = MeasuresOnDisplay::Count;
+
+            if (MeasuresOnDisplay::current != prev)
+            {
+                prev = MeasuresOnDisplay::current;
+
+                wndDC.SetEnabled(false);
+                wndAC.SetEnabled(false);
+
+                if (MeasuresOnDisplay::IsAC_DC())
+                {
+                    wndDC.SetCoord({ 0, 60 });
+                    wndAC.SetCoord({ 0, 220 });
+                    wndDC.SetEnabled(true);
+                    wndAC.SetEnabled(true);
+                }
+                else if (MeasuresOnDisplay::IsAC())
+                {
+                    wndAC.SetCoord({ 0, 150 });
+                    wndAC.SetEnabled(true);
+                }
+                else
+                {
+                    wndDC.SetCoord({ 0, 150 });
+                    wndDC.SetEnabled(true);
+                }
+            }
         }
     }
 
@@ -242,20 +274,19 @@ namespace PageMain
             {
                 button->SetText("DC", "DC");
                 MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
-                wndAC.SetEnabled(false);
+                RedrawAllMeasures();
             }
             else if (MeasuresOnDisplay::IsDC())
             {
                 button->SetText("AC", "AC");
                 MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
-                wndAC.SetEnabled(true);
-                wndDC.SetEnabled(false);
+                RedrawAllMeasures();
             }
             else
             {
                 button->SetText("AC+DC", "AC+DC");
                 MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
-                wndDC.SetEnabled(true);
+                RedrawAllMeasures();
             }
         }
     }, 1);
