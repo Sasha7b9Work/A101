@@ -14,7 +14,7 @@ namespace PageInformation
         Nextion::DrawString({ x, y, 300, 60 }, Font::_1, Color::White, Color::Background, text, false, true);
     }
 
-    static void FuncDraw()
+    static void FuncEnter()
     {
         for (int i = 0; i < 2; i++)
         {
@@ -61,7 +61,7 @@ namespace PageInformation
         nullptr
     };
 
-    static Page pageInformation(items, nullptr, FuncDraw);
+    static Page pageInformation(items, FuncEnter, nullptr);
 
     Page *self = &pageInformation;
 }
