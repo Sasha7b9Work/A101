@@ -35,6 +35,8 @@ struct TypeMeasure
 
     pchar Title(Lang::E lang) const;
 
+    bool IsShown() const;
+
 private:
 
     E value;
@@ -125,17 +127,16 @@ struct Settings
 
     bool en_DC;         // ¬ключена индикаци€ измерени€ DC
     bool en_AC;         // ¬ключена индикаци€ измерени€ ј—
-    bool en_f;          // ¬ключена индикаци€ измерени€ частоты
-    bool en_Imax;       // ¬ключена индикаци€ измерени€ Imax
-    bool en_Imin;       // ¬ключена индикаци€ измерени€ Imin
-    bool en_Iampl;      // ¬ключена нндикаци€ измерени€ Iampl
-    bool en_Ipp;        // ¬ключена индикаци€ измерени€ Ipp
+
+    TypeMeasure::E en_add_meas[3];  // «десь хран€тс€ измерени€, которые нужно выводить на экран. ѕервое измерение - выбрано раньше всего, т.е. его
+                                    // нужно удал€ть, дописыва€ в хвост новое нужное измерение
+
     Baudrate::E baudrate;
     Parity::E parity;
     StopBits::E stop_bits;
     ChangeRange::E change_range;
     RangeFreq::E range_freq;
-    int16 brightness;   // €ркость от нул€ до 100
+    int16 brightness;               // €ркость от 10 до 100
 
     uint serial_number;
 

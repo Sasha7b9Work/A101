@@ -21,11 +21,7 @@ namespace NS_Settings
 
         true,       // en_DC
         true,       // en_AC
-        false,      // en_f
-        false,      // en_Imax;
-        false,      // en_Imin;
-        false,      // en_Iampl;
-        false,      // en_Ipp;
+        { TypeMeasure::Count, TypeMeasure::Count, TypeMeasure::Count },
         Baudrate::_9600,
         Parity::No,
         StopBits::_1,
@@ -112,4 +108,18 @@ void Settings::Load()
 uint Settings::CalculateCRC32() const
 {
     return Math::CalculateCRC32(PointerToFirstData(), (int)SizeData());
+}
+
+
+bool TypeMeasure::IsShown() const
+{
+    for (int i = 0; i < 3; i++)
+    {
+        if (set.en_add_meas[i] == value)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }

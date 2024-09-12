@@ -19,7 +19,7 @@ namespace LM
 
     static const int16 heights[SizeMeasure::Count] =
     {
-        140,
+        120,
         40,
         85
     };
@@ -60,6 +60,32 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
         LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, false, true);
 
     rect.width = (int16)(GetWidth(_size, 0) + GetWidth(_size, 1) + GetWidth(_size, 2) + GetWidth(_size, 3));
+}
+
+
+void LabelMeasure::SetCoord(const Coord &coord)
+{
+    Coord delta = coord - Item::GetCoord();
+
+    Item::SetCoord(coord);
+
+    label_name.SetCoord(label_name.GetCoord() + delta);
+    label_sign.SetCoord(label_sign.GetCoord() + delta);
+    label_digits.SetCoord(label_digits.GetCoord() + delta);
+    label_units.SetCoord(label_units.GetCoord() + delta);
+}
+
+
+Coord Item::GetCoord() const
+{
+    return { rect.x, rect.y };
+}
+
+
+void Item::SetCoord(const Coord &coord)
+{
+    rect.x = coord.x;
+    rect.y = coord.y;
 }
 
 

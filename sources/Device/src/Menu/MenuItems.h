@@ -76,6 +76,9 @@ struct Item
     static int GetCoordX(int col);
     static int GetCoordY(int row);
 
+    void SetCoord(const Coord &);
+    Coord GetCoord() const;
+
 protected:
 
     TypeItem::E type;
@@ -272,6 +275,8 @@ struct LabelMeasure : public Label
     pchar GetDigits() const;
 
     pchar GetUnits() const;
+
+    void SetCoord(const Coord &);
 
     virtual bool Draw() override;
 

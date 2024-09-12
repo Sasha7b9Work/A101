@@ -17,6 +17,29 @@ struct Rect
 };
 
 
+struct Coord
+{
+    int16 x;
+    int16 y;
+    
+    Coord operator-(const Coord &rhs) const
+    {
+        Coord result{ x, y };
+        result.x -= rhs.x;
+        result.y -= rhs.y;
+        return result;
+    }
+
+    Coord operator+(const Coord &rhs) const
+    {
+        Coord result{ x, y };
+        result.x += rhs.x;
+        result.y += rhs.y;
+        return result;
+    }
+};
+
+
 namespace Math
 {
     float Random(float min, float max);

@@ -13,30 +13,88 @@ namespace PageMenu
     extern ButtonMenuPress btnCOM;
     extern ButtonMenuToggle btnSystem;
 
-    static ButtonMenuToggle btnFrequency("Частота", "Frequency", 1, 0, [](Item *item, bool)
+    static void AppendRemoveMeasure(TypeMeasure::E meas, bool insert);
+
+
+    static ButtonMenuToggle btnFrequency("Частота", "Frequency", 1, 0, [](Item *, bool press)
     {
-        set.en_f = item->ToButtonToggle()->IsPressed();
+        AppendRemoveMeasure(TypeMeasure::Frequency, press);
     });
 
-    static ButtonMenuToggle btnImin("Iмин", "Imin", 1, 1, [](Item *item, bool)
+    static ButtonMenuToggle btnImin("Iмин", "Imin", 1, 1, [](Item *, bool press)
     {
-        set.en_Imin = item->ToButtonToggle()->IsPressed();
+        AppendRemoveMeasure(TypeMeasure::Min, press);
     });
 
-    static ButtonMenuToggle btnImax("Iмакс", "Imax", 1, 2, [](Item *item, bool)
+    static ButtonMenuToggle btnImax("Iмакс", "Imax", 1, 2, [](Item *, bool press)
     {
-        set.en_Imax = item->ToButtonToggle()->IsPressed();
+        AppendRemoveMeasure(TypeMeasure::Max, press);
     });
 
-    static ButtonMenuToggle btnIamp("Iамп", "Iamp", 1, 3, [](Item *item, bool)
+    static ButtonMenuToggle btnIamp("Iамп", "Iamp", 1, 3, [](Item *, bool press)
     {
-        set.en_Iampl = item->ToButtonToggle()->IsPressed();
+        AppendRemoveMeasure(TypeMeasure::Ampl, press);
     });
 
-    static ButtonMenuToggle btnIpeak("Iпп", "Ipp", 1, 4, [](Item *item, bool)
+    static ButtonMenuToggle btnIpeak("Iпп", "Ipp", 1, 4, [](Item *, bool press)
     {
-        set.en_Ipp = item->ToButtonToggle()->IsPressed();
+        AppendRemoveMeasure(TypeMeasure::Peak, press);
     });
+
+    static void ToggleButtonsMeasures()
+    {
+        btnFrequency.SetToggled(TypeMeasure(TypeMeasure::Frequency).IsShown());
+        btnImax.SetToggled(TypeMeasure(TypeMeasure::Max).IsShown());
+        btnImin.SetToggled(TypeMeasure(TypeMeasure::Min).IsShown());
+        btnIamp.SetToggled(TypeMeasure(TypeMeasure::Ampl).IsShown());
+        btnIpeak.SetToggled(TypeMeasure(TypeMeasure::Peak).IsShown());
+    }
+
+    static void AppendRemoveMeasure(TypeMeasure::E meas, bool insert)
+    {
+        if (insert)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (set.en_add_meas[i] == TypeMeasure::Count ||
+                    set.en_add_meas[i] == meas)
+                {
+                    set.en_add_meas[i] = meas;
+                    break;
+                }
+            }
+
+            set.en_add_meas[0] = set.en_add_meas[1];
+            set.en_add_meas[1] = set.en_add_meas[2];
+            set.en_add_meas[2] = meas;
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (set.en_add_meas[i] == meas)
+                {
+                    set.en_add_meas[i] = TypeMeasure::Count;
+
+                    if (i == 0)
+                    {
+                        std::memmove(set.en_add_meas, set.en_add_meas + 1, 2 * sizeof(TypeMeasure::E));
+                    }
+                    else if (i == 1)
+                    {
+                        set.en_add_meas[1] = set.en_add_meas[2];
+                    }
+
+                    set.en_add_meas[2] = TypeMeasure::Count;
+                }
+            }
+        }
+
+        ToggleButtonsMeasures();
+
+        PageMain::RedrawAdditionMeasures();
+    }
+
 
     static ButtonMenuToggle btnSettings("Настройки", "Settings", 0, 0, [](Item *, bool press)
     {
@@ -231,11 +289,7 @@ namespace PageMenu
 
     static void FuncOnEnter()
     {
-        btnFrequency.SetToggled(set.en_f);
-        btnImax.SetToggled(set.en_Imax);
-        btnImin.SetToggled(set.en_Imin);
-        btnIamp.SetToggled(set.en_Iampl);
-        btnIpeak.SetToggled(set.en_Ipp);
+        ToggleButtonsMeasures();
 
         btnSettings.SetToggled(false);
         btnIndication.SetToggled(false);
