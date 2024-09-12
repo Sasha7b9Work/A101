@@ -62,6 +62,9 @@ struct Item
 
     bool IsPressed() const;
 
+    void SetEnabled(bool enable);
+    bool IsEnabled() const { return enabled; }
+
     static void OnEventPress(int, int);
     static void OnEventRelease(int, int);
 
@@ -94,6 +97,8 @@ protected:
     bool is_shown = false;          // Если true, то надо отрисовывать
 
     bool need_draw = true;
+
+    bool enabled = true;
 };
 
 

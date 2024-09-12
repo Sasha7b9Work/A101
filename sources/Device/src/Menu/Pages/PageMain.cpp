@@ -24,11 +24,11 @@ namespace PageMain
     LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 0, 60 };
     LabelMeasure wndAC{ TypeMeasure::AC, SizeMeasure::Big, 0, 220 };
 
-    static LabelMeasure wndAMPL{ TypeMeasure::Ampl, SizeMeasure::Small, 0, 400 };
-    static LabelMeasure wndPEAK{ TypeMeasure::Peak, SizeMeasure::Small, 0, 400 };
-    static LabelMeasure wndMIN{ TypeMeasure::Min,   SizeMeasure::Small, 0, 400 };
-    static LabelMeasure wndMAX{ TypeMeasure::Max,   SizeMeasure::Small, 0, 400 };
-    static LabelMeasure wndFREQ{ TypeMeasure::Frequency, SizeMeasure::Small, 0, 400 };
+    static LabelMeasure wndAMPL{ TypeMeasure::Ampl, SizeMeasure::Small, 0, 350 };
+    static LabelMeasure wndPEAK{ TypeMeasure::Peak, SizeMeasure::Small, 0, 350 };
+    static LabelMeasure wndMIN{ TypeMeasure::Min,   SizeMeasure::Small, 0, 350 };
+    static LabelMeasure wndMAX{ TypeMeasure::Max,   SizeMeasure::Small, 0, 350 };
+    static LabelMeasure wndFREQ{ TypeMeasure::Frequency, SizeMeasure::Small, 0, 350 };
 
     static LabelMeasure *labels[5] =
     {
@@ -43,6 +43,11 @@ namespace PageMain
     {
         int16 x = 25;
 
+        for (int i = 0; i < 5; i++)
+        {
+            labels[i]->SetEnabled(false);
+        }
+
         for (int i = 0; i < 3; i++)
         {
             if (set.en_add_meas[i] == TypeMeasure::Count)
@@ -51,6 +56,7 @@ namespace PageMain
             }
 
             labels[set.en_add_meas[i] - 2]->SetCoord({ x, 350 });
+            labels[set.en_add_meas[i] - 2]->SetEnabled(true);
 
             x += (750 / 3);
         }
@@ -149,10 +155,11 @@ namespace PageMain
 
         RedrawAdditionMeasures();
 
-        wndMIN.SetShown(TypeMeasure(TypeMeasure::Min).IsShown());
-        wndMAX.SetShown(TypeMeasure(TypeMeasure::Max).IsShown());
-        wndAMPL.SetShown(TypeMeasure(TypeMeasure::Ampl).IsShown());
-        wndPEAK.SetShown(TypeMeasure(TypeMeasure::Peak).IsShown());
+        wndMIN.SetEnabled(TypeMeasure(TypeMeasure::Min).IsShown());
+        wndMAX.SetEnabled(TypeMeasure(TypeMeasure::Max).IsShown());
+        wndAMPL.SetEnabled(TypeMeasure(TypeMeasure::Ampl).IsShown());
+        wndPEAK.SetEnabled(TypeMeasure(TypeMeasure::Peak).IsShown());
+        wndFREQ.SetEnabled(TypeMeasure(TypeMeasure::Frequency).IsShown());
     }
 
     static void FuncDraw()
@@ -163,12 +170,11 @@ namespace PageMain
 
         wndAC.SetMeasure(Ampermeter::GetAC(), Range::Current());
 
-        Measure ampl = Ampermeter::GetAmpl();
-        wndAMPL.SetMeasure(ampl, Range::Current());
-
+        wndAMPL.SetMeasure(Ampermeter::GetAmpl(), Range::Current());
         wndPEAK.SetMeasure(Ampermeter::GetPeak(), Range::Current());
         wndMIN.SetMeasure(Ampermeter::GetMin(), Range::Current());
         wndMAX.SetMeasure(Ampermeter::GetMax(), Range::Current());
+        wndFREQ.SetMeasure(Ampermeter::GetFrequency(), Range::Current());
     }
 
     // Вызывается при нажатии кнопки
@@ -261,6 +267,7 @@ namespace PageMain
         &wndPEAK,
         &wndMIN,
         &wndMAX,
+        &wndFREQ,
 //        &labelZeroAC,
 //        &labelZeroDC,
         &btnMenu,

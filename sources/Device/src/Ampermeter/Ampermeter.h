@@ -41,6 +41,7 @@ namespace Ampermeter
     Measure GetPeak();
     Measure GetMin();
     Measure GetMax();
+    Measure GetFrequency();
 
     // Автоматический выбор предела
     namespace AVP

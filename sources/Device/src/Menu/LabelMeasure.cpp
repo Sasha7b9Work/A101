@@ -104,6 +104,11 @@ int LabelMeasure::GetWidth(SizeMeasure::E size, int label)
 
 bool LabelMeasure::Draw()
 {
+    if (!IsEnabled())
+    {
+        return false;
+    }
+
     if (need_draw)
     {
         if (IsShown())

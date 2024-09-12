@@ -121,6 +121,37 @@ void Item::Release()
 }
 
 
+void Item::SetEnabled(bool set_enabled)
+{
+    if (set_enabled)
+    {
+        if (IsEnabled())
+        {
+            return;
+        }
+
+        enabled = true;
+
+        is_shown = true;
+
+        Draw();
+    }
+    else
+    {
+        if (!IsEnabled())
+        {
+            return;
+        }
+
+        is_shown = false;
+
+        Draw();
+
+        enabled = false;
+    }
+}
+
+
 void ButtonToggle::SetToggled(bool toggled, bool execute)
 {
     is_pressed = toggled;

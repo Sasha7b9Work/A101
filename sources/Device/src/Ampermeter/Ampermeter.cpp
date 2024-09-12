@@ -232,6 +232,14 @@ Measure Ampermeter::GetMax()
 }
 
 
+Measure Ampermeter::GetFrequency()
+{
+    bool correct = true;
+
+    return Measure(1.23f, false, correct);
+}
+
+
 Measure Ampermeter::GetPeak()
 {
     bool correct = false;
