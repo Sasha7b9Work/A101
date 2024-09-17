@@ -17,7 +17,7 @@ namespace PageMain
     extern ButtonToggle btnZeroDC;
 
     void SetMeasuresOnDisplay(MeasuresOnDisplay::E);
-    void SetRange(MeasuresOnDisplay::E, int);
+    void SetRange(int);
 
     void EnableZero(MeasuresOnDisplay::E, bool);
 

@@ -182,6 +182,8 @@ namespace PageMain
 
     static void FuncOnEnter()
     {
+        SetMeasuresOnDisplay(set.meas_on_display.Current());
+
         ResetAllMeasures();
 
         int range = Range::Current();
@@ -221,13 +223,8 @@ namespace PageMain
         wndFREQ.SetMeasure(Ampermeter::GetFrequency(), Range::Current());
     }
 
-    void SetRange(MeasuresOnDisplay::E meas, int range)
+    void SetRange(int range)
     {
-        set.meas_on_display.Set(meas);
-
-        wndAC.SetShown(set.meas_on_display.IsAC_DC() || set.meas_on_display.IsAC());
-        wndDC.SetShown(set.meas_on_display.IsAC_DC() || set.meas_on_display.IsDC());
-
         PageMain::self->GetItem(range)->Press();
 
         for (int i = 0; i < 6; i++)

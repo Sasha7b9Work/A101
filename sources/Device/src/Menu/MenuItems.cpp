@@ -294,8 +294,9 @@ void Item::OnEventRelease(int x, int y)
 
 void Menu::Init()
 {
-    PageMain::SetRange(MeasuresOnDisplay::AC_DC, 2);
-    PageMain::SetRange(MeasuresOnDisplay::AC_DC, 3);
+    PageMain::SetMeasuresOnDisplay(set.meas_on_display.Current());
+    PageMain::SetRange(2);
+    PageMain::SetRange(3);
 
     PageMain::self->SetAsCurrent();
 }
