@@ -33,7 +33,7 @@ bool SCPI::CommandMEAS::Execute(Direction::E dir)
 {
     String<> message;
 
-    if (MeasuresOnDisplay::IsDC() || MeasuresOnDisplay::IsAC_DC())
+    if (set.meas_on_display.IsDC() || set.meas_on_display.IsAC_DC())
     {
         message.Append("I=");
         message.Append(PageMain::wndDC.GetSign());
@@ -42,12 +42,12 @@ bool SCPI::CommandMEAS::Execute(Direction::E dir)
         message.Append(PageMain::wndDC.GetUnits());
     }
 
-    if (MeasuresOnDisplay::IsAC_DC())
+    if (set.meas_on_display.IsAC_DC())
     {
         message.Append(";");
     }
 
-    if (MeasuresOnDisplay::IsAC() || MeasuresOnDisplay::IsAC_DC())
+    if (set.meas_on_display.IsAC() || set.meas_on_display.IsAC_DC())
     {
         message.Append("J=");
         message.Append(PageMain::wndAC.GetDigits());

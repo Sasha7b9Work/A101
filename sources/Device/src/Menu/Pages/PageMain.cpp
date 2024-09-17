@@ -71,21 +71,21 @@ namespace PageMain
         {                           // Основные измерения
             static MeasuresOnDisplay::E prev = MeasuresOnDisplay::Count;
 
-            if (MeasuresOnDisplay::current != prev)
+            if (set.meas_on_display.Current() != prev)
             {
-                prev = MeasuresOnDisplay::current;
+                prev = set.meas_on_display.Current();
 
                 wndDC.SetEnabled(false);
                 wndAC.SetEnabled(false);
 
-                if (MeasuresOnDisplay::IsAC_DC())
+                if (set.meas_on_display.IsAC_DC())
                 {
                     wndDC.SetCoord({ 0, 60 });
                     wndAC.SetCoord({ 0, 220 });
                     wndDC.SetEnabled(true);
                     wndAC.SetEnabled(true);
                 }
-                else if (MeasuresOnDisplay::IsAC())
+                else if (set.meas_on_display.IsAC())
                 {
                     wndAC.SetCoord({ 0, 150 });
                     wndAC.SetEnabled(true);
@@ -223,23 +223,23 @@ namespace PageMain
 
     void SetRange(MeasuresOnDisplay::E meas, int range)
     {
-        MeasuresOnDisplay::Set(meas);
+        set.meas_on_display.Set(meas);
 
-        if (MeasuresOnDisplay::IsAC_DC())
+        if (set.meas_on_display.IsAC_DC())
         {
             btnAC_DC.SetText("AC+DC", "AC+DC");
         }
-        else if (MeasuresOnDisplay::IsAC())
+        else if (set.meas_on_display.IsAC())
         {
             btnAC_DC.SetText("AC", "AC");
         }
-        else if (MeasuresOnDisplay::IsDC())
+        else if (set.meas_on_display.IsDC())
         {
             btnAC_DC.SetText("DC", "DC");
         }
 
-        wndAC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsAC());
-        wndDC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsDC());
+        wndAC.SetShown(set.meas_on_display.IsAC_DC() || set.meas_on_display.IsAC());
+        wndDC.SetShown(set.meas_on_display.IsAC_DC() || set.meas_on_display.IsDC());
 
         PageMain::self->GetItem(range)->Press();
 
@@ -311,30 +311,34 @@ namespace PageMain
         FuncOnRange(item, 5, press);
     });
 
-    ButtonPress btnAC_DC("AC+DC", "AC+DC", Font::_5_GB30b, { CoordXHiButton(0), 4, WidthHiButton(), 37 }, [](Item *item, bool press)
+    void SetMeasuresOnDisplay(MeasuresOnDisplay::E meas)
     {
-        if (press)
+        if (meas != set.meas_on_display.Current())
         {
-            ButtonPress *button = item->ToButtonPress();
+            set.meas_on_display.Set(meas);
 
-            if (MeasuresOnDisplay::IsAC_DC())
+            if (meas == MeasuresOnDisplay::DC)
             {
-                button->SetText("DC", "DC");
-                MeasuresOnDisplay::Set(MeasuresOnDisplay::DC);
-                RedrawAllMeasures();
+                btnAC_DC.SetText("DC", "DC");
             }
-            else if (MeasuresOnDisplay::IsDC())
+            else if (meas == MeasuresOnDisplay::AC)
             {
-                button->SetText("AC", "AC");
-                MeasuresOnDisplay::Set(MeasuresOnDisplay::AC);
-                RedrawAllMeasures();
+                btnAC_DC.SetText("AC", "AC");
             }
             else
             {
-                button->SetText("AC+DC", "AC+DC");
-                MeasuresOnDisplay::Set(MeasuresOnDisplay::AC_DC);
-                RedrawAllMeasures();
+                btnAC_DC.SetText("AC+DC", "AC+DC");
             }
+
+            RedrawAllMeasures();
+        }
+    }
+
+    ButtonPress btnAC_DC("AC+DC", "AC+DC", Font::_5_GB30b, { CoordXHiButton(0), 4, WidthHiButton(), 37 }, [](Item *, bool press)
+    {
+        if (press)
+        {
+            SetMeasuresOnDisplay(set.meas_on_display.Current());
         }
     }, 1);
 

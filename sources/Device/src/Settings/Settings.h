@@ -54,13 +54,18 @@ struct MeasuresOnDisplay
         Count
     };
 
-    static void Set(E v) { current = v; }
+    MeasuresOnDisplay(E v = AC_DC) : current(v) { }
 
-    static bool IsAC_DC() { return current == AC_DC; }
-    static bool IsAC() { return current == AC; }
-    static bool IsDC() { return current == DC; }
+    void Set(E v) { current = v; }
 
-    static E current;
+    bool IsAC_DC() { return current == AC_DC; }
+    bool IsAC() { return current == AC; }
+    bool IsDC() { return current == DC; }
+
+    E Current() { return current; }
+
+private:
+    E current;
 };
 
 
@@ -131,6 +136,7 @@ struct Settings
     TypeMeasure::E en_add_meas[3];  // Здесь хранятся измерения, которые нужно выводить на экран. Первое измерение - выбрано раньше всего, т.е. его
                                     // нужно удалять, дописывая в хвост новое нужное измерение
 
+    MeasuresOnDisplay meas_on_display;
     Baudrate::E baudrate;
     Parity::E parity;
     StopBits::E stop_bits;

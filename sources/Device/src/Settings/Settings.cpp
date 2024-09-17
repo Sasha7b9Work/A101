@@ -6,9 +6,6 @@
 #include <cstring>
 
 
-MeasuresOnDisplay::E MeasuresOnDisplay::current = MeasuresOnDisplay::AC_DC;
-
-
 namespace NS_Settings
 {
     static Settings set_def
@@ -22,6 +19,7 @@ namespace NS_Settings
         true,       // en_DC
         true,       // en_AC
         { TypeMeasure::Count, TypeMeasure::Count, TypeMeasure::Count },
+        MeasuresOnDisplay::AC_DC,
         Baudrate::_9600,
         Parity::No,
         StopBits::_1,
