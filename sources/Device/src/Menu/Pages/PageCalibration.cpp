@@ -318,7 +318,7 @@ namespace PageCalibration
         {
             SetAllValue(0);
 
-            buttons[range]->Press();
+            buttons[range]->SetToggled(true, false);
         }
 
         static int GetRange()
