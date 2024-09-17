@@ -74,8 +74,14 @@ namespace PageCalibration
         {
             if (IsChanged())
             {
-                Color fill = PasswordCorrect() ? Color::Background : Color::White;
-                Color back = PasswordCorrect() ? Color::Background : Color::Black;
+                Color fill = Color::White;
+                Color back = Color::Black;
+
+                if (PasswordCorrect())
+                {
+                    fill = Color::Background;
+                    back = Color::Background;
+                }
 
                 Nextion::DrawString({ 50, 100, 500, 90 }, 4, fill, back, LabelPassword::buffer);
 
@@ -183,32 +189,32 @@ namespace PageCalibration
             btnCalib.SetShown(true);
         });
 
-    static ButtonPress btn2mA("2 לְ", "2 mA", Font::_1_GB42b, { 640, 6, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btn2mA("2 לְ", "2 mA", Font::_1_GB42b, { 640, 6, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(0);
     });
 
-    static ButtonPress btn20mA("20 לְ", "20 mA", Font::_1_GB42b, { 640, 85, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btn20mA("20 לְ", "20 mA", Font::_1_GB42b, { 640, 85, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(1);
     });
 
-    static ButtonPress btn200mA("200 לְ", "200 mA", Font::_1_GB42b, { 640, 164, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btn200mA("200 לְ", "200 mA", Font::_1_GB42b, { 640, 164, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(2);
     });
 
-    static ButtonPress btn2A("2 ְ", "2 A", Font::_1_GB42b, { 640, 243, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btn2A("2 ְ", "2 A", Font::_1_GB42b, { 640, 243, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(3);
     });
 
-    static ButtonPress btn20A("20 ְ", "20 A", Font::_1_GB42b, { 640, 322, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btn20A("20 ְ", "20 A", Font::_1_GB42b, { 640, 322, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(4);
     });
 
-    static ButtonPress btn50A("50 ְ", "50 A", Font::_1_GB42b, { 640, 401, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btn50A("50 ְ", "50 A", Font::_1_GB42b, { 640, 401, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(5);
     });
@@ -290,7 +296,7 @@ namespace PageCalibration
 
     namespace ButtonsRange
     {
-        static ButtonPress *buttons[6] =
+        static ButtonToggle *buttons[6] =
         {
             &btn2mA,
             &btn20mA,
@@ -304,7 +310,7 @@ namespace PageCalibration
         {
             for (int i = 0; i < 6; i++)
             {
-                value ? buttons[i]->Press() : buttons[i]->Release();
+                buttons[i]->SetToggled(value, false);
             }
         }
 
