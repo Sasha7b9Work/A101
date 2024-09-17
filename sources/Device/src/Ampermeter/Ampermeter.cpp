@@ -29,17 +29,14 @@ namespace Ampermeter
     {
         static bool is_enabled = false;
 
-        bool IsEnabled()
-        {
-            return is_enabled;
-        }
-
         void Enable()
         {
             ZeroAC::Disable();
             ZeroDC::Disable();
 
             is_enabled = true;
+
+            PageMain::btnAVP.SetToggled(true, false);
         }
 
         void Disable()
@@ -133,7 +130,7 @@ void Ampermeter::Update()
         DiagramInput::InstallData();
     }
 
-    if (AVP::IsEnabled())
+    if (AVP::is_enabled)
     {
         int range = Range::Current();
 
@@ -150,16 +147,18 @@ void Ampermeter::Update()
         {
             if (range < max)
             {
-                Range::Set(max);
+                PageMain::SetRange(max);
             }
         }
         else if (VerySmall())
         {
             if (range > min)
             {
-                Range::Set(range - 1);
+                PageMain::SetRange(range - 1);
             }
         }
+
+        AVP::Enable();  // Нужно заново включить, потому что нажатие на кнопку отлкючает АВП
     }
 }
 

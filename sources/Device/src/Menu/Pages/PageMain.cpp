@@ -148,7 +148,7 @@ namespace PageMain
         }
     }, 1);
 
-    static ButtonToggle btnAVP("юбо", "AVP", Font::_5_GB30b, { CoordXHiButton(3), 4, WidthHiButton(), 37 }, [](Item *, bool press)
+    ButtonToggle btnAVP("юбо", "AVP", Font::_5_GB30b, { CoordXHiButton(3), 4, WidthHiButton(), 37 }, [](Item *, bool press)
     {
         if (press)
         {

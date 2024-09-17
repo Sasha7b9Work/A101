@@ -49,8 +49,6 @@ namespace Ampermeter
         void Enable();
 
         void Disable();
-
-        bool IsEnabled();
     }
 
     // Режим "Ноль DC"

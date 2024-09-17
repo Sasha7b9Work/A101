@@ -26,6 +26,8 @@ namespace PageMain
 
     // После изменения выводимых на экран измерений нужно вызывать эту функцию
     void RedrawAllMeasures();
+
+    extern ButtonToggle btnAVP;
 }
 
 
