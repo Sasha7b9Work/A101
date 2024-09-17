@@ -36,6 +36,22 @@ namespace PageMain
         &wndFREQ
     };
 
+    static void SetTitleButtonAC_DC()
+    {
+        if (set.meas_on_display.Current() == MeasuresOnDisplay::DC)
+        {
+            btnAC_DC.SetText("DC", "DC");
+        }
+        else if (set.meas_on_display.Current() == MeasuresOnDisplay::AC)
+        {
+            btnAC_DC.SetText("AC", "AC");
+        }
+        else
+        {
+            btnAC_DC.SetText("AC+DC", "AC+DC");
+        }
+    }
+
     void RedrawAllMeasures()
     {
         {                           // Дополнительные измерения
@@ -182,7 +198,7 @@ namespace PageMain
 
     static void FuncOnEnter()
     {
-        SetMeasuresOnDisplay(set.meas_on_display.Current());
+        SetTitleButtonAC_DC();
 
         ResetAllMeasures();
 
@@ -301,18 +317,7 @@ namespace PageMain
         {
             set.meas_on_display.Set(meas);
 
-            if (meas == MeasuresOnDisplay::DC)
-            {
-                btnAC_DC.SetText("DC", "DC");
-            }
-            else if (meas == MeasuresOnDisplay::AC)
-            {
-                btnAC_DC.SetText("AC", "AC");
-            }
-            else
-            {
-                btnAC_DC.SetText("AC+DC", "AC+DC");
-            }
+            SetTitleButtonAC_DC();
 
             RedrawAllMeasures();
         }
@@ -322,7 +327,12 @@ namespace PageMain
     {
         if (press)
         {
-            SetMeasuresOnDisplay(set.meas_on_display.Current());
+            int meas = set.meas_on_display.Current() + 1;
+            if (meas == MeasuresOnDisplay::Count)
+            {
+                meas = 0;
+            }
+            SetMeasuresOnDisplay((MeasuresOnDisplay::E)meas);
         }
     }, 1);
 
