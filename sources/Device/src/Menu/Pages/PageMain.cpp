@@ -131,9 +131,16 @@ namespace PageMain
         }
     }, 1);
 
-    static ButtonPress btnAVP("ÀÂÏ", "AVP", Font::_5_GB30b, { CoordXHiButton(3), 4, WidthHiButton(), 37 }, [](Item *, bool)
+    static ButtonToggle btnAVP("ÀÂÏ", "AVP", Font::_5_GB30b, { CoordXHiButton(3), 4, WidthHiButton(), 37 }, [](Item *, bool press)
     {
-
+        if (press)
+        {
+            Ampermeter::AVP::Enable();
+        }
+        else
+        {
+            Ampermeter::AVP::Disable();
+        }
     }, 1);
 
     ButtonToggle btnZeroDC("Íóëü DC", "Zero DC", Font::_5_GB30b, { CoordXHiButton(1), 4, WidthHiButton(), 37 }, [](Item *item, bool)
@@ -231,6 +238,7 @@ namespace PageMain
                 }
 
                 Ampermeter::AVP::Disable();
+                btnAVP.SetToggled(false, false);
                 Range::Set(range);
             }
         }
