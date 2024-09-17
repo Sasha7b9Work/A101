@@ -225,19 +225,6 @@ namespace PageMain
     {
         set.meas_on_display.Set(meas);
 
-        if (set.meas_on_display.IsAC_DC())
-        {
-            btnAC_DC.SetText("AC+DC", "AC+DC");
-        }
-        else if (set.meas_on_display.IsAC())
-        {
-            btnAC_DC.SetText("AC", "AC");
-        }
-        else if (set.meas_on_display.IsDC())
-        {
-            btnAC_DC.SetText("DC", "DC");
-        }
-
         wndAC.SetShown(set.meas_on_display.IsAC_DC() || set.meas_on_display.IsAC());
         wndDC.SetShown(set.meas_on_display.IsAC_DC() || set.meas_on_display.IsDC());
 
