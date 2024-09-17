@@ -107,11 +107,13 @@ namespace PageCalibration
     // Установить видимость для цифровых кнопок
     static void SetVisibleDigits(bool visible);
 
-    static ButtonToggle btnMin("Мин", "Min", Font::_1_GB42b, { 11, 183, 150, 73 }, [](Item *, bool)
+    const int y = 183;
+
+    static ButtonToggle btnMin("Мин", "Min", Font::_1_GB42b, { 640, y, 150, 73 }, [](Item *, bool)
     {
     });
 
-    static ButtonToggle btnMax("Макс", "Max", Font::_1_GB42b, { 11, 104, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btnMax("Макс", "Max", Font::_1_GB42b, { 640, y - 79, 150, 73 }, [](Item *, bool)
     {
     });
 
@@ -152,9 +154,6 @@ namespace PageCalibration
                 SetVisibleDigits(false);
 
                 btnSave.SetShown(false);
-
-                btn0.SetText("Сброс", "Reset");
-                btn0.SetShown(true);
             }
             else
             {
@@ -177,7 +176,7 @@ namespace PageCalibration
         }
     }
 
-    ButtonPress btnCalib("Старт", "Start", Font::_1_GB42b, { 372, 6, 130, 73 }, [](Item *, bool)
+    ButtonPress btnCalib("Старт", "Start", Font::_1_GB42b, { 372, Item::GetCoordY(0), 130, 73 }, [](Item *, bool)
         {
             btnSave.SetShown(false);
             btnCalib.Release();
@@ -189,32 +188,34 @@ namespace PageCalibration
             btnCalib.SetShown(true);
         });
 
-    static ButtonToggle btn2mA("2 мА", "2 mA", Font::_1_GB42b, { 640, 6, 150, 73 }, [](Item *, bool)
+    static const int BUTTON_X = 0;
+
+    static ButtonToggle btn2mA("2 мА", "2 mA", Font::_1_GB42b, { BUTTON_X, 6, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(0);
     });
 
-    static ButtonToggle btn20mA("20 мА", "20 mA", Font::_1_GB42b, { 640, 85, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btn20mA("20 мА", "20 mA", Font::_1_GB42b, { BUTTON_X, 85, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(1);
     });
 
-    static ButtonToggle btn200mA("200 мА", "200 mA", Font::_1_GB42b, { 640, 164, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btn200mA("200 мА", "200 mA", Font::_1_GB42b, { BUTTON_X, 164, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(2);
     });
 
-    static ButtonToggle btn2A("2 А", "2 A", Font::_1_GB42b, { 640, 243, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btn2A("2 А", "2 A", Font::_1_GB42b, { BUTTON_X, 243, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(3);
     });
 
-    static ButtonToggle btn20A("20 А", "20 A", Font::_1_GB42b, { 640, 322, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btn20A("20 А", "20 A", Font::_1_GB42b, { BUTTON_X, 322, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(4);
     });
 
-    static ButtonToggle btn50A("50 А", "50 A", Font::_1_GB42b, { 640, 401, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btn50A("50 А", "50 A", Font::_1_GB42b, { BUTTON_X, 401, 150, 73 }, [](Item *, bool)
     {
         ChooseRange(5);
     });
