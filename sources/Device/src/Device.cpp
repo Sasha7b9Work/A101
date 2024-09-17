@@ -15,12 +15,12 @@
 
 void Device::Init()
 {
+    cal.Load();
+    set.Load();
+
     HAL::Init();
 
     HAL_TIM::Delay(500);
-
-    cal.Load();
-    set.Load();
 
     Ampermeter::Init();
 

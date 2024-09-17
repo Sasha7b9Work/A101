@@ -74,8 +74,14 @@ struct Baudrate
     enum E
     {
         _9600,
-        _115200
+        _115200,
+        Count
     };
+
+    Baudrate(E v = _9600) : current(v) { }
+    uint ToRaw() const;
+private:
+    E current;
 };
 
 
@@ -137,7 +143,7 @@ struct Settings
                                     // нужно удалять, дописывая в хвост новое нужное измерение
 
     MeasuresOnDisplay meas_on_display;
-    Baudrate::E baudrate;
+    Baudrate baudrate;
     Parity::E parity;
     StopBits::E stop_bits;
     ChangeRange::E change_range;

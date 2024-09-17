@@ -121,3 +121,15 @@ bool TypeMeasure::IsShown() const
 
     return false;
 }
+
+
+uint Baudrate::ToRaw() const
+{
+    static const uint raws[Count] =
+    {
+        9600,
+        115200
+    };
+
+    return raws[current];
+}

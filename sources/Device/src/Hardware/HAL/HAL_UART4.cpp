@@ -3,6 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "SCPI/SCPI.h"
+#include "Settings/Settings.h"
 #include "stm_includes.h"
 #include <cstring>
 
@@ -45,6 +46,8 @@ namespace HAL_UART4
 void HAL_UART4::Init()
 {
     __HAL_RCC_UART4_CLK_ENABLE();
+
+    handleUART4.Init.BaudRate = set.baudrate.ToRaw();
 
     HAL_PIO::Init(HPort::_A, HPin::_0, HMode::AF_PP, HPull::Up, HSpeed::High, HAlternate::AF8_UART4);      // TX
     HAL_PIO::Init(HPort::_A, HPin::_1, HMode::AF_PP, HPull::Up, HSpeed::High, HAlternate::AF8_UART4);      // RX

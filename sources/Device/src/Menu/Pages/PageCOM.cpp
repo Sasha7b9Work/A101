@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Menu/MenuItems.h"
+#include "Hardware/HAL/HAL.h"
 
 
 namespace PageCOM
@@ -13,7 +14,14 @@ namespace PageCOM
         nullptr
     };
 
-    static Choice chBaudrate("Скорость", "Baudrate", (uint8 *)&set.baudrate, names_baudrates, 0, 0);
+    static Choice chBaudrate("Скорость", "Baudrate", (uint8 *)&set.baudrate, names_baudrates, 0, 0, [](Item *, bool press)
+    {
+        if (!press)
+        {
+            HAL_UART4::Init();
+            HAL_USART3::Init();
+        }
+    });
 
     static pchar names_parity[] =
     {

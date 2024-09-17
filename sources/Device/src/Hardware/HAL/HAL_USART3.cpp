@@ -4,6 +4,7 @@
 #include "Hardware/HAL/HAL_PIO.h"
 #include "SCPI/SCPI.h"
 #include "stm_includes.h"
+#include "Settings/Settings.h"
 #include <cstring>
 
 
@@ -45,6 +46,8 @@ namespace HAL_USART3
 void HAL_USART3::Init()
 {
     __HAL_RCC_USART3_CLK_ENABLE();
+
+    handleUSART3.Init.BaudRate = set.baudrate.ToRaw();
 
     HAL_PIO::Init(HPort::_D, HPin::_8, HMode::AF_PP, HPull::No, HSpeed::High, HAlternate::AF7_USART2);      // TX
     HAL_PIO::Init(HPort::_D, HPin::_9, HMode::AF_PP, HPull::No, HSpeed::High, HAlternate::AF7_USART2);      // RX
