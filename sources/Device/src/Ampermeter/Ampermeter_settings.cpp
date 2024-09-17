@@ -88,8 +88,6 @@ void Ampermeter::ZeroAC::Enable()
     }
 
     PageMain::HightLightCurrentRange();
-
-//    PageMain::labelZeroAC.SetShown(true);
 }
 
 

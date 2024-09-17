@@ -16,6 +16,7 @@
 namespace PageMain
 {
     extern ButtonPress btnMenu;
+    extern ButtonPress btnAC_DC;
 
     LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 0, 60 };
     LabelMeasure wndAC{ TypeMeasure::AC, SizeMeasure::Big, 0, 220 };
@@ -220,6 +221,37 @@ namespace PageMain
         wndFREQ.SetMeasure(Ampermeter::GetFrequency(), Range::Current());
     }
 
+    void SetRange(MeasuresOnDisplay::E meas, int range)
+    {
+        MeasuresOnDisplay::Set(meas);
+
+        if (MeasuresOnDisplay::IsAC_DC())
+        {
+            btnAC_DC.SetText("AC+DC", "AC+DC");
+        }
+        else if (MeasuresOnDisplay::IsAC())
+        {
+            btnAC_DC.SetText("AC", "AC");
+        }
+        else if (MeasuresOnDisplay::IsDC())
+        {
+            btnAC_DC.SetText("DC", "DC");
+        }
+
+        wndAC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsAC());
+        wndDC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsDC());
+
+        PageMain::self->GetItem(range)->Press();
+
+        for (int i = 0; i < 6; i++)
+        {
+            if (i != range)
+            {
+                PageMain::self->GetItem(i)->Release();
+            }
+        }
+    }
+
     // Вызывается при нажатии кнопки
     static void FuncOnRange(Item *item, int range, bool press)
     {
@@ -279,7 +311,7 @@ namespace PageMain
         FuncOnRange(item, 5, press);
     });
 
-    static ButtonPress btnAC_DC("AC+DC", "AC+DC", Font::_5_GB30b, { CoordXHiButton(0), 4, WidthHiButton(), 37 }, [](Item *item, bool press)
+    ButtonPress btnAC_DC("AC+DC", "AC+DC", Font::_5_GB30b, { CoordXHiButton(0), 4, WidthHiButton(), 37 }, [](Item *item, bool press)
     {
         if (press)
         {
@@ -342,38 +374,6 @@ namespace PageMain
     static Page pageMain(items, FuncOnEnter, FuncDraw);
 
     Page *self = &pageMain;
-
-    void SetRange(MeasuresOnDisplay::E meas, int range)
-    {
-        MeasuresOnDisplay::Set(meas);
-
-        if (MeasuresOnDisplay::IsAC_DC())
-        {
-            btnAC_DC.SetText("AC+DC", "AC+DC");
-        }
-        else if (MeasuresOnDisplay::IsAC())
-        {
-            btnAC_DC.SetText("AC", "AC");
-        }
-        else if (MeasuresOnDisplay::IsDC())
-        {
-            btnAC_DC.SetText("DC", "DC");
-        }
-
-        wndAC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsAC());
-        wndDC.SetShown(MeasuresOnDisplay::IsAC_DC() || MeasuresOnDisplay::IsDC());
-
-        PageMain::self->GetItem(range)->Press();
-
-        for (int i = 0; i < 6; i++)
-        {
-            if (i != range)
-            {
-                PageMain::self->GetItem(i)->Release();
-            }
-        }
-    }
-
 
     void HightLightCurrentRange()
     {
