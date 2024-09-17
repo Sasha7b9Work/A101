@@ -11,7 +11,7 @@ namespace PageCOM
     {
         "9600",   "9600",
         "115200", "115200",
-        nullptr
+        nullptr,  nullptr
     };
 
     static Choice chBaudrate("Скорость", "Baudrate", (uint8 *)&set.baudrate, names_baudrates, 0, 0, [](Item *, bool press)
@@ -25,19 +25,19 @@ namespace PageCOM
 
     static pchar names_parity[] =
     {
-        "Нет", "No",
-        "Да",  "Yes",
-        nullptr
+        "Нет",   "No",
+        "Да",    "Yes",
+        nullptr, nullptr
     };
 
     static Choice chParity("Четность", "Parity", (uint8 *)&set.parity, names_parity, 0, 1);
 
     static pchar names_stop_bits[] =
-    {
-        "1",   "1",
-        "1.5", "1.5",
-        "2",   "2",
-        nullptr
+    {            
+        "1",     "1",
+        "1.5",   "1.5",
+        "2",     "2",
+        nullptr, nullptr
     };
 
     static Choice chStopBits("Стоп-биты", "Stop-bits", (uint8 *)&set.stop_bits, names_stop_bits, 0, 2);

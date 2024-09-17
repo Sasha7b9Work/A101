@@ -165,7 +165,7 @@ namespace PageMenu
     {
         "Russian",    "–усский",
         "јнглийский", "English",
-        nullptr
+        nullptr,      nullptr
     };
 
     static Choice chLanguage("язык", "Language", (uint8 *)&set.lang, names_lang, 1, 3, [](Item *, bool press)
@@ -242,7 +242,7 @@ namespace PageMenu
     {
         "–учной",         "Hand",
         "јвтоматический", "Auto",
-        nullptr
+        nullptr,          nullptr
     };
 
     Choice chChangeRange("¬ыбор диапазона", "Range selection", (uint8 *)&set.change_range, names_change_range, 1, 2);
@@ -252,7 +252,7 @@ namespace PageMenu
         "1√ц - 4√ц",   "1Hz - 4Hz",
         "4√ц - 40√ц",  "4Hz - 40Hz",
         "40√ц - 5к√ц", "40Hz - 5kHz",
-        nullptr
+        nullptr,       nullptr
     };
 
     Choice chRangeFreq("ƒиапазон частоты", "Range frequency", (uint8 *)&set.range_freq, names_range_freq, 1, 3);
