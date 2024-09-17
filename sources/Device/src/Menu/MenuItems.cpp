@@ -405,7 +405,7 @@ bool ButtonPress::Draw()
                 Nextion::DrawRect({ x + i, y + i, width - 1 - i * 2, height - 1 - i * 2}, Color::White);
             }
 
-            Nextion::DrawString({ x + 3, y + 3, width - 7, height - 7 }, font,
+            Nextion::DrawString({ x + tickness, y + tickness, width - tickness * 2, height - tickness * 2 }, font,
                 Color::White,
                 is_pressed ? Color::ButtonPress : Color::Background,
                 title[set.lang], true, true);
