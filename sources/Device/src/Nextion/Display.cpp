@@ -32,6 +32,10 @@ void Display::Init()
 
     SetBrightness();
 
+    Nextion::SendCommandFormat("%s", "pic 0,0,0");
+
+    Nextion::DrawString({ 645, 423, 145, 45 }, Font::_0_GB34b, Color::Background, Color::White, "Ver.1.0.1.");
+
 #ifdef DEBUG
     Nextion::DrawString({10, 350, 100, 40}, 0, Color::Black, Color::Background, "Debug");
 #endif
