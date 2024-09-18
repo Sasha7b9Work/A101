@@ -21,6 +21,7 @@ namespace PageCalibration
     extern ButtonPress btnCalib;
     extern ButtonPress btn0;
     extern ButtonPress btn2;
+    extern ButtonToggle btnMax;
 
     static void FuncDraw();
 
@@ -31,6 +32,9 @@ namespace PageCalibration
     {
         wndCurrent.Reset();
     }
+
+    // Выбор точки калибровки : 0 - мин, 1 - макс.
+    static void ChooseDot(int);
 
     static void ChooseRange(int);
 
@@ -109,12 +113,16 @@ namespace PageCalibration
 
     const int y = 183;
 
-    static ButtonToggle btnMin("Мин", "Min", Font::_1_GB42b, { 640, y, 150, 73 }, [](Item *, bool)
+    static ButtonToggle btnMin("Мин", "Min", Font::_1_GB42b, { 640, y, 150, 73 }, [](Item *item, bool)
     {
+        btnMax.SetToggled(false, false);
+        item->ToButtonToggle()->SetToggled(true, false);
     });
 
-    static ButtonToggle btnMax("Макс", "Max", Font::_1_GB42b, { 640, y - 79, 150, 73 }, [](Item *, bool)
+    ButtonToggle btnMax("Макс", "Max", Font::_1_GB42b, { 640, y - 79, 150, 73 }, [](Item *item, bool)
     {
+        btnMin.SetToggled(false, false);
+        item->ToButtonToggle()->SetToggled(true, false);
     });
 
     ButtonPress btnSave("Сохр.", "Save", Font::_1_GB42b, { 236, 6, 130, 73 }, [](Item *item, bool)
@@ -336,6 +344,22 @@ namespace PageCalibration
         }
     }
 
+    static void ChooseDot(int dot)
+    {
+        static ButtonToggle *btns[2] =
+        {
+            &btnMin,
+            &btnMax
+        };
+
+        for (int i = 0; i < 2; i++)
+        {
+            btns[i]->SetToggled(false, false);
+        }
+
+        btns[dot]->SetToggled(true);
+    }
+
     static void ChooseRange(int range)
     {
         ButtonsRange::SetRange(range);
@@ -397,6 +421,8 @@ namespace PageCalibration
         SetVisibleDigits(true);
 
         LabelPassword::Reset();
+
+        ChooseDot(0);
     }
 
     static void FuncDraw()
