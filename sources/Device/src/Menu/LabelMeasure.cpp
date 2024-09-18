@@ -95,7 +95,7 @@ int LabelMeasure::GetWidth(SizeMeasure::E size, int label)
     {
         {175, 64, 390, 170},
         {80,  17, 100, 45},
-        {100, 40, 250, 100}
+        {10, 40, 250, 100}
     };
 
     return width[size][label];

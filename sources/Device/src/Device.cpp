@@ -26,7 +26,7 @@ void Device::Init()
 
     Display::Init();
 
-    Timer::Delay(3000);         // Задержка на стартовый экран
+    Timer::Delay(30);         // Задержка на стартовый экран
 
     Menu::Init();
 }
