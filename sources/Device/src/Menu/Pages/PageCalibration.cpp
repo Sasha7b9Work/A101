@@ -38,6 +38,9 @@ namespace PageCalibration
 
     static void ChooseRange(int);
 
+    // Установить требуемое значение измеряемой величины
+    static void SetGivenMeasure();
+
     static const pchar PASSWORD = "1";
 
     namespace LabelPassword
@@ -117,12 +120,16 @@ namespace PageCalibration
     {
         btnMax.SetToggled(false, false);
         item->ToButtonToggle()->SetToggled(true, false);
+
+        SetGivenMeasure();
     });
 
     ButtonToggle btnMax("Макс", "Max", Font::_1_GB42b, { 640, y - 79, 150, 73 }, [](Item *item, bool)
     {
         btnMin.SetToggled(false, false);
         item->ToButtonToggle()->SetToggled(true, false);
+
+        SetGivenMeasure();
     });
 
     ButtonPress btnSave("Сохр.", "Save", Font::_1_GB42b, { 236, 6, 130, 73 }, [](Item *item, bool)
@@ -162,6 +169,10 @@ namespace PageCalibration
                 SetVisibleDigits(false);
 
                 btnSave.SetShown(false);
+
+                wndGiven.SetShown(true);
+
+                wndCurrent.SetShown(true);
             }
             else
             {
@@ -370,12 +381,13 @@ namespace PageCalibration
         HAL_PIO::Write(PIN_ZERO, false);
 
         btnSave.SetShown(false);
+
+        SetGivenMeasure();
     }
 
     void SetVisibleDigits(bool visible)
     {
         btn0.SetShown(visible);
-        btn0.Refresh();
         btn1.SetShown(visible);
         btn2.SetShown(visible);
         btn3.SetShown(visible);
@@ -402,19 +414,18 @@ namespace PageCalibration
         btn2A.SetShown(visible);
         btn20A.SetShown(visible);
         btn50A.SetShown(visible);
-
-        wndCurrent.SetEnabled(visible);
-        wndGiven.SetEnabled(visible);
     }
 
     static void FuncOnEnter()
     {
+        ChooseDot(0);
+
+        wndCurrent.SetShown(false);
+        wndGiven.SetShown(false);
+
         btnMin.SetText("Мин", "Min");
         btnMax.SetText("Макс", "Max");
         btnCalib.SetText("Калиб.", "Calib.");
-
-        wndCurrent.Flash();
-        wndGiven.Flash();
 
         SetVisibleExceptButtons(false);
 
@@ -422,15 +433,23 @@ namespace PageCalibration
 
         LabelPassword::Reset();
 
-        ChooseDot(0);
+        LabelPassword::Draw();
     }
 
     static void FuncDraw()
     {
-        wndCurrent.SetMeasure(Ampermeter::GetDC(), Range::Current());
-
         LabelPassword::Draw();
 
+        if (LabelPassword::PasswordCorrect())
+        {
+            wndCurrent.SetMeasure(Ampermeter::GetDC(), Range::Current());
+
+            SetGivenMeasure();
+        }
+    }
+
+    static void SetGivenMeasure()
+    {
         int range = ButtonsRange::GetRange();
 
         if (range >= 0)
@@ -454,6 +473,8 @@ namespace PageCalibration
                 wndGiven.SetMeasure({ values[range], false, true }, range);
             }
         }
+
+        wndGiven.Refresh();
     }
 
     static Item *items[] =

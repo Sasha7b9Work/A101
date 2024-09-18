@@ -271,7 +271,7 @@ struct LabelMeasure : public Label
 
     void Reset();
 
-    void Flash();
+    virtual void Refresh() override;
 
     void SetMeasure(const Measure &, int range);
 

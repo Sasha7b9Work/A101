@@ -172,6 +172,15 @@ void LabelMeasure::SetShown(bool show)
 }
 
 
+void LabelMeasure::Refresh()
+{
+    label_name.Refresh();
+    label_sign.Refresh();
+    label_digits.Refresh();
+    label_units.Refresh();
+}
+
+
 void LabelMeasure::Reset()
 {
     int range = Range::Current();
@@ -223,12 +232,6 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
     }
 
     need_draw = true;
-}
-
-
-void LabelMeasure::Flash()
-{
-
 }
 
 

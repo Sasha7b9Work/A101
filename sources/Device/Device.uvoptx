@@ -75,7 +75,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>0</IsCurrentTarget>
+        <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>
@@ -152,9 +152,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>340</LineNumber>
+          <LineNumber>445</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134250798</Address>
+          <Address>134251710</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,7 +163,23 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;1&gt;.\src\Menu\Pages\PageCalibration.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Menu/Pages/PageCalibration.cpp\340</Expression>
+          <Expression>\\A101_D\src/Menu/Pages/PageCalibration.cpp\445</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>436</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134251056</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Menu\Pages\PageCalibration.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\A101_D\src/Menu/Pages/PageCalibration.cpp\436</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -313,7 +329,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>1</IsCurrentTarget>
+        <IsCurrentTarget>0</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>
