@@ -6,6 +6,7 @@
 #include "Nextion/Nextion.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/Timer.h"
+#include "Menu/Pages/Pages.h"
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
@@ -13,12 +14,6 @@
 
 namespace Display
 {
-    namespace LabelStar
-    {
-        static uint time_show = 0;      // Время зажигания звёздочки. Нужно, чтобы знать, когда потушить.
-        static uint time_hide = 0;      // Время, когда была потушена звёздочка
-        static bool is_shown = false;
-    }
 }
 
 
@@ -51,38 +46,15 @@ void Display::SetBrightness()
 void Display::Update()
 {
     Page::Current()->Draw();
+
+    if (Page::Current() == PageMain::self)
+    {
+
+    }
 }
 
 
 void Display::Clear()
 {
     Nextion::FillRect({ 0, 0, Display::WIDTH, Display::HEIGHT }, Color::Background);
-}
-
-
-void Display::LabelStar::Show()
-{
-    if (is_shown || (TIME_MS - time_hide < 500))
-    {
-        return;
-    }
-
-    is_shown = true;
-
-    time_show = TIME_MS;
-
-//    Nextion::SetVisible("t_star", true);
-}
-
-
-void Display::LabelStar::Update()
-{
-    if (is_shown && (TIME_MS - time_show > 500))
-    {
-        is_shown = false;
-
-        time_hide = TIME_MS;
-
-//        Nextion::SetVisible("t_star", false);
-    }
 }

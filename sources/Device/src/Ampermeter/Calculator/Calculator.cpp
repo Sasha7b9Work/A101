@@ -78,8 +78,6 @@ SampleRate Calculator::AppendData()
         ampl.Push(ampl_value * k);
     }
 
-    Display::LabelStar::Show();
-
     return SampleRate::Current::Get();
 }
 

@@ -15,6 +15,8 @@
 
 namespace PageMain
 {
+    static uint time_enter = 0;     // Время перехода на данную страницу
+
     extern ButtonPress btnMenu;
     extern ButtonPress btnAC_DC;
 
@@ -198,6 +200,8 @@ namespace PageMain
 
     static void FuncOnEnter()
     {
+        time_enter = TIME_MS;
+
         SetTitleButtonAC_DC();
 
         ResetAllMeasures();
@@ -232,8 +236,6 @@ namespace PageMain
 
     static void FuncDraw()
     {
-        Display::LabelStar::Update();
-
         wndDC.SetMeasure(Ampermeter::GetDC(), Range::Current());
 
         wndAC.SetMeasure(Ampermeter::GetAC(), Range::Current());
@@ -397,4 +399,10 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
     {
         enable ? btnZeroDC.Press() : btnZeroDC.Release();
     }
+}
+
+
+uint PageMain::GetTimeEnter()
+{
+    return time_enter;
 }
