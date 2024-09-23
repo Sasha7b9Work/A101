@@ -222,6 +222,12 @@ namespace PageMain
         wndAMPL.SetEnabled(TypeMeasure(TypeMeasure::Ampl).IsShown());
         wndPEAK.SetEnabled(TypeMeasure(TypeMeasure::Peak).IsShown());
         wndFREQ.SetEnabled(TypeMeasure(TypeMeasure::Frequency).IsShown());
+
+        btnAC_DC.SetExtendedHeightPress();
+        btnZeroDC.SetExtendedHeightPress();
+        btnZeroAC.SetExtendedHeightPress();
+        btnAVP.SetExtendedHeightPress();
+        btnZero.SetExtendedHeightPress();
     }
 
     static void FuncDraw()
@@ -353,9 +359,12 @@ namespace PageMain
         &btn20A,    // |
         &btn50A,    // /
 
-        &btnAC_DC,
-        &btnZeroDC,
-        &btnZeroAC,
+        &btnAC_DC,  // /
+        &btnZeroDC, // |
+        &btnZeroAC, // | Кнопки вверху экрана
+        &btnAVP,    // |
+        &btnZero,   // /
+
         &wndDC,
         &wndAC,
         &wndAMPL,
@@ -364,8 +373,6 @@ namespace PageMain
         &wndMAX,
         &wndFREQ,
         &btnMenu,
-        &btnZero,
-        &btnAVP,
         nullptr
     };
 

@@ -42,10 +42,14 @@ struct Item
         parent = page;
     }
 
+    // Возвращает фигуру отрисовки
     const Rect &GetRect() const
     {
         return rect;
     }
+
+    // Возвращает фигуру нажатия
+    virtual Rect GetRectForPress() const;
 
     virtual void SetShown(bool show);
     bool IsShown() const;
@@ -125,9 +129,18 @@ struct ButtonPress : public ButtonCommon
 
     virtual bool Draw() override;
 
+    void SetExtendedHeightPress()
+    {
+        is_extened_height_press = true;
+    }
+
+    virtual Rect GetRectForPress() const override;
+
 protected:
 
     int tickness = 0;
+
+    bool is_extened_height_press = false;   // Если true, то зона срабатывания расширена в высоту в два раза вниз
 };
 
 

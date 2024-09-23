@@ -55,7 +55,10 @@ namespace PoolItems
         return false;
     }
 
-    static Item *GetItem(int x, int y)
+    Item *GetItemDraw(int x, int y);
+
+    // Возвращает Item по фигуре отрисовки
+    Item *GetItemDraw(int x, int y)
     {
         for (int i = 0; i < num_items; i++)
         {
@@ -68,6 +71,45 @@ namespace PoolItems
         }
 
         return nullptr;
+    }
+
+    // Возвращает Item по фигуре нажатия
+    static Item *GetItemPress(int x, int y)
+    {
+        for (int i = 0; i < num_items; i++)
+        {
+            Item *item = items[i];
+
+            if (item->IsShown() && item->GetRectForPress().Intersect(x, y))
+            {
+                return item;
+            }
+        }
+
+        return nullptr;
+    }
+}
+
+
+Rect Item::GetRectForPress() const
+{
+    return rect;
+}
+
+
+Rect ButtonPress::GetRectForPress() const
+{
+    if (is_extened_height_press)
+    {
+        Rect result = rect;
+
+        result.height *= 2;
+
+        return result;
+    }
+    else
+    {
+        return rect;
     }
 }
 
@@ -272,7 +314,7 @@ int Choice::GetCountValue() const
 
 void Item::OnEventPress(int x, int y)
 {
-    Item *item = PoolItems::GetItem(x, y);
+    Item *item = PoolItems::GetItemPress(x, y);
 
     if (item)
     {
@@ -283,7 +325,7 @@ void Item::OnEventPress(int x, int y)
 
 void Item::OnEventRelease(int x, int y)
 {
-    Item *item = PoolItems::GetItem(x, y);
+    Item *item = PoolItems::GetItemPress(x, y);
 
     if (item)
     {
