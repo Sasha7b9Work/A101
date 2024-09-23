@@ -46,11 +46,6 @@ void Display::SetBrightness()
 void Display::Update()
 {
     Page::Current()->Draw();
-
-    if (Page::Current() == PageMain::self)
-    {
-
-    }
 }
 
 

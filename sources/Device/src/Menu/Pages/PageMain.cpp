@@ -15,7 +15,15 @@
 
 namespace PageMain
 {
-    static uint time_enter = 0;     // Время перехода на данную страницу
+    namespace Star
+    {
+        static uint time_start = TIME_MS;     // Время перехода на данную страницу
+
+        static bool prev_enabled = false;       // В таком состоянии звёздочка была
+
+        static void Reset();
+        static void Draw();
+    }
 
     extern ButtonPress btnMenu;
     extern ButtonPress btnAC_DC;
@@ -200,7 +208,7 @@ namespace PageMain
 
     static void FuncOnEnter()
     {
-        time_enter = TIME_MS;
+        Star::Reset();
 
         SetTitleButtonAC_DC();
 
@@ -236,6 +244,8 @@ namespace PageMain
 
     static void FuncDraw()
     {
+        Star::Draw();
+
         wndDC.SetMeasure(Ampermeter::GetDC(), Range::Current());
 
         wndAC.SetMeasure(Ampermeter::GetAC(), Range::Current());
@@ -402,7 +412,23 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 }
 
 
-uint PageMain::GetTimeEnter()
+void PageMain::Star::Reset()
 {
-    return time_enter;
+    time_start = TIME_MS;
+    prev_enabled = false;
+}
+
+
+void PageMain::Star::Draw()
+{
+    uint full_time = (TIME_MS - time_start) / 1000;
+
+    bool enabled = (full_time % 2) == 0;
+
+    if (enabled != prev_enabled)
+    {
+        Nextion::DrawString({ 627, 0, 40, 40 }, Font::_2_GB72b, Color::White, Color::Background, enabled ? "*" : "", true, true);
+
+        prev_enabled = enabled;
+    }
 }

@@ -27,9 +27,6 @@ namespace PageMain
     // После изменения выводимых на экран измерений нужно вызывать эту функцию
     void RedrawAllMeasures();
 
-    // Возвращает время включения данной страницы
-    uint GetTimeEnter();
-
     extern ButtonToggle btnAVP;
 }
 
