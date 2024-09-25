@@ -75,7 +75,7 @@ void HAL_UART4::Send0D0A()
 
 void HAL_UART4::CallbackOnReceive()
 {
-    SCPI::CallbackOnReceive(Direction::RS232, buffer);
+    SCPI::CallbackOnReceive(Direction::RS232, (char)buffer);
 
     HAL_UART_Receive_IT(&handleUART4, (uint8_t *)&buffer, 1);
 }

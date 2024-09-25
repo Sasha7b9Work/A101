@@ -39,7 +39,7 @@ namespace HAL_USART3
 
     void *handle = (void *)&handleUSART3;
 
-    static uint8 buffer = 0;
+    static char buffer = 0;
 }
 
 

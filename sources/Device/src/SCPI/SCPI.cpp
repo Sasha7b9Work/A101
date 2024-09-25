@@ -48,7 +48,7 @@ void SCPI::InBuffer::Update()
 }
 
 
-void SCPI::CallbackOnReceive(Direction::E dir, uint8 byte)
+void SCPI::CallbackOnReceive(Direction::E dir, char byte)
 {
     if (dir & Direction::USB)
     {

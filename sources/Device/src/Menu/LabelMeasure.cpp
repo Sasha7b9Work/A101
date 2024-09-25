@@ -218,7 +218,7 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
     {
         if (measure.out_of_range)
         {
-            std::strcpy(buf_measure, "   OL");
+            std::strcpy(buf_measure, " OL");
         }
         else
         {
