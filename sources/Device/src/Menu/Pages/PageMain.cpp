@@ -329,15 +329,23 @@ namespace PageMain
         FuncOnRange(item, 5, press);
     });
 
-    void SetMeasuresOnDisplay(MeasuresOnDisplay::E meas)
+    void SetMeasuresOnDisplay(MeasuresOnDisplay::E meas, bool force)
     {
-        if (meas != set.meas_on_display.Current())
+        if (force || meas != set.meas_on_display.Current())
         {
             set.meas_on_display.Set(meas);
 
             SetTitleButtonAC_DC();
 
             RedrawAllMeasures();
+
+            bool show_AC = (meas == MeasuresOnDisplay::AC || meas == MeasuresOnDisplay::AC_DC);
+            bool show_DC = (meas == MeasuresOnDisplay::DC || meas == MeasuresOnDisplay::AC_DC);
+
+            btnZeroAC.SetShown(show_AC);
+            btnZeroAC.SetEnabled(show_AC);
+            btnZeroDC.SetShown(show_DC);
+            btnZeroDC.SetEnabled(show_DC);
         }
     }
 

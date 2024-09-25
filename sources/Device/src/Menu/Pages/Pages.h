@@ -16,7 +16,8 @@ namespace PageMain
     extern ButtonToggle btnZeroAC;
     extern ButtonToggle btnZeroDC;
 
-    void SetMeasuresOnDisplay(MeasuresOnDisplay::E);
+    // Форсировать действия (произвести их, даже если не требуется)
+    void SetMeasuresOnDisplay(MeasuresOnDisplay::E, bool force = false);
     void SetRange(int);
 
     void EnableZero(MeasuresOnDisplay::E, bool);

@@ -338,11 +338,12 @@ void Menu::Init()
 {
     Display::Clear();
 
-    PageMain::SetMeasuresOnDisplay(set.meas_on_display.Current());
     PageMain::SetRange(2);
     PageMain::SetRange(3);
 
     PageMain::self->SetAsCurrent();
+
+    PageMain::SetMeasuresOnDisplay(set.meas_on_display.Current(), true);
 }
 
 
