@@ -176,11 +176,7 @@ Measure Ampermeter::GetDC()
         zero /= 1e3;
     }
 
-//    return Measure(dc - zero, OutOfRange(), correct);
-
-    при перегрузке показывает mA на 2 А
-
-    return Measure(3.0f * 1e3f, true, true);
+    return Measure(dc - zero, OutOfRange(), correct);
 }
 
 

@@ -311,16 +311,14 @@ private:
 
     TypeMeasure type_measure;
 
-    void SetMeasure(pchar);
+    void SetMeasure(pchar, pchar units_ru, pchar units_en);
 
     // after - количество цифр после запятой
-    void ConvertRealToText(REAL value, char buffer[Label::MAX_LEN], int after, pchar suffix);
+    void ConvertRealToText(REAL value, char buffer[Label::MAX_LEN], int after);
 
     void DrawSign(pchar);
 
     void DrawDigits(pchar);
-
-    void DrawUnits(pchar, pchar);
 
     int GetWidth(SizeMeasure::E, int label);
 };

@@ -223,12 +223,11 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
         else
         {
             static const int after[6] = { 4, 3, 2, 4, 3, 3 };
-            const pchar suffix = (range < 3) ? "mA" : "A";
 
-            ConvertRealToText(measure.value_abs / (Range::Current() > 2 ? 1e3 : 1.0), buf_measure, after[range], suffix);
+            ConvertRealToText(measure.value_abs / (Range::Current() > 2 ? 1e3 : 1.0), buf_measure, after[range]);
         }
 
-        SetMeasure(buf_measure);
+        SetMeasure(buf_measure, (range < 3 ? "לְ" : "ְ"), (range < 3 ? "mA" : "A"));
     }
 
     need_draw = true;
@@ -253,7 +252,7 @@ pchar LabelMeasure::GetSign() const
 }
 
 
-void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int after, pchar suffix)
+void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int after)
 {
     std::strcpy(out, value < 0.0 ? "-" : "+");
 
@@ -293,9 +292,9 @@ void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int a
 
     char buffer[Label::MAX_LEN];
 
-    char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0' };
+    char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', '\0' };
 
-    std::sprintf(buffer, format, (double)value, suffix);
+    std::sprintf(buffer, format, (double)value);
 
     std::strcat(out, buffer);
 }
@@ -347,13 +346,7 @@ void LabelMeasure::DrawDigits(pchar digits)
 }
 
 
-void LabelMeasure::DrawUnits(pchar ru, pchar en)
-{
-    label_units.SetText(ru, en);
-}
-
-
-void LabelMeasure::SetMeasure(pchar measure)
+void LabelMeasure::SetMeasure(pchar measure, pchar units_ru, pchar units_en)
 {
     if (measure[0])
     {
@@ -370,13 +363,6 @@ void LabelMeasure::SetMeasure(pchar measure)
 
         DrawDigits(buffer);
 
-        if (measure[std::strlen(measure) - 2] == ' ')
-        {
-            DrawUnits("ְ", "A");
-        }
-        else
-        {
-            DrawUnits("לְ", "mA");
-        }
+        label_units.SetText(units_ru, units_en);
     }
 }
