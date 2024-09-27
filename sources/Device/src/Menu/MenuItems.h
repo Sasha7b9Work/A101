@@ -259,7 +259,6 @@ private:
 
     int GetCountValue() const;
 
-    pchar       titles[Lang::Count];
     pchar      *names;
     ButtonPress button;
     Label       label;

@@ -255,21 +255,17 @@ void ButtonCommon::SetText(pchar title_ru, pchar title_en)
 Choice::Choice(pchar title_ru, pchar title_en, uint8 *_choice, pchar *_names, int x, int y, void (*_funcOnPress)(Item *, bool), Font::E) :
     Item(TypeItem::Choice, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU }, _funcOnPress),
     names(_names),
-    button(title_ru, title_ru, Font::_1_GB42b, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress, 3, TypeItem::ButtonPress, false),
+    button(title_ru, title_en, Font::_1_GB42b, { Item::GetCoordX(x), Item::GetCoordY(y), Item::WIDTH_MENU, Item::HEIGHT_MENU}, _funcOnPress, 3, TypeItem::ButtonPress, false),
     label(false, "", "", { Item::GetCoordX(x) + 10 + Item::WIDTH_MENU, Item::GetCoordY(y) , Item::WIDTH_MENU, Item::HEIGHT_MENU} ),
     choice(_choice)
 {
-    titles[Lang::RU] = title_ru;
-    titles[Lang::EN] = title_en;
-
     SetTextValue();
 }
 
 
 void Choice::SetTitles(pchar title_ru, pchar title_en)
 {
-    titles[Lang::RU] = title_ru;
-    titles[Lang::EN] = title_en;
+    button.SetText(title_ru, title_en);
 }
 
 
