@@ -168,7 +168,7 @@ namespace PageMenu
         nullptr,      nullptr
     };
 
-    static Choice chLanguage("Language", "язык", (uint8 *)&set.lang, names_lang, 1, 3, [](Item *item, bool press)
+    static Choice chLanguage((Lang::IsRU() ? "Language" : "язык"), (Lang::IsRU() ? "язык" : "Language"), (uint8 *)&set.lang, names_lang, 1, 3, [](Item *item, bool press)
     {
         if (!press)
         {
