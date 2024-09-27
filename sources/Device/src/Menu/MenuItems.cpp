@@ -266,6 +266,13 @@ Choice::Choice(pchar title_ru, pchar title_en, uint8 *_choice, pchar *_names, in
 }
 
 
+void Choice::SetTitles(pchar title_ru, pchar title_en)
+{
+    titles[Lang::RU] = title_ru;
+    titles[Lang::EN] = title_en;
+}
+
+
 void Choice::SetTextValue()
 {
     pchar *value_ru = names + (*choice) * 2;

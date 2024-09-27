@@ -133,3 +133,9 @@ uint Baudrate::ToRaw() const
 
     return raws[current];
 }
+
+
+bool Lang::IsRU()
+{
+    return set.lang == RU;
+}

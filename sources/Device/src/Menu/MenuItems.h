@@ -253,6 +253,8 @@ struct Choice : public Item
     // Установить текстовое значение, соответствующее текущему выбору
     void SetTextValue();
 
+    void SetTitles(pchar title_ru, pchar title_en);
+
 private:
 
     int GetCountValue() const;

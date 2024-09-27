@@ -12,6 +12,8 @@ struct Lang
         EN,
         Count
     };
+
+    static bool IsRU();
 };
 
 
