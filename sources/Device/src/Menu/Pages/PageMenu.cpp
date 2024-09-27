@@ -161,30 +161,21 @@ namespace PageMenu
         }
     });
 
-    static pchar names_lang_ru[] =
+    static pchar names_lang[] =
     {
         "Russian",    "–усский",
         "English",    "јнглийский",
         nullptr,      nullptr
     };
 
-//    static pchar names_lang_en[] =
-//    {
-//        "–усский", "Russian",
-//        "English", "јнглийский",
-//        nullptr,   nullptr
-//    };
-
     static Choice chLanguage((Lang::IsRU() ? "Language" : "язык"), (Lang::IsRU() ? "язык" : "Language"),
         (uint8 *)&set.lang,
-        names_lang_ru,
-//        Lang::IsRU() ? names_lang_ru : names_lang_en,
+        names_lang,
         1, 3, [](Item *item, bool press)
     {
         if (!press)
         {
             item->ToChoice()->SetTitles((Lang::IsRU() ? "Language" : "язык"), (Lang::IsRU() ? "язык" : "Language"));
-//            item->ToChoice()->SetNames(Lang::IsRU() ? names_lang_ru : names_lang_en);
             Page::Current()->Refresh();
         }
     });
