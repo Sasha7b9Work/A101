@@ -255,6 +255,8 @@ struct Choice : public Item
 
     void SetTitles(pchar title_ru, pchar title_en);
 
+    void SetNames(pchar *_names);
+
 private:
 
     int GetCountValue() const;
