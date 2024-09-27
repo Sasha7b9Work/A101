@@ -195,17 +195,19 @@ namespace PageCalibration
         }
     }
 
-    ButtonPress btnCalib("Старт", "Start", Font::_1_GB42b, { 372, Item::GetCoordY(0), 130, 73 }, [](Item *, bool)
+    ButtonPress btnCalib("Старт", "Start", Font::_1_GB42b, { 372, Item::GetCoordY(0), 130, 73 }, [](Item *, bool press)
+    {
+        if (!press)
         {
             btnSave.SetShown(false);
-            btnCalib.Release();
             btnCalib.SetShown(false);
             if (Calibrator::Run(Range::Current(), (!btnMax.IsPressed()) ? Calibrator::Type::DC : Calibrator::Type::AC, FuncDraw))
             {
                 btnSave.SetShown(true);
             }
             btnCalib.SetShown(true);
-        });
+        }
+    });
 
     static const int BUTTON_X = 0;
 
@@ -438,6 +440,8 @@ namespace PageCalibration
 
     static void FuncDraw()
     {
+        wndCurrent.Draw();
+
         LabelPassword::Draw();
 
         if (LabelPassword::PasswordCorrect())
