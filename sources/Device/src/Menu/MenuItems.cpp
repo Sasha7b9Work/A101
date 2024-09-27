@@ -259,6 +259,7 @@ Choice::Choice(pchar title_ru, pchar title_en, uint8 *_choice, pchar *_names, in
     label(false, "", "", { Item::GetCoordX(x) + 10 + Item::WIDTH_MENU, Item::GetCoordY(y) , Item::WIDTH_MENU, Item::HEIGHT_MENU} ),
     choice(_choice)
 {
+    label.SetParent(PageMenu::self);
     SetTextValue();
 }
 
