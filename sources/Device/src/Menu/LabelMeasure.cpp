@@ -102,6 +102,8 @@ int LabelMeasure::GetWidth(SizeMeasure::E size, int label)
 }
 
 
+#ifdef DRAW_DEBUG_LINES
+
 bool LabelMeasure::Draw()
 {
     if (!IsEnabled())
@@ -113,38 +115,26 @@ bool LabelMeasure::Draw()
     {
         if (IsShown())
         {
-#ifdef DRAW_DEBUG_LINES
-
             Nextion::DrawRect(rect, Color::White);
-
-#endif
 
             if (label_name.Draw())
             {
-#ifdef DRAW_DEBUG_LINES
                 Nextion::DrawRect(label_name.GetRect());
-#endif
             }
 
             if (label_sign.Draw())
             {
-#ifdef DRAW_DEBUG_LINES
                 Nextion::DrawRect(label_sign.GetRect());
-#endif
             }
 
             if (label_digits.Draw())
             {
-#ifdef DRAW_DEBUG_LINES
                 Nextion::DrawRect(label_digits.GetRect());
-#endif
             }
 
             if (label_units.Draw())
             {
-#ifdef DRAW_DEBUG_LINES
                 Nextion::DrawRect(label_units.GetRect());
-#endif
             }
         }
         else
@@ -159,6 +149,39 @@ bool LabelMeasure::Draw()
 
     return false;
 }
+
+#else
+
+bool LabelMeasure::Draw()
+{
+    if (!IsEnabled())
+    {
+        return false;
+    }
+
+    if (need_draw)
+    {
+        if (IsShown())
+        {
+            label_name.Draw();
+            label_sign.Draw();
+            label_digits.Draw();
+            label_units.Draw();
+        }
+        else
+        {
+            Nextion::FillRect(rect, colorBack);
+        }
+
+        need_draw = false;
+
+        return true;
+    }
+
+    return false;
+}
+
+#endif
 
 
 void LabelMeasure::SetShown(bool show)
