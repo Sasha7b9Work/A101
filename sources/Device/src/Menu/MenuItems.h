@@ -322,6 +322,8 @@ private:
     void DrawDigits(pchar);
 
     int GetWidth(SizeMeasure::E, int label);
+
+    REAL frequency = 0.0;
 };
 
 

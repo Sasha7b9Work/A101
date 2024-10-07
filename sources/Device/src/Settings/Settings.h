@@ -39,6 +39,14 @@ struct TypeMeasure
 
     bool IsShown() const;
 
+    bool IsFrequency() const { return value == Frequency; }
+
+    // ¬озвращает единицы измерени€, выводимые на экран, дл€ данной частоты
+    static void GetUnitsForFrequnesy(REAL freq, char ru[32], char en[32]);
+
+    // ¬озвращает количество знаков после зап€той, выводимых на экран, дл€ данной частоты
+    static int GetNumDigitsAfterComma(REAL freq);
+
 private:
 
     E value;

@@ -139,3 +139,84 @@ bool Lang::IsRU()
 {
     return set.lang == RU;
 }
+
+
+void TypeMeasure::GetUnitsForFrequnesy(REAL freq, char ru[32], char en[32])
+{
+    if (freq < 1e-3f)
+    {
+        std::strcpy(ru, "мк√ц");
+        std::strcpy(en, "uHz");
+    }
+    else if (freq < 1.0f)
+    {
+        std::strcpy(ru, "м√ц");
+        std::strcpy(en, "mHz");
+    }
+    else if (freq < 1e3f)
+    {
+        std::strcpy(ru, "√ц");
+        std::strcpy(en, "Hz");
+    }
+    else if (freq < 1e6f)
+    {
+        std::strcpy(ru, "к√ц");
+        std::strcpy(en, "kHz");
+    }
+    else if (freq < 1e9f)
+    {
+        std::strcpy(ru, "ћ√ц");
+        std::strcpy(en, "MHz");
+    }
+    else
+    {
+        std::strcpy(ru, "√√ц");
+        std::strcpy(en, "GHz");
+    }
+}
+
+
+int TypeMeasure::GetNumDigitsAfterComma(REAL freq)
+{
+    /*
+    *   < 1m         2      10**-3
+    *   < 10m        4      10**-2
+    *   < 100m       3      10**-1
+    *   < 1          2      10**0
+
+    *   < 10         4      10**1  [1...10)
+    *   < 100        3      10**2  [10...100)
+    *   < 1k         2      10**3  [100...1k)
+
+    *   < 10k        4      10**4
+    *   < 100k       3      10**5
+    *   < 1M         2      10**6
+    *   < 10ћ        4      10**7
+    *   < 100ћ       3      10**8
+    *   < 1√         2      10**9
+    */
+
+    // «агоним значение в диапазон [1...1k)
+
+    while (freq < 1.0)          // ¬гон€ем значение в нижнюю границу
+    {
+        freq *= 1e3;
+    }
+
+    while (freq >= 1e3)         // ¬гон€ем значение в верхнюю границу
+    {
+        freq /= 1e3;
+    }
+
+    if (freq < 10.0)
+    {
+        return 4;
+    }
+
+    if (freq < 100.0)
+    {
+        return 3;
+    }
+
+    return 2;
+}

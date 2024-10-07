@@ -221,7 +221,19 @@ void LabelMeasure::Reset()
         label_digits.SetText("***.**", "***.**");
     }
 
-    label_units.SetText(range < 3 ? "ìA" : "A", range < 3 ? "ìA" : "A");
+    if (type_measure.IsFrequency())
+    {
+        char ru[32];
+        char en[32];
+
+        TypeMeasure::GetUnitsForFrequnesy(frequency, ru, en);
+
+        label_units.SetText(ru, en);
+    }
+    else
+    {
+        label_units.SetText(range < 3 ? "ìA" : "A", range < 3 ? "ìA" : "A");
+    }
 
     label_sign.SetText("", "");
 
@@ -247,10 +259,31 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
         {
             static const int after[6] = { 4, 3, 2, 4, 3, 3 };
 
-            ConvertRealToText(measure.value_abs / (Range::Current() > 2 ? 1e3 : 1.0), buf_measure, after[range]);
+            if (type_measure.IsFrequency())
+            {
+                frequency = measure.value_abs;
+
+                ConvertRealToText(frequency, buf_measure, TypeMeasure::GetNumDigitsAfterComma(frequency));
+            }
+            else
+            {
+                ConvertRealToText(measure.value_abs / (Range::Current() > 2 ? 1e3 : 1.0), buf_measure, after[range]);
+            }
         }
 
-        SetMeasure(buf_measure, (range < 3 ? "ìÀ" : "À"), (range < 3 ? "mA" : "A"));
+        if (type_measure.IsFrequency())
+        {
+            char ru[32];
+            char en[32];
+
+            TypeMeasure::GetUnitsForFrequnesy(frequency, ru, en);
+
+            SetMeasure(buf_measure, ru, en);
+        }
+        else
+        {
+            SetMeasure(buf_measure, (range < 3 ? "ìÀ" : "À"), (range < 3 ? "mA" : "A"));
+        }
     }
 
     need_draw = true;
