@@ -183,11 +183,9 @@ int TypeMeasure::GetNumDigitsAfterComma(REAL freq)
     *   < 10m        4      10**-2
     *   < 100m       3      10**-1
     *   < 1          2      10**0
-
     *   < 10         4      10**1  [1...10)
     *   < 100        3      10**2  [10...100)
     *   < 1k         2      10**3  [100...1k)
-
     *   < 10k        4      10**4
     *   < 100k       3      10**5
     *   < 1M         2      10**6
@@ -196,27 +194,19 @@ int TypeMeasure::GetNumDigitsAfterComma(REAL freq)
     *   < 1Г         2      10**9
     */
 
-    // Загоним значение в диапазон [1...1k)
+    if (freq < 1e-3)        return 2;
+    else if (freq < 1e-2)   return 4;
+    else if (freq < 1e-1)   return 3;
+    else if (freq < 1e0)    return 2;
+    else if (freq < 1e1)    return 4;
+    else if (freq < 1e2)    return 3;
+    else if (freq < 1e3)    return 2;
+    else if (freq < 1e4)    return 4;
+    else if (freq < 1e5)    return 3;
+    else if (freq < 1e6)    return 2;
+    else if (freq < 1e7)    return 4;
+    else if (freq < 1e8)    return 3;
+    else if (freq < 1e9)    return 2;
 
-    while (freq < 1.0)          // Вгоняем значение в нижнюю границу
-    {
-        freq *= 1e3;
-    }
-
-    while (freq >= 1e3)         // Вгоняем значение в верхнюю границу
-    {
-        freq /= 1e3;
-    }
-
-    if (freq < 10.0)
-    {
-        return 4;
-    }
-
-    if (freq < 100.0)
-    {
-        return 3;
-    }
-
-    return 2;
+    return 4;
 }
