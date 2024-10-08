@@ -20,6 +20,8 @@ struct Measure
     REAL value_abs = 0.0;
     bool out_of_range = false;
     bool correct = false;
+
+    static REAL LimitFrequency(REAL value);
 };
 
 

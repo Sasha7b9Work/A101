@@ -241,9 +241,11 @@ Measure Ampermeter::GetMax()
 
 Measure Ampermeter::GetFrequency()
 {
-    bool correct = true;
+    bool correct = false;
 
-    return Measure(1.2345e-4, false, correct);
+    REAL frequency = Calculator::GetValueFrequency(&correct);
+
+    return Measure(Measure::LimitFrequency(frequency), OutOfRange(), correct);
 }
 
 
@@ -447,4 +449,20 @@ void Ampermeter::AdjustmentZero()
 //    Nextion::DrawString(160, 60, 440, 40, 0, Color::White, Color::Background, String<>("%d nz_v=%d v=%d c=%d", counter++, non_zero_var, zero_var, const_val).c_str());
 
     HAL_PIO::Write(PIN_ZERO, false);
+}
+
+
+REAL Measure::LimitFrequency(REAL value)
+{
+    if (value < 1e-3)
+    {
+        return 1e-3;
+    }
+
+    if (value > 1e6)
+    {
+        return 1e6;
+    }
+
+    return value;
 }

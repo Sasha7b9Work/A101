@@ -15,4 +15,5 @@ namespace Calculator
     REAL GetValueMin(bool *correct);
     REAL GetValueMax(bool *correct);
     REAL GetValueAmpl(bool *correct);
+    REAL GetValueFrequency(bool *correct);
 }

@@ -24,6 +24,7 @@ namespace Calculator
     static Averager<REAL, NUM_AVERAGES> min;
     static Averager<REAL, NUM_AVERAGES> max;
     static Averager<REAL, NUM_AVERAGES> ampl;
+    static Averager<REAL, NUM_AVERAGES> frequency;
 
     // Значения, приведённые к пределу - mA для 2,20,200мА, амперы для 2A, 20A, 50A
     static REAL GetRelativeDC(bool *correct);
@@ -31,6 +32,7 @@ namespace Calculator
     static REAL GetMin(bool *correct);
     static REAL GetMax(bool *correct);
     static REAL GetAmpl(bool *correct);
+    static REAL GetFrequency(bool *correct);
 }
 
 
@@ -39,7 +41,9 @@ void Calculator::Reset()
     dc.Reset();
     ac.Reset();
     min.Reset();
+    max.Reset();
     ampl.Reset();
+    frequency.Reset();
 }
 
 
@@ -173,6 +177,14 @@ REAL Calculator::GetMin(bool *correct)
 }
 
 
+REAL Calculator::GetFrequency(bool *correct)
+{
+    *correct = (frequency.NumElements() > 0);
+
+    return frequency.NumElements() ? frequency.Get() : 0.0;
+}
+
+
 REAL Calculator::GetMax(bool *correct)
 {
     *correct = (max.NumElements() > 0);
@@ -216,4 +228,10 @@ REAL Calculator::GetValueMax(bool *correct)
 REAL Calculator::GetValueAmpl(bool *correct)
 {
     return GetAmpl(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
+}
+
+
+REAL Calculator::GetValueFrequency(bool *correct)
+{
+    return GetFrequency(correct);
 }
