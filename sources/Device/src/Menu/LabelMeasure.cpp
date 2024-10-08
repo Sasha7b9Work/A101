@@ -223,12 +223,9 @@ void LabelMeasure::Reset()
 
     if (type_measure.IsFrequency())
     {
-        char ru[32];
-        char en[32];
+        label_units.SetText("*****", "*****");
 
-        TypeMeasure::GetUnitsForFrequnesy(frequency, ru, en);
-
-        label_units.SetText(ru, en);
+        label_units.SetText("", "");
     }
     else
     {
