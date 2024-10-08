@@ -51,8 +51,6 @@ SampleRate Calculator::AppendData()
 {
     Period period = ResolverPeriodSamples().GetResult();
 
-    frequency.Push(period.GetFrequency());
-
     const REAL k = cal.gain[Range::Current()].Get();
 
     // Считаем AC
@@ -82,6 +80,11 @@ SampleRate Calculator::AppendData()
         REAL ampl_value = resolver_ampl.GetResult();
 
         ampl.Push(ampl_value * k);
+    }
+
+    if (ampl.Get() > Range::Max(Range::Current()) * 0.1)        // Частоту выводим только если амплитуда превышает 10% от максимального значения
+    {
+        frequency.Push(period.GetFrequency());
     }
 
     return SampleRate::Current::Get();
