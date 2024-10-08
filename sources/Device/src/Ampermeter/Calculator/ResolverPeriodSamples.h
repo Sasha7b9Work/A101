@@ -46,6 +46,8 @@ struct Period
 
     int Lenght() const { return last.first - first.first; }
 
+    REAL GetFrequency() const;
+
     Intersection first; // Первое пересечение с нулём
     Intersection last;  // Второе пересечение с нулём
 

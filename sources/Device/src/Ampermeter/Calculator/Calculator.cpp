@@ -51,6 +51,8 @@ SampleRate Calculator::AppendData()
 {
     Period period = ResolverPeriodSamples().GetResult();
 
+    frequency.Push(period.GetFrequency());
+
     const REAL k = cal.gain[Range::Current()].Get();
 
     // —читаем AC

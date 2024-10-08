@@ -15,7 +15,7 @@ const ValueADC ValueADC::MIN = ValueADC((1 << 17));
 int ValueADC::_raw = 0;
 
 
-SampleRate SampleRate::current(10);      // Минимально возможное расстояние между точками - 5 мкс.
+SampleRate SampleRate::current(10);
 
 
 namespace AD7691

@@ -179,6 +179,16 @@ void ResolverPeriodSamples::CalculateAccuracy(const ValueADC &dc)
 }
 
 
+REAL Period::GetFrequency() const
+{
+    REAL period_us = (REAL)(last.first - first.first) * SampleRate::Current().Get().TimeUS();
+
+    REAL period = period_us / 1e6;
+
+    return 1.0 / period;
+}
+
+
 DualIntegral::DualIntegral(const Period &period)
 {
     Recalculate(period);
