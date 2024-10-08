@@ -31,11 +31,13 @@ namespace PageMain
     LabelMeasure wndDC{ TypeMeasure::DC, SizeMeasure::Big, 0, 60 };
     LabelMeasure wndAC{ TypeMeasure::AC, SizeMeasure::Big, 0, 220 };
 
-    static LabelMeasure wndAMPL{ TypeMeasure::Ampl, SizeMeasure::Small, 0, 350 };
-    static LabelMeasure wndPEAK{ TypeMeasure::Peak, SizeMeasure::Small, 0, 350 };
-    static LabelMeasure wndMIN{ TypeMeasure::Min,   SizeMeasure::Small, 0, 350 };
-    static LabelMeasure wndMAX{ TypeMeasure::Max,   SizeMeasure::Small, 0, 350 };
-    static LabelMeasure wndFREQ{ TypeMeasure::Frequency, SizeMeasure::Small, 0, 350 };
+    static const int y_meas = 355;
+
+    static LabelMeasure wndAMPL{ TypeMeasure::Ampl,      SizeMeasure::Small, 0, y_meas };
+    static LabelMeasure wndPEAK{ TypeMeasure::Peak,      SizeMeasure::Small, 0, y_meas };
+    static LabelMeasure wndMIN{  TypeMeasure::Min,       SizeMeasure::Small, 0, y_meas };
+    static LabelMeasure wndMAX{  TypeMeasure::Max,       SizeMeasure::Small, 0, y_meas };
+    static LabelMeasure wndFREQ{ TypeMeasure::Frequency, SizeMeasure::Small, 0, y_meas };
 
     static LabelMeasure *labels[5] =
     {
@@ -72,7 +74,7 @@ namespace PageMain
             {
                 std::memcpy(prev, set.en_add_meas, 3 * sizeof(TypeMeasure::E));
 
-                int16 x = 25;
+                int16 x = 5;
 
                 for (int i = 0; i < 5; i++)
                 {
@@ -86,10 +88,10 @@ namespace PageMain
                         return;
                     }
 
-                    labels[set.en_add_meas[i] - 2]->SetCoord({ x, 350 });
+                    labels[set.en_add_meas[i] - 2]->SetCoord({ x, y_meas });
                     labels[set.en_add_meas[i] - 2]->SetEnabled(true);
 
-                    x += (750 / 3);
+                    x += (750 / 3 + 15);
                 }
             }
         }

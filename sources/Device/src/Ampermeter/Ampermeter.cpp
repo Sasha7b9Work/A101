@@ -243,7 +243,7 @@ Measure Ampermeter::GetFrequency()
 {
     bool correct = true;
 
-    return Measure(1.23f, false, correct);
+    return Measure(1.2345e-4, false, correct);
 }
 
 

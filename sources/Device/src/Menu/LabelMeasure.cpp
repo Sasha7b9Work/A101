@@ -36,28 +36,28 @@ LabelMeasure::LabelMeasure(TypeMeasure::E _type, SizeMeasure::E _size, int _x, i
 
     label_name = Label(false, type_measure.Title(Lang::RU), type_measure.Title(Lang::EN),
         { _x + x, _y, width, height },
-        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, true, true);
+        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, true, false);
 
     x += width;
     width = GetWidth(_size, 1);
 
     label_sign = Label(false, "", "",
         { _x + x, _y, width, height },
-        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, false, true);
+        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, false, false);
 
     x += width;
     width = GetWidth(_size, 2);
 
     label_digits = Label(false, "", "",
         { _x + x, _y, width, height },
-        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, true, true);
+        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, true, false);
 
     x += width;
     width = GetWidth(_size, 3);
 
     label_units = Label(false, "", "",
         { _x + x, _y, width, height },
-        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, false, true);
+        LM::fonts[_size], EmptyFuncVIemB, Color::White, Color::Count, false, false);
 
     rect.width = (int16)(GetWidth(_size, 0) + GetWidth(_size, 1) + GetWidth(_size, 2) + GetWidth(_size, 3));
 }
@@ -94,7 +94,7 @@ int LabelMeasure::GetWidth(SizeMeasure::E size, int label)
     static const int width[SizeMeasure::Count][4] =
     {
         {175, 64, 390, 170},
-        {80,  17, 100, 45},
+        {80,  17, 100, 55},
         {10, 40, 250, 100}
     };
 
@@ -310,6 +310,19 @@ pchar LabelMeasure::GetSign() const
 
 void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int after)
 {
+    if (type_measure.IsFrequency())
+    {
+        while (value >= 1e3)
+        {
+            value /= 1e3;
+        }
+
+        while (value < 1e0)
+        {
+            value *= 1e3;
+        }
+    }
+
     std::strcpy(out, value < 0.0 ? "-" : "+");
 
     value = std::fabs(value);
