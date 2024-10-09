@@ -1440,6 +1440,11 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>ResolverFrequency.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverFrequency.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3149,6 +3154,11 @@
               <FileName>ResolverAmpl.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\Calculator\ResolverAmpl.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverFrequency.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverFrequency.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -49,6 +49,20 @@ private:
 };
 
 
+class ResolverFrequency
+{
+public:
+
+    ResolverFrequency(const Period &);
+
+    REAL GetFrequency() const { return frequency; }
+
+private:
+
+    REAL frequency = 0.0;
+};
+
+
 class ResolverFFT
 {
 public:

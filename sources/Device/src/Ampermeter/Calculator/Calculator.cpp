@@ -81,7 +81,7 @@ SampleRate Calculator::AppendData()
 
     if (ampl.Get() > Range::Max(Range::Current()) * 0.1)        // Частоту выводим только если амплитуда превышает 10% от максимального значения
     {
-        frequency.Push(period.GetFrequency());
+        frequency.Push(ResolverFrequency(period).GetFrequency());
     }
     else
     {
