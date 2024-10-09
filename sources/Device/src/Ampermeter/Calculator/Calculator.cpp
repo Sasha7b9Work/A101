@@ -1,13 +1,10 @@
 // 2022/10/19 08:16:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Ampermeter/Calculator/Calculator.h"
-#include "Ampermeter/Calculator/ResolverFFT.h"
-#include "Ampermeter/Calculator/ResolverPeriodFFT.h"
 #include "Ampermeter/Calculator/ResolverPeriodSamples.h"
 #include "Ampermeter/Calculator/Averager.h"
 #include "Ampermeter/Calculator/ResolverAC.h"
-#include "Ampermeter/Calculator/ResolverMinMax.h"
-#include "Ampermeter/Calculator/ResolverAmpl.h"
+#include "Ampermeter/Calculator/Resolvers.h"
 #include "Hardware/Timer.h"
 #include "Ampermeter/InputRelays.h"
 #include "Settings/Settings.h"
@@ -85,6 +82,10 @@ SampleRate Calculator::AppendData()
     if (ampl.Get() > Range::Max(Range::Current()) * 0.1)        // Частоту выводим только если амплитуда превышает 10% от максимального значения
     {
         frequency.Push(period.GetFrequency());
+    }
+    else
+    {
+        frequency.Reset();
     }
 
     return SampleRate::Current::Get();

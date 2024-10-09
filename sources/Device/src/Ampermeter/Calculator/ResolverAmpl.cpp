@@ -1,6 +1,6 @@
 // 2024/08/21 15:59:00 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Ampermeter/Calculator/ResolverAmpl.h"
+#include "Ampermeter/Calculator/Resolvers.h"
 #include <limits>
 
 

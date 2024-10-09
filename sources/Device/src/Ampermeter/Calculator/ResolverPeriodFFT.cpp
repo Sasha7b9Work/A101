@@ -1,6 +1,6 @@
 // 2022/11/06 17:18:40 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Ampermeter/Calculator/ResolverPeriodFFT.h"
+#include "Ampermeter/Calculator/Resolvers.h"
 #include "Utils/Math.h"
 #include "Hardware/Timer.h"
 #include <limits>
