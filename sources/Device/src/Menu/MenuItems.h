@@ -136,11 +136,19 @@ struct ButtonPress : public ButtonCommon
 
     virtual Rect GetRectForPress() const override;
 
+    // Возвращает размер кнопки с учётом того, увеличенная она или нет (увеличена она в случае, если с фиксацией и нажата)
+    // если for_erase == true, то прямоугольник нужен для закраски кнопки и всегда большой
+    Rect GetDrawRect(bool for_erase) const;
+
+    bool IsBigRectangleForDraw() const;
+
 protected:
 
     int tickness = 0;
 
     bool is_extened_height_press = false;   // Если true, то зона срабатывания расширена в высоту в два раза вниз
+
+    bool prev_big_rectangle = true;
 };
 
 

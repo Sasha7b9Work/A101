@@ -202,6 +202,11 @@ void Item::SetEnabled(bool set_enabled)
 
 void ButtonToggle::SetToggled(bool toggled, bool execute)
 {
+    if(toggled == is_pressed)
+    {
+        return;
+    }
+
     is_pressed = toggled;
 
     need_draw = true;
@@ -439,30 +444,57 @@ bool Item::IsPressed() const
 }
 
 
+Rect ButtonPress::GetDrawRect(bool for_erase) const
+{
+    Rect result = rect;
+
+    if (IsBigRectangleForDraw() || for_erase)
+    {
+        result.height += 18;
+    }
+
+    return result;
+}
+
+
+bool ButtonPress::IsBigRectangleForDraw() const
+{
+    return (type == TypeItem::ButtonToggle) && is_extened_height_press && is_pressed;
+}
+
+
 bool ButtonPress::Draw()
 {
     if (need_draw)
     {
-        int16 x = rect.x;
-        int16 y = rect.y;
-        int16 width = rect.width;
-        int16 height = rect.height;
-
         if (IsShown())
         {
-            for (int i = 0; i < tickness; i++)
+            if (type == TypeItem::ButtonToggle && is_extened_height_press && prev_big_rectangle && !IsBigRectangleForDraw())
             {
-                Nextion::DrawRect({ x + i, y + i, width - 1 - i * 2, height - 1 - i * 2}, Color::White);
+                Nextion::FillRect(GetDrawRect(true), Color::Background);
             }
 
-            Nextion::DrawString({ x + tickness, y + tickness, width - tickness * 2, height - tickness * 2 }, font,
+            prev_big_rectangle = IsBigRectangleForDraw();
+
+            Rect draw_rect = GetDrawRect(false);
+
+            Nextion::DrawString(draw_rect, font,
                 Color::White,
                 is_pressed ? Color::ButtonPress : Color::Background,
                 title[set.lang], true, true);
+
+            for (int i = 0; i < tickness; i++)
+            {
+                Nextion::DrawRect({
+                    draw_rect.x + i,
+                    draw_rect.y + i,
+                    draw_rect.width - 1 - i * 2,
+                    draw_rect.height - 1 - i * 2}, Color::White);
+            }
         }
         else
         {
-            Nextion::FillRect(rect, Color::Background);
+            Nextion::FillRect(GetDrawRect(true), Color::Background);
         }
 
         need_draw = false;
