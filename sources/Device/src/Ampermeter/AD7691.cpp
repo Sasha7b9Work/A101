@@ -6,6 +6,7 @@
 #include "Settings/Settings.h"
 #include "Ampermeter/BufferADC.h"
 #include "stm_includes.h"
+#include <cmath>
 
 
 const ValueADC ValueADC::MAX = ValueADC((1 << 17) - 1);
@@ -101,6 +102,28 @@ void AD7691::Init()
 }
 
 
+#ifdef EMULATOR_ENABLED
+
+ValueADC AD7691::ReadValue()
+{
+    static int counter = 0;
+
+    float amplitude = 1.0f;
+
+    float value = amplitude * std::sinf((float)counter++);
+
+    value *= (1 << 17);
+
+    if (value < 0)
+    {
+        value += (1 << 18);
+    }
+
+    return ValueADC((int)(value));
+}
+
+#else
+
 ValueADC AD7691::ReadValue()
 {
     int result = 0;
@@ -145,6 +168,8 @@ ValueADC AD7691::ReadValue()
 
     return ValueADC(result);
 }
+
+#endif
 
 
 ValueADC::ValueADC(int reading)

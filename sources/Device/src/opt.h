@@ -2,10 +2,10 @@
 #pragma once
 
 // Закомментировать, чтобы логи не валили в UART
-//#define LOGGED
+#define LOGGED
 
 #define REAL double
 
-//#define EMULATOR_ENABLED
+#define EMULATOR_ENABLED
 
 //#define DRAW_DEBUG_LINES

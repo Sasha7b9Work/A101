@@ -92,86 +92,19 @@ SampleRate Calculator::AppendData()
 }
 
 
-#ifdef EMULATOR_ENABLED
-
-namespace Calculator
-{
-    static const uint tempo_secs = 2;   // Так часто будем переключать измерения
-
-    static REAL CastRealToDisplay(REAL value)
-    {
-        return Range::Current() > 2 ? (value * 1e-3) : (value);
-    }
-}
-
-#endif
-
-
 REAL Calculator::GetRelativeAC(bool *correct)
 {
-#ifdef EMULATOR_ENABLED
-
-    static REAL value = 0.001;
-    static REAL k = 1.5;
-    static uint next_secs = 0;
-
-    if (Timer::GetSecs() >= next_secs)
-    {
-        next_secs += tempo_secs;
-
-        value *= k;
-
-        if (value > 10000e3 || value < 0.001)
-        {
-            k = 1.0 / k;
-        }
-    }
-
-    *correct = true;
-
-    return CastRealToDisplay(value);
-
-#else
-
     *correct = (ac.NumElements() > 0);
 
     return ac.NumElements() ? ac.Get() : 0.0;
-
-#endif
 }
 
 
 REAL Calculator::GetRelativeDC(bool *correct)
 {
-#ifdef EMULATOR_ENABLED
-
-    *correct = true;
-
-    static REAL value = 0.001;
-    static REAL k = 1.5;
-    static uint next_secs = 0;
-
-    if (Timer::GetSecs() >= next_secs)
-    {
-        next_secs += tempo_secs;
-
-        value *= k;
-
-        if (value > 50e3 || value < 0.001)
-        {
-            k = 1.0f / k;
-        }
-    }
-
-    return CastRealToDisplay(value);
-
-#else
-
     *correct = (dc.NumElements() > 0);
 
     return dc.NumElements() ? dc.Get() : 0.0;
-
-#endif
 }
 
 

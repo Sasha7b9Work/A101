@@ -53,13 +53,15 @@ class ResolverFrequency
 {
 public:
 
-    ResolverFrequency(const Period &);
+    ResolverFrequency(const Period &period);
 
     REAL GetFrequency() const { return frequency; }
 
 private:
 
     REAL frequency = 0.0;
+
+    float CalculateMaxDelta(float *sum, int period);
 };
 
 
