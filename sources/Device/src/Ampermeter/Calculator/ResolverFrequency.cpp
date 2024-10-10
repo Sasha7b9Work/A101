@@ -9,28 +9,42 @@ ResolverFrequency::ResolverFrequency(const Period &period)
 {
     float sum[BufferADC::SIZE];
 
-    const int first = period.first.first;
-    const int lenght = period.Lenght();
-
     {                                                                       // Заполняем массив, по которому будем считать интегралы
-        sum[0] = (float)BufferADC::At(first);
+        sum[0] = (float)BufferADC::At(0);
 
-        for (int i = 1; i < lenght; i++)
+        for (int i = 1; i < BufferADC::SIZE; i++)
         {
-            sum[i] = sum[i - 1] + (float)BufferADC::At(i + first);
+            sum[i] = sum[i - 1] + (float)BufferADC::At(i).Real();
         }
     }
 
 //    float prev_delta = 0.0f;
-    int T = 5;
+//    int T = 5;
 //    int num_deltas = 0;     // 
 
-    for (; T < 100; T++)                           // Будем считать дельту интеграла при перемещении участка фиксированной длины
+    for (int T = 25; T < 35; T++)                           // Будем считать дельту интеграла при перемещении участка фиксированной длины
     {                                                           // от начала сигнала к концу. Начинаем с минимального значения, чтобы найти минимальный период
         float delta = CalculateMaxDelta(sum, T);
 
-        LOG_WRITE("delta = %f", delta);
+        LOG_WRITE("delta %d = %f", T, delta);
     }
+
+    for (int T = 60; T < 65; T++)                           // Будем считать дельту интеграла при перемещении участка фиксированной длины
+    {                                                           // от начала сигнала к концу. Начинаем с минимального значения, чтобы найти минимальный период
+        float delta = CalculateMaxDelta(sum, T);
+
+        LOG_WRITE("delta %d = %f", T, delta);
+    }
+
+    for (int T = 90; T < 97; T++)                           // Будем считать дельту интеграла при перемещении участка фиксированной длины
+    {                                                           // от начала сигнала к концу. Начинаем с минимального значения, чтобы найти минимальный период
+        float delta = CalculateMaxDelta(sum, T);
+
+        LOG_WRITE("delta %d = %f", T, delta);
+    }
+
+
+    LOG_WRITE(" ");
 
     frequency = period.GetFrequency();
 }
@@ -43,9 +57,6 @@ float ResolverFrequency::CalculateMaxDelta(float *sum, int period)
 
     for (int start = 0; start < BufferADC::SIZE - 1 - period; start++)              // Смещаем отрезок
     {
-        min = std::numeric_limits<float>::max();
-        max = std::numeric_limits<float>::min();
-
         float integral = sum[start + period] - sum[start];
 
         if (integral < min)

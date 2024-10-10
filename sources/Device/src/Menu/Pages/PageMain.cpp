@@ -242,6 +242,8 @@ namespace PageMain
         btnZeroAC.SetExtendedHeightPress();
         btnAVP.SetExtendedHeightPress();
         btnZero.SetExtendedHeightPress();
+
+        SetMeasuresOnDisplay(set.meas_on_display.Current(), true);
     }
 
     static void FuncDraw()

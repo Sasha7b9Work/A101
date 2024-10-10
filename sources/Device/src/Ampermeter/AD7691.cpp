@@ -104,25 +104,42 @@ void AD7691::Init()
 
 #ifdef EMULATOR_ENABLED
 
-ValueADC AD7691::ReadValue()
+namespace AD7691
 {
     static int counter = 0;
 
+    void ResetValue()
+    {
+        counter = 0;
+    }
+}
+
+ValueADC AD7691::ReadValue()
+{
     float amplitude = 1.0f;
 
-    float value = amplitude * std::sinf((float)counter++);
+    float value = amplitude * std::sinf((float)counter / 5.0f);
 
-    value *= (1 << 17);
+    value *= (1 << 16);
 
     if (value < 0)
     {
         value += (1 << 18);
     }
 
+    counter++;
+
     return ValueADC((int)(value));
 }
 
 #else
+
+
+void AD7691::ResetValue()
+{
+
+}
+
 
 ValueADC AD7691::ReadValue()
 {

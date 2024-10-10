@@ -278,6 +278,8 @@ Measure Ampermeter::GetAmpl()
 
 void Ampermeter::MeasurementCycle()
 {
+    AD7691::ResetValue();
+
     TimeMeterMS meter;
 
     BufferADC::Clear(SampleRate::Current::Get());

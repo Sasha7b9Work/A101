@@ -43,6 +43,8 @@ namespace AD7691
 {
     void Init();
 
+    void ResetValue();
+
     ValueADC ReadValue();
 
     // ¬озвращает усреднЄнное значение по максимальному количеству выборок
