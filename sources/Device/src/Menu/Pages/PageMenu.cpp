@@ -10,7 +10,6 @@ namespace PageMenu
     extern ButtonMenuToggle btnIndication;
     extern Choice chRangeFreq;
     extern ButtonMenuPress btnCOM;
-    extern ButtonMenuToggle btnSystem;
 
     static void AppendRemoveMeasure(TypeMeasure::E meas, bool insert);
 
@@ -98,18 +97,6 @@ namespace PageMenu
     }
 
 
-    static ButtonMenuToggle btnSettings("Настройки", "Settings", 0, 0, [](Item *, bool press)
-    {
-        if (press)
-        {
-            btnIndication.SetToggled(false);
-            btnSystem.SetToggled(false);
-        }
-
-        chRangeFreq.SetShown(press);
-        btnCOM.SetShown(press);
-    });
-
     static const pchar name_bright[10][Lang::Count] =
     {
         {"Яркость 10",  "Bright 10"},
@@ -186,14 +173,15 @@ namespace PageMenu
         }
     });
 
-    ButtonMenuToggle btnSystem("Система", "System", 0, 1, [](Item *, bool press)
+    static ButtonMenuToggle btnSettings("Настройки", "Settings", 0, 0, [](Item *, bool press)
     {
         if (press)
         {
-            btnSettings.SetToggled(false);
             btnIndication.SetToggled(false);
         }
 
+        chRangeFreq.SetShown(press);
+        btnCOM.SetShown(press);
         btnBrightness.SetShown(press);
         btnLess.SetShown(press);
         btnMore.SetShown(press);
@@ -201,12 +189,11 @@ namespace PageMenu
         btnInformation.SetShown(press);
     });
 
-    ButtonMenuToggle btnIndication("Доп. измер.", "Add. dim.", 0, 2, [](Item *, bool press)
+    ButtonMenuToggle btnIndication("Доп. измер.", "Add. dim.", 0, 1, [](Item *, bool press)
     {
         if (press)
         {
             btnSettings.SetToggled(false);
-            btnSystem.SetToggled(false);
         }
 
         btnFrequency.SetShown(press);
@@ -216,7 +203,7 @@ namespace PageMenu
         btnIpeak.SetShown(press);
     });
 
-    static ButtonMenuPress btnCalibration("Калибровка", "Calibration", 0, 3, [](Item *, bool press)
+    static ButtonMenuPress btnCalibration("Калибровка", "Calibration", 0, 2, [](Item *, bool press)
     {
         if (!press)
         {
@@ -224,7 +211,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 4, [](Item *, bool press)
+    static ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 3, [](Item *, bool press)
     {
         if (!press)
         {
@@ -248,9 +235,9 @@ namespace PageMenu
         nullptr,       nullptr
     };
 
-    Choice chRangeFreq("Диапазон", "Range", (uint8 *)&set.range_freq, names_range_freq, 1, 3);
+    Choice chRangeFreq("Диапазон", "Range", (uint8 *)&set.range_freq, names_range_freq, 1, 1);
 
-    ButtonMenuPress btnCOM("COM-порт", "COM-port", 1, 4, [](Item *, bool press)
+    ButtonMenuPress btnCOM("COM-порт", "COM-port", 1, 0, [](Item *, bool press)
     {
         if (!press)
         {
@@ -267,18 +254,17 @@ namespace PageMenu
         &btnIamp,
         &btnIpeak,
         &btnSettings,
-        &btnSystem,
         &btnIndication,
         &btnCalibration,
         &btnGraphics,
         &btnBack,
-        &chRangeFreq,
         &btnCOM,
+        &chRangeFreq,
         &btnBrightness,
-        &btnLess,
-        &btnMore,
         &chLanguage,
         &btnInformation,
+        &btnLess,
+        &btnMore,
         nullptr
     };
 
@@ -288,7 +274,6 @@ namespace PageMenu
 
         btnSettings.SetToggled(false);
         btnIndication.SetToggled(false);
-        btnSystem.SetToggled(false);
 
         btnBrightness.SetText(name_bright[set.brightness / 10 - 1][Lang::RU], name_bright[set.brightness / 10 - 1][Lang::EN]);
     }
