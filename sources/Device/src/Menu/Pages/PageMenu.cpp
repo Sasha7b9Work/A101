@@ -8,7 +8,6 @@
 namespace PageMenu
 {
     extern ButtonMenuToggle btnIndication;
-    extern Choice chChangeRange;
     extern Choice chRangeFreq;
     extern ButtonMenuPress btnCOM;
     extern ButtonMenuToggle btnSystem;
@@ -107,7 +106,6 @@ namespace PageMenu
             btnSystem.SetToggled(false);
         }
 
-        chChangeRange.SetShown(press);
         chRangeFreq.SetShown(press);
         btnCOM.SetShown(press);
     });
@@ -242,15 +240,6 @@ namespace PageMenu
         }
     });
 
-    static pchar names_change_range[] =
-    {
-        "Ручной",         "Hand",
-        "Автоматический", "Auto",
-        nullptr,          nullptr
-    };
-
-    Choice chChangeRange("Выбор диапазона", "Range selection", (uint8 *)&set.change_range, names_change_range, 1, 2);
-
     static pchar names_range_freq[] =
     {
         "1Гц - 4Гц",   "1Hz - 4Hz",
@@ -259,7 +248,7 @@ namespace PageMenu
         nullptr,       nullptr
     };
 
-    Choice chRangeFreq("Диапазон частоты", "Range frequency", (uint8 *)&set.range_freq, names_range_freq, 1, 3);
+    Choice chRangeFreq("Диапазон", "Range", (uint8 *)&set.range_freq, names_range_freq, 1, 3);
 
     ButtonMenuPress btnCOM("COM-порт", "COM-port", 1, 4, [](Item *, bool press)
     {
@@ -283,7 +272,6 @@ namespace PageMenu
         &btnCalibration,
         &btnGraphics,
         &btnBack,
-        &chChangeRange,
         &chRangeFreq,
         &btnCOM,
         &btnBrightness,
