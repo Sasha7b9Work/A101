@@ -12,6 +12,6 @@ LR_IROM1 0x08000000 0x00100000  {    ; load region size_region
    *(+RW +ZI)
   }
   RW_IRAM2 0x10000000 0x00010000  {  ; CCM data
-  *(ram2)                ; переменная gSquared будет размещена в ER3
+  *(ram2)
   }
 }

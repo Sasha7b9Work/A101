@@ -10,6 +10,7 @@ struct Color
     static Color ButtonPress;
     static Color MeasureDC;
     static Color MeasureAC;
+    static Color Gray50;
     static Color Count;
 
     Color(uint8 v = 255) : value(v) {}

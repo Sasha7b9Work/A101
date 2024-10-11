@@ -223,7 +223,7 @@ void LabelMeasure::Reset()
 
     if (type_measure.IsFrequency())
     {
-        label_units.SetText("*****", "*****");
+        label_digits.SetText("*****", "*****");
 
         label_units.SetText("", "");
     }
