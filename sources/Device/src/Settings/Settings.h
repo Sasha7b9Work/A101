@@ -130,9 +130,9 @@ struct RangeFreq
 {
     enum E
     {
-        Low,
-        Middle,
-        Hi
+        _5kHz,
+        _40Hz,
+        _4Hz
     };
 };
 

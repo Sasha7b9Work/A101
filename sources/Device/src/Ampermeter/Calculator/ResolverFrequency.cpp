@@ -5,11 +5,10 @@
 #include <limits>
 
 
-static float sum[BufferADC::SIZE] __attribute__((section("ram2")));
-//static float sum[BufferADC::SIZE];
-
 ResolverFrequency::ResolverFrequency(const Period &period)
 {
+    static float sum[BufferADC::SIZE] __attribute__((section("ram2")));
+
     {                                                                       // Заполняем массив, по которому будем считать интегралы
         sum[0] = (float)BufferADC::At(0);
 

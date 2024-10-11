@@ -229,9 +229,9 @@ namespace PageMenu
 
     static pchar names_range_freq[] =
     {
-        "1Ãö - 4Ãö",   "1Hz - 4Hz",
-        "4Ãö - 40Ãö",  "4Hz - 40Hz",
         "40Ãö - 5êÃö", "40Hz - 5kHz",
+        "4Ãö - 40Ãö",  "4Hz - 40Hz",
+        "1Ãö - 4Ãö",   "1Hz - 4Hz",
         nullptr,       nullptr
     };
 
