@@ -266,6 +266,16 @@ Choice::Choice(pchar title_ru, pchar title_en, uint8 *_choice, pchar *_names, in
 {
     label.SetParent(PageMenu::self);
     SetTextValue();
+
+    count_values = 0;
+
+    while (*_names != nullptr)
+    {
+        count_values++;
+        _names++;
+    }
+
+    count_values /= 2;
 }
 
 
@@ -297,27 +307,12 @@ void Choice::Press()
 
     (*choice)++;
 
-    if ((*choice) == GetCountValue())
+    if ((*choice) >= count_values)
     {
         *choice = 0;
     }
 
     SetTextValue();
-}
-
-
-int Choice::GetCountValue() const
-{
-    pchar *pointer = names;
-
-    int counter = 0;
-
-    while ((*pointer++)[0] != '\0')
-    {
-        counter++;
-    }
-
-    return counter / 2;
 }
 
 

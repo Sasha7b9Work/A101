@@ -265,12 +265,11 @@ struct Choice : public Item
 
 private:
 
-    int GetCountValue() const;
-
     pchar      *names;
     ButtonPress button;
     Label       label;
     uint8      *choice;
+    int        count_values;
 };
 
 
