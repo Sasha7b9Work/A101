@@ -6,16 +6,12 @@ LR_IROM1 0x08000000 0x00100000  {    ; load region size_region
   ER_IROM1 0x08000000 0x00100000  {  ; load address = execution address
    *.o (RESET, +First)
    *(InRoot$$Sections)
-   .ANY (+RO)
+   *(+RO)
   }
   RW_IRAM1 0x20000000 0x00020000  {  ; RW data
-   .ANY (+RW +ZI)
+   *(+RW +ZI)
   }
   RW_IRAM2 0x10000000 0x00010000  {  ; CCM data
-   .ANY (+RW +ZI)
-;   *(.ram2)
-;  startup_stm32f407xx.o (STACK)
-;  startup_stm32f407xx.o (HEAP)
+  *(ram2)                ; переменная gSquared будет размещена в ER3
   }
 }
-

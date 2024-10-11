@@ -5,8 +5,8 @@
 #include <limits>
 
 
-//static float sum[BufferADC::SIZE] __attribute__((section("CCM_DATA")));
-static float sum[BufferADC::SIZE / 2];
+static float sum[BufferADC::SIZE] __attribute__((section("ram2")));
+//static float sum[BufferADC::SIZE];
 
 ResolverFrequency::ResolverFrequency(const Period &period)
 {
