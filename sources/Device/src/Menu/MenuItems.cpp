@@ -202,7 +202,7 @@ void Item::SetEnabled(bool set_enabled)
 
 void ButtonToggle::SetToggled(bool toggled, bool execute)
 {
-    if(toggled == is_pressed && )
+    if(toggled == is_pressed && type == TypeItem::ButtonToggle && is_extened_height_press)
     {
         return;
     }
