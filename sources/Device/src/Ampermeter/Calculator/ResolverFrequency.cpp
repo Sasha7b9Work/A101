@@ -5,10 +5,11 @@
 #include <limits>
 
 
+//static float sum[BufferADC::SIZE] __attribute__((section("CCM_DATA")));
+static float sum[BufferADC::SIZE / 2];
+
 ResolverFrequency::ResolverFrequency(const Period &period)
 {
-    float sum[BufferADC::SIZE];
-
     {                                                                       // Заполняем массив, по которому будем считать интегралы
         sum[0] = (float)BufferADC::At(0);
 
@@ -50,14 +51,14 @@ ResolverFrequency::ResolverFrequency(const Period &period)
 }
 
 
-float ResolverFrequency::CalculateMaxDelta(float *sum, int period)
+float ResolverFrequency::CalculateMaxDelta(float *_sum, int period)
 {
     float min = std::numeric_limits<float>::max();
     float max = std::numeric_limits<float>::min();
 
     for (int start = 0; start < BufferADC::SIZE - 1 - period; start++)              // Смещаем отрезок
     {
-        float integral = sum[start + period] - sum[start];
+        float integral = _sum[start + period] - _sum[start];
 
         if (integral < min)
         {
