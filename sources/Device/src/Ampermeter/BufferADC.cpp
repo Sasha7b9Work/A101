@@ -11,7 +11,7 @@
 namespace BufferADC
 {
     static int        pointer;                                          // Указатель используется при чтении данных (массив raw)
-    static ValueADC   raw[SIZE] __attribute__((section("CCM_DATA")));   // Данные, считанные с АЦП
+    static ValueADC   raw[SIZE]  __attribute__((section("ram2")));   // Данные, считанные с АЦП
     static SampleRate sampleRate;
 
     static ValueADC   min;

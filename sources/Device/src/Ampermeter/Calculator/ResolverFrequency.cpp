@@ -7,7 +7,7 @@
 
 ResolverFrequency::ResolverFrequency(const Period &period)
 {
-    static float sum[BufferADC::SIZE] __attribute__((section("ram2")));
+    float sum[BufferADC::SIZE];
 
     {                                                                       // Заполняем массив, по которому будем считать интегралы
         sum[0] = (float)BufferADC::At(0);
