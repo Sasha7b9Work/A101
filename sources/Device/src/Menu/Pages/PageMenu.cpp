@@ -16,27 +16,27 @@ namespace PageMenu
     static void AppendRemoveMeasure(TypeMeasure::E meas, bool insert);
 
 
-    static ButtonMenuToggle btnFrequency("Частота", "Frequency", 1, 0, [](Item *, bool press)
+    static ButtonMenuToggle btnFrequency("F", "F", 1, 0, [](Item *, bool press)
     {
         AppendRemoveMeasure(TypeMeasure::Frequency, press);
     });
 
-    static ButtonMenuToggle btnImin("Iмин", "Imin", 1, 1, [](Item *, bool press)
+    static ButtonMenuToggle btnImin("I мин", "I min", 1, 1, [](Item *, bool press)
     {
         AppendRemoveMeasure(TypeMeasure::Min, press);
     });
 
-    static ButtonMenuToggle btnImax("Iмакс", "Imax", 1, 2, [](Item *, bool press)
+    static ButtonMenuToggle btnImax("I макс", "I max", 1, 2, [](Item *, bool press)
     {
         AppendRemoveMeasure(TypeMeasure::Max, press);
     });
 
-    static ButtonMenuToggle btnIamp("Iамп", "Iamp", 1, 3, [](Item *, bool press)
+    static ButtonMenuToggle btnIamp("I амп", "I amp", 1, 3, [](Item *, bool press)
     {
         AppendRemoveMeasure(TypeMeasure::Ampl, press);
     });
 
-    static ButtonMenuToggle btnIpeak("Iпп", "Ipp", 1, 4, [](Item *, bool press)
+    static ButtonMenuToggle btnIpeak("I пп", "I pp", 1, 4, [](Item *, bool press)
     {
         AppendRemoveMeasure(TypeMeasure::Peak, press);
     });
@@ -203,7 +203,7 @@ namespace PageMenu
         btnInformation.SetShown(press);
     });
 
-    ButtonMenuToggle btnIndication("Индикация", "Indication", 0, 2, [](Item *, bool press)
+    ButtonMenuToggle btnIndication("Доп. измер.", "Add. dim.", 0, 2, [](Item *, bool press)
     {
         if (press)
         {
