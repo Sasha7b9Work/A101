@@ -9,23 +9,13 @@
 
 ResolverFrequency::ResolverFrequency(const Period &period)
 {
-    static const int SIZE = 7;
-
-    Averager<float, SIZE> averager;
-
     float sum[BufferADC::SIZE];
 
-    {                                                                       // Заполняем массив, по которому будем считать интегралы
-        for (int i = 1; i < BufferADC::SIZE; i++)
-        {
-            averager.Push((float)BufferADC::At(i).Real());
-            sum[i] = averager.Get();
-        }
-    }
+    sum[0] = (float)BufferADC::At(0).Real();
 
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 1; i < BufferADC::SIZE; i++)
     {
-        sum[i] = sum[SIZE];
+        sum[i] = sum[i - 1] + (float)BufferADC::At(i).Real();
     }
 
     DiagramInput::InstallData(sum);
