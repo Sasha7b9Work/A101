@@ -116,9 +116,11 @@ namespace AD7691
 
 ValueADC AD7691::ReadValue()
 {
-    float amplitude = 1.0f;
+    float amplitude = 0.5f;
 
-    float value = amplitude * std::sinf((float)counter / 15.0f);
+    float value = amplitude * std::sinf((float)counter / 2.0f);
+
+    value *= (float)std::rand() / (float)RAND_MAX;
 
     value *= (1 << 16);
 

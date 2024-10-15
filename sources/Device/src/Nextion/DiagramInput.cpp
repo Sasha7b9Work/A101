@@ -22,15 +22,15 @@ namespace DiagramInput
 }
 
 
-void DiagramInput::InstallData(int data[1024])
+void DiagramInput::InstallData(float data[1024])
 {
     if (data_installed)
     {
         return;
     }
 
-    int min = std::numeric_limits<int>::max();
-    int max = std::numeric_limits<int>::min();
+    float min = std::numeric_limits<float>::max();
+    float max = std::numeric_limits<float>::min();
 
     for (int i = 0; i < 1024; i++)
     {

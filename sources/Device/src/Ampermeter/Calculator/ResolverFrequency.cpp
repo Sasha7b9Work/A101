@@ -19,20 +19,20 @@ ResolverFrequency::ResolverFrequency(const Period &period)
         }
     }
 
-    int data[1025];
+    float data[1100];
 
-    for (int i = 1; i < 1025; i++)
+    for (int i = 30; i < 1025; i++)
     {
         data[i] = CalculateMaxDelta(sum, i);
     }
 
-    DiagramInput::InstallData(data + 1);
+    DiagramInput::InstallData(data + 30);
 
     frequency = period.GetFrequency();
 }
 
 
-int ResolverFrequency::CalculateMaxDelta(int *_sum, int period)
+float ResolverFrequency::CalculateMaxDelta(int *_sum, int period)
 {
     int min = std::numeric_limits<int>::max();
     int max = std::numeric_limits<int>::min();
@@ -53,5 +53,5 @@ int ResolverFrequency::CalculateMaxDelta(int *_sum, int period)
     }
 
 
-    return max - min;
+    return (float)(max - min);
 }

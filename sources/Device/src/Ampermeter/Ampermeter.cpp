@@ -45,45 +45,6 @@ namespace Ampermeter
         }
     }
 
-    // Медианный фильтр по трём
-    struct MiddlerOf3
-    {
-        void Push(ValueADC value)
-        {
-            averager.Push(value);
-        }
-        ValueADC Get()
-        {
-            if (averager.NumElements() > 2)
-            {
-                return ValueADC::FromRaw(middle_of_3(averager.Pop(0), averager.Pop(1), averager.Pop(2)));
-            }
-            else if (averager.NumElements() == 2)
-            {
-                return averager.Pop(1);
-            }
-
-            return averager.Pop(0);
-        }
-
-    private:
-
-        Averager <ValueADC, 3> averager;
-
-        int middle_of_3(int a, int b, int c)
-        {
-            if ((a <= b) && (a <= c))
-            {
-                return (b <= c) ? b : c;
-            }
-            else if ((b <= a) && (b <= c))
-            {
-                return (a <= c) ? a : c;
-            }
-            return (a <= b) ? a : b;
-        }
-    };
-
     // Считанные значения выходят за пределы диапазона
     static bool OutOfRange();
 
@@ -326,10 +287,7 @@ void Ampermeter::MeasurementCycle()
 
     HAL_TIM4::Stop();
 
-    if (set.middle_of_3)
-    {
-        BufferADC::MiddleOf3();
-    }
+    BufferADC::MiddleOf3();
 
     if (set.smooth)
     {

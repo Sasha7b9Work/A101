@@ -5,7 +5,7 @@
 
 namespace DiagramInput
 {
-    void InstallData(int data[1024]);
+    void InstallData(float data[1024]);
 
     void _InstallData();
 

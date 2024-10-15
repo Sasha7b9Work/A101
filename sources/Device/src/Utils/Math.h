@@ -67,5 +67,18 @@ namespace Math
         if (value > max)        { max = value; }
     }
 
+    template<class T> T middle_of_3(T a, T b, T c)
+    {
+        if ((a <= b) && (a <= c))
+        {
+            return (b <= c) ? b : c;
+        }
+        else if ((b <= a) && (b <= c))
+        {
+            return (a <= c) ? a : c;
+        }
+        return (a <= b) ? a : b;
+    }
+
     uint CalculateCRC32(const void *buffer, int size);
 }
