@@ -5,6 +5,7 @@
 #include "Ampermeter/Calculator/Averager.h"
 #include "Settings/Settings.h"
 #include "Ampermeter/BufferADC.h"
+#include "Utils/Math.h"
 #include "stm_includes.h"
 #include <cmath>
 
@@ -114,13 +115,28 @@ namespace AD7691
     }
 }
 
+
+static float GetSample(float freq, int num_sample)
+{
+    float T = 1.0f / freq;
+
+    float samples_in_T = T / 10e-6f;
+
+    float radians_in_T = 2.0f * M_PI;
+
+    float radians_in_sample = radians_in_T / samples_in_T;
+
+    return std::sinf(radians_in_sample * num_sample);
+}
+
+
 ValueADC AD7691::ReadValue()
 {
     float amplitude = 0.5f;
 
-    float value = amplitude * std::sinf((float)counter / 7.0f);
+    float value = amplitude * GetSample(10.123f, counter);
 
-    value *= (float)std::rand() / (float)RAND_MAX;
+//    value *= (float)std::rand() / (float)RAND_MAX;
 
     value *= (1 << 16);
 

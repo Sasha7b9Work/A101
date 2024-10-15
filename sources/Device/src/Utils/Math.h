@@ -2,6 +2,9 @@
 #pragma once
 
 
+#define M_PI 3.1415926f
+
+
 struct Rect
 {
     Rect(int _x = 0, int _y = 0, int _width = 1, int _height = 1) :

@@ -51,5 +51,7 @@ ResolverFrequency::ResolverFrequency(const Period &period)
 
     DiagramInput::InstallData(sum);
 
-    frequency = 1.0f / ((last - first) / counter * (float)SampleRate::Current().Get().TimeUS());
+    float sample_time = (float)SampleRate::Current().Get().TimeUS() * 1e-6f;
+
+    frequency = 1.0f / ((last - first) / counter * sample_time);
 }
