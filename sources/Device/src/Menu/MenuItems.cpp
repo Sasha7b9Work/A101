@@ -474,8 +474,8 @@ bool ButtonPress::Draw()
             Rect draw_rect = GetDrawRect(false);
 
             Nextion::DrawString(draw_rect, font,
-                Color::White,
-                is_pressed ? Color::ButtonPress : Color::Background,
+                (inactive_color ? Color::Gray50 : Color::White),
+                (is_pressed ? Color::ButtonPress : Color::Background),
                 title[set.lang], true, true);
 
             for (int i = 0; i < tickness; i++)
@@ -664,4 +664,20 @@ int Item::GetCoordY(int row)
     int dy = 10;
 
     return dy + (ButtonCommon::HEIGHT_MENU + dy) * row;
+}
+
+
+void ButtonPress::SetInactiveColor()
+{
+    inactive_color = true;
+
+    Refresh();
+}
+
+
+void ButtonPress::SetActiveColor()
+{
+    inactive_color = false;
+
+    Refresh();
 }

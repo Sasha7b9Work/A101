@@ -142,13 +142,18 @@ struct ButtonPress : public ButtonCommon
 
     bool IsBigRectangleForDraw() const;
 
+    // Чтобы надписи выводились "неактивным" цветом
+    void SetInactiveColor();
+
+    // Чтобы надписи выводились "активным" цветом
+    void SetActiveColor();
+
 protected:
 
     int tickness = 0;
-
     bool is_extened_height_press = false;   // Если true, то зона срабатывания расширена в высоту в два раза вниз
-
     bool prev_big_rectangle = true;
+    bool inactive_color = false;
 };
 
 

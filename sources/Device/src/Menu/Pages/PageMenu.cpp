@@ -10,6 +10,8 @@ namespace PageMenu
     extern ButtonMenuToggle btnIndication;
     extern Choice chRangeFreq;
     extern ButtonMenuPress btnCOM;
+    extern ButtonMenuPress btnCalibration;
+    extern ButtonMenuPress btnGraphics;
 
     static void AppendRemoveMeasure(TypeMeasure::E meas, bool insert);
 
@@ -178,6 +180,15 @@ namespace PageMenu
         if (press)
         {
             btnIndication.SetToggled(false);
+            btnIndication.SetInactiveColor();
+            btnCalibration.SetInactiveColor();
+            btnGraphics.SetInactiveColor();
+        }
+        else
+        {
+            btnIndication.SetActiveColor();
+            btnCalibration.SetActiveColor();
+            btnGraphics.SetActiveColor();
         }
 
         chRangeFreq.SetShown(press);
@@ -194,7 +205,18 @@ namespace PageMenu
         if (press)
         {
             btnSettings.SetToggled(false);
+            btnSettings.SetInactiveColor();
+            btnCalibration.SetInactiveColor();
+            btnGraphics.SetInactiveColor();
         }
+        else
+        {
+            btnSettings.SetActiveColor();
+            btnCalibration.SetActiveColor();
+            btnGraphics.SetActiveColor();
+        }
+
+        press ? btnSettings.SetInactiveColor() : btnSettings.SetActiveColor();
 
         btnFrequency.SetShown(press);
         btnImin.SetShown(press);
@@ -203,7 +225,7 @@ namespace PageMenu
         btnIpeak.SetShown(press);
     });
 
-    static ButtonMenuPress btnCalibration("Калибровка", "Calibration", 0, 2, [](Item *, bool press)
+    ButtonMenuPress btnCalibration("Калибровка", "Calibration", 0, 2, [](Item *, bool press)
     {
         if (!press)
         {
@@ -211,7 +233,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 3, [](Item *, bool press)
+    ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 3, [](Item *, bool press)
     {
         if (!press)
         {
