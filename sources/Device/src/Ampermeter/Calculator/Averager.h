@@ -11,13 +11,18 @@ public:
     {
         if (num_elements == size_buffer)
         {
+            sum -= buffer[0];
+
             if (size_buffer != 1)
             {
-                std::memmove(buffer, buffer + 1, sizeof(T) * (size_buffer - 1));
+                std::memmove(buffer, &buffer[1], sizeof(T) * (size_buffer - 1));
             }
+
             num_elements--;
         }
+
         buffer[num_elements++] = value;
+        sum += value;
     }
 
     T Pop(int index)
@@ -27,13 +32,6 @@ public:
 
     T Get()
     {
-        T sum = 0;
-
-        for (int i = 0; i < num_elements; i++)
-        {
-            sum += buffer[i];
-        }
-
         return sum / (T)num_elements;
     }
     int NumElements() const { return num_elements; }
@@ -41,4 +39,5 @@ public:
 private:
     T buffer[size_buffer];
     int num_elements = 0;
+    T sum = T(0);
 };

@@ -3,18 +3,29 @@
 #include "Ampermeter/Calculator/Resolvers.h"
 #include "Ampermeter/BufferADC.h"
 #include "Nextion/DiagramInput.h"
+#include "Ampermeter/Calculator/Averager.h"
 #include <limits>
 
 
 ResolverFrequency::ResolverFrequency(const Period &period)
 {
+    static const int SIZE = 7;
+
+    Averager<float, SIZE> averager;
+
     float sum[BufferADC::SIZE];
 
     {                                                                       // Заполняем массив, по которому будем считать интегралы
         for (int i = 1; i < BufferADC::SIZE; i++)
         {
-            sum[i] = (float)BufferADC::At(i).Real();
+            averager.Push((float)BufferADC::At(i).Real());
+            sum[i] = averager.Get();
         }
+    }
+
+    for (int i = 0; i < SIZE; i++)
+    {
+        sum[i] = sum[SIZE];
     }
 
     DiagramInput::InstallData(sum);

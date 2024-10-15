@@ -110,7 +110,7 @@ namespace AD7691
 
     void ResetValue()
     {
-        counter = 0;
+//        counter = rand();
     }
 }
 
@@ -118,7 +118,7 @@ ValueADC AD7691::ReadValue()
 {
     float amplitude = 0.5f;
 
-    float value = amplitude * std::sinf((float)counter / 2.0f);
+    float value = amplitude * std::sinf((float)counter / 20.0f);
 
     value *= (float)std::rand() / (float)RAND_MAX;
 
