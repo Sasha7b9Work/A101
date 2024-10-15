@@ -49,7 +49,7 @@ ResolverFrequency::ResolverFrequency(const Period &period)
         }
     }
 
-    DiagramInput::InstallData(sum);
+//    DiagramInput::InstallData(sum);
 
     float sample_time = (float)SampleRate::Current().Get().TimeUS() * 1e-6f;
 
