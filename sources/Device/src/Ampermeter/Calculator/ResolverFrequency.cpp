@@ -8,50 +8,16 @@
 
 ResolverFrequency::ResolverFrequency(const Period &period)
 {
-    int sum[BufferADC::SIZE];
+    float sum[BufferADC::SIZE];
 
     {                                                                       // Заполняем массив, по которому будем считать интегралы
-        sum[0] = BufferADC::At(0).Raw();
-
         for (int i = 1; i < BufferADC::SIZE; i++)
         {
-            sum[i] = sum[i - 1] + BufferADC::At(i).Raw();
+            sum[i] = (float)BufferADC::At(i).Real();
         }
     }
 
-    float data[1100];
-
-    for (int i = 30; i < 1025; i++)
-    {
-        data[i] = CalculateMaxDelta(sum, i);
-    }
-
-    DiagramInput::InstallData(data + 30);
+    DiagramInput::InstallData(sum);
 
     frequency = period.GetFrequency();
-}
-
-
-float ResolverFrequency::CalculateMaxDelta(int *_sum, int period)
-{
-    int min = std::numeric_limits<int>::max();
-    int max = std::numeric_limits<int>::min();
-
-    for (int start = 0; start < BufferADC::SIZE - period - 10; start++)              // Смещаем отрезок
-    {
-        int integral = _sum[start + period] - _sum[start];
-
-        if (integral < min)
-        {
-            min = integral;
-        }
-
-        if (integral > max)
-        {
-            max = integral;
-        }
-    }
-
-
-    return (float)(max - min);
 }
