@@ -35,7 +35,7 @@ public:
         return sum / (T)num_elements;
     }
     int NumElements() const { return num_elements; }
-    void Reset() { num_elements = 0; }
+    void Reset() { num_elements = 0; sum = 0; }
 private:
     T buffer[size_buffer];
     int num_elements = 0;
