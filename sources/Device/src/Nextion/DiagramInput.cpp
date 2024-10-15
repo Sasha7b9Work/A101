@@ -22,7 +22,52 @@ namespace DiagramInput
 }
 
 
-void DiagramInput::InstallData()
+void DiagramInput::InstallData(int data[1024])
+{
+    if (data_installed)
+    {
+        return;
+    }
+
+    int min = std::numeric_limits<int>::max();
+    int max = std::numeric_limits<int>::min();
+
+    for (int i = 0; i < 1024; i++)
+    {
+        if (data[i] < min)
+        {
+            min = data[i];
+        }
+        if (data[i] > max)
+        {
+            max = data[i];
+        }
+    }
+
+    REAL scale = height / (max - min);
+    REAL ave = (max + min) / 2.0f;
+
+    for (int i = 0; i < NumPoints(); i++)
+    {
+        REAL value = y0 + scale * (data[i] - ave);
+
+        if (value < 0)
+        {
+            value = 0;
+        }
+        else if (value > 255)
+        {
+            value = 255;
+        }
+
+        points[i] = (uint8)value;
+    }
+
+    data_installed = true;
+}
+
+
+void DiagramInput::_InstallData()
 {
     if (data_installed)
     {

@@ -118,7 +118,7 @@ ValueADC AD7691::ReadValue()
 {
     float amplitude = 1.0f;
 
-    float value = amplitude * std::sinf((float)counter / 5.0f);
+    float value = amplitude * std::sinf((float)counter / 15.0f);
 
     value *= (1 << 16);
 

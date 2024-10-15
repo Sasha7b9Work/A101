@@ -2,62 +2,44 @@
 #include "defines.h"
 #include "Ampermeter/Calculator/Resolvers.h"
 #include "Ampermeter/BufferADC.h"
+#include "Nextion/DiagramInput.h"
 #include <limits>
 
 
 ResolverFrequency::ResolverFrequency(const Period &period)
 {
-    float sum[BufferADC::SIZE];
+    int sum[BufferADC::SIZE];
 
     {                                                                       // Заполняем массив, по которому будем считать интегралы
-        sum[0] = (float)BufferADC::At(0);
+        sum[0] = BufferADC::At(0).Raw();
 
         for (int i = 1; i < BufferADC::SIZE; i++)
         {
-            sum[i] = sum[i - 1] + (float)BufferADC::At(i).Real();
+            sum[i] = sum[i - 1] + BufferADC::At(i).Raw();
         }
     }
 
-//    float prev_delta = 0.0f;
-//    int T = 5;
-//    int num_deltas = 0;     // 
+    int data[1025];
 
-    for (int T = 25; T < 35; T++)                           // Будем считать дельту интеграла при перемещении участка фиксированной длины
-    {                                                           // от начала сигнала к концу. Начинаем с минимального значения, чтобы найти минимальный период
-        float delta = CalculateMaxDelta(sum, T);
-
-        LOG_WRITE("delta %d = %f", T, delta);
+    for (int i = 1; i < 1025; i++)
+    {
+        data[i] = CalculateMaxDelta(sum, i);
     }
 
-    for (int T = 60; T < 65; T++)                           // Будем считать дельту интеграла при перемещении участка фиксированной длины
-    {                                                           // от начала сигнала к концу. Начинаем с минимального значения, чтобы найти минимальный период
-        float delta = CalculateMaxDelta(sum, T);
-
-        LOG_WRITE("delta %d = %f", T, delta);
-    }
-
-    for (int T = 90; T < 97; T++)                           // Будем считать дельту интеграла при перемещении участка фиксированной длины
-    {                                                           // от начала сигнала к концу. Начинаем с минимального значения, чтобы найти минимальный период
-        float delta = CalculateMaxDelta(sum, T);
-
-        LOG_WRITE("delta %d = %f", T, delta);
-    }
-
-
-    LOG_WRITE(" ");
+    DiagramInput::InstallData(data + 1);
 
     frequency = period.GetFrequency();
 }
 
 
-float ResolverFrequency::CalculateMaxDelta(float *_sum, int period)
+int ResolverFrequency::CalculateMaxDelta(int *_sum, int period)
 {
-    float min = std::numeric_limits<float>::max();
-    float max = std::numeric_limits<float>::min();
+    int min = std::numeric_limits<int>::max();
+    int max = std::numeric_limits<int>::min();
 
-    for (int start = 0; start < BufferADC::SIZE - 1 - period; start++)              // Смещаем отрезок
+    for (int start = 0; start < BufferADC::SIZE - period - 10; start++)              // Смещаем отрезок
     {
-        float integral = _sum[start + period] - _sum[start];
+        int integral = _sum[start + period] - _sum[start];
 
         if (integral < min)
         {

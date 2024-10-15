@@ -2,7 +2,6 @@
 
 
 #define SHRT_MAX  0x7fff
-#define INT_MAX   0x7fffffff
 #define UINT_MAX  0xffffffffU
 
 
@@ -11,8 +10,8 @@ namespace std
     template<class T>
     struct numeric_limits
     {
-        static float min() { return 0.0F; }
-        static float max() { return 0.0F; }
+        static T min() { return (T)0; }
+        static T max() { return (T)0; }
         static float epsilon() { return 0.001F; }
     };
 }

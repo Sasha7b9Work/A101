@@ -61,7 +61,7 @@ private:
 
     REAL frequency = 0.0;
 
-    float CalculateMaxDelta(float *sum, int period);
+    int CalculateMaxDelta(int *sum, int period);
 };
 
 

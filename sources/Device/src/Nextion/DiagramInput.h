@@ -5,7 +5,9 @@
 
 namespace DiagramInput
 {
-    void InstallData();
+    void InstallData(int data[1024]);
+
+    void _InstallData();
 
     void Draw();
 
