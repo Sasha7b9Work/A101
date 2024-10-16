@@ -18,7 +18,7 @@ ResolverFrequency::ResolverFrequency(const Period &period)
 
     for (int i = 1; i < BufferADC::SIZE; i++)                       // –ассчитываем массив сумм касательных
     {
-        sum[i] = sum[i - 1] + (float)BufferADC::At(i).Real();
+        sum[i] = sum[i - 1] + (float)(BufferADC::At(i).Real() - BufferADC::At(i - 1).Real());
     }
 
     // «десь у нас график, представл€ющий гнутую синусоиду.  оличество верхних вершин соотвествует количеству периодов в исходной последовательности
@@ -30,26 +30,14 @@ ResolverFrequency::ResolverFrequency(const Period &period)
 
     for (int i = first; i < last; i++)
     {
-        if (DELTA(i) >= 0.0f && DELTA(i + 1) < 0.0f)
-        {
-            i += 2;
-
-            counter++;
-
-            continue;
-        }
-
         if (DELTA(i) > 0.0f && DELTA(i + 1) <= 0.0f)
         {
-            i += 2;
-
             counter++;
-
             continue;
         }
     }
 
-//    DiagramInput::InstallData(sum);
+    DiagramInput::InstallData(sum);
 
     float sample_time = (float)SampleRate::Current().Get().TimeUS() * 1e-6f;
 

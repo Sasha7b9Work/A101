@@ -88,7 +88,7 @@ void Ampermeter::Update()
     }
     else
     {
-        DiagramInput::_InstallData();
+//        DiagramInput::_InstallData();
     }
 
     if (AVP::is_enabled)

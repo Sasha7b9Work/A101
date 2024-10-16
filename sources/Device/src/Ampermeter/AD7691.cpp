@@ -134,7 +134,7 @@ ValueADC AD7691::ReadValue()
 {
     float amplitude = 0.5f;
 
-    float value = amplitude * GetSample(10.123f, counter);
+    float value = amplitude * GetSample(39.123f, counter);
 
 //    value *= (float)std::rand() / (float)RAND_MAX;
 
