@@ -14,11 +14,15 @@ ResolverFrequency::ResolverFrequency(const Period &period)
 {
     float sum[BufferADC::SIZE];
 
-    sum[0] = (float)BufferADC::At(0).Real();
+    Averager<float, 10> averager;
+
+    sum[0] = averager.Push((float)BufferADC::At(0).Real());
 
     for (int i = 1; i < BufferADC::SIZE; i++)                       // –ассчитываем массив сумм касательных
     {
-        sum[i] = sum[i - 1] + (float)(BufferADC::At(i).Real() - BufferADC::At(i - 1).Real());
+//        sum[i] = averager.Push(sum[i - 1] + (float)(BufferADC::At(i).Real() - BufferADC::At(i - 1).Real()));
+
+        sum[i] = averager.Push(sum[i - 1] + (float)BufferADC::At(i).Real());
     }
 
     // «десь у нас график, представл€ющий гнутую синусоиду.  оличество верхних вершин соотвествует количеству периодов в исходной последовательности
@@ -32,6 +36,7 @@ ResolverFrequency::ResolverFrequency(const Period &period)
     {
         if (DELTA(i) > 0.0f && DELTA(i + 1) <= 0.0f)
         {
+            i += 15;
             counter++;
             continue;
         }

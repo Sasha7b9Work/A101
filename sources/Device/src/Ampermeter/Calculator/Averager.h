@@ -7,7 +7,7 @@ template<class T, int size_buffer>
 class Averager //-V730
 {
 public:
-    void Push(T value)
+    T Push(T value)
     {
         if (num_elements == size_buffer)
         {
@@ -23,6 +23,8 @@ public:
 
         buffer[num_elements++] = value;
         sum += value;
+
+        return Get();
     }
 
     T Pop(int index)
