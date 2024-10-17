@@ -132,11 +132,11 @@ namespace PageCalibration
         SetGivenMeasure();
     });
 
-    ButtonPress btnSave("Сохр.", "Save", Font::_1_GB42b, { 236, 6, 130, 73 }, [](Item *item, bool)
-        {
-            Calibrator::PressButtonSave();
-            item->SetShown(false);
-        });
+    ButtonPress btnSave("Сохр.", "Save", Font::_1_GB42b, { 220, Item::GetCoordY(0), 130, 73 }, [](Item *item, bool)
+    {
+        Calibrator::PressButtonSave();
+        item->SetShown(false);
+    });
 
     // Нажатие кнопки на цифровой клавиатуре
     static void PressDigit(char symbol, bool press)
