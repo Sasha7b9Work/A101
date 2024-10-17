@@ -158,7 +158,7 @@ void AD7691::ResetValue()
 
 int AD7691::ReadValueRAW()
 {
-    int result = 0;
+    int value = 0;
 
     GPIOB->BSRR = GPIO_PIN_12;
 
@@ -181,7 +181,7 @@ int AD7691::ReadValueRAW()
 
         if (GPIOC->IDR & GPIO_PIN_2)
         {
-            result |= 1;
+            value |= 1;
         }
 
 #ifndef WIN32
@@ -193,7 +193,7 @@ int AD7691::ReadValueRAW()
 
         if (i != 17)
         {
-            result <<= 1;
+            value <<= 1;
         }
 
 #ifndef WIN32
@@ -202,7 +202,12 @@ int AD7691::ReadValueRAW()
 #endif
     }
 
-    return result;
+    if (_GET_BIT(value, 17))
+    {
+        value -= 1 << 18;
+    }
+
+    return value;
 }
 
 
@@ -216,14 +221,7 @@ ValueADC AD7691::ReadValue()
 
 ValueADC::ValueADC(int reading)
 {
-    value = reading;
-
-    if (_GET_BIT(value, 17))
-    {
-        value -= 1 << 18;
-    }
-
-    value -= cal.zero[Range::Current()].GetFull();
+    value = reading - cal.zero[Range::Current()].GetFull();
 }
 
 
