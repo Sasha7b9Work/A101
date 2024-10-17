@@ -27,8 +27,6 @@ struct ValueADC
     static ValueADC FromRaw(int raw) { ValueADC result; result.value = raw; return result; }
     REAL Real() const { return 5.0 / (1 << 17) * (REAL)value; }
     int Raw()    const { return value; }
-    static const ValueADC MIN;
-    static const ValueADC MAX;
     bool operator <(const ValueADC &rhs) const { return value < rhs.value; }
     bool operator >(const ValueADC &rhs) const { return value > rhs.value; }
     operator int() const { return value; }

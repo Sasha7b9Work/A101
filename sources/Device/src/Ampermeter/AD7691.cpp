@@ -10,10 +10,6 @@
 #include <cmath>
 
 
-const ValueADC ValueADC::MAX = ValueADC((1 << 17) - 1);
-const ValueADC ValueADC::MIN = ValueADC((1 << 17));
-
-
 SampleRate SampleRate::current(10);
 
 

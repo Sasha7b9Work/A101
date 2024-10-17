@@ -88,7 +88,7 @@ void Ampermeter::Update()
     }
     else
     {
-//        DiagramInput::_InstallData();
+        DiagramInput::_InstallData();
     }
 
     if (AVP::is_enabled)
@@ -263,7 +263,7 @@ void Ampermeter::MeasurementCycle()
             counter_raw++;
             sum_raw += AD7691::ReadValueRAW();
 
-        } while(TIM4->CNT < period * 2 / 3);
+        } while(TIM4->CNT < period * 3 / 4);
 
         while (TIM4->CNT < period)
         {

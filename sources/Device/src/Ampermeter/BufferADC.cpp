@@ -77,8 +77,8 @@ void BufferADC::CalculateLimits()
 
     (void)sum;
 
-    min = ValueADC::MAX;
-    max = ValueADC::MIN;
+    min = ValueADC::FromRaw(1 << 17);
+    max = ValueADC::FromRaw(-(1 << 17));
 
     for (int i = 0; i < SIZE; i++)
     {
