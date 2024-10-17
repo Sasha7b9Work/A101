@@ -45,7 +45,11 @@ namespace AD7691
 
     void ResetValue();
 
+    // Читает готовое к употреблению значение
     ValueADC ReadValue();
+
+    // Читает голое значение с АЦП
+    int ReadValueRAW();
 
     // Возвращает усреднённое значение по максимальному количеству выборок
     int GetAverageValue();

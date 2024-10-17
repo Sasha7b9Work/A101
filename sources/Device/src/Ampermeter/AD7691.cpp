@@ -159,19 +159,23 @@ void AD7691::ResetValue()
 }
 
 
-ValueADC AD7691::ReadValue()
+int AD7691::ReadValueRAW()
 {
     int result = 0;
 
     GPIOB->BSRR = GPIO_PIN_12;
 
-    __IO uint wait = 0;   for (; wait < 40; wait++)  { }
+    __IO uint wait = 0;
+
+    for (; wait < 40; wait++)
+    {
+    }
 
     GPIOB->BSRR = GPIO_PIN_12 << 16;
 
 #ifndef WIN32
-        __ASM("nop");
-        __ASM("nop");
+    __ASM("nop");
+    __ASM("nop");
 #endif
 
     for (int i = 0; i < 18; i++)
@@ -201,7 +205,13 @@ ValueADC AD7691::ReadValue()
 #endif
     }
 
-    return ValueADC(result);
+    return result;
+}
+
+
+ValueADC AD7691::ReadValue()
+{
+    return ValueADC(ReadValueRAW());
 }
 
 #endif
