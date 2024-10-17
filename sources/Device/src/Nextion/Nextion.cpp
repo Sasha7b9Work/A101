@@ -7,6 +7,7 @@
 #include "Hardware/Timer.h"
 #include "Utils/Profiler.h"
 #include "Nextion/Keyboard.h"
+#include "Ampermeter/Calibrator/Calibrator.h"
 #include "Menu/Menu.h"
 #include <cstdarg>
 #include <cstdio>

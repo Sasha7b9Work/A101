@@ -30,11 +30,20 @@ namespace Calibrator
 
     // Откалибровать усиление
     static bool CalibrateGain(int range);
+
+    static bool in_progress = false;
+
+    bool InProgress()
+    {
+        return in_progress;
+    }
 }
 
 
 bool Calibrator::Run(int range, Type::E type, void (*callback)())
 {
+    in_progress = true;
+
     callbackUpdate = callback;
 
     Range::Set(range);
@@ -51,6 +60,8 @@ bool Calibrator::Run(int range, Type::E type, void (*callback)())
     {
         result = CalibrateGain(range);
     }
+
+    in_progress = false;
 
     return result;
 }

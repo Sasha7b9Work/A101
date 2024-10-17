@@ -15,5 +15,7 @@ namespace Calibrator
 
     bool Run(int range, Type::E, void (*callbackUpdate)());
 
+    bool InProgress();
+
     void PressButtonSave();
 }

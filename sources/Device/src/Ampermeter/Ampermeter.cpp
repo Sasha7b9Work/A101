@@ -5,6 +5,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Ampermeter/AD7691.h"
 #include "Ampermeter/Calculator/Calculator.h"
+#include "Ampermeter/Calibrator/Calibrator.h"
 #include "Nextion/Display.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/MenuItems.h"
@@ -266,7 +267,7 @@ bool Ampermeter::MeasurementCycle()
             counter_raw++;
             sum_raw += AD7691::ReadValueRAW();
 
-            if (Nextion::ExixtCommnadsForExecute())
+            if (!Calibrator::InProgress() && Nextion::ExixtCommnadsForExecute())
             {
                 HAL_TIM4::Stop();
 
