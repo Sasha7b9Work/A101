@@ -132,6 +132,8 @@ namespace PageCalibration
         SetGivenMeasure();
     });
 
+    \todo Добавить кнопку сброса калибровок
+
     ButtonPress btnSave("Сохр.", "Save", Font::_1_GB42b, { 220, Item::GetCoordY(0), 130, 73 }, [](Item *item, bool)
     {
         Calibrator::PressButtonSave();
