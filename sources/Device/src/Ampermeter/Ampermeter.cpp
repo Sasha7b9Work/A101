@@ -79,7 +79,10 @@ void Ampermeter::Update()
 
     AdjustmentZero();
 
-    MeasurementCycle();
+    if (!MeasurementCycle())
+    {
+        return;
+    }
 
     SampleRate::Current::Set(Calculator::AppendData());
 
@@ -237,7 +240,7 @@ Measure Ampermeter::GetAmpl()
 }
 
 
-void Ampermeter::MeasurementCycle()
+bool Ampermeter::MeasurementCycle()
 {
     AD7691::ResetValue();
 
@@ -262,6 +265,13 @@ void Ampermeter::MeasurementCycle()
         {
             counter_raw++;
             sum_raw += AD7691::ReadValueRAW();
+
+            if (Nextion::ExixtCommnadsForExecute())
+            {
+                HAL_TIM4::Stop();
+
+                return false;
+            }
 
         } while(TIM4->CNT < period * 2 / 3);
 
@@ -300,6 +310,8 @@ void Ampermeter::MeasurementCycle()
     }
 
     BufferADC::CalculateLimits();
+
+    return true;
 }
 
 
@@ -397,8 +409,6 @@ void Ampermeter::AdjustmentZero()
     zero.SetConst(0);
     zero.SetVar(0);
 
-//    int non_zero_var = AD7691::_GetAverageValue();
-
     InputRelays::EnableZero(false);
 
     int zero_var = AD7691::GetAverageValue();
@@ -408,10 +418,6 @@ void Ampermeter::AdjustmentZero()
     InputRelays::DisableZero(false);
 
     zero.SetConst(const_val);
-
-//    static int counter = 0;
-
-//    Nextion::DrawString(160, 60, 440, 40, 0, Color::White, Color::Background, String<>("%d nz_v=%d v=%d c=%d", counter++, non_zero_var, zero_var, const_val).c_str());
 
     HAL_PIO::Write(PIN_ZERO, false);
 }

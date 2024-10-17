@@ -160,12 +160,25 @@ void Nextion::Update()
 
         delete command;
     }
+
+    exist_command = false;
 }
 
 
 void Nextion::CallbackOnReceive(char byte)
 {
     bufferUART.Push(byte);
+
+    if (byte == (uint8)'-' || byte == (uint8)'+')
+    {
+        exist_command = true;
+    }
+}
+
+
+bool Nextion::ExixtCommnadsForExecute()
+{
+    return exist_command;
 }
 
 

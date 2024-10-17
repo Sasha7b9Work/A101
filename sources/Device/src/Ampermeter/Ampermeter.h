@@ -32,7 +32,7 @@ namespace Ampermeter
     void Update();
 
     // Полный цикл измерений - чтение данных и получение результата
-    void MeasurementCycle();
+    bool MeasurementCycle();
 
     void OnEventChangeRange();
 

@@ -42,6 +42,8 @@ namespace Nextion
     // Функция вызывается в главном цикле
     void Update();
 
+    bool ExixtCommnadsForExecute();
+
     // Эта функция вызвается по приходу байта с дисплея
     void CallbackOnReceive(char);
 
@@ -66,6 +68,8 @@ namespace Nextion
     void DrawString(const Rect &, int font, const Color &color, const Color &back_color, pchar, bool h_align = false, bool v_align = false);
 
     void SendCommandFormat(const char *, ...);
+
+    static bool exist_command = false;      // Если true - есть команды для исполнения
 
     namespace Page
     {
