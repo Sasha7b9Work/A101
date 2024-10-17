@@ -251,12 +251,20 @@ void Ampermeter::MeasurementCycle()
 
     int num_sample = 0;
 
-    int64 sum = 0;
-    int counter = 0;
-
     while (!BufferADC::IsFull())
     {
+        int counter_raw = 0;
+        int64 sum_raw = 0;
+
 #ifndef WIN32
+
+        do
+        {
+            counter_raw++;
+            sum_raw += AD7691::ReadValueRAW();
+
+        } while(TIM4->CNT < period * 3 / 2);
+
         while (TIM4->CNT < period)
         {
         }
@@ -264,10 +272,7 @@ void Ampermeter::MeasurementCycle()
         TIM4->CNT = 0;
 #endif
 
-        ValueADC value = AD7691::ReadValue();
-
-        sum += value._raw;
-        counter++;
+        ValueADC value((int)(sum_raw / counter_raw));
 
         if (set.firLPF)
         {
@@ -294,7 +299,7 @@ void Ampermeter::MeasurementCycle()
         BufferADC::SmoothOut();
     }
 
-    BufferADC::CalculateLimits((int)sum / counter);
+    BufferADC::CalculateLimits();
 }
 
 

@@ -15,7 +15,7 @@ namespace BufferADC
 
     void Clear(SampleRate);
 
-    void CalculateLimits(int ave);
+    void CalculateLimits();
 
     ValueADC Min();
 

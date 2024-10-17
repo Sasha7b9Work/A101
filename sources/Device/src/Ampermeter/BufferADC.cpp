@@ -71,7 +71,7 @@ ValueADC BufferADC::At(int i)
 }
 
 
-void BufferADC::CalculateLimits(int /*ave*/)
+void BufferADC::CalculateLimits()
 {
     int64 sum = 0;
 
@@ -89,12 +89,6 @@ void BufferADC::CalculateLimits(int /*ave*/)
         if (value < min) { min = value; }
         if (value > max) { max = value; }
     }
-
-//    int ave_zero = (int)(sum / SIZE);
-
-//    Nextion::DrawString(250, 20, 300, 40, 0, Color::White, Color::Background, String<>("%d   %d", ave_zero, ave).c_str());
-
-//    Nextion::DrawString(250, 50, 300, 40, 0, Color::White, Color::Background, String<>("%d", ave_zero - ave).c_str());
 }
 
 
