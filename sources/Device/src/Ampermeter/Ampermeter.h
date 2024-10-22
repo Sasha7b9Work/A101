@@ -22,6 +22,9 @@ struct Measure
     bool correct = false;
 
     static REAL LimitFrequency(REAL value);
+
+    // Возвращате макимальное измеряемое значение тока на данном диапазоне
+    static REAL MaxIAbs(int range);
 };
 
 

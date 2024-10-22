@@ -316,11 +316,17 @@ bool Ampermeter::MeasurementCycle()
 }
 
 
-bool Ampermeter::OutOfRange()
+REAL Measure::MaxIAbs(int range)
 {
     static const REAL maxs[6] = { 2.0, 2e1, 2e2, 2e3, 2e4, 5e4 };
 
-    REAL max = maxs[Range::Current()] * 1.15;
+    return maxs[range];
+}
+
+
+bool Ampermeter::OutOfRange()
+{
+    REAL max = Measure::MaxIAbs(Range::Current()) * 1.15;
 
     bool correct_dc = false;
     bool correct_ac = false;
