@@ -132,11 +132,11 @@ namespace PageCalibration
         SetGivenMeasure();
     });
 
-    ButtonPress btnReset("Сброс", "Reset", Font::_1_GB42b, { 540, 300, 150, 73 }, [](Item *, bool press)
+    static ButtonPress btnReset("Сброс", "Reset", Font::_1_GB42b, { 640, 400, 150, 73 }, [](Item *, bool press)
     {
         if (!press)
         {
-
+            cal.Reset();
         }
     });
 
@@ -152,7 +152,7 @@ namespace PageCalibration
     // Нажатие кнопки на цифровой клавиатуре
     static void PressDigit(char symbol, bool press)
     {
-        if (!press)
+        if (press)
         {
             return;
         }
@@ -217,6 +217,7 @@ namespace PageCalibration
                 btnSave.SetShown(true);
             }
             btnCalib.SetShown(true);
+
         }
     });
 
@@ -421,6 +422,7 @@ namespace PageCalibration
         btnMax.SetShown(visible);
         btnSave.SetShown(visible);
         btnCalib.SetShown(visible);
+        btnReset.SetShown(visible);
         btn2mA.SetShown(visible);
         btn20mA.SetShown(visible);
         btn200mA.SetShown(visible);
@@ -494,10 +496,10 @@ namespace PageCalibration
 
     static Item *items[] =
     {
-        &btnBack,    &btnSave, &btnCalib, &btnMin, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
-        &btn2A,      &btn20A,  &btn50A,   &btn0,   &btn1,    &btn2,   &btn3,    &btn4,
-        &btn5,       &btn6,    &btn7,     &btn8,   &btn9,    &btnDot, &btnSign, &btnBackspace,
-        &wndCurrent, &wndGiven, nullptr
+        &btnBack,    &btnSave,  &btnCalib, &btnMin, &btnMax,  &btn2mA, &btn20mA, &btn200mA,
+        &btn2A,      &btn20A,   &btn50A,   &btn0,   &btn1,    &btn2,   &btn3,    &btn4,
+        &btn5,       &btn6,     &btn7,     &btn8,   &btn9,    &btnDot, &btnSign, &btnBackspace,
+        &wndCurrent, &wndGiven, &btnReset, nullptr
     };
 
     static Page pageCalibration(items, FuncOnEnter, FuncDraw);
