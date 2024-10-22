@@ -429,6 +429,9 @@ namespace PageCalibration
         btn2A.SetShown(visible);
         btn20A.SetShown(visible);
         btn50A.SetShown(visible);
+
+        wndCurrent.SetShown(visible);
+        wndGiven.SetShown(visible);
     }
 
     static void FuncOnEnter()
