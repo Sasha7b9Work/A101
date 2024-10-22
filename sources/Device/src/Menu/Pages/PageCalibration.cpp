@@ -132,7 +132,7 @@ namespace PageCalibration
         SetGivenMeasure();
     });
 
-    ButtonPress btnReset("—брос", "Reset", Font::_1_GB42b, { 540, 300, 150, 73 }, [](Item *item, bool press)
+    ButtonPress btnReset("—брос", "Reset", Font::_1_GB42b, { 540, 300, 150, 73 }, [](Item *, bool press)
     {
         if (!press)
         {
