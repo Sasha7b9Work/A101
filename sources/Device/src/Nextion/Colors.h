@@ -11,6 +11,7 @@ struct Color
     static Color MeasureDC;
     static Color MeasureAC;
     static Color Gray50;
+    static Color Gray75;
     static Color Count;
 
     Color(uint8 v = 255) : value(v) {}

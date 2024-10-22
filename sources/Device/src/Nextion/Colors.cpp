@@ -15,6 +15,7 @@ Color Color::ButtonPress(3);
 Color Color::MeasureDC(4);
 Color Color::MeasureAC(5);
 Color Color::Gray50(6);
+Color Color::Gray75(7);
 Color Color::Count(255);
 
 Color Color::current(0);
@@ -28,7 +29,8 @@ static pchar colors[255] =
     "1024",     // ButtonPress
     "65504",    // MeasureDC
     "65504",    // MeasureAC
-    "33808"     // Серый 50%
+    "33808",    // Серый 50%
+    "48631"     // Серый 75%
 };
 
 

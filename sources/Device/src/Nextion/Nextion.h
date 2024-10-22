@@ -80,7 +80,7 @@ namespace Nextion
 
     namespace WaveInput
     {
-        void Draw(int x, uint8 *points, int num_points);
+        void Draw(const Rect &, uint16 *points);
 
         // 0 - маленький, 1 - большой
         void Enable(int size);
