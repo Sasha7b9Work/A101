@@ -5,9 +5,10 @@
 
 namespace DiagramInput
 {
-    void InstallData(float data[1024]);
+    void InstallData();
 
-    void _InstallData();
+    // Это вспомогательная функция. Можно использовать при отладке
+    void InstallData2(float data[1024]);
 
     void Draw();
 

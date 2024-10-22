@@ -22,7 +22,7 @@ namespace DiagramInput
 }
 
 
-void DiagramInput::InstallData(float data[1024])
+void DiagramInput::InstallData2(float data[1024])
 {
     if (data_installed)
     {
@@ -67,7 +67,7 @@ void DiagramInput::InstallData(float data[1024])
 }
 
 
-void DiagramInput::_InstallData()
+void DiagramInput::InstallData()
 {
     if (data_installed)
     {
