@@ -94,41 +94,6 @@ void DiagramInput::InstallData()
     }
 
     data_installed = true;
-
-//    int index = 0;
-//
-//    int points_in_point = BufferADC::SIZE / NumPoints() - 1;
-//
-//    for (int i = 0; i < NumPoints(); i++)
-//    {
-//        float sum_points = 0.0f;
-//
-//        for (int j = 0; j < points_in_point; j++)
-//        {
-//            index = j + i * points_in_point;
-//            if (index < BufferADC::SIZE)
-//            {
-//                sum_points += BufferADC::At(index).Real();
-//            }
-//        }
-//
-//        float value = sum_points / points_in_point;
-//
-//        value = y0 + scale * (value - ave);
-//
-//        if (value < 0)
-//        {
-//            value = 0;
-//        }
-//        else if (value > 255)
-//        {
-//            value = 255;
-//        }
-//
-//        points[i] = (uint8)value;
-//    }
-//
-//    LOG_WRITE("index %d", index);
 }
 
 
