@@ -123,7 +123,7 @@ static float GetSample(float freq, int num_sample)
 }
 
 
-ValueADC AD7691::ReadValue()
+int AD7691::ReadValueRAW()
 {
     float amplitude = 0.5f;
 
@@ -140,7 +140,7 @@ ValueADC AD7691::ReadValue()
 
     counter++;
 
-    return ValueADC((int)(value));
+    return (int)(value / 10);
 }
 
 #else
@@ -206,13 +206,13 @@ int AD7691::ReadValueRAW()
     return value;
 }
 
+#endif
+
 
 ValueADC AD7691::ReadValue()
 {
     return ValueADC(ReadValueRAW());
 }
-
-#endif
 
 
 ValueADC::ValueADC(int reading)
