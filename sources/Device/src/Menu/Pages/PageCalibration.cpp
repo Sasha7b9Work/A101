@@ -132,12 +132,21 @@ namespace PageCalibration
         SetGivenMeasure();
     });
 
-    \todo Добавить кнопку сброса калибровок
-
-    ButtonPress btnSave("Сохр.", "Save", Font::_1_GB42b, { 220, Item::GetCoordY(0), 130, 73 }, [](Item *item, bool)
+    ButtonPress btnReset("Сброс", "Reset", Font::_1_GB42b, { 540, 300, 150, 73 }, [](Item *item, bool press)
     {
-        Calibrator::PressButtonSave();
-        item->SetShown(false);
+        if (!press)
+        {
+
+        }
+    });
+
+    ButtonPress btnSave("Сохр.", "Save", Font::_1_GB42b, { 220, Item::GetCoordY(0), 130, 73 }, [](Item *item, bool press)
+    {
+        if (!press)
+        {
+            Calibrator::PressButtonSave();
+            item->SetShown(false);
+        }
     });
 
     // Нажатие кнопки на цифровой клавиатуре
