@@ -41,7 +41,7 @@ namespace PageCalibration
     // Установить требуемое значение измеряемой величины
     static void SetGivenMeasure();
 
-    static const pchar PASSWORD = "1";
+    static const pchar PASSWORD = "2700500";
 
     namespace LabelPassword
     {
