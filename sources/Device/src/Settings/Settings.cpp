@@ -98,7 +98,11 @@ void Settings::Load()
 {
     if (!HAL_EEPROM::Load(this))
     {
+        uint sn = set.serial_number;
+
         *this = NS_Settings::set_def;
+
+        this->serial_number = sn;
     }
 }
 
