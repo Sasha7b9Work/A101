@@ -53,9 +53,9 @@ static float GetSample(float freq, int num_sample)
 
 int AD7691::ReadValueRAW()
 {
-    float amplitude = 10.0f;
+    float amplitude = 0.8f;
 
-    float value = amplitude * GetSample(4900.95f, counter);
+    float value = amplitude * GetSample(5100.95f, counter);
 
 //    value += (float)std::rand() / (float)RAND_MAX / 2.0f;
 
