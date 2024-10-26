@@ -34,7 +34,7 @@ ResolverFrequency::ResolverFrequency(const Period &period)
     {
         if (DELTA(i) > 0.0f && DELTA(i + 1) <= 0.0f)
         {
-            i += 15;
+            i += 5;
             counter++;
             continue;
         }

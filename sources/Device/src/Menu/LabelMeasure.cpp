@@ -396,7 +396,7 @@ pchar TypeMeasure::Title(Lang::E lang) const
     {
         {"DC:",    "DC:"},
         {"AC:",    "AC:"},
-        {"Iампл:", "Iampl:"},
+        {"Iамп:",  "Iamp:"},
         {"Iпп:",   "Ipp:"},
         {"Iмин:",  "Imin:"},
         {"Iмакс:", "Imax:"},
