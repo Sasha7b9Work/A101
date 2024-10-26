@@ -20,8 +20,6 @@ ResolverFrequency::ResolverFrequency(const Period &period)
 
     for (int i = 1; i < BufferADC::SIZE; i++)                       // Рассчитываем массив сумм касательных
     {
-//        sum[i] = averager.Push(sum[i - 1] + (float)(BufferADC::At(i).Real() - BufferADC::At(i - 1).Real()));
-
         sum[i] = averager.Push(sum[i - 1] + (float)BufferADC::At(i).Real());
     }
 
@@ -42,9 +40,9 @@ ResolverFrequency::ResolverFrequency(const Period &period)
         }
     }
 
-//    DiagramInput::InstallData2(sum);
-
     float sample_time = (float)SampleRate::Current().Get().TimeUS() * 1e-6f;
 
-    frequency = 1.0f / ((last - first) / counter * sample_time);
+    float time = (last - first) * sample_time / counter;
+
+    frequency = 1.0f / time;
 }

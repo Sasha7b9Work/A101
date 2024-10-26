@@ -261,7 +261,6 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
                 frequency = measure.value_abs;
 
                 ConvertRealToText(frequency, buf_measure, TypeMeasure::GetNumDigitsAfterComma(frequency));
-                buf_measure[4] = '\0';
             }
             else
             {
@@ -271,11 +270,11 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
 
         if (type_measure.IsFrequency())
         {
-            if (Ampermeter::GetAC().value_abs < Range::MaxMA(Range::Current()))
-            {
-                SetMeasure("*****", "", "");
-            }
-            else
+//            if (Ampermeter::GetAC().value_abs < Range::MaxMA(Range::Current()) * 0.1)
+//            {
+//                SetMeasure("*****", "", "");
+//            }
+//            else
             {
                 char ru[32];
                 char en[32];
