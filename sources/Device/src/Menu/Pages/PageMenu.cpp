@@ -162,7 +162,7 @@ namespace PageMenu
     {
         if (!press)
         {
-            item->ToChoice()->SetTitles((Lang::IsRU() ? "Language" : "язык"), (Lang::IsRU() ? "язык" : "Language"));
+            ((ButtonCommon *)item)->SetText((Lang::IsRU() ? "Language" : "язык"), (Lang::IsRU() ? "язык" : "Language"));
             Page::Current()->Refresh();
         }
     });

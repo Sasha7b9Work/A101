@@ -95,11 +95,13 @@ static float GetSample(float freq, int num_sample)
 
 int AD7691::ReadValueRAW()
 {
-    float amplitude = 0.8f;
+    float amplitude = 0.5f;
 
     float value = amplitude * GetSample(1234.0f, counter);
 
-//    value += (float)std::rand() / (float)RAND_MAX / 2.0f;
+//    value += (float)std::rand() / (float)RAND_MAX / 10.0f;
+
+    value += 0.1f;
 
     value *= 0x1FFFF;           // 17 бит в единичке - максимальное значение
 
