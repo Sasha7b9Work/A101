@@ -17,8 +17,6 @@ ResolverAmpl::ResolverAmpl(const Period &period)
 
 REAL ResolverAmpl::CalculateMin(int first, int last, REAL aveValue) const
 {
-    REAL result = std::numeric_limits<REAL>::max();
-
     REAL sum = 0.0;
     int numSums = 0;
 
@@ -33,50 +31,12 @@ REAL ResolverAmpl::CalculateMin(int first, int last, REAL aveValue) const
         }
     }
 
-    result = sum / numSums;
-
-    int numDeleted = 0;
-
-    int numMin = numSums;
-
-    REAL value = (max - min) / 9.0F;
-
-    REAL _min = result;
-
-    for (int i = first; i < last; i++)
-    {
-        REAL d = -BufferADC::At(i).Real();
-
-        if (d < aveValue)
-        {
-            if (d < _min)
-            {
-                if (_min - d > value)
-                {
-                    sum -= d;
-                    --numSums;
-                    ++numDeleted; //-V127
-                }
-            }
-            else if (d - _min > value) //-V2516
-            {
-                sum -= d;
-                --numSums;
-                ++numDeleted; //-V127
-            }
-        }
-    }
-
-    result = (numDeleted > numMin / 2.0F) ? min : (sum / numSums);
-
-    return result;
+    return sum / numSums;
 }
 
 
 REAL ResolverAmpl::CalculateMax(int first, int last, REAL aveValue) const
 {
-    REAL result = std::numeric_limits<REAL>::min();
-
     REAL sum = 0.0;
     int numSums = 0;
 
@@ -91,41 +51,5 @@ REAL ResolverAmpl::CalculateMax(int first, int last, REAL aveValue) const
         }
     }
 
-    result = sum / numSums;
-
-    int numDeleted = 0;
-
-    int numMax = numSums;
-
-    REAL value = (max - min) / 9.0;
-
-    REAL _max = result;
-
-    for (int i = first; i < last; i++)
-    {
-        REAL d = -BufferADC::At(i).Real();
-
-        if (d > aveValue)
-        {
-            if (d > _max)
-            {
-                if (d - _max > value)
-                {
-                    sum -= d;
-                    numSums--;
-                    numDeleted++; //-V127
-                }
-            }
-            else if (_max - d > value) //-V2516
-            {
-                sum -= d;
-                numSums--;
-                numDeleted++; //-V127
-            }
-        }
-    }
-
-    result = (numDeleted > numMax / 2) ? max : (sum / numSums);
-
-    return result;
+    return sum / numSums;
 }
