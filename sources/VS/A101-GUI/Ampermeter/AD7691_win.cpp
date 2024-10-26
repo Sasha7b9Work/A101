@@ -93,7 +93,7 @@ int AD7691::ReadValueRAW()
 {
     float amplitude = 0.8f;
 
-    float value = amplitude * GetSample(5100.95f, counter);
+    float value = amplitude * GetSample(40.0f, counter);
 
 //    value += (float)std::rand() / (float)RAND_MAX / 2.0f;
 

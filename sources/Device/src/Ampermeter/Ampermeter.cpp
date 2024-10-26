@@ -121,7 +121,10 @@ void Ampermeter::Update()
 
 bool Ampermeter::MeasurementCycle()
 {
-    Nextion::DrawLineH(43, 0, Display::WIDTH, Color::Background);
+    if (Page::Current() == PageMain::self)
+    {
+        Nextion::DrawLineH(43, 0, Display::WIDTH, Color::Background);
+    }
 
     TimeMeterMS meter;
 
@@ -138,7 +141,10 @@ bool Ampermeter::MeasurementCycle()
         if (meter.ElapsedTime() > 500)
         {
             meter.Reset();
-            Nextion::DrawLineH(43, 0, (int)((float)num_samples * Display::WIDTH / 16384.0f), Color::Gray75);
+            if (Page::Current() == PageMain::self)
+            {
+                Nextion::DrawLineH(43, 0, (int)((float)num_samples * Display::WIDTH / 16384.0f), Color::Gray75);
+            }
         }
 
         int counter_raw = 0;
