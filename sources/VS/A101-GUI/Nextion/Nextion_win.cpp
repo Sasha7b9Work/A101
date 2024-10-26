@@ -31,7 +31,7 @@ void Nextion::FillRect(const Rect &rect, const Color &color)
         int width = rect.width;
         int height = rect.height;
 
-        Screen::self->FillRectangle(x, y, width, height, wxColor(Color::Current().ToRaw()));
+        Screen::self->FillRectangle(x, y, width, height, Color::Current());
     }
 }
 
@@ -40,7 +40,7 @@ void Nextion::DrawLine(int x1, int y1, int x2, int y2, const Color &color)
 {
     color.SetAsCurrent();
 
-    Screen::self->DrawLine(x1, y1, x2, y2, wxColor(Color::Current().ToRaw()));
+    Screen::self->DrawLine(x1, y1, x2, y2, Color::Current());
 }
 
 
@@ -52,7 +52,7 @@ void Nextion::DrawString(const Rect &rect, int font, const Color &color, const C
 
     if (Screen::self)
     {
-        Screen::self->DrawString(rect.x, rect.y, font, wxColor(Color::Current().ToRaw()), text);
+        Screen::self->DrawString(rect.x, rect.y, font, Color::Current(), text);
     }
 }
 

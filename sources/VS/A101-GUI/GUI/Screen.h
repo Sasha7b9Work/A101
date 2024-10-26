@@ -18,9 +18,9 @@ public:
 
     void FillRectangle(int x, int y, int width, int height, const Color &);
 
-    void DrawLine(int x1, int y1, int x2, int y2, const wxColor &);
+    void DrawLine(int x1, int y1, int x2, int y2, const Color &);
 
-    void DrawString(int x, int y, int font, const wxColor &, pchar text);
+    void DrawString(int x, int y, int font, const Color &, pchar text);
 
     struct WaveInput
     {

@@ -8,6 +8,18 @@
 #include <algorithm>
 
 
+static wxColor ColorToWx(const Color &color)
+{
+    uint16 raw = color.ToRaw();
+
+    float blue = (float)(raw & 31) / 31.0f;
+    float green = (float)((raw >> 5) & 63) / 63.0f;
+    float red = (float)((raw >> 11) & 31) / 31.0f;
+
+    return wxColor((uint8)(red * 255), (uint8)(green * 255), (uint8)(blue * 255));
+}
+
+
 wxBitmap Screen::bitmap(Screen::WIDTH, Screen::HEIGHT);
 
 
@@ -94,34 +106,40 @@ void Screen::Init()
 }
 
 
-void Screen::FillRectangle(int x, int y, int width, int height, const wxColor &color)
+void Screen::FillRectangle(int x, int y, int width, int height, const Color &color)
 {
+    wxColor colour = ColorToWx(color);
+
     wxMemoryDC dc;
     dc.SelectObject(bitmap);
-    dc.SetBrush(color);
-    dc.SetPen(color);
+    dc.SetBrush(colour);
+    dc.SetPen(colour);
     dc.DrawRectangle({ x, y, width, height });
     dc.SelectObject(wxNullBitmap);
     Refresh();
 }
 
 
-void Screen::DrawLine(int x1, int y1, int x2, int y2, const wxColor &color)
+void Screen::DrawLine(int x1, int y1, int x2, int y2, const Color &color)
 {
+    wxColor colour = ColorToWx(color);
+
     wxMemoryDC dc;
     dc.SelectObject(bitmap);
-    dc.SetPen(color);
+    dc.SetPen(colour);
     dc.DrawLine(x1, y1, x2, y2);
     dc.SelectObject(wxNullBitmap);
     Refresh();
 }
 
 
-void Screen::DrawString(int x, int y, int num_font, const wxColor &color, pchar text)
+void Screen::DrawString(int x, int y, int num_font, const Color &color, pchar text)
 {
+    wxColor colour = ColorToWx(color);
+
     wxMemoryDC dc;
     dc.SelectObject(bitmap);
-    dc.SetTextForeground(color);
+    dc.SetTextForeground(colour);
     dc.SetFont(FontGUI::Get(num_font));
     dc.DrawText(text, x, y);
     dc.SelectObject(wxNullBitmap);
