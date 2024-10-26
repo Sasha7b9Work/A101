@@ -141,7 +141,7 @@ void Screen::DrawString(int x, int y, int num_font, const Color &color, pchar te
     dc.SelectObject(bitmap);
     dc.SetTextForeground(colour);
     dc.SetFont(FontGUI::Get(num_font));
-    dc.DrawText(text, x, y);
+    dc.DrawText(text, x + 5, y + 5);
     dc.SelectObject(wxNullBitmap);
     Refresh();
 }
@@ -254,7 +254,9 @@ void Wave::Draw()
 
 wxFont FontGUI::Get(int num_font)
 {
-    static const int sizes[10] = { 30, 30, 30, 20, 30, 30, 30, 60, 30, 30 };
+    return wxFont(10, wxFONTFAMILY_ROMAN, wxNORMAL, wxNORMAL);
 
-    return wxFont(sizes[num_font], wxFONTFAMILY_ROMAN, wxNORMAL, wxNORMAL);
+//    static const int sizes[10] = { 30, 30, 30, 20, 30, 30, 30, 60, 30, 30 };
+
+//    return wxFont(sizes[num_font], wxFONTFAMILY_ROMAN, wxNORMAL, wxNORMAL);
 }

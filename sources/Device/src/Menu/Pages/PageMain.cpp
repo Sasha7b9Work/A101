@@ -206,6 +206,7 @@ namespace PageMain
         ResetAllMeasures();
 
         btnZero.SetShown(new_range >= 4);
+        btnAVP.SetShown(new_range < 4);
     }
 
     static void FuncOnEnter()
