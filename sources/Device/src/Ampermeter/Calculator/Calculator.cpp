@@ -12,9 +12,10 @@
 #include <cmath>
 
 
-#define GET_RELATIVE(arr)                           \
-    *correct = arr.NumElements() > 0;               \
-    REAL relative = (*correct) ? arr.Get() : 0.0
+#define RETURN_VALUE(arr)                               \
+    *correct = arr.NumElements() > 0;                   \
+    REAL relative = (*correct) ? arr.Get() : 0.0;       \
+    return relative * (Range::Current() > 2 ? 1e3 : 1.0)
 
 
 namespace Calculator
@@ -117,39 +118,29 @@ REAL Calculator::GetValueFrequency(bool *correct)
 
 REAL Calculator::GetAbsAC(bool *correct)
 {
-    GET_RELATIVE(ac);
-
-    return relative * (Range::Current() > 2 ? 1e3 : 1.0);
+    RETURN_VALUE(ac);
 }
 
 
 REAL Calculator::GetAbsDC(bool *correct)
 {
-    GET_RELATIVE(dc);
-
-    return relative * (Range::Current() > 2 ? 1e3 : 1.0);
+    RETURN_VALUE(dc);
 }
 
 
 REAL Calculator::GetValueMin(bool *correct)
 {
-    GET_RELATIVE(min);
-
-    return relative * (Range::Current() > 2 ? 1e3 : 1.0);
+    RETURN_VALUE(min);
 }
 
 
 REAL Calculator::GetValueMax(bool *correct)
 {
-    GET_RELATIVE(max);
-
-    return relative * (Range::Current() > 2 ? 1e3 : 1.0);
+    RETURN_VALUE(max);
 }
 
 
 REAL Calculator::GetValueAmpl(bool *correct)
 {
-    GET_RELATIVE(ampl);
-
-    return relative * (Range::Current() > 2 ? 1e3 : 1.0);
+    RETURN_VALUE(ampl);
 }
