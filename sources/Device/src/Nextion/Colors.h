@@ -25,7 +25,7 @@ struct Color
 
     uint8 value;
 
-    uint16 ToRaw() const;
+    uint16 _ToRaw() const;
 
 private:
 

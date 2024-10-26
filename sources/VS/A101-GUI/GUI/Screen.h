@@ -16,7 +16,7 @@ public:
 
     void Init();
 
-    void FillRectangle(int x, int y, int width, int height, const wxColor &);
+    void FillRectangle(int x, int y, int width, int height, const Color &);
 
     void DrawLine(int x1, int y1, int x2, int y2, const wxColor &);
 

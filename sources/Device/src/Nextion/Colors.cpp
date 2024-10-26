@@ -59,7 +59,10 @@ uint16 Color::MakeColor(float r, float g, float b)
 }
 
 
-uint16 Color::ToRaw() const
-{
-    return 0;
+uint16 Color::_ToRaw() const
+{   // Red   Green  Blue
+    // 11111 111111 11111
+    // b15 ........... b0
+
+    return (uint16)std::atoi(colors[value]);
 }
