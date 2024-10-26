@@ -208,9 +208,6 @@ namespace PageMain
 
         btnZero.SetShown(new_range >= 4);
         btnAVP.SetShown(new_range < 4);
-
-        btnZero.Refresh();
-        btnAVP.Refresh();
     }
 
     static void FuncOnEnter()
