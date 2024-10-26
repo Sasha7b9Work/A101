@@ -25,6 +25,8 @@ struct Color
 
     uint8 value;
 
+    uint16 ToRaw() const;
+
 private:
 
     static Color current;

@@ -4,6 +4,13 @@
 
 
 
+void HAL_USART3::Init()
+{
+
+}
+
+
+
 void HAL_USART3::SendText(pchar)
 {
 

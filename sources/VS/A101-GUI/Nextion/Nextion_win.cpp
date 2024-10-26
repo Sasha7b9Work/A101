@@ -4,15 +4,14 @@
 #include "GUI/Screen.h"
 
 
-void Nextion::SetValue(pchar, int)
-{
-
-}
-
-
-void Nextion::DrawRect(int x, int y, int width, int height, const Color &color)
+void Nextion::DrawRect(const Rect &rect, const Color &color)
 {
     color.SetAsCurrent();
+
+    int x = rect.x;
+    int y = rect.y;
+    int width = rect.width;
+    int height = rect.height;
 
     DrawLineH(y, x, x + width);
     DrawLineV(x + width - 1, y, y + height);
@@ -21,12 +20,17 @@ void Nextion::DrawRect(int x, int y, int width, int height, const Color &color)
 }
 
 
-void Nextion::FillRect(int x, int y, int width, int height, const Color &color)
+void Nextion::FillRect(const Rect &rect, const Color &color)
 {
     color.SetAsCurrent();
 
     if (Screen::self)
     {
+        int x = rect.x;
+        int y = rect.y;
+        int width = rect.width;
+        int height = rect.height;
+
         Screen::self->FillRectangle(x, y, width, height, wxColor(Color::Current().ToRaw()));
     }
 }
@@ -40,22 +44,22 @@ void Nextion::DrawLine(int x1, int y1, int x2, int y2, const Color &color)
 }
 
 
-void Nextion::DrawString(int x, int y, int width, int height, int font, const Color &color, const Color &back_color, pchar text, int /*h_align*/, int /*v_align*/)
+void Nextion::DrawString(const Rect &rect, int font, const Color &color, const Color &back_color, pchar text, bool /*h_align*/, bool /*v_align*/)
 {
-    FillRect(x, y, width, height, back_color);
+    FillRect(rect, back_color);
 
     color.SetAsCurrent();
 
     if (Screen::self)
     {
-        Screen::self->DrawString(x, y, font, wxColor(Color::Current().ToRaw()), text);
+        Screen::self->DrawString(rect.x, rect.y, font, wxColor(Color::Current().ToRaw()), text);
     }
 }
 
 
-void Nextion::WaveInput::Draw(uint8 *points, int num_points)
+void Nextion::WaveInput::Draw(const Rect &, uint16 *)
 {
-    Screen::WaveInput::Draw(points, num_points);
+//    Screen::WaveInput::Draw(points, num_points);
 }
 
 
@@ -83,26 +87,6 @@ void Nextion::WaveFFT::Disable(int size)
 }
 
 
-void Nextion::Button::SetText(pchar /*_name_button*/, pchar /*_text*/)
-{
-}
-
-
-void Nextion::Button::Highligth(pchar /*_name_button*/, bool /*_highlight*/)
-{
-}
-
-
-void Nextion::Button::Enable(pchar /*_name_button*/)
-{
-}
-
-
-void Nextion::Button::Disable(pchar /*_name_button*/)
-{
-}
-
-
 void Nextion::Page::Enable(int)
 {
 
@@ -114,8 +98,3 @@ void Nextion::SendCommandFormat(const char *, ...)
 
 }
 
-
-void Nextion::Text::SetVisible(pchar, bool)
-{
-
-}

@@ -90,7 +90,7 @@ void Screen::OnMouseUp(wxMouseEvent &event)
 
 void Screen::Init()
 {
-    Nextion::FillRect(0, 0, WIDTH, HEIGHT, Color::Background);
+    Nextion::FillRect({ 0, 0, WIDTH, HEIGHT }, Color::Background);
 }
 
 
@@ -228,9 +228,9 @@ void Wave::DrawData(const uint8 *data, int num_points)
 
 void Wave::Draw()
 {
-    Color color = enabled ? Color::ButtonPress : Color::Background;
+//    Color color = enabled ? Color::ButtonPress : Color::Background;
 
-    Screen::self->FillRectangle(x, y, width, height, wxColor(color.ToRaw()));
+//    Screen::self->FillRectangle(x, y, width, height, wxColor(color.ToRaw()));
 }
 
 

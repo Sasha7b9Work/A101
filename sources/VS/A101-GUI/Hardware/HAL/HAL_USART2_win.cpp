@@ -7,9 +7,3 @@ void HAL_USART2::SendNZ(pchar)
 {
 
 }
-
-
-void HAL_USART2::SendByte(uint8)
-{
-
-}

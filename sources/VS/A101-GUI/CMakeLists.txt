@@ -2,7 +2,7 @@
 
 project (A101-GUI)
 
-set(CMAKE_UNITY_BUILD ON)
+#set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(
     .
@@ -54,7 +54,7 @@ if(WIN32)
     endif()
 
     add_compile_options(
-#        /wd4127    # conditional expression is constant
+        /wd4127    # conditional expression is constant
         /wd4464    # relative include path contains '..'
         /wd4514    # unreferenced inline function has been removed
         /wd4625    # copy constructor was implicitly defined as deleted

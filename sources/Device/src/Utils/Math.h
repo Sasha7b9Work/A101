@@ -2,7 +2,9 @@
 #pragma once
 
 
-#define M_PI 3.1415926f
+#ifndef M_PI
+    #define M_PI 3.1415926f
+#endif
 
 
 struct Rect

@@ -57,3 +57,9 @@ uint16 Color::MakeColor(float r, float g, float b)
 
     return (uint16)((red << 11) | (green << 6) | (blue));
 }
+
+
+uint16 Color::ToRaw() const
+{
+    return 0;
+}

@@ -3,6 +3,12 @@
 #include "Hardware/HAL/HAL.h"
 
 
+void HAL_UART4::Init()
+{
+
+}
+
+
 void HAL_UART4::SendText(pchar)
 {
 
