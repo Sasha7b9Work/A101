@@ -368,12 +368,9 @@ void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int a
 
     char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', '\0', '\0', '\0'};
 
-    if (type_measure.IsFrequency())
+    if (type_measure.IsFrequency() && after == 0)
     {
-        if (after == 0)
-        {
-            std::strcpy(format, "%03.0f.");
-        }
+        std::strcpy(format, "%03.0f.");
     }
 
     std::sprintf(buffer, format, (double)value);
