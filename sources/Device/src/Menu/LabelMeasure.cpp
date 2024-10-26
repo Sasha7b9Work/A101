@@ -268,11 +268,11 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
             {
                 frequency = measure.value_abs;
 
-                ConvertRealToText(frequency, buf_measure, TypeMeasure::GetNumDigitsAfterComma(frequency));
+                ConvertRealToText(frequency, buf_measure, TypeMeasure::GetNumDigitsAfterComma(frequency), 3);
             }
             else
             {
-                ConvertRealToText(measure.value_abs / (Range::Current() > 2 ? 1e3 : 1.0), buf_measure, after[range]);
+                ConvertRealToText(measure.value_abs / (Range::Current() > 2 ? 1e3 : 1.0), buf_measure, after[range], 5);
             }
         }
 
@@ -313,7 +313,7 @@ pchar LabelMeasure::GetSign() const
 }
 
 
-void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int after)
+void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int after, int num_digits)
 {
     if (type_measure.IsFrequency())
     {
@@ -332,7 +332,7 @@ void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int a
 
     value = std::fabs(value);
 
-    int before = 5 - after;
+    int before = num_digits - after;
 
     if (before == 3)
     {
@@ -366,7 +366,15 @@ void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int a
 
     char buffer[Label::MAX_LEN];
 
-    char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', '\0' };
+    char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', '\0', '\0', '\0'};
+
+    if (type_measure.IsFrequency())
+    {
+        if (after == 0)
+        {
+            std::strcpy(format, "%03.0f.");
+        }
+    }
 
     std::sprintf(buffer, format, (double)value);
 

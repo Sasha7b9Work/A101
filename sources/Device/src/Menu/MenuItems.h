@@ -330,7 +330,7 @@ private:
     void SetMeasure(pchar, pchar units_ru, pchar units_en);
 
     // after - количество цифр после запятой
-    void ConvertRealToText(REAL value, char buffer[Label::MAX_LEN], int after);
+    void ConvertRealToText(REAL value, char buffer[Label::MAX_LEN], int after, int num_digits);
 
     void DrawSign(pchar);
 

@@ -198,19 +198,19 @@ int TypeMeasure::GetNumDigitsAfterComma(REAL freq)
     *   < 1Ã         2      10**9
     */
 
-    if (freq < 1e-3)        return 2;
-    else if (freq < 1e-2)   return 4;
-    else if (freq < 1e-1)   return 3;
-    else if (freq < 1e0)    return 2;
-    else if (freq < 1e1)    return 4;
-    else if (freq < 1e2)    return 3;
-    else if (freq < 1e3)    return 2;
-    else if (freq < 1e4)    return 4;
-    else if (freq < 1e5)    return 3;
-    else if (freq < 1e6)    return 2;
-    else if (freq < 1e7)    return 4;
-    else if (freq < 1e8)    return 3;
-    else if (freq < 1e9)    return 2;
+    if (freq < 1e-3)        return 0;
+    else if (freq < 1e-2)   return 2;
+    else if (freq < 1e-1)   return 1;
+    else if (freq < 1e0)    return 0;
+    else if (freq < 1e1)    return 2;
+    else if (freq < 1e2)    return 1;
+    else if (freq < 1e3)    return 0;
+    else if (freq < 1e4)    return 2;
+    else if (freq < 1e5)    return 1;
+    else if (freq < 1e6)    return 0;
+    else if (freq < 1e7)    return 2;
+    else if (freq < 1e8)    return 1;
+    else if (freq < 1e9)    return 0;
 
-    return 4;
+    return 2;
 }
