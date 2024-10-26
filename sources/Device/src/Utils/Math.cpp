@@ -111,7 +111,7 @@ bool Math::RealIsCorrect(REAL value)
         return false;
     }
 
-    if (std::numeric_limits<REAL>::infinity() == value)
+    if (std::fabs(value) >= std::numeric_limits<REAL>::infinity())
     {
         return false;
     }
