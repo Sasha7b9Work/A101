@@ -20,6 +20,12 @@ struct SampleRate
 
     static E Get()       { return value; }
 
+    // ћинимальна€ измер€ема€ частота на данном диапазоне
+    static float MinFrequency();
+
+    // ћаксимальна€ измер€ема€ частота на данном диапазоне
+    static float MaxFrequency();
+
 private:
 
     static E value;

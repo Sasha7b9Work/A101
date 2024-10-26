@@ -26,6 +26,32 @@ uint SampleRate::TimeUSonPoint()
 }
 
 
+float SampleRate::MinFrequency()
+{
+    static const float freq[Count] =
+    {
+        0.4f,
+        4.0f,
+        40.0f
+    };
+
+    return freq[value];
+}
+
+
+float SampleRate::MaxFrequency()
+{
+    static const float freq[Count] =
+    {
+        4.0f,
+        40.0f,
+        5e3f
+    };
+
+    return freq[value];
+}
+
+
 namespace AD7691
 {
     struct Pin
