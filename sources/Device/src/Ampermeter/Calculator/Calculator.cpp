@@ -108,11 +108,13 @@ SampleRate Calculator::AppendData()
 }
 
 
-REAL Calculator::GetValueFrequency(bool *correct)
+Measure Calculator::GetMeasureFrequency()
 {
-    *correct = (frequency.NumElements() > 0);
+    bool correct = frequency.NumElements() > 0;
 
-    return frequency.NumElements() ? frequency.Get() : 0.0;
+    REAL value = correct ? frequency.Get() : 0.0;
+
+    return Measure(Measure::LimitFrequency(value), Ampermeter::OutOfRange(), correct);
 }
 
 

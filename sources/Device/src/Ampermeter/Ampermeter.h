@@ -39,6 +39,9 @@ namespace Ampermeter
 
     void OnEventChangeRange();
 
+    // Считанные значения выходят за пределы диапазона
+    bool OutOfRange();
+
     // если out_of_range == true - выход за границы диапазона
     Measure GetDC();
     Measure GetAC();
@@ -46,7 +49,6 @@ namespace Ampermeter
     Measure GetPeak();
     Measure GetMin();
     Measure GetMax();
-    Measure GetFrequency();
 
     // Автоматический выбор предела
     namespace AVP

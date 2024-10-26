@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
+#include "Ampermeter/Calculator/Calculator.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Nextion/Nextion.h"
@@ -259,7 +260,7 @@ namespace PageMain
         wndPEAK.SetMeasure(Ampermeter::GetPeak(), Range::Current());
         wndMIN.SetMeasure(Ampermeter::GetMin(), Range::Current());
         wndMAX.SetMeasure(Ampermeter::GetMax(), Range::Current());
-        wndFREQ.SetMeasure(Ampermeter::GetFrequency(), Range::Current());
+        wndFREQ.SetMeasure(Calculator::GetMeasureFrequency(), Range::Current());
     }
 
     void SetRange(int range)

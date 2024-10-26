@@ -46,9 +46,6 @@ namespace Ampermeter
         }
     }
 
-    // Считанные значения выходят за пределы диапазона
-    static bool OutOfRange();
-
     // Измеряемая величина слишком маленькая - нужно перейти на предыдущий диапазон
     static bool VerySmall();
 
@@ -201,16 +198,6 @@ Measure Ampermeter::GetMax()
     }
 
     return Measure(max - zero, OutOfRange(), correct);
-}
-
-
-Measure Ampermeter::GetFrequency()
-{
-    bool correct = false;
-
-    REAL frequency = Calculator::GetValueFrequency(&correct);
-
-    return Measure(Measure::LimitFrequency(frequency), OutOfRange(), correct);
 }
 
 

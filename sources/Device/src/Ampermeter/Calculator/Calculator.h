@@ -1,6 +1,7 @@
 // 2022/10/19 08:16:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Ampermeter/BufferADC.h"
+#include "Ampermeter/Ampermeter.h"
 
 
 namespace Calculator
@@ -15,5 +16,5 @@ namespace Calculator
     REAL GetValueMin(bool *correct);
     REAL GetValueMax(bool *correct);
     REAL GetValueAmpl(bool *correct);
-    REAL GetValueFrequency(bool *correct);
+    Measure GetMeasureFrequency();
 }
