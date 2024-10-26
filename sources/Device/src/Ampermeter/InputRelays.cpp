@@ -22,7 +22,7 @@ namespace InputRelays
 }
 
 
-REAL Range::Max(int range)
+REAL Range::MaxMA(int range)
 {
     static const REAL max[6] = { 2.0, 2e1, 2e2, 2e3, 2e4, 5e4 };
 

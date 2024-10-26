@@ -271,12 +271,19 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
 
         if (type_measure.IsFrequency())
         {
-            char ru[32];
-            char en[32];
+            if (Ampermeter::GetAC().value_abs < Range::MaxMA(Range::Current()))
+            {
+                SetMeasure("*****", "", "");
+            }
+            else
+            {
+                char ru[32];
+                char en[32];
 
-            TypeMeasure::GetUnitsForFrequnesy(frequency, ru, en);
+                TypeMeasure::GetUnitsForFrequnesy(frequency, ru, en);
 
-            SetMeasure(buf_measure, ru, en);
+                SetMeasure(buf_measure, ru, en);
+            }
         }
         else
         {

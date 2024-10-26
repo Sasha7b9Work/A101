@@ -11,7 +11,7 @@ struct Range
 
     static void Load(bool reset_measures) { Set(current, reset_measures); }
 
-    static REAL Max(int);
+    static REAL MaxMA(int);
 
 private:
 
