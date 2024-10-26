@@ -171,6 +171,23 @@ REAL Calculator::GetValueMin(bool *correct)
 }
 
 
+Measure Calculator::GetMeasureMin()
+{
+    bool correct = false;
+
+    REAL value = Calculator::GetValueMin(&correct);
+
+    REAL zero = Ampermeter::ZeroDC::LevelAbsFull();
+
+    if (Range::Current() > 2)
+    {
+        zero /= 1e3;
+    }
+
+    return Measure(value - zero, Ampermeter::OutOfRange(), correct);
+}
+
+
 REAL Calculator::GetValueMax(bool *correct)
 {
     RETURN_VALUE(max);

@@ -258,7 +258,7 @@ namespace PageMain
 
         wndAMPL.SetMeasure(Calculator::GetMeasureAmpl(), Range::Current());
         wndPEAK.SetMeasure(Ampermeter::GetPeak(), Range::Current());
-        wndMIN.SetMeasure(Ampermeter::GetMin(), Range::Current());
+        wndMIN.SetMeasure(Calculator::GetMeasureMin(), Range::Current());
         wndMAX.SetMeasure(Ampermeter::GetMax(), Range::Current());
         wndFREQ.SetMeasure(Calculator::GetMeasureFrequency(), Range::Current());
     }

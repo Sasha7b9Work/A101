@@ -43,7 +43,6 @@ namespace Ampermeter
     bool OutOfRange();
 
     Measure GetPeak();
-    Measure GetMin();
     Measure GetMax();
 
     // Автоматический выбор предела
