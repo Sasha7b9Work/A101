@@ -14,6 +14,7 @@ namespace Calculator
     REAL GetAbsAC(bool *correct);
     Measure GetMeasureAC();
     REAL GetAbsDC(bool *correct);
+    Measure GetMeasureDC();
     REAL GetValueMin(bool *correct);
     REAL GetValueMax(bool *correct);
     Measure GetMeasureAmpl();

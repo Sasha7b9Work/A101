@@ -42,7 +42,6 @@ namespace Ampermeter
     // —читанные значени€ выход€т за пределы диапазона
     bool OutOfRange();
 
-    Measure GetDC();
     Measure GetPeak();
     Measure GetMin();
     Measure GetMax();

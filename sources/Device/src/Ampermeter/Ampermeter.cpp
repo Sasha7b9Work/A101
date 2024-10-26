@@ -125,23 +125,6 @@ void Ampermeter::Update()
 }
 
 
-Measure Ampermeter::GetDC()
-{
-    bool correct = false;
-
-    REAL dc = Calculator::GetAbsDC(&correct);
-
-    REAL zero = ZeroDC::LevelAbsFull();
-
-    if (Range::Current() > 2)
-    {
-        zero /= 1e3;
-    }
-
-    return Measure(dc - zero, OutOfRange(), correct);
-}
-
-
 Measure Ampermeter::GetMin()
 {
     bool correct = false;

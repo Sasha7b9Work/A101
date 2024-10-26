@@ -252,7 +252,7 @@ namespace PageMain
     {
         Star::Draw();
 
-        wndDC.SetMeasure(Ampermeter::GetDC(), Range::Current());
+        wndDC.SetMeasure(Calculator::GetMeasureDC(), Range::Current());
 
         wndAC.SetMeasure(Calculator::GetMeasureAC(), Range::Current());
 

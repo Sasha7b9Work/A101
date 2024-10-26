@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
+#include "Ampermeter/Calculator/Calculator.h"
 #include "Nextion/Nextion.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
@@ -460,7 +461,7 @@ namespace PageCalibration
 
         if (LabelPassword::PasswordCorrect())
         {
-            wndCurrent.SetMeasure(Ampermeter::GetDC(), Range::Current());
+            wndCurrent.SetMeasure(Calculator::GetMeasureDC(), Range::Current());
 
             SetGivenMeasure();
         }

@@ -18,9 +18,9 @@
     return relative * (Range::Current() > 2 ? 1e3 : 1.0)
 
 
-#define GET_VALUE(arr)                                          \
-    bool correct = arr.NumElements() > 0;                       \
-    REAL value = correct ? arr.Get() : 0.0
+#define GET_VALUE(arr)                                                              \
+    bool correct = arr.NumElements() > 0;                                           \
+    REAL value = (correct ? arr.Get() : 0.0) * (Range::Current() > 2 ? 1e3 : 1.0)
 
 
 namespace Calculator
@@ -135,6 +135,11 @@ Measure Calculator::GetMeasureAC()
 
     REAL zero = Ampermeter::ZeroAC::LevelAbs();
 
+    if (Range::Current() > 2)
+    {
+        zero /= 1e3;
+    }
+
     return Measure(value - zero, Ampermeter::OutOfRange(), correct);
 }
 
@@ -142,6 +147,21 @@ Measure Calculator::GetMeasureAC()
 REAL Calculator::GetAbsDC(bool *correct)
 {
     RETURN_VALUE(dc);
+}
+
+
+Measure Calculator::GetMeasureDC()
+{
+    GET_VALUE(dc);
+
+    REAL zero = Ampermeter::ZeroDC::LevelAbsFull();
+
+    if (Range::Current() > 2)
+    {
+        zero /= 1e3;
+    }
+
+    return Measure(value - zero, Ampermeter::OutOfRange(), correct);
 }
 
 

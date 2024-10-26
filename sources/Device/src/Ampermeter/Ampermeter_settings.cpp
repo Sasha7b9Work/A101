@@ -32,7 +32,7 @@ void Ampermeter::ZeroDC::Enable()
 
     value_abs = 0.0;
 
-    Measure measure = Ampermeter::GetDC();
+    Measure measure = Calculator::GetMeasureDC();
 
     value_abs = measure.IsValid() ? measure.value_abs : 0.0;
 
@@ -49,7 +49,7 @@ void Ampermeter::ZeroDC::FloatingZero::Process()
 {
     value_abs[Range::Current()] = 0.0;
 
-    Measure measure = Ampermeter::GetDC();
+    Measure measure = Calculator::GetMeasureDC();
 
     value_abs[Range::Current()] = measure.IsValid() ? measure.value_abs : 0.0;
 
