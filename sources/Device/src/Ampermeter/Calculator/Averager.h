@@ -52,14 +52,14 @@ class AveragerReal : public Averager <REAL, size_buffer>
 public:
     REAL Push(REAL value)
     {
-        if (Math::RealIsCorrect(value))
+        if (!Math::RealIsCorrect(value))
         {
-            return Averager<REAL, size_buffer>::Push(value);
+            Averager<REAL, size_buffer>::Reset();
+
+            return 0.0;
         }
 
-        Reset();
-
-        return 0.0;
+        return Averager<REAL, size_buffer>::Push(value);
     }
 private:
 };
