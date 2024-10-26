@@ -261,6 +261,7 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
                 frequency = measure.value_abs;
 
                 ConvertRealToText(frequency, buf_measure, TypeMeasure::GetNumDigitsAfterComma(frequency));
+                buf_measure[4] = '\0';
             }
             else
             {
