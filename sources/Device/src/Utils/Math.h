@@ -47,6 +47,8 @@ struct Coord
 
 namespace Math
 {
+    bool RealIsCorrect(REAL);
+
     float Random(float min, float max);
 
     template<class T> T Abs(T value)

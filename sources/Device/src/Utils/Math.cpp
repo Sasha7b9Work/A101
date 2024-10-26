@@ -2,6 +2,8 @@
 #include "defines.h"
 #include "Utils/Math.h"
 #include <cstdlib>
+#include <cmath>
+#include <limits>
 
 
 namespace Math
@@ -94,6 +96,22 @@ bool Rect::Intersect(int _x, int _y) const
     }
 
     if (_y > y + height)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+
+bool Math::RealIsCorrect(REAL value)
+{
+    if (isnan(value))
+    {
+        return false;
+    }
+
+    if (std::numeric_limits<REAL>::infinity() == value)
     {
         return false;
     }

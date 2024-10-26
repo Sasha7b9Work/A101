@@ -16,12 +16,12 @@ namespace Calculator
 {
 #define NUM_AVERAGES 1
 
-    static Averager<REAL, NUM_AVERAGES> dc;
-    static Averager<REAL, NUM_AVERAGES> ac;
-    static Averager<REAL, NUM_AVERAGES> min;
-    static Averager<REAL, NUM_AVERAGES> max;
-    static Averager<REAL, NUM_AVERAGES> ampl;
-    static Averager<REAL, NUM_AVERAGES> frequency;
+    static AveragerReal<NUM_AVERAGES> dc;
+    static AveragerReal<NUM_AVERAGES> ac;
+    static AveragerReal<NUM_AVERAGES> min;
+    static AveragerReal<NUM_AVERAGES> max;
+    static AveragerReal<NUM_AVERAGES> ampl;
+    static AveragerReal<NUM_AVERAGES> frequency;
 
     // Значения, приведённые к пределу - mA для 2,20,200мА, амперы для 2A, 20A, 50A
     static REAL GetRelativeDC(bool *correct);

@@ -1,5 +1,6 @@
 // 2022/11/06 19:23:41 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include <Utils/Math.h>
 #include <cstring>
 
 
@@ -42,4 +43,21 @@ private:
     T buffer[size_buffer];
     int num_elements = 0;
     T sum = T(0);
+};
+
+
+template<int size_buffer>
+class AveragerReal : public Averager <REAL, size_buffer>
+{
+public:
+    REAL Push(REAL value)
+    {
+        if (Math::RealIsCorrect(value))
+        {
+            return Averager<REAL, size_buffer>::Push(value);
+        }
+
+        return 0.0;
+    }
+private:
 };

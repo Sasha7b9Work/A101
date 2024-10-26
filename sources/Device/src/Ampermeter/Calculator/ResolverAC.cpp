@@ -24,5 +24,8 @@ ResolverAC::ResolverAC(const Period &period)
         sum += value * value;
     }
 
-    result = std::sqrt(sum / (period.last.first - period.first.first));
+    Period per = period;
+    per.last.first = period.first.first;
+
+    result = std::sqrt(sum / (per.last.first - per.first.first));
 }
