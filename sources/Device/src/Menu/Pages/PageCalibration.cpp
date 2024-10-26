@@ -90,7 +90,7 @@ namespace PageCalibration
                     back = Color::Background;
                 }
 
-                Nextion::DrawString({ 50, 100, 500, 90 }, 4, fill, back, LabelPassword::buffer);
+                Nextion::DrawString({ 25, 25, 500, 90 }, 4, fill, back, LabelPassword::buffer);
 
                 is_changed = false;
             }
