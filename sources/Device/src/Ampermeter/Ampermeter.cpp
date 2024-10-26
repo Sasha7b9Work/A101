@@ -281,6 +281,14 @@ bool Ampermeter::MeasurementCycle()
         }
 
         TIM4->CNT = 0;
+#else
+
+        for (int i = 0; i < 1; i++)
+        {
+            counter_raw++;
+            sum_raw += AD7691::ReadValueRAW();
+        }
+
 #endif
 
         ValueADC value((int)(sum_raw / counter_raw));

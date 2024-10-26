@@ -73,18 +73,12 @@ ValueADC BufferADC::At(int i)
 
 void BufferADC::CalculateLimits()
 {
-    int64 sum = 0;
-
-    (void)sum;
-
     min = ValueADC::FromRaw(1 << 17);
     max = ValueADC::FromRaw(-(1 << 17));
 
     for (int i = 0; i < SIZE; i++)
     {
         ValueADC value = raw[i];
-
-        sum += value;
 
         if (value < min) { min = value; }
         if (value > max) { max = value; }
