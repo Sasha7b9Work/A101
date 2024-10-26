@@ -134,8 +134,4 @@ void assert_failed(uint8_t *, uint32_t)
 
 void HAL::ErrorHandler()
 {
-    while(true)
-    {
-
-    }
 }
