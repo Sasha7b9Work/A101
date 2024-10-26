@@ -123,14 +123,6 @@ bool Calibrator::CalibratorZero::Run()
         }
     }
 
-#ifdef LOGGED
-    bool correct_ac = false;
-
-    LOG_WRITE("z - 1 = %d, dc = %f", z - 1, (double)CalculateDC(z - 1));
-    LOG_WRITE("z = %d, ac = %e, dc = %e", z, (double)Calculator::GetAbsAC(&correct_ac), (double)dc);
-    LOG_WRITE("z + 1 = %d, dc = %f", z + 1, (double)CalculateDC(z + 1));
-#endif
-
     bool result = false;
 
     if (Math::Abs(z) < 10000)

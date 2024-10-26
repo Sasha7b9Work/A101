@@ -4,6 +4,7 @@
 #include "Nextion/Nextion.h"
 #include "Ampermeter/InputRelays.h"
 #include "Menu/Pages/Pages.h"
+#include "Ampermeter/Calculator/Calculator.h"
 
 
 namespace Ampermeter
@@ -78,7 +79,7 @@ void Ampermeter::ZeroAC::Enable()
 
     value_abs = 0.0;
 
-    Measure measure = Ampermeter::GetAC();
+    Measure measure = Calculator::GetMeasureAC();
 
     value_abs = measure.IsValid() ? measure.value_abs : 0.0;
 

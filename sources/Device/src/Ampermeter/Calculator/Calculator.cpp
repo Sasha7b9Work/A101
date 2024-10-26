@@ -20,8 +20,7 @@
 
 #define GET_VALUE(arr)                                          \
     bool correct = arr.NumElements() > 0;                       \
-    REAL relative = correct ? arr.Get() : 0.0;                  \
-    REAL value = relative * (Range::Current() > 2 ? 1e3 : 1.0)
+    REAL value = correct ? arr.Get() : 0.0
 
 
 namespace Calculator
@@ -127,6 +126,16 @@ Measure Calculator::GetMeasureFrequency()
 REAL Calculator::GetAbsAC(bool *correct)
 {
     RETURN_VALUE(ac);
+}
+
+
+Measure Calculator::GetMeasureAC()
+{
+    GET_VALUE(ac);
+
+    REAL zero = Ampermeter::ZeroAC::LevelAbs();
+
+    return Measure(value - zero, Ampermeter::OutOfRange(), correct);
 }
 
 

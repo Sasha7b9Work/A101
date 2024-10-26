@@ -12,6 +12,7 @@ namespace Calculator
     void Reset();
 
     REAL GetAbsAC(bool *correct);
+    Measure GetMeasureAC();
     REAL GetAbsDC(bool *correct);
     REAL GetValueMin(bool *correct);
     REAL GetValueMax(bool *correct);

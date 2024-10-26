@@ -139,31 +139,6 @@ Measure Ampermeter::GetDC()
     }
 
     return Measure(dc - zero, OutOfRange(), correct);
-
-//    REAL result = 1.0f;
-//
-//    result -= 1e-4f;
-//
-//    result += 1e-6f * TIME_MS / 1000;
-//
-//    return Measure(result, false, true);
-}
-
-
-Measure Ampermeter::GetAC()
-{
-    bool correct = false;
-
-    REAL ac = Calculator::GetAbsAC(&correct);
-
-    REAL zero = ZeroAC::LevelAbs();
-
-    if (Range::Current() > 2)
-    {
-        zero /= 1e3;
-    }
-
-    return Measure(ac - zero, OutOfRange(), correct);
 }
 
 
