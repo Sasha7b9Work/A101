@@ -40,7 +40,7 @@ void DiagramInput::InstallData()
 
     int range = Range::Current();
 
-    REAL scale = height / Measure::MaxIAbs(range) / 2;
+    REAL scale = height / Measure::MaxIAbs(range) / 3.0;
 
     REAL k = cal.gain[range].Get();
 
@@ -86,9 +86,13 @@ void DiagramInput::Draw()
 
     elapsed_point -= num_points;
 
-    Rect rect{ first_point, y0 - height / 2,  num_points, height };
+    Rect rect{
+        (first_point == 0) ? first_point : (first_point - 1),
+        y0 - height / 2,
+        (first_point == 0) ? num_points : (num_points + 1),
+        height };
 
-    Nextion::WaveInput::Draw(rect, points + first_point);
+    Nextion::WaveInput::Draw(rect, points + (first_point == 0 ? first_point : (first_point - 1)));
 
     first_point += num_points;
 
