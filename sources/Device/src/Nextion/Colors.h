@@ -23,7 +23,7 @@ struct Color
     static uint16 MakeColor(float r, float g, float b);
     static uint16 MakeColor(uint16 v) { return v; }
     static Color Current() { return current; }
-    pchar GetValue() const;
+    pchar ValueString() const;
 
     uint8 Value() const;
 

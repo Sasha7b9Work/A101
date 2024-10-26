@@ -48,7 +48,7 @@ void Nextion::DrawRect(const Rect &rect, const Color &color)
 {
     color.SetAsCurrent();
 
-    SendCommandFormat("draw %d,%d,%d,%d,%s", rect.x, rect.y, rect.x + rect.width, rect.y + rect.height, Color::Current().GetValue());
+    SendCommandFormat("draw %d,%d,%d,%d,%s", rect.x, rect.y, rect.x + rect.width, rect.y + rect.height, Color::Current().ValueString());
 }
 
 
@@ -56,7 +56,7 @@ void Nextion::FillRect(const Rect &rect, const Color & color)
 {
     color.SetAsCurrent();
 
-    SendCommandFormat("fill %d,%d,%d,%d,%s", rect.x, rect.y, rect.width, rect.height, Color::Current().GetValue());
+    SendCommandFormat("fill %d,%d,%d,%d,%s", rect.x, rect.y, rect.width, rect.height, Color::Current().ValueString());
 }
 
 
@@ -64,7 +64,7 @@ void Nextion::DrawLine(int x1, int y1, int x2, int y2, const Color &color)
 {
     color.SetAsCurrent();
 
-    SendCommandFormat("line %d,%d,%d,%d,%s", x1, y1, x2, y2, Color::Current().GetValue());
+    SendCommandFormat("line %d,%d,%d,%d,%s", x1, y1, x2, y2, Color::Current().ValueString());
 }
 
 
@@ -81,7 +81,7 @@ void Nextion::DrawLineWhite(int x1, int y1, int x2, int y2)
 void Nextion::DrawString(const Rect &rect, int font, const Color &color, const Color &back_color, pchar text, bool h_align, bool v_align)
 {
     SendCommandFormat("xstr %d,%d,%d,%d,%d,%s,%s,%d,%d,1,\"%s\"",
-        rect.x, rect.y, rect.width, rect.height, font, color.GetValue(), back_color.GetValue(), h_align ? 1 : 0, v_align ? 1 : 0, Convert(text));
+        rect.x, rect.y, rect.width, rect.height, font, color.ValueString(), back_color.ValueString(), h_align ? 1 : 0, v_align ? 1 : 0, Convert(text));
 }
 
 

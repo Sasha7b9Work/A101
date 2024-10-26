@@ -59,7 +59,7 @@ void Color::SetAsCurrent() const
 }
 
 
-pchar Color::GetValue() const
+pchar Color::ValueString() const
 {
     return colors[value];
 }
