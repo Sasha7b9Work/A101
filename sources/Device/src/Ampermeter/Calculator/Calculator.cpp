@@ -79,7 +79,6 @@ void Calculator::AppendData()
 
     // —читаем MIN и MAX и AMPL
     {
-
         ResolverAmpl resolver_ampl(period);
 
         ampl.Push(resolver_ampl.GetAmplitude() * k);

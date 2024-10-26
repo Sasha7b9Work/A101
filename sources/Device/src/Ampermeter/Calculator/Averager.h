@@ -57,6 +57,8 @@ public:
             return Averager<REAL, size_buffer>::Push(value);
         }
 
+        Reset();
+
         return 0.0;
     }
 private:
