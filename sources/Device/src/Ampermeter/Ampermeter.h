@@ -42,7 +42,6 @@ namespace Ampermeter
     // Считанные значения выходят за пределы диапазона
     bool OutOfRange();
 
-    Measure GetPeak();
     Measure GetMax();
 
     // Автоматический выбор предела

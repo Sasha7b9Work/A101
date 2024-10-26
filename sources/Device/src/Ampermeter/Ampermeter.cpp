@@ -142,18 +142,6 @@ Measure Ampermeter::GetMax()
 }
 
 
-Measure Ampermeter::GetPeak()
-{
-    bool correct = false;
-
-    REAL max = Calculator::GetValueMax(&correct);
-
-    REAL min = Calculator::GetValueMin(&correct);
-
-    return Measure(max - min, OutOfRange(), correct);
-}
-
-
 bool Ampermeter::MeasurementCycle()
 {
     AD7691::ResetValue();

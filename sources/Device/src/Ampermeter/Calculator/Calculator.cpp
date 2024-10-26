@@ -200,3 +200,16 @@ Measure Calculator::GetMeasureAmpl()
 
     return Measure(value, Ampermeter::OutOfRange(), correct);
 }
+
+
+Measure Calculator::GetMeasurePeak()
+{
+    bool correct_max = false;
+    bool correct_min = false;
+
+    REAL value_max = Calculator::GetValueMax(&correct_max);
+
+    REAL value_min = Calculator::GetValueMin(&correct_min);
+
+    return Measure(value_max - value_min, Ampermeter::OutOfRange(), correct_min && correct_max);
+}

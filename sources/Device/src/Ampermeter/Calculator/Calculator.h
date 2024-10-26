@@ -20,4 +20,5 @@ namespace Calculator
     REAL GetValueMax(bool *correct);
     Measure GetMeasureAmpl();
     Measure GetMeasureFrequency();
+    Measure GetMeasurePeak();
 }
