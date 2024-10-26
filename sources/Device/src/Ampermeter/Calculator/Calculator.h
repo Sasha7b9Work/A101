@@ -11,18 +11,27 @@ namespace Calculator
 
     void Reset();
 
+    // ƒействующее значение переменной составл€ющей
     REAL GetAbsAC(bool *correct);
-    REAL GetAbsDC(bool *correct);
-
-    REAL GetValueMin(bool *correct);
-    REAL GetValueMax(bool *correct);
-
     Measure GetMeasureAC();
+
+    // ƒействующее значение полного тока
+    REAL GetAbsDC(bool *correct);
     Measure GetMeasureDC();
 
-    Measure GetMeasureMin();
-    Measure GetMeasureMax();
-    Measure GetMeasureAmpl();
-    Measure GetMeasureFrequency();
+    // ћинимальное установившеес€ значение тока
+    REAL GetValueMinSteady(bool *correct);
+    Measure GetMeasureMinSteady();
+
+    // ћаксимальное установившеес€ значение тока
+    REAL GetValueMaxSteady(bool *correct);
+    Measure GetMeasureMaxSteady();
+
+    // –азница между макс и мин
+    Measure GetMeasureAmplSteady();
+
+    // –азница между пиковыми значени€ми - мгновенными мин и макс
     Measure GetMeasurePeak();
+
+    Measure GetMeasureFrequency();
 }

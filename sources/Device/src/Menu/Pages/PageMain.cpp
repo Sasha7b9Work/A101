@@ -255,10 +255,10 @@ namespace PageMain
         wndDC.SetMeasure(Calculator::GetMeasureDC(), Range::Current());
         wndAC.SetMeasure(Calculator::GetMeasureAC(), Range::Current());
 
-        wndAMPL.SetMeasure(Calculator::GetMeasureAmpl(), Range::Current());
+        wndAMPL.SetMeasure(Calculator::GetMeasureAmplSteady(), Range::Current());
         wndPEAK.SetMeasure(Calculator::GetMeasurePeak(), Range::Current());
-        wndMIN.SetMeasure(Calculator::GetMeasureMin(), Range::Current());
-        wndMAX.SetMeasure(Calculator::GetMeasureMax(), Range::Current());
+        wndMIN.SetMeasure(Calculator::GetMeasureMinSteady(), Range::Current());
+        wndMAX.SetMeasure(Calculator::GetMeasureMaxSteady(), Range::Current());
         wndFREQ.SetMeasure(Calculator::GetMeasureFrequency(), Range::Current());
     }
 

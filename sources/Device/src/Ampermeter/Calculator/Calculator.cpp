@@ -165,17 +165,17 @@ Measure Calculator::GetMeasureDC()
 }
 
 
-REAL Calculator::GetValueMin(bool *correct)
+REAL Calculator::GetValueMinSteady(bool *correct)
 {
     RETURN_VALUE(min);
 }
 
 
-Measure Calculator::GetMeasureMin()
+Measure Calculator::GetMeasureMinSteady()
 {
     bool correct = false;
 
-    REAL value = Calculator::GetValueMin(&correct);
+    REAL value = GetValueMinSteady(&correct);
 
     REAL zero = Ampermeter::ZeroDC::LevelAbsFull();
 
@@ -188,13 +188,13 @@ Measure Calculator::GetMeasureMin()
 }
 
 
-REAL Calculator::GetValueMax(bool *correct)
+REAL Calculator::GetValueMaxSteady(bool *correct)
 {
     RETURN_VALUE(max);
 }
 
 
-Measure Calculator::GetMeasureAmpl()
+Measure Calculator::GetMeasureAmplSteady()
 {
     GET_VALUE(ampl);
 
@@ -207,19 +207,19 @@ Measure Calculator::GetMeasurePeak()
     bool correct_max = false;
     bool correct_min = false;
 
-    REAL value_max = Calculator::GetValueMax(&correct_max);
+    REAL value_max = GetValueMaxSteady(&correct_max);
 
-    REAL value_min = Calculator::GetValueMin(&correct_min);
+    REAL value_min = GetValueMinSteady(&correct_min);
 
     return Measure(value_max - value_min, Ampermeter::OutOfRange(), correct_min && correct_max);
 }
 
 
-Measure Calculator::GetMeasureMax()
+Measure Calculator::GetMeasureMaxSteady()
 {
     bool correct = false;
 
-    REAL value_max = Calculator::GetValueMax(&correct);
+    REAL value_max = GetValueMaxSteady(&correct);
 
     REAL zero = Ampermeter::ZeroDC::LevelAbsFull();
 
