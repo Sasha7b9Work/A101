@@ -7,8 +7,8 @@ struct SampleRate
     enum E
     {
         _10us,      // ¬ходна€ частота 40 √ц - 5 к√ц
-        _100us,     // ¬ходна€ частота 4 √ц - 40 √ц
-        _1000us,    // ¬ходна€ частота 0.4 √ц - 4 √ц
+        _100us,     // ¬ходна€ частота 4 √ц - 400 √ц
+        _1000us,    // ¬ходна€ частота 0.4 √ц - 40 √ц
         Count
     };
 
@@ -20,11 +20,8 @@ struct SampleRate
 
     static E Get()       { return value; }
 
-    // ћинимальна€ измер€ема€ частота на данном диапазоне
-    static float MinFrequency();
-
-    // ћаксимальна€ измер€ема€ частота на данном диапазоне
-    static float MaxFrequency();
+    // ¬озвращает false, если намеренна€ частота выходит за пределы текущего диапазона
+    static bool InRange(REAL, pchar *title_ru, pchar *title_en);
 
 private:
 

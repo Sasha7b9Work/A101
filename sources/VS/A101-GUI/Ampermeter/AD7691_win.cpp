@@ -20,29 +20,34 @@ uint SampleRate::TimeUSonPoint()
 }
 
 
-float SampleRate::MinFrequency()
+bool SampleRate::InRange(REAL freq, pchar *title_ru, pchar *title_en)
 {
-    static const float freq[Count] =
+    static const pchar meas_ru_less[Count] = { "< 40 Ãö", "< 4 Ãö", "< 0.4 Ãö" };
+    static const pchar meas_en_less[Count] = { "< 40 Hz", "< 4 Hz", "< 0.4 Hz" };
+
+    static const REAL value_min[Count] = { 40.0, 4.0, 0.4 };
+
+    static const pchar meas_ru_abov[Count] = { "> 5 êÃö", "> 400 Ãö", "> 40 Ãö" };
+    static const pchar meas_en_abov[Count] = { "> 5 kHz", "> 400 Hz", "> 40 Hz" };
+
+    static const REAL value_max[Count] = { 5e3, 400.0, 40.0 };
+
+    if (freq < value_min[value])
     {
-        0.4f,
-        4.0f,
-        40.0f
-    };
+        *title_ru = meas_ru_less[value];
+        *title_en = meas_en_less[value];
 
-    return freq[value];
-}
-
-
-float SampleRate::MaxFrequency()
-{
-    static const float freq[Count] =
+        return false;
+    }
+    else if (freq > value_max[value])
     {
-        4.0f,
-        40.0f,
-        5e3f
-    };
+        *title_ru = meas_ru_abov[value];
+        *title_en = meas_en_abov[value];
 
-    return freq[value];
+        return false;
+    }
+
+    return true;
 }
 
 
@@ -88,7 +93,7 @@ int AD7691::ReadValueRAW()
 {
     float amplitude = 0.8f;
 
-    float value = amplitude * GetSample(4900.95f, counter);
+    float value = amplitude * GetSample(3900.95f, counter);
 
 //    value += (float)std::rand() / (float)RAND_MAX / 2.0f;
 

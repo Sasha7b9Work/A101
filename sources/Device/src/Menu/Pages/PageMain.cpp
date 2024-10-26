@@ -259,7 +259,20 @@ namespace PageMain
         wndPEAK.SetMeasure(Calculator::GetMeasurePeak(), Range::Current());
         wndMIN.SetMeasure(Calculator::GetMeasureMinSteady(), Range::Current());
         wndMAX.SetMeasure(Calculator::GetMeasureMaxSteady(), Range::Current());
-        wndFREQ.SetMeasure(Calculator::GetMeasureFrequency(), Range::Current());
+
+        Measure frequency = Calculator::GetMeasureFrequency();
+
+        pchar message_ru = nullptr;
+        pchar message_en = nullptr;
+
+        if (SampleRate::InRange(frequency.value_abs, &message_ru, &message_en))
+        {
+            wndFREQ.SetMeasure(Calculator::GetMeasureFrequency(), Range::Current());
+        }
+        else
+        {
+            wndFREQ.SetMeasure(message_ru, message_en);
+        }
     }
 
     void SetRange(int range)

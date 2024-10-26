@@ -299,6 +299,9 @@ struct LabelMeasure : public Label
 
     virtual void Refresh() override;
 
+    // Пишет надпись на поле измерений. В units пишет пробелы
+    void SetMeasure(pchar message_ru, pchar message_en);
+
     void SetMeasure(const Measure &, int range);
 
     pchar GetSign() const;
