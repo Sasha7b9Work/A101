@@ -12,6 +12,11 @@
 #include <cmath>
 
 
+#define GET_RELATIVE(arr)                           \
+    *correct = arr.NumElements() > 0;               \
+    REAL relative = (*correct) ? arr.Get() : 0.0
+
+
 namespace Calculator
 {
 #define NUM_AVERAGES 1
@@ -23,10 +28,6 @@ namespace Calculator
     static AveragerReal<NUM_AVERAGES> max;
     static AveragerReal<NUM_AVERAGES> ampl;
     static AveragerReal<NUM_AVERAGES> frequency;
-
-    static REAL GetMax(bool *correct);
-    static REAL GetAmpl(bool *correct);
-    static REAL GetFrequency(bool *correct);
 }
 
 
@@ -106,7 +107,7 @@ SampleRate Calculator::AppendData()
 }
 
 
-REAL Calculator::GetFrequency(bool *correct)
+REAL Calculator::GetValueFrequency(bool *correct)
 {
     *correct = (frequency.NumElements() > 0);
 
@@ -114,65 +115,41 @@ REAL Calculator::GetFrequency(bool *correct)
 }
 
 
-REAL Calculator::GetMax(bool *correct)
-{
-    *correct = (max.NumElements() > 0);
-
-    return max.NumElements() ? max.Get() : 0.0;
-}
-
-
-REAL Calculator::GetAmpl(bool *correct)
-{
-    *correct = (ampl.NumElements() > 0);
-
-    return ampl.NumElements() ? ampl.Get() : 0.0;
-}
-
-
 REAL Calculator::GetAbsAC(bool *correct)
 {
-    *correct = ac.NumElements() > 0;
+    GET_RELATIVE(ac);
 
-    REAL relative_ac = (*correct) ? ac.Get() : 0.0;
-
-    return relative_ac * (Range::Current() > 2 ? 1e3 : 1.0);
+    return relative * (Range::Current() > 2 ? 1e3 : 1.0);
 }
 
 
 REAL Calculator::GetAbsDC(bool *correct)
 {
-    *correct = dc.NumElements() > 0;
+    GET_RELATIVE(dc);
 
-    REAL relative_dc = (*correct) ? dc.Get() : 0.0;
-
-    return relative_dc * (Range::Current() > 2 ? 1e3 : 1.0);
+    return relative * (Range::Current() > 2 ? 1e3 : 1.0);
 }
 
 
 REAL Calculator::GetValueMin(bool *correct)
 {
-    *correct = min.NumElements() > 0;
+    GET_RELATIVE(min);
 
-    REAL relative_min = (*correct) ? min.Get() : 0.0;
-
-    return relative_min * (Range::Current() > 2 ? 1e3 : 1.0);
+    return relative * (Range::Current() > 2 ? 1e3 : 1.0);
 }
 
 
 REAL Calculator::GetValueMax(bool *correct)
 {
-    return GetMax(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
+    GET_RELATIVE(max);
+
+    return relative * (Range::Current() > 2 ? 1e3 : 1.0);
 }
 
 
 REAL Calculator::GetValueAmpl(bool *correct)
 {
-    return GetAmpl(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
-}
+    GET_RELATIVE(ampl);
 
-
-REAL Calculator::GetValueFrequency(bool *correct)
-{
-    return GetFrequency(correct);
+    return relative * (Range::Current() > 2 ? 1e3 : 1.0);
 }
