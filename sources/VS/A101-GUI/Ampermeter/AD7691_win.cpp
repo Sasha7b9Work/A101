@@ -70,12 +70,6 @@ ValueADC AD7691::ReadValue()
 }
 
 
-void AD7691::ResetValue()
-{
-
-}
-
-
 static float GetSample(float freq, int num_sample)
 {
     float T = 1.0f / freq;

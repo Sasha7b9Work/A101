@@ -140,11 +140,6 @@ void AD7691::Init()
 namespace AD7691
 {
     static int counter = 0;
-
-    void ResetValue()
-    {
-//        counter = rand();
-    }
 }
 
 
@@ -183,12 +178,6 @@ int AD7691::ReadValueRAW()
 }
 
 #else
-
-
-void AD7691::ResetValue()
-{
-
-}
 
 
 int AD7691::ReadValueRAW()

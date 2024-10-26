@@ -121,8 +121,6 @@ void Ampermeter::Update()
 
 bool Ampermeter::MeasurementCycle()
 {
-    AD7691::ResetValue();
-
     TimeMeterMS meter;
 
     BufferADC::Clear();

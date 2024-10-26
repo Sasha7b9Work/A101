@@ -52,8 +52,6 @@ namespace AD7691
 {
     void Init();
 
-    void ResetValue();
-
     // Читает готовое к употреблению значение
     ValueADC ReadValue();
 
