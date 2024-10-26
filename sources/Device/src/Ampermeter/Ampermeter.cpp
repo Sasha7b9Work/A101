@@ -297,19 +297,3 @@ void Ampermeter::AdjustmentZero()
 
     HAL_PIO::Write(PIN_ZERO, false);
 }
-
-
-REAL Measure::LimitFrequency(REAL value)
-{
-    if (value < 1e-3)
-    {
-        return 1e-3;
-    }
-
-    if (value > 1e6)
-    {
-        return 1e6;
-    }
-
-    return value;
-}

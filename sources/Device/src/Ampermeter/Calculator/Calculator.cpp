@@ -98,14 +98,7 @@ void Calculator::AppendData()
 
     REAL freq = ResolverFrequency(period).GetFrequency();
 
-    if (freq <= 5e3)
-    {
-        frequency.Push(ResolverFrequency(period).GetFrequency());
-    }
-    else
-    {
-        frequency.Reset();
-    }
+    frequency.Push(freq);
 
 #endif
 }
@@ -117,7 +110,7 @@ Measure Calculator::GetMeasureFrequency()
 
     REAL value = correct ? frequency.Get() : 0.0;
 
-    return Measure(Measure::LimitFrequency(value), OutOfRange(), correct);
+    return Measure(value, OutOfRange(), correct);
 }
 
 
