@@ -4,7 +4,7 @@
 #include <limits>
 
 
-ResolverMinMax::ResolverMinMax(const Period &period)
+ResolverPeak::ResolverPeak(const Period &period)
 {
     min = std::numeric_limits<REAL>::max();
     max = std::numeric_limits<REAL>::min();

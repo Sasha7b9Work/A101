@@ -8,29 +8,12 @@ class ResolverAmpl
 {
 public:
 
-    ResolverAmpl(const Period &, REAL min, REAL max);
+    ResolverAmpl(const Period &);
 
-    REAL GetResult() const
+    REAL GetAmplitude() const
     {
-        return _ampl;
+        return max - min;
     }
-
-private:
-
-    REAL _ampl = 0.0f;
-
-    REAL CalculateMax(int first, int last, REAL ave, REAL min, REAL max) const;
-
-    REAL CalculateMin(int first, int last, REAL ave, REAL min, REAL max) const;
-};
-
-
-// ¬ычисл€ет минимальное и максимальное значени€
-class ResolverMinMax
-{
-public:
-
-    ResolverMinMax(const Period &);
 
     REAL GetMin() const
     {
@@ -41,6 +24,27 @@ public:
     {
         return max;
     }
+
+private:
+
+    REAL min = 0.0;
+
+    REAL max = 0.0;
+
+    REAL CalculateMax(int first, int last, REAL ave) const;
+
+    REAL CalculateMin(int first, int last, REAL ave) const;
+};
+
+
+// ¬ычисл€ет пиковое значение
+class ResolverPeak
+{
+public:
+
+    ResolverPeak(const Period &);
+
+    REAL GetResult() const {  return max - min; }
 
 private:
 

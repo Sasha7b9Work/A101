@@ -4,20 +4,18 @@
 #include <limits>
 
 
-ResolverAmpl::ResolverAmpl(const Period &period, REAL min, REAL max)
+ResolverAmpl::ResolverAmpl(const Period &period)
 {
     int first = period.first.first;
     int last = period.last.first;
 
-    REAL _max = CalculateMax(first, last, period.dc.Real(), min, max);
+    max = CalculateMax(first, last, period.dc.Real());
 
-    REAL _min = CalculateMin(first, last, period.dc.Real(), min, max);
-
-    _ampl = _max - _min;
+    min = CalculateMin(first, last, period.dc.Real());
 }
 
 
-REAL ResolverAmpl::CalculateMin(int first, int last, REAL aveValue, REAL min, REAL max) const
+REAL ResolverAmpl::CalculateMin(int first, int last, REAL aveValue) const
 {
     REAL result = std::numeric_limits<REAL>::max();
 
@@ -75,7 +73,7 @@ REAL ResolverAmpl::CalculateMin(int first, int last, REAL aveValue, REAL min, RE
 }
 
 
-REAL ResolverAmpl::CalculateMax(int first, int last, REAL aveValue, REAL min, REAL max) const
+REAL ResolverAmpl::CalculateMax(int first, int last, REAL aveValue) const
 {
     REAL result = std::numeric_limits<REAL>::min();
 

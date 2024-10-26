@@ -1431,11 +1431,6 @@
               <FilePath>.\src\Ampermeter\Calculator\ResolverAC.h</FilePath>
             </File>
             <File>
-              <FileName>ResolverMinMax.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\ResolverMinMax.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ResolverAmpl.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\Calculator\ResolverAmpl.cpp</FilePath>
@@ -1546,6 +1541,16 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+            <File>
+              <FileName>ResolverPeak.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverPeak.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Resolvers.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\Resolvers.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -3248,11 +3253,6 @@
               <FilePath>.\src\Ampermeter\Calculator\ResolverAC.h</FilePath>
             </File>
             <File>
-              <FileName>ResolverMinMax.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Ampermeter\Calculator\ResolverMinMax.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ResolverAmpl.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\Calculator\ResolverAmpl.cpp</FilePath>
@@ -3261,6 +3261,16 @@
               <FileName>ResolverFrequency.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Ampermeter\Calculator\ResolverFrequency.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ResolverPeak.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\ResolverPeak.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Resolvers.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Ampermeter\Calculator\Resolvers.h</FilePath>
             </File>
           </Files>
         </Group>

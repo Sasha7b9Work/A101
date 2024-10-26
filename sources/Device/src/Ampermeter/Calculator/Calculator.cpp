@@ -33,6 +33,7 @@ namespace Calculator
     static AveragerReal<NUM_AVERAGES> min;
     static AveragerReal<NUM_AVERAGES> max;
     static AveragerReal<NUM_AVERAGES> ampl;
+    static AveragerReal<NUM_AVERAGES> peak;
     static AveragerReal<NUM_AVERAGES> frequency;
 }
 
@@ -44,6 +45,7 @@ void Calculator::Reset()
     min.Reset();
     max.Reset();
     ampl.Reset();
+    peak.Reset();
     frequency.Reset();
 }
 
@@ -68,19 +70,23 @@ void Calculator::AppendData()
         dc.Push(value_dc * k);
     }
 
+    // ѕиковое значение
+    {
+        ResolverPeak resolver(period);
+
+        peak.Push(resolver.GetResult() * k);
+    }
+
     // —читаем MIN и MAX и AMPL
     {
-        ResolverMinMax resolver_min_max(period);
 
-        min.Push(resolver_min_max.GetMin() * k);
+        ResolverAmpl resolver_ampl(period);
 
-        max.Push(resolver_min_max.GetMax() * k);
+        ampl.Push(resolver_ampl.GetAmplitude() * k);
 
-        ResolverAmpl resolver_ampl(period, resolver_min_max.GetMin(), resolver_min_max.GetMax());
+        min.Push(resolver_ampl.GetMin() * k);
 
-        REAL ampl_value = resolver_ampl.GetResult();
-
-        ampl.Push(ampl_value * k);
+        max.Push(resolver_ampl.GetMax() * k);
     }
 
 #if 0
@@ -195,14 +201,9 @@ Measure Calculator::GetMeasureAmplSteady()
 
 Measure Calculator::GetMeasurePeak()
 {
-    bool correct_max = false;
-    bool correct_min = false;
+    GET_VALUE(peak);
 
-    REAL value_max = GetValueMaxSteady(&correct_max);
-
-    REAL value_min = GetValueMinSteady(&correct_min);
-
-    return Measure(value_max - value_min, OutOfRange(), correct_min && correct_max);
+    return Measure(value, OutOfRange(), correct);
 }
 
 
