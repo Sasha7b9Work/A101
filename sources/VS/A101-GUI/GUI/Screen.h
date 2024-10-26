@@ -1,5 +1,6 @@
 // 2022/10/28 23:17:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Nextion/Colors.h"
 #include "wx_includes.h"
 
 

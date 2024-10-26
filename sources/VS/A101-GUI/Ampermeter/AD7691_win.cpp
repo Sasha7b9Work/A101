@@ -1,7 +1,11 @@
 // 2023/11/09 12:21:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Ampermeter/AD7691.h"
+#include "Settings/CalibrationSettings.h"
+#include "Ampermeter/InputRelays.h"
+#include "Utils/Math.h"
 #include <cstdlib>
+#include <cmath>
 
 
 SampleRate::E SampleRate::value = SampleRate::_10us;
