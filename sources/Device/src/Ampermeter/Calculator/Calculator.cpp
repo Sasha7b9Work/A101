@@ -16,6 +16,7 @@ namespace Calculator
 {
 #define NUM_AVERAGES 1
 
+    // Значения, приведённые к пределу - mA для 2,20,200мА, амперы для 2A, 20A, 50A
     static AveragerReal<NUM_AVERAGES> dc;
     static AveragerReal<NUM_AVERAGES> ac;
     static AveragerReal<NUM_AVERAGES> min;
@@ -23,8 +24,6 @@ namespace Calculator
     static AveragerReal<NUM_AVERAGES> ampl;
     static AveragerReal<NUM_AVERAGES> frequency;
 
-    // Значения, приведённые к пределу - mA для 2,20,200мА, амперы для 2A, 20A, 50A
-    static REAL GetRelativeDC(bool *correct);
     static REAL GetMin(bool *correct);
     static REAL GetMax(bool *correct);
     static REAL GetAmpl(bool *correct);
@@ -108,14 +107,6 @@ SampleRate Calculator::AppendData()
 }
 
 
-REAL Calculator::GetRelativeDC(bool *correct)
-{
-    *correct = (dc.NumElements() > 0);
-
-    return dc.NumElements() ? dc.Get() : 0.0;
-}
-
-
 REAL Calculator::GetMin(bool *correct)
 {
     *correct = (min.NumElements() > 0);
@@ -150,9 +141,9 @@ REAL Calculator::GetAmpl(bool *correct)
 
 REAL Calculator::GetAbsAC(bool *correct)
 {
-    *correct = (ac.NumElements() > 0);
+    *correct = ac.NumElements() > 0;
 
-    REAL relative_ac = *correct ? ac.Get() : 0.0;
+    REAL relative_ac = (*correct) ? ac.Get() : 0.0;
 
     return relative_ac * (Range::Current() > 2 ? 1e3 : 1.0);
 }
@@ -160,7 +151,11 @@ REAL Calculator::GetAbsAC(bool *correct)
 
 REAL Calculator::GetAbsDC(bool *correct)
 {
-    return GetRelativeDC(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
+    *correct = dc.NumElements() > 0;
+
+    REAL relative_dc = (*correct) ? dc.Get() : 0.0;
+
+    return relative_dc * (Range::Current() > 2 ? 1e3 : 1.0);
 }
 
 
