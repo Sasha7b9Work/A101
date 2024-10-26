@@ -251,13 +251,21 @@ namespace PageMenu
 
     static pchar names_range_freq[] =
     {
-        "40√ц - 5к√ц", "40Hz - 5kHz",
-        "4√ц - 40√ц",  "4Hz - 40Hz",
-        "1√ц - 4√ц",   "1Hz - 4Hz",
+        "40 √ц - 5 к√ц", "40 Hz - 5 kHz",
+        "4 √ц - 40 √ц",  "4 Hz - 40 Hz",
+        "0.4 √ц - 4 √ц", "0.4 Hz - 4 Hz",
         nullptr,       nullptr
     };
 
-    Choice chRangeFreq("ƒиапазон", "Range", (uint8 *)&set.range_freq, names_range_freq, 1, 1);
+    static uint8 sample_rate = SampleRate::_10us;
+
+    Choice chRangeFreq("ƒиапазон", "Range", &sample_rate, names_range_freq, 1, 1, [](Item *, bool press)
+    {
+        if (!press)
+        {
+            SampleRate::Set((SampleRate::E)sample_rate);
+        }
+    });
 
     ButtonMenuPress btnCOM("COM-порт", "COM-port", 1, 0, [](Item *, bool press)
     {

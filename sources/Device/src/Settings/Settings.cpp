@@ -24,7 +24,7 @@ namespace NS_Settings
         Parity::No,
         StopBits::_1,
         ChangeRange::Hand,
-        RangeFreq::_5kHz,
+        Settings::RangeFreq::_5kHz,
         100,        // brightness
 
         0U,         // serial number

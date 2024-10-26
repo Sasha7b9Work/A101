@@ -126,19 +126,18 @@ struct ChangeRange
 };
 
 
-struct RangeFreq
-{
-    enum E
-    {
-        _5kHz,
-        _40Hz,
-        _4Hz
-    };
-};
-
-
 struct Settings
 {
+    struct RangeFreq
+    {
+        enum E
+        {
+            _5kHz,
+            _40Hz,
+            _4Hz
+        };
+    };
+
     uint size;          // «десь размер настроек - дл€ проверки того, что версии соответствуют
     uint crc32;         // «десь контрольна€ сумма - дл€ проверки правильности сохранени€
 
@@ -157,7 +156,7 @@ struct Settings
     Parity::E parity;
     StopBits::E stop_bits;
     ChangeRange::E change_range;
-    RangeFreq::E range_freq;
+    RangeFreq::E not_used;
     int16 brightness;               // €ркость от 10 до 100
 
     uint serial_number;
