@@ -42,8 +42,6 @@ namespace Ampermeter
     // Считанные значения выходят за пределы диапазона
     bool OutOfRange();
 
-    Measure GetMax();
-
     // Автоматический выбор предела
     namespace AVP
     {

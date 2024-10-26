@@ -18,6 +18,7 @@ namespace Calculator
     REAL GetValueMin(bool *correct);
     Measure GetMeasureMin();
     REAL GetValueMax(bool *correct);
+    Measure GetMeasureMax();
     Measure GetMeasureAmpl();
     Measure GetMeasureFrequency();
     Measure GetMeasurePeak();

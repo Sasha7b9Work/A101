@@ -125,23 +125,6 @@ void Ampermeter::Update()
 }
 
 
-Measure Ampermeter::GetMax()
-{
-    bool correct = false;
-
-    REAL max = Calculator::GetValueMax(&correct);
-
-    REAL zero = ZeroDC::LevelAbsFull();
-
-    if (Range::Current() > 2)
-    {
-        zero /= 1e3;
-    }
-
-    return Measure(max - zero, OutOfRange(), correct);
-}
-
-
 bool Ampermeter::MeasurementCycle()
 {
     AD7691::ResetValue();

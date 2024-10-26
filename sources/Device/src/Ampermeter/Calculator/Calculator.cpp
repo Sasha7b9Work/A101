@@ -213,3 +213,21 @@ Measure Calculator::GetMeasurePeak()
 
     return Measure(value_max - value_min, Ampermeter::OutOfRange(), correct_min && correct_max);
 }
+
+
+Measure Calculator::GetMeasureMax()
+{
+    bool correct = false;
+
+    REAL value_max = Calculator::GetValueMax(&correct);
+
+    REAL zero = Ampermeter::ZeroDC::LevelAbsFull();
+
+    if (Range::Current() > 2)
+    {
+        zero /= 1e3;
+    }
+
+    return Measure(value_max - zero, Ampermeter::OutOfRange(), correct);
+}
+
