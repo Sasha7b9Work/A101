@@ -539,7 +539,7 @@ Label::Label(bool append, pchar _textRU, pchar _textEN, const Rect &_rect, Font:
     const Color &_colorText, const Color &_colorBack, bool _h_aligned, bool _v_aligned) :
     Item(TypeItem::Label, _rect, _funcOnPress, append),
     font(_font), h_aligned(_h_aligned), v_aligned(_v_aligned), colorText(_colorText),
-    colorBack(_colorBack.value == Color::Count.value ? Color::Background : _colorBack)
+    colorBack(_colorBack.Value() == Color::Count.Value() ? Color::Background : _colorBack)
 {
     std::strcpy(text[0], _textRU);
     std::strcpy(text[1], _textEN);

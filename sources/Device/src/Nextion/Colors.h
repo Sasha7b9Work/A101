@@ -16,6 +16,8 @@ struct Color
 
     Color(uint8 v = 255) : value(v) {}
 
+    static void Init();
+
     void SetAsCurrent() const;
 
     static uint16 MakeColor(float r, float g, float b);
@@ -23,11 +25,12 @@ struct Color
     static Color Current() { return current; }
     pchar GetValue() const;
 
-    uint8 value;
+    uint8 Value() const;
 
     uint16 ToRaw() const;
 
 private:
 
     static Color current;
+    uint8 value;
 };

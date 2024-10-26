@@ -252,7 +252,7 @@ void Wave::Draw()
 }
 
 
-wxFont FontGUI::Get(int num_font)
+wxFont FontGUI::Get(int /*num_font*/)
 {
     return wxFont(10, wxFONTFAMILY_ROMAN, wxNORMAL, wxNORMAL);
 
