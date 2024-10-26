@@ -45,7 +45,6 @@ namespace Ampermeter
     // если out_of_range == true - выход за границы диапазона
     Measure GetDC();
     Measure GetAC();
-    Measure GetAmpl();
     Measure GetPeak();
     Measure GetMin();
     Measure GetMax();

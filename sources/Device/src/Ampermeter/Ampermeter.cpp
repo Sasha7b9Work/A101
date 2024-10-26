@@ -213,21 +213,6 @@ Measure Ampermeter::GetPeak()
 }
 
 
-Measure Ampermeter::GetAmpl()
-{
-    bool correct = false;
-
-    REAL ampl = Calculator::GetValueAmpl(&correct);
-
-    if (Range::Current() > 2)
-    {
-        ampl /= 1e3;
-    }
-
-    return Measure(ampl, OutOfRange(), correct);
-}
-
-
 bool Ampermeter::MeasurementCycle()
 {
     AD7691::ResetValue();

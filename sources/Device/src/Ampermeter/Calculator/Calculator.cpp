@@ -18,6 +18,12 @@
     return relative * (Range::Current() > 2 ? 1e3 : 1.0)
 
 
+#define GET_VALUE(arr)                                          \
+    bool correct = arr.NumElements() > 0;                       \
+    REAL relative = correct ? arr.Get() : 0.0;                  \
+    REAL value = relative * (Range::Current() > 2 ? 1e3 : 1.0)
+
+
 namespace Calculator
 {
 #define NUM_AVERAGES 1
@@ -142,7 +148,9 @@ REAL Calculator::GetValueMax(bool *correct)
 }
 
 
-REAL Calculator::GetValueAmpl(bool *correct)
+Measure Calculator::GetMeasureAmpl()
 {
-    RETURN_VALUE(ampl);
+    GET_VALUE(ampl);
+
+    return Measure(value, Ampermeter::OutOfRange(), correct);
 }
