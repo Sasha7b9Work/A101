@@ -25,7 +25,6 @@ namespace Calculator
 
     // Значения, приведённые к пределу - mA для 2,20,200мА, амперы для 2A, 20A, 50A
     static REAL GetRelativeDC(bool *correct);
-    static REAL GetRelativeAC(bool *correct);
     static REAL GetMin(bool *correct);
     static REAL GetMax(bool *correct);
     static REAL GetAmpl(bool *correct);
@@ -109,14 +108,6 @@ SampleRate Calculator::AppendData()
 }
 
 
-REAL Calculator::GetRelativeAC(bool *correct)
-{
-    *correct = (ac.NumElements() > 0);
-
-    return ac.NumElements() ? ac.Get() : 0.0;
-}
-
-
 REAL Calculator::GetRelativeDC(bool *correct)
 {
     *correct = (dc.NumElements() > 0);
@@ -159,7 +150,11 @@ REAL Calculator::GetAmpl(bool *correct)
 
 REAL Calculator::GetAbsAC(bool *correct)
 {
-    return GetRelativeAC(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
+    *correct = (ac.NumElements() > 0);
+
+    REAL relative_ac = *correct ? ac.Get() : 0.0;
+
+    return relative_ac * (Range::Current() > 2 ? 1e3 : 1.0);
 }
 
 
