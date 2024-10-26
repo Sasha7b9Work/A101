@@ -356,6 +356,28 @@ void Nextion::LastCode::Set(ResponseCode::E _code)
 }
 
 
+void Nextion::WaveInput::Draw(const Rect &rect, uint16 *points)
+{
+    Nextion::FillRect(rect, Color::Background);
+
+    const int num_points = rect.width;
+    const int x = rect.x;
+
+    Nextion::DrawLineH(rect.y, rect.x, rect.x + rect.width, Color::Gray75);
+    Nextion::DrawLineH(rect.y + rect.height / 2, rect.x, rect.x + rect.width);
+    Nextion::DrawLineH(rect.y + rect.height, rect.x, rect.x + rect.width);
+
+    for (int i = 1; i < num_points; i++)
+    {
+        Nextion::DrawLineWhite(
+            x + i - 1,
+            points[i - 1],
+            x + i,
+            points[i]);
+    }
+}
+
+
 #ifndef WIN32
 #pragma clang diagnostic pop
 #endif

@@ -57,12 +57,6 @@ void Nextion::DrawString(const Rect &rect, int font, const Color &color, const C
 }
 
 
-void Nextion::WaveInput::Draw(const Rect &, uint16 *)
-{
-//    Screen::WaveInput::Draw(points, num_points);
-}
-
-
 void Nextion::WaveInput::Enable(int size)
 {
     Screen::WaveInput::Enable(size);
@@ -84,6 +78,12 @@ void Nextion::WaveFFT::Enable(int size)
 void Nextion::WaveFFT::Disable(int size)
 {
     Screen::WaveFFT::Disable(size);
+}
+
+
+void Nextion::DrawLineWhite(int x1, int y1, int x2, int y2)
+{
+    DrawLine(x1, y1, x2, y2, Color::White);
 }
 
 

@@ -84,29 +84,6 @@ void Nextion::DrawString(const Rect &rect, int font, const Color &color, const C
         rect.x, rect.y, rect.width, rect.height, font, color.ValueString(), back_color.ValueString(), h_align ? 1 : 0, v_align ? 1 : 0, Convert(text));
 }
 
-
-void Nextion::WaveInput::Draw(const Rect &rect, uint16 *points)
-{
-    Nextion::FillRect(rect, Color::Background);
-
-    const int num_points = rect.width;
-    const int x = rect.x;
-
-    Nextion::DrawLineH(rect.y, rect.x, rect.x + rect.width, Color::Gray75);
-    Nextion::DrawLineH(rect.y + rect.height / 2, rect.x, rect.x + rect.width);
-    Nextion::DrawLineH(rect.y + rect.height, rect.x, rect.x + rect.width);
-
-    for (int i = 1; i < num_points; i++)
-    {
-        Nextion::DrawLineWhite(
-            x + i - 1,
-            points[i - 1],
-            x + i,
-            points[i]);
-    }
-}
-
-
 void Nextion::WaveInput::Enable(int size)
 {
     SendCommandFormat("vis %s,1", size ? "waveBig" : "waveLeft");

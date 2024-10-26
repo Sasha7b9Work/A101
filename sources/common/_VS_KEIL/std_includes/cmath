@@ -1,5 +1,6 @@
 #pragma once
 
+bool isnan(double num);
 
 namespace std
 {
