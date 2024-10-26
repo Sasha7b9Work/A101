@@ -84,13 +84,7 @@ void Ampermeter::Update()
 
     SampleRate::Current::Set(Calculator::AppendData());
 
-    if (OutOfRange())
-    {
-    }
-    else
-    {
-        DiagramInput::InstallData();
-    }
+    DiagramInput::InstallData();
 
     if (AVP::is_enabled)
     {
@@ -105,7 +99,7 @@ void Ampermeter::Update()
             max = 3;
         }
 
-        if (OutOfRange())
+        if (Calculator::OutOfRange())
         {
             if (range < max)
             {
@@ -213,29 +207,6 @@ REAL Measure::MaxIAbs(int range)
     static const REAL maxs[6] = { 2.0, 2e1, 2e2, 2e3, 2e4, 5e4 };
 
     return maxs[range];
-}
-
-
-bool Ampermeter::OutOfRange()
-{
-    REAL max = Measure::MaxIAbs(Range::Current()) * 1.15;
-
-    bool correct_dc = false;
-    bool correct_ac = false;
-
-    REAL dc = Calculator::GetAbsDC(&correct_dc);
-    REAL ac = Calculator::GetAbsAC(&correct_ac);
-
-    REAL value = std::fabs(dc) + ac;
-
-    if (value > max)
-    {
-        LOG_WRITE("out range dc = %f, ac = %f", (double)dc, (double)ac);
-
-        return true;
-    }
-
-    return false;
 }
 
 

@@ -160,5 +160,6 @@ void DiagramInput::Reset()
 void DiagramInput::DrawCoordinateAxes()
 {
     Nextion::DrawRect({0, y0 - height / 2, Display::WIDTH - 1, height}, Color::Gray75);
+
     Nextion::DrawLineH(y0, 0, Display::WIDTH);
 }

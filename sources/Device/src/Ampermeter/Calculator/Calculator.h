@@ -34,4 +34,7 @@ namespace Calculator
     Measure GetMeasurePeak();
 
     Measure GetMeasureFrequency();
+
+    // —читанные значени€ выход€т за пределы диапазона
+    bool OutOfRange();
 }

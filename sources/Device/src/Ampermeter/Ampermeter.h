@@ -39,9 +39,6 @@ namespace Ampermeter
 
     void OnEventChangeRange();
 
-    // Считанные значения выходят за пределы диапазона
-    bool OutOfRange();
-
     // Автоматический выбор предела
     namespace AVP
     {

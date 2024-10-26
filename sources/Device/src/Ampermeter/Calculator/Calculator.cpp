@@ -119,7 +119,7 @@ Measure Calculator::GetMeasureFrequency()
 
     REAL value = correct ? frequency.Get() : 0.0;
 
-    return Measure(Measure::LimitFrequency(value), Ampermeter::OutOfRange(), correct);
+    return Measure(Measure::LimitFrequency(value), OutOfRange(), correct);
 }
 
 
@@ -140,7 +140,7 @@ Measure Calculator::GetMeasureAC()
         zero /= 1e3;
     }
 
-    return Measure(value - zero, Ampermeter::OutOfRange(), correct);
+    return Measure(value - zero, OutOfRange(), correct);
 }
 
 
@@ -161,7 +161,7 @@ Measure Calculator::GetMeasureDC()
         zero /= 1e3;
     }
 
-    return Measure(value - zero, Ampermeter::OutOfRange(), correct);
+    return Measure(value - zero, OutOfRange(), correct);
 }
 
 
@@ -184,7 +184,7 @@ Measure Calculator::GetMeasureMinSteady()
         zero /= 1e3;
     }
 
-    return Measure(value - zero, Ampermeter::OutOfRange(), correct);
+    return Measure(value - zero, OutOfRange(), correct);
 }
 
 
@@ -198,7 +198,7 @@ Measure Calculator::GetMeasureAmplSteady()
 {
     GET_VALUE(ampl);
 
-    return Measure(value, Ampermeter::OutOfRange(), correct);
+    return Measure(value, OutOfRange(), correct);
 }
 
 
@@ -211,7 +211,7 @@ Measure Calculator::GetMeasurePeak()
 
     REAL value_min = GetValueMinSteady(&correct_min);
 
-    return Measure(value_max - value_min, Ampermeter::OutOfRange(), correct_min && correct_max);
+    return Measure(value_max - value_min, OutOfRange(), correct_min && correct_max);
 }
 
 
@@ -228,6 +228,21 @@ Measure Calculator::GetMeasureMaxSteady()
         zero /= 1e3;
     }
 
-    return Measure(value_max - zero, Ampermeter::OutOfRange(), correct);
+    return Measure(value_max - zero, OutOfRange(), correct);
 }
 
+
+bool Calculator::OutOfRange()
+{
+    REAL value_max = Measure::MaxIAbs(Range::Current()) * 1.15;
+
+    bool correct_dc = false;
+    bool correct_ac = false;
+
+    REAL value_dc = Calculator::GetAbsDC(&correct_dc);
+    REAL value_ac = Calculator::GetAbsAC(&correct_ac);
+
+    REAL value = std::fabs(value_dc) + value_ac;
+
+    return value > value_max;
+}
