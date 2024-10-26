@@ -24,7 +24,6 @@ namespace Calculator
     static AveragerReal<NUM_AVERAGES> ampl;
     static AveragerReal<NUM_AVERAGES> frequency;
 
-    static REAL GetMin(bool *correct);
     static REAL GetMax(bool *correct);
     static REAL GetAmpl(bool *correct);
     static REAL GetFrequency(bool *correct);
@@ -107,14 +106,6 @@ SampleRate Calculator::AppendData()
 }
 
 
-REAL Calculator::GetMin(bool *correct)
-{
-    *correct = (min.NumElements() > 0);
-
-    return min.NumElements() ? min.Get() : 0.0;
-}
-
-
 REAL Calculator::GetFrequency(bool *correct)
 {
     *correct = (frequency.NumElements() > 0);
@@ -161,7 +152,11 @@ REAL Calculator::GetAbsDC(bool *correct)
 
 REAL Calculator::GetValueMin(bool *correct)
 {
-    return GetMin(correct) * (Range::Current() > 2 ? 1e3 : 1.0);
+    *correct = min.NumElements() > 0;
+
+    REAL relative_min = (*correct) ? min.Get() : 0.0;
+
+    return relative_min * (Range::Current() > 2 ? 1e3 : 1.0);
 }
 
 
