@@ -48,7 +48,7 @@ void Calculator::Reset()
 }
 
 
-SampleRate Calculator::AppendData()
+void Calculator::AppendData()
 {
     Period period = ResolverPeriodSamples().GetResult();
 
@@ -108,8 +108,6 @@ SampleRate Calculator::AppendData()
     }
 
 #endif
-
-    return SampleRate::Current::Get();
 }
 
 

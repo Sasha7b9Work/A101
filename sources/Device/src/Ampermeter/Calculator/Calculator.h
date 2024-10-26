@@ -7,7 +7,7 @@
 namespace Calculator
 {
     // Функция возвращает частоту дискретизации для следующего сбора данных
-    SampleRate AppendData();
+    void AppendData();
 
     void Reset();
 

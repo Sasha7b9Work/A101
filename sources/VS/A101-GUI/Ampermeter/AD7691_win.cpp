@@ -4,13 +4,26 @@
 #include <cstdlib>
 
 
+SampleRate::E SampleRate::value = SampleRate::_10us;
+
+
+uint SampleRate::TimeUSonPoint()
+{
+    static const uint times[Count] =
+    {
+        10,
+        100,
+        1000
+    };
+
+    return times[value];
+}
+
+
 namespace AD7691
 {
     static int counter = 0;
 }
-
-
-SampleRate SampleRate::current(10);
 
 
 ValueADC::ValueADC(int reading)

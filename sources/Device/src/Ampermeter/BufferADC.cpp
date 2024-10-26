@@ -12,7 +12,6 @@ namespace BufferADC
 {
     static int        pointer;                                      // Указатель используется при чтении данных (массив raw)
     static ValueADC   raw[SIZE]  __attribute__((section("ram2")));  // Данные, считанные с АЦП
-    static SampleRate sampleRate;
 
     static ValueADC   min;
     static ValueADC   max;
@@ -40,10 +39,9 @@ bool BufferADC::IsFull()
 }
 
 
-void BufferADC::Clear(SampleRate rate)
+void BufferADC::Clear()
 {
     pointer = 0;
-    sampleRate = rate;
 }
 
 
@@ -56,12 +54,6 @@ ValueADC BufferADC::Min()
 ValueADC BufferADC::Max()
 {
     return max;
-}
-
-
-SampleRate BufferADC::GetSampleRate()
-{
-    return sampleRate;
 }
 
 

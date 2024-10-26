@@ -13,7 +13,7 @@ namespace BufferADC
 
     bool IsFull();
 
-    void Clear(SampleRate);
+    void Clear();
 
     void CalculateLimits();
 
@@ -22,8 +22,6 @@ namespace BufferADC
     ValueADC Max();
 
     void LogUART();
-
-    SampleRate GetSampleRate();
 
     ValueADC At(int i);
 

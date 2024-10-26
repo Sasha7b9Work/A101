@@ -82,7 +82,7 @@ void Ampermeter::Update()
         return;
     }
 
-    SampleRate::Current::Set(Calculator::AppendData());
+    Calculator::AppendData();
 
     DiagramInput::InstallData();
 
@@ -125,9 +125,9 @@ bool Ampermeter::MeasurementCycle()
 
     TimeMeterMS meter;
 
-    BufferADC::Clear(SampleRate::Current::Get());
+    BufferADC::Clear();
 
-    uint period = SampleRate::Current::Get().TimeUS();
+    uint period = SampleRate::TimeUSonPoint();
 
     HAL_TIM4::StartPeriodicUS(period * 2);
 

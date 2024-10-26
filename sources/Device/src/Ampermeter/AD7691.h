@@ -4,19 +4,25 @@
 
 struct SampleRate
 {
-    SampleRate(uint _time_points_us = current.TimeUS()) : time_points_us(_time_points_us) {}
-    uint TimeUS() const { return time_points_us; }
-    float Freq() const { return 1.0f / ((float)time_points_us * 1e-6f); }
-
-    struct Current
+    enum E
     {
-        static SampleRate Get() { return current; }
-        static void Set(const SampleRate &rate) { current = rate; }
+        _10us,      // ¬ходна€ частота 40 √ц - 5 к√ц
+        _100us,     // ¬ходна€ частота 4 √ц - 40 √ц
+        _1000us,    // ¬ходна€ частота 0.4 √ц - 4 √ц
+        Count
     };
 
+
+    // ¬рем€ в микросекундах между точками дискретизации
+    static uint TimeUSonPoint();
+
+    static void Set(E v) { value = v; }
+
+    static E Get()       { return value; }
+
 private:
-    uint time_points_us;
-    static SampleRate current;
+
+    static E value;
 };
 
 

@@ -40,7 +40,7 @@ ResolverFrequency::ResolverFrequency(const Period &period)
         }
     }
 
-    float sample_time = (float)SampleRate::Current().Get().TimeUS() * 1e-6f;
+    float sample_time = (float)SampleRate::TimeUSonPoint() * 1e-6f;
 
     float time = (last - first) * sample_time / counter;
 
