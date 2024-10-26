@@ -93,8 +93,6 @@ namespace PageCalibration
                 Nextion::DrawString({ 50, 100, 500, 90 }, 4, fill, back, LabelPassword::buffer);
 
                 is_changed = false;
-
-                Nextion::DrawString({ 300, 20, 150, 40 }, 0, fill, back, String<>("%08X", cal.crc32).c_str());
             }
         }
 
