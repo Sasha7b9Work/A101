@@ -5,8 +5,11 @@
 
 void Bootloader::Run(uint version_build_new)
 {
-    if (VERSION_BUILD == version_build_new || VERSION_BUILD == 0 || VERSION_BUILD == (uint)-1)
+    if (VERSION_BUILD == version_build_new ||               // ќбновл€ть не нужно - совпадает с текущей версией
+        VERSION_BUILD == 0 || VERSION_BUILD == (uint)-1)
     {
         return;
     }
+
+
 }
