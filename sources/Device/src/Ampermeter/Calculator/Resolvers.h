@@ -92,7 +92,7 @@ private:
 
     void CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]);
     void Normalize(float *, uint);
-    void ApplyHamming(Buffer<NUM_POINTS, float> &);
+    void ApplyHamming(float *, uint);
     void TransformToLogarifm(float *, uint);
 };
 

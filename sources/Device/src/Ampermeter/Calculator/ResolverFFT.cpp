@@ -23,8 +23,6 @@ ResolverFFT::ResolverFFT(int delta)
 
     CalculateFFT(in.Data(), out.Data());
 
-//    ApplyHamming(out);
-
     LOG_WRITE("time fft %d ms", meter.ElapsedTime());
 
     for (int i = 0; i < SIZE_DATA; i++)
@@ -62,6 +60,8 @@ void ResolverFFT::CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]
     {
         result[i] = 0.0;
     }
+
+    ApplyHamming(dataR, NUM_POINTS);
 
     static const float Rcoef[14] =
     {
@@ -169,18 +169,18 @@ void ResolverFFT::Normalize(float *buf, uint num_points)
 }
 
 
-void ResolverFFT::ApplyHamming(Buffer<NUM_POINTS, float> &buf)
+void ResolverFFT::ApplyHamming(float *buf, uint num_points)
 {
-    for (int i = 0; i < NUM_POINTS / 2; i++)
+    for (uint i = 0; i < num_points; i++)
     {
-        buf[(uint)i] *= 0.53836f - 0.46164f * std::cosf(2.0f * 3.1415926f * i / (NUM_POINTS - 1));
+        buf[(uint)i] *= 0.53836f - 0.46164f * std::cosf(2.0f * 3.1415926f * i / (num_points - 1));
     }
 }
 
 
-void ResolverFFT::TransformToLogarifm(float buf[2048], uint num_points)
+void ResolverFFT::TransformToLogarifm(float *buf, uint num_points)
 {
-    const float minDB = -40.0f;
+    const float minDB = -20.0f;
 
     for (uint i = 0; i < num_points; i++)
     {
