@@ -23,9 +23,7 @@ ResolverFFT::ResolverFFT(int delta)
 
     CalculateFFT(in.Data(), out.Data());
 
-    ApplyHamming(out);
-
-    Normalize(out);
+//    ApplyHamming(out);
 
     LOG_WRITE("time fft %d ms", meter.ElapsedTime());
 
@@ -146,15 +144,17 @@ void ResolverFFT::CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]
         result[i] = std::sqrtf(dataR[i] * dataR[i] + result[i] * result[i]); //-V2563
     }
 
-    result[0] = 0.0;       // \todo нулева€ составл€юща€ мешает посто€нно. надо еЄ убрать //-V2563
+    Normalize(result, NUM_POINTS / 2);
+
+    TransformToLogarifm(result, NUM_POINTS / 2);
 }
 
 
-void ResolverFFT::Normalize(Buffer<NUM_POINTS, float> &buf)
+void ResolverFFT::Normalize(float *buf, uint num_points)
 {
     float max = 0.0;
 
-    for (uint i = 0; i < NUM_POINTS; i++)
+    for (uint i = 0; i < num_points / 2; i++)
     {
         if (buf[i] > max) //-V2563
         {
@@ -162,7 +162,7 @@ void ResolverFFT::Normalize(Buffer<NUM_POINTS, float> &buf)
         }
     }
 
-    for (uint i = 0; i < NUM_POINTS; i++)
+    for (uint i = 0; i < num_points / 2; i++)
     {
         buf[i] /= max; //-V2563
     }
@@ -171,8 +171,21 @@ void ResolverFFT::Normalize(Buffer<NUM_POINTS, float> &buf)
 
 void ResolverFFT::ApplyHamming(Buffer<NUM_POINTS, float> &buf)
 {
-    for (int i = 0; i < NUM_POINTS; i++)
+    for (int i = 0; i < NUM_POINTS / 2; i++)
     {
         buf[(uint)i] *= 0.53836f - 0.46164f * std::cosf(2.0f * 3.1415926f * i / (NUM_POINTS - 1));
+    }
+}
+
+
+void ResolverFFT::TransformToLogarifm(float buf[2048], uint num_points)
+{
+    const float minDB = -40.0f;
+
+    for (uint i = 0; i < num_points; i++)
+    {
+        buf[i] = 10 * std::log10f(buf[i]);
+
+        buf[i] = 1.0f - buf[i] / minDB;
     }
 }

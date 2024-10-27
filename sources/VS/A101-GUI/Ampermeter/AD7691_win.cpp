@@ -101,7 +101,7 @@ int AD7691::ReadValueRAW()
 
     value += (float)std::rand() / (float)RAND_MAX / 10.0f;
 
-//    value += 0.1f;
+    value += 0.1f;
 
     value *= 0x1FFFF;           // 17 бит в единичке - максимальное значение
 

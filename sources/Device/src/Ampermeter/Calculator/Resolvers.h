@@ -91,9 +91,9 @@ private:
     uint8 data[SIZE_DATA];
 
     void CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]);
-    void Normalize(Buffer<NUM_POINTS, float> &);
-
+    void Normalize(float *, uint);
     void ApplyHamming(Buffer<NUM_POINTS, float> &);
+    void TransformToLogarifm(float *, uint);
 };
 
 
