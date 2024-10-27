@@ -31,6 +31,8 @@ namespace PageGraph
             };
 
             item->ToButtonPress()->SetText(titles[set.type_signal.value][Lang::RU], titles[set.type_signal.value][Lang::EN]);
+
+            FuncOnEnter();
         }
     });
 

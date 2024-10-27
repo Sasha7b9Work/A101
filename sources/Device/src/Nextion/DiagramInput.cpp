@@ -7,6 +7,8 @@
 #include "Nextion/Display.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
+#include "Settings/Settings.h"
+#include "Ampermeter/Calculator/Resolvers.h"
 #include <limits>
 
 
@@ -24,6 +26,14 @@ namespace DiagramInput
     static int elapsed_point = NUM_POINTS;  // Столько точек осталось отрисовать
 
     static void DrawCoordinateAxes();
+
+    static void Clear();
+
+    static void InstallRaw();
+    static void InstallFFT();
+
+    static void DrawRaw();
+    static void DrawFFT();
 }
 
 
@@ -34,8 +44,21 @@ void DiagramInput::InstallData()
         return;
     }
 
-    data_installed = true;
+    if (set.type_signal.value == TypeSignal::Raw)
+    {
+        InstallRaw();
+    }
+    else
+    {
+        InstallFFT();
+    }
 
+    data_installed = true;
+}
+
+
+void DiagramInput::InstallRaw()
+{
     DrawCoordinateAxes();
 
     int range = Range::Current();
@@ -70,6 +93,19 @@ void DiagramInput::InstallData()
 }
 
 
+void DiagramInput::InstallFFT()
+{
+    ResolverFFT resolver(1);
+
+    REAL scale = (REAL)height / 255.0;
+
+    for (int i = 0; i < NUM_POINTS; i++)
+    {
+        points[i] = (uint16)(resolver.At(i) * scale);
+    }
+}
+
+
 void DiagramInput::Draw()
 {
     if (!data_installed)
@@ -77,6 +113,19 @@ void DiagramInput::Draw()
         return;
     }
 
+    if (set.type_signal.value == TypeSignal::Raw)
+    {
+        DrawRaw();
+    }
+    else
+    {
+        DrawFFT();
+    }
+}
+
+
+void DiagramInput::DrawRaw()
+{
     int num_points = 50;
 
     if (num_points > elapsed_point)
@@ -95,6 +144,31 @@ void DiagramInput::Draw()
     Nextion::WaveInput::Draw(rect, points + (first_point == 0 ? first_point : (first_point - 1)));
 
     first_point += num_points;
+
+    if (elapsed_point == 0)
+    {
+        Reset();
+    }
+}
+
+
+void DiagramInput::DrawFFT()
+{
+    int num_points = 50;
+
+    if (num_points > elapsed_point)
+    {
+        num_points = elapsed_point;
+    }
+
+    elapsed_point -= num_points;
+
+    for (int i = 0; i < num_points; i++)
+    {
+        Nextion::DrawLineV(first_point, 0, height, Color::Background);
+        Nextion::DrawLineV(first_point, 0, points[first_point], Color::White);
+        first_point++;
+    }
 
     if (elapsed_point == 0)
     {
@@ -159,11 +233,24 @@ void DiagramInput::Reset()
     data_installed = false;
     first_point = 0;
     elapsed_point = NUM_POINTS;
+
+    Clear();
+
+    DrawCoordinateAxes();
 }
 
 void DiagramInput::DrawCoordinateAxes()
 {
-    Nextion::DrawRect({0, y0 - height / 2, Display::WIDTH - 1, height}, Color::Gray75);
+    if (set.type_signal.value == TypeSignal::Raw)
+    {
+        Nextion::DrawRect({ 0, y0 - height / 2, Display::WIDTH - 1, height }, Color::Gray75);
 
-    Nextion::DrawLineH(y0, 0, Display::WIDTH);
+        Nextion::DrawLineH(y0, 0, Display::WIDTH);
+    }
+}
+
+
+void DiagramInput::Clear()
+{
+    Nextion::FillRect({ 0, y0 - height / 2, Display::WIDTH - 1, height }, Color::Background);
 }
