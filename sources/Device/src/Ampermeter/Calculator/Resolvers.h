@@ -1,6 +1,7 @@
 // 2024/10/09 09:43:42 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Ampermeter/Calculator/ResolverPeriodSamples.h"
+#include "Utils/Buffer.h"
 
 
 // Вычисляет амплутудное значение
@@ -90,7 +91,9 @@ private:
     uint8 data[SIZE_DATA];
 
     void CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]);
-    void Normalize(float *data, int);
+    void Normalize(Buffer<NUM_POINTS, float> &);
+
+    void ApplyHamming(Buffer<NUM_POINTS, float> &);
 };
 
 

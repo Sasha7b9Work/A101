@@ -3,7 +3,6 @@
 #include "Ampermeter/Calculator/Resolvers.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Timer.h"
-#include "Utils/Buffer.h"
 #include <cmath>
 #include <cstdlib>
 
@@ -23,6 +22,10 @@ ResolverFFT::ResolverFFT(int delta)
     TimeMeterMS meter;
 
     CalculateFFT(in.Data(), out.Data());
+
+    ApplyHamming(out);
+
+    Normalize(out);
 
     LOG_WRITE("time fft %d ms", meter.ElapsedTime());
 
@@ -144,25 +147,32 @@ void ResolverFFT::CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]
     }
 
     result[0] = 0.0;       // \todo нулева€ составл€юща€ мешает посто€нно. надо еЄ убрать //-V2563
-
-    Normalize(result, SIZE_DATA);
 }
 
 
-void ResolverFFT::Normalize(float *in, int num_points)
+void ResolverFFT::Normalize(Buffer<NUM_POINTS, float> &buf)
 {
     float max = 0.0;
 
-    for (int i = 0; i < num_points; i++)
+    for (uint i = 0; i < NUM_POINTS; i++)
     {
-        if (in[i] > max) //-V2563
+        if (buf[i] > max) //-V2563
         {
-            max = in[i]; //-V2563
+            max = buf[i]; //-V2563
         }
     }
 
-    for (int i = 0; i < num_points; i++)
+    for (uint i = 0; i < NUM_POINTS; i++)
     {
-        in[i] /= max; //-V2563
+        buf[i] /= max; //-V2563
+    }
+}
+
+
+void ResolverFFT::ApplyHamming(Buffer<NUM_POINTS, float> &buf)
+{
+    for (int i = 0; i < NUM_POINTS; i++)
+    {
+        buf[(uint)i] *= 0.53836f - 0.46164f * std::cosf(2.0f * 3.1415926f * i / (NUM_POINTS - 1));
     }
 }
