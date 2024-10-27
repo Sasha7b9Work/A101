@@ -126,18 +126,35 @@ struct ChangeRange
 };
 
 
-struct Settings
+// Как выводить сигнал - в виде отсчётов или в виде FFT
+struct TypeSignal
 {
-    struct RangeFreq
+    enum E
     {
-        enum E
-        {
-            _5kHz,
-            _40Hz,
-            _4Hz
-        };
+        Raw,
+        FFT,
+        Count
     };
 
+    TypeSignal(E v = Raw) : value(v) { }
+
+    void Increase()
+    {
+        value = (E)(value + 1);
+
+        if (value >= Count)
+        {
+            value = Raw;
+        }
+    }
+
+    E value;
+};
+
+
+
+struct Settings
+{
     uint size;          // Здесь размер настроек - для проверки того, что версии соответствуют
     uint crc32;         // Здесь контрольная сумма - для проверки правильности сохранения
 
@@ -156,7 +173,7 @@ struct Settings
     Parity::E parity;
     StopBits::E stop_bits;
     ChangeRange::E change_range;
-    RangeFreq::E not_used;
+    TypeSignal type_signal;
     int16 brightness;               // яркость от 10 до 100
 
     uint serial_number;

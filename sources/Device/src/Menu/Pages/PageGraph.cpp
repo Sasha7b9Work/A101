@@ -18,27 +18,19 @@ namespace PageGraph
         DiagramInput::Draw();
     }
 
-    static int type_signal = 0;     // Сигнал, спектр, оба
-
     static ButtonMenuPress btnWave("Сигнал", "Signal", 0, 0, [](Item *item, bool press)
     {
         if (!press)
         {
-            type_signal++;
+            set.type_signal.Increase();
 
-            if (type_signal > 2)
-            {
-                type_signal = 0;
-            }
-
-            static const pchar titles[3][Lang::Count] =
+            static const pchar titles[2][Lang::Count] =
             {
                 {"Сигнал", "Signal"},
-                {"FFT",    "FFT"},
-                {"Оба",    "Together"}
+                {"FFT",    "FFT"}
             };
 
-            item->ToButtonPress()->SetText(titles[type_signal][Lang::RU], titles[type_signal][Lang::EN]);
+            item->ToButtonPress()->SetText(titles[set.type_signal.value][Lang::RU], titles[set.type_signal.value][Lang::EN]);
         }
     });
 
