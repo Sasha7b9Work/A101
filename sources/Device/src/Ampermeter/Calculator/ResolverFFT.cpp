@@ -8,12 +8,12 @@
 #include <cstdlib>
 
 
-ResolverFFT::ResolverFFT()
+ResolverFFT::ResolverFFT(int delta)
 {
     Buffer<NUM_POINTS, float> in;
     Buffer<NUM_POINTS, float> out;
 
-    for (int i = 0; i < NUM_POINTS; i++)
+    for (int i = 0; i < NUM_POINTS; i += delta)
     {
         in[i] = (float)BufferADC::At(i).Real(); //-V522
     }
@@ -24,7 +24,7 @@ ResolverFFT::ResolverFFT()
 
     LOG_WRITE("time fft %d ms", meter.ElapsedTime());
 
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < SIZE_DATA; i++)
     {
         data[i] = (uint8)(255.0f * out[i]); //-V522
     }
@@ -33,7 +33,7 @@ ResolverFFT::ResolverFFT()
 
 int ResolverFFT::FindIndexFreq() const
 {
-    for (int i = 1; i < SIZE / 2; i++)
+    for (int i = 1; i < SIZE_DATA / 2; i++)
     {
         if (data[i] == 255)
         {
@@ -41,7 +41,7 @@ int ResolverFFT::FindIndexFreq() const
         }
     }
 
-    for (int i = 1; i < SIZE / 2; i++)
+    for (int i = 1; i < SIZE_DATA / 2; i++)
     {
         if (data[i] == 254)
         {
@@ -59,8 +59,6 @@ void ResolverFFT::CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]
     {
         result[i] = 0.0;
     }
-
-    int logN = 10;
 
     static const float Rcoef[14] =
     {
@@ -83,10 +81,10 @@ void ResolverFFT::CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]
     int nn = NUM_POINTS >> 1;
     int ie = NUM_POINTS;
 
-    for (int n = 1; n <= logN; n++)
+    for (int n = 1; n <= LOG_N; n++)
     {
-        float rw = Rcoef[logN - n];
-        float iw = Icoef[logN - n];
+        float rw = Rcoef[LOG_N - n];
+        float iw = Icoef[LOG_N - n];
         int in = ie >> 1;
         float ru = 1.0;
         float iu = 0.0;
@@ -138,14 +136,14 @@ void ResolverFFT::CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]
         j = j + k;
     }
 
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < SIZE_DATA; i++)
     {
         result[i] = std::sqrtf(dataR[i] * dataR[i] + result[i] * result[i]); //-V2563
     }
 
     result[0] = 0.0;       // \todo нулева€ составл€юща€ мешает посто€нно. надо еЄ убрать //-V2563
 
-    Normalize(result, SIZE);
+    Normalize(result, SIZE_DATA);
 }
 
 

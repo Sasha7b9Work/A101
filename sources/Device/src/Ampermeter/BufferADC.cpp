@@ -59,7 +59,7 @@ ValueADC BufferADC::Max()
 
 ValueADC BufferADC::At(int i)
 {
-    return raw[i];
+    return (i < SIZE) ? raw[i] : ValueADC(0);
 }
 
 

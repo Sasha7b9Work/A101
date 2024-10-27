@@ -70,13 +70,24 @@ private:
 class ResolverFFT
 {
 public:
-    static const int NUM_POINTS = 1024;
-    ResolverFFT();
+    static const int NUM_POINTS = 1024;             // Столько точек во входном массиве
+    static const int LOG_N = 10;                    // Это 2 * LOG_N, чтобы получилось NUM_POINTS
+    static const int SIZE_DATA = NUM_POINTS / 2;    // Столько точек в выходном массиве
+
+    // Через delta нужно брать точки
+    ResolverFFT(int delta);
+
     // Находит индекс массива частоты
     int FindIndexFreq() const;
+
+    uint8 At(int i) const
+    {
+        return (i < SIZE_DATA) ? data[i] : 0U;
+    }
+
 private:
-    static const int SIZE = NUM_POINTS / 2;
-    uint8 data[SIZE];
+
+    uint8 data[SIZE_DATA];
 
     void CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]);
     void Normalize(float *data, int);
