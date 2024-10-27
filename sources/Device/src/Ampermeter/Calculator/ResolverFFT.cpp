@@ -3,6 +3,7 @@
 #include "Ampermeter/Calculator/Resolvers.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Timer.h"
+#include "Utils/Math.h"
 #include <cmath>
 #include <cstdlib>
 
@@ -207,12 +208,7 @@ void ResolverFFT::TransformToLogarifm(float *buf, uint num_points)
 {
     for (uint i = 0; i < num_points; i++)
     {
-        buf[i] = 10 * std::log10f(buf[i]);
-    }
-
-    for (uint i = 0; i < num_points; i++)
-    {
-        float sub = buf[i] / minDB;
+        float sub = (10 * std::log10f(buf[i])) / minDB;
 
         if (sub > 1.0f)
         {

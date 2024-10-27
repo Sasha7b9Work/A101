@@ -10,6 +10,7 @@
 #include "Settings/Settings.h"
 #include "Ampermeter/Calculator/Resolvers.h"
 #include <limits>
+#include <cstdio>
 
 
 namespace DiagramInput
@@ -97,7 +98,8 @@ void DiagramInput::InstallFFT()
 
     for (int i = 0; i < NUM_POINTS; i++)
     {
-        points[i] = (uint16)(resolver.At(i) * scale);
+        uint16 value = (uint16)(resolver.At(i) * scale);
+        points[i] = value;
     }
 }
 
