@@ -19,13 +19,6 @@ public:
 
     T *Data() { return buffer; }
 
-    const T *DataConst() const { return buffer; }
-
-    T *Last()
-    {
-        return buffer + Size();
-    }
-
     // Возвращает количество элементов в буфере
     int Size() const
     {
