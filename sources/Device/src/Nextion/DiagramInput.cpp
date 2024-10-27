@@ -166,6 +166,21 @@ void DiagramInput::DrawFFT()
         first_point++;
     }
 
+    char buffer[32];
+    if (set.lang == Lang::RU)
+    {
+        std::sprintf(buffer, "%02.0f Äá", ResolverFFT::minDB);
+    }
+    else
+    {
+        std::sprintf(buffer, "%02.0f Db", ResolverFFT::minDB);
+    }
+
+    const int w = 80;
+    const int h = 30;
+
+    Nextion::DrawString({ Display::WIDTH - w - 5, Display::HEIGHT - h - 5, w, h }, Font::_5_GB30b, Color::White, Color::Background, buffer, true, true);
+
     if (elapsed_point == 0)
     {
         Reset(false);

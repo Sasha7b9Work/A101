@@ -74,6 +74,7 @@ public:
     static const int NUM_POINTS = 8192;             // Столько точек во входном массиве
     static const int LOG_N = 13;                    // Это 2 * LOG_N, чтобы получилось NUM_POINTS
     static const int SIZE_DATA = NUM_POINTS / 2;    // Столько точек в выходном массиве
+    static const float minDB;
 
     // Через delta нужно брать точки
     ResolverFFT(int delta);

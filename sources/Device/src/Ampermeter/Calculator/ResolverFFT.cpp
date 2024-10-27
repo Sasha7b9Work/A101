@@ -7,6 +7,9 @@
 #include <cstdlib>
 
 
+const float ResolverFFT::minDB = -40.0f;
+
+
 ResolverFFT::ResolverFFT(int delta)
 {
     Buffer<NUM_POINTS, float> in;
@@ -173,7 +176,7 @@ void ResolverFFT::ApplyWindowHamming(float *buf, uint num_points)
 {
     for (uint i = 0; i < num_points; i++)
     {
-        buf[(uint)i] *= 0.53836f - 0.46164f * std::cosf(2.0f * 3.1415926f * i / (num_points - 1));
+        buf[(uint)i] *= 0.53836f - 0.46164f * std::cosf(2.0f * M_PI * i / (num_points - 1));
     }
 }
 
@@ -186,7 +189,7 @@ void ResolverFFT::ApplyWindowBlackman(float *buf, uint num_points)
     float a2 = alpha / 2.0f;
     for (uint i = 0; i < num_points; i++)
     {
-        buf[i] *= a0 - a1 * std::cosf(2.0f * 3.1415926f * i / (num_points - 1)) + a2 * std::cosf(4.0f * 3.1415926f * i / (num_points - 1));
+        buf[i] *= a0 - a1 * std::cosf(2.0f * M_PI * i / (num_points - 1)) + a2 * std::cosf(4.0f * M_PI * i / (num_points - 1));
     }
 }
 
@@ -195,15 +198,13 @@ void ResolverFFT::ApplyWindowHann(float *buf, uint num_points)
 {
     for (uint i = 0; i < num_points; i++)
     {
-        buf[i] *= 0.5f * (1.0f - std::cosf(2.0f * 3.1415926f * i / (num_points - 1.0f)));
+        buf[i] *= 0.5f * (1.0f - std::cosf(2.0f * M_PI * i / (num_points - 1.0f)));
     }
 }
 
 
 void ResolverFFT::TransformToLogarifm(float *buf, uint num_points)
 {
-    const float minDB = -60.0f;
-
     for (uint i = 0; i < num_points; i++)
     {
         buf[i] = 10 * std::log10f(buf[i]);
