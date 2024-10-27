@@ -4,6 +4,7 @@
 #include "Device.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
+#include "Utils/Bootloader.h"
 
 
 namespace SCPI
@@ -60,19 +61,6 @@ bool SCPI::CommandMEAS::Execute(Direction::E dir)
     return true;
 }
 
-bool SCPI::CommandINFO::Execute(Direction::E dir)
-{
-    String<128> message;
-
-    message.AppendFormat("VERSION=%d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD);
-    message.AppendFormat("DATE BUILD=%s\n", DATE_BUILD);
-    message.AppendFormat("SCPI=%s", VERSION_SCPI);
-
-    Send(dir, message.c_str());
-
-    return true;
-}
-
 
 bool SCPI::CommandRangeI::Execute(Direction::E)
 {
@@ -104,6 +92,28 @@ bool SCPI::CommandRangeIJ::Execute(Direction::E)
 bool SCPI::CommandZero::Execute(Direction::E)
 {
     PageMain::EnableZero(type == 'I' ? MeasuresOnDisplay::DC : MeasuresOnDisplay::AC, enabled);
+
+    return true;
+}
+
+
+bool SCPI::CommandINFO::Execute(Direction::E dir)
+{
+    String<128> message;
+
+    message.AppendFormat("VERSION=%d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD);
+    message.AppendFormat("DATE BUILD=%s\n", DATE_BUILD);
+    message.AppendFormat("SCPI=%s", VERSION_SCPI);
+
+    Send(dir, message.c_str());
+
+    return true;
+}
+
+
+bool SCPI::CommandUpgradeFirmware::Execute(Direction::E)
+{
+    Bootloader::Run(version_build_new);
 
     return true;
 }

@@ -80,4 +80,12 @@ namespace SCPI
         char type;
         bool enabled;
     };
+
+    struct CommandUpgradeFirmware : public Command
+    {
+        CommandUpgradeFirmware(uint version_new) : version_build_new(version_new) { }
+        virtual bool Execute(Direction::E) override;
+    protected:
+        uint version_build_new = 0;
+    };
 }

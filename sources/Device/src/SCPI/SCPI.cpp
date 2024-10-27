@@ -99,17 +99,17 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
 {
     char *data = (char *)symbols;
 
-    if (std::strcmp(data, "*IDN?") == 0)
+    if (std::strcmp(data, "*IDN?") == 0)                // *IDN?
     {
         return new CommandIDN();
     }
 
-    if (std::strcmp(data, "MEAS?") == 0)
+    if (std::strcmp(data, "MEAS?") == 0)                // MEAS?
     {
         return new CommandMEAS();
     }
 
-    if (std::strcmp(data, "INFO?") == 0)
+    if (std::strcmp(data, "INFO?") == 0)                // INFO?
     {
         return new CommandINFO();
     }
@@ -156,6 +156,31 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
                 {
                     return new CommandZero(data[1], data[2] == '1');
                 }
+            }
+        }
+    }
+
+    if (std::strlen(data) > std::strlen("UPGRADE"))     // UPGRADE VERSION_BUILD
+    {
+        char *pointer = data + std::strlen("UPGRADE");
+
+        while (*pointer == ' ')
+        {
+            if (*pointer == '\0')
+            {
+                break;
+            }
+
+            pointer++;
+        }
+
+        uint version = 0;
+
+        if (std::sscanf(pointer, "%u", &version) == 1)
+        {
+            if (version != 0 && version != (uint)-1)
+            {
+                return new CommandUpgradeFirmware(version);
             }
         }
     }

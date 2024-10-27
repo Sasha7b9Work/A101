@@ -2250,6 +2250,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Utils\String.h</FilePath>
             </File>
+            <File>
+              <FileName>Bootloader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Bootloader.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Bootloader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Bootloader.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -3561,6 +3571,16 @@
               <FileName>String.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\String.h</FilePath>
+            </File>
+            <File>
+              <FileName>Bootloader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Bootloader.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Bootloader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Bootloader.h</FilePath>
             </File>
           </Files>
         </Group>
