@@ -4,5 +4,5 @@
 
 namespace Bootloader
 {
-    void Run(uint version_build_new);
+    void Run(uint version_build_new, uint size, uint crc32);
 }

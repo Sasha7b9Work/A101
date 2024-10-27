@@ -113,7 +113,7 @@ bool SCPI::CommandINFO::Execute(Direction::E dir)
 
 bool SCPI::CommandUpgradeFirmware::Execute(Direction::E)
 {
-    Bootloader::Run(version_build_new);
+    Bootloader::Run(version_build_new, size, crc32);
 
     return true;
 }

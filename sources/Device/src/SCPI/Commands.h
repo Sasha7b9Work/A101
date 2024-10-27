@@ -83,9 +83,11 @@ namespace SCPI
 
     struct CommandUpgradeFirmware : public Command
     {
-        CommandUpgradeFirmware(uint version_new) : version_build_new(version_new) { }
+        CommandUpgradeFirmware(uint version_new, uint _size, uint _crc32) : version_build_new(version_new), size(_size), crc32(_crc32) { }
         virtual bool Execute(Direction::E) override;
     protected:
         uint version_build_new = 0;
+        uint size = 0;
+        uint crc32 = 0;
     };
 }

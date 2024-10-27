@@ -162,25 +162,16 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
 
     if (std::strlen(data) > std::strlen("UPGRADE"))     // UPGRADE VERSION_BUILD
     {
-        char *pointer = data + std::strlen("UPGRADE");
-
-        while (*pointer == ' ')
+        if (std::memcmp(data, "UPGRADE", std::strlen("UPGRADE")))
         {
-            if (*pointer == '\0')
+            char command[128];
+            uint version_firm = 0;
+            uint size_firm = 0;
+            uint crc32_firm = 0;
+
+            if (std::sscanf(data, "%s %u %u %u", command, &version_firm, &size_firm, &crc32_firm) == 4)
             {
-                break;
-            }
-
-            pointer++;
-        }
-
-        uint version = 0;
-
-        if (std::sscanf(pointer, "%u", &version) == 1)
-        {
-            if (version != 0 && version != (uint)-1)
-            {
-                return new CommandUpgradeFirmware(version);
+                return new CommandUpgradeFirmware(version_firm, size_firm, crc32_firm);
             }
         }
     }

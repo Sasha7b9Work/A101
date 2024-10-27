@@ -3,7 +3,7 @@
 #include "Utils/Bootloader.h"
 
 
-void Bootloader::Run(uint version_build_new)
+void Bootloader::Run(uint version_build_new, uint /*size*/, uint /*crc32*/)
 {
     if (VERSION_BUILD == version_build_new ||               // ќбновл€ть не нужно - совпадает с текущей версией
         VERSION_BUILD == 0 || VERSION_BUILD == (uint)-1)
@@ -11,5 +11,7 @@ void Bootloader::Run(uint version_build_new)
         return;
     }
 
-
+    /*
+    *   
+    */
 }
