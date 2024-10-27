@@ -75,13 +75,13 @@ ValueADC AD7691::ReadValue()
 
 static float GetSample(float freq, int /*num_sample*/)
 {
-    const float T = 1.0f / freq;
+    float T = 1.0f / freq;
 
-    const float samples_in_T = T / 10e-6f;
+    float samples_in_T = T / SampleRate::TimeUSonPoint() / 1e-6f;
 
-    const float radians_in_T = 2.0f * M_PI;
+    float radians_in_T = 2.0f * M_PI;
 
-    const float radians_in_sample = radians_in_T / samples_in_T;
+    float radians_in_sample = radians_in_T / samples_in_T;
 
     static float value = 0.0f;
 
@@ -97,9 +97,9 @@ int AD7691::ReadValueRAW()
 
     static int counter = 0;
 
-    float value = amplitude * GetSample(5000.0f, counter++);
+    float value = amplitude * GetSample(45.0f, counter++);
 
-    value += (float)std::rand() / (float)RAND_MAX / 100.0f;
+//    value += (float)std::rand() / (float)RAND_MAX / 100.0f;
 
 //    value += 0.1f;
 
