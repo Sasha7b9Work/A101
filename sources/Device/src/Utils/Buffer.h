@@ -69,7 +69,7 @@ public:
         }
     }
 
-    void Append(uint8 value)
+    void Append(T value)
     {
         if (Size() + 1 > Capacity())
         {
@@ -93,17 +93,17 @@ public:
         return null;
     }
 
-    T &operator[](int i)
-    {
-        if (i >= 0 && i < Size())
-        {
-            return buffer[i];
-        }
-
-        static T null(0);
-
-        return null;
-    }
+//    T &operator[](int i)
+//    {
+//        if (i >= 0 && i < Size())
+//        {
+//            return buffer[i];
+//        }
+//
+//        static T null(0);
+//
+//        return null;
+//    }
 
     // Содержимое эквалентно данной строке
     bool IsEquals(pchar)
@@ -122,13 +122,6 @@ protected:
     int size;
 
     T buffer[MAX_SIZE];
-};
-
-
-class Buffer1024 : public Buffer<1024>
-{
-public:
-    Buffer1024() : Buffer<1024>() { }
 };
 
 

@@ -15,7 +15,9 @@ ResolverFFT::ResolverFFT(int delta)
 
     for (int i = 0; i < NUM_POINTS; i += delta)
     {
-        in[i] = (float)BufferADC::At(i).Real(); //-V522
+        float value = (float)BufferADC::At(i).Real(); //-V522
+
+        in.Append(value);
     }
 
     TimeMeterMS meter;
@@ -26,7 +28,7 @@ ResolverFFT::ResolverFFT(int delta)
 
     for (int i = 0; i < SIZE_DATA; i++)
     {
-        data[i] = (uint8)(255.0f * out[i]); //-V522
+        data[i] = (uint8)(255.0f * out[(uint)i]); //-V522
     }
 }
 
