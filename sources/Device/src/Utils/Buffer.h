@@ -93,30 +93,6 @@ public:
         return null;
     }
 
-//    T &operator[](int i)
-//    {
-//        if (i >= 0 && i < Size())
-//        {
-//            return buffer[i];
-//        }
-//
-//        static T null(0);
-//
-//        return null;
-//    }
-
-    // Содержимое эквалентно данной строке
-    bool IsEquals(pchar)
-    {
-        return false;
-    }
-
-    // Содержимое начинается с данной строки
-    bool BeginWith(char *)
-    {
-        return false;
-    }
-
 protected:
 
     int size;
