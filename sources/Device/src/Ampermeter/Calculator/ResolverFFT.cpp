@@ -180,12 +180,22 @@ void ResolverFFT::ApplyHamming(float *buf, uint num_points)
 
 void ResolverFFT::TransformToLogarifm(float *buf, uint num_points)
 {
-    const float minDB = -20.0f;
+    const float minDB = -40.0f;
 
     for (uint i = 0; i < num_points; i++)
     {
         buf[i] = 10 * std::log10f(buf[i]);
+    }
 
-        buf[i] = 1.0f - buf[i] / minDB;
+    for (uint i = 0; i < num_points; i++)
+    {
+        float sub = buf[i] / minDB;
+
+        if (sub > 1.0f)
+        {
+            sub = 1.0f;
+        }
+
+        buf[i] = 1.0f - sub;
     }
 }
