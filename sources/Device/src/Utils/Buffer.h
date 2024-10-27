@@ -56,19 +56,6 @@ public:
         }
     }
 
-    void Append(const uint8 *data, int _size)
-    {
-        if (Size() + _size > Capacity())
-        {
-            LOG_ERROR("Нет места в буфере");
-        }
-        else
-        {
-            std::memcpy(&buffer[size], data, (uint)_size * sizeof(buffer[0]));
-            size += _size;
-        }
-    }
-
     void Append(T value)
     {
         if (Size() + 1 > Capacity())
