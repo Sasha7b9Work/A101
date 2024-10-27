@@ -92,8 +92,11 @@ private:
 
     void CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]);
     void Normalize(float *, uint);
-    void ApplyHamming(float *, uint);
     void TransformToLogarifm(float *, uint);
+
+    void ApplyWindowHamming(float *, uint);
+    void ApplyWindowBlackman(float *, uint);
+    void ApplyWindowHann(float *, uint);
 };
 
 

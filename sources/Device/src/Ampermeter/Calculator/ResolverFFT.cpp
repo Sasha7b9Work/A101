@@ -61,7 +61,7 @@ void ResolverFFT::CalculateFFT(float dataR[NUM_POINTS], float result[NUM_POINTS]
         result[i] = 0.0;
     }
 
-    ApplyHamming(dataR, NUM_POINTS);
+    ApplyWindowHamming(dataR, NUM_POINTS);
 
     static const float Rcoef[14] =
     {
@@ -169,7 +169,7 @@ void ResolverFFT::Normalize(float *buf, uint num_points)
 }
 
 
-void ResolverFFT::ApplyHamming(float *buf, uint num_points)
+void ResolverFFT::ApplyWindowHamming(float *buf, uint num_points)
 {
     for (uint i = 0; i < num_points; i++)
     {
@@ -178,9 +178,31 @@ void ResolverFFT::ApplyHamming(float *buf, uint num_points)
 }
 
 
+void ResolverFFT::ApplyWindowBlackman(float *buf, uint num_points)
+{
+    float alpha = 0.16f;
+    float a0 = (1.0f - alpha) / 2.0f;
+    float a1 = 0.5f;
+    float a2 = alpha / 2.0f;
+    for (uint i = 0; i < num_points; i++)
+    {
+        buf[i] *= a0 - a1 * std::cosf(2.0f * 3.1415926f * i / (num_points - 1)) + a2 * std::cosf(4.0f * 3.1415926f * i / (num_points - 1));
+    }
+}
+
+
+void ResolverFFT::ApplyWindowHann(float *buf, uint num_points)
+{
+    for (uint i = 0; i < num_points; i++)
+    {
+        buf[i] *= 0.5f * (1.0f - std::cosf(2.0f * 3.1415926f * i / (num_points - 1.0f)));
+    }
+}
+
+
 void ResolverFFT::TransformToLogarifm(float *buf, uint num_points)
 {
-    const float minDB = -40.0f;
+    const float minDB = -60.0f;
 
     for (uint i = 0; i < num_points; i++)
     {
