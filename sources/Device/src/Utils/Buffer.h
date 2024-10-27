@@ -63,7 +63,7 @@ public:
 
     T &operator[](uint i)
     {
-        if ((int)i >= 0 && (int)i < Size())
+        if ((int)i >= 0 && (int)i < Capacity())
         {
             return buffer[i];
         }

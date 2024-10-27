@@ -25,8 +25,6 @@ namespace DiagramInput
     static int first_point = 0;             // С этой точки начнём отрисовку в следующий раз
     static int elapsed_point = NUM_POINTS;  // Столько точек осталось отрисовать
 
-    static void DrawCoordinateAxes();
-
     static void Clear();
 
     static void InstallRaw();
@@ -59,8 +57,6 @@ void DiagramInput::InstallData()
 
 void DiagramInput::InstallRaw()
 {
-    DrawCoordinateAxes();
-
     int range = Range::Current();
 
     REAL scale = height / Measure::MaxIAbs(range) / 3.0;
@@ -147,7 +143,7 @@ void DiagramInput::DrawRaw()
 
     if (elapsed_point == 0)
     {
-        Reset();
+        Reset(false);
     }
 }
 
@@ -165,14 +161,14 @@ void DiagramInput::DrawFFT()
 
     for (int i = 0; i < num_points; i++)
     {
-        Nextion::DrawLineV(first_point, 0, height, Color::Background);
-        Nextion::DrawLineV(first_point, 0, points[first_point], Color::White);
+        Nextion::DrawLineV(first_point + 1, Display::HEIGHT -1, Display::HEIGHT - height, Color::Background);
+        Nextion::DrawLineV(first_point + 1, Display::HEIGHT -1, Display::HEIGHT - points[first_point], Color::White);
         first_point++;
     }
 
     if (elapsed_point == 0)
     {
-        Reset();
+        Reset(false);
     }
 }
 
@@ -228,27 +224,17 @@ bool DiagramInput::DataInstalled()
 }
 
 
-void DiagramInput::Reset()
+void DiagramInput::Reset(bool clear)
 {
     data_installed = false;
     first_point = 0;
     elapsed_point = NUM_POINTS;
 
-    Clear();
-
-    DrawCoordinateAxes();
-}
-
-void DiagramInput::DrawCoordinateAxes()
-{
-    if (set.type_signal.value == TypeSignal::Raw)
+    if (clear)
     {
-        Nextion::DrawRect({ 0, y0 - height / 2, Display::WIDTH - 1, height }, Color::Gray75);
-
-        Nextion::DrawLineH(y0, 0, Display::WIDTH);
+        Clear();
     }
 }
-
 
 void DiagramInput::Clear()
 {

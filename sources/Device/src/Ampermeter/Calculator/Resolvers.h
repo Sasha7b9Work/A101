@@ -70,8 +70,8 @@ private:
 class ResolverFFT
 {
 public:
-    static const int NUM_POINTS = 1024;             // Столько точек во входном массиве
-    static const int LOG_N = 10;                    // Это 2 * LOG_N, чтобы получилось NUM_POINTS
+    static const int NUM_POINTS = 8192;             // Столько точек во входном массиве
+    static const int LOG_N = 13;                    // Это 2 * LOG_N, чтобы получилось NUM_POINTS
     static const int SIZE_DATA = NUM_POINTS / 2;    // Столько точек в выходном массиве
 
     // Через delta нужно брать точки

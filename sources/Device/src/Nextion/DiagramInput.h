@@ -12,7 +12,7 @@ namespace DiagramInput
 
     void Draw();
 
-    void Reset();
+    void Reset(bool clear);
 
     // Если true, то не надо обновлять амперметр, чьё обновление занимает порядком времени - более 300 мс
     bool DataInstalled();

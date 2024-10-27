@@ -10,7 +10,7 @@ namespace PageGraph
 {
     static void FuncOnEnter()
     {
-        DiagramInput::Reset();
+        DiagramInput::Reset(true);
     }
 
     static void FuncDraw()

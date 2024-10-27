@@ -97,11 +97,11 @@ int AD7691::ReadValueRAW()
 {
     float amplitude = 0.5f;
 
-    float value = amplitude * GetSample(4999.0f, counter);
+    float value = amplitude * GetSample(5000.0f, counter);
 
 //    value += (float)std::rand() / (float)RAND_MAX / 10.0f;
 
-    value += 0.1f;
+//    value += 0.1f;
 
     value *= 0x1FFFF;           // 17 бит в единичке - максимальное значение
 
