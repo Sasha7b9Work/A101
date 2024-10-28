@@ -8,8 +8,8 @@ ResolverMeasures::ResolverMeasures(const Period &period, REAL frequency)
 {
 //    min = std::numeric_limits<REAL>::max();
 
-    max = -BufferADC::Max().Real();
-    min = -BufferADC::Min().Real();
+    max = BufferADC::Max().Real();
+    min = BufferADC::Min().Real();
 
     int num_points = 0;
     int num_periods = 0;
@@ -79,7 +79,7 @@ void ResolverMeasures::CalculateNumPoints(REAL frequency, int *out_num_points, i
 
     int num_points = 100000;
 
-    while (num_points > 15000)
+    while (num_points > 5000)
     {
         num_periods--;
 
