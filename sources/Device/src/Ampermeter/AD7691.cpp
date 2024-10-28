@@ -28,13 +28,13 @@ uint SampleRate::TimeUSonPoint()
 
 bool SampleRate::InRange(REAL freq, pchar *title_ru, pchar *title_en)
 {
-    static const pchar meas_ru_less[Count] = { "< 40 Ãö", "< 4 Ãö", "< 0.4 Ãö" };
-    static const pchar meas_en_less[Count] = { "< 40 Hz", "< 4 Hz", "< 0.4 Hz" };
+    static const pchar meas_ru_less[Count] = { "< 40Ãö", "< 4Ãö", "< 0.4Ãö" };
+    static const pchar meas_en_less[Count] = { "< 40Hz", "< 4Hz", "< 0.4Hz" };
 
     static const REAL value_min[Count] = { 40.0, 4.0, 0.4 };
 
-    static const pchar meas_ru_abov[Count] = { "> 5 êÃö", "> 400 Ãö", "> 40 Ãö" };
-    static const pchar meas_en_abov[Count] = { "> 5 kHz", "> 400 Hz", "> 40 Hz" };
+    static const pchar meas_ru_abov[Count] = { "> 5êÃö", "> 400Ãö", "> 40Ãö" };
+    static const pchar meas_en_abov[Count] = { "> 5kHz", "> 400Hz", "> 40Hz" };
 
     static const REAL value_max[Count] = { 5e3, 400.0, 40.0 };
 

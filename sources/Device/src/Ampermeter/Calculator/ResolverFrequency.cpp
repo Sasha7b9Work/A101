@@ -14,7 +14,7 @@ ResolverFrequency::ResolverFrequency(const Period &period)
 {
     float sum[BufferADC::SIZE];
 
-    Averager<float, 10> averager;
+    Averager<float, 5> averager;
 
     sum[0] = averager.Push((float)BufferADC::At(0).Real());
 
@@ -34,15 +34,11 @@ ResolverFrequency::ResolverFrequency(const Period &period)
     {
         if (DELTA(i) > 0.0f && DELTA(i + 1) <= 0.0f)
         {
-            i += 5;
+            i += 2;
             counter++;
             continue;
         }
     }
 
-    float sample_time = (float)SampleRate::TimeUSonPoint() * 1e-6f;
-
-    float time = (last - first) * sample_time / counter;
-
-    frequency = 1.0f / time;
+    frequency = (float)counter * 1e6f / (last - first) / SampleRate::TimeUSonPoint();
 }

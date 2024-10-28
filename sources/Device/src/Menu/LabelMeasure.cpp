@@ -245,6 +245,8 @@ void LabelMeasure::SetMeasure(pchar message_ru, pchar message_en)
     label_units.SetText("", "");
 
     label_digits.SetText(message_ru, message_en);
+
+    need_draw = true;
 }
 
 
