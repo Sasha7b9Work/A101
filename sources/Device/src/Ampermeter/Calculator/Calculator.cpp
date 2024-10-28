@@ -70,42 +70,36 @@ void Calculator::AppendData()
         dc.Push(value_dc * k);
     }
 
-    // Пиковое значение
+    // Считаем все измерения
     {
-        ResolverPeak resolver(period);
-
-        peak.Push(resolver.GetResult() * k);
-    }
-
-    // Считаем MIN и MAX и AMPL
-    {
-        ResolverAmpl resolver_ampl(period);
-
-        ampl.Push(resolver_ampl.GetAmplitude() * k);
-
-        min.Push(resolver_ampl.GetMin() * k);
-
-        max.Push(resolver_ampl.GetMax() * k);
-    }
-
 #if 0
 
-    if (ampl.Get() > Range::Max(Range::Current()) * 0.1)        // Частоту выводим только если амплитуда превышает 10% от максимального значения
-    {
-        frequency.Push(ResolverFrequency(period).GetFrequency());
-    }
-    else
-    {
-        frequency.Reset();
-    }
+        if (ampl.Get() > Range::Max(Range::Current()) * 0.1)        // Частоту выводим только если амплитуда превышает 10% от максимального значения
+        {
+            frequency.Push(ResolverFrequency(period).GetFrequency());
+        }
+        else
+        {
+            frequency.Reset();
+        }
 
 #else
 
-    REAL freq = ResolverFrequency(period).GetFrequency();
+        REAL freq = ResolverFrequency(period).GetFrequency();
 
-    frequency.Push(freq);
+        frequency.Push(freq);
 
 #endif
+        ResolverMeasures resolver(period, freq);
+
+        peak.Push(resolver.GetPeak() * k);
+
+        min.Push(resolver.GetMin() * k);
+
+        max.Push(resolver.GetMax() * k);
+
+        ampl.Push(resolver.GetAmplitude() * k);
+    }
 }
 
 

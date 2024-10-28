@@ -4,53 +4,37 @@
 #include "Utils/Buffer.h"
 
 
-// Вычисляет амплутудное значение
-class ResolverAmpl
+/*
+*   Imax - максимальное мгновенное значение отсчёта
+*   Imin - минимальное мгновенное значение отсчёта
+*   Ipeak - разница между Imax и Imin
+*
+*   Iampl - усреднённое по десяти периодам значение Ipeak
+*/
+
+
+// Вычисляет все измерения
+class ResolverMeasures
 {
 public:
 
-    ResolverAmpl(const Period &);
+    ResolverMeasures(const Period &, REAL frequency);
 
-    REAL GetAmplitude() const
-    {
-        return max - min;
-    }
-
-    REAL GetMin() const
-    {
-        return min;
-    }
-
-    REAL GetMax() const
-    {
-        return max;
-    }
+    REAL GetPeak() const {  return max - min; }
+    REAL GetMin() const { return min; }
+    REAL GetMax() const { return max; }
+    REAL GetAmplitude() const { return amplitude; }
 
 private:
 
-    REAL min = 0.0;
+    REAL min = 0.0;         // Минимальное мгновенное значение по всей выборке
+    REAL max = 0.0;         // Максимальное мгновенное значение по всей выборке
+    REAL amplitude = 0.0;   // Разица между макс и мин по 10 периодам
 
-    REAL max = 0.0;
+    REAL CalculateAmplitude(int first, int num_points) const;
+    void CalculateMinMaxSteady(int first, int num_poinst, REAL *min, REAL *max) const;
 
-    REAL CalculateMax(int first, int last, REAL ave) const;
-
-    REAL CalculateMin(int first, int last, REAL ave) const;
-};
-
-
-// Вычисляет пиковое значение
-class ResolverPeak
-{
-public:
-
-    ResolverPeak(const Period &);
-
-    REAL GetResult() const {  return max - min; }
-
-private:
-
-    REAL min = 0.0;
-    REAL max = 0.0;
+    int CalculateNumPoints(REAL frequency) const;
 };
 
 
