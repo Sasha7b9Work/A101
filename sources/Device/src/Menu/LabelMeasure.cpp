@@ -360,6 +360,8 @@ void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int a
             value *= 10.0;
         }
 
+        value = (float)((int)value);
+
         for (int i = 0; i < after; i++)
         {
             value /= 10.0;
