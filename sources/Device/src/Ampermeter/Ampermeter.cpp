@@ -165,6 +165,7 @@ bool Ampermeter::MeasurementCycle()
             }
 
         } while(TIM4->CNT < period * 2 / 3);
+//        } while (false);
 
         while (TIM4->CNT < period)
         {
@@ -181,7 +182,7 @@ bool Ampermeter::MeasurementCycle()
 
 #endif
 
-        ValueADC value((int)(sum_raw / counter_raw));
+        ValueADC value((int)((float)sum_raw / (float)counter_raw + 0.5f));
 
         if (set.firLPF)
         {
