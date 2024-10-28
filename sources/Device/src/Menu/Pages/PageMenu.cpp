@@ -8,10 +8,10 @@
 namespace PageMenu
 {
     extern ButtonMenuToggle btnIndication;
-    extern Choice chRangeFreq;
+//    extern Choice chRangeFreq;
     extern ButtonMenuPress btnCOM;
     extern ButtonMenuPress btnCalibration;
-    extern ButtonMenuPress btnGraphics;
+//    extern ButtonMenuPress btnGraphics;
 
     static void AppendRemoveMeasure(TypeMeasure::E meas, bool insert);
 
@@ -114,7 +114,7 @@ namespace PageMenu
     };
 
 
-    static ButtonMenuPress btnBrightness("", "", 1, 2, [](Item *item, bool press)
+    static ButtonMenuPress btnBrightness("", "", 1, 1, [](Item *item, bool press)
     {
         if (press)
         {
@@ -124,7 +124,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonPress btnLess("-", "-", Font::_1_GB42b, { Item::GetCoordX(2), Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool press)
+    static ButtonPress btnLess("-", "-", Font::_1_GB42b, { Item::GetCoordX(2), Item::GetCoordY(1), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool press)
     {
         if (press)
         {
@@ -136,7 +136,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonPress btnMore("+", "+", Font::_1_GB42b, { Item::GetCoordX(2) + 10 + Item::HEIGHT_MENU, Item::GetCoordY(2), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool press)
+    static ButtonPress btnMore("+", "+", Font::_1_GB42b, { Item::GetCoordX(2) + 10 + Item::HEIGHT_MENU, Item::GetCoordY(1), Item::HEIGHT_MENU, Item::HEIGHT_MENU }, [](Item *, bool press)
     {
         if (press)
         {
@@ -158,7 +158,7 @@ namespace PageMenu
     static Choice chLanguage((Lang::IsRU() ? "Language" : "язык"), (Lang::IsRU() ? "язык" : "Language"),
         (uint8 *)&set.lang,
         names_lang,
-        1, 3, [](Item *item, bool press)
+        1, 2, [](Item *item, bool press)
     {
         if (!press)
         {
@@ -167,7 +167,7 @@ namespace PageMenu
         }
     });
 
-    static ButtonMenuPress btnInformation("»нформаци€", "Information", 1, 4, [](Item *, bool press)
+    static ButtonMenuPress btnInformation("»нформаци€", "Information", 1, 3, [](Item *, bool press)
     {
         if (!press)
         {
@@ -182,16 +182,16 @@ namespace PageMenu
             btnIndication.SetToggled(false);
             btnIndication.SetInactiveColor();
             btnCalibration.SetInactiveColor();
-            btnGraphics.SetInactiveColor();
+//            btnGraphics.SetInactiveColor();
         }
         else
         {
             btnIndication.SetActiveColor();
             btnCalibration.SetActiveColor();
-            btnGraphics.SetActiveColor();
+//            btnGraphics.SetActiveColor();
         }
 
-        chRangeFreq.SetShown(press);
+//        chRangeFreq.SetShown(press);
         btnCOM.SetShown(press);
         btnBrightness.SetShown(press);
         btnLess.SetShown(press);
@@ -207,13 +207,13 @@ namespace PageMenu
             btnSettings.SetToggled(false);
             btnSettings.SetInactiveColor();
             btnCalibration.SetInactiveColor();
-            btnGraphics.SetInactiveColor();
+//            btnGraphics.SetInactiveColor();
         }
         else
         {
             btnSettings.SetActiveColor();
             btnCalibration.SetActiveColor();
-            btnGraphics.SetActiveColor();
+//            btnGraphics.SetActiveColor();
         }
 
         press ? btnSettings.SetInactiveColor() : btnSettings.SetActiveColor();
@@ -233,13 +233,13 @@ namespace PageMenu
         }
     });
 
-    ButtonMenuPress btnGraphics("√рафики", "Graphs", 0, 3, [](Item *, bool press)
-    {
-        if (!press)
-        {
-            PageGraph::self->SetAsCurrent();
-        }
-    });
+//    ButtonMenuPress btnGraphics("√рафики", "Graphs", 0, 3, [](Item *, bool press)
+//    {
+//        if (!press)
+//        {
+//            PageGraph::self->SetAsCurrent();
+//        }
+//    });
 
     static ButtonMenuPress btnBack("Ќазад", "Back", 2, 0, [](Item *, bool press)
     {
@@ -249,23 +249,23 @@ namespace PageMenu
         }
     });
 
-    static pchar names_range_freq[] =
-    {
-        "40 √ц - 5 к√ц", "40 Hz - 5 kHz",
-        "4 √ц - 40 √ц",  "4 Hz - 40 Hz",
-        "0.4 √ц - 4 √ц", "0.4 Hz - 4 Hz",
-        nullptr,       nullptr
-    };
+//    static pchar names_range_freq[] =
+//    {
+//        "40 √ц - 5 к√ц", "40 Hz - 5 kHz",
+//        "4 √ц - 40 √ц",  "4 Hz - 40 Hz",
+//        "0.4 √ц - 4 √ц", "0.4 Hz - 4 Hz",
+//        nullptr,       nullptr
+//    };
 
-    static uint8 sample_rate = SampleRate::_10us;
+//    static uint8 sample_rate = SampleRate::_10us;
 
-    Choice chRangeFreq("ƒиапазон", "Range", &sample_rate, names_range_freq, 1, 1, [](Item *, bool press)
-    {
-        if (!press)
-        {
-            SampleRate::Set((SampleRate::E)sample_rate);
-        }
-    });
+//    Choice chRangeFreq("ƒиапазон", "Range", &sample_rate, names_range_freq, 1, 1, [](Item *, bool press)
+//    {
+//        if (!press)
+//        {
+//            SampleRate::Set((SampleRate::E)sample_rate);
+//        }
+//    });
 
     ButtonMenuPress btnCOM("COM-порт", "COM-port", 1, 0, [](Item *, bool press)
     {
@@ -286,10 +286,10 @@ namespace PageMenu
         &btnSettings,
         &btnIndication,
         &btnCalibration,
-        &btnGraphics,
+//        &btnGraphics,
         &btnBack,
         &btnCOM,
-        &chRangeFreq,
+//        &chRangeFreq,
         &btnBrightness,
         &chLanguage,
         &btnInformation,
