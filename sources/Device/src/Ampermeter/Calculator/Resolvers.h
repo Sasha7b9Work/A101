@@ -20,7 +20,7 @@ public:
 
     ResolverMeasures(const Period &, REAL frequency);
 
-    REAL GetPeak() const {  return max - min; }
+    REAL GetPeak() const {  return peak; }
     REAL GetMin() const { return min; }
     REAL GetMax() const { return max; }
     REAL GetAmplitude() const { return amplitude; }
@@ -29,6 +29,7 @@ private:
 
     REAL min = 0.0;         // Минимальное мгновенное значение по всей выборке
     REAL max = 0.0;         // Максимальное мгновенное значение по всей выборке
+    REAL peak = 0.0;
     REAL amplitude = 0.0;   // Разица между макс и мин по 10 периодам
 
     REAL CalculateAmplitudeSteady(int first, int num_poinst, int num_periods) const;

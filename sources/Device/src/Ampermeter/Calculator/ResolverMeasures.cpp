@@ -11,39 +11,36 @@ ResolverMeasures::ResolverMeasures(const Period &period, REAL frequency)
     max = BufferADC::Max().Real();
     min = BufferADC::Min().Real();
 
+    peak = max - min;
+
     int num_points = 0;
     int num_periods = 0;
     
     CalculateNumPoints(frequency, &num_points, &num_periods);
 
-    amplitude = CalculateAmplitudeSteady(period.first.first, num_points, num_periods);
+    amplitude = (num_points < 10 || num_periods < 1) ?
+        peak / 2.0 :
+        CalculateAmplitudeSteady(period.first.first, num_points, num_periods);
 }
 
 
 REAL ResolverMeasures::CalculateAmplitudeSteady(int first, int num_points, int num_periods) const
 {
-    if (num_points < 10)
+    REAL sum_ampl = 0.0;
+
+    if (first + num_points >= BufferADC::SIZE)
     {
-        return std::numeric_limits<REAL>::infinity();
+        first = 0;
     }
-    else
+
+    float points_on_period = (float)num_points / num_periods;
+
+    for (int i = 0; i < num_periods; i++)
     {
-        REAL sum_ampl = 0.0;
-
-        if (first + num_points >= BufferADC::SIZE)
-        {
-            first = 0;
-        }
-
-        float points_on_period = (float)num_points / num_periods;
-
-        for (int i = 0; i < num_periods; i++)
-        {
-            sum_ampl += CalculateAmplitudeSteadyPeriod((int)(first + points_on_period * i + 0.5f), (int)(points_on_period + 0.5f));
-        }
-
-        return sum_ampl / num_periods;
+        sum_ampl += CalculateAmplitudeSteadyPeriod((int)(first + points_on_period * i + 0.5f), (int)(points_on_period + 0.5f));
     }
+
+    return sum_ampl / num_periods;
 }
 
 
