@@ -8,8 +8,8 @@ ResolverMeasures::ResolverMeasures(const Period &period, REAL frequency)
 {
 //    min = std::numeric_limits<REAL>::max();
 
-    max = BufferADC::Max().Real();
-    min = BufferADC::Min().Real();
+    max = -BufferADC::Max().Real();
+    min = -BufferADC::Min().Real();
 
     int num_points = CalculateNumPoints(frequency);
 
@@ -19,12 +19,19 @@ ResolverMeasures::ResolverMeasures(const Period &period, REAL frequency)
 
 REAL ResolverMeasures::CalculateAmplitude(int first, int num_points) const
 {
-    REAL max_steady = 0.0;
-    REAL min_steady = 0.0;
+    if (num_points < 10)
+    {
+        return std::numeric_limits<REAL>::infinity();
+    }
+    else
+    {
+        REAL max_steady = 0.0;
+        REAL min_steady = 0.0;
 
-    CalculateMinMaxSteady(first, num_points, &min_steady, &max_steady);
+        CalculateMinMaxSteady(first, num_points, &min_steady, &max_steady);
 
-    return max_steady - min_steady;
+        return max_steady - min_steady;
+    }
 }
 
 
@@ -42,7 +49,7 @@ void ResolverMeasures::CalculateMinMaxSteady(int first, int num_points, REAL *ou
 
     for (int i = first; i < last; i++)
     {
-        REAL value = BufferADC::At(i).Real();
+        REAL value = -BufferADC::At(i).Real();
 
         if (value > res_max)
         {

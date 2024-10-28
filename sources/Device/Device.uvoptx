@@ -152,50 +152,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>273</LineNumber>
+          <LineNumber>149</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134236034</Address>
+          <Address>46</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Ampermeter\Ampermeter.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Utils\String.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Ampermeter/Ampermeter.cpp\273</Expression>
+          <Expression>\\A101_D\src/Utils/String.cpp\149</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>237</LineNumber>
+          <LineNumber>14</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134263624</Address>
+          <Address>134258246</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Nextion\Nextion.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Ampermeter\Calculator\ResolverMeasures.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Nextion/Nextion.cpp\237</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>99</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134234238</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Hardware\HAL\HAL_IT.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\A101_D\src/Hardware/HAL/HAL_IT.cpp\99</Expression>
+          <Expression>\\A101_D\src/Ampermeter/Calculator/ResolverMeasures.cpp\14</Expression>
         </Bp>
       </Breakpoint>
       <MemoryWindow1>

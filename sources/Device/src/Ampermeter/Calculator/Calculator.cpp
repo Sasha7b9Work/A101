@@ -87,18 +87,24 @@ void Calculator::AppendData()
 
         REAL freq = ResolverFrequency(period).GetFrequency();
 
-        frequency.Push(freq);
+        if (freq > 0.4f)
+        {
+            frequency.Push(freq);
+        }
 
 #endif
-        ResolverMeasures resolver(period, freq);
+        if (frequency.NumElements())
+        {
+            ResolverMeasures resolver(period, freq);
 
-        peak.Push(resolver.GetPeak() * k);
+            peak.Push(resolver.GetPeak() * k);
 
-        min.Push(resolver.GetMin() * k);
+            min.Push(resolver.GetMin() * k);
 
-        max.Push(resolver.GetMax() * k);
+            max.Push(resolver.GetMax() * k);
 
-        ampl.Push(resolver.GetAmplitude() * k);
+            ampl.Push(resolver.GetAmplitude() * k);
+        }
     }
 }
 
