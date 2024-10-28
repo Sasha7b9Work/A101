@@ -31,10 +31,10 @@ private:
     REAL max = 0.0;         // Максимальное мгновенное значение по всей выборке
     REAL amplitude = 0.0;   // Разица между макс и мин по 10 периодам
 
-    REAL CalculateAmplitude(int first, int num_points) const;
-    void CalculateMinMaxSteady(int first, int num_poinst, REAL *min, REAL *max) const;
+    REAL CalculateAmplitudeSteady(int first, int num_poinst, int num_periods) const;
+    REAL CalculateAmplitudeSteadyPeriod(int first, int num_points) const;
 
-    int CalculateNumPoints(REAL frequency) const;
+    void CalculateNumPoints(REAL frequency, int *out_num_points, int *out_num_periods) const;
 };
 
 

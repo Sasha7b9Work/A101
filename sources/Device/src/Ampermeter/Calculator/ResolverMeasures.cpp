@@ -11,13 +11,16 @@ ResolverMeasures::ResolverMeasures(const Period &period, REAL frequency)
     max = -BufferADC::Max().Real();
     min = -BufferADC::Min().Real();
 
-    int num_points = CalculateNumPoints(frequency);
+    int num_points = 0;
+    int num_periods = 0;
+    
+    CalculateNumPoints(frequency, &num_points, &num_periods);
 
-    amplitude = CalculateAmplitude(period.first.first, num_points);
+    amplitude = CalculateAmplitudeSteady(period.first.first, num_points, num_periods);
 }
 
 
-REAL ResolverMeasures::CalculateAmplitude(int first, int num_points) const
+REAL ResolverMeasures::CalculateAmplitudeSteady(int first, int num_points, int num_periods) const
 {
     if (num_points < 10)
     {
@@ -25,23 +28,27 @@ REAL ResolverMeasures::CalculateAmplitude(int first, int num_points) const
     }
     else
     {
-        REAL max_steady = 0.0;
-        REAL min_steady = 0.0;
+        REAL sum_ampl = 0.0;
 
-        CalculateMinMaxSteady(first, num_points, &min_steady, &max_steady);
+        if (first + num_points >= BufferADC::SIZE)
+        {
+            first = 0;
+        }
 
-        return max_steady - min_steady;
+        float points_on_period = (float)num_points / num_periods;
+
+        for (int i = 0; i < num_periods; i++)
+        {
+            sum_ampl += CalculateAmplitudeSteadyPeriod((int)(first + points_on_period * i + 0.5f), (int)(points_on_period + 0.5f));
+        }
+
+        return sum_ampl / num_periods;
     }
 }
 
 
-void ResolverMeasures::CalculateMinMaxSteady(int first, int num_points, REAL *out_min, REAL *out_max) const
+REAL ResolverMeasures::CalculateAmplitudeSteadyPeriod(int first, int num_points) const
 {
-    if (first + num_points >= BufferADC::SIZE)
-    {
-        first = 0;
-    }
-
     int last = first + num_points;
 
     REAL res_max = -1e30;
@@ -62,14 +69,13 @@ void ResolverMeasures::CalculateMinMaxSteady(int first, int num_points, REAL *ou
         }
     }
 
-    *out_min = res_min;
-    *out_max = res_max;
+    return res_max - res_min;
 }
 
 
-int ResolverMeasures::CalculateNumPoints(REAL frequency) const
+void ResolverMeasures::CalculateNumPoints(REAL frequency, int *out_num_points, int *out_num_periods) const
 {
-    REAL num_periods = 11.0;
+    int num_periods = 11;
 
     int num_points = 100000;
 
@@ -80,5 +86,6 @@ int ResolverMeasures::CalculateNumPoints(REAL frequency) const
         num_points = (int)(1e6 * num_periods / SampleRate::TimeUSonPoint() / frequency + 0.5);
     }
 
-    return num_points;
+    *out_num_points = num_points;
+    *out_num_periods = num_periods;
 }
