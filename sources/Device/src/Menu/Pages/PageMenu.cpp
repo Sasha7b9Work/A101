@@ -11,7 +11,7 @@ namespace PageMenu
 //    extern Choice chRangeFreq;
     extern ButtonMenuPress btnCOM;
     extern ButtonMenuPress btnCalibration;
-    extern ButtonMenuPress btnGraphics;
+//    extern ButtonMenuPress btnGraphics;
 
     static void AppendRemoveMeasure(TypeMeasure::E meas, bool insert);
 
@@ -182,13 +182,13 @@ namespace PageMenu
             btnIndication.SetToggled(false);
             btnIndication.SetInactiveColor();
             btnCalibration.SetInactiveColor();
-            btnGraphics.SetInactiveColor();
+//            btnGraphics.SetInactiveColor();
         }
         else
         {
             btnIndication.SetActiveColor();
             btnCalibration.SetActiveColor();
-            btnGraphics.SetActiveColor();
+//            btnGraphics.SetActiveColor();
         }
 
 //        chRangeFreq.SetShown(press);
@@ -207,13 +207,13 @@ namespace PageMenu
             btnSettings.SetToggled(false);
             btnSettings.SetInactiveColor();
             btnCalibration.SetInactiveColor();
-            btnGraphics.SetInactiveColor();
+//            btnGraphics.SetInactiveColor();
         }
         else
         {
             btnSettings.SetActiveColor();
             btnCalibration.SetActiveColor();
-            btnGraphics.SetActiveColor();
+//            btnGraphics.SetActiveColor();
         }
 
         press ? btnSettings.SetInactiveColor() : btnSettings.SetActiveColor();
@@ -233,13 +233,13 @@ namespace PageMenu
         }
     });
 
-    ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 3, [](Item *, bool press)
-    {
-        if (!press)
-        {
-            PageGraph::self->SetAsCurrent();
-        }
-    });
+//    ButtonMenuPress btnGraphics("Графики", "Graphs", 0, 3, [](Item *, bool press)
+//    {
+//        if (!press)
+//        {
+//            PageGraph::self->SetAsCurrent();
+//        }
+//    });
 
     static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
     {
@@ -286,7 +286,7 @@ namespace PageMenu
         &btnSettings,
         &btnIndication,
         &btnCalibration,
-        &btnGraphics,
+//        &btnGraphics,
         &btnBack,
         &btnCOM,
 //        &chRangeFreq,
