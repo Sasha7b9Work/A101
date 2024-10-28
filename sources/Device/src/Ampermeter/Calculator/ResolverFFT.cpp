@@ -8,7 +8,7 @@
 #include <cstdlib>
 
 
-const float ResolverFFT::minDB = -40.0f;
+const float ResolverFFT::minDB = -60.0f;
 
 
 ResolverFFT::ResolverFFT(int delta)
@@ -26,8 +26,6 @@ ResolverFFT::ResolverFFT(int delta)
     TimeMeterMS meter;
 
     CalculateFFT(in.Data(), out.Data());
-
-    LOG_WRITE("time fft %d ms", meter.ElapsedTime());
 
     for (int i = 0; i < SIZE_DATA; i++)
     {
@@ -158,7 +156,7 @@ void ResolverFFT::Normalize(float *buf, uint num_points)
 {
     float max = 0.0;
 
-    for (uint i = 0; i < num_points / 2; i++)
+    for (uint i = 0; i < num_points; i++)
     {
         if (buf[i] > max) //-V2563
         {
@@ -166,7 +164,7 @@ void ResolverFFT::Normalize(float *buf, uint num_points)
         }
     }
 
-    for (uint i = 0; i < num_points / 2; i++)
+    for (uint i = 0; i < num_points; i++)
     {
         buf[i] /= max; //-V2563
     }

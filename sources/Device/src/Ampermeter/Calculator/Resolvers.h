@@ -71,8 +71,8 @@ private:
 class ResolverFFT
 {
 public:
-    static const int NUM_POINTS = 4096;             // Столько точек во входном массиве
-    static const int LOG_N = 12;                    // Это 2 * LOG_N, чтобы получилось NUM_POINTS
+    static const int NUM_POINTS = 2048;             // Столько точек во входном массиве
+    static const int LOG_N = 11;                    // Это 2 * LOG_N, чтобы получилось NUM_POINTS
     static const int SIZE_DATA = NUM_POINTS / 2;    // Столько точек в выходном массиве
     static const float minDB;
 
