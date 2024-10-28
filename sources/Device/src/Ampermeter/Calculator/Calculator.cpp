@@ -72,27 +72,17 @@ void Calculator::AppendData()
 
     // Считаем все измерения
     {
-#if 0
-
-        if (ampl.Get() > Range::Max(Range::Current()) * 0.1)        // Частоту выводим только если амплитуда превышает 10% от максимального значения
-        {
-            frequency.Push(ResolverFrequency(period).GetFrequency());
-        }
-        else
-        {
-            frequency.Reset();
-        }
-
-#else
-
         REAL freq = ResolverFrequency(period).GetFrequency();
 
-        if (freq > 0.4f)
-        {
+//        if (ampl.Get() > Range::MaxMA(Range::Current()) * 0.1)
+//        {
             frequency.Push(freq);
-        }
+//        }
+//        else
+//        {
+//            frequency.Reset();
+//        }
 
-#endif
         if (frequency.NumElements())
         {
             ResolverMeasures resolver(period, freq);

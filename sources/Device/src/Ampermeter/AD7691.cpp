@@ -31,12 +31,12 @@ bool SampleRate::InRange(REAL freq, pchar *title_ru, pchar *title_en)
     static const pchar meas_ru_less[Count] = { "< 40Ãö", "< 4Ãö", "< 0.4Ãö" };
     static const pchar meas_en_less[Count] = { "< 40Hz", "< 4Hz", "< 0.4Hz" };
 
-    static const REAL value_min[Count] = { 40.0, 4.0, 0.4 };
+    static const REAL value_min[Count] = { 39.0, 3.9, 0.39 };
 
     static const pchar meas_ru_abov[Count] = { "> 5êÃö", "> 400Ãö", "> 40Ãö" };
     static const pchar meas_en_abov[Count] = { "> 5kHz", "> 400Hz", "> 40Hz" };
 
-    static const REAL value_max[Count] = { 5e3, 400.0, 40.0 };
+    static const REAL value_max[Count] = { 5.1e3, 410.0, 41.0 };
 
     if (freq < value_min[value])
     {

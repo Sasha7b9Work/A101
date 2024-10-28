@@ -14,7 +14,7 @@ ResolverFrequency::ResolverFrequency(const Period &period)
 {
     float sum[BufferADC::SIZE];
 
-    Averager<float, 5> averager;
+    Averager<float, 10> averager;
 
     sum[0] = averager.Push((float)BufferADC::At(0).Real());
 
@@ -34,7 +34,7 @@ ResolverFrequency::ResolverFrequency(const Period &period)
     {
         if (DELTA(i) > 0.0f && DELTA(i + 1) <= 0.0f)
         {
-            i += 2;
+            i += 5;
             counter++;
             continue;
         }
