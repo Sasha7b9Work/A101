@@ -251,10 +251,10 @@ namespace PageMenu
 
     static pchar names_range_freq[] =
     {
-        "40 Ãö - 5 êÃö", "40 Hz - 5 kHz",
-        "4 Ãö - 40 Ãö",  "4 Hz - 40 Hz",
-        "0.4 Ãö - 4 Ãö", "0.4 Hz - 4 Hz",
-        nullptr,       nullptr
+        "40 Ãö - 5 êÃö",  "40 Hz - 5 kHz",
+        "4 Ãö - 500 Ãö",  "4 Hz - 500 Hz",
+        "0.4 Ãö - 50 Ãö", "0.4 Hz - 50 Hz",
+        nullptr,          nullptr
     };
 
     static uint8 sample_rate = SampleRate::_10us;
