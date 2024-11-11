@@ -18,6 +18,7 @@ endif ()
 project (A101)
 
 set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
 set (TARGET_NAME A101)
 
