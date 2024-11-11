@@ -4,11 +4,7 @@
 
 #define VERSION_MAJOR 0
 #define VERSION_MINOR 1
-#define VERSION_BUILD 467
 
-#define DATE_BUILD "2024-11-11 10:48:36"
-
-#define VERSION_SCPI  "1.0"
 
 #ifndef WIN32
 #pragma clang diagnostic ignored "-Wglobal-constructors"

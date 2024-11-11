@@ -1,5 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
+#include "defines.inc"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Hardware/Timer.h"
@@ -13,7 +14,7 @@ namespace HAL
     static void EnablePeriphery();
 
     // По этому адресу хранится версия сборки, чтобы прошивальщим мог её прочитать и сравнить с той, что зашита в новой прошивке
-    static const uint PROGRAM_VERSION_BUILD __attribute__((used)) __attribute__((section(".ARM.__at_0x08001000"))) = VERSION_BUILD;
+    static volatile const uint PROGRAM_VERSION_BUILD __attribute__((used)) __attribute__((section(".ARM.__at_0x08001000"))) = VERSION_BUILD;
 }
 
 

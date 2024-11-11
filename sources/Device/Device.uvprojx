@@ -1014,6 +1014,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\opt.h</FilePath>
             </File>
+            <File>
+              <FileName>defines.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\defines.inc</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3146,6 +3151,11 @@
               <FileName>opt.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\opt.h</FilePath>
+            </File>
+            <File>
+              <FileName>defines.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\defines.inc</FilePath>
             </File>
           </Files>
         </Group>
