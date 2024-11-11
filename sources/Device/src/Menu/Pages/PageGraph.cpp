@@ -18,7 +18,7 @@ namespace PageGraph
         DiagramInput::Draw();
     }
 
-    static ButtonMenuPress btnWave("Сигнал", "Signal", 0, 0, [](Item *item, bool press)
+    static ButtonMenuPress btnTypeGraph("Сигнал", "Signal", 0, 0, [](Item *item, bool press)
     {
         if (!press)
         {
@@ -46,7 +46,7 @@ namespace PageGraph
 
     static Item *items[] =
     {
-        &btnWave,
+        &btnTypeGraph,
         &btnBack,
         nullptr
     };
