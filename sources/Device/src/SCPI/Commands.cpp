@@ -1,6 +1,6 @@
 // 2022/11/23 12:38:18 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "defines.inc"
+#include "defines.cpp"
 #include "SCPI/Commands.h"
 #include "Device.h"
 #include "Menu/Pages/Pages.h"

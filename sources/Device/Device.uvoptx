@@ -1074,12 +1074,12 @@
     <File>
       <GroupNumber>5</GroupNumber>
       <FileNumber>48</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\defines.inc</PathWithFileName>
-      <FilenameWithoutPath>defines.inc</FilenameWithoutPath>
+      <PathWithFileName>.\src\defines.cpp</PathWithFileName>
+      <FilenameWithoutPath>defines.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

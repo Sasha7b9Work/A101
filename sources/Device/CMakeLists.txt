@@ -70,6 +70,10 @@ source_group(SCPI                  FILES ${SCPI})
 source_group(Settings              FILES ${SETTINGS})
 source_group(Utils                 FILES ${UTILS})
 
+set_source_files_properties(
+    src/defines.cpp
+    PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
+
 add_library(
     ${PROJECT_NAME}
     ${LIBS_HAL}
