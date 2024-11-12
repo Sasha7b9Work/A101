@@ -29,6 +29,11 @@ namespace PageMain
     void RedrawAllMeasures();
 
     extern ButtonToggle btnAVP;
+
+    namespace Star
+    {
+        void Draw();
+    }
 }
 
 

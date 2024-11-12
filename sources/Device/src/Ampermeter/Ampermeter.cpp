@@ -148,6 +148,8 @@ bool Ampermeter::MeasurementCycle()
 
                 if ((prev_time - time) > 50)
                 {
+                    PageMain::Star::Draw();
+
                     Nextion::DrawString({ 520, 5, 70, 27 }, Font::_0_GB34b, Color::White, Color::Background, String<>("%3.1f", time / 1000.0f).c_str(), false, false);
                     prev_time = time;
                 }

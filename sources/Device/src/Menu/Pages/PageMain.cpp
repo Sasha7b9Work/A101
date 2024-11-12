@@ -23,7 +23,6 @@ namespace PageMain
         static bool prev_enabled = false;       // В таком состоянии звёздочка была
 
         static void Reset();
-        static void Draw();
     }
 
     extern ButtonPress btnMenu;
