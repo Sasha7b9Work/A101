@@ -34,11 +34,11 @@ void Device::Init()
 
 void Device::Update()
 {
+    Display::Update();
+
     Ampermeter::Update();
 
     Nextion::Update();
-
-    Display::Update();
 
     Nextion::Update();
 
