@@ -23,6 +23,9 @@ struct SampleRate
     // Возвращает false, если намеренная частота выходит за пределы текущего диапазона
     static bool InRange(REAL, pchar *title_ru, pchar *title_en);
 
+    // Время полного считывания данных
+    static uint TimeFullRead();
+
 private:
 
     static E value;

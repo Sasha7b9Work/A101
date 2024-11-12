@@ -110,7 +110,7 @@ void Ampermeter::Update()
         {
             if (range > min)
             {
-                PageMain::SetRange(range - 1);
+                PageMain::SetRange(range - 1); 
             }
         }
 
@@ -121,6 +121,11 @@ void Ampermeter::Update()
 
 bool Ampermeter::MeasurementCycle()
 {
+    if (Page::Current() == PageMain::self)
+    {
+        Nextion::DrawString({ 520, 5, 50, 27 }, Font::_0_GB34b, Color::White, Color::Background, "", false, false);
+    }
+
     TimeMeterMS meter;
 
     BufferADC::Clear();
@@ -131,8 +136,24 @@ bool Ampermeter::MeasurementCycle()
 
     int num_samples = 0;
 
+    uint prev_time = SampleRate::TimeFullRead();
+
     while (!BufferADC::IsFull())
     {
+        if (SampleRate::Get() != SampleRate::_10us)
+        {
+            if (SampleRate::TimeFullRead() > meter.ElapsedTime())
+            {
+                uint time = SampleRate::TimeFullRead() - meter.ElapsedTime();
+
+                if ((prev_time - time) > 50)
+                {
+                    Nextion::DrawString({ 520, 5, 70, 27 }, Font::_0_GB34b, Color::White, Color::Background, String<>("%3.1f", time / 1000.0f).c_str(), false, false);
+                    prev_time = time;
+                }
+            }
+        }
+
         int counter_raw = 0;
         int64 sum_raw = 0;
 

@@ -36,7 +36,7 @@ bool SampleRate::InRange(REAL freq, pchar *title_ru, pchar *title_en)
     static const pchar meas_ru_abov[Count] = { "> 5êÃö", "> 400Ãö", "> 40Ãö" };
     static const pchar meas_en_abov[Count] = { "> 5kHz", "> 400Hz", "> 40Hz" };
 
-    static const REAL value_max[Count] = { 5.1e3, 410.0, 41.0 };
+    static const REAL value_max[Count] = { 5.1e3, 510.0, 51.0 };
 
     if (freq < value_min[value])
     {
@@ -54,6 +54,19 @@ bool SampleRate::InRange(REAL freq, pchar *title_ru, pchar *title_en)
     }
 
     return true;
+}
+
+
+uint SampleRate::TimeFullRead()
+{
+    static const uint times[Count] =
+    {
+        173,
+        1730,
+        17300
+    };
+
+    return times[value];
 }
 
 
