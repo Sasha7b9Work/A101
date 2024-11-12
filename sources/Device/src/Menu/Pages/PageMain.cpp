@@ -153,7 +153,7 @@ namespace PageMain
         return i * WidthHiButton();
     }
 
-    static ButtonPress btnZero("Óñò. 0", "Set 0", Font::_5_GB30b, { CoordXHiButton(4), 4, WidthHiButton(), 37 }, [](Item *, bool press)
+    static ButtonPress btnZero("Óñò. 0", "Set 0", Font::_5_GB30b, { CoordXHiButton(3), 4, WidthHiButton(), 37 }, [](Item *, bool press)
     {
         if (press)
         {
