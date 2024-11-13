@@ -127,7 +127,7 @@ struct ChangeRange
 
 
 // Как выводить сигнал - в виде отсчётов или в виде FFT
-struct TypeSignal
+struct TypeGraph
 {
     enum E
     {
@@ -136,7 +136,7 @@ struct TypeSignal
         Count
     };
 
-    TypeSignal(E v = Raw) : value(v) { }
+    TypeGraph(E v = Raw) : value(v) { }
 
     void Increase()
     {
@@ -178,12 +178,12 @@ struct Settings
                                     // нужно удалять, дописывая в хвост новое нужное измерение
 
     MeasuresOnDisplay meas_on_display;
-    Baudrate baudrate;
-    Parity::E parity;
-    StopBits::E stop_bits;
-    ChangeRange::E change_range;
-    TypeSignal type_signal;
-    int16 brightness;               // яркость от 10 до 100
+    Baudrate          baudrate;
+    Parity::E         parity;
+    StopBits::E       stop_bits;
+    ChangeRange::E    change_range;
+    TypeGraph         type_signal;
+    int16             brightness;       // яркость от 10 до 100
 
     uint serial_number;
 

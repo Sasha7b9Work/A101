@@ -24,7 +24,7 @@ namespace NS_Settings
         Parity::No,
         StopBits::_1,
         ChangeRange::Hand,
-        TypeSignal::Raw,
+        TypeGraph::Raw,
         100,        // brightness
 
         0U,         // serial number
