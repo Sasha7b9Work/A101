@@ -28,8 +28,8 @@ namespace DiagramInput
 
     static void Clear();
 
-    static void InstallRaw();
-    static void InstallRawDC();
+    static void InstallSignal();
+    static void InstallSignalDC();
 //    static void InstallRawAC();
     static void InstallFFT();
 
@@ -45,9 +45,9 @@ void DiagramInput::InstallData()
         return;
     }
 
-    if (set.type_signal.IsSignal())
+    if (set.type_graph.IsSignal())
     {
-        InstallRaw();
+        InstallSignal();
     }
     else
     {
@@ -58,13 +58,13 @@ void DiagramInput::InstallData()
 }
 
 
-void DiagramInput::InstallRaw()
+void DiagramInput::InstallSignal()
 {
-    InstallRawDC();
+    InstallSignalDC();
 }
 
 
-void DiagramInput::InstallRawDC()
+void DiagramInput::InstallSignalDC()
 {
     int range = Range::Current();
 
@@ -119,7 +119,7 @@ void DiagramInput::Draw()
         return;
     }
 
-    if (set.type_signal.IsSignal())
+    if (set.type_graph.IsSignal())
     {
         DrawRaw();
     }

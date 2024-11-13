@@ -19,7 +19,7 @@ namespace PageGraph
             {"FFT",    "FFT"}
         };
 
-        btnTypeGraph.SetText(titles[set.type_signal.GetValue()][Lang::RU], titles[set.type_signal.GetValue()][Lang::EN]);
+        btnTypeGraph.SetText(titles[set.type_graph.GetValue()][Lang::RU], titles[set.type_graph.GetValue()][Lang::EN]);
 
         btnTypeGraph.Refresh();
     }
@@ -30,7 +30,7 @@ namespace PageGraph
 
         SetTitleButtonTypeGraph();
 
-        btnTypeSignal.SetShown(set.type_signal.IsSignal());
+        btnTypeSignal.SetShown(set.type_graph.IsSignal());
 
         btnTypeSignal.Refresh();
     }
@@ -44,7 +44,7 @@ namespace PageGraph
     {
         if (!press)
         {
-            set.type_signal.Increase();
+            set.type_graph.Increase();
 
             SetTitleButtonTypeGraph();
 

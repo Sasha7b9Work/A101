@@ -182,7 +182,7 @@ struct Settings
     Parity::E         parity;
     StopBits::E       stop_bits;
     ChangeRange::E    change_range;
-    TypeGraph         type_signal;
+    TypeGraph         type_graph;
     int16             brightness;       // €ркость от 10 до 100
 
     uint serial_number;
