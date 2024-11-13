@@ -90,15 +90,7 @@ void DiagramInput::InstallSignalFull()
 
         int16 value_int = (int16)(scale * value_abs);
 
-        if (value_int < -height / 2)
-        {
-            value_int = -height / 2;
-        }
-
-        if (value_int > height / 2)
-        {
-            value_int = height / 2;
-        }
+        Math::Limitation<int16>(&value_int, -height / 2, height / 2);
 
         points[i] = (uint16)(y0 + value_int);
     }
