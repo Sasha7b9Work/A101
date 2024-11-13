@@ -2,13 +2,11 @@
 #include "defines.h"
 #include "Nextion/DiagramInput.h"
 #include "Nextion/Nextion.h"
-#include "Hardware/HAL/HAL.h"
-#include "Hardware/Timer.h"
 #include "Nextion/Display.h"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
-#include "Settings/Settings.h"
 #include "Ampermeter/Calculator/Resolvers.h"
+#include "Ampermeter/Calculator/Calculator.h"
 #include <limits>
 #include <cstdio>
 
@@ -28,13 +26,35 @@ namespace DiagramInput
 
     static void Clear();
 
-    static void InstallSignal();
-    static void InstallSignalFull();
-    static void InstallSignalAC();
-    static void InstallFFT();
+    static bool InstallSignal();
+    static bool InstallSignalFull();
+    static bool InstallSignalAC();
+    static bool InstallFFT();
 
     static void DrawSignal();
     static void DrawFFT();
+
+    // order    result
+    //  -1        0.1
+    //   0        1
+    //   1        10
+    static REAL MulPow(int order)
+    {
+        REAL result = 1.0;
+
+        while (order-- > 0)
+        {
+            result *= 10.0;
+
+        }
+
+        while (order++ < 0)
+        {
+            result *= 0.1;
+        }
+
+        return result;
+    }
 }
 
 
@@ -45,33 +65,33 @@ void DiagramInput::InstallData()
         return;
     }
 
+    data_installed = false;
+
     if (set.type_graph.IsSignal())
     {
-        InstallSignal();
+        data_installed = InstallSignal();
     }
     else
     {
-        InstallFFT();
+        data_installed = InstallFFT();
     }
-
-    data_installed = true;
 }
 
 
-void DiagramInput::InstallSignal()
+bool DiagramInput::InstallSignal()
 {
     if (set.type_signal.IsFull())
     {
-        InstallSignalFull();
+        return InstallSignalFull();
     }
     else
     {
-        InstallSignalAC();
+        return InstallSignalAC();
     }
 }
 
 
-void DiagramInput::InstallSignalFull()
+bool DiagramInput::InstallSignalFull()
 {
     int range = Range::Current();
 
@@ -94,16 +114,79 @@ void DiagramInput::InstallSignalFull()
 
         points[i] = (uint16)(y0 + value_int);
     }
+
+    return true;
 }
 
 
-void DiagramInput::InstallSignalAC()
+bool DiagramInput::InstallSignalAC()
 {
+    bool correct = false;
 
+    REAL dc = Calculator::GetAbsDC(&correct);
+
+    if (!correct)
+    {
+        return false;
+    }
+
+    int range = Range::Current();
+//    REAL scale = height / Measure::MaxIAbs(range) / 3.0;
+    REAL k = cal.gain[range].Get();
+
+    REAL min = std::numeric_limits<REAL>::max();
+    REAL max = std::numeric_limits<REAL>::min();
+
+    {                                                          // Находим минимальное и масимальное значения на отрезке
+        for (int i = 0; i < NUM_POINTS; i++)
+        {
+            REAL value_abs = BufferADC::At(i).Real() * k + dc;
+
+            if (range > 2)
+            {
+                value_abs *= 1e3;
+            }
+
+            if (value_abs > max)
+            {
+                max = value_abs;
+            }
+
+            if (value_abs < min)
+            {
+                min = value_abs;
+            }
+        }
+    }
+
+    REAL amplitude = max - min;                                 // Размах переменного напряжения
+
+    if (amplitude == 0.0f)
+    {
+        return false;
+    }
+
+    float width = 0.0f;                                         // Ширина окна в амперах, в которое будем выводить
+
+    int order = 0;
+
+    {                                                           // Находим высоту окна, в котором будем рисовать. Ряд 1,2,5
+        for (;; order++)
+        {
+            if (amplitude * MulPow(order) >= 1.0)
+            {
+                break;
+            }
+        }
+
+
+    }
+
+    return true;
 }
 
 
-void DiagramInput::InstallFFT()
+bool DiagramInput::InstallFFT()
 {
     ResolverFFT resolver(1);
 
@@ -114,6 +197,8 @@ void DiagramInput::InstallFFT()
         uint16 value = (uint16)(resolver.At(i) * scale);
         points[i] = value;
     }
+
+    return true;
 }
 
 

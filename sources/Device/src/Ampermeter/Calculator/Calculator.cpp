@@ -63,7 +63,7 @@ void Calculator::AppendData()
         ac.Push(value_ac * k);
     }
 
-    // Считаем ВС
+    // Считаем DС
     {
         REAL value_dc = -period.dc.Real();
 
