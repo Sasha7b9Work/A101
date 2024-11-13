@@ -29,11 +29,11 @@ namespace DiagramInput
     static void Clear();
 
     static void InstallSignal();
-    static void InstallSignalDC();
-//    static void InstallRawAC();
+    static void InstallSignalFull();
+    static void InstallSignalAC();
     static void InstallFFT();
 
-    static void DrawRaw();
+    static void DrawSignal();
     static void DrawFFT();
 }
 
@@ -60,11 +60,18 @@ void DiagramInput::InstallData()
 
 void DiagramInput::InstallSignal()
 {
-    InstallSignalDC();
+    if (set.type_signal.IsFull())
+    {
+        InstallSignalFull();
+    }
+    else
+    {
+        InstallSignalAC();
+    }
 }
 
 
-void DiagramInput::InstallSignalDC()
+void DiagramInput::InstallSignalFull()
 {
     int range = Range::Current();
 
@@ -98,6 +105,12 @@ void DiagramInput::InstallSignalDC()
 }
 
 
+void DiagramInput::InstallSignalAC()
+{
+
+}
+
+
 void DiagramInput::InstallFFT()
 {
     ResolverFFT resolver(1);
@@ -121,7 +134,7 @@ void DiagramInput::Draw()
 
     if (set.type_graph.IsSignal())
     {
-        DrawRaw();
+        DrawSignal();
     }
     else
     {
@@ -130,7 +143,7 @@ void DiagramInput::Draw()
 }
 
 
-void DiagramInput::DrawRaw()
+void DiagramInput::DrawSignal()
 {
     int num_points = 50;
 
