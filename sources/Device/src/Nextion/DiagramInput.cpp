@@ -45,7 +45,7 @@ void DiagramInput::InstallData()
         return;
     }
 
-    if (set.type_signal.IsRaw())
+    if (set.type_signal.IsSignal())
     {
         InstallRaw();
     }
@@ -119,7 +119,7 @@ void DiagramInput::Draw()
         return;
     }
 
-    if (set.type_signal.IsRaw())
+    if (set.type_signal.IsSignal())
     {
         DrawRaw();
     }

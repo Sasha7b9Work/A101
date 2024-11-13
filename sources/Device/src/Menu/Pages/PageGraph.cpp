@@ -30,7 +30,7 @@ namespace PageGraph
 
         SetTitleButtonTypeGraph();
 
-        btnTypeSignal.SetShown(set.type_signal.IsRaw());
+        btnTypeSignal.SetShown(set.type_signal.IsSignal());
 
         btnTypeSignal.Refresh();
     }

@@ -131,12 +131,12 @@ struct TypeGraph
 {
     enum E
     {
-        Raw,
+        Signal,
         FFT,
         Count
     };
 
-    TypeGraph(E v = Raw) : value(v) { }
+    TypeGraph(E v = Signal) : value(v) { }
 
     void Increase()
     {
@@ -144,13 +144,13 @@ struct TypeGraph
 
         if (value >= Count)
         {
-            value = Raw;
+            value = Signal;
         }
     }
 
-    bool IsRaw() const
+    bool IsSignal() const
     {
-        return value == Raw;
+        return value == Signal;
     }
 
     E GetValue() const { return value; }
