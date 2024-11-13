@@ -29,6 +29,8 @@ namespace DiagramInput
     static void Clear();
 
     static void InstallRaw();
+    static void InstallRawDC();
+//    static void InstallRawAC();
     static void InstallFFT();
 
     static void DrawRaw();
@@ -57,6 +59,12 @@ void DiagramInput::InstallData()
 
 
 void DiagramInput::InstallRaw()
+{
+    InstallRawDC();
+}
+
+
+void DiagramInput::InstallRawDC()
 {
     int range = Range::Current();
 
