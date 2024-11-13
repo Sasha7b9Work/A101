@@ -126,6 +126,26 @@ struct ChangeRange
 };
 
 
+// Будем выводить полный сигнал или только AC
+struct TypeSignal
+{
+    enum E
+    {
+        Full,       // Выводить полный сигнал
+        AC,         // Выводить только переменную составляющую
+        Count
+    };
+
+    TypeSignal(E v = Full) : value(v) { }
+
+    bool IsFull() const { return (value == Full); }
+
+private:
+
+    E value;
+};
+
+
 // Как выводить сигнал - в виде отсчётов или в виде FFT
 struct TypeGraph
 {
@@ -183,6 +203,7 @@ struct Settings
     StopBits::E       stop_bits;
     ChangeRange::E    change_range;
     TypeGraph         type_graph;
+    TypeSignal        type_signal;
     int16             brightness;       // яркость от 10 до 100
 
     uint serial_number;

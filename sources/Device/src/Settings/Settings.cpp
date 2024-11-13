@@ -12,12 +12,12 @@ namespace NS_Settings
     {
         sizeof(Settings),
         0,
-        false,      // middle_of_3
-        false,      // smooth
-        false,      // firLPF
+        false,                  // middle_of_3
+        false,                  // smooth
+        false,                  // firLPF
 
-        true,       // en_DC
-        true,       // en_AC
+        true,                   // en_DC
+        true,                   // en_AC
         { TypeMeasure::Count, TypeMeasure::Count, TypeMeasure::Count },
         MeasuresOnDisplay::AC_DC,
         Baudrate::_9600,
@@ -25,9 +25,10 @@ namespace NS_Settings
         StopBits::_1,
         ChangeRange::Hand,
         TypeGraph::Signal,
-        100,        // brightness
+        TypeSignal::Full,
+        100,                    // brightness
 
-        0U,         // serial number
+        0U,                     // serial number
         Lang::RU
     };
 
