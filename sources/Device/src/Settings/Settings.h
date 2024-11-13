@@ -140,6 +140,18 @@ struct TypeSignal
 
     bool IsFull() const { return (value == Full); }
 
+    void Increase()
+    {
+        value = (E)(value + 1);
+
+        if (value >= Count)
+        {
+            value = (E)0;
+        }
+    }
+
+    E GetValue() const { return value; }
+
 private:
 
     E value;
@@ -164,7 +176,7 @@ struct TypeGraph
 
         if (value >= Count)
         {
-            value = Signal;
+            value = (E)0;
         }
     }
 

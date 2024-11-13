@@ -22,6 +22,16 @@ namespace PageGraph
         btnTypeGraph.SetText(titles[set.type_graph.GetValue()][Lang::RU], titles[set.type_graph.GetValue()][Lang::EN]);
 
         btnTypeGraph.Refresh();
+
+        static const pchar signals[2][Lang::Count] =
+        {
+            {"DC", "DC"},
+            {"AC", "AC"}
+        };
+
+        btnTypeSignal.SetText(signals[set.type_signal.GetValue()][Lang::RU], signals[set.type_signal.GetValue()][Lang::EN]);
+
+        btnTypeSignal.Refresh();
     }
 
     static void FuncOnEnter()
@@ -46,15 +56,18 @@ namespace PageGraph
         {
             set.type_graph.Increase();
 
-            SetTitleButtonTypeGraph();
-
             FuncOnEnter();
         }
     });
 
-    ButtonMenuPress btnTypeSignal("DC", "DC", 1, 0, [](Item * /*item*/, bool /*press*/)
+    ButtonMenuPress btnTypeSignal("DC", "DC", 1, 0, [](Item *, bool press)
     {
+        if (!press)
+        {
+            set.type_signal.Increase();
 
+            FuncOnEnter();
+        }
     });
 
     static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
