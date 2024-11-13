@@ -163,43 +163,6 @@ void Item::Release()
 }
 
 
-void Item::SetEnabled(bool set_enabled)
-{
-    if (set_enabled)
-    {
-        if (IsEnabled())
-        {
-            return;
-        }
-
-        enabled = true;
-
-        SetShown(true);
-
-        if (Page::Current() == parent)
-        {
-            Draw();
-        }
-    }
-    else
-    {
-        if (!IsEnabled())
-        {
-            return;
-        }
-
-        SetShown(false);
-
-        if (Page::Current() == parent)
-        {
-            Draw();
-        }
-
-        enabled = false;
-    }
-}
-
-
 void ButtonToggle::SetToggled(bool toggled, bool execute)
 {
     if(toggled == is_pressed && type == TypeItem::ButtonToggle && is_extened_height_press)
@@ -513,6 +476,43 @@ void Item::SetShown(bool show)
         {
             Draw();
         }
+    }
+}
+
+
+void Item::SetEnabled(bool set_enabled)
+{
+    if (set_enabled)
+    {
+        if (IsEnabled())
+        {
+            return;
+        }
+
+        enabled = true;
+
+        SetShown(true);
+
+        if (Page::Current() == parent)
+        {
+            Draw();
+        }
+    }
+    else
+    {
+        if (!IsEnabled())
+        {
+            return;
+        }
+
+        SetShown(false);
+
+        if (Page::Current() == parent)
+        {
+            Draw();
+        }
+
+        enabled = false;
     }
 }
 

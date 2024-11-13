@@ -8,9 +8,31 @@
 
 namespace PageGraph
 {
+    extern ButtonMenuPress btnTypeGraph;
+    extern ButtonMenuPress btnTypeSignal;
+
+    static void SetTitleButtonTypeGraph()
+    {
+        static const pchar titles[2][Lang::Count] =
+        {
+            {"Сигнал", "Signal"},
+            {"FFT",    "FFT"}
+        };
+
+        btnTypeGraph.SetText(titles[set.type_signal.value][Lang::RU], titles[set.type_signal.value][Lang::EN]);
+
+        btnTypeGraph.Refresh();
+    }
+
     static void FuncOnEnter()
     {
         DiagramInput::Reset(true);
+
+        SetTitleButtonTypeGraph();
+
+        btnTypeSignal.SetShown(set.type_signal.IsRaw());
+
+        btnTypeSignal.Refresh();
     }
 
     static void FuncDraw()
@@ -18,24 +40,21 @@ namespace PageGraph
         DiagramInput::Draw();
     }
 
-    static ButtonMenuPress btnTypeGraph("Сигнал", "Signal", 0, 0, [](Item *item, bool press)
+    ButtonMenuPress btnTypeGraph("Сигнал", "Signal", 0, 0, [](Item *, bool press)
     {
         if (!press)
         {
             set.type_signal.Increase();
 
-            static const pchar titles[2][Lang::Count] =
-            {
-                {"Сигнал", "Signal"},
-                {"FFT",    "FFT"}
-            };
-
-            item->ToButtonPress()->SetText(titles[set.type_signal.value][Lang::RU], titles[set.type_signal.value][Lang::EN]);
-
-            item->Refresh();
+            SetTitleButtonTypeGraph();
 
             FuncOnEnter();
         }
+    });
+
+    ButtonMenuPress btnTypeSignal("DC", "DC", 1, 0, [](Item * /*item*/, bool /*press*/)
+    {
+
     });
 
     static ButtonMenuPress btnBack("Назад", "Back", 2, 0, [](Item *, bool press)
@@ -48,7 +67,8 @@ namespace PageGraph
 
     static Item *items[] =
     {
-        &btnTypeGraph,
+        &btnTypeGraph,          // FFT или f(t) выводим
+        &btnTypeSignal,         // AC или DC выводим
         &btnBack,
         nullptr
     };

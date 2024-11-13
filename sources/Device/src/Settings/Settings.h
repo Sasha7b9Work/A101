@@ -148,6 +148,11 @@ struct TypeSignal
         }
     }
 
+    bool IsRaw() const
+    {
+        return value == Raw;
+    }
+
     E value;
 };
 
