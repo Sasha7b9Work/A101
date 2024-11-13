@@ -19,7 +19,7 @@ namespace PageGraph
             {"FFT",    "FFT"}
         };
 
-        btnTypeGraph.SetText(titles[set.type_signal.value][Lang::RU], titles[set.type_signal.value][Lang::EN]);
+        btnTypeGraph.SetText(titles[set.type_signal.GetValue()][Lang::RU], titles[set.type_signal.GetValue()][Lang::EN]);
 
         btnTypeGraph.Refresh();
     }

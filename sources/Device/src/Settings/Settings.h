@@ -153,6 +153,10 @@ struct TypeSignal
         return value == Raw;
     }
 
+    E GetValue() const { return value; }
+
+private:
+
     E value;
 };
 
