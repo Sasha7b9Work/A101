@@ -13,6 +13,65 @@
 
 namespace DiagramInput
 {
+    // Вспомогательная структура, используемая для расчёта границ окна, куда нужно вписать сигнал
+    struct AmplStruct
+    {
+        AmplStruct(REAL source) : source_amplitude(source), order(0), reduced_ampl(source)
+        {
+            CalculateReducedAmpl();
+        }
+
+        REAL CalculateReducedAmpl()
+        {
+            reduced_ampl = source_amplitude * MulPow(order);
+
+            return reduced_ampl;
+        }
+
+        void DecreaseOrder()
+        {
+            order--;
+
+            CalculateReducedAmpl();
+        }
+
+        void IncreaseOrder()
+        {
+            order++;
+
+            CalculateReducedAmpl();
+        }
+
+    private:
+
+        REAL source_amplitude = 0.0f;       // Исходная амплитуда
+        int order = 0;                      // Порядок. При применении его к ampl должна получиться source_amplitude
+        REAL reduced_ampl = 0.0;            // Приведённая амплитуда - при применении к ней порядка order должна получиться source_ampl
+
+        // order    result
+        //  -1        0.1
+        //   0        1
+        //   1        10
+        REAL MulPow(int k)
+        {
+            REAL result = 1.0;
+
+            while (k-- > 0)
+            {
+                result *= 10.0;
+
+            }
+
+            while (k++ < 0)
+            {
+                result *= 0.1;
+            }
+
+            return result;
+        }
+    };
+
+
     static const int height = 368;
     static const int y0 = 295;
 
@@ -33,28 +92,6 @@ namespace DiagramInput
 
     static void DrawSignal();
     static void DrawFFT();
-
-    // order    result
-    //  -1        0.1
-    //   0        1
-    //   1        10
-    static REAL MulPow(int order)
-    {
-        REAL result = 1.0;
-
-        while (order-- > 0)
-        {
-            result *= 10.0;
-
-        }
-
-        while (order++ < 0)
-        {
-            result *= 0.1;
-        }
-
-        return result;
-    }
 }
 
 
@@ -166,20 +203,39 @@ bool DiagramInput::InstallSignalAC()
         return false;
     }
 
-    float width = 0.0f;                                         // Ширина окна в амперах, в которое будем выводить
-
-    int order = 0;
+    int weight_window = -1;                                     // "Вес" окна = 1, 2 или 5
 
     {                                                           // Находим высоту окна, в котором будем рисовать. Ряд 1,2,5
-        for (;; order++)
+        AmplStruct as(amplitude);
+
+        // Сначала ограничим сверху (1 A)
+        while (as.CalculateReducedAmpl() >= 1.0)
         {
-            if (amplitude * MulPow(order) >= 1.0)
-            {
-                break;
-            }
+            as.DecreaseOrder();
         }
 
+        // В этой точке приведённая амплитуда менее 1
 
+        // Теперь ограничиваем снизу (0.1 A)
+        while (as.CalculateReducedAmpl() < 0.1)
+        {
+            as.IncreaseOrder();
+        }
+
+        // Здесь приведённая амплитуда вписана в отрезок [0.1 A ... 1 A)
+
+        if (as.CalculateReducedAmpl() <= 0.2)
+        {
+            weight_window = 2;
+        }
+        else if (as.CalculateReducedAmpl() <= 0.5)
+        {
+            weight_window = 5;
+        }
+        else
+        {
+            weight_window = 1;
+        }
     }
 
     return true;
