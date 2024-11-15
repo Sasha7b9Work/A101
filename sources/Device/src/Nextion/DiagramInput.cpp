@@ -8,13 +8,13 @@
 #include "Ampermeter/Calculator/Resolvers.h"
 #include "Ampermeter/Calculator/Calculator.h"
 #include <limits>
+#include <cstdlib>
 #include <cstdio>
+#include <string>
 
 
 namespace DiagramInput
 {
-    static void GetMantissaOrder(REAL value, REAL *mantissa, REAL *order);
-
     static const int height = 368;
     static const int y0 = 295;
 
@@ -35,6 +35,9 @@ namespace DiagramInput
 
     static void DrawSignal();
     static void DrawFFT();
+
+    // Возвращет мантиссу и порядок числа value
+    static bool GetMantissaOrder(REAL value, REAL *mantissa, int *order);
 }
 
 
@@ -321,11 +324,24 @@ void DiagramInput::Clear()
 }
 
 
-void DiagramInput::GetMantissaOrder(REAL value, REAL *mantissa, REAL *order)
+bool DiagramInput::GetMantissaOrder(REAL value, REAL *mantissa, int *order)
 {
     char buffer[32];
 
     sprintf(buffer, "%E", value);
 
+    char *pointer_E = std::strchr(buffer, 'E');
 
+    if (pointer_E)
+    {
+        *order = std::atoi(pointer_E + 1);
+
+        *pointer_E = '\0';
+
+        *mantissa = std::stod(buffer);
+
+        return true;
+    }
+
+    return false;
 }
