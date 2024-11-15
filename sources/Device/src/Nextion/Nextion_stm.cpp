@@ -72,7 +72,7 @@ void Nextion::DrawLineWhite(int x1, int y1, int x2, int y2)
 {
     char buffer[128];
 
-    std::sprintf(buffer, "line %d,%d,%d,%d,65535", x1, y1, x2, y2);
+    sprintf(buffer, "line %d,%d,%d,%d,65535", x1, y1, x2, y2);
 
     SendCommandRAW(buffer);
 }

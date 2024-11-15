@@ -13,64 +13,7 @@
 
 namespace DiagramInput
 {
-    // Вспомогательная структура, используемая для расчёта границ окна, куда нужно вписать сигнал
-    struct AmplStruct
-    {
-        AmplStruct(REAL source) : source_amplitude(source), order(0), reduced_ampl(source)
-        {
-            CalculateReducedAmpl();
-        }
-
-        REAL CalculateReducedAmpl()
-        {
-            reduced_ampl = source_amplitude * MulPow(order);
-
-            return reduced_ampl;
-        }
-
-        void DecreaseOrder()
-        {
-            order--;
-
-            CalculateReducedAmpl();
-        }
-
-        void IncreaseOrder()
-        {
-            order++;
-
-            CalculateReducedAmpl();
-        }
-
-    private:
-
-        REAL source_amplitude = 0.0f;       // Исходная амплитуда
-        int order = 0;                      // Порядок. При применении его к ampl должна получиться source_amplitude
-        REAL reduced_ampl = 0.0;            // Приведённая амплитуда - при применении к ней порядка order должна получиться source_ampl
-
-        // order    result
-        //  -1        0.1
-        //   0        1
-        //   1        10
-        REAL MulPow(int k)
-        {
-            REAL result = 1.0;
-
-            while (k-- > 0)
-            {
-                result *= 10.0;
-
-            }
-
-            while (k++ < 0)
-            {
-                result *= 0.1;
-            }
-
-            return result;
-        }
-    };
-
+    static void GetMantissaOrder(REAL value, REAL *mantissa, REAL *order);
 
     static const int height = 368;
     static const int y0 = 295;
@@ -203,42 +146,7 @@ bool DiagramInput::InstallSignalAC()
         return false;
     }
 
-    int weight_window = -1;                                     // "Вес" окна = 1, 2 или 5
-
-    {                                                           // Находим высоту окна, в котором будем рисовать. Ряд 1,2,5
-        AmplStruct as(amplitude);
-
-        // Сначала ограничим сверху (1 A)
-        while (as.CalculateReducedAmpl() >= 1.0)
-        {
-            as.DecreaseOrder();
-        }
-
-        // В этой точке приведённая амплитуда менее 1
-
-        // Теперь ограничиваем снизу (0.1 A)
-        while (as.CalculateReducedAmpl() < 0.1)
-        {
-            as.IncreaseOrder();
-        }
-
-        // Здесь приведённая амплитуда вписана в отрезок [0.1 A ... 1 A)
-
-        if (as.CalculateReducedAmpl() <= 0.2)
-        {
-            weight_window = 2;
-        }
-        else if (as.CalculateReducedAmpl() <= 0.5)
-        {
-            weight_window = 5;
-        }
-        else
-        {
-            weight_window = 1;
-        }
-    }
-
-    return true;
+    return false;
 }
 
 
@@ -325,11 +233,11 @@ void DiagramInput::DrawFFT()
     char buffer[32];
     if (set.lang == Lang::RU)
     {
-        std::sprintf(buffer, "%02.0f Дб", ResolverFFT::minDB);
+        sprintf(buffer, "%02.0f Дб", ResolverFFT::minDB);
     }
     else
     {
-        std::sprintf(buffer, "%02.0f Db", ResolverFFT::minDB);
+        sprintf(buffer, "%02.0f Db", ResolverFFT::minDB);
     }
 
     const int w = 80;
@@ -410,4 +318,14 @@ void DiagramInput::Reset(bool clear)
 void DiagramInput::Clear()
 {
     Nextion::FillRect({ 0, y0 - height / 2, Display::WIDTH - 1, height }, Color::Background);
+}
+
+
+void DiagramInput::GetMantissaOrder(REAL value, REAL *mantissa, REAL *order)
+{
+    char buffer[32];
+
+    sprintf(buffer, "%E", value);
+
+
 }
