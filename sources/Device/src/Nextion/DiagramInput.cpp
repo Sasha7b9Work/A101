@@ -19,7 +19,7 @@ namespace DiagramInput
     static const int y0 = 295;
 
     static const int NUM_POINTS = Display::WIDTH;
-
+    +
     static uint16 points[NUM_POINTS];       // Здесь точки в координатах экрана
 
     static bool data_installed = false;     // Признак того, что данные для отрисовки установлены
@@ -38,6 +38,9 @@ namespace DiagramInput
 
     // Возвращет мантиссу и порядок числа value
     static bool GetMantissaOrder(REAL value, REAL *mantissa, int *order);
+
+    // 
+    static void ConvertValue(int order);
 }
 
 
@@ -141,11 +144,25 @@ bool DiagramInput::InstallSignalAC()
     REAL mantissa = 0.0;
     int order = 0;
 
-    GetMantissaOrder(amplitude, &mantissa, &order);
+    if (!GetMantissaOrder(amplitude, &mantissa, &order))
+    {
+        return false;
+    }
 
+    if (mantissa < 2.0)         // Размах до 2
+    {
 
+    }
+    else if (mantissa < 5.0)    // Размах до 5
+    {
 
-    return true;
+    }
+    else                        // Размах до 10
+    {
+
+    }
+
+    return false;
 }
 
 
