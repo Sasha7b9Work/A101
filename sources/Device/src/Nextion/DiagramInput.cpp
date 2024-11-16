@@ -8,9 +8,9 @@
 #include "Ampermeter/Calculator/Resolvers.h"
 #include "Ampermeter/Calculator/Calculator.h"
 #include <limits>
-#include <cstdlib>
+//#include <string>
 #include <cstdio>
-#include <string>
+#include <cstdlib>
 
 
 namespace DiagramInput
@@ -125,20 +125,9 @@ bool DiagramInput::InstallSignalAC()
         {
             REAL value_abs = BufferADC::At(i).Real() * k + dc;
 
-            if (range > 2)
-            {
-                value_abs *= 1e3;
-            }
+            if (range > 2)       { value_abs *= 1e3; }
 
-            if (value_abs > max)
-            {
-                max = value_abs;
-            }
-
-            if (value_abs < min)
-            {
-                min = value_abs;
-            }
+            Math::Limitation(&value_abs, min, max);
         }
     }
 
@@ -149,7 +138,14 @@ bool DiagramInput::InstallSignalAC()
         return false;
     }
 
-    return false;
+    REAL mantissa = 0.0;
+    int order = 0;
+
+    GetMantissaOrder(amplitude, &mantissa, &order);
+
+
+
+    return true;
 }
 
 
@@ -338,7 +334,7 @@ bool DiagramInput::GetMantissaOrder(REAL value, REAL *mantissa, int *order)
 
         *pointer_E = '\0';
 
-        *mantissa = std::stod(buffer);
+        *mantissa = std::strtod(buffer, nullptr);
 
         return true;
     }

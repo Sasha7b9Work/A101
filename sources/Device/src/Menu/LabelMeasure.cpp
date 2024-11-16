@@ -377,7 +377,7 @@ void LabelMeasure::ConvertRealToText(REAL value, char out[Label::MAX_LEN], int a
         std::strcpy(format, "%03.0f.");
     }
 
-    std::sprintf(buffer, format, (double)value);
+    sprintf(buffer, format, (double)value);
 
     std::strcat(out, buffer);
 }

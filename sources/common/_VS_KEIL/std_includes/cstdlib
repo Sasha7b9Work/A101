@@ -6,5 +6,7 @@ namespace std
 
     int atoi(const char *str);
 
+    double      strtod( const char* str, char** str_end );
+
     #include "stdlib.h"
 }

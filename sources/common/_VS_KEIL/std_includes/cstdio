@@ -1,6 +1,6 @@
 #pragma once
 
-int sprintf(char *, char *, ...);
+int sprintf(char *, const char *, ...);
 
 namespace std
 {
