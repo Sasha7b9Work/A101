@@ -57,19 +57,6 @@ bool SampleRate::InRange(REAL freq, pchar *title_ru, pchar *title_en)
 }
 
 
-uint SampleRate::TimeFullRead()
-{
-    static const uint times[Count] =
-    {
-        173,
-        1730,
-        17300
-    };
-
-    return times[value];
-}
-
-
 namespace AD7691
 {
     struct Pin

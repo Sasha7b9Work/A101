@@ -81,16 +81,16 @@ file(GLOB SRC                   ./*.h
                                 ../../Device/src/defines.h
                                 ../../Device/src/stm_includes.h
                                 ../../Device/src/Device.*)
-file(GLOB CONTROLS              Controls/*.*)
+file(GLOB CONTROLS                              Controls/*.*)
 file(GLOB GENERATOR             ../../Device/src/Generator/*.*)
-file(GLOB GUI                   ./GUI/*.*)
+file(GLOB GUI                                  ./GUI/*.*)
 file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
-file(GLOB HARDWARE_HAL          ./Hardware/HAL/*.*
+file(GLOB HARDWARE_HAL                         ./Hardware/HAL/*.*
                                 ../../Device/src/Hardware/HAL/HAL.h
                                 ../../Device/src/Hardware/HAL/HAL_PIO.h
                                 ../../Device/src/Hardware/HAL/HAL_TIM.cpp)
-file(GLOB AMPERMETER            Ampermeter/*.*
-                                ../../Device/src/Ampermeter/AD7691.h
+file(GLOB AMPERMETER                             Ampermeter/*.*
+                                ../../Device/src/Ampermeter/AD7691.*
                                 ../../Device/src/Ampermeter/Ampermeter.*
                                 ../../Device/src/Ampermeter/Ampermeter_settings.*
                                 ../../Device/src/Ampermeter/BufferADC.*
@@ -98,10 +98,10 @@ file(GLOB AMPERMETER            Ampermeter/*.*
                                 ../../Device/src/Ampermeter/InputRelays.*)
 file(GLOB AMPERMETER_CALC       ../../Device/src/Ampermeter/Calculator/*.*)
 file(GLOB AMPERMETER_CALIBRATOR ../../Device/src/Ampermeter/Calibrator/*.*)
-file(GLOB COMMUNICATOR          Communicator/*.*)
+file(GLOB COMMUNICATOR                           Communicator/*.*)
 file(GLOB MENU                  ../../Device/src/Menu/*.*)
 file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
-file(GLOB NEXTION               ./Nextion/*.*
+file(GLOB NEXTION                              ./Nextion/*.*
                                 ../../Device/src/Nextion/*.h
                                 ../../Device/src/Nextion/Diagram*.cpp
                                 ../../Device/src/Nextion/Display.cpp
