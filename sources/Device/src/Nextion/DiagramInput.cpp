@@ -19,7 +19,7 @@ namespace DiagramInput
     static const int y0 = 295;
 
     static const int NUM_POINTS = Display::WIDTH;
-    +
+
     static uint16 points[NUM_POINTS];       // Здесь точки в координатах экрана
 
     static bool data_installed = false;     // Признак того, что данные для отрисовки установлены
