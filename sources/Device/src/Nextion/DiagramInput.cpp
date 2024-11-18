@@ -7,6 +7,7 @@
 #include "Ampermeter/InputRelays.h"
 #include "Ampermeter/Calculator/Resolvers.h"
 #include "Ampermeter/Calculator/Calculator.h"
+#include "Ampermeter/AD7691.h"
 #include <limits>
 #include <cstdio>
 #include <cstdlib>
@@ -46,6 +47,9 @@ namespace DiagramInput
     static void ConvertZeroACToASCII(REAL value, char buffer[32]);
 
     static void ConvertDeltaACToASCII(REAL mantissa, int order, char buffer[32]);
+
+    // Нарисовать время на шкале
+    static void DrawTimeScale();
 }
 
 
@@ -276,6 +280,8 @@ void DiagramInput::DrawSignal()
 
         Nextion::DrawString({ 0, y0 - 34, 150, 34 }, Font::_0_GB34b, Color::White, Color::Background, zero_AC, false, false);
     }
+
+    DrawTimeScale();
 
     first_point += num_points;
 
@@ -521,4 +527,19 @@ void DiagramInput::ConvertZeroACToASCII(REAL value, char buffer[32])
     {
         std::strcpy(buffer, "0 nA");
     }
+}
+
+
+void DiagramInput::DrawTimeScale()
+{
+    const double time_ms = SampleRate::TimeUSonPoint() * NUM_POINTS / 1e3;
+
+    char buffer[32];
+
+    sprintf(buffer, "%.0f ms", time_ms);
+
+    const int w = 150;
+    const int h = 35;
+
+    Nextion::DrawString({ Display::WIDTH - w, Display::HEIGHT - h, w, h }, Font::_0_GB34b,  Color::White, Color::Background, buffer, false, false);
 }
