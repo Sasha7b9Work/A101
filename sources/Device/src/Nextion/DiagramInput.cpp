@@ -16,8 +16,8 @@ namespace DiagramInput
 {
     static const int height = 368;
     static const int y0 = 295;
-    static float scale_max_AC = 0.0;          // Максимальный размах по току
     static char zero_AC[32] = { '\0' };
+    static char delta_AC[32] = { '\0' };
 
     static const int NUM_POINTS = Display::WIDTH;
 
@@ -44,6 +44,8 @@ namespace DiagramInput
     static REAL ConvertMantissaToOrder(const REAL value, const int order);
 
     static void ConvertZeroACToASCII(REAL value, char buffer[32]);
+
+    static void ConvertDeltaACToASCII(REAL mantissa, int order, char buffer[32]);
 }
 
 
@@ -137,6 +139,10 @@ bool DiagramInput::InstallSignalAC()
     {
         return false;
     }
+
+    ConvertDeltaACToASCII(mantissa, order, delta_AC);
+
+    REAL scale_max_AC = 0.0;
 
     if (mantissa < 2.0)         // Размах до 2
     {
@@ -258,13 +264,13 @@ void DiagramInput::DrawSignal()
 
     if (!set.type_signal.IsFull())
     {
-        char buffer[32];
+        delta_AC[0] = '+';
 
-        sprintf(buffer, "-%.1f", scale_max_AC);
+        Nextion::DrawString({ 0, y0 - height / 2 + 1, 150, 34 }, Font::_0_GB34b, Color::White, Color::Background, delta_AC, false, false);
 
-        Nextion::DrawString({ 0, y0 - height / 2 + 1, 100, 34 }, Font::_0_GB34b, Color::White, Color::Background, buffer + 1, false, false);
+        delta_AC[0] = '-';
 
-        Nextion::DrawString({ 0, y0 + height / 2 - 35, 100, 34 }, Font::_0_GB34b, Color::White, Color::Background, buffer, false, false);
+        Nextion::DrawString({ 0, y0 + height / 2 - 35, 150, 34 }, Font::_0_GB34b, Color::White, Color::Background, delta_AC, false, false);
 
         Nextion::DrawString({ 0, y0 - 34, 150, 34 }, Font::_0_GB34b, Color::White, Color::Background, zero_AC, false, false);
     }
@@ -435,6 +441,24 @@ REAL DiagramInput::ConvertMantissaToOrder(const REAL _value, const int _order)
 }
 
 
+void DiagramInput::ConvertDeltaACToASCII(REAL mantissa, int order, char buffer[32])
+{
+    while (order > 0)
+    {
+        mantissa *= 10.0;
+        order--;
+    }
+
+    while (order < 0)
+    {
+        mantissa *= 0.1;
+        order++;
+    }
+
+    ConvertZeroACToASCII(mantissa, buffer + 1);
+}
+
+
 void DiagramInput::ConvertZeroACToASCII(REAL value, char buffer[32])
 {
     value *= 1e-3;
@@ -487,7 +511,7 @@ void DiagramInput::ConvertZeroACToASCII(REAL value, char buffer[32])
     {
         sprintf(buffer, "%.1f nA", value * 1e9);
     }
-    else if (value >= 1e-9)
+    else
     {
         sprintf(buffer, "%.2f nA", value * 1e9);
     }
