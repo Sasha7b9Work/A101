@@ -8,7 +8,6 @@
 #include "Ampermeter/Calculator/Resolvers.h"
 #include "Ampermeter/Calculator/Calculator.h"
 #include <limits>
-//#include <string>
 #include <cstdio>
 #include <cstdlib>
 
@@ -17,6 +16,7 @@ namespace DiagramInput
 {
     static const int height = 368;
     static const int y0 = 295;
+    static float scale_max_AC = 0.0;          // Максимальный размах по току
 
     static const int NUM_POINTS = Display::WIDTH;
 
@@ -38,9 +38,6 @@ namespace DiagramInput
 
     // Возвращет мантиссу и порядок числа value
     static bool GetMantissaOrder(REAL value, REAL *mantissa, int *order);
-
-    // 
-    static void ConvertValue(int order);
 }
 
 
@@ -77,6 +74,89 @@ bool DiagramInput::InstallSignal()
 }
 
 
+bool DiagramInput::InstallSignalAC()
+{
+    bool correct = false;
+
+    REAL dc = Calculator::GetAbsDC(&correct);
+
+    if (!correct)
+    {
+        return false;
+    }
+
+    int range = Range::Current();
+    REAL k = cal.gain[range].Get();
+
+    REAL min = std::numeric_limits<REAL>::max();
+    REAL max = std::numeric_limits<REAL>::min();
+
+    {                                                          // Находим минимальное и масимальное значения на отрезке
+        for (int i = 0; i < NUM_POINTS; i++)
+        {
+            REAL value_abs = BufferADC::At(i).Real() * k + dc;
+
+            if (range > 2)
+            {
+                value_abs *= 1e3;
+            }
+
+            Math::Limitation(&value_abs, min, max);
+        }
+    }
+
+    REAL amplitude = max - min;                                 // Размах переменного напряжения
+
+    if (amplitude == 0.0f)
+    {
+        return false;
+    }
+
+    REAL mantissa = 0.0;
+    int order = 0;
+
+    if (!GetMantissaOrder(amplitude, &mantissa, &order))
+    {
+        return false;
+    }
+
+    if (mantissa < 2.0)         // Размах до 2
+    {
+        scale_max_AC = 2.0;
+    }
+    else if (mantissa < 5.0)    // Размах до 5
+    {
+        scale_max_AC = 5.0;
+    }
+    else                        // Размах до 10
+    {
+        scale_max_AC = 10.0;
+    }
+
+    REAL scale = height / scale_max_AC;
+
+    for (int i = 0; i < NUM_POINTS; i++)
+    {
+        REAL value_abs = BufferADC::At(i).Real() * k + dc;
+
+        if (range > 2)
+        {
+            value_abs *= 1e3;
+        }
+
+        GetMantissaOrder(value_abs, &mantissa, &order);
+
+        int16 value_int = (int16)(scale * value_abs);
+
+        Math::Limitation<int16>(&value_int, -height / 2, height / 2);
+
+        points[i] = (uint16)(y0 + value_int);
+    }
+
+    return true;
+}
+
+
 bool DiagramInput::InstallSignalFull()
 {
     int range = Range::Current();
@@ -102,67 +182,6 @@ bool DiagramInput::InstallSignalFull()
     }
 
     return true;
-}
-
-
-bool DiagramInput::InstallSignalAC()
-{
-    bool correct = false;
-
-    REAL dc = Calculator::GetAbsDC(&correct);
-
-    if (!correct)
-    {
-        return false;
-    }
-
-    int range = Range::Current();
-//    REAL scale = height / Measure::MaxIAbs(range) / 3.0;
-    REAL k = cal.gain[range].Get();
-
-    REAL min = std::numeric_limits<REAL>::max();
-    REAL max = std::numeric_limits<REAL>::min();
-
-    {                                                          // Находим минимальное и масимальное значения на отрезке
-        for (int i = 0; i < NUM_POINTS; i++)
-        {
-            REAL value_abs = BufferADC::At(i).Real() * k + dc;
-
-            if (range > 2)       { value_abs *= 1e3; }
-
-            Math::Limitation(&value_abs, min, max);
-        }
-    }
-
-    REAL amplitude = max - min;                                 // Размах переменного напряжения
-
-    if (amplitude == 0.0f)
-    {
-        return false;
-    }
-
-    REAL mantissa = 0.0;
-    int order = 0;
-
-    if (!GetMantissaOrder(amplitude, &mantissa, &order))
-    {
-        return false;
-    }
-
-    if (mantissa < 2.0)         // Размах до 2
-    {
-
-    }
-    else if (mantissa < 5.0)    // Размах до 5
-    {
-
-    }
-    else                        // Размах до 10
-    {
-
-    }
-
-    return false;
 }
 
 
