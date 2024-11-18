@@ -97,12 +97,14 @@ bool DiagramInput::InstallSignalAC()
     {                                                          // Находим минимальное и масимальное значения на отрезке
         for (int i = 0; i < NUM_POINTS; i++)
         {
-            REAL value_abs = BufferADC::At(i).Real() * k - dc;
+            REAL value_abs = BufferADC::At(i).Real() * k;
 
             if (range > 2)
             {
                 value_abs *= 1e3;
             }
+
+            value_abs += dc;
 
             if (value_abs < min)
             {
@@ -144,16 +146,18 @@ bool DiagramInput::InstallSignalAC()
         scale_max_AC = 10.0;
     }
 
-    REAL scale = height / scale_max_AC;
+    volatile REAL scale = height / scale_max_AC;
 
     for (int i = 0; i < NUM_POINTS; i++)
     {
-        REAL value_abs = BufferADC::At(i).Real() * k + dc;
+        volatile REAL value_abs = BufferADC::At(i).Real() * k;
 
         if (range > 2)
         {
             value_abs *= 1e3;
         }
+
+        value_abs += dc;
 
         int16 value_int = (int16)(scale * ConvertMantissaToOrder(value_abs, order));
 
