@@ -2,9 +2,6 @@
 #pragma once
 #pragma warning(push, 0)
 #include <wx/dialog.h>
-#include <wx/spinctrl.h>
-#include <wx/wx.h>
-#include <wx/event.h>
 #pragma warning(pop)
 
 

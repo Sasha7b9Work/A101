@@ -12,3 +12,7 @@ typedef const char *pchar;
 
 
 #define BUTTON_SIZE wxSize(70, 30)
+
+#pragma warning(push, 0)
+#include <wx/spinctrl.h>
+#pragma warning(pop)

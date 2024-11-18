@@ -1,7 +1,7 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Explorer)
 
-set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(
     src
@@ -64,7 +64,7 @@ add_compile_options(
 
 file(GLOB DOC            doc/*)
 file(GLOB SRC            src/*.h src/*.cpp)
-file(GLOB CONTROLS       src/Controls/*)
+file(GLOB CONTROLS       src/Controls/*.*)
 file(GLOB DIALOGS        src/Dialogs/*)
 file(GLOB EDITOR         src/Editor/*.h src/Editor/*.cpp)
 file(GLOB EDITOR_PAINTER src/Editor/Painter/*)
