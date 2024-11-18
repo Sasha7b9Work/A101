@@ -130,7 +130,7 @@ void Frame::OnCloseWindow(wxCloseEvent &event)
 
 void Frame::CreatePanel()
 {
-    wxWindow *window = new wxWindow(this, wxID_ANY, { 500, 500 });
+    wxWindow *window = new wxWindow(this, wxID_ANY);
 
     wxBoxSizer *top = new wxBoxSizer(wxHORIZONTAL);
     {
