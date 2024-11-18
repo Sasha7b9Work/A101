@@ -38,6 +38,9 @@ namespace DiagramInput
 
     // ¬озвращет мантиссу и пор€док числа value
     static bool GetMantissaOrder(REAL value, REAL *mantissa, int *order);
+
+    // ѕреобразовать value к пор€дку order и вернуть мантиссу
+    static REAL ConvertMantissaToOrder(const REAL value, const int order);
 }
 
 
@@ -94,7 +97,7 @@ bool DiagramInput::InstallSignalAC()
     {                                                          // Ќаходим минимальное и масимальное значени€ на отрезке
         for (int i = 0; i < NUM_POINTS; i++)
         {
-            REAL value_abs = BufferADC::At(i).Real() * k + dc;
+            REAL value_abs = BufferADC::At(i).Real() * k - dc;
 
             if (range > 2)
             {
@@ -152,9 +155,7 @@ bool DiagramInput::InstallSignalAC()
             value_abs *= 1e3;
         }
 
-        GetMantissaOrder(value_abs, &mantissa, &order);
-
-        int16 value_int = (int16)(scale * mantissa);
+        int16 value_int = (int16)(scale * ConvertMantissaToOrder(value_abs, order));
 
         Math::Limitation<int16>(&value_int, -height / 2, height / 2);
 
@@ -245,6 +246,17 @@ void DiagramInput::DrawSignal()
         height };
 
     Nextion::WaveInput::Draw(rect, points + (first_point == 0 ? first_point : (first_point - 1)));
+
+    if (!set.type_signal.IsFull())
+    {
+        char buffer[32];
+
+        sprintf(buffer, "-%.1f", scale_max_AC);
+
+        Nextion::DrawString({ 0, y0 - height / 2 + 1, 100, 34 }, Font::_0_GB34b, Color::White, Color::Background, buffer + 1, false, false);
+
+        Nextion::DrawString({ 0, y0 + height / 2 - 35, 100, 34 }, Font::_0_GB34b, Color::White, Color::Background, buffer, false, false);
+    }
 
     first_point += num_points;
 
@@ -384,4 +396,29 @@ bool DiagramInput::GetMantissaOrder(REAL value, REAL *mantissa, int *order)
     }
 
     return false;
+}
+
+
+REAL DiagramInput::ConvertMantissaToOrder(const REAL _value, const int _order)
+{
+    REAL mantissa = 0.0f;
+    int order = 0;
+
+    GetMantissaOrder(_value, &mantissa, &order);
+
+    int delta = order - _order;
+
+    while (delta > 0)
+    {
+        mantissa *= 10.0;
+        delta--;
+    }
+
+    while (delta < 0)
+    {
+        mantissa *= 0.1;
+        delta++;
+    }
+
+    return mantissa;
 }
