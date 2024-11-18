@@ -101,10 +101,12 @@ bool DiagramInput::InstallSignalAC()
     REAL min = std::numeric_limits<REAL>::max();
     REAL max = -std::numeric_limits<REAL>::max();
 
+    const int start_i = 10;
+
     {                                                          // Находим минимальное и масимальное значения на отрезке
         for (int i = 0; i < NUM_POINTS; i++)
         {
-            REAL value_abs = BufferADC::At(i).Real() * k;
+            REAL value_abs = BufferADC::At(i + start_i).Real() * k;
 
             if (range > 2)
             {
@@ -161,7 +163,7 @@ bool DiagramInput::InstallSignalAC()
 
     for (int i = 0; i < NUM_POINTS; i++)
     {
-        volatile REAL value_abs = BufferADC::At(i).Real() * k;
+        volatile REAL value_abs = BufferADC::At(i + start_i).Real() * k;
 
         if (range > 2)
         {
@@ -507,12 +509,16 @@ void DiagramInput::ConvertZeroACToASCII(REAL value, char buffer[32])
     {
         sprintf(buffer, "%.0f nA", value * 1e9);
     }
-    else if (value >= 1e-8)
+    else if (value >= 1e-8)                 // > 10 nA
     {
         sprintf(buffer, "%.1f nA", value * 1e9);
     }
-    else
+    else if(value >= 1e-9)                  // > 1 na
     {
         sprintf(buffer, "%.2f nA", value * 1e9);
+    }
+    else
+    {
+        std::strcpy(buffer, "0 nA");
     }
 }
