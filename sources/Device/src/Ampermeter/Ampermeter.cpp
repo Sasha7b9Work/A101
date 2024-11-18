@@ -146,7 +146,7 @@ bool Ampermeter::MeasurementCycle()
             {
                 uint time = SampleRate::TimeFullRead() - meter.ElapsedTime();
 
-                if ((prev_time - time) > 50)
+                if ((prev_time - time) > 50 && Page::Current() == PageMain::self)
                 {
                     PageMain::Star::Draw();
 
