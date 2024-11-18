@@ -89,7 +89,7 @@ bool DiagramInput::InstallSignalAC()
     REAL k = cal.gain[range].Get();
 
     REAL min = std::numeric_limits<REAL>::max();
-    REAL max = std::numeric_limits<REAL>::min();
+    REAL max = -std::numeric_limits<REAL>::max();
 
     {                                                          // Находим минимальное и масимальное значения на отрезке
         for (int i = 0; i < NUM_POINTS; i++)
@@ -101,7 +101,15 @@ bool DiagramInput::InstallSignalAC()
                 value_abs *= 1e3;
             }
 
-            Math::Limitation(&value_abs, min, max);
+            if (value_abs < min)
+            {
+                min = value_abs;
+            }
+
+            if (value_abs > max)
+            {
+                max = value_abs;
+            }
         }
     }
 
@@ -146,7 +154,7 @@ bool DiagramInput::InstallSignalAC()
 
         GetMantissaOrder(value_abs, &mantissa, &order);
 
-        int16 value_int = (int16)(scale * value_abs);
+        int16 value_int = (int16)(scale * mantissa);
 
         Math::Limitation<int16>(&value_int, -height / 2, height / 2);
 
