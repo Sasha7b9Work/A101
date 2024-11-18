@@ -140,8 +140,6 @@ bool DiagramInput::InstallSignalAC()
         return false;
     }
 
-    ConvertDeltaACToASCII(mantissa, order, delta_AC);
-
     REAL scale_max_AC = 0.0;
 
     if (mantissa < 2.0)         // Размах до 2
@@ -156,6 +154,8 @@ bool DiagramInput::InstallSignalAC()
     {
         scale_max_AC = 10.0;
     }
+
+    ConvertDeltaACToASCII(scale_max_AC, order, delta_AC);
 
     volatile REAL scale = height / scale_max_AC;
 
