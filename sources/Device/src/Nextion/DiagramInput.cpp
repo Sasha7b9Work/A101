@@ -17,6 +17,7 @@ namespace DiagramInput
     static const int height = 368;
     static const int y0 = 295;
     static float scale_max_AC = 0.0;          // Максимальный размах по току
+    static char zero_AC[32] = { '\0' };
 
     static const int NUM_POINTS = Display::WIDTH;
 
@@ -41,6 +42,8 @@ namespace DiagramInput
 
     // Преобразовать value к порядку order и вернуть мантиссу
     static REAL ConvertMantissaToOrder(const REAL value, const int order);
+
+    static void ConvertZeroACToASCII(REAL value, char buffer[32]);
 }
 
 
@@ -82,6 +85,8 @@ bool DiagramInput::InstallSignalAC()
     bool correct = false;
 
     REAL dc = Calculator::GetAbsDC(&correct);
+
+    ConvertZeroACToASCII(dc, zero_AC);
 
     if (!correct)
     {
@@ -260,6 +265,8 @@ void DiagramInput::DrawSignal()
         Nextion::DrawString({ 0, y0 - height / 2 + 1, 100, 34 }, Font::_0_GB34b, Color::White, Color::Background, buffer + 1, false, false);
 
         Nextion::DrawString({ 0, y0 + height / 2 - 35, 100, 34 }, Font::_0_GB34b, Color::White, Color::Background, buffer, false, false);
+
+        Nextion::DrawString({ 0, y0 - 34, 150, 34 }, Font::_0_GB34b, Color::White, Color::Background, zero_AC, false, false);
     }
 
     first_point += num_points;
@@ -425,4 +432,63 @@ REAL DiagramInput::ConvertMantissaToOrder(const REAL _value, const int _order)
     }
 
     return mantissa;
+}
+
+
+void DiagramInput::ConvertZeroACToASCII(REAL value, char buffer[32])
+{
+    value *= 1e-3;
+
+    if (value >= 1e3)
+    {
+        sprintf(buffer, "%.2f kA", value / 1e3);
+    }
+    else if (value >= 1e2)
+    {
+        sprintf(buffer, "%.0f A", value);
+    }
+    else if (value >= 1e1)
+    {
+        sprintf(buffer, "%.1f A", value);
+    }
+    else if (value >= 1e0)                  // > 1A
+    {
+        sprintf(buffer, "%.2f A", value);
+    }
+    else if (value >= 1e-1)                 // > 100 mA
+    {
+        sprintf(buffer, "%.0f mA", value * 1e3);
+    }
+    else if (value >= 1e-2)                 // > 10 mA
+    {
+        sprintf(buffer, "%.1f mA", value * 1e3);
+    }
+    else if (value >= 1e-3)                  // > 1 mA
+    {
+        sprintf(buffer, "%.2f mA", value * 1e3);
+    }
+    else if (value >= 1e-4)                 // > 100 uA
+    {
+        sprintf(buffer, "%.0f uA", value * 1e6);
+    }
+    else if (value >= 1e-5)                 // > 10 uA
+    {
+        sprintf(buffer, "%.1f uA", value * 1e6);
+    }
+    else if (value >= 1e-6)                 // > 1 uA
+    {
+        sprintf(buffer, "%.2f uA", value * 1e6);
+    }
+    else if (value >= 1e-7)                  // > 100 nA
+    {
+        sprintf(buffer, "%.0f nA", value * 1e9);
+    }
+    else if (value >= 1e-8)
+    {
+        sprintf(buffer, "%.1f nA", value * 1e9);
+    }
+    else if (value >= 1e-9)
+    {
+        sprintf(buffer, "%.2f nA", value * 1e9);
+    }
 }
