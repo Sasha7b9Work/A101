@@ -183,11 +183,6 @@ bool Ampermeter::MeasurementCycle()
 
         } while(TIM4->CNT < period * 2 / 3);
 
-        while (TIM4->CNT < period)
-        {
-        }
-
-        TIM4->CNT = 0;
 #else
 
         for (int i = 0; i < 1; i++)
@@ -214,6 +209,16 @@ bool Ampermeter::MeasurementCycle()
             BufferADC::Push(value);
             num_samples++;
         }
+
+#ifndef WIN32
+
+        while (TIM4->CNT < period)
+        {
+        }
+
+        TIM4->CNT = 0;
+
+#endif
     }
 
     HAL_TIM4::Stop();
