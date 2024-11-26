@@ -51,6 +51,8 @@ namespace Ampermeter
 
     // Подстрока нуля
     static void AdjustmentZero();
+
+    static void DrawProgress(TimeMeterMS &timer, uint &prev_time);
 }
 
 
@@ -119,6 +121,23 @@ void Ampermeter::Update()
 }
 
 
+void Ampermeter::DrawProgress(TimeMeterMS &meter, uint &prev_time)
+{
+    if (SampleRate::TimeFullRead() > meter.ElapsedTime())
+    {
+        uint time = SampleRate::TimeFullRead() - meter.ElapsedTime();
+
+        if ((prev_time - time) > 50 && Page::Current() == PageMain::self)
+        {
+            PageMain::Star::Draw();
+
+            Nextion::DrawString({ 520, 5, 70, 27 }, Font::_0_GB34b, Color::White, Color::Background, String<>("%3.1f", time / 1000.0f).c_str(), false, false);
+            prev_time = time;
+        }
+    }
+}
+
+
 bool Ampermeter::MeasurementCycle()
 {
     if (Page::Current() == PageMain::self)
@@ -142,18 +161,7 @@ bool Ampermeter::MeasurementCycle()
     {
         if (SampleRate::Get() != SampleRate::_10us)
         {
-            if (SampleRate::TimeFullRead() > meter.ElapsedTime())
-            {
-                uint time = SampleRate::TimeFullRead() - meter.ElapsedTime();
-
-                if ((prev_time - time) > 50 && Page::Current() == PageMain::self)
-                {
-                    PageMain::Star::Draw();
-
-                    Nextion::DrawString({ 520, 5, 70, 27 }, Font::_0_GB34b, Color::White, Color::Background, String<>("%3.1f", time / 1000.0f).c_str(), false, false);
-                    prev_time = time;
-                }
-            }
+            DrawProgress(meter, prev_time);
         }
 
         int counter_raw = 0;
@@ -174,7 +182,6 @@ bool Ampermeter::MeasurementCycle()
             }
 
         } while(TIM4->CNT < period * 2 / 3);
-//        } while (false);
 
         while (TIM4->CNT < period)
         {

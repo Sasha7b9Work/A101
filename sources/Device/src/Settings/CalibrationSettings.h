@@ -22,7 +22,7 @@ struct CalibrationSettings
         int GetFull() const { return const_val + var_val; }
 
         int GetConst() const { return const_val; }
-        int _GetVar() const { return var_val; }
+        int GetVar() const { return var_val; }
 
     private:
         int const_val;      // ѕосто€нное смещение, получаетс€ при калибровке
