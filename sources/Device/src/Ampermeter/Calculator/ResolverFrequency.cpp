@@ -4,7 +4,10 @@
 #include "Ampermeter/BufferADC.h"
 #include "Nextion/DiagramInput.h"
 #include "Ampermeter/Calculator/Averager.h"
+#include "Nextion/Nextion.h"
+#include "Nextion/Controls.h"
 #include <limits>
+#include <cstdio>
 
 
 #define DELTA(o)    (sum[(o) + 1] - sum[(o)])
@@ -41,4 +44,19 @@ ResolverFrequency::ResolverFrequency(const Period &period)
     }
 
     frequency = (float)counter * 1e6f / (last - first) / SampleRate::TimeUSonPoint();
+
+    char buffer[65];
+
+    sprintf(buffer, "%d %d %f", counter, last - first, frequency);
+
+    Nextion::DrawString({ 0, 20, 300, 40 }, Font::_1_GB42b, Color::White, Color::Background, buffer);
+
+    if (SampleRate::Get() == SampleRate::_100us)
+    {
+        frequency = 40.0 + (frequency - 44.0) * 450.0 / 443.0;
+    }
+    else if (SampleRate::Get() == SampleRate::_1000us)
+    {
+        frequency = 40.0 + (frequency - 42.5) * 10.5 / 10.0;
+    }
 }

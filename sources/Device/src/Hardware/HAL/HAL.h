@@ -66,10 +66,7 @@ namespace HAL_TIM4
     void Init();
 
     // Запустить таймер с периодом срабатывания dUS микросекнуд
-    void StartPeriodicUS(uint dUS);
-
-    // Выход из этой функции происходит, когда срабатывает таймер. Одновременно запускаетя следующий счёт
-    void WaitEvent();
+    void Start();
 
     void Stop();
 }

@@ -149,9 +149,13 @@ bool Ampermeter::MeasurementCycle()
 
     BufferADC::Clear();
 
-    uint period = SampleRate::TimeUSonPoint();
+#ifndef WIN32
 
-    HAL_TIM4::StartPeriodicUS(period * 2);
+    volatile uint period = SampleRate::TimeUSonPoint();
+
+#endif
+
+    HAL_TIM4::Start();
 
     int num_samples = 0;
 

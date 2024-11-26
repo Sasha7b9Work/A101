@@ -20,8 +20,6 @@ namespace HAL_TIM4
         {HAL_TIM_CHANNEL_STATE_RESET, HAL_TIM_CHANNEL_STATE_RESET, HAL_TIM_CHANNEL_STATE_RESET, HAL_TIM_CHANNEL_STATE_RESET},
         HAL_DMA_BURST_STATE_RESET
     };
-
-    static uint period = 83;
 }
 
 
@@ -40,27 +38,11 @@ void HAL_TIM4::Init()
 }
 
 
-void HAL_TIM4::StartPeriodicUS(uint timeUS)
+void HAL_TIM4::Start()
 {
-    period = timeUS;
-
     Stop();
 
     TIM4->CNT = 0;
-    TIM4->CR1 |= TIM_CR1_CEN;
-}
-
-
-void HAL_TIM4::WaitEvent()
-{
-    while (TIM4->CNT < period)
-    {
-    }
-
-    TIM4->CR1 &= (uint)~TIM_CR1_CEN;
-
-    TIM4->CNT = 0;
-
     TIM4->CR1 |= TIM_CR1_CEN;
 }
 
