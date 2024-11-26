@@ -50,6 +50,8 @@ public:
 private:
 
     REAL frequency = 0.0;
+
+    int CalculateCounter(float sum[BufferADC::SIZE], int first, int last, int step);
 };
 
 

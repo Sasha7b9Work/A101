@@ -31,25 +31,20 @@ ResolverFrequency::ResolverFrequency(const Period &period)
     int first = period.first.first;
     int last = period.last.first;
 
-    int counter = 0;
-
-    for (int i = first; i < last; i++)
-    {
-        if (DELTA(i) > 0.0f && DELTA(i + 1) <= 0.0f)
-        {
-            i += 5;
-            counter++;
-            continue;
-        }
-    }
+    int counter = CalculateCounter(sum, first, last, 5);
 
     frequency = (float)counter * 1e6f / (last - first) / SampleRate::TimeUSonPoint();
 
-    char buffer[65];
-
-    sprintf(buffer, "%d %d %f", counter, last - first, frequency);
-
-    Nextion::DrawString({ 0, 20, 300, 40 }, Font::_1_GB42b, Color::White, Color::Background, buffer);
+//    char buffer[65];
+//
+//    sprintf(buffer, "%d:%d %d:%d %d:%d",
+//        counter_2, (int)(counter_2 * 1e6f / (last - first) / SampleRate::TimeUSonPoint()),
+//        counter_5, (int)(counter_5 * 1e6f / (last - first) / SampleRate::TimeUSonPoint()),
+//        counter_10, (int)(counter_10 * 1e6f / (last - first) / SampleRate::TimeUSonPoint()),
+//        counter_20, (int)(counter_20 * 1e6f / (last - first) / SampleRate::TimeUSonPoint())
+//    );
+//
+//    Nextion::DrawString({ 0, 20, 700, 40 }, Font::_1_GB42b, Color::White, Color::Background, buffer);
 
     if (SampleRate::Get() == SampleRate::_100us)
     {
@@ -59,4 +54,22 @@ ResolverFrequency::ResolverFrequency(const Period &period)
     {
         frequency = 40.0 + (frequency - 42.5) * 10.5 / 10.0;
     }
+}
+
+
+int ResolverFrequency::CalculateCounter(float sum[BufferADC::SIZE], int first, int last, int step)
+{
+    int counter = 0;
+
+    for (int i = first; i < last; i++)
+    {
+        if (DELTA(i) > 0.0f && DELTA(i + 1) <= 0.0f)
+        {
+            i += step;
+            counter++;
+            continue;
+        }
+    }
+
+    return counter;
 }
