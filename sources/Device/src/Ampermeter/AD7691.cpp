@@ -7,9 +7,9 @@ uint SampleRate::TimeFullRead()
 {
     static const uint times[Count] =
     {
-        173,
-        1730,
-        17300
+        164,
+        1638,
+        16384
     };
 
     return times[value];

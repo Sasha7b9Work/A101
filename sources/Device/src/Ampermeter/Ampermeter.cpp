@@ -146,9 +146,14 @@ void Ampermeter::DrawProgress(TimeMeterMS &meter, uint &prev_time)
             {
                 if (HAL_USART2::TransferITAllowed())
                 {
-                    String<> message("xstr 520,5,70,27,0,65535,6964,0,0,1,\"%s\"\xFF\xFF\xFF", String<>("%3.1f", time / 1000.0f).c_str());
+                    if (SampleRate::Get() != SampleRate::_10us)
+                    {
+                        static char buffer[64];
 
-                    HAL_USART2::TransmitIT(message.c_str());
+                        sprintf(buffer, "xstr 520,5,70,27,0,65535,6964,0,0,1,\"%s\"\xFF\xFF\xFF", String<>("%3.1f", time / 1000.0f).c_str());
+
+                        HAL_USART2::TransmitIT(buffer);
+                    }
 
                     progress_allow = false;
                 }
@@ -157,6 +162,8 @@ void Ampermeter::DrawProgress(TimeMeterMS &meter, uint &prev_time)
             if (!star_allow && !progress_allow)
             {
                 prev_time = time;
+                star_allow = true;
+                progress_allow = true;
             }
         }
     }
@@ -188,10 +195,7 @@ bool Ampermeter::MeasurementCycle()
 
     while (!BufferADC::IsFull())
     {
-        if (SampleRate::Get() != SampleRate::_10us)
-        {
-            DrawProgress(meter, prev_time);
-        }
+        DrawProgress(meter, prev_time);
 
         int counter_raw = 0;
         int64 sum_raw = 0;
@@ -206,6 +210,10 @@ bool Ampermeter::MeasurementCycle()
             if (!Calibrator::InProgress() && Nextion::ExixtCommnadsForExecute())
             {
                 HAL_TIM4::Stop();
+
+                while (!HAL_USART2::TransferITAllowed())
+                {
+                }
 
                 return false;
             }
@@ -256,6 +264,10 @@ bool Ampermeter::MeasurementCycle()
     }
 
     BufferADC::CalculateLimits();
+
+    while (!HAL_USART2::TransferITAllowed())
+    {
+    }
 
     return true;
 }

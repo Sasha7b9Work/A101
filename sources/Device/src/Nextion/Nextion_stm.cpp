@@ -89,6 +89,10 @@ void Nextion::SendCommandFormat(const char *format, ...)
 
 void Nextion::SendCommandRAW(pchar command)
 {
+    while (!HAL_USART2::TransferITAllowed())
+    {
+    }
+
     HAL_USART2::SendNZ(command);
 
     HAL_USART2::SendNZ("\xFF\xFF\xFF");
@@ -104,13 +108,17 @@ void Nextion::DrawString(const Rect &rect, int font, const Color &color, const C
 
 void Nextion::DrawSpaceForStar()
 {
-    HAL_USART2::TransmitIT("xstr 627,0,40,40,2,65535,6964,1,1,1,\" \"\xFF\xFF\xFF");
+    static const pchar message = "xstr 627,0,40,40,2,65535,6964,1,1,1,\" \"\xFF\xFF\xFF";
+
+    HAL_USART2::TransmitIT(message);
 }
 
 
 void Nextion::DrawStarForStar()
 {
-    HAL_USART2::TransmitIT("xstr 627,0,40,40,2,65535,6964,1,1,1,\"*\"\xFF\xFF\xFF");
+    static const pchar message = "xstr 627,0,40,40,2,65535,6964,1,1,1,\"*\"\xFF\xFF\xFF";
+
+    HAL_USART2::TransmitIT(message);
 }
 
 

@@ -96,5 +96,7 @@ void HAL_USART2::CallbackOnTransferIT()
 
 void HAL_USART2::TransmitIT(pchar data)
 {
-    HAL_UART_Transmit_IT(&handleUSART2, (uint8_t *)data, 10);
+    transfer_IT_allowed = false;
+
+    HAL_UART_Transmit_IT(&handleUSART2, (uint8_t *)data, std::strlen(data));
 }

@@ -249,7 +249,7 @@ namespace PageMain
 
     static void FuncDraw()
     {
-        Star::Draw();
+//        Star::Draw();
 
         wndDC.SetMeasure(Calculator::GetMeasureDC(), Range::Current());
         wndAC.SetMeasure(Calculator::GetMeasureAC(), Range::Current());
