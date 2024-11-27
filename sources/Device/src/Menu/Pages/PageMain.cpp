@@ -452,8 +452,6 @@ void PageMain::Star::Draw()
 
     if (enabled != prev_enabled)
     {
-        Nextion::DrawString({ 627, 0, 40, 40 }, Font::_2_GB72b, Color::White, Color::Background, enabled ? "*" : "", true, true);
-
         if (enabled)
         {
             Nextion::DrawStarForStar();
