@@ -11,6 +11,7 @@
 #include <limits>
 #include <cstdio>
 #include <cstdlib>
+#include <cmath>
 
 
 namespace DiagramInput
@@ -44,6 +45,7 @@ namespace DiagramInput
     // Преобразовать value к порядку order и вернуть мантиссу
     static REAL ConvertMantissaToOrder(const REAL value, const int order);
 
+    // Если write_sign, то знак тоже пишем
     static void ConvertZeroACToASCII(REAL value, char buffer[32]);
 
     static void ConvertDeltaACToASCII(REAL mantissa, int order, char buffer[32]);
@@ -482,55 +484,55 @@ void DiagramInput::ConvertDeltaACToASCII(REAL mantissa, int order, char buffer[3
 }
 
 
-void DiagramInput::ConvertZeroACToASCII(REAL value, char buffer[32])
+void DiagramInput::ConvertZeroACToASCII(REAL value, char *buffer)
 {
     value *= 1e-3;
 
-    if (value >= 1e3)
+    if (std::fabs(value) >= 1e3)
     {
         sprintf(buffer, "%.2f kA", value / 1e3);
     }
-    else if (value >= 1e2)
+    else if (std::fabs(value) >= 1e2)
     {
         sprintf(buffer, "%.0f A", value);
     }
-    else if (value >= 1e1)
+    else if (std::fabs(value) >= 1e1)
     {
         sprintf(buffer, "%.1f A", value);
     }
-    else if (value >= 1e0)                  // > 1A
+    else if (std::fabs(value) >= 1e0)                  // > 1A
     {
         sprintf(buffer, "%.2f A", value);
     }
-    else if (value >= 1e-1)                 // > 100 mA
+    else if (std::fabs(value) >= 1e-1)                 // > 100 mA
     {
         sprintf(buffer, "%.0f mA", value * 1e3);
     }
-    else if (value >= 1e-2)                 // > 10 mA
+    else if (std::fabs(value) >= 1e-2)                 // > 10 mA
     {
         sprintf(buffer, "%.1f mA", value * 1e3);
     }
-    else if (value >= 1e-3)                  // > 1 mA
+    else if (std::fabs(value) >= 1e-3)                  // > 1 mA
     {
         sprintf(buffer, "%.2f mA", value * 1e3);
     }
-    else if (value >= 1e-4)                 // > 100 uA
+    else if (std::fabs(value) >= 1e-4)                 // > 100 uA
     {
         sprintf(buffer, "%.0f uA", value * 1e6);
     }
-    else if (value >= 1e-5)                 // > 10 uA
+    else if (std::fabs(value) >= 1e-5)                 // > 10 uA
     {
         sprintf(buffer, "%.1f uA", value * 1e6);
     }
-    else if (value >= 1e-6)                 // > 1 uA
+    else if (std::fabs(value) >= 1e-6)                 // > 1 uA
     {
         sprintf(buffer, "%.2f uA", value * 1e6);
     }
-    else if (value >= 1e-7)                  // > 100 nA
+    else if (std::fabs(value) >= 1e-7)                  // > 100 nA
     {
         sprintf(buffer, "%.0f nA", value * 1e9);
     }
-    else if (value >= 1e-8)                 // > 10 nA
+    else if (std::fabs(value) >= 1e-8)                 // > 10 nA
     {
         sprintf(buffer, "%.1f nA", value * 1e9);
     }
