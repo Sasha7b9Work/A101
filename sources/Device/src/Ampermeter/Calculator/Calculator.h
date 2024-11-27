@@ -2,6 +2,7 @@
 #pragma once
 #include "Ampermeter/BufferADC.h"
 #include "Ampermeter/Ampermeter.h"
+#include "Ampermeter/Calculator/ResolverPeriodSamples.h"
 
 
 namespace Calculator
@@ -10,6 +11,8 @@ namespace Calculator
     void AppendData();
 
     void Reset();
+
+    Period GetPeriod();
 
     // ƒействующее значение переменной составл€ющей
     REAL GetAbsAC(bool *correct);

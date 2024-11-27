@@ -35,6 +35,13 @@ namespace Calculator
     static AveragerReal<NUM_AVERAGES> ampl;
     static AveragerReal<NUM_AVERAGES> peak;
     static AveragerReal<NUM_AVERAGES> frequency;
+
+    static Period period;
+
+    Period GetPeriod()
+    {
+        return period;
+    }
 }
 
 
@@ -52,7 +59,7 @@ void Calculator::Reset()
 
 void Calculator::AppendData()
 {
-    Period period = ResolverPeriodSamples().GetResult();
+    period = ResolverPeriodSamples().GetResult();
 
     const REAL k = cal.gain[Range::Current()].Get();
 

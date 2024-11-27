@@ -105,10 +105,23 @@ bool DiagramInput::InstallSignalAC()
     REAL min = std::numeric_limits<REAL>::max();
     REAL max = -std::numeric_limits<REAL>::max();
 
-    const int start_i = 10;
+    int start_i = Calculator::GetPeriod().first.first;
 
-    {                                                          // Находим минимальное и масимальное значения на отрезке
-        for (int i = 0; i < NUM_POINTS; i++)
+    {                                                       // Находим первую точку, с которой будем выводить
+        REAL value = BufferADC::At(start_i).Real();
+
+        for (int i = 0; i < start_i + 100; i++)
+        {
+            if (BufferADC::At(i) <= value && BufferADC::At(i + 10) > value)
+            {
+                start_i = i;
+                break;
+            }
+        }
+    }
+
+    {                                                       // Находим минимальное и масимальное значения на отрезке
+        for (int i = 0; i < NUM_POINTS * 5; i++)
         {
             REAL value_abs = BufferADC::At(i + start_i).Real() * k;
 
