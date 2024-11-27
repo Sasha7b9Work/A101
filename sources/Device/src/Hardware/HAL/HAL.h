@@ -95,7 +95,7 @@ namespace HAL_USART2
     bool TransferITAllowed();
 
     // Передать по прерывания
-    void TransmitIT(char *);
+    void TransmitIT(pchar);
 
     // Вызывается по завершению передачи по IT
     void CallbackOnTransferIT();

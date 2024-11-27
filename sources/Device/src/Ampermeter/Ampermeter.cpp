@@ -123,16 +123,41 @@ void Ampermeter::Update()
 
 void Ampermeter::DrawProgress(TimeMeterMS &meter, uint &prev_time)
 {
+    static bool star_allow = true;          // Разрешена передача звезды
+    static bool progress_allow = true;      // Разрешена передача прогресс-бара
+
     if (SampleRate::TimeFullRead() > meter.ElapsedTime())
     {
         uint time = SampleRate::TimeFullRead() - meter.ElapsedTime();
 
         if ((prev_time - time) > 50 && Page::Current() == PageMain::self)
         {
-            PageMain::Star::Draw();
+            if (star_allow && progress_allow)
+            {
+                if (HAL_USART2::TransferITAllowed())
+                {
+                    PageMain::Star::Draw();
 
-            Nextion::DrawString({ 520, 5, 70, 27 }, Font::_0_GB34b, Color::White, Color::Background, String<>("%3.1f", time / 1000.0f).c_str(), false, false);
-            prev_time = time;
+                    star_allow = false;
+                }
+            }
+
+            if (!star_allow && progress_allow)
+            {
+                if (HAL_USART2::TransferITAllowed())
+                {
+                    String<> message("xstr 520,5,70,27,0,65535,6964,0,0,1,\"%s\"\xFF\xFF\xFF", String<>("%3.1f", time / 1000.0f).c_str());
+
+                    HAL_USART2::TransmitIT(message.c_str());
+
+                    progress_allow = false;
+                }
+            }
+
+            if (!star_allow && !progress_allow)
+            {
+                prev_time = time;
+            }
         }
     }
 }

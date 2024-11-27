@@ -104,15 +104,13 @@ void Nextion::DrawString(const Rect &rect, int font, const Color &color, const C
 
 void Nextion::DrawSpaceForStar()
 {
-//  Nextion::DrawString({ 627, 0, 40, 40 }, Font::_2_GB72b, Color::White, Color::Background, enabled ? "*" : "", true, true);
-    HAL_USART2::SendNZ("xstr 627,0,40,40,2,65535,6964,1,1,1,\" \"\xFF\xFF\xFF");
+    HAL_USART2::TransmitIT("xstr 627,0,40,40,2,65535,6964,1,1,1,\" \"\xFF\xFF\xFF");
 }
 
 
 void Nextion::DrawStarForStar()
 {
-//  Nextion::DrawString({ 627, 0, 40, 40 }, Font::_2_GB72b, Color::White, Color::Background, enabled ? "*" : "", true, true);
-    HAL_USART2::SendNZ("xstr 627,0,40,40,2,65535,6964,1,1,1,\"*\"\xFF\xFF\xFF");
+    HAL_USART2::TransmitIT("xstr 627,0,40,40,2,65535,6964,1,1,1,\"*\"\xFF\xFF\xFF");
 }
 
 
