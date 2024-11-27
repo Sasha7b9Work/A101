@@ -4,7 +4,6 @@
 #include "Nextion/DiagramInput.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Utils/Profiler.h"
 #include "Nextion/Display.h"
 #include <cstdarg>
 #include <cstdio>
@@ -127,8 +126,6 @@ void Nextion::SendCommandRAW(pchar command)
     HAL_USART2::SendNZ(command);
 
     HAL_USART2::SendNZ("\xFF\xFF\xFF");
-
-    Profiler::AddCommand();
 }
 
 

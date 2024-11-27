@@ -5,7 +5,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/Timer.h"
-#include "Utils/Profiler.h"
 #include "Nextion/Keyboard.h"
 #include "Ampermeter/Calibrator/Calibrator.h"
 #include "Menu/Menu.h"

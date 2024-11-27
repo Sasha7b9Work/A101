@@ -6,7 +6,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Ampermeter/Ampermeter.h"
 #include "Menu/Menu.h"
-#include "Utils/Profiler.h"
 #include "Hardware/Timer.h"
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
@@ -41,8 +40,6 @@ void Device::Update()
     Nextion::Update();
 
     Nextion::Update();
-
-    Profiler::Update();
 
     Nextion::Update();
 

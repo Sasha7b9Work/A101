@@ -2221,16 +2221,6 @@
               <FilePath>.\src\Utils\Debug.h</FilePath>
             </File>
             <File>
-              <FileName>Profiler.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Profiler.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Profiler.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Profiler.h</FilePath>
-            </File>
-            <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Math.cpp</FilePath>
@@ -3546,16 +3536,6 @@
               <FileName>Debug.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Debug.h</FilePath>
-            </File>
-            <File>
-              <FileName>Profiler.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Profiler.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Profiler.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Profiler.h</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>

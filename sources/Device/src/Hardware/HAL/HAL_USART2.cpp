@@ -4,7 +4,6 @@
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Nextion/Nextion.h"
 #include "stm_includes.h"
-#include "Utils/Profiler.h"
 #include "Hardware/Timer.h"
 #include <cstring>
 
@@ -68,8 +67,6 @@ void HAL_USART2::Init()
 void HAL_USART2::SendNZ(pchar command)
 {
     uint16 num_bytes = (uint16)std::strlen(command);
-
-    Profiler::AddBytes(num_bytes);
 
     HAL_UART_Transmit(&handleUSART2, (const uint8 *)command, num_bytes, 100);
 }
