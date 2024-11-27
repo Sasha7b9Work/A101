@@ -34,26 +34,6 @@ ResolverFrequency::ResolverFrequency(const Period &period)
     int counter = CalculateCounter(sum, first, last, 5);
 
     frequency = (float)counter * 1e6f / (last - first) / SampleRate::TimeUSonPoint();
-
-//    char buffer[65];
-//
-//    sprintf(buffer, "%d:%d %d:%d %d:%d",
-//        counter_2, (int)(counter_2 * 1e6f / (last - first) / SampleRate::TimeUSonPoint()),
-//        counter_5, (int)(counter_5 * 1e6f / (last - first) / SampleRate::TimeUSonPoint()),
-//        counter_10, (int)(counter_10 * 1e6f / (last - first) / SampleRate::TimeUSonPoint()),
-//        counter_20, (int)(counter_20 * 1e6f / (last - first) / SampleRate::TimeUSonPoint())
-//    );
-//
-//    Nextion::DrawString({ 0, 20, 700, 40 }, Font::_1_GB42b, Color::White, Color::Background, buffer);
-
-    if (SampleRate::Get() == SampleRate::_100us)
-    {
-        frequency = 40.0 + (frequency - 44.0) * 450.0 / 443.0;
-    }
-    else if (SampleRate::Get() == SampleRate::_1000us)
-    {
-        frequency = 40.0 + (frequency - 42.5) * 10.5 / 10.0;
-    }
 }
 
 
