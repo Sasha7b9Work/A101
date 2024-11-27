@@ -133,11 +133,6 @@ namespace Nextion
     static BufferUART bufferUART;                   // Сюда складываем даныне из UART
 
     static BufferData data;                         // А здесь принятые данные
-
-    namespace LastCode
-    {
-        static ResponseCode::E code = ResponseCode::InstructionSuccessful;
-    }
 }
 
 
@@ -212,13 +207,6 @@ bool Nextion::AnswerFF::Execute()
     if (IsEmpty())
     {
         return false;
-    }
-
-    LastCode::Set((ResponseCode::E)buffer[0]);
-
-    if(size > 1)
-    {
-//        LOG_WRITE("Size return code %d", size);
     }
 
     return true;
@@ -340,18 +328,6 @@ void Nextion::DrawLineH(int y, int x1, int x2, const Color &color)
 void Nextion::DrawLineV(int x, int y1, int y2, const Color &color)
 {
     DrawLine(x, y1, x, y2, color);
-}
-
-
-ResponseCode::E Nextion::LastCode::Get()
-{
-    return code;
-}
-
-
-void Nextion::LastCode::Set(ResponseCode::E _code)
-{
-    code = _code;
 }
 
 

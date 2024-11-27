@@ -14,9 +14,6 @@ namespace Nextion
 {
     static void SendCommandRAW(pchar);
 
-    // Функция заверашется при получении кода
-    void WaitResponse(pchar, ResponseCode::E);
-
     static pchar Convert(pchar text)
     {
         static uint8 buffer[32];
@@ -77,11 +74,45 @@ void Nextion::DrawLineWhite(int x1, int y1, int x2, int y2)
 }
 
 
+void Nextion::SendCommandFormat(const char *format, ...)
+{
+    char message[256];
+
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(message, format, args);
+    va_end(args);
+
+    SendCommandRAW(message);
+}
+
+
+void Nextion::SendCommandRAW(pchar command)
+{
+    HAL_USART2::SendNZ(command);
+
+    HAL_USART2::SendNZ("\xFF\xFF\xFF");
+}
+
+
 void Nextion::DrawString(const Rect &rect, int font, const Color &color, const Color &back_color, pchar text, bool h_align, bool v_align)
 {
     SendCommandFormat("xstr %d,%d,%d,%d,%d,%s,%s,%d,%d,1,\"%s\"",
         rect.x, rect.y, rect.width, rect.height, font, color.ValueString(), back_color.ValueString(), h_align ? 1 : 0, v_align ? 1 : 0, Convert(text));
 }
+
+
+void Nextion::DrawSpaceForStar()
+{
+
+}
+
+
+void Nextion::DrawStarForStar()
+{
+
+}
+
 
 void Nextion::WaveInput::Enable(int size)
 {
@@ -103,62 +134,6 @@ void Nextion::WaveFFT::Enable(int size)
 void Nextion::WaveFFT::Disable(int size)
 {
     Nextion::SendCommandFormat("vis %s,0", size ? "waveBig" : "waveRight");
-}
-
-
-void Nextion::SendCommandFormat(const char *format, ...)
-{
-    char message[256];
-
-    std::va_list args;
-    va_start(args, format);
-    std::vsprintf(message, format, args);
-    va_end(args);
-
-    SendCommandRAW(message);
-}
-
-
-void Nextion::SendCommandRAW(pchar command)
-{
-    LastCode::Set(ResponseCode::None);
-
-    HAL_USART2::SendNZ(command);
-
-    HAL_USART2::SendNZ("\xFF\xFF\xFF");
-}
-
-
-void Nextion::WaitResponse(pchar
-#ifdef LOGGED
-    command
-#endif
-    , ResponseCode::E
-#ifdef LOGGED
-    code
-#endif
-)
-{
-    TimeMeterMS meter;
-
-    while (LastCode::Get() == ResponseCode::None)
-    {
-        Update();
-
-        if (meter.ElapsedTime() > 200)
-        {
-            LOG_WRITE("No response received");
-
-            break;
-        }
-    }
-
-#ifdef LOGGED
-    if (LastCode::Get() != code)
-    {
-        LOG_WRITE("Error in %s : Received %02Xh but expected %02Xh", command, LastCode::Get(), code);
-    }
-#endif
 }
 
 

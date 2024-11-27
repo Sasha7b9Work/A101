@@ -47,12 +47,6 @@ namespace Nextion
     // Эта функция вызвается по приходу байта с дисплея
     void CallbackOnReceive(char);
 
-    namespace LastCode
-    {
-        void Set(ResponseCode::E);
-        ResponseCode::E Get();
-    }
-
     void DrawRect(const Rect &, const Color & = Color::Count);
 
     void FillRect(const Rect &, const Color & = Color::Count);
@@ -66,6 +60,10 @@ namespace Nextion
 
     // h_align - горизонтальное выравнивание. 0 - лево, 1 - центр
     void DrawString(const Rect &, int font, const Color &color, const Color &back_color, pchar, bool h_align = false, bool v_align = false);
+
+    void DrawSpaceForStar();
+
+    void DrawStarForStar();
 
     void SendCommandFormat(const char *, ...);
 
