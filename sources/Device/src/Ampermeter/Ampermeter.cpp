@@ -211,10 +211,6 @@ bool Ampermeter::MeasurementCycle()
             {
                 HAL_TIM4::Stop();
 
-                while (!HAL_USART2::TransferITAllowed())
-                {
-                }
-
                 return false;
             }
 
@@ -264,10 +260,6 @@ bool Ampermeter::MeasurementCycle()
     }
 
     BufferADC::CalculateLimits();
-
-    while (!HAL_USART2::TransferITAllowed())
-    {
-    }
 
     return true;
 }

@@ -89,10 +89,6 @@ void Nextion::SendCommandFormat(const char *format, ...)
 
 void Nextion::SendCommandRAW(pchar command)
 {
-    while (!HAL_USART2::TransferITAllowed())
-    {
-    }
-
     HAL_USART2::SendNZ(command);
 
     HAL_USART2::SendNZ("\xFF\xFF\xFF");

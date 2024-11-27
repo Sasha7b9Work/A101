@@ -68,9 +68,11 @@ void HAL_USART2::Init()
 
 void HAL_USART2::SendNZ(pchar command)
 {
-    uint16 num_bytes = (uint16)std::strlen(command);
+    while (!HAL_USART2::TransferITAllowed())
+    {
+    }
 
-    HAL_UART_Transmit(&handleUSART2, (const uint8 *)command, num_bytes, 100);
+    HAL_UART_Transmit(&handleUSART2, (const uint8 *)command, (uint16)std::strlen(command), 100);
 }
 
 
@@ -98,5 +100,5 @@ void HAL_USART2::TransmitIT(pchar data)
 {
     transfer_IT_allowed = false;
 
-    HAL_UART_Transmit_IT(&handleUSART2, (uint8_t *)data, std::strlen(data));
+    HAL_UART_Transmit_IT(&handleUSART2, (uint8_t *)data, (uint16)std::strlen(data));
 }
