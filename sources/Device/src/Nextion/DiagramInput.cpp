@@ -464,6 +464,8 @@ REAL DiagramInput::ConvertMantissaToOrder(const REAL _value, const int _order)
 
 void DiagramInput::ConvertDeltaACToASCII(REAL mantissa, int order, char buffer[32])
 {
+    mantissa /= 2.0f;
+
     while (order > 0)
     {
         mantissa *= 10.0;
