@@ -45,6 +45,8 @@ namespace HAL_USART2
     void *handle = (void *)&handleUSART2;
 
     static char buffer = 0;
+
+    static bool transfer_IT_allowed = true;
 }
 
 
@@ -77,4 +79,22 @@ void HAL_USART2::CallbackOnReceive()
     Nextion::CallbackOnReceive(buffer);
 
     HAL_UART_Receive_IT(&handleUSART2, (uint8_t *)&buffer, 1);
+}
+
+
+bool HAL_USART2::TransferITAllowed()
+{
+    return transfer_IT_allowed;
+}
+
+
+void HAL_USART2::CallbackOnTransferIT()
+{
+    transfer_IT_allowed = true;
+}
+
+
+void HAL_USART2::TransmitIT(char *data)
+{
+    HAL_UART_Transmit_IT(&handleUSART2, (uint8_t *)data, 10);
 }

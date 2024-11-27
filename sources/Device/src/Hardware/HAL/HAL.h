@@ -90,6 +90,15 @@ namespace HAL_USART2
     extern void *handle;   // UART_HandleTypeDef
 
     void CallbackOnReceive();
+
+    // Разрешена передача по прервыванию
+    bool TransferITAllowed();
+
+    // Передать по прерывания
+    void TransmitIT(char *);
+
+    // Вызывается по завершению передачи по IT
+    void CallbackOnTransferIT();
 }
 
 

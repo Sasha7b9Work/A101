@@ -127,6 +127,14 @@ extern "C" {
         }
     }
 
+    void HAL_UART_TxCpltCallback(UART_HandleTypeDef *handle)
+    {
+        if (handle == HAL_USART2::handle)
+        {
+            HAL_USART2::CallbackOnTransferIT();
+        }
+    }
+
 #ifdef __cplusplus
 }
 #endif
