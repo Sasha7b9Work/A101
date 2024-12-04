@@ -249,8 +249,6 @@ namespace PageMain
 
     static void FuncDraw()
     {
-//        Star::Draw();
-
         wndDC.SetMeasure(Calculator::GetMeasureDC(), Range::Current());
         wndAC.SetMeasure(Calculator::GetMeasureAC(), Range::Current());
 
@@ -272,6 +270,8 @@ namespace PageMain
         {
             wndFREQ.SetMeasure(message_ru, message_en);
         }
+
+        Nextion::DrawString({ 550, 2, 75, 40 }, Font::_0_GB34b, Color::White, Color::Background, SampleRate::TextUGO());
     }
 
     void SetRange(int range)
@@ -446,21 +446,24 @@ void PageMain::Star::Reset()
 
 void PageMain::Star::Draw()
 {
-    uint full_time = (TIME_MS - time_start) / 1000;
-
-    bool enabled = (full_time % 2) == 0;
-
-    if (enabled != prev_enabled)
+    if (SampleRate::Get() == SampleRate::_10us)
     {
-        if (enabled)
-        {
-            Nextion::DrawStarForStar();
-        }
-        else
-        {
-            Nextion::DrawSpaceForStar();
-        }
+        uint full_time = (TIME_MS - time_start) / 1000;
 
-        prev_enabled = enabled;
+        bool enabled = (full_time % 2) == 0;
+
+        if (enabled != prev_enabled)
+        {
+            if (enabled)
+            {
+                Nextion::DrawStarForStar();
+            }
+            else
+            {
+                Nextion::DrawSpaceForStar();
+            }
+
+            prev_enabled = enabled;
+        }
     }
 }

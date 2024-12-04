@@ -20,6 +20,8 @@ struct SampleRate
 
     static E Get()       { return value; }
 
+    static pchar TextUGO();
+
     // Возвращает false, если намеренная частота выходит за пределы текущего диапазона
     static bool InRange(REAL, pchar *title_ru, pchar *title_en);
 

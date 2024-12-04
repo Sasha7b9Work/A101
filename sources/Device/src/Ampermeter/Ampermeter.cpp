@@ -123,12 +123,36 @@ void Ampermeter::Update()
 
 void Ampermeter::DrawProgress(TimeMeterMS &meter, uint &prev_time)
 {
-    static bool star_allow = true;          // Разрешена передача звезды
-    static bool progress_allow = true;      // Разрешена передача прогресс-бара
+    static uint prev_elapsed_ms = 0xFFFFFFFF;   // Время, переданное в предыдущий раз счётчиком meter. Нужно для определения первого фрейма
+    static bool star_allow = true;              // Разрешена передача звезды
+    static bool progress_allow = true;          // Разрешена передача прогресс-бара
 
-    if (SampleRate::TimeFullRead() > meter.ElapsedTime())
+    const int x = 627;
+    const int w = 40;
+    const int h = 40;
+
+    const uint elapsed_ms = meter.ElapsedTime();
+
+    if (SampleRate::Get() != SampleRate::_10us)
     {
-        uint time = SampleRate::TimeFullRead() - meter.ElapsedTime();
+        if (elapsed_ms < prev_elapsed_ms)
+        {
+            if (HAL_USART2::TransferITAllowed())
+            {
+                Nextion::FillRect({ x, 0, w, h }, Color::Background);
+            }
+            else
+            {
+                return;
+            }
+        }
+    }
+
+    prev_elapsed_ms = elapsed_ms;
+
+    if (elapsed_ms < SampleRate::TimeFullRead())
+    {
+        uint time = SampleRate::TimeFullRead() - elapsed_ms;
 
         if ((prev_time - time) > 50 && Page::Current() == PageMain::self)
         {
@@ -150,7 +174,7 @@ void Ampermeter::DrawProgress(TimeMeterMS &meter, uint &prev_time)
                     {
                         static char buffer[64];
 
-                        sprintf(buffer, "xstr 520,5,70,27,0,65535,6964,0,0,1,\"%s\"\xFF\xFF\xFF", String<>("%3.1f", time / 1000.0f).c_str());
+                        sprintf(buffer, "fill %d,0,%d,%d,65535\xFF\xFF\xFF", x, (int)((float)w * (float)elapsed_ms / (float)SampleRate::TimeFullRead()), h);
 
                         HAL_USART2::TransmitIT(buffer);
                     }
