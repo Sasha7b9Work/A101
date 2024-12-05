@@ -259,16 +259,23 @@ namespace PageMain
 
         Measure frequency = Calculator::GetMeasureFrequency();
 
-        pchar message_ru = nullptr;
-        pchar message_en = nullptr;
-
-        if (SampleRate::InRange(frequency.value_abs, &message_ru, &message_en))
+        if (frequency.correct)
         {
-            wndFREQ.SetMeasure(Calculator::GetMeasureFrequency(), Range::Current());
+            pchar message_ru = nullptr;
+            pchar message_en = nullptr;
+
+            if (SampleRate::InRange(frequency.value_abs, &message_ru, &message_en))
+            {
+                wndFREQ.SetMeasure(frequency, Range::Current());
+            }
+            else
+            {
+                wndFREQ.SetMeasure(message_ru, message_en);
+            }
         }
         else
         {
-            wndFREQ.SetMeasure(message_ru, message_en);
+            wndFREQ.SetMeasure(frequency, Range::Current());
         }
 
         Nextion::DrawString({ 550, 2, 75, 40 }, Font::_0_GB34b, Color::White, Color::Background, SampleRate::TextUGO());
