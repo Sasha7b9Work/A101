@@ -129,7 +129,7 @@ void Ampermeter::DrawProgress(TimeMeterMS &meter, uint &prev_time)
 
     const int x = 627;
     const int w = 40;
-    const int h = 40;
+    const int h = 25;
 
     const uint elapsed_ms = meter.ElapsedTime();
 
@@ -139,7 +139,7 @@ void Ampermeter::DrawProgress(TimeMeterMS &meter, uint &prev_time)
         {
             if (HAL_USART2::TransferITAllowed())
             {
-                Nextion::FillRect({ x, 0, w, h }, Color::Background);
+                Nextion::FillRect({ x, 11, w, h }, Color::Background);
             }
             else
             {
@@ -174,7 +174,7 @@ void Ampermeter::DrawProgress(TimeMeterMS &meter, uint &prev_time)
                     {
                         static char buffer[64];
 
-                        sprintf(buffer, "fill %d,0,%d,%d,65535\xFF\xFF\xFF", x, (int)((float)w * (float)elapsed_ms / (float)SampleRate::TimeFullRead()), h);
+                        sprintf(buffer, "fill %d,11,%d,%d,65535\xFF\xFF\xFF", x, (int)((float)w * (float)elapsed_ms / (float)SampleRate::TimeFullRead()), h);
 
                         HAL_USART2::TransmitIT(buffer);
                     }
@@ -196,11 +196,6 @@ void Ampermeter::DrawProgress(TimeMeterMS &meter, uint &prev_time)
 
 bool Ampermeter::MeasurementCycle()
 {
-    if (Page::Current() == PageMain::self)
-    {
-        Nextion::DrawString({ 520, 5, 50, 27 }, Font::_0_GB34b, Color::White, Color::Background, "", false, false);
-    }
-
     TimeMeterMS meter;
 
     BufferADC::Clear();

@@ -278,7 +278,7 @@ namespace PageMain
             wndFREQ.SetMeasure(frequency, Range::Current());
         }
 
-        Nextion::DrawString({ 550, 2, 75, 40 }, Font::_0_GB34b, Color::White, Color::Background, SampleRate::TextUGO());
+        Nextion::DrawString({ 525, 5, 75, 40 }, Font::_0_GB34b, Color::White, Color::Background, SampleRate::TextUGO(), true, false);
     }
 
     void SetRange(int range)
