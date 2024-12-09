@@ -20,6 +20,8 @@ namespace SCPI
 
     static RingBuffer ring_usb;
     static RingBuffer ring_rs232;
+
+    static bool exist_data = false;     // Если true, в буфере есть данные для обработки
 }
 
 
@@ -30,6 +32,14 @@ void SCPI::Update()
 
     ring_rs232.GetData(in_rs232);
     in_rs232.Update();
+
+    exist_data = false;
+}
+
+
+bool SCPI::ExistData()
+{
+    return exist_data;
 }
 
 
@@ -53,11 +63,21 @@ void SCPI::CallbackOnReceive(Direction::E dir, char byte)
     if (dir & Direction::USB)
     {
         ring_usb.Append((uint8)std::toupper(byte));
+
+        if (ring_usb.GetElementCount() > 1 && (byte == 0x0d || byte == 0x0a))
+        {
+            exist_data = true;
+        }
     }
 
     if (dir & Direction::RS232)
     {
         ring_rs232.Append((uint8)std::toupper(byte));
+
+        if (ring_usb.GetElementCount() > 1 && (byte == 0x0d || byte == 0x0a))
+        {
+            exist_data = true;
+        }
     }
 }
 
@@ -116,6 +136,14 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
 
     if (std::strlen(data) == 2)
     {
+        if (std::strcmp(data, "R?") == 0)          // R? Запрос установленного диапазона
+        {
+            return new CommandRangeRequest();
+        }
+        else if (std::strcmp(data, "D?") == 0)          // D? Запрос установленного диапазона частоты
+        {
+            return new CommandRangeFrequencyRequest();
+        }
         if (data[0] == 'I')                             // I0...I5
         {
             int range = data[1] & 0x0F;
@@ -142,14 +170,6 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
             {
                 return new CommandRangeFrequency(range);
             }
-        }
-        else if (std::strcmp(data, "R?") == 0)          // R? Запрос установленного диапазона
-        {
-            return new CommandRangeRequest();
-        }
-        else if (std::strcmp(data, "D?") == 0)          // D? Запрос установленного диапазона частоты
-        {
-            return new CommandRangeFrequencyRequest();
         }
     }
 

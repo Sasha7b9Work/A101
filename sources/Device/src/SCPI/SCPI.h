@@ -22,4 +22,6 @@ namespace SCPI
     void CallbackOnReceive(Direction::E, char);
 
     void Update();
+
+    bool ExistData();
 }

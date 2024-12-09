@@ -20,6 +20,7 @@
 #include "Nextion/Nextion.h"
 #include "Utils/String.h"
 #include "Hardware/HAL/HAL_PIO.h"
+#include "SCPI/SCPI.h"
 #include <cmath>
 #include <cstdio>
 
@@ -226,7 +227,7 @@ bool Ampermeter::MeasurementCycle()
             counter_raw++;
             sum_raw += AD7691::ReadValueRAW();
 
-            if (!Calibrator::InProgress() && Nextion::ExixtCommnadsForExecute())
+            if (!Calibrator::InProgress() && (Nextion::ExixtCommnadsForExecute() || SCPI::ExistData()))
             {
                 HAL_TIM4::Stop();
 
