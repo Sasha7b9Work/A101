@@ -4,6 +4,7 @@
 #include "Hardware/Communicator.h"
 #include "Utils/Buffer.h"
 #include "Utils/String.h"
+#include "Ampermeter/AD7691.h"
 
 
 namespace SCPI
@@ -75,6 +76,20 @@ namespace SCPI
     struct CommandRangeRequest : public Command
     {
         CommandRangeRequest() { }
+        virtual bool Execute(Direction::E) override;
+    };
+
+    struct CommandRangeFrequency : public Command
+    {
+        CommandRangeFrequency(int _range) : range((SampleRate::E)_range) { }
+        virtual bool Execute(Direction::E) override;
+    protected:
+        SampleRate::E range;
+    };
+
+    struct CommandRangeFrequencyRequest : public Command
+    {
+        CommandRangeFrequencyRequest() { }
         virtual bool Execute(Direction::E) override;
     };
 

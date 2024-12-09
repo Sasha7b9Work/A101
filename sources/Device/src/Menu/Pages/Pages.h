@@ -2,6 +2,7 @@
 #pragma once
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
+#include "Ampermeter/AD7691.h"
 
 
 namespace PageMain
@@ -21,6 +22,8 @@ namespace PageMain
     void SetRange(int);
 
     void EnableZero(MeasuresOnDisplay::E, bool);
+
+    void SetSampleRate(SampleRate::E);
 
     // ѕодсветить выбор текущего диапазона
     void HightLightCurrentRange();

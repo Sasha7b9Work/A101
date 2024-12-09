@@ -474,3 +474,27 @@ void PageMain::Star::Draw()
         }
     }
 }
+
+
+void PageMain::SetSampleRate(SampleRate::E rate)
+{
+    if (SampleRate::Get() == rate)
+    {
+        return;
+    }
+
+    const bool need_switch_pages = (Page::Current() == PageMain::self);
+
+    if (need_switch_pages)
+    {
+        btnMenu.Press();
+        btnMenu.Release();
+    }
+
+    SampleRate::Set(rate);
+
+    if (need_switch_pages)
+    {
+        PageMain::self->SetAsCurrent();
+    }
+}

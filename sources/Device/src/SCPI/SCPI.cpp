@@ -134,9 +134,22 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
                 return new CommandRangeJ(range);
             }
         }
+        else if (data[0] == 'D')
+        {
+            int range = data[1] & 0x0F;
+
+            if (range < 3)
+            {
+                return new CommandRangeFrequency(range);
+            }
+        }
         else if (std::strcmp(data, "R?") == 0)          // R? «апрос установленного диапазона
         {
             return new CommandRangeRequest();
+        }
+        else if (std::strcmp(data, "D?") == 0)          // D? «апрос установленного диапазона частоты
+        {
+            return new CommandRangeFrequencyRequest();
         }
     }
 

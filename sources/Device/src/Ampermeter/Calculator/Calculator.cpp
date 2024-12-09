@@ -81,7 +81,7 @@ void Calculator::AppendData()
     {
         REAL freq = ResolverFrequency(period).GetFrequency();
 
-        if (ac.NumElements() && (ac.Get() > Range::MaxMA(Range::Current()) * (Range::Current() > 2 ? 0.0001 : 0.1)))
+        if (ac.NumElements() && (ac.Get() > Range::MaxMA(Range::Current()) * (Range::Current() > 2 ? 0.00008 : 0.08)))
         {
             frequency.Push(freq);
         }

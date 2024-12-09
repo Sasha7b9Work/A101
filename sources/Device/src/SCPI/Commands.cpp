@@ -7,6 +7,7 @@
 #include "Settings/Settings.h"
 #include "Utils/Bootloader.h"
 #include "Ampermeter/InputRelays.h"
+#include "Ampermeter/AD7691.h"
 
 
 namespace SCPI
@@ -79,10 +80,31 @@ bool SCPI::CommandRangeRequest::Execute(Direction::E dir)
 }
 
 
+bool SCPI::CommandRangeFrequencyRequest::Execute(Direction::E dir)
+{
+    static const pchar ranges[SampleRate::Count] =
+    {
+        "40Hz", "4Hz", "0.4Hz"
+    };
+
+    Send(dir, ranges[SampleRate::Get()]);
+
+    return true;
+}
+
+
 bool SCPI::CommandRangeI::Execute(Direction::E)
 {
     PageMain::SetMeasuresOnDisplay(MeasuresOnDisplay::DC);
     PageMain::SetRange(range);
+
+    return true;
+}
+
+
+bool SCPI::CommandRangeFrequency::Execute(Direction::E)
+{
+    PageMain::SetSampleRate(range);
 
     return true;
 }
