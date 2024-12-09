@@ -72,6 +72,12 @@ namespace SCPI
         int range;
     };
 
+    struct CommandRangeRequest : public Command
+    {
+        CommandRangeRequest() { }
+        virtual bool Execute(Direction::E) override;
+    };
+
     struct CommandZero : public Command
     {
         CommandZero(char _type, bool _enabled) : type(_type), enabled(_enabled) { }

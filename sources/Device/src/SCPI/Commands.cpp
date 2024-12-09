@@ -6,6 +6,7 @@
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Utils/Bootloader.h"
+#include "Ampermeter/InputRelays.h"
 
 
 namespace SCPI
@@ -56,6 +57,21 @@ bool SCPI::CommandMEAS::Execute(Direction::E dir)
         message.Append(" ");
         message.Append(PageMain::wndAC.GetUnits());
     }
+
+    Send(dir, message.c_str());
+
+    return true;
+}
+
+
+bool SCPI::CommandRangeRequest::Execute(Direction::E dir)
+{
+    static const pchar labels[MeasuresOnDisplay::Count] =
+    {
+        "IJ", "I", "J"
+    };
+
+    String<> message("%s%d", labels[set.meas_on_display.Current()], Range::Current());
 
     Send(dir, message.c_str());
 

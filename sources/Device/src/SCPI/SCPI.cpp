@@ -134,6 +134,10 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
                 return new CommandRangeJ(range);
             }
         }
+        else if (std::strcmp(data, "R?") == 0)          // R? Запрос установленного диапазона
+        {
+            return new CommandRangeRequest();
+        }
     }
 
     if (std::strlen(data) == 3)
