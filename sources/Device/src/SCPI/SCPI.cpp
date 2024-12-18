@@ -162,7 +162,7 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
                 return new CommandRangeJ(range);
             }
         }
-        else if (data[0] == 'D')
+        else if (data[0] == 'D')                        // D0..D2
         {
             int range = data[1] & 0x0F;
 
