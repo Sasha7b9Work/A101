@@ -84,7 +84,7 @@ bool SCPI::CommandRangeFrequencyRequest::Execute(Direction::E dir)
 {
     static const pchar ranges[SampleRate::Count] =
     {
-        "40Hz", "4Hz", "0.4Hz"
+        "D0", "D1", "D2"
     };
 
     Send(dir, ranges[SampleRate::Get()]);
