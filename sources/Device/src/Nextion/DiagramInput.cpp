@@ -287,13 +287,13 @@ void DiagramInput::DrawSignal()
     {
         delta_AC[0] = '+';
 
-        Nextion::DrawString({ 0, y0 - height / 2 + 1, 150, 34 }, Font::_0_GB34b, Color::White, Color::Background, delta_AC, false, false);
+        Nextion::DrawString({ 0, y0 - height / 2 + 1, 170, 34 }, Font::_0_GB34b, Color::White, Color::Background, delta_AC, false, false);
 
         delta_AC[0] = '-';
 
-        Nextion::DrawString({ 0, y0 + height / 2 - 35, 150, 34 }, Font::_0_GB34b, Color::White, Color::Background, delta_AC, false, false);
+        Nextion::DrawString({ 0, y0 + height / 2 - 35, 170, 34 }, Font::_0_GB34b, Color::White, Color::Background, delta_AC, false, false);
 
-        Nextion::DrawString({ 0, y0 - 34, 150, 34 }, Font::_0_GB34b, Color::White, Color::Background, zero_AC, false, false);
+        Nextion::DrawString({ 0, y0 - 34, 170, 34 }, Font::_0_GB34b, Color::White, Color::Background, zero_AC, false, false);
     }
 
     DrawTimeScale();
@@ -484,13 +484,35 @@ void DiagramInput::ConvertDeltaACToASCII(REAL mantissa, int order, char buffer[3
 }
 
 
+static pchar GetKA()
+{
+    return set.lang == Lang::RU ? "êÀ" : "kA";
+}
+
+static pchar GetMA()
+{
+    return set.lang == Lang::RU ? "ìÀ" : "mA";
+}
+
+static pchar GetUA()
+{
+    return set.lang == Lang::RU ? "ìêÀ" : "uA";
+}
+
+
+static pchar GetNA()
+{
+    return set.lang == Lang::RU ? "íÀ" : "nA";
+}
+
+
 void DiagramInput::ConvertZeroACToASCII(REAL value, char *buffer)
 {
     value *= 1e-3;
 
     if (std::fabs(value) >= 1e3)
     {
-        sprintf(buffer, "%.2f kA", value / 1e3);
+        sprintf(buffer, "%.2f %s", value / 1e3, GetKA());
     }
     else if (std::fabs(value) >= 1e2)
     {
@@ -506,43 +528,43 @@ void DiagramInput::ConvertZeroACToASCII(REAL value, char *buffer)
     }
     else if (std::fabs(value) >= 1e-1)                 // > 100 mA
     {
-        sprintf(buffer, "%.0f mA", value * 1e3);
+        sprintf(buffer, "%.0f %s", value * 1e3, GetMA());
     }
     else if (std::fabs(value) >= 1e-2)                 // > 10 mA
     {
-        sprintf(buffer, "%.1f mA", value * 1e3);
+        sprintf(buffer, "%.1f %s", value * 1e3, GetMA());
     }
     else if (std::fabs(value) >= 1e-3)                  // > 1 mA
     {
-        sprintf(buffer, "%.2f mA", value * 1e3);
+        sprintf(buffer, "%.2f %s", value * 1e3, GetMA());
     }
     else if (std::fabs(value) >= 1e-4)                 // > 100 uA
     {
-        sprintf(buffer, "%.0f uA", value * 1e6);
+        sprintf(buffer, "%.0f %s", value * 1e6, GetUA());
     }
     else if (std::fabs(value) >= 1e-5)                 // > 10 uA
     {
-        sprintf(buffer, "%.1f uA", value * 1e6);
+        sprintf(buffer, "%.1f %s", value * 1e6, GetUA());
     }
     else if (std::fabs(value) >= 1e-6)                 // > 1 uA
     {
-        sprintf(buffer, "%.2f uA", value * 1e6);
+        sprintf(buffer, "%.2f %s", value * 1e6, GetUA());
     }
     else if (std::fabs(value) >= 1e-7)                  // > 100 nA
     {
-        sprintf(buffer, "%.0f nA", value * 1e9);
+        sprintf(buffer, "%.0f %s", value * 1e9, GetNA());
     }
     else if (std::fabs(value) >= 1e-8)                 // > 10 nA
     {
-        sprintf(buffer, "%.1f nA", value * 1e9);
+        sprintf(buffer, "%.1f %s", value * 1e9, GetNA());
     }
     else if(value >= 1e-9)                  // > 1 na
     {
-        sprintf(buffer, "%.2f nA", value * 1e9);
+        sprintf(buffer, "%.2f %s", value * 1e9, GetNA());
     }
     else
     {
-        std::strcpy(buffer, "0 nA");
+        sprintf(buffer, "0 %s", GetNA());
     }
 }
 
@@ -553,7 +575,7 @@ void DiagramInput::DrawTimeScale()
 
     char buffer[32];
 
-    sprintf(buffer, "%.0f ms", time_ms);
+    sprintf(buffer, "%.0f %s", time_ms, (set.lang == Lang::RU) ? "ìñ" : "ms");
 
     const int w = 150;
     const int h = 35;
