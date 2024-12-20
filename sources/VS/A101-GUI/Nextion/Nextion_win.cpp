@@ -4,6 +4,18 @@
 #include "GUI/Screen.h"
 
 
+void Nextion::DrawSpaceForStar()
+{
+
+}
+
+
+void Nextion::DrawStarForStar()
+{
+
+}
+
+
 void Nextion::DrawRect(const Rect &rect, const Color &color)
 {
     color.SetAsCurrent();

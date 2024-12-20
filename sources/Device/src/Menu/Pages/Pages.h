@@ -42,6 +42,8 @@ namespace PageMain
 
 namespace PageMenu
 {
+    void Init();
+
     extern Page *self;
 }
 

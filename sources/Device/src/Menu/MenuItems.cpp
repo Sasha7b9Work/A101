@@ -308,6 +308,8 @@ void Menu::Init()
     PageMain::SetRange(2);
     PageMain::SetRange(3);
 
+    PageMenu::Init();
+
     PageMain::self->SetAsCurrent();
 
     PageMain::SetMeasuresOnDisplay(set.meas_on_display.Current(), true);

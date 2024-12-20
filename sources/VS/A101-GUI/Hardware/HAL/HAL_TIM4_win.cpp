@@ -9,19 +9,13 @@ void HAL_TIM4::Init()
 }
 
 
-void HAL_TIM4::StartPeriodicUS(uint)
-{
-
-}
-
-
-void HAL_TIM4::WaitEvent()
-{
-
-}
-
-
 void HAL_TIM4::Stop()
+{
+
+}
+
+
+void HAL_TIM4::Start()
 {
 
 }

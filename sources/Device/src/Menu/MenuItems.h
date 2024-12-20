@@ -268,6 +268,11 @@ struct Choice : public Item
 
     void SetTitles(pchar title_ru, pchar title_en);
 
+    ButtonPress &GetButton()
+    {
+        return button;
+    }
+
 private:
 
     pchar      *names;

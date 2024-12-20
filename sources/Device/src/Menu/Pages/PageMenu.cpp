@@ -155,17 +155,24 @@ namespace PageMenu
         nullptr,      nullptr
     };
 
-    static Choice chLanguage((Lang::IsRU() ? "Language" : "язык"), (Lang::IsRU() ? "язык" : "Language"),
+
+    static Choice chLanguage((Lang::IsRU() ? "Language" : "язык"), (Lang::IsRU() ? "Language" : "язык"),
         (uint8 *)&set.lang,
         names_lang,
         1, 3, [](Item *item, bool press)
     {
         if (!press)
         {
-            ((ButtonCommon *)item)->SetText((Lang::IsRU() ? "Language" : "язык"), (Lang::IsRU() ? "язык" : "Language"));
+            ((ButtonCommon *)item)->SetText((Lang::IsRU() ? "Language" : "язык"), (Lang::IsRU() ? "Language" : "язык"));
             Page::Current()->Refresh();
         }
     });
+
+    void Init()
+    {
+        chLanguage.GetButton().SetText((Lang::IsRU() ? "Language" : "язык"), (Lang::IsRU() ? "Language" : "язык"));
+    }
+
 
     static ButtonMenuPress btnInformation("»нформаци€", "Information", 1, 4, [](Item *, bool press)
     {

@@ -7,3 +7,15 @@ void HAL_USART2::SendNZ(pchar)
 {
 
 }
+
+
+bool HAL_USART2::TransferITAllowed()
+{
+    return true;
+}
+
+
+void HAL_USART2::TransmitIT(pchar)
+{
+
+}
