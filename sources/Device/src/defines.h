@@ -1,10 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "opt.h"
-
-#define VERSION_MAJOR 0
-#define VERSION_MINOR 1
-
 
 #ifndef WIN32
 #pragma clang diagnostic ignored "-Wglobal-constructors"
@@ -23,12 +18,20 @@
 #pragma clang diagnostic ignored "-Wdouble-promotion"
 #pragma clang diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
 #pragma clang diagnostic ignored "-Wweak-vtables"
+#pragma clang diagnostic ignored "-Winvalid-utf8"
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
 #else
 #define WIN32_LEAN_AND_MEAN
 #endif
+
+#include "opt.h"
+
+#define VERSION_MAJOR 0
+#define VERSION_MINOR 1
+
 
 typedef unsigned int       uint;
 typedef unsigned short     uint16;

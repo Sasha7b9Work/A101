@@ -1,28 +1,28 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
+#ifndef WIN32
+    #pragma clang diagnostic ignored "-Wglobal-constructors"
+    #pragma clang diagnostic ignored "-Wmissing-noreturn"
+    #pragma clang diagnostic ignored "-Wpadded"
+    #pragma clang diagnostic ignored "-Wold-style-cast"
+    #pragma clang diagnostic ignored "-Wc++98-compat"
+    #pragma clang diagnostic ignored "-Wformat-nonliteral"
+    #pragma clang diagnostic ignored "-Winvalid-source-encoding"
+    #pragma clang diagnostic ignored "-Wimplicit-int-float-conversion"
+    #pragma clang diagnostic ignored "-Wcast-qual"
+    #pragma clang diagnostic ignored "-Wcast-align"
+    #pragma clang diagnostic ignored "-Wnon-virtual-dtor"
+    #pragma clang diagnostic ignored "-Wundefined-func-template"
+    #pragma clang diagnostic ignored "-Winvalid-utf8"
+    #pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+#endif
 
 // Закомментировать, чтобы логи не валили в UART
 #define LOGGED
-
-
-#ifndef WIN32
-#pragma clang diagnostic ignored "-Wglobal-constructors"
-#pragma clang diagnostic ignored "-Wmissing-noreturn"
-#pragma clang diagnostic ignored "-Wpadded"
-#pragma clang diagnostic ignored "-Wold-style-cast"
-#pragma clang diagnostic ignored "-Wc++98-compat"
-#pragma clang diagnostic ignored "-Wformat-nonliteral"
-#pragma clang diagnostic ignored "-Winvalid-source-encoding"
-#pragma clang diagnostic ignored "-Wimplicit-int-float-conversion"
-#pragma clang diagnostic ignored "-Wcast-qual"
-#pragma clang diagnostic ignored "-Wcast-align"
-#pragma clang diagnostic ignored "-Wnon-virtual-dtor"
-#pragma clang diagnostic ignored "-Wundefined-func-template"
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
-#endif
 
 typedef unsigned int       uint;
 typedef unsigned short     uint16;

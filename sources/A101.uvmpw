@@ -5,15 +5,15 @@
 
   <Header>### uVision Project, (C) Keil Software</Header>
 
-  <WorkspaceName>WorkSpace</WorkspaceName>
+  <WorkspaceName>D:\Projects\A101\sources\A101.uvmpw</WorkspaceName>
 
   <project>
     <PathAndName>.\Device\Device.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
   </project>
 
   <project>
     <PathAndName>.\Loader\Loader.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
   </project>
 
 </ProjectWorkspace>

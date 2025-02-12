@@ -43,7 +43,7 @@ void Range::Set(int _range, bool reset_measures)
 
     if ((_range > 3) && current != _range)
     {
-        HAL_PIO::Write(PIN_ZERO, true);
+        HAL_PIO::Write(PIN_ZERO, false);
 
         Timer::Delay(400);
     }

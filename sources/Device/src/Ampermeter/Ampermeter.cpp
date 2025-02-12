@@ -372,5 +372,5 @@ void Ampermeter::AdjustmentZero()
 
     zero.SetConst(const_val);
 
-    HAL_PIO::Write(PIN_ZERO, false);
+    HAL_PIO::Write(PIN_ZERO, true);
 }

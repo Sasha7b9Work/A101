@@ -260,6 +260,7 @@ ResolverDC::ResolverDC(const Period &_period)
     int dc_value = period.dc.Raw();
 
     int counter = 0;
+    (void)counter;
 
     while (max - min > 1)
     {

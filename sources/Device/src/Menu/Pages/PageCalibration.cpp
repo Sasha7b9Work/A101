@@ -391,7 +391,7 @@ namespace PageCalibration
 
         Timer::Delay(400);
 
-        HAL_PIO::Write(PIN_ZERO, false);
+        HAL_PIO::Write(PIN_ZERO, true);
 
         btnSave.SetShown(false);
 

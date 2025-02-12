@@ -159,4 +159,6 @@ void HAL_PIO::Init()
 
         str++;
     }
+
+    HAL_PIO::Write(PIN_ZERO, true);
 }
