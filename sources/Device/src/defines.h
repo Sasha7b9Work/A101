@@ -18,8 +18,8 @@
 #pragma clang diagnostic ignored "-Wdouble-promotion"
 #pragma clang diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
 #pragma clang diagnostic ignored "-Wweak-vtables"
-#pragma clang diagnostic ignored "-Winvalid-utf8"
-#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+//#pragma clang diagnostic ignored "-Winvalid-utf8"
+//#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
