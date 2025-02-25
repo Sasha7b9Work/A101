@@ -39,7 +39,15 @@ void Display::Init()
 
 void Display::SetBrightness()
 {
-    Nextion::SendCommandFormat("dims=%d", set.brightness);
+    float max_delta = 100.0f - 10.0f;
+
+    float delta = 100.0f - 10.0f - 20.0f;
+
+    float k = delta / max_delta;
+
+    float bright = (((float)set.brightness - 10.0f) * k) + 10.0f;
+
+    Nextion::SendCommandFormat("dims=%d", (int)bright);
 }
 
 
