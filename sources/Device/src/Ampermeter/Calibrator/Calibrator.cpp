@@ -162,7 +162,7 @@ bool Calibrator::CalibrateGain(int range)
 
     bool correct_dc = false;
 
-    REAL dc = std::fabs(Calculator::GetAbsDC(&correct_dc));
+    REAL dc = Calculator::GetAbsDC(&correct_dc);
 
     REAL k = Range::MaxMA(range) / dc;
 
