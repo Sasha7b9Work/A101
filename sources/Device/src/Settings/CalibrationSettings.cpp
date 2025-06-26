@@ -65,6 +65,15 @@ void CalibrationSettings::Reset()
 }
 
 
+void CalibrationSettings::Reset(int range)
+{
+    gain[range] = { range, 1.0 };
+    zero[range] = 0;
+
+    Save();
+}
+
+
 uint CalibrationSettings::CalculateCRC32() const
 {
     return Math::CalculateCRC32(PointerToFirstData(), (int)SizeData());

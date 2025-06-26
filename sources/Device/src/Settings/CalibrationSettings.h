@@ -29,11 +29,11 @@ struct CalibrationSettings
         int var_val;        // Плавающее смещение, измеряется каждый 10 секунд
     };
 
-    uint size;                      // Здесь размер настроек - для проверки того, что версии соответствуют
-    uint crc32;                     // Здесь контрольная сумма - для проверки правильности сохранения
+    uint size;              // Здесь размер настроек - для проверки того, что версии соответствуют
+    uint crc32;             // Здесь контрольная сумма - для проверки правильности сохранения
 
-    Gain gain[6];                   // Растяжка
-    Zero zero[6];                   // Смещения нуля
+    Gain gain[6];           // Растяжка
+    Zero zero[6];           // Смещения нуля
 
     uint CalculateCRC32() const;
     bool IsEqual(const CalibrationSettings *) const;
@@ -57,6 +57,7 @@ struct CalibrationSettings
     void Save();
     void Load();
     void Reset();
+    void Reset(int range);
 };
 
 

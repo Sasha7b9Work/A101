@@ -11,11 +11,13 @@ sources/Device/Objects/*
 sources/Device/Objects-Debug/*
 sources/Device/Listings/*
 sources/Device/Listings-Debug/*
+sources/Device/RTE/*
 
 sources/Loader/Objects/*
 sources/Loader/Objects-Debug/*
 sources/Loader/Listings/*
 sources/Loader/Listings-Debug/*
+sources/Loader/RTE/*
 
 sources/arm_fir_example/ARMCM4_debug/*
 sources/arm_fir_example/RTE/*

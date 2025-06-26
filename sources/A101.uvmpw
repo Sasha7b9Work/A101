@@ -5,12 +5,11 @@
 
   <Header>### uVision Project, (C) Keil Software</Header>
 
-  <WorkspaceName>D:\Projects\A101\sources\A101.uvmpw</WorkspaceName>
+  <WorkspaceName>A101</WorkspaceName>
 
   <project>
     <PathAndName>.\Device\Device.uvprojx</PathAndName>
     <NodeIsActive>1</NodeIsActive>
-    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
   <project>
