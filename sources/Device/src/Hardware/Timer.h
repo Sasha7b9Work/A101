@@ -82,5 +82,5 @@ public:
     uint ElapsedTime();
     void Wait(uint dMS);
 private:
-    uint time_reset;
+    volatile uint time_reset;
 };
