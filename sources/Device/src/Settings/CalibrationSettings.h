@@ -36,6 +36,9 @@ struct CalibrationSettings
     Gain gain[6];           // Растяжка
     Zero zero[6];           // Смещения нуля
 
+    static Gain stored_gain;
+    static Zero stored_zero;
+
     uint CalculateCRC32() const;
     bool IsEqual(const CalibrationSettings *) const;
 
@@ -58,7 +61,15 @@ struct CalibrationSettings
     void Save();
     void Load();
     void Reset();
-    void Reset(int range, Calibrator::Type::E);
+
+    // Сбрасывает на этом диапазоне
+    void ResetGain(int range);
+
+    // Сохраняет коэффициент
+    void Store(int range, Calibrator::Type::E);
+
+    // Восстанавливает коэффициент
+    void Restore(int range, Calibrator::Type::E);
 };
 
 

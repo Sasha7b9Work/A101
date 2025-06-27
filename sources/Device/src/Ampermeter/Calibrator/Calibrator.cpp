@@ -42,7 +42,9 @@ namespace Calibrator
 
 bool Calibrator::Run(int range, Type::E type, void (*callback)())
 {
-    cal.Reset(range, type);
+    cal.Store(range, type == Type::Min ? Type::Max : Type::Min);
+
+    cal.ResetGain(range);
 
     in_progress = true;
 
@@ -54,13 +56,17 @@ bool Calibrator::Run(int range, Type::E type, void (*callback)())
 
     bool result = false;
 
-    if (type == Type::DC)
+    if (type == Type::Min)
     {
         result = CalibratorZero(range).Run();
+
+        cal.Restore(range, Type::Max);
     }
-    else if (type == Type::AC)
+    else if (type == Type::Max)
     {
         result = CalibrateGain(range);
+
+        cal.Restore(range, Type::Min);
     }
 
     in_progress = false;
