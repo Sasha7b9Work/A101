@@ -75,6 +75,9 @@ void BufferADC::CalculateLimits()
         if (value < min) { min = value; }
         if (value > max) { max = value; }
     }
+
+    min.Inverse();
+    max.Inverse();
 }
 
 
