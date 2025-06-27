@@ -65,10 +65,16 @@ void CalibrationSettings::Reset()
 }
 
 
-void CalibrationSettings::Reset(int range)
+void CalibrationSettings::Reset(int range, Calibrator::Type::E type)
 {
-    gain[range] = { range, 1.0 };
-    zero[range] = 0;
+    if (type == Calibrator::Type::AC)
+    {
+        gain[range] = { range, 1.0 };
+    }
+    if (type == Calibrator::Type::DC)
+    {
+        zero[range] = 0;
+    }
 
     Save();
 }

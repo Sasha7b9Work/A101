@@ -42,7 +42,7 @@ namespace Calibrator
 
 bool Calibrator::Run(int range, Type::E type, void (*callback)())
 {
-    cal.Reset(range);
+    cal.Reset(range, type);
 
     in_progress = true;
 

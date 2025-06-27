@@ -1,5 +1,6 @@
 // 2022/11/22 08:45:27 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Ampermeter/Calibrator/Calibrator.h"
 
 
 struct CalibrationSettings
@@ -57,7 +58,7 @@ struct CalibrationSettings
     void Save();
     void Load();
     void Reset();
-    void Reset(int range);
+    void Reset(int range, Calibrator::Type::E);
 };
 
 
