@@ -45,15 +45,15 @@ void BufferADC::Clear()
 }
 
 
-float BufferADC::Min()
+double BufferADC::Min()
 {
-    return -min.Real();
+    return min.Real();
 }
 
 
-float BufferADC::Max()
+double BufferADC::Max()
 {
-    return -max.Real();
+    return max.Real();
 }
 
 
