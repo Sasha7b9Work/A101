@@ -211,7 +211,7 @@ namespace PageCalibration
         {
             btnSave.SetShown(false);
             btnCalib.SetShown(false);
-            if (Calibrator::Run(Range::Current(), (!btnMax.IsPressed()) ? Calibrator::Type::Min : Calibrator::Type::Max, FuncDraw))
+            if (Calibrator::Run(Range::Current(), (!btnMax.IsPressed()) ? Calibrator::Type::DC : Calibrator::Type::AC, FuncDraw))
             {
                 btnSave.SetShown(true);
             }

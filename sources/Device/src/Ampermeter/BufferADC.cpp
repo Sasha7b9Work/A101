@@ -10,11 +10,11 @@
 
 namespace BufferADC
 {
-    static volatile int pointer;                                    // Указатель используется при чтении данных (массив raw)
+    static int        pointer;                                      // Указатель используется при чтении данных (массив raw)
     static ValueADC   raw[SIZE]  __attribute__((section("ram2")));  // Данные, считанные с АЦП
 
-    static ValueADC min;
-    static ValueADC max;
+    static ValueADC   min;
+    static ValueADC   max;
 }
 
 
@@ -75,9 +75,6 @@ void BufferADC::CalculateLimits()
         if (value < min) { min = value; }
         if (value > max) { max = value; }
     }
-
-    min.Inverse();
-    max.Inverse();
 }
 
 

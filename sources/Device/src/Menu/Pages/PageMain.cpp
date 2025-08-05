@@ -249,12 +249,6 @@ namespace PageMain
 
     static void FuncDraw()
     {
-#ifdef DEBUG
-
-        Nextion::DrawString({ 10, 190, 200, 50 }, Font::_0_GB34b, Color::White, Color::Black, "Отладка", false, false);
-
-#endif
-
         wndDC.SetMeasure(Calculator::GetMeasureDC(), Range::Current());
         wndAC.SetMeasure(Calculator::GetMeasureAC(), Range::Current());
 

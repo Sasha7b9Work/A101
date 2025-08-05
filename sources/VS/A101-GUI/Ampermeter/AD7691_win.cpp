@@ -57,7 +57,7 @@ bool SampleRate::InRange(REAL freq, pchar *title_ru, pchar *title_en)
 
 ValueADC::ValueADC(int reading)
 {
-    value = reading - cal.zero[Range::Current()]._GetFull();
+    value = reading - cal.zero[Range::Current()].GetFull();
 }
 
 

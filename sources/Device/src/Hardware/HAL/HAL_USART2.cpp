@@ -44,9 +44,9 @@ namespace HAL_USART2
 
     void *handle = (void *)&handleUSART2;
 
-    static volatile char buffer = 0;
+    static char buffer = 0;
 
-    static volatile bool transfer_IT_allowed = true;
+    static bool transfer_IT_allowed = true;
 }
 
 

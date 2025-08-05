@@ -42,10 +42,6 @@ namespace Calibrator
 
 bool Calibrator::Run(int range, Type::E type, void (*callback)())
 {
-    cal.Store(range, type == Type::Min ? Type::Max : Type::Min);
-
-    cal.ResetGain(range);
-
     in_progress = true;
 
     callbackUpdate = callback;
@@ -56,17 +52,13 @@ bool Calibrator::Run(int range, Type::E type, void (*callback)())
 
     bool result = false;
 
-    if (type == Type::Min)
+    if (type == Type::DC)
     {
         result = CalibratorZero(range).Run();
-
-        cal.Restore(range, Type::Max);
     }
-    else if (type == Type::Max)
+    else if (type == Type::AC)
     {
         result = CalibrateGain(range);
-
-        cal.Restore(range, Type::Min);
     }
 
     in_progress = false;
@@ -170,7 +162,7 @@ bool Calibrator::CalibrateGain(int range)
 
     bool correct_dc = false;
 
-    REAL dc = Calculator::GetAbsDC(&correct_dc);
+    REAL dc = std::fabs(Calculator::GetAbsDC(&correct_dc));
 
     REAL k = Range::MaxMA(range) / dc;
 

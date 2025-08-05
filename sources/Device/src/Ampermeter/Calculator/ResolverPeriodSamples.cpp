@@ -250,8 +250,8 @@ uint DualIntegral::CalculateNegative(const Period &period)
 
 ResolverDC::ResolverDC(const Period &_period)
 {
-    volatile int min = BufferADC::Min();
-    volatile int max = BufferADC::Max();
+    int min = BufferADC::Min();
+    int max = BufferADC::Max();
 
     Period period = _period;
 

@@ -23,9 +23,6 @@ CalibrationSettings CalibrationSettings::Storage::stored;
 
 CalibrationSettings cal = NS_CalibrationSettings::cal_def;
 
-CalibrationSettings::Gain CalibrationSettings::stored_gain;
-CalibrationSettings::Zero CalibrationSettings::stored_zero;
-
 
 REAL CalibrationSettings::Gain::Get() const
 {
@@ -63,42 +60,6 @@ void CalibrationSettings::Load()
 void CalibrationSettings::Reset()
 {
     *this = NS_CalibrationSettings::cal_def;
-
-    Save();
-}
-
-
-void CalibrationSettings::ResetGain(int range)
-{
-    gain[range] = { range, 1.0 };
-
-    Save();
-}
-
-
-void CalibrationSettings::Store(int range, Calibrator::Type::E type)
-{
-    if (type == Calibrator::Type::Max)
-    {
-        stored_gain = gain[range];
-    }
-    else if(type == Calibrator::Type::Min)
-    {
-        stored_zero = zero[range];
-    }
-}
-
-
-void CalibrationSettings::Restore(int range, Calibrator::Type::E type)
-{
-    if (type == Calibrator::Type::Max)
-    {
-        gain[range] = stored_gain;
-    }
-    else if (type == Calibrator::Type::Min)
-    {
-        zero[range] = stored_zero;
-    }
 
     Save();
 }

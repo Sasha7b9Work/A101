@@ -1,6 +1,5 @@
 // 2022/11/22 08:45:27 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Ampermeter/Calibrator/Calibrator.h"
 
 
 struct CalibrationSettings
@@ -30,14 +29,11 @@ struct CalibrationSettings
         int var_val;        // Плавающее смещение, измеряется каждый 10 секунд
     };
 
-    uint size;              // Здесь размер настроек - для проверки того, что версии соответствуют
-    uint crc32;             // Здесь контрольная сумма - для проверки правильности сохранения
+    uint size;                      // Здесь размер настроек - для проверки того, что версии соответствуют
+    uint crc32;                     // Здесь контрольная сумма - для проверки правильности сохранения
 
-    Gain gain[6];           // Растяжка
-    Zero zero[6];           // Смещения нуля
-
-    static Gain stored_gain;
-    static Zero stored_zero;
+    Gain gain[6];                   // Растяжка
+    Zero zero[6];                   // Смещения нуля
 
     uint CalculateCRC32() const;
     bool IsEqual(const CalibrationSettings *) const;
@@ -61,15 +57,6 @@ struct CalibrationSettings
     void Save();
     void Load();
     void Reset();
-
-    // Сбрасывает на этом диапазоне
-    void ResetGain(int range);
-
-    // Сохраняет коэффициент
-    void Store(int range, Calibrator::Type::E);
-
-    // Восстанавливает коэффициент
-    void Restore(int range, Calibrator::Type::E);
 };
 
 
