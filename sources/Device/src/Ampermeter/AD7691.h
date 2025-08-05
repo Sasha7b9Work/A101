@@ -44,6 +44,10 @@ struct ValueADC
     bool operator <(const ValueADC &rhs) const { return value < rhs.value; }
     bool operator >(const ValueADC &rhs) const { return value > rhs.value; }
     operator int() const { return value; }
+    void Inverse()
+    {
+        value = -value;
+    }
 private:
     int value;        // ѕрочитанное значение, уже преобразованное
 };
