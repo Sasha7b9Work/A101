@@ -6,11 +6,13 @@
 
 uint SampleRate::TimeFullRead()
 {
+    // TimeUSonPoint() * 16384
+
     static const uint times[Count] =
     {
-        164,
-        1638,
-        16384
+        180,
+        1802,
+        18022
     };
 
     return times[value];

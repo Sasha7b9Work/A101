@@ -17,9 +17,9 @@ uint SampleRate::TimeUSonPoint()
 {
     static const uint times[Count] =
     {
-        10,
-        100,
-        1000
+        11,
+        110,
+        1100
     };
 
     return times[value];
