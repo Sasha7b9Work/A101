@@ -7,9 +7,9 @@
 ResolverMeasures::ResolverMeasures(const Period &period, REAL frequency)
 {
 //    min = std::numeric_limits<REAL>::max();
-
-    max = BufferADC::Max().Real();
-    min = BufferADC::Min().Real();
+     
+    max = BufferADC::Max();
+    min = BufferADC::Min();
 
     peak = max - min;
 

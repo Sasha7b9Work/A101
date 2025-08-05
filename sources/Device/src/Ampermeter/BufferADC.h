@@ -17,9 +17,9 @@ namespace BufferADC
 
     void CalculateLimits();
 
-    ValueADC Min();
+    float Min();
 
-    ValueADC Max();
+    float Max();
 
     void LogUART();
 
