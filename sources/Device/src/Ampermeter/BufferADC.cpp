@@ -45,6 +45,18 @@ void BufferADC::Clear()
 }
 
 
+int BufferADC::MinInt()
+{
+    return min.Raw();
+}
+
+
+int BufferADC::MaxInt()
+{
+    return max.Raw();
+}
+
+
 REAL BufferADC::MinReal()
 {
     return min.Real();
