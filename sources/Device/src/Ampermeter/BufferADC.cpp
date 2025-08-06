@@ -77,8 +77,8 @@ ValueADC BufferADC::At(int i)
 
 void BufferADC::CalculateLimits()
 {
-    min = ValueADC::FromRaw(1 << 17);
-    max = ValueADC::FromRaw(-(1 << 17));
+    min = ValueADC::FromRaw(1 << 30);
+    max = ValueADC::FromRaw(-(1 << 30));
 
     for (int i = 0; i < SIZE; i++)
     {
