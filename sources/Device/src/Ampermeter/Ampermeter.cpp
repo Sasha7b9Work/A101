@@ -260,12 +260,12 @@ bool Ampermeter::MeasurementCycle()
 
             if (num_samples++ > 200)
             {
-                BufferADC::_Push(value);
+                BufferADC::Push(value);
             }
         }
         else
         {
-            BufferADC::_Push(value);
+            BufferADC::Push(value);
             num_samples++;
         }
     }

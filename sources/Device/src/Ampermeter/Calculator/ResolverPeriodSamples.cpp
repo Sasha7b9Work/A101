@@ -250,14 +250,17 @@ uint DualIntegral::CalculateNegative(const Period &period)
 
 ResolverDC::ResolverDC(const Period &_period)
 {
-    int min = BufferADC::MinInt();
-    int max = BufferADC::MaxInt();
+    int min = BufferADC::Min();
+    int max = BufferADC::Max();
 
     Period period = _period;
 
     DualIntegral integral(period);
 
     int dc_value = period.dc.Raw();
+
+    int counter = 0;
+    (void)counter;
 
     while (max - min > 1)
     {
@@ -275,11 +278,11 @@ ResolverDC::ResolverDC(const Period &_period)
         period.dc = ValueADC::FromRaw(dc_value);
 
         integral.Recalculate(period);
+
+        counter++;
     }
 
     period.dc = ValueADC::FromRaw(period.dc.Raw());
 
     result = period.dc;
-
-    result.Inverse();
 }

@@ -7,7 +7,7 @@ namespace BufferADC
 {
     static const int SIZE = 16 * 1024;
 
-    void _Push(ValueADC word);
+    void Push(ValueADC word);
 
     int NumElements();
 
@@ -17,11 +17,9 @@ namespace BufferADC
 
     void CalculateLimits();
 
-    REAL MinReal();
-    REAL MaxReal();
+    double Min();
 
-    int MinInt();
-    int MaxInt();
+    double Max();
 
     void LogUART();
 

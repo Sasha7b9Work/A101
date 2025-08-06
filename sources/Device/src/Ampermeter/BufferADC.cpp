@@ -18,7 +18,7 @@ namespace BufferADC
 }
 
 
-void BufferADC::_Push(ValueADC word)
+void BufferADC::Push(ValueADC word)
 {
     if (pointer < SIZE)
     {
@@ -45,27 +45,15 @@ void BufferADC::Clear()
 }
 
 
-REAL BufferADC::MinReal()
+double BufferADC::Min()
 {
     return min.Real();
 }
 
 
-REAL BufferADC::MaxReal()
+double BufferADC::Max()
 {
     return max.Real();
-}
-
-
-int BufferADC::MinInt()
-{
-    return min.Raw();
-}
-
-
-int BufferADC::MaxInt()
-{
-    return max.Raw();
 }
 
 
@@ -77,8 +65,8 @@ ValueADC BufferADC::At(int i)
 
 void BufferADC::CalculateLimits()
 {
-    min = ValueADC::FromRaw(1 << 30);
-    max = ValueADC::FromRaw(-(1 << 30));
+    min = ValueADC::FromRaw(1 << 17);
+    max = ValueADC::FromRaw(-(1 << 17));
 
     for (int i = 0; i < SIZE; i++)
     {
