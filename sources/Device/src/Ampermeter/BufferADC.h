@@ -17,9 +17,9 @@ namespace BufferADC
 
     void CalculateLimits();
 
-    double Min();
+    REAL MinReal();
 
-    double Max();
+    REAL MaxReal();
 
     void LogUART();
 

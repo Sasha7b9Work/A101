@@ -45,13 +45,13 @@ void BufferADC::Clear()
 }
 
 
-double BufferADC::Min()
+REAL BufferADC::MinReal()
 {
     return min.Real();
 }
 
 
-double BufferADC::Max()
+REAL BufferADC::MaxReal()
 {
     return max.Real();
 }
