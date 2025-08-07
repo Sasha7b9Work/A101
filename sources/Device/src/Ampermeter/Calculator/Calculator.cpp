@@ -72,7 +72,7 @@ void Calculator::AppendData()
 
     // Считаем DС
     {
-        REAL value_dc = -period.dc.Real();
+        REAL value_dc = period.dc.Real();
 
         dc.Push(value_dc * k);
     }

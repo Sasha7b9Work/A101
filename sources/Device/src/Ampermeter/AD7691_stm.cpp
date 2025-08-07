@@ -236,7 +236,7 @@ int AD7691::ReadValueRAW()
         value -= 1 << 18;
     }
 
-    return value;
+    return -value;
 }
 
 #endif

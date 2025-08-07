@@ -257,10 +257,7 @@ ResolverDC::ResolverDC(const Period &_period)
 
     DualIntegral integral(period);
 
-    int dc_value = period.dc.Raw();
-
-    int counter = 0;
-    (void)counter;
+    int dc_value = (max + min) / 2;
 
     while (max - min > 1)
     {
@@ -278,8 +275,6 @@ ResolverDC::ResolverDC(const Period &_period)
         period.dc = ValueADC::FromRaw(dc_value);
 
         integral.Recalculate(period);
-
-        counter++;
     }
 
     period.dc = ValueADC::FromRaw(period.dc.Raw());
