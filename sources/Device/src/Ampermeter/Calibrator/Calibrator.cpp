@@ -93,7 +93,7 @@ bool Calibrator::CalibratorZero::Run()
 
     int z = 0;
 
-    int delta = (dc < 0.0) ? 1000 : -1000;
+    int delta = (dc < 0.0) ? -1000 : 1000;
 
     {
         for (int i = 0; i < 4; i++)
@@ -106,7 +106,9 @@ bool Calibrator::CalibratorZero::Run()
 
                 dc = CalculateDC(z);
 
+#ifdef LOGGED
                 LOG_WRITE("z = %d, dc = %f", z, (double)dc);
+#endif
 
                 if (std::fabs(dc) < 1e-6)
                 {
