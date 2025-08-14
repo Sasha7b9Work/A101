@@ -52,11 +52,11 @@ bool Calibrator::Run(int range, Type::E type, void (*callback)())
 
     bool result = false;
 
-    if (type == Type::DC)
+    if (type == Type::Zero)
     {
         result = CalibratorZero(range).Run();
     }
-    else if (type == Type::AC)
+    else if (type == Type::Max)
     {
         result = CalibrateGain(range);
     }

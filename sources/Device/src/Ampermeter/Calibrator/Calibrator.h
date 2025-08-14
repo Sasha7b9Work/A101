@@ -6,10 +6,10 @@ namespace Calibrator
 {
     struct Type
     {
-        enum E
+        enum E 
         {
-            DC,
-            AC
+            Zero,   // Калибровка нуля
+            Max     // Калибровка максимального значения
         };
     };
 
