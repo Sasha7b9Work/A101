@@ -257,7 +257,7 @@ ResolverDC::ResolverDC(const Period &_period)
 
     DualIntegral integral(period);
 
-    int dc_value = (max + min) / 2;
+    int dc_value = period.dc.Raw();
 
     while (max - min > 1)
     {
