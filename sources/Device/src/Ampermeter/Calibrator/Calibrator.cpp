@@ -46,6 +46,11 @@ bool Calibrator::Run(int range, Type::E type, void (*callback)())
 
     callbackUpdate = callback;
 
+    if (type == Type::Zero)                 // При калибровке нуля сбрасываем калибровочные коэффициенты данного диапазона
+    {
+        cal.Reset(range);
+    }
+
     Range::Set(range);
 
     TimeMeterMS().Wait(1000);

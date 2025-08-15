@@ -57,6 +57,7 @@ struct CalibrationSettings
     void Save();
     void Load();
     void Reset();
+    void Reset(int range);
 };
 
 
