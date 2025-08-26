@@ -116,6 +116,15 @@ void HAL_PIO::Write(HPort::E port, uint16 pin, HState::E state)
 
 void HAL_PIO::Write(HPort::E port, uint16 pin, bool state)
 {
+#ifdef OLD_VERSION
+
+    if (pin == HPin::_14 && port == HPort::_B)
+    {
+        state = !state;
+    }
+
+#endif
+
     HAL_GPIO_WritePin(PORT(port), pin, state ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
