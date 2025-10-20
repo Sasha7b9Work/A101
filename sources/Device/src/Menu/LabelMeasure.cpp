@@ -297,9 +297,9 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
 }
 
 
-pchar LabelMeasure::GetUnits() const
+pchar LabelMeasure::GetUnits(Lang::E lang) const
 {
-    return label_units.Text();
+    return label_units.Text(lang);
 }
 
 

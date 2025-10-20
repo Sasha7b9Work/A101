@@ -313,7 +313,7 @@ struct LabelMeasure : public Label
 
     pchar GetDigits() const;
 
-    pchar GetUnits() const;
+    pchar GetUnits(Lang::E) const;
 
     void SetCoord(const Coord &);
 
