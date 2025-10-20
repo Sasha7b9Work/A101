@@ -299,19 +299,19 @@ void LabelMeasure::SetMeasure(const Measure &measure, int range)
 
 pchar LabelMeasure::GetUnits() const
 {
-    return "";
+    return label_units.Text();
 }
 
 
 pchar LabelMeasure::GetDigits() const
-{
-    return "";
+{ 
+    return label_digits.Text();
 }
 
 
 pchar LabelMeasure::GetSign() const
 {
-    return "";
+    return label_sign.Text();
 }
 
 
