@@ -435,11 +435,11 @@ void PageMain::EnableZero(MeasuresOnDisplay::E meas, bool enable)
 {
     if (meas == MeasuresOnDisplay::AC)
     {
-        enable ? btnZeroAC.Press() : btnZeroAC.Release();
+        btnZeroAC.SetToggled(enable);
     }
     else if (meas == MeasuresOnDisplay::DC)
     {
-        enable ? btnZeroDC.Press() : btnZeroDC.Release();
+        btnZeroDC.SetToggled(enable);
     }
 }
 
