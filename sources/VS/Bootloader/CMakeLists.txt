@@ -1,6 +1,6 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 
-project (Flasher)
+project (Bootloader)
 
 #set(CMAKE_UNITY_BUILD OFF)
 
