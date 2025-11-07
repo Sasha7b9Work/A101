@@ -5,25 +5,14 @@
 #define BUTTON_SIZE wxSize(70, 30)
 
 
-enum
-{
-    ID_SPINCTRL_DONW,
-    ID_SPINCTRL_UP,
-    ID_BUTTON_OK,
-    ID_BUTTON_CANCEL,
-    ID_RADIOBUTTON_DIRECT,
-    ID_RADIOBUTTON_BACK
-};
-
-
 Dialog::Dialog(const wxString &title) : wxDialog(nullptr, wxID_ANY, title)
 {
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
 
-    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Принять"), wxDefaultPosition, BUTTON_SIZE); //-V2511
-    Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonApply));
-    wxButton *btnCancel = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отменить"), wxDefaultPosition, BUTTON_SIZE); //-V2511
-    Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonCancel));
+    wxButton *btnOk = new wxButton(this, wxID_ANY, wxT("Принять"), wxDefaultPosition, BUTTON_SIZE); //-V2511
+    Connect(btnOk->GetId(), wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonApply));
+    wxButton *btnCancel = new wxButton(this, wxID_ANY, wxT("Отменить"), wxDefaultPosition, BUTTON_SIZE); //-V2511
+    Connect(btnCancel->GetId(), wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonCancel));
 
     Bind(wxEVT_KEY_DOWN, &Dialog::OnKeyDown, this);
     Bind(wxEVT_KEY_UP, &Dialog::OnKeyDown, this);
