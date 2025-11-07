@@ -11,16 +11,6 @@
 #pragma warning(pop)
 
 
-enum
-{
-    ID_SPINCTRL_POWER,
-    ID_TYPE_1,
-    ID_TYPE_2,
-    ID_TYPE_3,
-    ID_TYPE_4
-};
-
-
 static int power = 2000;
 static bool type1 = true;
 static bool type2 = false;
@@ -34,7 +24,7 @@ wxPanel *ExponentDialog::CreatePanelPower()
 
     new wxStaticBox(panel, wxID_ANY, wxT("Постоянная времени"), wxDefaultPosition, { 130, 75 });
 
-    scPower = new SpinControl(panel, ID_SPINCTRL_POWER, { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), power,
+    scPower = new SpinControl(panel, wxID_ANY, { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), power,
                               this, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT(""), this);
     return panel;
 }
@@ -47,17 +37,17 @@ wxPanel *ExponentDialog::CreatePanelType()
 
     int y = 25, x = 10, dY = 25, dX = 45;
 
-    rbType1 = new wxRadioButton(panel, ID_TYPE_1, wxT("1"), { x, y });
-    Connect(ID_TYPE_1, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+    rbType1 = new wxRadioButton(panel, wxID_ANY, wxT("1"), { x, y });
+    Connect(rbType1->GetId(), wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
 
-    rbType2 = new wxRadioButton(panel, ID_TYPE_2, wxT("2"), { x, y + dY });
-    Connect(ID_TYPE_2, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+    rbType2 = new wxRadioButton(panel, wxID_ANY, wxT("2"), { x, y + dY });
+    Connect(rbType2->GetId(), wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
 
-    rbType3 = new wxRadioButton(panel, ID_TYPE_3, wxT("3"), { x + dX, y });
-    Connect(ID_TYPE_3, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+    rbType3 = new wxRadioButton(panel, wxID_ANY, wxT("3"), { x + dX, y });
+    Connect(rbType3->GetId(), wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
 
-    rbType4 = new wxRadioButton(panel, ID_TYPE_4, wxT("4"), { x + dX, y + dY });
-    Connect(ID_TYPE_4, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+    rbType4 = new wxRadioButton(panel, wxID_ANY, wxT("4"), { x + dX, y + dY });
+    Connect(rbType4->GetId(), wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
   
     rbType1->SetValue(type1);
     rbType2->SetValue(type2);
