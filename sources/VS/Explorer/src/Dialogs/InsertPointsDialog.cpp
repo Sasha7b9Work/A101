@@ -11,12 +11,6 @@
 #pragma warning(pop)
 
 
-enum
-{
-    ID_SPINCTRL_DELTA
-};
-
-
 static SpinControl *scDelta = nullptr;
 
 
@@ -28,7 +22,7 @@ InsertPointsDialog::InsertPointsDialog() : wxDialog(nullptr, -1, wxT("Вставить м
     wxButton *btnClose = new wxButton(this, wxID_ANY, wxT("Отмена"), wxDefaultPosition, BUTTON_SIZE);
     Connect(btnClose->GetId(), wxEVT_BUTTON, wxCommandEventHandler(InsertPointsDialog::OnButtonCancel));
 
-    scDelta = new SpinControl(this, ID_SPINCTRL_DELTA, wxDefaultPosition, wxSize(50, 20), 1, Point::AMOUNT / 2, 512,
+    scDelta = new SpinControl(this, wxID_ANY, wxDefaultPosition, wxSize(50, 20), 1, Point::AMOUNT / 2, 512,
         this, wxCommandEventHandler(InsertPointsDialog::OnControlNumPoints), wxT("Расстояние между точками"), nullptr);
 
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);

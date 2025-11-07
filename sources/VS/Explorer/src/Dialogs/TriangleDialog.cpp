@@ -11,12 +11,6 @@
 #pragma warning(pop)
 
 
-enum
-{
-    ID_SPINCTRL_CENTER,
-    ID_SPINCTRL_DELAY
-};
-
 int TriangleDialog::center = 0;
 int TriangleDialog::delay = 0;
 bool TriangleDialog::polarityDirect = true;
@@ -33,8 +27,8 @@ wxPanel *TriangleDialog::CreatePanelOffsets()
 
     new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, wxSize(Dialog::WIDTH_PANEL, 75));
 
-    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxPoint(x, y), wxSize(51, 20), -100, 100, center, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Центр, %"), this);
-    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxPoint(x, y + 26), wxSize(51, 20), 0, Point::AMOUNT, delay, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Задержка, точки"), this);
+    scCenter = new SpinControl(panel, wxID_ANY, wxPoint(x, y), wxSize(51, 20), -100, 100, center, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Центр, %"), this);
+    scDelay = new SpinControl(panel, wxID_ANY, wxPoint(x, y + 26), wxSize(51, 20), 0, Point::AMOUNT, delay, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Задержка, точки"), this);
 
     return panel;
 }
