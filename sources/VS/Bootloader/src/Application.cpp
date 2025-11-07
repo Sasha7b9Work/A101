@@ -7,12 +7,6 @@
 wxIMPLEMENT_APP(Application);
 
 
-enum
-{
-    TIMER_ID = 111
-};
-
-
 bool Application::OnInit()
 {
     if (!wxApp::OnInit())
@@ -26,9 +20,9 @@ bool Application::OnInit()
 
     Init();
 
-    Bind(wxEVT_TIMER, &Application::OnTimer, this, TIMER_ID);
+    Bind(wxEVT_TIMER, &Application::OnTimer, this, timer.GetId());
 
-    timer.SetOwner(this, TIMER_ID);
+    timer.SetOwner(this, timer.GetId());
 
     timer.Start();
 
