@@ -13,12 +13,6 @@
 #pragma warning(pop)
 
 
-enum
-{
-    ID_LINE
-};
-
-
 static wxTextCtrl *text = nullptr;
 static wxTextCtrl *line = nullptr;
 
@@ -30,7 +24,7 @@ ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("Ã6-49
 {
     text = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, { 600, 300 }, wxTE_MULTILINE | wxTE_READONLY);
 
-    line = new wxTextCtrl(this, ID_LINE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+    line = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
     line->SetFocus();
 
     wxFont font(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Courier New"));
@@ -38,8 +32,8 @@ ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("Ã6-49
     text->SetFont(font);
 
     Bind(wxEVT_SIZE, &ConsoleSCPI::OnSize, this);
-    line->Bind(wxEVT_TEXT_ENTER, &ConsoleSCPI::OnTextEnter, this, ID_LINE);
-    line->Bind(wxEVT_KEY_DOWN, &ConsoleSCPI::OnTextControlKeyDown, this, ID_LINE);
+    line->Bind(wxEVT_TEXT_ENTER, &ConsoleSCPI::OnTextEnter, this, line->GetId());
+    line->Bind(wxEVT_KEY_DOWN, &ConsoleSCPI::OnTextControlKeyDown, this, line->GetId());
     Bind(wxEVT_CLOSE_WINDOW, &ConsoleSCPI::OnClose, this);
 
     wxTopLevelWindowMSW::Show();
