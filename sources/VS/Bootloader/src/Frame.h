@@ -28,7 +28,5 @@ private:
 
     void OnMenuTool(wxCommandEvent &);
 
-    void OnMenuSettings(wxCommandEvent &);
-
     void CreatePanel();
 };

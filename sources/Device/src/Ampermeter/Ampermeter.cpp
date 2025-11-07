@@ -244,7 +244,7 @@ bool Ampermeter::MeasurementCycle()
 
 #else
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 1; i++) //-V1008
         {
             counter_raw++;
             sum_raw += AD7691::ReadValueRAW();

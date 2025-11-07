@@ -173,22 +173,28 @@ void ResolverFFT::Normalize(float *buf, uint num_points)
 
 void ResolverFFT::ApplyWindowHamming(float *buf, uint num_points)
 {
-    for (uint i = 0; i < num_points; i++)
+    if (num_points > 2)
     {
-        buf[(uint)i] *= 0.53836f - 0.46164f * std::cosf(2.0f * M_PI * i / (num_points - 1));
+        for (uint i = 0; i < num_points; i++)
+        {
+            buf[(uint)i] *= 0.53836f - 0.46164f * std::cosf(2.0f * M_PI * i / (num_points - 1));
+        }
     }
 }
 
 
 void ResolverFFT::ApplyWindowBlackman(float *buf, uint num_points)
 {
-    float alpha = 0.16f;
-    float a0 = (1.0f - alpha) / 2.0f;
-    float a1 = 0.5f;
-    float a2 = alpha / 2.0f;
-    for (uint i = 0; i < num_points; i++)
+    if (num_points > 2)
     {
-        buf[i] *= a0 - a1 * std::cosf(2.0f * M_PI * i / (num_points - 1)) + a2 * std::cosf(4.0f * M_PI * i / (num_points - 1));
+        float alpha = 0.16f;
+        float a0 = (1.0f - alpha) / 2.0f;
+        float a1 = 0.5f;
+        float a2 = alpha / 2.0f;
+        for (uint i = 0; i < num_points; i++)
+        {
+            buf[i] *= a0 - a1 * std::cosf(2.0f * M_PI * i / (num_points - 1)) + a2 * std::cosf(4.0f * M_PI * i / (num_points - 1));
+        }
     }
 }
 

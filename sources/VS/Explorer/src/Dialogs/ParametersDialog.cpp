@@ -70,7 +70,7 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
 
     SetSizer(vBox);
 
-    SetClientSize({ 170, 100 });
+    wxWindowBase::SetClientSize({ 170, 100 });
 
     Centre();
 

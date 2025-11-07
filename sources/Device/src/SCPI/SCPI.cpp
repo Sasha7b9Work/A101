@@ -199,14 +199,14 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
 
     if (std::strlen(data) > std::strlen("UPGRADE"))     // UPGRADE VERSION_BUILD
     {
-        if (std::memcmp(data, "UPGRADE", std::strlen("UPGRADE")))
+        if (std::memcmp(data, "UPGRADE", std::strlen("UPGRADE")) == 0)
         {
             char command[128];
             uint version_firm = 0;
             uint size_firm = 0;
             uint crc32_firm = 0;
 
-            if (std::sscanf(data, "%s %u %u %u", command, &version_firm, &size_firm, &crc32_firm) == 4)
+            if (std::sscanf(data, "%127s%u%u%u", &command[0], &version_firm, &size_firm, &crc32_firm) == 4)
             {
                 return new CommandUpgradeFirmware(version_firm, size_firm, crc32_firm);
             }

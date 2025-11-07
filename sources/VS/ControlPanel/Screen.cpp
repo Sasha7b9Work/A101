@@ -110,8 +110,8 @@ Screen::Screen(wxWindow *parent) : wxPanel(parent)
 {
     self = this;
 
-    SetMinSize({ Screen::WIDTH, Screen::HEIGHT });
-    SetDoubleBuffered(true);
+    wxWindowBase::SetMinSize({ Screen::WIDTH, Screen::HEIGHT });
+    wxWindow::SetDoubleBuffered(true);
     Bind(wxEVT_PAINT, &Screen::OnPaint, this);
     Bind(wxEVT_LEFT_DOWN, &Screen::OnMouseDown, this);
 }

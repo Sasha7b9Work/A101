@@ -43,7 +43,7 @@ InsertPointsDialog::InsertPointsDialog() : wxDialog(nullptr, -1, wxT("Вставить м
 
     SetSizer(vBox);
 
-    Centre();
+    wxWindowBase::Centre();
 }
 
 

@@ -49,8 +49,6 @@ Frame::Frame(const wxString &title)
 
     SetIcon(wxICON(MAIN_ICON));
 
-    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this);
-
     Bind(wxEVT_MENU, &Frame::OnAbout, this, wxID_ABOUT);
     Bind(wxEVT_MENU, &Frame::OnMenuTool, this, TOOL_CONSOLE);
     Bind(wxEVT_MENU, &Frame::OnMenuTool, this, TOOL_DATABASE);
@@ -64,20 +62,6 @@ Frame::Frame(const wxString &title)
 
     sizer_version->Enable(false);
     sizer_file->Enable(false);
-}
-
-
-void Frame::OnMenuSettings(wxCommandEvent &event)
-{
-    int id = event.GetId();
-
-    if (id >= ID_SPEED_1 && id <= ID_SPEED_60)
-    {
-        static const int scales[] = { 1, 2, 5, 30, 60 };
-    }
-    else if (id >= ID_MODE_VIEW_FULL && id <= ID_MODE_VIEW_GRAPH)
-    {
-    }
 }
 
 

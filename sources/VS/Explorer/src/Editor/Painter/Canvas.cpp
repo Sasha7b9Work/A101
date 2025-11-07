@@ -53,7 +53,7 @@ Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY), parent(p)
 {
     Painter::Init(p);
 
-    SetDoubleBuffered(true);
+    wxWindow::SetDoubleBuffered(true);
     Bind(wxEVT_PAINT,        &Canvas::OnPaint,          this);
     Bind(wxEVT_SIZE,         &Canvas::OnResize,         this);
     Bind(wxEVT_MOTION,       &Canvas::OnMouseMove,      this);

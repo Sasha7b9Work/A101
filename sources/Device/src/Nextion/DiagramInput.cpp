@@ -62,8 +62,6 @@ void DiagramInput::InstallData()
         return;
     }
 
-    data_installed = false;
-
     if (set.type_graph.IsSignal())
     {
         data_installed = InstallSignal();
@@ -300,7 +298,7 @@ void DiagramInput::DrawSignal()
 
     first_point += num_points;
 
-    if (elapsed_point == 0)
+    if (elapsed_point == 0) //-V1051
     {
         Reset(false);
     }
@@ -571,7 +569,7 @@ void DiagramInput::ConvertZeroACToASCII(REAL value, char *buffer)
 
 void DiagramInput::DrawTimeScale()
 {
-    const double time_ms = SampleRate::TimeUSonPoint() * NUM_POINTS / 1e3;
+    const double time_ms = (double)SampleRate::TimeUSonPoint() * (double)NUM_POINTS / 1e3;
 
     char buffer[32];
 
