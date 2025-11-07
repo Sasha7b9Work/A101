@@ -7,28 +7,6 @@
 Frame *Frame::self = nullptr;
 
 
-enum
-{
-    FILE_QUIT = wxID_HIGHEST + 1,
-
-    MEAS_PRESSURE,          // Давление
-    MEAS_ILLUMINATION,      // Освещённость
-    MEAS_HUMIDITY,          // Влажность
-    MEAS_VELOCITY,          // Скорость
-    MEAS_TEMPERATURE,       // Температура
-
-    ID_SPEED_1,
-    ID_SPEED_2,
-    ID_SPEED_5,
-    ID_SPEED_30,
-    ID_SPEED_60,
-
-    ID_MODE_VIEW_FULL,
-    ID_MODE_VIEW_TABLE,
-    ID_MODE_VIEW_GRAPH
-};
-
-
 Frame::Frame(const wxString &title)
     : wxFrame((wxFrame *)NULL, wxID_ANY, title)
 {
