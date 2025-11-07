@@ -37,12 +37,6 @@ enum
 };
 
 
-enum
-{
-    TIMER_ID = 11111
-};
-
-
 MainFrame::MainFrame(const wxString &title)
     :wxFrame((wxFrame *)NULL, wxID_ANY, title)
 {
@@ -91,9 +85,9 @@ void MainFrame::SetSizeAndPosition()
 
     wxWindowBase::SetPosition({ x, y });
 
-    Bind(wxEVT_TIMER, &MainFrame::OnTimer, this, TIMER_ID);
+    Bind(wxEVT_TIMER, &MainFrame::OnTimer, this, timer.GetId());
 
-    timer.SetOwner(this, TIMER_ID);
+    timer.SetOwner(this, timer.GetId());
 
     timer.StartOnce(25);
 }
