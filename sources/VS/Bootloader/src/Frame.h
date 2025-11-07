@@ -26,7 +26,5 @@ private:
 
     void OnCloseWindow(wxCloseEvent &);
 
-    void OnMenuTool(wxCommandEvent &);
-
     void CreatePanel();
 };

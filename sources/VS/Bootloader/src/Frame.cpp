@@ -11,19 +11,6 @@ enum
 {
     FILE_QUIT = wxID_HIGHEST + 1,
 
-    TOOL_OPEN,
-    TOOL_SAVE,
-    TOOL_NEW,
-
-    TOOL_UNDO,
-    TOOL_REDO,
-
-    TOOL_VIEW_BRIEF,        // Сокращённый вид отображения
-    TOOL_VIEW_FULL,         // Полный вид отображения
-
-    TOOL_CONSOLE,
-    TOOL_DATABASE,
-
     MEAS_PRESSURE,          // Давление
     MEAS_ILLUMINATION,      // Освещённость
     MEAS_HUMIDITY,          // Влажность
@@ -50,8 +37,6 @@ Frame::Frame(const wxString &title)
     SetIcon(wxICON(MAIN_ICON));
 
     Bind(wxEVT_MENU, &Frame::OnAbout, this, wxID_ABOUT);
-    Bind(wxEVT_MENU, &Frame::OnMenuTool, this, TOOL_CONSOLE);
-    Bind(wxEVT_MENU, &Frame::OnMenuTool, this, TOOL_DATABASE);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnCloseWindow, this);
 
     Bind(wxEVT_SIZE, &Frame::OnSize, this);
@@ -89,20 +74,6 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
     topsizer->Fit(&dlg);
 
     dlg.ShowModal();
-}
-
-
-void Frame::OnMenuTool(wxCommandEvent &event)
-{
-    int id = event.GetId();
-
-    if (id == TOOL_CONSOLE)
-    {
-    }
-    else if (id == TOOL_DATABASE)
-    {
-
-    }
 }
 
 
