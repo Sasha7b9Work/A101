@@ -2,7 +2,7 @@
 
 project (Bootloader)
 
-#set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD OFF)
 
 #set(CMAKE_UNITY_BUILD_BATCH_SIZE 8)
 
@@ -81,6 +81,8 @@ if(WIN32)
         /wd4626    # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
         /wd4668
         /wd4702
+        /wd4710
+        /wd4711
         /wd4820    # 'bytes' bytes padding added after construct 'member_name'
         /wd4826
         /wd4996    # Your code uses a function, class member, variable, or typedef that's marked deprecated

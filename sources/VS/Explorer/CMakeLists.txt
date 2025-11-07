@@ -51,6 +51,9 @@ add_compile_options(
     /wd4514    # 'xxx': unreferenced inline function has been removed
     /wd4625    # copy constructor was implicitly defined as deleted
     /wd4626    # assignment operator was implicitly defined as deleted
+    /wd4710
+    /wd4711
+    /wd4738
     /wd4820    # 'bytes' bytes padding added after construct 'member_name'
     /wd5026    # move constructor was implicitly defined as deleted
     /wd5027    # move assignment operator was implicitly defined as deleted

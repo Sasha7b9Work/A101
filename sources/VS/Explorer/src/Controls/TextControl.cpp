@@ -1,4 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "defines.h"
 #include "Controls/TextControl.h"
 #include "Dialogs/Dialog.h"
 

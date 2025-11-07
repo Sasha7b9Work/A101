@@ -55,6 +55,8 @@ if(WIN32)
         /wd4514    # unreferenced inline function has been removed
         /wd4625    # copy constructor was implicitly defined as deleted
         /wd4626    # assignment operator was implicitly defined as deleted
+        /wd4710
+        /wd4711
         /wd4774    # 'string' : format string expected in argument number is not a string literal
         /wd4820    # 'bytes' bytes padding added after construct 'member_name'
         /wd4996    # This function or variable may be unsafe
