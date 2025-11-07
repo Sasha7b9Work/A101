@@ -8,21 +8,6 @@
 class Dialog;
 
 
-enum
-{
-    ID_SPINCTRL_DONW,
-    ID_SPINCTRL_UP,
-    ID_SPINCTRL_NUMBER_PERIODS,
-    ID_BUTTON_OK,
-    ID_BUTTON_CANCEL,
-    ID_RADIOBUTTON_DIRECT,
-    ID_RADIOBUTTON_BACK,
-    ID_TEXT_CONTROL_POSITION,
-    ID_TEXT_CONTROL_VALUE,
-    ID_TEXT_CONTROL_POWER
-};
-
-
 class SpinControl : public wxSpinCtrl
 {
 public:

@@ -22,11 +22,11 @@ static SpinControl *scDelta = nullptr;
 
 InsertPointsDialog::InsertPointsDialog() : wxDialog(nullptr, -1, wxT("Вставить маркеры"), wxDefaultPosition, wxSize(225, 185))
 {
-    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
-    Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(InsertPointsDialog::OnButtonOk));
+    wxButton *btnOk = new wxButton(this, wxID_ANY, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
+    Connect(btnOk->GetId(), wxEVT_BUTTON, wxCommandEventHandler(InsertPointsDialog::OnButtonOk));
 
-    wxButton *btnClose = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отмена"), wxDefaultPosition, BUTTON_SIZE);
-    Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(InsertPointsDialog::OnButtonCancel));
+    wxButton *btnClose = new wxButton(this, wxID_ANY, wxT("Отмена"), wxDefaultPosition, BUTTON_SIZE);
+    Connect(btnClose->GetId(), wxEVT_BUTTON, wxCommandEventHandler(InsertPointsDialog::OnButtonCancel));
 
     scDelta = new SpinControl(this, ID_SPINCTRL_DELTA, wxDefaultPosition, wxSize(50, 20), 1, Point::AMOUNT / 2, 512,
         this, wxCommandEventHandler(InsertPointsDialog::OnControlNumPoints), wxT("Расстояние между точками"), nullptr);

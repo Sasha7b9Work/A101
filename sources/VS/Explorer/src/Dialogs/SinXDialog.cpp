@@ -14,7 +14,7 @@ wxPanel *SinXDialog::CreatePanelNumPeriods(wxDialog *dlg) //-V2009
     int x = 40;
     int y = 20;
 
-    scNumPeriods = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxPoint(x, y), wxSize(50, 20), 1, 1000, numPeriods, this, wxCommandEventHandler(Dialog::OnControlEvent),
+    scNumPeriods = new SpinControl(panel, wxID_ANY, wxPoint(x, y), wxSize(50, 20), 1, 1000, numPeriods, this, wxCommandEventHandler(Dialog::OnControlEvent),
         wxT("Число периодов"), this);
 
     return panel;

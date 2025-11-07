@@ -20,7 +20,7 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     wxStaticText *stPosition = new wxStaticText(this, wxID_ANY, wxT("Индекс"));
-    tcPosition = new TextControlInt(0, 8 * 1024 - 1, this, ID_TEXT_CONTROL_POSITION, _itoa(index, buffer, 10), pos, size);
+    tcPosition = new TextControlInt(0, 8 * 1024 - 1, this, wxID_ANY, _itoa(index, buffer, 10), pos, size);
 
     wxBoxSizer *hBoxPosition = new wxBoxSizer(wxHORIZONTAL);
 
@@ -33,7 +33,7 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     wxStaticText *stValue = new wxStaticText(this, wxID_ANY, wxT("Значение"));
-    tcValue = new TextControlInt(0, 4095, this, ID_TEXT_CONTROL_VALUE, _itoa(value, buffer, 10), pos, size);
+    tcValue = new TextControlInt(0, 4095, this, wxID_ANY, _itoa(value, buffer, 10), pos, size);
 
     wxBoxSizer *hBoxValue = new wxBoxSizer(wxHORIZONTAL);
 
@@ -45,11 +45,11 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Применить"), wxDefaultPosition, SMALL_BUTTON_SIZE);
-    Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(ParametersDialog::OnButtonApply));
+    wxButton *btnOk = new wxButton(this, wxID_ANY, wxT("Применить"), wxDefaultPosition, SMALL_BUTTON_SIZE);
+    Connect(btnOk->GetId(), wxEVT_BUTTON, wxCommandEventHandler(ParametersDialog::OnButtonApply));
 
-    wxButton *btnClose = new wxButton(this, ID_BUTTON_CANCEL, wxT("Закрыть"), wxDefaultPosition, SMALL_BUTTON_SIZE);
-    Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(ParametersDialog::OnButtonClose));
+    wxButton *btnClose = new wxButton(this, wxID_ANY, wxT("Закрыть"), wxDefaultPosition, SMALL_BUTTON_SIZE);
+    Connect(btnClose->GetId(), wxEVT_BUTTON, wxCommandEventHandler(ParametersDialog::OnButtonClose));
 
     wxBoxSizer *hBoxButtons = new wxBoxSizer(wxHORIZONTAL);
 

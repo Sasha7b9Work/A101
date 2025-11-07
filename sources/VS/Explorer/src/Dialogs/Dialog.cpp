@@ -11,10 +11,10 @@ Dialog::Dialog(const wxString &title, bool blockingCanvas) : wxDialog(nullptr, w
 {
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
 
-    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Принять"), wxDefaultPosition, BUTTON_SIZE);
-    Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonApply));
-    wxButton *btnCancel = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отменить"), wxDefaultPosition, BUTTON_SIZE);
-    Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonCancel));
+    wxButton *btnOk = new wxButton(this, wxID_ANY, wxT("Принять"), wxDefaultPosition, BUTTON_SIZE);
+    Connect(btnOk->GetId(), wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonApply));
+    wxButton *btnCancel = new wxButton(this, wxID_ANY, wxT("Отменить"), wxDefaultPosition, BUTTON_SIZE);
+    Connect(btnCancel->GetId(), wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonCancel));
 
     Bind(wxEVT_KEY_UP, &Dialog::OnKeyUp, this);
 
@@ -49,8 +49,8 @@ wxPanel *Dialog::CreatePanelLevels(int levelUp, int levelDown)
 
     int y = 20, x = 10;
 
-    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxPoint(x, y), wxSize(51, 20), -100, 100, levelUp, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"), this);
-    scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxPoint(x, y + 26), wxSize(51, 20), -100, 100, levelDown, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"), this);
+    scLevelUp = new SpinControl(panel, wxID_ANY, wxPoint(x, y), wxSize(51, 20), -100, 100, levelUp, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"), this);
+    scLevelDown = new SpinControl(panel, wxID_ANY, wxPoint(x, y + 26), wxSize(51, 20), -100, 100, levelDown, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"), this);
 
     return panel;
 }
@@ -63,12 +63,12 @@ wxPanel *Dialog::CreatePanelPolarity(bool polarityDirect, bool polarityBack)
 
     int y = 25, x = 5;
 
-    rbPolarityDirect = new wxRadioButton(panel, ID_RADIOBUTTON_DIRECT, wxT("Прямая"), wxPoint(x, y));
-    Connect(ID_RADIOBUTTON_DIRECT, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+    rbPolarityDirect = new wxRadioButton(panel, wxID_ANY, wxT("Прямая"), wxPoint(x, y));
+    Connect(rbPolarityDirect->GetId(), wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
     rbPolarityDirect->SetValue(true);
 
-    rbPolarityBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
-    Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+    rbPolarityBack = new wxRadioButton(panel, wxID_ANY, wxT("Обратная"), wxPoint(x, y + 25));
+    Connect(rbPolarityBack->GetId(), wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
 
     rbPolarityDirect->SetValue(polarityDirect);
     rbPolarityBack->SetValue(polarityBack);
