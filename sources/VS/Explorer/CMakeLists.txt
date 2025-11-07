@@ -114,12 +114,9 @@ set_source_files_properties(
     PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON
 )
 
-target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)
+target_link_libraries(${PROJECT_NAME} wxbase33ud wxmsw33ud_core Ws2_32)
 
 target_link_libraries(${PROJECT_NAME} WinMM.lib)
 target_link_libraries(${PROJECT_NAME} version.lib)
 target_link_libraries(${PROJECT_NAME} Imm32.Lib)
 target_link_libraries(${PROJECT_NAME} Setupapi.lib)
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxmsw32ud_core_vc_custom.dll $(OutputPath) /Y)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxbase32ud_vc_custom.dll $(OutputPath) /Y)

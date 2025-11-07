@@ -106,9 +106,6 @@ add_executable( ${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME}
-    wxbase32ud wxmsw32ud_core wxbase32ud_net wxzlibd wxpngd
+    wxbase33ud wxmsw33ud_core wxbase33ud_net wxzlibd wxpngd
     Ws2_32 Comctl32 Rpcrt4 Setupapi
 )
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxmsw32ud_core_vc_custom.dll $(OutputPath) /Y)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxbase32ud_vc_custom.dll $(OutputPath) /Y)
