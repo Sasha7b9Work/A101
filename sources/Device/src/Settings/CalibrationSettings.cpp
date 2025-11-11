@@ -87,7 +87,7 @@ bool CalibrationSettings::IsEqual(const CalibrationSettings *rhs) const
         return false;
     }
 
-    return std::memcmp(PointerToFirstData(), rhs->PointerToFirstData(), SizeData()) == 0;
+    return std::memcmp(PointerToFirstData(), rhs->PointerToFirstData(), (size_t)SizeData()) == 0; //-V201
 }
 
 

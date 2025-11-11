@@ -13,7 +13,8 @@ link_directories(../../generated/ThirdParty/lib/vc_dll)
 
 add_definitions(-DWXUSINGDLL)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -MTd")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 
 # Older cmake versions don't support string(APPEND ...) provide a workaround
 macro(wx_string_append var str)
@@ -119,10 +120,10 @@ set_source_files_properties(
 
 target_link_libraries(${PROJECT_NAME} wxbase33ud wxmsw33ud_core Ws2_32)
 
-target_link_libraries(${PROJECT_NAME} WinMM.lib)
-target_link_libraries(${PROJECT_NAME} version.lib)
-target_link_libraries(${PROJECT_NAME} Imm32.Lib)
-target_link_libraries(${PROJECT_NAME} Setupapi.lib)
+#target_link_libraries(${PROJECT_NAME} WinMM.lib)
+#target_link_libraries(${PROJECT_NAME} version.lib)
+#target_link_libraries(${PROJECT_NAME} Imm32.Lib)
+#target_link_libraries(${PROJECT_NAME} Setupapi.lib)
 
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxmsw331ud_core_vc_custom.dll $(OutputPath) /Y)

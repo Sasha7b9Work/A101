@@ -15,6 +15,6 @@ endif()
 
 add_subdirectory(ControlPanel)
 add_subdirectory(A101-GUI)
-add_subdirectory(Explorer)
+#add_subdirectory(Explorer)
 add_subdirectory(Bootloader)
 add_subdirectory(hex2binA101)
