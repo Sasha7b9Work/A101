@@ -49,15 +49,21 @@ void Device::Update()
 
 void Device::JumpToMainApplication()
 {
+#define APP_ADDRESS 0x8020000
+    
+    typedef void (*pFunction)(void);
+    pFunction jump_to_app;
+    uint32_t jump_address;
+    
     __disable_irq();
 
-    pFuncVV JumpToApplication;
+    SCB->VTOR = APP_ADDRESS;
 
-    JumpToApplication = (pFuncVV)(*(__IO uint *)(0x8020000 + 4)); //-V566
+    __set_MSP(*(__IO uint *)APP_ADDRESS);
 
-    __set_MSP(*(__IO uint *)0x8020000);
-
+    jump_address = *(__IO uint32_t*)(APP_ADDRESS + 4);
+    jump_to_app = (pFunction)jump_address;
     __enable_irq();
 
-    JumpToApplication();
+    jump_to_app();
 }

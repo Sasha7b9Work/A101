@@ -13,12 +13,6 @@
 #include "Menu/Pages/Pages.h"
 
 
-namespace Device
-{
-    const uint PROGRAM_VERSION_BUILD __attribute__((used)) __attribute__((section(".ARM.__at_0x08001204"))) = VERSION_BUILD;
-}
-
-
 void Device::Init()
 {
     cal.Load();
