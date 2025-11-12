@@ -23,6 +23,7 @@ private:
     wxStaticText *txtVersionValue = nullptr;
     wxStaticText *txtDateValue = nullptr;
     wxButton *btnSelectFile = nullptr;
+    wxButton *btnUpdate = nullptr;
 
     void OnSize(wxSizeEvent &);
 
@@ -38,4 +39,6 @@ private:
 
     // Выбор файла
     void OnEventButtonSelectFile(wxCommandEvent &);
+
+    void CreateFileFirmware(const wxString &);
 };

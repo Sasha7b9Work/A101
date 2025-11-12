@@ -101,7 +101,7 @@ Sizer *Frame::CreateSizerFile(wxWindow *window)
         btnSelectFile = new wxButton(window, wxID_ANY, _("Выбор файла"), wxDefaultPosition, { 200, 23 });
         btnSelectFile->Bind(wxEVT_BUTTON, &Frame::OnEventButtonSelectFile, this);
 
-        wxButton *btnUpdate = new wxButton(window, wxID_ANY, _("Firmware update"));
+        btnUpdate = new wxButton(window, wxID_ANY, _("Firmware update"));
         btnUpdate->Enable(false);
 
         sizer->AddSpacer(25);
@@ -164,19 +164,27 @@ void Frame::OnEventButtonSelectFile(wxCommandEvent &)
 
         btnSelectFile->SetToolTip(file_name);
 
-        File::Create(file_name);
+        CreateFileFirmware(file_name);
+    }
 
-        if (!File::IsBad())
-        {
-            txtVersionValue->SetLabel(wxString::Format("%u", File::GetVersion()));
+    btnUpdate->Enable(File::IsValid());
+}
 
-            txtDateValue->SetLabel(File::GetDateBuild());
-        }
-        else
-        {
-            txtVersionValue->SetLabel("");
 
-            txtDateValue->SetLabel("Не является файлом прошивки");
-        }
+void Frame::CreateFileFirmware(const wxString &file_name)
+{
+    File::Create(file_name);
+
+    if (File::IsValid())
+    {
+        txtVersionValue->SetLabel(wxString::Format("%u", File::GetVersion()));
+
+        txtDateValue->SetLabel(File::GetDateBuild());
+    }
+    else
+    {
+        txtVersionValue->SetLabel("");
+
+        txtDateValue->SetLabel("Не является файлом прошивки");
     }
 }

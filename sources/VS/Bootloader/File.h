@@ -4,12 +4,12 @@
 
 namespace File
 {
-    void Create(const wxString &);
+    bool Create(const wxString &);
 
     uint GetVersion();
 
     wxString GetDateBuild();
 
-    // Не является файлом прошивки
-    bool IsBad();
+    // Является файлом прошивки
+    bool IsValid();
 }

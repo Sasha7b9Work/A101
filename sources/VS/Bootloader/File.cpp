@@ -9,7 +9,7 @@ namespace File
 }
 
 
-void File::Create(const wxString &path)
+bool File::Create(const wxString &path)
 {
     wxFile file;
 
@@ -25,6 +25,8 @@ void File::Create(const wxString &path)
 
         bytes.SetDataLen(file_size);
     }
+
+    return IsValid();
 }
 
 
@@ -60,9 +62,9 @@ wxString File::GetDateBuild()
 }
 
 
-bool File::IsBad()
+bool File::IsValid()
 {
     wxString date = GetDateBuild();
 
-    return date.Length() < 0x13 || date[10] != ' ';
+    return date.Length() == 0x13 && date[10] == ' ';
 }
