@@ -26,6 +26,7 @@ private:
     wxButton *btnUpgradeFirmware = nullptr;
     wxButton *btnUpdatePorts = nullptr;
     wxComboBox *cbComPorts = nullptr;
+    wxButton *btnConnect = nullptr;
 
     void OnSize(wxSizeEvent &);
 
@@ -39,10 +40,9 @@ private:
 
     wxBoxSizer *CreateSizerDate(wxWindow *, const wxSize &);
 
-    // Выбор файла
     void OnEventButtonSelectFile(wxCommandEvent &);
-
-    void OnEventUpdatePorts(wxCommandEvent &);
+    void OnEventButtonUpdatePorts(wxCommandEvent &);
+    void OnEventButtonConnect(wxCommandEvent &);
 
     void CreateFileFirmware(const wxString &);
 };

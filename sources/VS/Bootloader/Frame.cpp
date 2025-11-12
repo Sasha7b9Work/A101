@@ -61,9 +61,10 @@ void Frame::CreatePanel(wxWindow *window)
         cbComPorts = new wxComboBox(window, wxID_ANY, wxEmptyString, wxDefaultPosition, { 80, 20 });
 
         btnUpdatePorts = new wxButton(window, wxID_ANY, _("Обновить"));
-        btnUpdatePorts->Bind(wxEVT_BUTTON, &Frame::OnEventUpdatePorts, this);
+        btnUpdatePorts->Bind(wxEVT_BUTTON, &Frame::OnEventButtonUpdatePorts, this);
 
-        wxButton *btnConnect = new wxButton(window, wxID_ANY, _("Подключиться"));
+        btnConnect = new wxButton(window, wxID_ANY, _("Подключиться"));
+        btnConnect->Bind(wxEVT_BUTTON, &Frame::OnEventButtonConnect, this);
 
         top->AddSpacer(10);
         top->Add(txtPort);
@@ -201,7 +202,7 @@ void Frame::OnEventReceive(uint8 *, int)
 }
 
 
-void Frame::OnEventUpdatePorts(wxCommandEvent &)
+void Frame::OnEventButtonUpdatePorts(wxCommandEvent &)
 {
     std::vector<bool> &ports = ComPort::GetComports();
 
@@ -211,7 +212,39 @@ void Frame::OnEventUpdatePorts(wxCommandEvent &)
     {
         if (ports[i])
         {
-            cbComPorts->AppendText(wxString::Format("COM%u", i + 1U));
+            cbComPorts->Append(wxString::Format("COM%u", i + 1U));
         }
+    }
+
+    cbComPorts->SetSelection(0);
+
+    btnConnect->Enable(cbComPorts->GetCount() != 0);
+}
+
+
+void Frame::OnEventButtonConnect(wxCommandEvent &)
+{
+    wxString name_port = cbComPorts->GetValue();
+
+    wxString num_port;
+
+    pchar digit = name_port.c_str().AsChar() + name_port.Length() - 1;
+
+    while (*digit >= '0' && *digit <= '9')
+    {
+        num_port.Prepend(*digit);
+        digit--;
+    }
+
+    long number = 0;
+
+    num_port.ToLong(&number);
+
+    if (C omPort::TryConnect((int)number - 1))
+    {
+    }
+    else
+    {
+
     }
 }
