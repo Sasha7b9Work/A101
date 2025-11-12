@@ -12,4 +12,8 @@ namespace File
 
     // Является файлом прошивки
     bool IsValid();
+
+    uint GetSize();
+
+    uint GetCRC32();
 }

@@ -13,20 +13,25 @@ public:
 
     static Frame *self;
 
-    void OnEventReceive(uint8 *, int);
+    // Вызываем, когда нужно закрыть порт
+    void Disconnect();
 
 private:
 
     Sizer *sizer_file = nullptr;
     Sizer *sizer_version = nullptr;
+
     wxBoxSizer *sizer_date = nullptr;
+
     wxStaticText *txtVersionValue = nullptr;
     wxStaticText *txtDateValue = nullptr;
+
     wxButton *btnSelectFile = nullptr;
     wxButton *btnUpgradeFirmware = nullptr;
     wxButton *btnUpdatePorts = nullptr;
-    wxComboBox *cbComPorts = nullptr;
     wxButton *btnConnect = nullptr;
+
+    wxComboBox *cbComPorts = nullptr;
 
     void OnSize(wxSizeEvent &);
 

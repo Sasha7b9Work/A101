@@ -1,6 +1,7 @@
 ﻿// 2025/11/12 10:37:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "File.h"
+#include "Utils/StringUtils.h"
 
 
 namespace File
@@ -27,6 +28,18 @@ bool File::Create(const wxString &path)
     }
 
     return IsValid();
+}
+
+
+uint File::GetSize()
+{
+    return bytes.GetDataLen();
+}
+
+
+uint File::GetCRC32()
+{
+    return SU::CalculateCRC32(bytes.GetData(), bytes.GetDataLen());
 }
 
 

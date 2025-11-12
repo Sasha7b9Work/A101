@@ -10,11 +10,13 @@ namespace ComPort
     // Попытка приконнектиться в соотвествии с настройками
     bool TryConnect(int num_port);
 
+    bool IsConnected();
+
     void Update();
 
     void Close();
 
-    void Send(pchar);
+    void SendCommand(const wxString &);
 
     void Send(void *buffer, int num_bytes);
 

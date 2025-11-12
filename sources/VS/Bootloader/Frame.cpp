@@ -4,6 +4,7 @@
 #include "Controls/Sizer.h"
 #include "Utils/GlobalFunctions.h"
 #include "Communicator/ComPort.h"
+#include "Upgrader.h"
 #include "File.h"
 
 
@@ -196,12 +197,6 @@ void Frame::CreateFileFirmware(const wxString &file_name)
 }
 
 
-void Frame::OnEventReceive(uint8 *, int)
-{
-
-}
-
-
 void Frame::OnEventButtonUpdatePorts(wxCommandEvent &)
 {
     std::vector<bool> &ports = ComPort::GetComports();
@@ -242,9 +237,14 @@ void Frame::OnEventButtonConnect(wxCommandEvent &)
 
     if (ComPort::TryConnect((int)number - 1))
     {
-    }
-    else
-    {
+        Upgrader::Reset();
 
+        ComPort::SendCommand("*idn?");
     }
+}
+
+
+void Frame::Disconnect()
+{
+
 }

@@ -44,4 +44,6 @@ namespace SU
     char *GetWord(pchar data, int num, char out[32], pchar delimit = " \n\0");
 
     int GetNumWords(pchar data, pchar delimit = " \n");
+
+    uint CalculateCRC32(const void *buffer, int size);
 }

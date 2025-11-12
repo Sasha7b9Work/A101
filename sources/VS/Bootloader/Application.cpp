@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "Frame.h"
 #include "Communicator/ComPort.h"
+#include "Upgrader.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -36,6 +37,8 @@ bool Application::OnInit()
 void Application::OnTimer(wxTimerEvent &)
 {
     ComPort::Update();
+
+    Upgrader::Update();
 }
 
 

@@ -3,7 +3,7 @@
 #include "Communicator/ComPort.h"
 #include "Communicator/rs232.h"
 #include "Utils/String.h"
-#include "Frame.h"
+#include "Upgrader.h"
 #include <cstring>
 #include <chrono>
 #include <thread>
@@ -23,8 +23,6 @@ namespace ComPort
 
     // Нумерация начинается с 0 : 0 == COM1
     bool PortIsExist(int);
-
-    bool IsConnected();
 
     int Receive(char *buffer, int size);
 
@@ -98,11 +96,13 @@ bool ComPort::IsConnected()
 }
 
 
-void ComPort::Send(pchar buffer)
+void ComPort::SendCommand(const wxString &command)
 {
     if (IsConnected())
     {
-        Send((void *)buffer, (int)std::strlen(buffer));
+        Send((void *)command.c_str().AsChar(), (int)command.Length());
+
+        Send("\x0a\x0d", 2);
     }
 }
 
@@ -138,7 +138,7 @@ void ComPort::Update()
 
         if (n)
         {
-            Frame::self->OnEventReceive((uint8 *)buffer, n);
+            Upgrader::OnEventReceive((uint8 *)buffer, n);
         }
     }
 }
