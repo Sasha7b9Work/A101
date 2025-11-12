@@ -7,6 +7,7 @@
 #include <wx/wx.h>
 #include <wx/listctrl.h>
 #include <wx/file.h>
+#include <wx/tokenzr.h>
 
 #include <algorithm>
 #include <vector>
@@ -15,3 +16,5 @@
 
 
 typedef unsigned int uint;
+typedef const char *pchar;
+typedef unsigned char uint8;

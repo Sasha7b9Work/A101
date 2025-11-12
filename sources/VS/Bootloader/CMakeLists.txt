@@ -1,5 +1,4 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-
 project (Bootloader)
 
 set(CMAKE_UNITY_BUILD OFF)
@@ -96,15 +95,21 @@ if(WIN32)
 endif()
 
 
-file(GLOB SRC         *.h *.cpp)
-file(GLOB CONTROLS    Controls/*.h Controls/*.cpp)
+file(GLOB SRC          *.h *.cpp)
+file(GLOB COMMUNICATOR Communicator/*.*)
+file(GLOB CONTROLS     Controls/*.*)
+file(GLOB UTILS        Utils/*.*)
 
-source_group(src      FILES ${SRC})
-source_group(Controls FILES ${CONTROLS})
+source_group(src          FILES ${SRC})
+source_group(Communicator FILES ${COMMUNICATOR})
+source_group(Controls     FILES ${CONTROLS})
+source_group(Utils        FILES ${UTILS})
 
 add_executable( ${PROJECT_NAME}
     ${SRC}
+    ${COMMUNICATOR}
     ${CONTROLS}
+    ${UTILS}
 )
 
 target_link_libraries(${PROJECT_NAME}

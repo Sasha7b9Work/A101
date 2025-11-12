@@ -13,6 +13,8 @@ public:
 
     static Frame *self;
 
+    void OnEventReceive(uint8 *, int);
+
 private:
 
     wxToolBar *toolBar = nullptr;
@@ -23,7 +25,8 @@ private:
     wxStaticText *txtVersionValue = nullptr;
     wxStaticText *txtDateValue = nullptr;
     wxButton *btnSelectFile = nullptr;
-    wxButton *btnUpdate = nullptr;
+    wxButton *btnUpgradeFirmware = nullptr;
+    wxButton *btnUpdatePorts = nullptr;
 
     void OnSize(wxSizeEvent &);
 
@@ -39,6 +42,8 @@ private:
 
     // Выбор файла
     void OnEventButtonSelectFile(wxCommandEvent &);
+
+    void OnEventUpdatePorts(wxCommandEvent &);
 
     void CreateFileFirmware(const wxString &);
 };

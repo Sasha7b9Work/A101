@@ -2,6 +2,8 @@
 #include "defines.h"
 #include "Frame.h"
 #include "Controls/Sizer.h"
+#include "Utils/GlobalFunctions.h"
+#include "Communicator/ComPort.h"
 #include "File.h"
 
 
@@ -32,8 +34,7 @@ Frame::Frame(const wxString &title)
 
     SetClientSize(410, 150);
 
-//    sizer_version->Enable(false);
-//    sizer_file->Enable(false);
+    GF::SendCommandEvent(btnUpdatePorts, wxEVT_BUTTON, btnUpdatePorts->GetId());
 }
 
 
@@ -56,8 +57,12 @@ void Frame::CreatePanel(wxWindow *window)
     wxBoxSizer *top = new wxBoxSizer(wxHORIZONTAL);
     {
         wxStaticText *txtPort = new wxStaticText(window, wxID_ANY, _("COM-порт"));
+
         wxComboBox *cbComPort = new wxComboBox(window, wxID_ANY, wxEmptyString, wxDefaultPosition, { 80, 20 });
-        wxButton *btnUpdate = new wxButton(window, wxID_ANY, _("Обновить"));
+
+        btnUpdatePorts = new wxButton(window, wxID_ANY, _("Обновить"));
+        btnUpdatePorts->Bind(wxEVT_BUTTON, &Frame::OnEventUpdatePorts, this);
+
         wxButton *btnConnect = new wxButton(window, wxID_ANY, _("Подключиться"));
 
         top->AddSpacer(10);
@@ -65,7 +70,7 @@ void Frame::CreatePanel(wxWindow *window)
         top->AddSpacer(10);
         top->Add(cbComPort);
         top->AddSpacer(10);
-        top->Add(btnUpdate);
+        top->Add(btnUpdatePorts);
         top->AddSpacer(50);
         top->Add(btnConnect);
         top->AddSpacer(10);
@@ -101,13 +106,13 @@ Sizer *Frame::CreateSizerFile(wxWindow *window)
         btnSelectFile = new wxButton(window, wxID_ANY, _("Выбор файла"), wxDefaultPosition, { 200, 23 });
         btnSelectFile->Bind(wxEVT_BUTTON, &Frame::OnEventButtonSelectFile, this);
 
-        btnUpdate = new wxButton(window, wxID_ANY, _("Firmware update"));
-        btnUpdate->Enable(false);
+        btnUpgradeFirmware = new wxButton(window, wxID_ANY, _("Firmware update"));
+        btnUpgradeFirmware->Enable(false);
 
         sizer->AddSpacer(25);
         sizer->Add(btnSelectFile);
         sizer->AddSpacer(25);
-        sizer->Add(btnUpdate);
+        sizer->Add(btnUpgradeFirmware);
     }
 
     return sizer;
@@ -167,7 +172,7 @@ void Frame::OnEventButtonSelectFile(wxCommandEvent &)
         CreateFileFirmware(file_name);
     }
 
-    btnUpdate->Enable(File::IsValid());
+    btnUpgradeFirmware->Enable(File::IsValid());
 }
 
 
@@ -187,4 +192,18 @@ void Frame::CreateFileFirmware(const wxString &file_name)
 
         txtDateValue->SetLabel("Не является файлом прошивки");
     }
+}
+
+
+void Frame::OnEventReceive(uint8 *, int)
+{
+
+}
+
+
+void Frame::OnEventUpdatePorts(wxCommandEvent &)
+{
+    std::vector<bool> ports;
+
+    ComPort::GetComports(ports);
 }
