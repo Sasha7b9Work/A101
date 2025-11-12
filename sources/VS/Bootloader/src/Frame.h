@@ -11,8 +11,6 @@ class Frame : public wxFrame
 public:
     Frame(const wxString &title);
 
-    void OnAbout(wxCommandEvent &event);
-
     static Frame *self;
 
 private:

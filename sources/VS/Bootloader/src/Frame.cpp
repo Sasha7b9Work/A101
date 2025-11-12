@@ -14,9 +14,7 @@ Frame::Frame(const wxString &title)
 
     SetIcon(wxICON(MAIN_ICON));
 
-    Bind(wxEVT_MENU, &Frame::OnAbout, this, wxID_ABOUT);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnCloseWindow, this);
-
     Bind(wxEVT_SIZE, &Frame::OnSize, this);
 
     wxWindow *window = new wxWindow(this, wxID_ANY);
@@ -31,7 +29,7 @@ Frame::Frame(const wxString &title)
 
     CreatePanel(window);
 
-    SetClientSize(470, 215);
+    SetClientSize(410, 150);
 
 //    sizer_version->Enable(false);
 //    sizer_file->Enable(false);
@@ -43,25 +41,6 @@ void Frame::OnSize(wxSizeEvent &event)
     Layout();
 
     event.Skip();
-}
-
-
-void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
-{
-    wxBoxSizer *topsizer;
-    wxDialog dlg(this, wxID_ANY, wxString(_("About")));
-
-    topsizer = new wxBoxSizer(wxVERTICAL);
-
-    wxButton *bu1 = new wxButton(&dlg, wxID_OK, _("OK"));
-    bu1->SetDefault();
-
-    topsizer->Add(bu1, 0, wxALL | wxALIGN_RIGHT, 15);
-
-    dlg.SetSizer(topsizer);
-    topsizer->Fit(&dlg);
-
-    dlg.ShowModal();
 }
 
 
