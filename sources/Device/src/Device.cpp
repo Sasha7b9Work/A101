@@ -1,5 +1,6 @@
 // 2022/11/23 14:55:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
+#include "defines.cpp"
 #include "Device.h"
 #include "Nextion/Display.h"
 #include "Nextion/Nextion.h"
@@ -10,6 +11,12 @@
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 #include "Menu/Pages/Pages.h"
+
+
+namespace Device
+{
+    const uint PROGRAM_VERSION_BUILD __attribute__((used)) __attribute__((section(".ARM.__at_0x08001204"))) = VERSION_BUILD;
+}
 
 
 void Device::Init()

@@ -9,4 +9,6 @@ namespace Device
     void Update();
 
     void Reset();
+
+    extern const uint PROGRAM_VERSION_BUILD;
 }
