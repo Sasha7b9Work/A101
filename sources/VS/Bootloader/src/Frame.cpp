@@ -21,14 +21,20 @@ Frame::Frame(const wxString &title)
 
     wxWindow *window = new wxWindow(this, wxID_ANY);
 
+    wxSize size_label{ 90, 15 };
+
     sizer_file = CreateSizerFile(window);
+
+    sizer_version = CreateSizerVersion(window, size_label);
+
+    sizer_date = CreateSizerDate(window, size_label);
 
     CreatePanel(window);
 
     SetClientSize(470, 215);
 
-    sizer_version->Enable(false);
-    sizer_file->Enable(false);
+//    sizer_version->Enable(false);
+//    sizer_file->Enable(false);
 }
 
 
@@ -85,32 +91,6 @@ void Frame::CreatePanel(wxWindow *window)
         top->AddSpacer(10);
     }
 
-    wxSize size_label{ 90, 15 };
-
-    sizer_version = new Sizer(wxHORIZONTAL);
-    {
-        wxStaticText *txtVersionLabel = new wxStaticText(window, wxID_ANY, _("Версия"), wxDefaultPosition, size_label);
-        wxStaticText *txtVersionValue = new wxStaticText(window, wxID_ANY, "-", wxDefaultPosition, size_label);
-
-        sizer_version->AddSpacer(50);
-        sizer_version->Add(txtVersionLabel);
-        sizer_version->AddSpacer(10);
-        sizer_version->Add(txtVersionValue);
-        sizer_version->AddSpacer(10);
-    }
-
-    wxBoxSizer *box_date = new wxBoxSizer(wxHORIZONTAL);
-    {
-        wxStaticText *txtDateLabel = new wxStaticText(window, wxID_ANY, _("Дата сборки"), wxDefaultPosition, size_label);
-        wxStaticText *txtDateValue = new wxStaticText(window, wxID_ANY, "-", wxDefaultPosition, size_label);
-
-        box_date->AddSpacer(50);
-        box_date->Add(txtDateLabel);
-        box_date->AddSpacer(10);
-        box_date->Add(txtDateValue);
-        box_date->AddSpacer(10);
-    }
-
     wxBoxSizer *window_sizer = new wxBoxSizer(wxVERTICAL);
 
     window_sizer->AddSpacer(10);
@@ -118,7 +98,7 @@ void Frame::CreatePanel(wxWindow *window)
     window_sizer->AddSpacer(20);
     window_sizer->Add(sizer_version);
     window_sizer->AddSpacer(10);
-    window_sizer->Add(box_date);
+    window_sizer->Add(sizer_date);
     window_sizer->AddSpacer(20);
     window_sizer->Add(sizer_file);
     window_sizer->AddSpacer(10);
@@ -147,6 +127,44 @@ Sizer *Frame::CreateSizerFile(wxWindow *window)
         sizer->Add(btnSelectFile);
         sizer->AddSpacer(25);
         sizer->Add(btnUpdate);
+    }
+
+    return sizer;
+}
+
+
+Sizer *Frame::CreateSizerVersion(wxWindow *window, const wxSize &size_label)
+{
+    Sizer *sizer = new Sizer(wxHORIZONTAL);
+
+    {
+        wxStaticText *txtVersionLabel = new wxStaticText(window, wxID_ANY, _("Версия"), wxDefaultPosition, size_label);
+        wxStaticText *txtVersionValue = new wxStaticText(window, wxID_ANY, "-", wxDefaultPosition, size_label);
+
+        sizer->AddSpacer(50);
+        sizer->Add(txtVersionLabel);
+        sizer->AddSpacer(10);
+        sizer->Add(txtVersionValue);
+        sizer->AddSpacer(10);
+    }
+
+    return sizer;
+}
+
+
+wxBoxSizer *Frame::CreateSizerDate(wxWindow *window, const wxSize &size_label)
+{
+    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+
+    {
+        wxStaticText *txtDateLabel = new wxStaticText(window, wxID_ANY, _("Дата сборки"), wxDefaultPosition, size_label);
+        wxStaticText *txtDateValue = new wxStaticText(window, wxID_ANY, "-", wxDefaultPosition, size_label);
+
+        sizer->AddSpacer(50);
+        sizer->Add(txtDateLabel);
+        sizer->AddSpacer(10);
+        sizer->Add(txtDateValue);
+        sizer->AddSpacer(10);
     }
 
     return sizer;

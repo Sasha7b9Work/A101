@@ -21,6 +21,7 @@ private:
 
     Sizer *sizer_file = nullptr;
     Sizer *sizer_version = nullptr;
+    wxBoxSizer *sizer_date = nullptr;
 
     void OnSize(wxSizeEvent &);
 
@@ -29,4 +30,8 @@ private:
     void CreatePanel(wxWindow *);
 
     Sizer *CreateSizerFile(wxWindow *);
+
+    Sizer *CreateSizerVersion(wxWindow *, const wxSize &);
+
+    wxBoxSizer *CreateSizerDate(wxWindow *, const wxSize &);
 };
