@@ -3,11 +3,14 @@
 
 
 #pragma warning(push, 0)
+
 #include <wx/wx.h>
 #include <wx/listctrl.h>
+#include <wx/file.h>
 
 #include <algorithm>
 #include <vector>
+
 #pragma warning(pop)
 
 

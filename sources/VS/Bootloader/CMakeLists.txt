@@ -96,7 +96,7 @@ if(WIN32)
 endif()
 
 
-file(GLOB SRC         src/*.h src/*.cpp)
+file(GLOB SRC         *.h *.cpp)
 file(GLOB CONTROLS    Controls/*.h Controls/*.cpp)
 
 source_group(src      FILES ${SRC})

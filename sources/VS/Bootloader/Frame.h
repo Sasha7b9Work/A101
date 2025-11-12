@@ -20,6 +20,8 @@ private:
     Sizer *sizer_file = nullptr;
     Sizer *sizer_version = nullptr;
     wxBoxSizer *sizer_date = nullptr;
+    wxStaticText *txtVersionValue = nullptr;
+    wxStaticText *txtDateValue = nullptr;
 
     void OnSize(wxSizeEvent &);
 
@@ -32,4 +34,7 @@ private:
     Sizer *CreateSizerVersion(wxWindow *, const wxSize &);
 
     wxBoxSizer *CreateSizerDate(wxWindow *, const wxSize &);
+
+    // Выбор файла
+    void OnEventButtonSelectFile(wxCommandEvent &);
 };

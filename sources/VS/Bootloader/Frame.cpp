@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Frame.h"
 #include "Controls/Sizer.h"
+#include "File.h"
 
 
 Frame *Frame::self = nullptr;
@@ -98,6 +99,9 @@ Sizer *Frame::CreateSizerFile(wxWindow *window)
 
     {
         wxButton *btnSelectFile = new wxButton(window, wxID_ANY, _("Выбор файла"), wxDefaultPosition, { 250, 23 });
+
+        btnSelectFile->Bind(wxEVT_BUTTON, &Frame::OnEventButtonSelectFile, this);
+
         wxButton *btnUpdate = new wxButton(window, wxID_ANY, _("Обновить"));
 
         btnUpdate->Enable(false);
@@ -118,7 +122,7 @@ Sizer *Frame::CreateSizerVersion(wxWindow *window, const wxSize &size_label)
 
     {
         wxStaticText *txtVersionLabel = new wxStaticText(window, wxID_ANY, _("Версия"), wxDefaultPosition, size_label);
-        wxStaticText *txtVersionValue = new wxStaticText(window, wxID_ANY, "-", wxDefaultPosition, size_label);
+        txtVersionValue = new wxStaticText(window, wxID_ANY, "-", wxDefaultPosition, size_label);
 
         sizer->AddSpacer(50);
         sizer->Add(txtVersionLabel);
@@ -137,7 +141,7 @@ wxBoxSizer *Frame::CreateSizerDate(wxWindow *window, const wxSize &size_label)
 
     {
         wxStaticText *txtDateLabel = new wxStaticText(window, wxID_ANY, _("Дата сборки"), wxDefaultPosition, size_label);
-        wxStaticText *txtDateValue = new wxStaticText(window, wxID_ANY, "-", wxDefaultPosition, size_label);
+        txtDateValue = new wxStaticText(window, wxID_ANY, "-", wxDefaultPosition, size_label);
 
         sizer->AddSpacer(50);
         sizer->Add(txtDateLabel);
@@ -147,4 +151,19 @@ wxBoxSizer *Frame::CreateSizerDate(wxWindow *window, const wxSize &size_label)
     }
 
     return sizer;
+}
+
+
+void Frame::OnEventButtonSelectFile(wxCommandEvent &)
+{
+    wxFileDialog dialog(self, "Открыть файл с прошивкой", wxEmptyString, wxEmptyString, "*.bin", wxFD_OPEN);
+
+    if (dialog.ShowModal() == wxID_OK)
+    {
+        File::Create(dialog.GetPath());
+
+        txtVersionValue->SetLabel(wxString::Format("%u", File::GetVersion()));
+
+        txtDateValue->SetLabel(File::GetDateBuild());
+    }
 }
