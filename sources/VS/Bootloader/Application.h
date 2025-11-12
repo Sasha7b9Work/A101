@@ -15,7 +15,5 @@ private:
 
     void Init();
 
-    void Update();
-
     virtual int OnExit() wxOVERRIDE;
 };

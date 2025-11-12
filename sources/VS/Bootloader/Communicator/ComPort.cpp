@@ -24,9 +24,6 @@ namespace ComPort
     // Нумерация начинается с 0 : 0 == COM1
     bool PortIsExist(int);
 
-    // Каждофреймовое обновление при подключённом устройстве
-    void UpdateConnected();
-
     bool IsConnected();
 
     int Receive(char *buffer, int size);
@@ -131,15 +128,6 @@ int ComPort::Receive(char *buffer, int size)
 
 
 void ComPort::Update()
-{
-    if (IsConnected())
-    {
-        UpdateConnected();
-    }
-}
-
-
-void ComPort::UpdateConnected()
 {
     if (IsConnected())
     {

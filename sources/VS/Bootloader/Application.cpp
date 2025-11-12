@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Application.h"
 #include "Frame.h"
+#include "Communicator/ComPort.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -34,7 +35,7 @@ bool Application::OnInit()
 
 void Application::OnTimer(wxTimerEvent &)
 {
-    Update();
+    ComPort::Update();
 }
 
 
@@ -45,12 +46,6 @@ int Application::OnExit()
 
 
 void Application::Init()
-{
-
-}
-
-
-void Application::Update()
 {
 
 }

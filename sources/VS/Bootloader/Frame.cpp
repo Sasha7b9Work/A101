@@ -240,7 +240,7 @@ void Frame::OnEventButtonConnect(wxCommandEvent &)
 
     num_port.ToLong(&number);
 
-    if (C omPort::TryConnect((int)number - 1))
+    if (ComPort::TryConnect((int)number - 1))
     {
     }
     else
