@@ -14,7 +14,7 @@ namespace HAL
     static void EnablePeriphery();
 
     // По этому адресу хранится версия сборки, чтобы прошивальщим мог её прочитать и сравнить с той, что зашита в новой прошивке
-    static volatile const uint PROGRAM_VERSION_BUILD __attribute__((used)) __attribute__((section(".ARM.__at_0x08001000"))) = VERSION_BUILD;
+    static volatile const uint PROGRAM_VERSION_BUILD __attribute__((used)) __attribute__((section(".ARM.__at_0x08022000"))) = VERSION_BUILD;
 }
 
 
