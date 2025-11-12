@@ -1,4 +1,4 @@
-// 2025/11/12 10:37:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/11/12 10:37:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "File.h"
 
@@ -48,11 +48,21 @@ wxString File::GetDateBuild()
 
     wxString result;
 
-    while(*p)
+    int counter = 0;
+
+    while(*p && (counter++ < 0x30))
     {
         result.Append(*p);
         p++;
     }
 
     return result;
+}
+
+
+bool File::IsBad()
+{
+    wxString date = GetDateBuild();
+
+    return date.Length() < 0x13 || date[10] != ' ';
 }

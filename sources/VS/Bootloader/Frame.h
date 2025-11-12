@@ -22,6 +22,7 @@ private:
     wxBoxSizer *sizer_date = nullptr;
     wxStaticText *txtVersionValue = nullptr;
     wxStaticText *txtDateValue = nullptr;
+    wxButton *btnSelectFile = nullptr;
 
     void OnSize(wxSizeEvent &);
 
