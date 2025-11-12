@@ -26,5 +26,7 @@ private:
 
     void OnCloseWindow(wxCloseEvent &);
 
-    void CreatePanel();
+    void CreatePanel(wxWindow *);
+
+    Sizer *CreateSizerFile(wxWindow *);
 };

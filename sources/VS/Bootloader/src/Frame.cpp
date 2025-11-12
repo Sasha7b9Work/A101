@@ -19,7 +19,11 @@ Frame::Frame(const wxString &title)
 
     Bind(wxEVT_SIZE, &Frame::OnSize, this);
 
-    CreatePanel();
+    wxWindow *window = new wxWindow(this, wxID_ANY);
+
+    sizer_file = CreateSizerFile(window);
+
+    CreatePanel(window);
 
     SetClientSize(470, 215);
 
@@ -61,10 +65,8 @@ void Frame::OnCloseWindow(wxCloseEvent &event)
 }
 
 
-void Frame::CreatePanel()
+void Frame::CreatePanel(wxWindow *window)
 {
-    wxWindow *window = new wxWindow(this, wxID_ANY);
-
     wxBoxSizer *top = new wxBoxSizer(wxHORIZONTAL);
     {
         wxStaticText *txtPort = new wxStaticText(window, wxID_ANY, _("COM-порт"));
@@ -109,19 +111,6 @@ void Frame::CreatePanel()
         box_date->AddSpacer(10);
     }
 
-    sizer_file = new Sizer(wxHORIZONTAL);
-    {
-        wxButton *btnSelectFile = new wxButton(window, wxID_ANY, _("Выбор файла"), wxDefaultPosition, { 250, 23 });
-        wxButton *btnUpdate = new wxButton(window, wxID_ANY, _("Обновить"));
-
-        btnUpdate->Enable(false);
-
-        sizer_file->AddSpacer(25);
-        sizer_file->Add(btnSelectFile);
-        sizer_file->AddSpacer(25);
-        sizer_file->Add(btnUpdate);
-    }
-
     wxBoxSizer *window_sizer = new wxBoxSizer(wxVERTICAL);
 
     window_sizer->AddSpacer(10);
@@ -141,4 +130,24 @@ void Frame::CreatePanel()
     sizer->Add(window);
 
     SetSizer(sizer);
+}
+
+
+Sizer *Frame::CreateSizerFile(wxWindow *window)
+{
+    Sizer *sizer = new Sizer(wxHORIZONTAL);
+
+    {
+        wxButton *btnSelectFile = new wxButton(window, wxID_ANY, _("Выбор файла"), wxDefaultPosition, { 250, 23 });
+        wxButton *btnUpdate = new wxButton(window, wxID_ANY, _("Обновить"));
+
+        btnUpdate->Enable(false);
+
+        sizer->AddSpacer(25);
+        sizer->Add(btnSelectFile);
+        sizer->AddSpacer(25);
+        sizer->Add(btnUpdate);
+    }
+
+    return sizer;
 }
