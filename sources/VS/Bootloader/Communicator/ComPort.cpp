@@ -30,10 +30,12 @@ namespace ComPort
     bool IsConnected();
 
     int Receive(char *buffer, int size);
+
+    static std::vector<bool> ports;
 }
 
 
-void ComPort::GetComports(std::vector<bool> &ports)
+std::vector<bool> &ComPort::GetComports()
 {
     ports.clear();
 
@@ -52,6 +54,8 @@ void ComPort::GetComports(std::vector<bool> &ports)
             ports.push_back(false);
         }
     }
+
+    return ports;
 }
 
 

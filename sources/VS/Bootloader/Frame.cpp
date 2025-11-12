@@ -58,7 +58,7 @@ void Frame::CreatePanel(wxWindow *window)
     {
         wxStaticText *txtPort = new wxStaticText(window, wxID_ANY, _("COM-порт"));
 
-        wxComboBox *cbComPort = new wxComboBox(window, wxID_ANY, wxEmptyString, wxDefaultPosition, { 80, 20 });
+        cbComPorts = new wxComboBox(window, wxID_ANY, wxEmptyString, wxDefaultPosition, { 80, 20 });
 
         btnUpdatePorts = new wxButton(window, wxID_ANY, _("Обновить"));
         btnUpdatePorts->Bind(wxEVT_BUTTON, &Frame::OnEventUpdatePorts, this);
@@ -68,7 +68,7 @@ void Frame::CreatePanel(wxWindow *window)
         top->AddSpacer(10);
         top->Add(txtPort);
         top->AddSpacer(10);
-        top->Add(cbComPort);
+        top->Add(cbComPorts);
         top->AddSpacer(10);
         top->Add(btnUpdatePorts);
         top->AddSpacer(50);
@@ -203,7 +203,15 @@ void Frame::OnEventReceive(uint8 *, int)
 
 void Frame::OnEventUpdatePorts(wxCommandEvent &)
 {
-    std::vector<bool> ports;
+    std::vector<bool> &ports = ComPort::GetComports();
 
-    ComPort::GetComports(ports);
+    cbComPorts->Clear();
+
+    for (size_t i = 0; i < ports.size(); i++)
+    {
+        if (ports[i])
+        {
+            cbComPorts->AppendText(wxString::Format("COM%u", i + 1U));
+        }
+    }
 }

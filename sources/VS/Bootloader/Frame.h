@@ -17,8 +17,6 @@ public:
 
 private:
 
-    wxToolBar *toolBar = nullptr;
-
     Sizer *sizer_file = nullptr;
     Sizer *sizer_version = nullptr;
     wxBoxSizer *sizer_date = nullptr;
@@ -27,6 +25,7 @@ private:
     wxButton *btnSelectFile = nullptr;
     wxButton *btnUpgradeFirmware = nullptr;
     wxButton *btnUpdatePorts = nullptr;
+    wxComboBox *cbComPorts = nullptr;
 
     void OnSize(wxSizeEvent &);
 
