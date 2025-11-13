@@ -102,6 +102,15 @@ void Upgrader::RunCommand(const wxString &command)
     }
     else if(command.StartsWith("UPGRADE "))         // Получен запрос на отправку новой порции данных
     {
+        static int counter = 0;
+
+        counter++;
+
+        if (counter > 10)
+        {
+            counter++;
+        }
+
         char parameter[32];
 
         SU::GetWord(command.data(), 2, parameter);

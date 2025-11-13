@@ -19,7 +19,7 @@ link_directories(../../generated/ThirdParty/lib/vc_lib)
 add_definitions(-DSTM32F103xB -DGUI -DDEVICE)
 
 if(WIN32)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -MT -std:c++20")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -std:c++20")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
     
     add_compile_options(

@@ -59,6 +59,12 @@ void Device::UpgradeFirmware()
     while (true)
     {
         uint size = HAL_EEPROM::ReadUint(START_ADDRESS);
+
+        if (size > 128 * 1024 * 2)                          // Ѕольше двух секторов прошивка занимать не может
+        {
+            return;
+        }
+
         uint crc32 = HAL_EEPROM::ReadUint(START_ADDRESS + 4);
 
         HAL_EEPROM::EraseSector(ADDR_SECTOR_5);

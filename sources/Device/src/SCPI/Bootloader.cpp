@@ -41,6 +41,10 @@ namespace Bootloader
     static void DrawString(int x, int y, pchar);
 
     static TimeMeterMS meter;
+
+    static void DisplayCompleted();
+
+    static void DisplayError();
 }
 
 
@@ -120,6 +124,10 @@ void Bootloader::Update()
             {
                 in_progress = false;
 
+                DisplayCompleted();
+
+                meter.Wait(3000);
+
                 HAL_NVIC_SystemReset();
             }
             else
@@ -127,6 +135,17 @@ void Bootloader::Update()
                 in_progress = false;
                 SendCommand("UPGRADE RESET");
             }
+        }
+    }
+    else
+    {
+        if (meter.ElapsedTime() > 30000)        // Долго нет новых данных - обрыв связи
+        {
+            DisplayError();
+
+            meter.Wait(3000);
+
+            HAL_NVIC_SystemReset();
         }
     }
 }
@@ -193,4 +212,22 @@ void Bootloader::DisplayFunc()
 void Bootloader::DrawString(int x, int y, pchar message)
 {
     Nextion::DrawString({ x, y, 700, 50 }, 0, Color::White, Color::Background, message);
+}
+
+
+void Bootloader::DisplayCompleted()
+{
+    Display::Clear();
+
+    DrawString(10, 100, "Прошивка загрежана.");
+    DrawString(10, 160, "Перезагрузка.");
+}
+
+
+void Bootloader::DisplayError()
+{
+    Display::Clear();
+
+    DrawString(10, 100, "При обновлении произошла ошибка.");
+    DrawString(10, 160, "Перезагрузка.");
 }
