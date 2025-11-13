@@ -3,6 +3,12 @@
 #include <cstring>
 
 
+namespace SU
+{
+    uint CalculateCRC32(const void *buffer, int size);
+}
+
+
 #define DEFAULT_SIZE_STRING 64
 
 template<int capacity = DEFAULT_SIZE_STRING>

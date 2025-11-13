@@ -36,6 +36,9 @@ namespace HAL_EEPROM
 
     void EraseSector(uint address);
     void WriteData(uint address, const void *data, int size);
+    void ReadData(uint address, void *data, int size);
+
+    uint ReadUint(uint address);
 }
 
 

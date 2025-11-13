@@ -230,3 +230,17 @@ void HAL_EEPROM::WriteData(uint address, const void *data, int size)
 
     HAL_FLASH_Lock();
 }
+
+
+uint HAL_EEPROM::ReadUint(uint address)
+{
+    uint *pointer = (uint *)address;
+
+    return *pointer;
+}
+
+
+void HAL_EEPROM::ReadData(uint address, void *data, int size)
+{
+    std::memcpy(data, (const void *)address, (uint)size);
+}

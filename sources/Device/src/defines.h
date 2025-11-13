@@ -2,29 +2,29 @@
 #pragma once
 
 #ifndef WIN32
-#pragma clang diagnostic ignored "-Wglobal-constructors"
-#pragma clang diagnostic ignored "-Wmissing-noreturn"
-#pragma clang diagnostic ignored "-Wpadded"
-#pragma clang diagnostic ignored "-Wold-style-cast"
-#pragma clang diagnostic ignored "-Wc++98-compat"
-#pragma clang diagnostic ignored "-Wformat-nonliteral"
-#pragma clang diagnostic ignored "-Winvalid-source-encoding"
-#pragma clang diagnostic ignored "-Wimplicit-int-float-conversion"
-#pragma clang diagnostic ignored "-Wcast-qual"
-#pragma clang diagnostic ignored "-Wcast-align"
-#pragma clang diagnostic ignored "-Wnon-virtual-dtor"
-#pragma clang diagnostic ignored "-Wundefined-func-template"
-#pragma clang diagnostic ignored "-Wimplicit-float-conversion"
-#pragma clang diagnostic ignored "-Wdouble-promotion"
-#pragma clang diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
-#pragma clang diagnostic ignored "-Wweak-vtables"
-//#pragma clang diagnostic ignored "-Winvalid-utf8"
-//#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+    #pragma clang diagnostic ignored "-Wglobal-constructors"
+    #pragma clang diagnostic ignored "-Wmissing-noreturn"
+    #pragma clang diagnostic ignored "-Wpadded"
+    #pragma clang diagnostic ignored "-Wold-style-cast"
+    #pragma clang diagnostic ignored "-Wc++98-compat"
+    #pragma clang diagnostic ignored "-Wformat-nonliteral"
+    #pragma clang diagnostic ignored "-Winvalid-source-encoding"
+    #pragma clang diagnostic ignored "-Wimplicit-int-float-conversion"
+    #pragma clang diagnostic ignored "-Wcast-qual"
+    #pragma clang diagnostic ignored "-Wcast-align"
+    #pragma clang diagnostic ignored "-Wnon-virtual-dtor"
+    #pragma clang diagnostic ignored "-Wundefined-func-template"
+    #pragma clang diagnostic ignored "-Wimplicit-float-conversion"
+    #pragma clang diagnostic ignored "-Wdouble-promotion"
+    #pragma clang diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
+    #pragma clang diagnostic ignored "-Wweak-vtables"
+    //#pragma clang diagnostic ignored "-Winvalid-utf8"
+    //#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+    
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
 #else
-#define WIN32_LEAN_AND_MEAN
+    #define WIN32_LEAN_AND_MEAN
 #endif
 
 #include "opt.h"
@@ -46,7 +46,9 @@ typedef const char * const cstr;
 typedef const char *       pchar;
 
 #ifdef WIN32
-    #define HAL_NVIC_SystemReset()
+    #ifdef GUI
+        #define HAL_NVIC_SystemReset()
+    #endif
 #else
     #pragma clang diagnostic pop
 #endif
