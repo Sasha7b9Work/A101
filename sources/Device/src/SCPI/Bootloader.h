@@ -5,4 +5,10 @@
 namespace Bootloader
 {
     void Run(uint version_build_new, uint size, uint crc32);
+
+    void Update();
+
+    bool InProgress();
+
+    void OnReceiveByte(char);
 }

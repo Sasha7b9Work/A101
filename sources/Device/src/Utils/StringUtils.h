@@ -30,4 +30,6 @@ namespace SU
 
     // Считывает значение uint из десятичного или шестнадцатиричного ASCII-представления
     bool AtoUInt(pchar, uint *value, int radix);
+
+    uint CalculateCRC32(const void *buffer, int size);
 }

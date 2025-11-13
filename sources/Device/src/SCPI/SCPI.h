@@ -24,4 +24,8 @@ namespace SCPI
     void Update();
 
     bool ExistData();
+
+    void Send(Direction::E, pchar);
+
+    void Error(Direction::E, pchar);
 }

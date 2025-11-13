@@ -1,10 +1,9 @@
 #pragma once
 
-int sprintf(char *, const char *, ...);
-
 namespace std
 {
     int snprintf(char *, int, const char *, ...);
     int sscanf(void *, void *, ...);
+    int sprintf(char *, const char *, ...);
 }
 

@@ -12,4 +12,5 @@ namespace std //-V1061
     char *itoa(int num, char *str, int radix);
     unsigned long long int strtoull(const char *str, char **endptr, int base);
     long strtol(const char *start, char **end, int radix);
+    double strtod(const char *start, char **end);
 }

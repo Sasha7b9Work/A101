@@ -8,14 +8,7 @@
 #include "Ampermeter/InputRelays.h"
 #include "Ampermeter/AD7691.h"
 #include "SCPI/Bootloader.h"
-
-
-namespace SCPI
-{
-    void Send(Direction::E, pchar);
-
-    void Error(Direction::E, pchar);
-}
+#include "SCPI/SCPI.h"
 
 
 bool SCPI::CommandWithParameters::Execute(Direction::E)

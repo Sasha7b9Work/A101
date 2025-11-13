@@ -6,15 +6,12 @@
 #include "Utils/String.h"
 #include "SCPI/RingBuffer.h"
 #include "Utils/StringUtils.h"
+#include "SCPI/Bootloader.h"
 #include <cctype>
 
 
 namespace SCPI
 {
-    void Send(Direction::E, pchar);
-
-    void Error(Direction::E, pchar);
-
     // Входной буфер. Здесь находятся принимаемые символы
     static InBuffer in_usb(Direction::USB);
     static InBuffer in_rs232(Direction::RS232);
@@ -46,6 +43,13 @@ bool SCPI::ExistData()
 
 void SCPI::InBuffer::Update()
 {
+    if (Bootloader::InProgress())
+    {
+        Bootloader::Update();
+
+        return;
+    }
+
     bool run = true;
 
     while (run)
@@ -61,23 +65,30 @@ void SCPI::InBuffer::Update()
 
 void SCPI::CallbackOnReceive(Direction::E dir, char byte)
 {
-    if (dir & Direction::USB)
+    if (Bootloader::InProgress())
     {
-        ring_usb.Append((uint8)std::toupper(byte));
-
-        if (ring_usb.GetElementCount() > 1 && (byte == 0x0d || byte == 0x0a))
-        {
-            exist_data = true;
-        }
+        Bootloader::OnReceiveByte(byte);
     }
-
-    if (dir & Direction::RS232)
+    else
     {
-        ring_rs232.Append((uint8)std::toupper(byte));
-
-        if (ring_usb.GetElementCount() > 1 && (byte == 0x0d || byte == 0x0a))
+        if (dir & Direction::USB)
         {
-            exist_data = true;
+            ring_usb.Append((uint8)std::toupper(byte));
+
+            if (ring_usb.GetElementCount() > 1 && (byte == 0x0d || byte == 0x0a))
+            {
+                exist_data = true;
+            }
+        }
+
+        if (dir & Direction::RS232)
+        {
+            ring_rs232.Append((uint8)std::toupper(byte));
+
+            if (ring_usb.GetElementCount() > 1 && (byte == 0x0d || byte == 0x0a))
+            {
+                exist_data = true;
+            }
         }
     }
 }

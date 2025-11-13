@@ -51,7 +51,7 @@ void WindowMeasure::SetMeasure(REAL value)
 
     buffer[0] = (value >= 0.0) ? '+' : '-';
 
-    sprintf(buffer + 1, "%5f", (double)value);
+    std::sprintf(buffer + 1, "%5f", (double)value);
 
     SetMeasure(buffer);
 }
@@ -159,7 +159,7 @@ void WindowMeasure::ConvertRealToText(REAL value, char out[TextString::MAX_LEN],
 
     char format[] = { '%', '0', (char)((before + 1) | 0x30), '.', (char)(after | 0x30), 'f', ' ', '%', 's', '\0' };
 
-    sprintf(buffer, format, (double)value, suffix);
+    std::sprintf(buffer, format, (double)value, suffix);
 
     std::strcat(out, buffer);
 }
