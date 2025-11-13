@@ -175,7 +175,7 @@ void Ampermeter::DrawProgress(TimeMeterMS &meter, uint &prev_time)
                     {
                         static char buffer[64];
 
-                        sprintf(buffer, "fill %d,11,%d,%d,65535\xFF\xFF\xFF", x, (int)((float)w * (float)elapsed_ms / (float)SampleRate::TimeFullRead()) + 1, h);
+                        std::sprintf(buffer, "fill %d,11,%d,%d,65535\xFF\xFF\xFF", x, (int)((float)w * (float)elapsed_ms / (float)SampleRate::TimeFullRead()) + 1, h);
 
                         HAL_USART2::TransmitIT(buffer);
                     }

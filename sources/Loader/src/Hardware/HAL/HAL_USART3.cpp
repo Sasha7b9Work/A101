@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
-#include "SCPI/SCPI.h"
 #include "stm_includes.h"
 #include <cstring>
 
@@ -81,7 +80,5 @@ void HAL_USART3::Send0D()
 
 void HAL_USART3::CallbackOnReceive()
 {
-    SCPI::CallbackOnReceive(buffer);
-
     HAL_UART_Receive_IT(&handleUSART3, (uint8_t *)&buffer, 1);
 }

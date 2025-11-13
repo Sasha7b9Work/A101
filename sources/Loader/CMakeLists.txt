@@ -40,7 +40,6 @@ file(GLOB SRC              src/*.*)
 file(GLOB HARDWARE         src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS   src/Hardware/CMSIS/*.*)
 file(GLOB HARDWARE_HAL     src/Hardware/HAL/*.*)
-file(GLOB SCPI             src/SCPI/*.*)
 file(GLOB UTILS            src/Utils/*)
 
 set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
@@ -50,7 +49,6 @@ source_group(libs/HAL              FILES ${LIBS_HAL})
 source_group(Hardware              FILES ${HARDWARE})
 source_group(Hardware/CMSIS        FILES ${HARDWARE_CMSIS})
 source_group(Hardware/HAL          FILES ${HARDWARE_HAL})
-source_group(SCPI                  FILES ${SCPI})
 source_group(Utils                 FILES ${UTILS})
 
 add_library(
@@ -60,6 +58,5 @@ add_library(
     ${HARDWARE}
     ${HARDWARE_CMSIS}
     ${HARDWARE_HAL}
-    ${SCPI}
     ${UTILS}
 )
