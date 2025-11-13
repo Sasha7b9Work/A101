@@ -5,6 +5,7 @@
 #include "Hardware/Communicator.h"
 #include "Utils/String.h"
 #include "SCPI/RingBuffer.h"
+#include "Utils/StringUtils.h"
 #include <cctype>
 
 
@@ -197,18 +198,39 @@ SCPI::Command *SCPI::InBuffer::ParseCommand(pchar symbols)
         }
     }
 
-    if (std::strlen(data) > std::strlen("UPGRADE"))     // UPGRADE VERSION_BUILD
-    {
-        if (std::memcmp(data, "UPGRADE", std::strlen("UPGRADE")) == 0)
-        {
-            char command[128];
-            uint version_firm = 0;
-            uint size_firm = 0;
-            uint crc32_firm = 0;
+#define COMMAND_UPGRADE "UPGRADE "
 
-            if (std::sscanf(data, "%127s%u%u%u", &command[0], &version_firm, &size_firm, &crc32_firm) == 4)
+    if (std::strlen(data) > std::strlen(COMMAND_UPGRADE))
+    {
+        if (std::memcmp(data, COMMAND_UPGRADE, std::strlen(COMMAND_UPGRADE)) == 0)
+        {
+            uint num_ver = 0;
+            uint size_ver = 0;
+            uint crc32_ver = 0;
+
+            ParseBuffer par_buf;
+
+            SU::GetWord(data, 2, &par_buf);
+
+            if (par_buf.GetLength() > 0)
             {
-                return new CommandUpgradeFirmware(version_firm, size_firm, crc32_firm);
+                if (SU::AtoUInt(par_buf.data, &num_ver, 16))         // Получили номер версии
+                {
+                    SU::GetWord(data, 3, &par_buf);
+
+                    if (par_buf.GetLength() > 0)
+                    {
+                        if (SU::AtoUInt(par_buf.data, &size_ver, 16))    // Получили размер
+                        {
+                            SU::GetWord(data, 4, &par_buf);
+
+                            if (SU::AtoUInt(par_buf.data, &crc32_ver, 16))
+                            {
+                                return new CommandUpgradeFirmware(num_ver, size_ver, crc32_ver);
+                            }
+                        }
+                    }
+                }
             }
         }
     }

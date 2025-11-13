@@ -2086,11 +2086,6 @@
               <FilePath>.\src\SCPI\SCPI.h</FilePath>
             </File>
             <File>
-              <FileName>SCPI.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\SCPI.txt</FilePath>
-            </File>
-            <File>
               <FileName>Commands.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\Commands.h</FilePath>
@@ -2306,6 +2301,16 @@
               <FileName>Bootloader.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Bootloader.h</FilePath>
+            </File>
+            <File>
+              <FileName>StringUtils.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\StringUtils.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StringUtils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\StringUtils.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -3710,11 +3715,6 @@
               <FilePath>.\src\SCPI\SCPI.h</FilePath>
             </File>
             <File>
-              <FileName>SCPI.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\SCPI.txt</FilePath>
-            </File>
-            <File>
               <FileName>Commands.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\Commands.h</FilePath>
@@ -3828,6 +3828,16 @@
               <FileName>Bootloader.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Bootloader.h</FilePath>
+            </File>
+            <File>
+              <FileName>StringUtils.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\StringUtils.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StringUtils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\StringUtils.h</FilePath>
             </File>
           </Files>
         </Group>

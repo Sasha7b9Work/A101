@@ -1,12 +1,15 @@
 #pragma once
 
-namespace std
+namespace std //-V1061
 {
+    void *malloc(size_t);
+    void free(void *);
+    #define RAND_MAX 0x7fffffff
+    void srand(unsigned int);
+    unsigned int rand();
+    int atoi(const char *);
     unsigned long strtoul(const char *start, char **end, int radix);
-
-    int atoi(const char *str);
-
-    double      strtod( const char* str, char** str_end );
-
-    #include "stdlib.h"
+    char *itoa(int num, char *str, int radix);
+    unsigned long long int strtoull(const char *str, char **endptr, int base);
+    long strtol(const char *start, char **end, int radix);
 }
