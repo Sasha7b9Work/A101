@@ -1,7 +1,7 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-project (Bootloader)
+project (Boot101)
 
-set(CMAKE_UNITY_BUILD OFF)
+#set(CMAKE_UNITY_BUILD OFF)
 
 #set(CMAKE_UNITY_BUILD_BATCH_SIZE 8)
 
