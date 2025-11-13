@@ -2217,6 +2217,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\Parser.h</FilePath>
             </File>
+            <File>
+              <FileName>Bootloader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\Bootloader.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Bootloader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\Bootloader.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2342,16 +2352,6 @@
               <FileName>String.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\String.h</FilePath>
-            </File>
-            <File>
-              <FileName>Bootloader.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Bootloader.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Bootloader.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Bootloader.h</FilePath>
             </File>
             <File>
               <FileName>StringUtils.cpp</FileName>
@@ -3795,6 +3795,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\Parser.h</FilePath>
             </File>
+            <File>
+              <FileName>Bootloader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\Bootloader.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Bootloader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\Bootloader.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3869,16 +3879,6 @@
               <FileName>String.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\String.h</FilePath>
-            </File>
-            <File>
-              <FileName>Bootloader.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Bootloader.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Bootloader.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Bootloader.h</FilePath>
             </File>
             <File>
               <FileName>StringUtils.cpp</FileName>

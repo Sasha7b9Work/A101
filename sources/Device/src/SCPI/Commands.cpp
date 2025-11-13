@@ -5,9 +5,9 @@
 #include "Device.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
-#include "Utils/Bootloader.h"
 #include "Ampermeter/InputRelays.h"
 #include "Ampermeter/AD7691.h"
+#include "SCPI/Bootloader.h"
 
 
 namespace SCPI
