@@ -21,4 +21,7 @@ namespace File
 
     // Возвращает данные в текущей позиции указателя и передвигает указатель на num_bytes
     uint8 *CurrentData(uint num_bytes);
+
+    // Когда все байты получены CurrentData, эта функция вернёт true
+    bool AllBytesCompleted();
 }

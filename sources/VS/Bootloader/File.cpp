@@ -101,3 +101,9 @@ uint8 *File::CurrentData(uint num_bytes)
 
     return pointer;
 }
+
+
+bool File::AllBytesCompleted()
+{
+    return index >= bytes.GetDataLen();
+}

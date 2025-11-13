@@ -124,6 +124,11 @@ void Upgrader::RunCommand(const wxString &command)
             uint num_bytes = SU::UIntFromString(parameter);
 
             ComPort::Send(File::CurrentData(num_bytes), num_bytes);
+
+            if (File::AllBytesCompleted())
+            {
+                Frame::self->OnEventUpgradeComplete();
+            }
         }
     }
 }

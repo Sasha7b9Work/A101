@@ -312,4 +312,16 @@ void Frame::EnableControlsForConnect(bool enable)
 void Frame::OnEventButtonBeginUpgrade(wxCommandEvent &)
 {
     Upgrader::CommandBeginUpgrade();
+
+    btnUpgradeFirmware->Enable(false);
+
+    btnConnect->Enable(false);
+}
+
+
+void Frame::OnEventUpgradeComplete()
+{
+    btnUpgradeFirmware->Enable(true);
+
+    btnConnect->Enable(true);
 }

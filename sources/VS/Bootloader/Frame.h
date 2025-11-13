@@ -18,6 +18,9 @@ public:
 
     void SetDeviceInfo(const wxString &);
 
+    // Вызывается когда завершён процесс обновления
+    void OnEventUpgradeComplete();
+
 private:
 
     void TryConnect();
