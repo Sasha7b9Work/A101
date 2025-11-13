@@ -7,6 +7,7 @@
 namespace File
 {
     static wxMemoryBuffer bytes;
+    static uint index = 0;         // Укзатель прочитанных данных
 }
 
 
@@ -27,7 +28,15 @@ bool File::Create(const wxString &path)
         bytes.SetDataLen(file_size);
     }
 
+    Reset();
+
     return IsValid();
+}
+
+
+void File::Reset()
+{
+    index = 0;
 }
 
 
@@ -80,4 +89,15 @@ bool File::IsValid()
     wxString date = GetDateBuild();
 
     return date.Length() == 0x13 && date[10] == ' ';
+}
+
+
+uint8 *File::CurrentData(uint num_bytes)
+{
+    uint8 *pointer = (uint8 *)bytes.GetData();
+    pointer += index;
+
+    index += num_bytes;
+
+    return pointer;
 }

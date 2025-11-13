@@ -6,6 +6,8 @@ namespace File
 {
     bool Create(const wxString &);
 
+    void Reset();
+
     uint GetVersion();
 
     wxString GetDateBuild();
@@ -16,4 +18,7 @@ namespace File
     uint GetSize();
 
     uint GetCRC32();
+
+    // Возвращает данные в текущей позиции указателя и передвигает указатель на num_bytes
+    uint8 *CurrentData(uint num_bytes);
 }

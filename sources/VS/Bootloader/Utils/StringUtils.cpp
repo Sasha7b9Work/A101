@@ -109,7 +109,6 @@ const wxString &Words::First() const
 }
 
 
-
 uint SU::CalculateCRC32(const void *buffer, int size)
 {
     return ProcessCRC((const uint8 *)buffer, size, 0);
@@ -124,4 +123,12 @@ uint SU::ProcessCRC(const uint8 *data, int length, uint crc)
     }
 
     return crc;
+}
+
+
+uint SU::UIntFromString(pchar string)
+{
+    char *end = nullptr;
+
+    return (uint)std::strtoul(string, &end, 10);
 }

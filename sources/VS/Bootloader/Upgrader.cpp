@@ -3,6 +3,7 @@
 #include "Upgrader.h"
 #include "Utils/Timer.h"
 #include "Communicator/ComPort.h"
+#include "Utils/StringUtils.h"
 #include "Frame.h"
 #include "File.h"
 
@@ -19,6 +20,8 @@ namespace Upgrader
     static void AppendNewSymbol(char);
 
     static void RunCommand(const wxString &);
+
+    static void CommandBeginUpgrade();
 }
 
 
@@ -97,10 +100,31 @@ void Upgrader::RunCommand(const wxString &command)
     {
         is_A101 = true;
 
-        ComPort::SendCommand(wxString::Format("UPGRADE %08X %08X %08X", File::GetVersion(), File::GetSize(), File::GetCRC32()));
+        CommandBeginUpgrade();
     }
     else if(command.StartsWith("UPGRADE "))         // Получен запрос на отправку новой порции данных
     {
+        char parameter[32];
 
+        SU::GetWord(command.data(), 2, parameter);
+
+        if (std::strcmp(parameter, "RESET"))
+        {
+            CommandBeginUpgrade();
+        }
+        else
+        {
+            uint num_bytes = SU::UIntFromString(parameter);
+
+            ComPort::Send(File::CurrentData(num_bytes), num_bytes);
+        }
     }
+}
+
+
+void Upgrader::CommandBeginUpgrade()
+{
+    File::Reset();
+
+    ComPort::SendCommand(wxString::Format("UPGRADE %08X %08X %08X", File::GetVersion(), File::GetSize(), File::GetCRC32()));
 }

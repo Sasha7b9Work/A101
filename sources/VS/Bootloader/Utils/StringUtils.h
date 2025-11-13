@@ -46,4 +46,6 @@ namespace SU
     int GetNumWords(pchar data, pchar delimit = " \n");
 
     uint CalculateCRC32(const void *buffer, int size);
+
+    uint UIntFromString(pchar string);
 }
