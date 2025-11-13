@@ -37,10 +37,6 @@ Frame::Frame(const wxString &title)
 
     SetClientSize(450, 190);
 
-    window->SetSize({450, 190});
-
-    Refresh();
-
     GF::SendCommandEvent(btnUpdatePorts, wxEVT_BUTTON, btnUpdatePorts->GetId());
 }
 
@@ -99,12 +95,6 @@ void Frame::CreatePanel(wxWindow *window)
     window_sizer->AddSpacer(10);
 
     window->SetSizer(window_sizer);
-
-    wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-
-    sizer->Add(window);
-
-    SetSizer(sizer);
 }
 
 
@@ -113,7 +103,7 @@ Sizer *Frame::CreateSizerFile(wxWindow *window)
     Sizer *sizer = new Sizer(wxHORIZONTAL);
 
     {
-        btnSelectFile = new wxButton(window, wxID_ANY, _("Выбор файла"), wxDefaultPosition, { 200, 23 });
+        btnSelectFile = new wxButton(window, wxID_ANY, _("Выбор файла"), wxDefaultPosition, { 250, 23 });
         btnSelectFile->Bind(wxEVT_BUTTON, &Frame::OnEventButtonSelectFile, this);
 
         btnUpgradeFirmware = new wxButton(window, wxID_ANY, _("Firmware update"));
@@ -311,11 +301,14 @@ void Frame::EnableControlsForConnect(bool enable)
 
 void Frame::OnEventButtonBeginUpgrade(wxCommandEvent &)
 {
-    Upgrader::CommandBeginUpgrade();
+    if (ComPort::IsConnected())
+    {
+        Upgrader::CommandBeginUpgrade();
 
-    btnUpgradeFirmware->Enable(false);
+        btnUpgradeFirmware->Enable(false);
 
-    btnConnect->Enable(false);
+        btnConnect->Enable(false);
+    }
 }
 
 
