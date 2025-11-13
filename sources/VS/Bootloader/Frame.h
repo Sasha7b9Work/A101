@@ -18,6 +18,8 @@ public:
 
 private:
 
+    void TryConnect();
+
     Sizer *sizer_file = nullptr;
     Sizer *sizer_version = nullptr;
 
@@ -25,6 +27,7 @@ private:
 
     wxStaticText *txtVersionValue = nullptr;
     wxStaticText *txtDateValue = nullptr;
+    wxStaticText *txtPort = nullptr;
 
     wxButton *btnSelectFile = nullptr;
     wxButton *btnUpgradeFirmware = nullptr;
@@ -50,4 +53,7 @@ private:
     void OnEventButtonConnect(wxCommandEvent &);
 
     void CreateFileFirmware(const wxString &);
+
+    // Вклюить/выключить элементы управления, меняющие состояние при подключении/отключении
+    void EnableControlsForConnect(bool);
 };

@@ -57,7 +57,7 @@ void Frame::CreatePanel(wxWindow *window)
 {
     wxBoxSizer *top = new wxBoxSizer(wxHORIZONTAL);
     {
-        wxStaticText *txtPort = new wxStaticText(window, wxID_ANY, _("COM-порт"));
+        txtPort = new wxStaticText(window, wxID_ANY, _("COM-порт"));
 
         cbComPorts = new wxComboBox(window, wxID_ANY, wxEmptyString, wxDefaultPosition, { 80, 20 });
 
@@ -219,6 +219,27 @@ void Frame::OnEventButtonUpdatePorts(wxCommandEvent &)
 
 void Frame::OnEventButtonConnect(wxCommandEvent &)
 {
+    if (btnConnect->GetLabel() == "Подключиться")
+    {
+        TryConnect();
+    }
+    else
+    {
+        Disconnect();
+    }
+}
+
+
+void Frame::Disconnect()
+{
+    ComPort::Close();
+
+    EnableControlsForConnect(true);
+}
+
+
+void Frame::TryConnect()
+{
     wxString name_port = cbComPorts->GetValue();
 
     wxString num_port;
@@ -239,12 +260,16 @@ void Frame::OnEventButtonConnect(wxCommandEvent &)
     {
         Upgrader::Reset();
 
-        ComPort::SendCommand("*idn?");
+        EnableControlsForConnect(false);
     }
 }
 
 
-void Frame::Disconnect()
+void Frame::EnableControlsForConnect(bool enable)
 {
+    txtPort->Enable(enable);
+    cbComPorts->Enable(enable);
+    btnUpdatePorts->Enable(enable);
 
+    btnConnect->SetLabel(enable ? "Подключиться" : "Отключиться");
 }

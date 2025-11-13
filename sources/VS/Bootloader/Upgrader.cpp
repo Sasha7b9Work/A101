@@ -53,6 +53,8 @@ void Upgrader::Reset()
     commands.Clear();
     current_command.Clear();
     is_A101 = false;
+
+    ComPort::SendCommand("*idn?");
 }
 
 
@@ -91,11 +93,11 @@ void Upgrader::AppendNewSymbol(char symbol)
 
 void Upgrader::RunCommand(const wxString &command)
 {
-    if (command.StartsWith("A101"))                 // Принятая строка начинается с A101 - это прибор А101
+    if (command.StartsWith("OAO MNIPI"))            // Принятая строка начинается с A101 - это прибор А101
     {
         is_A101 = true;
 
-        ComPort::SendCommand(wxString::Format("UPGRADE %08X, %08X", File::GetSize(), File::GetCRC32()));
+        ComPort::SendCommand(wxString::Format("UPGRADE %08X %08X %08X", File::GetVersion(), File::GetSize(), File::GetCRC32()));
     }
     else if(command.StartsWith("UPGRADE "))         // Получен запрос на отправку новой порции данных
     {
