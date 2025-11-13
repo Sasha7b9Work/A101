@@ -7,6 +7,7 @@
 #include "Nextion/Display.h"
 #include "Nextion/Nextion.h"
 #include "SCPI/SCPI.h"
+#include "Hardware/Timer.h"
 #include <cstdio>
 
 
@@ -37,6 +38,8 @@ namespace Bootloader
     static void SendCommand(pchar);
 
     static void DrawString(int x, int y, pchar);
+
+    static TimeMeterMS meter;
 }
 
 
@@ -54,6 +57,8 @@ void Bootloader::Run(uint num_ver, uint size_ver, uint crc32_ver)
     WriteToROM(&crc32, 4);
 
     RequestNewChain();
+
+    meter.Reset();
 }
 
 
@@ -115,7 +120,6 @@ void Bootloader::Update()
             else
             {
                 SendCommand("UPGRADE RESET");
-
             }
         }
     }
@@ -158,13 +162,29 @@ void Bootloader::DisplayFunc()
 
     char message[128];
 
-    std::sprintf(message, "Version : %d", version);
+    int y = 10;
+    int dy = 70;
 
-    DrawString(10, 10, message);
+    std::sprintf(message, "Version : %d", version);
+    DrawString(10, y, message);
+    y += dy;
+
+    uint *pointer = (uint *)ADDR_SECTOR_7;
+    uint full_size = *pointer;
+
+    uint received = address_write - ADDR_SECTOR_7 - 8;
+
+    std::sprintf(message, "Received : %u/%d Kbytes, %f %%", received / 1024, full_size / 1024, received * 100.0f / full_size);
+    DrawString(10, y, message);
+    y += dy;
+
+    std::sprintf(message, "Time elapsed : %u s", meter.ElapsedTime() / 1000);
+    DrawString(10, y, message);
+    y += dy;
 }
 
 
 void Bootloader::DrawString(int x, int y, pchar message)
 {
-    Nextion::DrawString({ x, y, 200, 50 }, 0, Color::White, Color::Background, message);
+    Nextion::DrawString({ x, y, 700, 50 }, 0, Color::White, Color::Background, message);
 }
