@@ -9,50 +9,19 @@ include_directories(
     ../../Device/src
     ../../Device/src/Hardware/HAL
     ../../VS/ThirdParty/wxWidgets/include
-    ../../generated/ThirdParty/lib/vc_dll/mswud
+    ../../generated/ThirdParty/lib/vc_lib/mswu
     ../../common/_VS_GUI/HAL
     ../../common/_VS_GUI/CMSIS
 )
 
-link_directories(../../generated/ThirdParty/lib/vc_dll)
+link_directories(../../generated/ThirdParty/lib/vc_lib)
 
-add_definitions(-DSTM32F103xB -DWXUSINGDLL -DGUI -DDEVICE)
+add_definitions(-DSTM32F103xB -DGUI -DDEVICE)
 
 if(WIN32)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -MT -std:c++20")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
     
-    # Older cmake versions don't support string(APPEND ...) provide a workaround
-    macro(wx_string_append var str)
-        set(${var} ${${var}}${str})
-    endmacro()
-    
-    if(BUILD_USE_STATIC_RUNTIME)
-        set(MSVC_LIB_USE "/MTd")
-        set(MSVC_LIB_REPLACE "/MDd")
-        
-        # Set MSVC runtime flags for all configurations
-        foreach(cfg "" ${CMAKE_CONFIGURATION_TYPES})
-            set(c_flag_var CMAKE_C_FLAGS)
-            set(cxx_flag_var CMAKE_CXX_FLAGS)
-            if(cfg)
-                string(TOUPPER ${cfg} cfg_upper)
-                wx_string_append(c_flag_var "_${cfg_upper}")
-                wx_string_append(cxx_flag_var "_${cfg_upper}")
-            endif()
-            if(${c_flag_var} MATCHES ${MSVC_LIB_REPLACE})
-                string(REPLACE ${MSVC_LIB_REPLACE} ${MSVC_LIB_USE} ${c_flag_var} "${${c_flag_var}}")
-                set(${c_flag_var} ${${c_flag_var}} CACHE STRING
-                "Flags used by the C compiler during ${cfg_upper} builds." FORCE)
-            endif()
-            if(${cxx_flag_var} MATCHES ${MSVC_LIB_REPLACE})
-                string(REPLACE ${MSVC_LIB_REPLACE} ${MSVC_LIB_USE} ${cxx_flag_var} "${${cxx_flag_var}}")
-                set(${cxx_flag_var} ${${cxx_flag_var}} CACHE STRING
-                "Flags used by the CXX compiler during ${cfg_upper} builds." FORCE)
-            endif()
-        endforeach()
-    endif()
-
     add_compile_options(
         /wd4127    # conditional expression is constant
         /wd4464    # relative include path contains '..'
@@ -153,7 +122,14 @@ add_executable(
     ${UTILS}
 )
 
-target_link_libraries(${PROJECT_NAME} wxbase33ud wxmsw33ud_core Ws2_32)
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxmsw331ud_core_vc_custom.dll $(OutputPath) /Y)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxbase331ud_vc_custom.dll $(OutputPath) /Y)
+target_link_libraries(${PROJECT_NAME}
+    wxbase33u
+    wxmsw33u_core
+    wxbase33u_net
+    wxzlib
+    wxpng
+    Ws2_32
+    Comctl32
+    Rpcrt4
+    Setupapi
+)

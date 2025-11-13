@@ -7,12 +7,12 @@ project (ControlPanel)
 include_directories(
     .
     ../../VS/ThirdParty/wxWidgets/include
-    ../../generated/ThirdParty/lib/vc_dll/mswud
+    ../../generated/ThirdParty/lib/vc_lib/mswu
 )
 
-link_directories(../../generated/ThirdParty/lib/vc_dll)
+link_directories(../../generated/ThirdParty/lib/vc_lib)
 
-add_definitions(-DSTM32F103xB -DWXUSINGDLL -DGUI -DDEVICE)
+add_definitions(-DSTM32F103xB -DGUI -DDEVICE)
 
 if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
@@ -90,7 +90,13 @@ add_executable(
     ${SCPI_PARSER}
 )
 
-target_link_libraries(${PROJECT_NAME} wxbase33ud wxmsw33ud_core Ws2_32)
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxmsw331ud_core_vc_custom.dll $(OutputPath) /Y)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxbase331ud_vc_custom.dll $(OutputPath) /Y)
+target_link_libraries(${PROJECT_NAME}
+    wxbase33u
+    wxmsw33u_core
+    wxpng
+    wxzlib
+    Ws2_32
+    Comctl32
+    Rpcrt4
+    Setupapi
+)
