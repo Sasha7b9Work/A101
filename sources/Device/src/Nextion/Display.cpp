@@ -7,6 +7,7 @@
 #include "Menu/MenuItems.h"
 #include "Hardware/Timer.h"
 #include "Menu/Pages/Pages.h"
+#include "SCPI/Bootloader.h"
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
@@ -53,7 +54,14 @@ void Display::SetBrightness()
 
 void Display::Update()
 {
-    Page::Current()->Draw();
+    if (Bootloader::InProgress())
+    {
+        Bootloader::DisplayFunc();
+    }
+    else
+    {
+        Page::Current()->Draw();
+    }
 }
 
 

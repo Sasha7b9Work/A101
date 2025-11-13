@@ -4,6 +4,8 @@
 #include "SCPI/Bootloader.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/StringUtils.h"
+#include "Nextion/Display.h"
+#include "Nextion/Nextion.h"
 #include "SCPI/SCPI.h"
 #include <cstdio>
 
@@ -33,6 +35,8 @@ namespace Bootloader
     static void WriteToROM(const void *buffer, int size);
 
     static void SendCommand(pchar);
+
+    static void DrawString(int x, int y, pchar);
 }
 
 
@@ -145,4 +149,22 @@ void Bootloader::WriteToROM(const void *buffer, int sz)
     HAL_EEPROM::WriteData(address_write, buffer, sz);
 
     address_write += (uint)sz;
+}
+
+
+void Bootloader::DisplayFunc()
+{
+    Display::Clear();
+
+    char message[128];
+
+    std::sprintf(message, "Version : %d", version);
+
+    DrawString(10, 10, message);
+}
+
+
+void Bootloader::DrawString(int x, int y, pchar message)
+{
+    Nextion::DrawString({ x, y, 200, 50 }, 0, Color::White, Color::Background, message);
 }

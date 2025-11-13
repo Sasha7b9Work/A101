@@ -11,4 +11,6 @@ namespace Bootloader
     bool InProgress();
 
     void OnReceiveByte(char);
+
+    void DisplayFunc();
 }
