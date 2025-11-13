@@ -104,7 +104,7 @@ void Upgrader::RunCommand(const wxString &command)
 
         SU::GetWord(command.data(), 2, parameter);
 
-        if (std::strcmp(parameter, "RESET"))
+        if (std::strcmp(parameter, "RESET") == 0)
         {
             CommandBeginUpgrade();
         }

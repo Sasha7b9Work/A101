@@ -31,6 +31,8 @@ namespace Bootloader
     static void PrepareROM();
 
     static void WriteToROM(const void *buffer, int size);
+
+    static void SendCommand(pchar);
 }
 
 
@@ -79,6 +81,8 @@ bool Bootloader::RequestNewChain()
 
     std::sprintf(message, "UPGRADE %d", (size >= MAX_SIZE_CHAIN) ? MAX_SIZE_CHAIN : size);
 
+    SendCommand(message);
+
     return true;
 }
 
@@ -106,13 +110,18 @@ void Bootloader::Update()
             }
             else
             {
-                pchar command = "UPGRADE RESET";
+                SendCommand("UPGRADE RESET");
 
-                SCPI::Send(Direction::USB, command);
-                SCPI::Send(Direction::RS232, command);
             }
         }
     }
+}
+
+
+void Bootloader::SendCommand(pchar command)
+{
+    SCPI::Send(Direction::USB, command);
+    SCPI::Send(Direction::RS232, command);
 }
 
 

@@ -54,7 +54,9 @@ char *SU::GetWord(pchar data, int num, char out[32], pchar delimit)
 
     if (num <= words.Size())
     {
-        std::strcpy(out, words.At(num - 1).c_str());
+        std::string word = words.At(num - 1);
+
+        std::strcpy(out, word.c_str());
     }
     else
     {
@@ -77,7 +79,7 @@ std::string Words::At(int i) const
 {
     if (i < Size())
     {
-        return std::string(words[(uint)i].mb_str());
+        return std::string(words[(uint)i].c_str().AsChar());
     }
 
     static const std::string null;

@@ -25,3 +25,15 @@ bool HAL_EEPROM::Load(Settings *)
 {
     return false;
 }
+
+
+void HAL_EEPROM::EraseSector(uint /*address*/)
+{
+
+}
+
+
+void HAL_EEPROM::WriteData(uint /*address*/, const void */*data*/, int /*size*/)
+{
+
+}
