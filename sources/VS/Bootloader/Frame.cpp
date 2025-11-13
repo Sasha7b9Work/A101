@@ -110,6 +110,7 @@ Sizer *Frame::CreateSizerFile(wxWindow *window)
 
         btnUpgradeFirmware = new wxButton(window, wxID_ANY, _("Firmware update"));
         btnUpgradeFirmware->Enable(false);
+        btnUpgradeFirmware->Bind(wxEVT_BUTTON, &Frame::OnEventButtonBeginUpgrade, this);
 
         sizer->AddSpacer(25);
         sizer->Add(btnSelectFile);
@@ -272,4 +273,10 @@ void Frame::EnableControlsForConnect(bool enable)
     btnUpdatePorts->Enable(enable);
 
     btnConnect->SetLabel(enable ? "Подключиться" : "Отключиться");
+}
+
+
+void Frame::OnEventButtonBeginUpgrade(wxCommandEvent &)
+{
+    Upgrader::CommandBeginUpgrade();
 }

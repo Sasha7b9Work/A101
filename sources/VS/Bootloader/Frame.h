@@ -51,6 +51,7 @@ private:
     void OnEventButtonSelectFile(wxCommandEvent &);
     void OnEventButtonUpdatePorts(wxCommandEvent &);
     void OnEventButtonConnect(wxCommandEvent &);
+    void OnEventButtonBeginUpgrade(wxCommandEvent &);
 
     void CreateFileFirmware(const wxString &);
 

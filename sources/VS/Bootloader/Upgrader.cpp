@@ -20,8 +20,6 @@ namespace Upgrader
     static void AppendNewSymbol(char);
 
     static void RunCommand(const wxString &);
-
-    static void CommandBeginUpgrade();
 }
 
 
@@ -99,8 +97,6 @@ void Upgrader::RunCommand(const wxString &command)
     if (command.StartsWith("OAO MNIPI"))            // Принятая строка начинается с A101 - это прибор А101
     {
         is_A101 = true;
-
-        CommandBeginUpgrade();
     }
     else if(command.StartsWith("UPGRADE "))         // Получен запрос на отправку новой порции данных
     {

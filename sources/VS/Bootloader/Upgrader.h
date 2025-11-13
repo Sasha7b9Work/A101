@@ -10,4 +10,6 @@ namespace Upgrader
     void Reset();
 
     void OnEventReceive(uint8 *, int);
+
+    void CommandBeginUpgrade();
 }
