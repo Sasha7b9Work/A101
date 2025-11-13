@@ -9,6 +9,7 @@
 #include "SCPI/SCPI.h"
 #include "Hardware/Timer.h"
 #include <cstdio>
+#include <stm32f4xx_hal.h>
 
 
 namespace Bootloader
@@ -50,6 +51,8 @@ void Bootloader::Run(uint num_ver, uint size_ver, uint crc32_ver)
     crc32 = crc32_ver;
 
     in_progress = true;
+
+    DisplayFunc();
 
     PrepareROM();
 
@@ -115,10 +118,13 @@ void Bootloader::Update()
 
             if (calc_crc32 == rd_crc32)
             {
-                int i = 0;
+                in_progress = false;
+
+                HAL_NVIC_SystemReset();
             }
             else
             {
+                in_progress = false;
                 SendCommand("UPGRADE RESET");
             }
         }
@@ -165,7 +171,7 @@ void Bootloader::DisplayFunc()
     int y = 10;
     int dy = 70;
 
-    std::sprintf(message, "Version : %d", version);
+    std::sprintf(message, "Версия : %d", version);
     DrawString(10, y, message);
     y += dy;
 
@@ -174,11 +180,11 @@ void Bootloader::DisplayFunc()
 
     uint received = address_write - ADDR_SECTOR_7 - 8;
 
-    std::sprintf(message, "Received : %u/%d Kbytes, %f %%", received / 1024, full_size / 1024, received * 100.0f / full_size);
+    std::sprintf(message, "Принято : %u/%d Kbytes, %u %%", received / 1024, full_size / 1024, received * 100 / full_size);
     DrawString(10, y, message);
     y += dy;
 
-    std::sprintf(message, "Time elapsed : %u s", meter.ElapsedTime() / 1000);
+    std::sprintf(message, "Времени прошло : %u s", meter.ElapsedTime() / 1000);
     DrawString(10, y, message);
     y += dy;
 }

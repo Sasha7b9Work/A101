@@ -45,8 +45,10 @@ typedef signed char        int8;
 typedef const char * const cstr;
 typedef const char *       pchar;
 
-#ifndef WIN32
-#pragma clang diagnostic pop
+#ifdef WIN32
+    #define HAL_NVIC_SystemReset()
+#else
+    #pragma clang diagnostic pop
 #endif
 
 typedef void(*pFuncVV)();

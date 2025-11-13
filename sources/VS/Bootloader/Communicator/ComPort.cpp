@@ -56,7 +56,7 @@ std::vector<bool> &ComPort::GetComports()
 
 bool ComPort::TryConnect(int num_port)
 {
-    if (RS232_OpenComport(num_port, 9600, "8N1", 0) == 0)
+    if (RS232_OpenComport(num_port, 115200, "8N1", 0) == 0)
     {
         connected_port = num_port;
 
