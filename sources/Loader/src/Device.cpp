@@ -67,9 +67,6 @@ void Device::UpgradeFirmware()
 
         uint crc32 = HAL_EEPROM::ReadUint(START_ADDRESS + 4);
 
-        HAL_EEPROM::EraseSector(ADDR_SECTOR_5);
-        HAL_EEPROM::EraseSector(ADDR_SECTOR_6);
-
         uint rd_crc32 = SU::CalculateCRC32((const void *)(START_ADDRESS + 8), (int)size);
 
         if (crc32 != rd_crc32)
@@ -82,6 +79,9 @@ void Device::UpgradeFirmware()
 
         static const int SIZE_BUFFER = 1024;
         uint8 buffer[SIZE_BUFFER];
+
+        HAL_EEPROM::EraseSector(ADDR_SECTOR_5);
+        HAL_EEPROM::EraseSector(ADDR_SECTOR_6);
 
         while ((int)size > 0)
         {

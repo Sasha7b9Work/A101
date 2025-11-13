@@ -126,8 +126,6 @@ void Bootloader::Update()
 
                 DisplayCompleted();
 
-                meter.Wait(3000);
-
                 HAL_NVIC_SystemReset();
             }
             else
@@ -219,7 +217,7 @@ void Bootloader::DisplayCompleted()
 {
     Display::Clear();
 
-    DrawString(10, 100, "Прошивка загрежана.");
+    DrawString(10, 100, "Прошивка загружена.");
     DrawString(10, 160, "Перезагрузка.");
 }
 
