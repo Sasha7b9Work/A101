@@ -16,18 +16,22 @@ public:
     // Вызываем, когда нужно закрыть порт
     void Disconnect();
 
+    void SetDeviceInfo(const wxString &);
+
 private:
 
     void TryConnect();
 
     Sizer *sizer_file = nullptr;
     Sizer *sizer_version = nullptr;
+    Sizer *sizer_device = nullptr;
 
     wxBoxSizer *sizer_date = nullptr;
 
     wxStaticText *txtVersionValue = nullptr;
     wxStaticText *txtDateValue = nullptr;
     wxStaticText *txtPort = nullptr;
+    wxStaticText *txtDeviceInfo = nullptr;
 
     wxButton *btnSelectFile = nullptr;
     wxButton *btnUpgradeFirmware = nullptr;
@@ -43,6 +47,8 @@ private:
     void CreatePanel(wxWindow *);
 
     Sizer *CreateSizerFile(wxWindow *);
+
+    Sizer *CreateSizerDevice(wxWindow *, const wxSize &);
 
     Sizer *CreateSizerVersion(wxWindow *, const wxSize &);
 

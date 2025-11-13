@@ -55,7 +55,7 @@ void Upgrader::Reset()
     current_command.Clear();
     is_A101 = false;
 
-    ComPort::SendCommand("*idn?");
+    ComPort::SendCommand("INFO?");
 }
 
 
@@ -94,8 +94,10 @@ void Upgrader::AppendNewSymbol(char symbol)
 
 void Upgrader::RunCommand(const wxString &command)
 {
-    if (command.StartsWith("OAO MNIPI"))            // Принятая строка начинается с A101 - это прибор А101
+    if (command.StartsWith("VERSION"))            // Принятая строка начинается с A101 - это прибор А101
     {
+        Frame::self->SetDeviceInfo(command);
+
         is_A101 = true;
     }
     else if(command.StartsWith("UPGRADE "))         // Получен запрос на отправку новой порции данных

@@ -27,13 +27,19 @@ Frame::Frame(const wxString &title)
 
     sizer_file = CreateSizerFile(window);
 
+    sizer_device = CreateSizerDevice(window, size_label);
+
     sizer_version = CreateSizerVersion(window, size_label);
 
     sizer_date = CreateSizerDate(window, size_label);
 
     CreatePanel(window);
 
-    SetClientSize(410, 150);
+    SetClientSize(450, 190);
+
+    window->SetSize({450, 190});
+
+    Refresh();
 
     GF::SendCommandEvent(btnUpdatePorts, wxEVT_BUTTON, btnUpdatePorts->GetId());
 }
@@ -83,6 +89,8 @@ void Frame::CreatePanel(wxWindow *window)
     window_sizer->AddSpacer(10);
     window_sizer->Add(top);
     window_sizer->AddSpacer(20);
+    window_sizer->Add(sizer_device);
+    window_sizer->AddSpacer(30);
     window_sizer->Add(sizer_version);
     window_sizer->AddSpacer(10);
     window_sizer->Add(sizer_date);
@@ -134,6 +142,31 @@ Sizer *Frame::CreateSizerVersion(wxWindow *window, const wxSize &size_label)
         sizer->Add(txtVersionLabel);
         sizer->AddSpacer(10);
         sizer->Add(txtVersionValue);
+        sizer->AddSpacer(10);
+    }
+
+    return sizer;
+}
+
+
+void Frame::SetDeviceInfo(const wxString &info)
+{
+    txtDeviceInfo->SetLabel(info);
+}
+
+
+Sizer *Frame::CreateSizerDevice(wxWindow *window, const wxSize &size_label)
+{
+    Sizer *sizer = new Sizer(wxHORIZONTAL);
+
+    {
+        wxStaticText *txtVersionLabel = new wxStaticText(window, wxID_ANY, _("A101"), wxDefaultPosition, size_label);
+        txtDeviceInfo = new wxStaticText(window, wxID_ANY, "-", wxDefaultPosition, size_label);
+
+        sizer->AddSpacer(50);
+        sizer->Add(txtVersionLabel);
+        sizer->AddSpacer(10);
+        sizer->Add(txtDeviceInfo);
         sizer->AddSpacer(10);
     }
 
