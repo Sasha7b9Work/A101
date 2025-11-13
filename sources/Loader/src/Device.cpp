@@ -77,7 +77,7 @@ void Device::UpgradeFirmware()
         static const int SIZE_BUFFER = 1024;
         uint8 buffer[SIZE_BUFFER];
 
-        while (size > 0)
+        while ((int)size > 0)
         {
             HAL_EEPROM::ReadData(read_address, buffer, SIZE_BUFFER);
             HAL_EEPROM::WriteData(write_address, buffer, SIZE_BUFFER);
