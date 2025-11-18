@@ -35,7 +35,7 @@ Frame::Frame(const wxString &title)
 
     CreatePanel(window);
 
-    SetClientSize(450, 190);
+    SetClientSize(450, 220);
 
     GF::SendCommandEvent(btnUpdatePorts, wxEVT_BUTTON, btnUpdatePorts->GetId());
 }
@@ -83,6 +83,8 @@ void Frame::CreatePanel(wxWindow *window)
     wxBoxSizer *window_sizer = new wxBoxSizer(wxVERTICAL);
 
     window_sizer->AddSpacer(10);
+    window_sizer->Add(new wxStaticText(window, wxID_ANY, _("Установите скорость COM-порта 115200"), wxDefaultPosition, { 400, 20 }));
+    window_sizer->AddSpacer(5);
     window_sizer->Add(top);
     window_sizer->AddSpacer(20);
     window_sizer->Add(sizer_device);
