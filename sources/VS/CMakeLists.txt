@@ -15,6 +15,10 @@ endif()
 
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded")         # Установка флага линковки /MT
 
+add_compile_options(
+    /wd4865 # '<unnamed-enum-XXX>': the underlying type will change from 'int' to '__int64' when '/Zc:enumTypes' is specified on the command line
+)
+
 add_subdirectory(ControlPanel)
 add_subdirectory(A101-GUI)
 #add_subdirectory(Explorer)

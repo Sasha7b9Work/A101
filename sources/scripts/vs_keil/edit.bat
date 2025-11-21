@@ -1,2 +1,2 @@
 @echo on
-start ..\..\generated\Keil\A101.sln
+start ..\..\generated\Keil\A101.slnx

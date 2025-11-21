@@ -1,1 +1,1 @@
-start ..\..\generated\GUI\A101-GUI.sln
+start ..\..\generated\GUI\A101-GUI.slnx
