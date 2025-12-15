@@ -230,6 +230,8 @@ namespace PageMain
             Range::Set(range);
         }
 
+        Ampermeter::AdjustmentZero(true);
+
         RedrawAllMeasures();
 
         wndMIN.SetEnabled(TypeMeasure(TypeMeasure::Min).IsShown());

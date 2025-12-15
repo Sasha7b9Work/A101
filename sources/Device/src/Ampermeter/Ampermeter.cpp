@@ -50,9 +50,6 @@ namespace Ampermeter
     // »змер€ема€ величина слишком маленька€ - нужно перейти на предыдущий диапазон
     static bool VerySmall();
 
-    // ѕодстрока нул€
-    static void AdjustmentZero();
-
     static void DrawProgress(TimeMeterMS &timer, uint &prev_time);
 }
 
@@ -78,7 +75,7 @@ void Ampermeter::Update()
         return;                                 // обновл€тьс€ не будем, потому что это занимает много времени
     }
 
-    AdjustmentZero();
+    AdjustmentZero(false);
 
     if (!MeasurementCycle())
     {
@@ -322,7 +319,7 @@ void Ampermeter::OnEventChangeRange()
 }
 
 
-void Ampermeter::AdjustmentZero()
+void Ampermeter::AdjustmentZero(bool forcedly)
 {
     static int prev_range = -1;
 
@@ -336,7 +333,10 @@ void Ampermeter::AdjustmentZero()
 
         if (TIME_MS < next_time)
         {
-            return;
+            if (!forcedly)
+            {
+                return;
+            }
         }
     }
     else

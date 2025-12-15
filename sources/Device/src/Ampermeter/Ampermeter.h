@@ -37,6 +37,9 @@ namespace Ampermeter
 
     void OnEventChangeRange();
 
+    // Подстройка нуля. Если forcedly == true, то производим подстройку, даже если не прошло достаточно времени
+    void AdjustmentZero(bool forcedly);
+
     // Автоматический выбор предела
     namespace AVP
     {
