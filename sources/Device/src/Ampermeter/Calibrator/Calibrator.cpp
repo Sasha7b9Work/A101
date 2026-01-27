@@ -42,6 +42,8 @@ namespace Calibrator
 
 bool Calibrator::Run(int range, Type::E type, void (*callback)())
 {
+    Ampermeter::ZeroDC::FloatingZero::Clear();
+
     in_progress = true;
 
     callbackUpdate = callback;

@@ -60,6 +60,12 @@ void Ampermeter::ZeroDC::FloatingZero::Process()
 }
 
 
+void Ampermeter::ZeroDC::FloatingZero::Clear()
+{
+    value_abs[Range::Current()] = 0.0f;
+}
+
+
 void Ampermeter::ZeroDC::Disable()
 {
     value_abs = 0.0;

@@ -59,7 +59,11 @@ namespace Ampermeter
         // В связи со спецификой преобразователя
         namespace FloatingZero
         {
+            // Вызывается по "Уст. 0"
             void Process();
+
+            // Очищается при калибровке
+            void Clear();
         }
 
         // Возвращает полное смещение - с учётом FloatingZero

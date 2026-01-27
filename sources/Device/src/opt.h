@@ -7,7 +7,7 @@
 #define REAL double
 
 // Это нужно раскомментировать для старых версий - первых 17 приборов
-#define OLD_VERSION
+//#define OLD_VERSION
 
 //#define EMULATOR_ENABLED
 
