@@ -1,5 +1,6 @@
 // 2022/10/29 21:41:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
+#include "defines.cpp"
 #include "Menu/Pages/Pages.h"
 #include "Ampermeter/InputRelays.h"
 #include "Ampermeter/Calculator/Calculator.h"
@@ -7,7 +8,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Ampermeter/Calibrator/Calibrator.h"
-#include "Nextion/Display.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 #include "Utils/String.h"
@@ -92,6 +92,8 @@ namespace PageCalibration
                 }
 
                 Nextion::DrawString({ 25, 25, 500, 90 }, 4, fill, back, LabelPassword::buffer);
+
+                Nextion::DrawString({ 730, 445, 70, 35 }, 0, fill, Color::Background, String<>("%d", VERSION_BUILD).c_str());
 
                 is_changed = false;
             }
